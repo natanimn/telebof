@@ -9,9 +9,8 @@ import java.util.Objects;
  */
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class Message implements Serializable {
     public Integer message_id, message_thread_id, date, edit_date;

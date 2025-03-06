@@ -5,9 +5,8 @@ import io.github.natanimn.BotLog;
 import java.io.Serializable;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class InlineQueryResultCachedGif extends InlineQueryMediaResult<InlineQueryResultCachedGif> implements Serializable {
     private String gif_file_id;

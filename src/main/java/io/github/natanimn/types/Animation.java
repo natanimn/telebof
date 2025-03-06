@@ -8,9 +8,8 @@ import java.util.Objects;
  * @version 0.1
  * @since 3/6/25
  /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class Animation implements Serializable {
     public String file_id, file_unique_id, file_name, mime_type;

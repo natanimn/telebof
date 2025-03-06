@@ -6,9 +6,8 @@ import java.io.File;
 import java.io.Serializable;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class InputMediaDocument extends InputMediaBuilder<InputMediaDocument> implements Serializable {
     private String thumbnail;

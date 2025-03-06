@@ -3,9 +3,8 @@ package io.github.natanimn.requests;
 import java.util.List;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class SetStickerEmojiList extends AbstractBaseRequest<SetStickerEmojiList, Boolean> {
     public SetStickerEmojiList(String sticker, String[] emojiList, RequestSender requestSender) {

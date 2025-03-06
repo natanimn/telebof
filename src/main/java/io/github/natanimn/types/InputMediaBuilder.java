@@ -8,9 +8,8 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 abstract /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class InputMediaBuilder<T> implements InputMedia {
     protected String type, caption, parse_mode, media;

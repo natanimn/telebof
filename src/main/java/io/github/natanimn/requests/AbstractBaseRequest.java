@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 @SuppressWarnings("unchecked")
 abstract public class AbstractBaseRequest<T, R>{

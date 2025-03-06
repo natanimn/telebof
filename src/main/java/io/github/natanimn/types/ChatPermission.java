@@ -5,9 +5,8 @@ import java.util.Objects;
 
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class ChatPermission implements Serializable {
     public Boolean can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos,

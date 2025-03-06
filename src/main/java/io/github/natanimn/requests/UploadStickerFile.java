@@ -3,9 +3,8 @@ package io.github.natanimn.requests;
 import io.github.natanimn.types.File;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class UploadStickerFile extends AbstractBaseRequest<UploadStickerFile, File> {
     public UploadStickerFile(long userId, java.io.File sticker, String stickerFormat, RequestSender requestSender) {

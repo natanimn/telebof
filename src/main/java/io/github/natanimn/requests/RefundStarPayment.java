@@ -1,9 +1,8 @@
 package io.github.natanimn.requests;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class RefundStarPayment extends AbstractBaseRequest<RefundStarPayment, Boolean> {
     public RefundStarPayment(long user_id, String telegram_payment_charge_id, RequestSender requestSender){

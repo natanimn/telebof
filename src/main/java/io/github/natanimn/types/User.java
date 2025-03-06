@@ -5,9 +5,8 @@ import java.util.Objects;
 import io.github.natanimn.Util;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class User implements Serializable {
     public long id;

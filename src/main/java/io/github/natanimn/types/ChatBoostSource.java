@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class ChatBoostSource implements Serializable {
     public String source, giveaway_message_id;

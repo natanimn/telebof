@@ -5,9 +5,8 @@ import io.github.natanimn.types.Message;
 import java.util.List;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class SendInvoice extends DefaultParameters<SendInvoice, Message> {
     public SendInvoice(Object chatId, String title, String description, String payload,

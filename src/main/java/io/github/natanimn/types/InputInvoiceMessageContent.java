@@ -5,9 +5,8 @@ import java.util.List;
 
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class InputInvoiceMessageContent implements Serializable {
     private String title, description, payload, provider_token, currency, provider_data, photo_url;

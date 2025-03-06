@@ -4,9 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class ChatPhoto implements Serializable {
     public String small_file_id, small_file_unique_id, big_file_id, big_file_unique_id;

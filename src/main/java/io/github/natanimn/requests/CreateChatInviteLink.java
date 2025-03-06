@@ -4,9 +4,8 @@ import io.github.natanimn.Util;
 import io.github.natanimn.types.ChatInviteLink;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class CreateChatInviteLink extends AbstractBaseRequest<CreateChatInviteLink, ChatInviteLink> {
     public CreateChatInviteLink(Object chatId, RequestSender requestSender) {

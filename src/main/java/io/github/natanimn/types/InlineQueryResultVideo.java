@@ -3,9 +3,8 @@ package io.github.natanimn.types;
 import java.io.Serializable;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class InlineQueryResultVideo extends InlineQueryMediaResult<InlineQueryResultVideo> implements Serializable {
     private String video_url, description, mime_type, thumbnail_url;

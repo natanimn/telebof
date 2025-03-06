@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class Chat implements Serializable {
     public long id;

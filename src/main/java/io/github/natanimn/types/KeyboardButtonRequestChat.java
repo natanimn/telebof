@@ -5,9 +5,8 @@ import java.util.Objects;
 import java.util.TreeMap;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class KeyboardButtonRequestChat {
     private ChatAdministratorRights user_administrator_rights, bot_administrator_rights;

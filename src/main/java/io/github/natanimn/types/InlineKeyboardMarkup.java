@@ -10,9 +10,8 @@ import java.util.ArrayList;
 
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class InlineKeyboardMarkup implements Markup, Serializable {
     private final List<List<InlineKeyboardButton>> inline_keyboard = new ArrayList<>();

@@ -5,9 +5,8 @@ import io.github.natanimn.types.InlineQueryResult;
 import io.github.natanimn.types.SentWebAppMessage;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class AnswerWebAppQuery extends AbstractBaseRequest<AnswerWebAppQuery, SentWebAppMessage> {
     public AnswerWebAppQuery(String webAppQueryId, InlineQueryResult result, RequestSender requestSender) {

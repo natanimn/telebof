@@ -3,9 +3,8 @@ package io.github.natanimn.requests;
 import io.github.natanimn.types.MenuButton;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class SetChatMenuButton extends AbstractBaseRequest<SetChatMenuButton, Boolean> {
     public SetChatMenuButton(RequestSender requestSender) {

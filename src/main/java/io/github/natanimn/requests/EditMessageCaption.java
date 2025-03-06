@@ -8,9 +8,8 @@ import io.github.natanimn.types.MessageEntity;
 import java.util.List;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class EditMessageCaption extends AbstractBaseRequest<EditMessageCaption, Message> {
     public EditMessageCaption(Object chatId, int messageId, RequestSender requestSender) {

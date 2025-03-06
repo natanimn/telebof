@@ -4,9 +4,8 @@ import io.github.natanimn.types.InlineKeyboardMarkup;
 import io.github.natanimn.types.Message;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class EditMessageLiveLocation extends AbstractBaseRequest<EditMessageLiveLocation, Message> {
     public EditMessageLiveLocation(Object chatId, double latitude, double longitude, int messageId, RequestSender requestSender) {

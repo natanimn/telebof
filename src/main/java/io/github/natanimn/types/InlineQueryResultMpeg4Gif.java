@@ -3,9 +3,8 @@ package io.github.natanimn.types;
 import java.io.Serializable;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class InlineQueryResultMpeg4Gif extends InlineQueryMediaResult<InlineQueryResultMpeg4Gif> implements Serializable {
     private String mpeg4_url, thumbnail_mime_type;

@@ -5,9 +5,8 @@ import java.util.Objects;
 
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash
+ *  3 March 2025
  */
 public class ChatAdministratorRights implements Serializable {
     public Boolean is_anonymous, can_manage_chat, can_delete_messages, can_manage_video_chats,

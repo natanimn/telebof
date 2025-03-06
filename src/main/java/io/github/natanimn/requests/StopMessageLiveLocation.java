@@ -4,9 +4,8 @@ import io.github.natanimn.types.InlineKeyboardMarkup;
 import io.github.natanimn.types.Message;
 
 /**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
+ * Natanim Negash 
+ *  3 March 2025
  */
 public class StopMessageLiveLocation extends AbstractBaseRequest<StopMessageLiveLocation, Message> {
     public StopMessageLiveLocation(Object chatId, int messageId, RequestSender requestSender) {
