@@ -1,5 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 7.7 Bot API </p> 
+## <p align="center"> Supported 7.8 Bot API </p> 
 ##
 
 
@@ -33,14 +33,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.1.1'
+implementation 'io.github.natanimn:telebof:0.2.0'
 ```
 ### Your First Echo Bot
 
@@ -734,6 +734,9 @@ try {
     System.out.println(apiException.description);
 }
 ```
+
+## Do you want your bot to be listed here?
+* Just make a pull request; Only bots with public source code are accepted.
 
 ## Conclusion
 
