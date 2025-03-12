@@ -14,4 +14,8 @@ public class PinChatMessage extends AbstractBaseRequest<PinChatMessage, Boolean>
         return add("disable_notification", disableNotification);
     }
 
+    public PinChatMessage businessConnectionId(boolean business_connection_id) {
+        return add("business_connection_id", business_connection_id);
+    }
+
 }

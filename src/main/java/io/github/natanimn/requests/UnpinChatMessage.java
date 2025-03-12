@@ -13,4 +13,7 @@ public class UnpinChatMessage extends AbstractBaseRequest<UnpinChatMessage, Bool
         return add("message_id", messageId);
     }
 
+    public UnpinChatMessage businessConnectionId(boolean business_connection_id) {
+        return add("business_connection_id", business_connection_id);
+    }
 }
