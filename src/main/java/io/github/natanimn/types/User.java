@@ -11,7 +11,8 @@ import io.github.natanimn.Util;
 public class User implements Serializable {
     public long id;
     public Boolean is_bot, is_premium, added_to_attachment_menu, can_join_groups,
-            can_read_all_group_messages, supports_inline_queries, can_connect_to_business;
+            can_read_all_group_messages, supports_inline_queries, can_connect_to_business,
+            has_main_web_app;
     public String first_name, last_name, language_code, username;
 
     public String mention(){
@@ -32,14 +33,15 @@ public class User implements Serializable {
                 Objects.equals(supports_inline_queries, user.supports_inline_queries) &&
                 Objects.equals(can_connect_to_business, user.can_connect_to_business) &&
                 Objects.equals(first_name, user.first_name) && Objects.equals(last_name, user.last_name) &&
-                Objects.equals(language_code, user.language_code) && Objects.equals(username, user.username);
+                Objects.equals(language_code, user.language_code) && Objects.equals(username, user.username) &&
+                Objects.equals(has_main_web_app, user.has_main_web_app);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, is_bot, is_premium, added_to_attachment_menu, can_join_groups,
                 can_read_all_group_messages, supports_inline_queries, can_connect_to_business, first_name, last_name,
-                language_code, username);
+                language_code, username, has_main_web_app);
     }
 
     @Override
@@ -50,6 +52,7 @@ public class User implements Serializable {
                 ", is_premium=" + is_premium +
                 ", added_to_attachment_menu=" + added_to_attachment_menu +
                 ", can_join_groups=" + can_join_groups +
+                ", has_main_web_app=" + has_main_web_app +
                 ", can_read_all_group_messages=" + can_read_all_group_messages +
                 ", supports_inline_queries=" + supports_inline_queries +
                 ", can_connect_to_business=" + can_connect_to_business +
