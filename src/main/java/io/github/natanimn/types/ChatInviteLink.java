@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ChatInviteLink implements Serializable {
     public String invite_link, name;
     public User creator;
-    public Integer expire_date, member_limit, pending_join_request_count;
+    public Integer expire_date, member_limit, pending_join_request_count, subscription_period, subscription_price;
     public Boolean is_primary, is_revoked, creates_join_request;
 
     @Override
@@ -24,12 +24,14 @@ public class ChatInviteLink implements Serializable {
                 Objects.equals(member_limit, that.member_limit) &&
                 Objects.equals(pending_join_request_count, that.pending_join_request_count) &&
                 Objects.equals(is_primary, that.is_primary) && Objects.equals(is_revoked, that.is_revoked) &&
-                Objects.equals(creates_join_request, that.creates_join_request);
+                Objects.equals(creates_join_request, that.creates_join_request) &&
+                Objects.equals(subscription_period, that.subscription_period) &&
+                Objects.equals(subscription_price, that.subscription_price);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(invite_link, name, creator, expire_date, member_limit, pending_join_request_count,
-                is_primary, is_revoked, creates_join_request);
+                is_primary, is_revoked, creates_join_request, subscription_period, subscription_price);
     }
 }
