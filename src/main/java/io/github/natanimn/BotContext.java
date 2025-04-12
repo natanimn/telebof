@@ -525,12 +525,21 @@ public class BotContext {
         return new CreateChatInviteLink(getChatId(), this.requestSender);
     }
 
+    public CreateChatSubscriptionInviteLink createChatSubscriptionInviteLink(Object chatId,int subscriptionPeriod,
+                                                                             int subscriptionPrice) {
+        return new CreateChatSubscriptionInviteLink(getChatId(), subscriptionPeriod, subscriptionPeriod, this.requestSender);
+    }
+
     public EditChatInviteLink editChatInviteLink(Object chatId, String inviteLink) {
         return new EditChatInviteLink(chatId, inviteLink, this.requestSender);
     }
 
     public EditChatInviteLink editChatInviteLink(String inviteLink) {
         return new EditChatInviteLink(getChatId(), inviteLink, this.requestSender);
+    }
+
+    public EditChatSubscriptionInviteLink editChatSubscriptionInviteLink(Object chatId, String inviteLink) {
+        return new EditChatSubscriptionInviteLink(chatId, inviteLink, this.requestSender);
     }
 
     public RevokeChatInviteLink revokeChatInviteLink(Object chatId, String inviteLink) {
