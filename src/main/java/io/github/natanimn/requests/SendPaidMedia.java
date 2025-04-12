@@ -66,4 +66,8 @@ public class SendPaidMedia extends AbstractBaseRequest<SendPaidMedia, Message> {
         return add("show_caption_above_media", show_caption_above_media);
     }
 
+    public SendPaidMedia businessConnectionId(String business_connection_id){
+        return add("business_connection_id", business_connection_id);
+    }
+
 }
