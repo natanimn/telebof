@@ -1,6 +1,6 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 7.8 Bot API </p> 
-##
+## <p align="center"> Supported 7.9 Bot API </p> 
+
 
 
 * [Installation](#installation)
@@ -33,14 +33,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.2.1</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.2.1'
+implementation 'io.github.natanimn:telebof:0.3.0'
 ```
 ### Your First Echo Bot
 
@@ -52,7 +52,8 @@ public class MyFirstEchoBot {
 
   public static void main(String[] args) {
     final BotClient bot = new BotClient(TOKEN);
-
+    
+   
     // Listening for /start command
     bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
         context.reply("Welcome!").exec();
