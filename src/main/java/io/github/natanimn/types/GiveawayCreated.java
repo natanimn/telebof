@@ -1,6 +1,5 @@
 package io.github.natanimn.types;
 
-import java.io.Serializable;
 
 /**
  * Natanim Negash
