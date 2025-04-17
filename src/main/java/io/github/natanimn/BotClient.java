@@ -61,6 +61,7 @@ final public class BotClient {
     private final LinkedHashMap<FilterExecutor, BusinessMessageHandler> businessMessageHandlers = new LinkedHashMap<>();
     private final LinkedHashMap<FilterExecutor, EditedBusinessMessageHandler> editedBusinessMessageHandlers = new LinkedHashMap<>();
     private final LinkedHashMap<FilterExecutor, DeletedBusinessMessageHandler> deletedBusinessMessageHandlers = new LinkedHashMap<>();
+    private final LinkedHashMap<FilterExecutor, PurchasedPaidMediaHandler> purchasedPaidMediaHandlers = new LinkedHashMap<>();
 
     private Filter filter;
     private final GetUpdates getUpdates;
@@ -366,6 +367,14 @@ final public class BotClient {
         deletedBusinessMessageHandlers.put(filter -> true, deletedBusiness);
     }
 
+    public void onPurchasedPaidMedia(FilterExecutor filterExecutor, PurchasedPaidMediaHandler paidMedia){
+        purchasedPaidMediaHandlers.put(filterExecutor, paidMedia);
+    }
+
+    public void onPurchasedPaidMedia(PurchasedPaidMediaHandler paidMedia){
+        purchasedPaidMediaHandlers.put(filter -> true, paidMedia);
+    }
+
     /**
      * <p>Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever
      * there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a
@@ -461,6 +470,7 @@ final public class BotClient {
      *
      * @param update Update class
      */
+
     public void notifyUpdate(Update update){
         this.context.setUpdate(update);
         this.filter = new Filter(update, storage);
@@ -486,6 +496,7 @@ final public class BotClient {
         else if (update.business_message != null) processBusinessMessage(update);
         else if (update.edited_business_message != null) processBusinessMessage(update);
         else if (update.deleted_business_messages != null) processDeletedBusinessMessage(update);
+        else if (update.purchased_paid_media != null) processPurchasedPaidMedia(update);
 
     }
 
@@ -749,6 +760,19 @@ final public class BotClient {
             boolean executed = filterExecutor.execute(filter);
             if (executed){
                 editedBusinessMessageHandler.handle(this.context, update.edited_business_message);
+                break;
+            }
+        }
+    }
+
+
+    private void processPurchasedPaidMedia(Update update){
+        for (Map.Entry<FilterExecutor, PurchasedPaidMediaHandler> entry: purchasedPaidMediaHandlers.entrySet()){
+            FilterExecutor filterExecutor = entry.getKey();
+            PurchasedPaidMediaHandler paidMediaHandler = entry.getValue();
+            boolean executed = filterExecutor.execute(filter);
+            if (executed){
+                paidMediaHandler.handle(this.context, update.purchased_paid_media);
                 break;
             }
         }
