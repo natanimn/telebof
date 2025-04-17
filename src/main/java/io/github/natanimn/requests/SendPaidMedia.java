@@ -70,4 +70,8 @@ public class SendPaidMedia extends AbstractBaseRequest<SendPaidMedia, Message> {
         return add("business_connection_id", business_connection_id);
     }
 
+    public SendPaidMedia payload(String payload){
+        return add("payload", payload);
+    }
+
 }
