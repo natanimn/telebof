@@ -15,7 +15,7 @@ public class Giveaway implements Serializable {
     public Boolean only_new_members, has_public_winners;
     public String prize_description;
     public List<String> country_codes;
-    public Integer premium_subscription_month_count;
+    public Integer premium_subscription_month_count, prize_star_count;
 
     @Override
     public boolean equals(Object object) {
@@ -27,12 +27,13 @@ public class Giveaway implements Serializable {
                 Objects.equals(has_public_winners, giveaway.has_public_winners) &&
                 Objects.equals(prize_description, giveaway.prize_description) &&
                 Objects.equals(country_codes, giveaway.country_codes) &&
-                Objects.equals(premium_subscription_month_count, giveaway.premium_subscription_month_count);
+                Objects.equals(premium_subscription_month_count, giveaway.premium_subscription_month_count) &&
+                Objects.equals(prize_star_count, giveaway.prize_star_count);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(chats, winners_selection_date, winner_count, only_new_members, has_public_winners,
-                prize_description, country_codes, premium_subscription_month_count);
+                prize_description, country_codes, premium_subscription_month_count, prize_star_count);
     }
 }
