@@ -16,6 +16,7 @@ import okhttp3.ResponseBody;
 import okhttp3.Request;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.Proxy;
 import java.net.UnknownHostException;
@@ -59,32 +60,59 @@ public class RequestSender {
             this.URL = "https://api.telegram.org/bot%s" + (useTestServer?"/test/%s":"/%s");
     }
 
-    private RequestBody prepareRequest(AbstractBaseRequest<?, ?> baseRequest){
-        if (baseRequest.hasMultipart()){
-            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-            for (Map.Entry<String, Object> param: baseRequest.getParameters().entrySet()){
-                String name = param.getKey();
-                Object val = param.getValue();
-                MediaType contentType = MediaType.parse(baseRequest.getContentType());
-                if (val == null) continue;
-                if (val instanceof java.io.File file){
-                    builder.addFormDataPart(name, file.getName(), RequestBody.create(file, contentType));
-                } else {
-                    String stringVal;
-                    if (val.getClass().getName().startsWith("java.lang") || val.getClass().isPrimitive())
-                        stringVal = String.valueOf(val);
-                    else stringVal = gson.toJson(val);
-                    builder.addFormDataPart(name, stringVal);
-                }
+    private RequestBody prepareRequest(AbstractBaseRequest<?, ?> baseRequest) {
+        if (baseRequest.hasMultipart()) {
+            return buildMultipartBody(baseRequest);
+        }
+        return buildJsonBody(baseRequest);
+    }
 
-            }
-            return builder.build();
+    private RequestBody buildMultipartBody(AbstractBaseRequest<?, ?> request) {
+        MultipartBody.Builder builder = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM);
 
+        MediaType contentType = MediaType.parse(request.getContentType());
+
+        request.getParameters().entrySet().stream()
+                .filter(entry -> entry.getValue() != null)
+                .forEach(entry -> addMultipartPart(builder, entry, contentType));
+
+        return builder.build();
+    }
+
+    private void addMultipartPart(MultipartBody.Builder builder,
+                                  Map.Entry<String, Object> entry,
+                                  MediaType contentType) {
+        String name = entry.getKey();
+        Object value = entry.getValue();
+
+        if (value instanceof File file) {
+            builder.addFormDataPart(
+                    name,
+                    file.getName(),
+                    RequestBody.create(file, contentType)
+            );
         } else {
-            return RequestBody.create(gson.toJson(baseRequest.getParameters()), JSON);
+            String stringValue = convertToString(value);
+            builder.addFormDataPart(name, stringValue);
         }
     }
 
+    private String convertToString(Object value) {
+        if (value.getClass().isPrimitive() || value instanceof Number ||
+                value instanceof Boolean || value instanceof Character ||
+                value instanceof String) {
+            return String.valueOf(value);
+        }
+        return gson.toJson(value);
+    }
+
+    private RequestBody buildJsonBody(AbstractBaseRequest<?, ?> request) {
+        return RequestBody.create(
+                gson.toJson(request.getParameters()),
+                MediaType.get("application/json; charset=utf-8")
+        );
+    }
     private String getUrl(AbstractBaseRequest<?, ?> baseRequest) {
         return String.format(URL, botToken, baseRequest.getMethodName());
     }

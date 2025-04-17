@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -25,53 +26,18 @@ public class ReplyKeyboardMarkup implements Markup, Serializable {
 
     public ReplyKeyboardMarkup(){}
 
-    public ReplyKeyboardMarkup(KeyboardButton[] keyboard){
-        this(keyboard, Math.min(keyboard.length, 12));
+
+    public ReplyKeyboardMarkup(KeyboardButton[][] keyboards) {
+        List.of(keyboards).forEach(k-> keyboard.add(List.of(k)));
     }
 
-    public ReplyKeyboardMarkup(KeyboardButton[] keyboards, int rowWidth) {
-        if (rowWidth > MAX_ROW_WIDTH) {
-            BotLog.warn("Currently telegram supports 12 reply keyboard row width at maximum.");
-            rowWidth = MAX_ROW_WIDTH;
-        }
-
-        List<KeyboardButton> buttons = List.of(keyboards);
-        int length = keyboards.length;
-        int i = 0;
-        while (i < length){
-            try{
-                keyboard.add(buttons.subList(i, i+rowWidth));
-            }catch (IndexOutOfBoundsException e){
-                keyboard.add(buttons.subList(i, length));
-            }
-            i+=rowWidth;
-        }
-
-    }
-
-    public ReplyKeyboardMarkup(String[] keyboard){
-        this(keyboard, Math.min(keyboard.length, 12));
-    }
-
-    public ReplyKeyboardMarkup(String[] keyboards, int rowWidth){
-        if (rowWidth > MAX_ROW_WIDTH){
-            BotLog.warn("Currently telegram supports 12 reply keyboard row width at maximum.");
-            rowWidth = MAX_ROW_WIDTH;
-        }
-
-        List<KeyboardButton> keyboardButtons = new ArrayList<>();
-        Arrays.stream(keyboards).forEach(v -> keyboardButtons.add(new KeyboardButton(v)));
-        int length = keyboards.length;
-
-        int i =0;
-        while (i < length){
-            try{
-                keyboard.add(keyboardButtons.subList(i, i+rowWidth));
-            }catch (IndexOutOfBoundsException e){
-                keyboard.add(keyboardButtons.subList(i, length));
-            }
-            i+=rowWidth;
-        }
+    public ReplyKeyboardMarkup(String[][] keyboards) {
+        Arrays.stream(keyboards).forEach(row -> {
+            List<KeyboardButton> buttons = Arrays.stream(row)
+                            .map(KeyboardButton::new)
+                            .collect(Collectors.toList());
+                    keyboard.add(buttons);
+                });
     }
 
     public ReplyKeyboardMarkup isPersistent(boolean isPersistent) {
@@ -108,30 +74,20 @@ public class ReplyKeyboardMarkup implements Markup, Serializable {
         }
     }
 
-    public void add(String ... keyboardButton) {
-        List<KeyboardButton> keyboardButtonList = new ArrayList<>();
-        List.of(keyboardButton).forEach(value -> {
-            keyboardButtonList.add(new KeyboardButton(value));
-        });
-        KeyboardButton[] keyboardButtons = keyboardButtonList.toArray(KeyboardButton[]::new);
-        add(keyboardButtons);
+    public void add(String... keyboardButton) {
+        add(Arrays.stream(keyboardButton)
+                .map(KeyboardButton::new)
+                .toArray(KeyboardButton[]::new));
     }
 
-
-    public void add(KeyboardButton ... keyboardButton) {
-        int length = keyboardButton.length;
-        List<KeyboardButton> buttonList = List.of(keyboardButton);
-        if (length > MAX_ROW_WIDTH) {
-            for (int i=0; i<length; i+=rowWidth){
-                try{
-                    keyboard.add(buttonList.subList(i, i+rowWidth));
-                }catch (IndexOutOfBoundsException e){
-                    keyboard.add(buttonList.subList(i, length));
-                }
+    public void add(KeyboardButton... keyboardButtons) {
+        if (keyboardButtons.length > MAX_ROW_WIDTH) {
+            for (int i = 0; i < keyboardButtons.length; i += rowWidth) {
+                int end = Math.min(i + rowWidth, keyboardButtons.length);
+                keyboard.add(List.of(Arrays.copyOfRange(keyboardButtons, i, end)));
             }
-
         } else {
-            keyboard.add(buttonList);
+            keyboard.add(List.of(keyboardButtons));
         }
     }
 

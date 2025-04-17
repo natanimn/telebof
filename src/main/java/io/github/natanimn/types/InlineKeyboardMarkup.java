@@ -25,50 +25,32 @@ public class InlineKeyboardMarkup implements Markup, Serializable {
 
     public InlineKeyboardMarkup(){}
 
-    public InlineKeyboardMarkup(InlineKeyboardButton[][]  keyboard) {
-        List<InlineKeyboardButton[]> lists = Arrays.stream(keyboard).toList();
-        lists.forEach(value -> {
-            inline_keyboard.add(List.of(value));
-        });
+    public InlineKeyboardMarkup(InlineKeyboardButton[][] keyboard) {
+        Arrays.stream(keyboard)
+                .map(List::of)
+                .forEach(inline_keyboard::add);
     }
 
-
-    public InlineKeyboardMarkup(InlineKeyboardButton[] buttons, int rowWidth){
+    public InlineKeyboardMarkup(InlineKeyboardButton[] buttons, int rowWidth) {
+        this.rowWidth = Math.min(rowWidth, 8);
         if (rowWidth > 8) {
-            BotLog.warn("Currently telegram supports 8 inline keyboard rowWidth at maximum");
-            rowWidth = 8;
+            BotLog.warn("Telegram supports maximum 8 buttons per row");
         }
-
-        List<InlineKeyboardButton> keyboard = List.of(buttons);
-        for (int i =0; i < keyboard.size(); i+=rowWidth) {
-            try {
-                inline_keyboard.add(keyboard.subList(i, i + rowWidth));
-            } catch (IndexOutOfBoundsException exception) {
-                inline_keyboard.add(keyboard.subList(i, keyboard.size()));
-            }
-        }
+        addButtons(buttons);
     }
 
-    public InlineKeyboardMarkup(InlineKeyboardButton[] buttons){
+    public InlineKeyboardMarkup(InlineKeyboardButton[] buttons) {
         this(buttons, Math.min(buttons.length, 8));
     }
 
+    public void addKeyboard(InlineKeyboardButton... buttons) {
+        addButtons(buttons);
+    }
 
-
-    public void addKeyboard(InlineKeyboardButton... buttons){
-        int length = buttons.length;
-        List<InlineKeyboardButton> buttonList = List.of(buttons);
-        if (length > 8){
-            for (int i =0; i < length; i+=rowWidth){
-                try {
-                    inline_keyboard.add(buttonList.subList(i, i + rowWidth));
-                } catch (IndexOutOfBoundsException exception) {
-                    inline_keyboard.add(buttonList.subList(i, length));
-                }
-            }
-
-        } else {
-            inline_keyboard.add(buttonList);
+    private void addButtons(InlineKeyboardButton[] buttons) {
+        for (int i = 0; i < buttons.length; i += rowWidth) {
+            int end = Math.min(i + rowWidth, buttons.length);
+            inline_keyboard.add(List.of(Arrays.copyOfRange(buttons, i, end)));
         }
     }
 
