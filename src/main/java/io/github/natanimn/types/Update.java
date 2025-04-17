@@ -31,6 +31,7 @@ public class Update implements Serializable {
     public ChatBoostRemoved removed_chat_boost;
     public BusinessConnection business_connection;
     public BusinessMessagesDeleted deleted_business_messages;
+    public PaidMediaPurchased purchased_paid_media;
 
     @Override
     public boolean equals(Object object) {
@@ -57,7 +58,8 @@ public class Update implements Serializable {
                 Objects.equals(chat_boost, update.chat_boost) &&
                 Objects.equals(removed_chat_boost, update.removed_chat_boost) &&
                 Objects.equals(business_connection, update.business_connection) &&
-                Objects.equals(deleted_business_messages, update.deleted_business_messages);
+                Objects.equals(deleted_business_messages, update.deleted_business_messages) &&
+                Objects.equals(purchased_paid_media, update.purchased_paid_media);
     }
 
     @Override
@@ -65,7 +67,8 @@ public class Update implements Serializable {
         return Objects.hash(update_id, message, edited_message, channel_post, edited_channel_post, business_message,
                 edited_business_message, callback_query, inline_query, chosen_inline_result, poll, poll_answer,
                 pre_checkout_query, shipping_query, my_chat_member, chat_member, chat_join_request, message_reaction,
-                message_reaction_count, chat_boost, removed_chat_boost, business_connection, deleted_business_messages);
+                message_reaction_count, chat_boost, removed_chat_boost, business_connection, deleted_business_messages,
+                purchased_paid_media);
     }
 
 
@@ -95,6 +98,7 @@ public class Update implements Serializable {
                 ", removed_chat_boost=" + removed_chat_boost +
                 ", business_connection=" + business_connection +
                 ", deleted_business_messages=" + deleted_business_messages +
+                ", purchased_paid_media=" + purchased_paid_media +
                 '}';
     }
 }
