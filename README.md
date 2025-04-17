@@ -1,5 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 7.9 Bot API </p> 
+## <p align="center"> Supported 7.10 Bot API </p> 
 
 
 
@@ -33,14 +33,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.3.0'
+implementation 'io.github.natanimn:telebof:0.4.0'
 ```
 ### Your First Echo Bot
 
@@ -566,7 +566,15 @@ ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup()
 markup.add("A", "B", "C"); // You can add String or 
 markup.add("D", "E"); 
 markup.add(new KeyboardButton("F")); // KeybaordButton class
-
+        
+// also possible
+ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
+        new String[]{"A", "B", "C"},
+        new String[]{"D", "E"},
+        new String[]{"F"}
+}).resizeKeyboard(true); // resize keyboard
+        
+        
 context.sendMssage("Hello, World!").replyMarkup(markup).exec();
 ```
 
@@ -741,7 +749,7 @@ try {
 
 ## Conclusion
 
-Finally, we now assume that you have basic understanding of this library in this brief tutorial, however, if you have any question or need 
+Finally, we now assume that you have basic understanding of this library in this brief tutorial; however, if you have any question or need 
 support regarding this library, you have the following options
 
 1. Ping us on [our official Telegram group](https://t.me/telebofchat). 
