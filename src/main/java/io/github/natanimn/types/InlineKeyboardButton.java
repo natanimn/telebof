@@ -14,6 +14,7 @@ public class InlineKeyboardButton implements Serializable {
     public Boolean pay;
     public CallbackGame callback_game;
     public SwitchInlineQueryChosenChat switch_inline_query_chosen_chat;
+    public CopyTextButton copy_text;
 
     public InlineKeyboardButton(String text) {
         this.text = text;
@@ -59,6 +60,14 @@ public class InlineKeyboardButton implements Serializable {
         return this;
     }
 
+    public InlineKeyboardButton copyText(CopyTextButton copyTextButton){
+        /*
+         *
+         */
+        this.copy_text = copyTextButton;
+        return this;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -72,12 +81,13 @@ public class InlineKeyboardButton implements Serializable {
                 Objects.equals(login_url, button.login_url) &&
                 Objects.equals(pay, button.pay) &&
                 Objects.equals(callback_game, button.callback_game) &&
-                Objects.equals(switch_inline_query_chosen_chat, button.switch_inline_query_chosen_chat);
+                Objects.equals(switch_inline_query_chosen_chat, button.switch_inline_query_chosen_chat) &&
+                Objects.equals(copy_text, button.copy_text);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(text, url, callback_data, switch_inline_query_current_chat, wep_app, login_url, pay,
-                callback_game, switch_inline_query_chosen_chat);
+                callback_game, switch_inline_query_chosen_chat, copy_text);
     }
 }
