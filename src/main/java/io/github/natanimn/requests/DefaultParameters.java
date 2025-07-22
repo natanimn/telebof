@@ -3,7 +3,6 @@ import io.github.natanimn.enums.ParseMode;
 import io.github.natanimn.types.Markup;
 import io.github.natanimn.types.Message;
 import io.github.natanimn.types.ReplyParameters;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Type;
 
@@ -68,5 +67,9 @@ public class DefaultParameters<T, R> extends AbstractBaseRequest<T, R> {
 
     public T messageEffectId(String message_effect_id ){
         return add("message_effect_id ", message_effect_id);
+    }
+
+    public T allowPaidBroadcast(boolean allow_paid_broadcast){
+        return add("allow_paid_broadcast", allow_paid_broadcast);
     }
 }
