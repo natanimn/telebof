@@ -1,5 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 7.10 Bot API </p> 
+## <p align="center"> Supported 7.11 Bot API </p> 
 ### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
 
 
