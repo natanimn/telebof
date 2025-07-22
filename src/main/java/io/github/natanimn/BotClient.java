@@ -833,7 +833,6 @@ final public class BotClient {
             processWebhook();
         } else {
             BotLog.info("Bot started running via longPolling");
-            // deleteWebhook();
             startPolling();
         }
     }
