@@ -12,6 +12,7 @@ public class TransactionPartner {
     public User user;
     public RevenueWithdrawalState withdrawal_state;
     public List<PaidMedia> paid_media;
+    Integer request_count;
 
     @Override
     public boolean equals(Object object) {
@@ -22,11 +23,12 @@ public class TransactionPartner {
                 Objects.equals(invoice_payload, that.invoice_payload) &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(withdrawal_state, that.withdrawal_state) &&
-                Objects.equals(paid_media, that.paid_media);
+                Objects.equals(paid_media, that.paid_media) &&
+                Objects.equals(request_count, that.request_count);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(type, invoice_payload, user, withdrawal_state, paid_media);
+        return Objects.hash(type, invoice_payload, user, withdrawal_state, paid_media, request_count);
     }
 }
