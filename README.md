@@ -748,6 +748,9 @@ try {
 ## Do you want your bot to be listed here?
 * Just make a pull request; Only bots with public source code are accepted.
 
+## Contribution
+We welcome contribution; Feel free to contribute to this library. Just pull request. 
+
 ## Conclusion
 
 Finally, we now assume that you have basic understanding of this library in this brief tutorial; however, if you have any question or need 
