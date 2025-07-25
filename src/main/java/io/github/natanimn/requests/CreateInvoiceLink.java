@@ -4,8 +4,9 @@ import io.github.natanimn.types.LabeledPrice;
 import java.util.List;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since March 3, 2025
+ * @version 0.6
  */
 public class CreateInvoiceLink extends AbstractBaseRequest<CreateInvoiceLink, String> {
     public CreateInvoiceLink(Object chatId, String title, String description, String payload,
@@ -77,4 +78,24 @@ public class CreateInvoiceLink extends AbstractBaseRequest<CreateInvoiceLink, St
         return add("is_flexible", isFlexible);
     }
 
+    /**
+     * @param subscription_period The number of seconds the subscription will be active for before the next payment.
+     * The currency must be set to “XTR” (Telegram Stars) if the parameter is used.
+     * Currently, it must always be 2592000 (30 days) if specified.
+     * Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent
+     * subscriptions from the same user. Subscription price must not exceed 10000 Telegram Stars.
+     * @return {@link CreateInvoiceLink}
+     */
+    public CreateInvoiceLink subscriptionPeriod(Integer subscription_period){
+        return add("subscription_period", subscription_period);
+    }
+
+    /**
+     * @param business_connection_id Unique identifier of the business connection on behalf of which the link will be created.
+     * For payments in Telegram Stars only.
+     * @return {@link CreateInvoiceLink}
+     */
+    public CreateInvoiceLink businessConnectionId(String business_connection_id){
+        return add("business_connection_id", business_connection_id);
+    }
 }
