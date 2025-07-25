@@ -1,7 +1,8 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 7.11 Bot API </p> 
-### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
+## <p align="center"> Supported 8.0 Bot API </p> 
+#### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
 
+## Official Docs — Coming soon
 
 * [Installation](#installation)
 * [Your First Echo Bot](#your-first-echo-bot)
@@ -33,14 +34,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.5.0</version>
+    <version>0.6.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.5.0'
+implementation 'io.github.natanimn:telebof:0.6.0'
 ```
 ### Your First Echo Bot
 
