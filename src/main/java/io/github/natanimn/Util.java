@@ -12,12 +12,13 @@ import io.github.natanimn.types.Update;
 
 import java.lang.reflect.Type;
 import java.util.List;
-
-abstract /**
- * Natanim Negash
- *  3 March 2025
+/**
+ * Util class
+ * @author Natanim
+ * @since March 3, 2025
+ * @version 0.1
  */
-public class Util {
+abstract public class Util {
     static Gson gson = new Gson();
 
     public static boolean isCommand(String text) {
@@ -109,9 +110,6 @@ public class Util {
         Type type = new TypeToken<List<BotCommand>>() {}.getType();
         return gson.fromJson(gson.toJson(json), type);
     }
-
-
-
 }
 
 
