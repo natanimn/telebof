@@ -14,7 +14,6 @@ import io.github.natanimn.types.InputSticker;
 import io.github.natanimn.types.LabeledPrice;
 import io.github.natanimn.types.MaskPosition;
 import io.github.natanimn.types.Message;
-import io.github.natanimn.types.PaidMedia;
 import io.github.natanimn.types.PassportElementError;
 import io.github.natanimn.types.ReplyParameters;
 import io.github.natanimn.types.Update;
@@ -22,14 +21,15 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("unused")
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since March 3, 2025
+ * @version 0.6
  */
+@SuppressWarnings("unused")
 public class BotContext {
     private Update update;
-    private RequestSender requestSender;
+    private final RequestSender requestSender;
     private StateMemoryStorage storage;
     private ParseMode parseMode;
 
@@ -374,6 +374,18 @@ public class BotContext {
         return new EditMessageLiveLocation(inlineMessageId, latitude, longitude, this.requestSender);
     }
 
+    /**
+     * This a method that allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars.
+     * @param user_id Identifier of the user whose subscription will be edited
+     * @param telegram_charge_id Telegram payment identifier for the subscription
+     * @param is_cancelled Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period.
+     *                     Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
+     * @return {@link EditUserStarSubscription}
+     */
+    public EditUserStarSubscription editUserStarSubscription(long user_id, String telegram_charge_id, boolean is_cancelled){
+        return new EditUserStarSubscription(user_id, telegram_charge_id, is_cancelled, requestSender);
+    }
+
     public StopMessageLiveLocation stopMessageLiveLocation(Object chatId, int messageId) {
         return new StopMessageLiveLocation(chatId, messageId, this.requestSender);
     }
@@ -442,6 +454,26 @@ public class BotContext {
         return new SendChatAction(getChatId(), chatAction, this.requestSender);
     }
 
+    /**
+     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver
+     * @param user_id Unique identifier of the target user who will receive the gift.
+     * @param gift_id Identifier of the gift
+     * @return {@link SendGift}
+     */
+    public SendGift sendGift(long user_id, String gift_id){
+        return new SendGift(user_id, gift_id, requestSender);
+    }
+
+    /**
+     * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver
+     * @param chat_id Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
+     * @param gift_id Identifier of the gift
+     * @return {@link SendGift}
+     */
+    public SendGift sendGift(Object chat_id, String gift_id){
+        return new SendGift(chat_id, gift_id, requestSender);
+    }
+
     public GetUserProfilePhotos getUserProfilePhotos(long userId) {
         return new GetUserProfilePhotos(userId, this.requestSender);
     }
@@ -491,6 +523,17 @@ public class BotContext {
 
     public SetChatAdministratorCustomTitle setChatAdministratorCustomTitle(long userId, String customTitle) {
         return new SetChatAdministratorCustomTitle(getChatId(), userId, customTitle, this.requestSender);
+    }
+
+    /**
+     * This method Changes the emoji status for a given user that previously allowed the bot to manage their emoji status
+     * via the Mini App method <a href="https://core.telegram.org/bots/webapps#initializing-mini-apps">requestEmojiStatusAccess</a>.
+     * Return True on success
+     * @param user_id Unique identifier of the target user
+     * @return {@link SetUserEmojiStatus}
+     */
+    public SetUserEmojiStatus setUserEmojiStatus(long user_id){
+        return new SetUserEmojiStatus(user_id, requestSender);
     }
 
     public BanChatSenderChat banChatSenderChat(Object chatId, long senderChatId) {
@@ -986,6 +1029,15 @@ public class BotContext {
         return new AnswerInlineQuery(update.inline_query.id, results, this.requestSender);
     }
 
+    /**
+     * Stores a message that can be sent by a user of a Mini App. Returns a {@link PreparedInlineMessage} object.
+     * @param user_id Unique identifier of the target user that can use the prepared message
+     * @param result {@link InlineQueryResult} object describing the message to be sent
+     * @return {@link SavePreparedInlineMessage}
+     */
+    public SavePreparedInlineMessage savePreparedInlineMessage(long user_id, InlineQueryResult result){
+        return new SavePreparedInlineMessage(user_id, result, requestSender);
+    }
     public AnswerWebAppQuery answerWebAppQuery(String webAppQueryId, InlineQueryResult result) {
         return new AnswerWebAppQuery(webAppQueryId, result, this.requestSender);
     }
@@ -1044,6 +1096,14 @@ public class BotContext {
         return new SetGameScore(chatId, userId, score, messageId, this.requestSender);
     }
 
+    /**
+     * Returns the list of gifts that can be sent by the bot to users and channel chats. Requires no parameters.
+     * Returns a {@link Gifts} object.
+     * @return {@link GetAvailableGifts}
+     */
+    public GetAvailableGifts getAvailableGifts(){
+        return new GetAvailableGifts(requestSender);
+    }
     public GetMyName getMyName(){
         return new GetMyName(this.requestSender);
     }
