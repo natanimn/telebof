@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.File;
+import io.github.natanimn.types.media_and_service.File;
 
 /**
  * Natanim Negash

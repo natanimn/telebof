@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.chat_and_user;
 
 import java.io.Serializable;
 import java.util.List;
