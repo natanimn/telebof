@@ -1,6 +1,7 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
 
 import io.github.natanimn.enums.MenuButtonType;
+import io.github.natanimn.types.web.WebAppInfo;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
