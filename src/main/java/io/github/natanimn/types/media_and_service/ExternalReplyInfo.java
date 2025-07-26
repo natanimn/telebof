@@ -1,4 +1,8 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
+
+import io.github.natanimn.types.updates.Poll;
+import io.github.natanimn.types.chat_and_user.Chat;
+import io.github.natanimn.types.payments.PaidMediaInfo;
 
 import java.io.Serializable;
 import java.util.List;
