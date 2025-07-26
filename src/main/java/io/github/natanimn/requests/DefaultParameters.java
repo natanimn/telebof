@@ -1,19 +1,17 @@
 package io.github.natanimn.requests;
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.Markup;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.ReplyParameters;
+import io.github.natanimn.types.keyboard.Markup;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.keyboard.ReplyParameters;
 
 import java.lang.reflect.Type;
 
 /**
- * @author Natanim Negash
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
-abstract /**
- * Natanim Negash
- *  3 March 2025
- */
-public class DefaultParameters<T, R> extends AbstractBaseRequest<T, R> {
+abstract public class DefaultParameters<T, R> extends AbstractBaseRequest<T, R> {
 
     public DefaultParameters(Object chatId, RequestSender requestSender, String methodName) {
         super(chatId, requestSender, methodName, Message.class);
@@ -28,7 +26,7 @@ public class DefaultParameters<T, R> extends AbstractBaseRequest<T, R> {
     }
 
     public T parseMode(ParseMode parseMode) {
-        return add("parse_mode",  parseMode != null?parseMode.name():null);
+        return add("parse_mode",  parseMode);
     }
 
     public T disableWebPagePreview(boolean disableWebPagePreview) {
@@ -41,16 +39,6 @@ public class DefaultParameters<T, R> extends AbstractBaseRequest<T, R> {
 
     public T protectContent(boolean protectContent) {
         return add("protect_content", protectContent);
-    }
-
-    @Deprecated(since = "v1.5.0")
-    public T replyToMessageId(int replyToMessageId) {
-        return add("reply_to_message_id", replyToMessageId);
-    }
-
-    @Deprecated(since = "v1.5.0")
-    public T allowSendingWithoutReply(boolean allowSendingWithoutReply) {
-        return add("allow_sending_without_reply", allowSendingWithoutReply);
     }
 
     public T replyParameters(ReplyParameters replyParameters){
