@@ -1,14 +1,30 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.payments;
+
+import io.github.natanimn.enums.RevenueWithdrawalStateType;
 
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * This class describes the state of a revenue withdrawal operation
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class RevenueWithdrawalState {
-    public String type, url;
+    /**
+     * Type of the state
+     */
+    public RevenueWithdrawalStateType type;
+
+    /**
+     * Date the withdrawal was completed in Unix time
+     */
     public Integer date;
+
+    /**
+     * An HTTPS URL that can be used to see transaction details
+     */
+    public String url;
 
     @Override
     public boolean equals(Object object) {
