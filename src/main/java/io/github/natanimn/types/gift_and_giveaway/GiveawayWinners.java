@@ -1,4 +1,7 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.gift_and_giveaway;
+
+import io.github.natanimn.types.chat_and_user.User;
+import io.github.natanimn.types.chat_and_user.Chat;
 
 import java.util.List;
 import java.util.Objects;

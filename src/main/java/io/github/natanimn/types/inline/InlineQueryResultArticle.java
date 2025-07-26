@@ -1,4 +1,7 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.inline;
+
+import io.github.natanimn.types.keyboard.InlineKeyboardMarkup;
+import io.github.natanimn.types.input.InputTextMessageContent;
 
 import java.io.Serializable;
 import java.util.Objects;

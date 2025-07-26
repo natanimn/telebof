@@ -1,4 +1,9 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
+
+import io.github.natanimn.types.media_and_service.CallbackGame;
+import io.github.natanimn.types.media_and_service.CopyTextButton;
+import io.github.natanimn.types.media_and_service.SwitchInlineQueryChosenChat;
+import io.github.natanimn.types.web.WebAppInfo;
 
 import java.io.Serializable;
 import java.util.Objects;

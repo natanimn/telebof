@@ -1,7 +1,7 @@
 package io.github.natanimn.handlers;
 
 import io.github.natanimn.BotContext;
-import io.github.natanimn.types.InlineQuery;
+import io.github.natanimn.types.updates.InlineQuery;
 
 @FunctionalInterface
 public interface InlineHandler {

@@ -1,4 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.gift_and_giveaway;
+
+import io.github.natanimn.types.updates.Message;
 
 import java.util.Objects;
 

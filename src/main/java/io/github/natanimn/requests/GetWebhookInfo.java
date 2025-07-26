@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.WebhookInfo;
+import io.github.natanimn.types.web.WebhookInfo;
 
 /**
  * Natanim Negash 
