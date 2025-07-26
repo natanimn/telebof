@@ -1,17 +1,37 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.chat_and_user.Chat;
+import io.github.natanimn.types.chat_and_user.User;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents an answer of a user in a non-anonymous poll.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
-public class PollAnswer implements Serializable {
+public class PollAnswer{
+    /**
+     * Unique poll identifier
+     */
     public String poll_id;
+
+    /**
+     * The user that changed the answer to the poll, if the voter isn't anonymous
+     */
     public User user;
+
+    /**
+     * 0-based identifiers of chosen answer options. May be empty if the vote was retracted.
+     */
     public List<Integer> options_id;
+
+    /**
+     * The chat that changed the answer to the poll, if the voter is anonymous
+     */
     public Chat voter_chat;
 
     @Override

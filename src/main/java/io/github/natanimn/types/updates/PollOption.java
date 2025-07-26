@@ -1,17 +1,33 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.media_and_service.MessageEntity;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This class contains information about one answer option in a poll.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
-public class PollOption implements Serializable {
+public class PollOption {
+    /**
+     * Option text, 1-100 characters
+     */
     public String text;
-    public Integer voter_count;
+
+    /**
+     * Special entities that appear in the option text.
+     * Currently, only custom emoji entities are allowed in poll option texts
+     */
     public List<MessageEntity> text_entities;
+
+    /**
+     * Number of users that voted for this option
+     */
+    public Integer voter_count;
 
     @Override
     public boolean equals(Object object) {
