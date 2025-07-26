@@ -1,11 +1,13 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.chat_and_user;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ *
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class ChatBoostAdded implements Serializable{
     public Integer boost_count;

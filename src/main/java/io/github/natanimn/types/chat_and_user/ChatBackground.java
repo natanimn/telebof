@@ -1,4 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.chat_and_user;
+
+import io.github.natanimn.types.media_and_service.BackgroundType;
 
 import java.util.Objects;
 
