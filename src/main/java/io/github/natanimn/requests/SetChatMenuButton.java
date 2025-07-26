@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.MenuButton;
+import io.github.natanimn.types.keyboard.MenuButton;
 
 /**
  * Natanim Negash 

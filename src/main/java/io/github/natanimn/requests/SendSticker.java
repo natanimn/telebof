@@ -2,7 +2,7 @@ package io.github.natanimn.requests;
 
 import io.github.natanimn.BotLog;
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.Message;
+import io.github.natanimn.types.updates.Message;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;

@@ -1,8 +1,8 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.Markup;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.ReplyParameters;
+import io.github.natanimn.types.keyboard.Markup;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.keyboard.ReplyParameters;
 
 /**
  * Natanim Negash

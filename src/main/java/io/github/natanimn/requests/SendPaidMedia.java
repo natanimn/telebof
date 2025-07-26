@@ -1,12 +1,11 @@
 package io.github.natanimn.requests;
 
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.InputMedia;
-import io.github.natanimn.types.InputPaidMedia;
-import io.github.natanimn.types.Markup;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.MessageEntity;
-import io.github.natanimn.types.ReplyParameters;
+import io.github.natanimn.types.input.InputPaidMedia;
+import io.github.natanimn.types.keyboard.Markup;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.media_and_service.MessageEntity;
+import io.github.natanimn.types.keyboard.ReplyParameters;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class SendPaidMedia extends AbstractBaseRequest<SendPaidMedia, Message> {
     }
 
     public SendPaidMedia parseMode(ParseMode parseMode) {
-        return add("parse_mode",  parseMode != null?parseMode.name():null);
+        return add("parse_mode",  parseMode);
     }
 
     public SendPaidMedia disableNotification(boolean disableNotification) {

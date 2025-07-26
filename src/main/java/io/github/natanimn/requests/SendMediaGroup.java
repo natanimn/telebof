@@ -2,10 +2,9 @@ package io.github.natanimn.requests;
 
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.BotLog;
-import io.github.natanimn.Util;
-import io.github.natanimn.types.InputMedia;
-import io.github.natanimn.types.Markup;
-import io.github.natanimn.types.Message;
+import io.github.natanimn.types.input.InputMedia;
+import io.github.natanimn.types.keyboard.Markup;
+import io.github.natanimn.types.updates.Message;
 
 import java.lang.reflect.Type;
 import java.util.List;

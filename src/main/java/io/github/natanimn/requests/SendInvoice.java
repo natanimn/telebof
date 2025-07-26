@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.LabeledPrice;
-import io.github.natanimn.types.Message;
+import io.github.natanimn.types.payments.LabeledPrice;
+import io.github.natanimn.types.updates.Message;
 import java.util.List;
 
 /**

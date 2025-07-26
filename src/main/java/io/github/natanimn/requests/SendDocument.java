@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.MessageEntity;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.media_and_service.MessageEntity;
 import java.io.File;import java.util.List;
 
 /**

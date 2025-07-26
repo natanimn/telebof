@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.InlineQueryResult;
-import io.github.natanimn.types.PreparedInlineMessage;
+import io.github.natanimn.types.inline.InlineQueryResult;
+import io.github.natanimn.types.media_and_service.PreparedInlineMessage;
 
 /**
  * @author Natanim

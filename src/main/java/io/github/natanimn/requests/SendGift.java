@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.MessageEntity;
+import io.github.natanimn.types.media_and_service.MessageEntity;
 import java.util.List;
 
 /**
@@ -47,7 +47,7 @@ public class SendGift extends AbstractBaseRequest<SendGift, Boolean>{
      * @return {@link SendGift}
      */
     public SendGift textParseMode(ParseMode text_parse_mode){
-        return add("text_parse_mode", text_parse_mode.name());
+        return add("text_parse_mode", text_parse_mode);
     }
 
     /**
