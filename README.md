@@ -1,5 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 8.0 Bot API </p> 
+## <p align="center"> Supported 8.1 Bot API </p> 
 #### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
 
 ## Official Docs — Coming soon
@@ -34,14 +34,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.6.0'
+implementation 'io.github.natanimn:telebof:0.7.0'
 ```
 ### Your First Echo Bot
 
@@ -72,7 +72,7 @@ public class MyFirstEchoBot {
 **Do not worry if you do not understand what the above code mean, it will be explained in the next chapter.** 
 
 ## Available Types
-All Telegram types are defined in `io.github.natanimn.types`. And they are completely the same as Telegram types. 
+All Telegram types are defined in `io.github.natanimn.types` and organized in a package based on their relation. They are completely the same as Telegram types. 
 
 Their set method is their camelCased name method
 
