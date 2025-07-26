@@ -1,4 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.business;
+
+import io.github.natanimn.types.media_and_service.Location;
 
 import java.io.Serializable;
 import java.util.Objects;

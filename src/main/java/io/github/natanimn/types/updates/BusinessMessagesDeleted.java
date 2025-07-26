@@ -1,16 +1,31 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.chat_and_user.Chat;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * This object is received when messages are deleted from a connected business account.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class BusinessMessagesDeleted implements Serializable {
+    /**
+     * Unique identifier of the business connection
+     */
     public String business_connection_id;
+
+    /**
+     * Information about a chat in the business account. The bot may not have access to the chat or the corresponding user.
+     */
     public Chat chat;
+
+    /**
+     * The list of identifiers of deleted messages in the chat of the business account
+     */
     public List<Integer> message_ids;
 
     @Override
@@ -18,8 +33,9 @@ public class BusinessMessagesDeleted implements Serializable {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         BusinessMessagesDeleted that = (BusinessMessagesDeleted) object;
-        return Objects.equals(business_connection_id, that.business_connection_id) &&
-                Objects.equals(chat, that.chat) && Objects.equals(message_ids, that.message_ids);
+        return  Objects.equals(business_connection_id, that.business_connection_id) &&
+                Objects.equals(chat, that.chat) &&
+                Objects.equals(message_ids, that.message_ids);
     }
 
     @Override

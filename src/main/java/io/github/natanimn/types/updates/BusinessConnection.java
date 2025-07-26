@@ -1,18 +1,46 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.chat_and_user.User;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * Describes the connection of the bot with a business account.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class BusinessConnection implements Serializable{
+    /**
+     * Unique identifier of the business connection
+     */
     public String id;
+
+    /**
+     * Business account user that created the business connection
+     */
     public User user;
+
+    /**
+     * Identifier of a private chat with the user who created the business connection
+     */
     public Long user_Chat_id;
+
+    /**
+     * Date the connection was established in Unix time
+     */
     public Integer date;
-    public Boolean can_reply, is_enabled;
+
+    /**
+     * True, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
+     */
+    public Boolean can_reply;
+
+    /**
+     * True, if the connection is active
+     */
+    public Boolean is_enabled;
 
     @Override
     public boolean equals(Object object) {

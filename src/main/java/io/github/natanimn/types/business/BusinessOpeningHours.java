@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.business;
 
 import java.io.Serializable;
 import java.util.List;
