@@ -1,7 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
-import io.github.natanimn.types.StickerSet;
+import io.github.natanimn.types.media_and_service.StickerSet;
 
 /**
  * Natanim Negash

@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.StarTransactions;
+import io.github.natanimn.types.payments.StarTransactions;
 
 /**
  * Natanim Negash 

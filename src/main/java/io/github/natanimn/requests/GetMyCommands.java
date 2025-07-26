@@ -1,8 +1,8 @@
 package io.github.natanimn.requests;
 
 import com.google.gson.reflect.TypeToken;
-import io.github.natanimn.types.BotCommand;
-import io.github.natanimn.types.BotCommandScope;
+import io.github.natanimn.types.chat_and_user.bot.BotCommand;
+import io.github.natanimn.types.chat_and_user.bot.BotCommandScope;
 import java.lang.reflect.Type;
 import java.util.List;
 

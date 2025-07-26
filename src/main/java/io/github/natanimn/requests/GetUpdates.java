@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
 import com.google.gson.reflect.TypeToken;
-import io.github.natanimn.types.Update;
+import io.github.natanimn.types.updates.Update;
 import io.github.natanimn.enums.Updates;
 
 import java.lang.reflect.Type;
@@ -31,9 +31,9 @@ public class GetUpdates extends AbstractBaseRequest<GetUpdates, List<Update>>{
     }
 
     public GetUpdates allowedUpdates(Updates[] allowedUpdates){
-        List<String> updates = new ArrayList<>();
+        List<Updates> updates = new ArrayList<>();
         if (allowedUpdates != null) {
-            List.of(allowedUpdates).forEach(update -> updates.add(update.name().toLowerCase()));
+            updates = List.of(allowedUpdates);
         }
         add("allowed_updates", updates);
 
