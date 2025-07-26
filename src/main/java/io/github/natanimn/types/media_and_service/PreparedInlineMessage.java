@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
 
 /**
  * This class represents an inline message to be sent by a user of a Mini App.
