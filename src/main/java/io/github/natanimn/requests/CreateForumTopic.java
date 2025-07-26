@@ -1,7 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
-import io.github.natanimn.types.ForumTopic;
+import io.github.natanimn.types.forum.ForumTopic;
 
 /**
  * Natanim Negash

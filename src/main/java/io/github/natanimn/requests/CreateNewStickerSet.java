@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
 import io.github.natanimn.enums.StickerType;
-import io.github.natanimn.types.InputSticker;
+import io.github.natanimn.types.input.InputSticker;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class CreateNewStickerSet extends AbstractBaseRequest<CreateNewStickerSet
     }
 
     public CreateNewStickerSet stickerType(StickerType stickerType) {
-        return add("sticker_type", stickerType.name().toLowerCase());
+        return add("sticker_type", stickerType);
     }
 
     public CreateNewStickerSet needsRepainting(boolean needsRepainting) {

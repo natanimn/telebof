@@ -2,7 +2,7 @@
 Jul 22, 2025
  */
 
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
 
 import java.io.Serializable;
 

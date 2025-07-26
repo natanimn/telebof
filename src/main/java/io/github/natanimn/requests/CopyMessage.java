@@ -1,12 +1,10 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.Markup;
-import io.github.natanimn.types.MessageEntity;
-import io.github.natanimn.types.MessageId;
-import io.github.natanimn.types.ReplyParameters;
-import org.jetbrains.annotations.NotNull;
+import io.github.natanimn.types.keyboard.Markup;
+import io.github.natanimn.types.media_and_service.MessageEntity;
+import io.github.natanimn.types.media_and_service.MessageId;
+import io.github.natanimn.types.keyboard.ReplyParameters;
 
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class CopyMessage extends AbstractBaseRequest<CopyMessage, MessageId> {
     }
 
     public CopyMessage parseMode(ParseMode parseMode) {
-        return add("parse_mode", parseMode != null?parseMode.name():null);
+        return add("parse_mode", parseMode);
     }
 
     public CopyMessage disableWebPagePreview(boolean disableWebPagePreview) {

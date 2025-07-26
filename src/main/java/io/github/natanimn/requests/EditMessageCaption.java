@@ -1,9 +1,9 @@
 package io.github.natanimn.requests;
 
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.InlineKeyboardMarkup;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.MessageEntity;
+import io.github.natanimn.types.keyboard.InlineKeyboardMarkup;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.media_and_service.MessageEntity;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public class EditMessageCaption extends AbstractBaseRequest<EditMessageCaption, 
     }
 
     public EditMessageCaption parseMode(ParseMode parseMode) {
-        return add("parse_mode",  parseMode != null?parseMode.name():null);
+        return add("parse_mode",  parseMode);
     }
 
     public EditMessageCaption entities(MessageEntity[] captionEntities) {

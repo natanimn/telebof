@@ -1,11 +1,8 @@
 package io.github.natanimn.requests;
 
 import com.google.gson.reflect.TypeToken;
-import io.github.natanimn.Util;
-import io.github.natanimn.types.ChatMember;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.MessageEntity;
-import io.github.natanimn.types.MessageId;
+import io.github.natanimn.types.media_and_service.MessageEntity;
+import io.github.natanimn.types.media_and_service.MessageId;
 
 import java.lang.reflect.Type;
 import java.util.List;
