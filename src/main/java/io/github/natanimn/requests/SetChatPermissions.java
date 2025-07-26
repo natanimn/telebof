@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.ChatPermission;
+import io.github.natanimn.types.chat_and_user.ChatPermission;
 
 /**
  * Natanim Negash

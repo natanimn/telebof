@@ -1,7 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
-import io.github.natanimn.types.Message;
+import io.github.natanimn.types.updates.Message;
 
 /**
  * Natanim Negash 

@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.ChatInviteLink;
+import io.github.natanimn.types.chat_and_user.ChatInviteLink;
 
 /**
  * Natanim Negash

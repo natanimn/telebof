@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.MaskPosition;
+import io.github.natanimn.types.media_and_service.MaskPosition;
 
 
 /**

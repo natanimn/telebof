@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.PassportElementError;
+import io.github.natanimn.types.passport.PassportElementError;
 
 /**
  * Natanim Negash 

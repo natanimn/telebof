@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.ChatAdministratorRights;
+import io.github.natanimn.types.chat_and_user.ChatAdministratorRights;
 
 /**
  * Natanim Negash 

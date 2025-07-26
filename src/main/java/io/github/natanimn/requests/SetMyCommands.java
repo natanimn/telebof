@@ -1,12 +1,9 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.BotCommand;
-import io.github.natanimn.types.BotCommandScope;
+import io.github.natanimn.types.chat_and_user.bot.BotCommand;
+import io.github.natanimn.types.chat_and_user.bot.BotCommandScope;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Natanim Negash
