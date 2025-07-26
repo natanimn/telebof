@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.Gifts;
+import io.github.natanimn.types.gift_and_giveaway.Gifts;
 
 /**
  * @author Natanim

@@ -1,7 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
-import io.github.natanimn.types.ChatMember;
+import io.github.natanimn.types.chat_and_user.ChatMember;
 
 /**
  * Natanim Negash 
