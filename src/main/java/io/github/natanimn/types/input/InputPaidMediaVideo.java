@@ -1,6 +1,7 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.input;
 
 import io.github.natanimn.requests.MediaContentType;
+import io.github.natanimn.types.media_and_service.InputFile;
 
 import java.io.File;
 

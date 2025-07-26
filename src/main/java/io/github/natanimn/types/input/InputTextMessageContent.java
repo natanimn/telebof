@@ -1,6 +1,8 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.input;
 
 import io.github.natanimn.enums.ParseMode;
+import io.github.natanimn.types.media_and_service.LinkPreviewOptions;
+import io.github.natanimn.types.media_and_service.MessageEntity;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;

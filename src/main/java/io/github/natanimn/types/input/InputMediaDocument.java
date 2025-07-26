@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.input;
 
 import io.github.natanimn.requests.MediaContentType;
 
