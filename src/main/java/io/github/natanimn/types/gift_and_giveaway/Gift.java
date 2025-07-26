@@ -1,4 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.gift_and_giveaway;
+
+import io.github.natanimn.types.media_and_service.Sticker;
 
 /**
  * This class represents a gift that can be sent by the bot.
