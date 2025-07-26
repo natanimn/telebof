@@ -1,16 +1,35 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
 
-import java.io.Serializable;
+import io.github.natanimn.types.chat_and_user.User;
+import io.github.natanimn.types.payments.ShippingAddress;
+
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * This class contains information about an incoming shipping query.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
-public class ShippingQuery implements Serializable {
+public class ShippingQuery{
+    /**
+     * Unique query identifier
+     */
     public String id;
+
+    /**
+     * User who sent the query
+     */
     public User from;
+
+    /**
+     * Bot-specified invoice payload
+     */
     public String invoice_payload;
+
+    /**
+     * User specified shipping address
+     */
     public ShippingAddress shipping_address;
 
     @Override
@@ -18,7 +37,8 @@ public class ShippingQuery implements Serializable {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         ShippingQuery that = (ShippingQuery) object;
-        return Objects.equals(id, that.id) && Objects.equals(from, that.from) &&
+        return  Objects.equals(id, that.id) &&
+                Objects.equals(from, that.from) &&
                 Objects.equals(invoice_payload, that.invoice_payload) &&
                 Objects.equals(shipping_address, that.shipping_address);
     }

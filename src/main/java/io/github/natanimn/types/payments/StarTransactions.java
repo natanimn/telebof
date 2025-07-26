@@ -1,13 +1,16 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.payments;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * Contains a list of Telegram Star transactions.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class StarTransactions {
+    /* The list of transactions */
     public List<StarTransaction> transactions;
 
     @Override
