@@ -486,12 +486,12 @@ You can write your own filter using `filter.customFilter`.
 This example will show you how you can write filters using `io.github.natanimn.filters.CustomFilter` and `filter.customFilter`.
 
 Let's write simple custom filter whether incoming text starts with `!` or not.
+
 ```java
 import io.github.natanimn.BotContext;
 import io.github.natanimn.filters.CustomFilter;
-import io.github.natanimn.handlers.MessageHandler;
-import io.github.natanimn.types.Message;
-import io.github.natanimn.types.Update;
+import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.types.updates.Update;
 
 
 // Filter whether the incoming message text starts with `!`. or not
@@ -505,14 +505,14 @@ class StartsWithFilter implements CustomFilter {
 
 public class FilterBot {
 
-  static void startsWith(BotContext context, Message message){
-      context.sendMessage("Message starts with !").exec();
+  static void startsWith(BotContext context, Message message) {
+    context.sendMessage("Message starts with !").exec();
   }
 
   public static void main(String[] args) {
-      // ...
-      bot.onMessage(filter -> filter.text() && filter.customFilter(new StartsWithFilter()), 
-              FilterBot::startsWith);
+    // ...
+    bot.onMessage(filter -> filter.text() && filter.customFilter(new StartsWithFilter()),
+            FilterBot::startsWith);
   }
 }
 ```
@@ -558,16 +558,22 @@ bot.onMessage(filter -> filter.state("name") && filter.text(), (context, message
 Example for using reply markup
 
 ```java
-import io.github.natanimn.types.ReplyKeyboardMarkup;
-import io.github.natanimn.types.KeyboardButton;
+import io.github.natanimn.types.keyboard.ReplyKeyboardMarkup;
+import io.github.natanimn.types.keyboard.KeyboardButton;
 
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup()
         .resizeKeyboard(true); // resize keyboard
         
-markup.add("A", "B", "C"); // You can add String or 
-markup.add("D", "E"); 
-markup.add(new KeyboardButton("F")); // KeybaordButton class
-        
+markup.
+
+add("A","B","C"); // You can add String or 
+markup.
+
+add("D","E"); 
+markup.
+
+add(new KeyboardButton("F")); // KeybaordButton class
+
 // also possible
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
         new String[]{"A", "B", "C"},
@@ -576,80 +582,122 @@ ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
 }).resizeKeyboard(true); // resize keyboard
         
         
-context.sendMssage("Hello, World!").replyMarkup(markup).exec();
+context.
+
+sendMssage("Hello, World!").
+
+replyMarkup(markup).
+
+exec();
 ```
 
 ### InlineKeyboardMarkup
 example for using InlineKeyboardMarkup
 
 ```java
-import io.github.natanimn.types.InlineKeyboardButton;
-import io.github.natanimn.types.InlineKeyboardMarkup;
+import io.github.natanimn.types.keyboard.InlineKeyboardButton;
 
 InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup();
 
-inlineMarkup.addKeybaord(
-  new InlineKeybaordButton("A").callbackData("a"), 
-  new InlineKeybaordButton("C").callbackData("b"), 
-  new InlineKeybaordButton("Url").url("www.example.com")
+inlineMarkup.
+
+addKeybaord(
+  new InlineKeybaordButton("A").
+
+callbackData("a"), 
+  new
+
+InlineKeybaordButton("C").
+
+callbackData("b"), 
+  new
+
+InlineKeybaordButton("Url").
+
+url("www.example.com")
 ); // 3 keyboards on a row 
 
 // also  possible
 InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup(new InlineKeybaordButton[]{
-  new InlineKeybaordButton("A").callbackData("a"), 
-  new InlineKeybaordButton("B").callbackData("b"),    
-  new InlineKeyboardButton("Url").url("www.example.com")
-  
+        new InlineKeybaordButton("A").callbackData("a"),
+        new InlineKeybaordButton("B").callbackData("b"),
+        new InlineKeyboardButton("Url").url("www.example.com")
+
 }, 2); // 2 row width. i.e 2 keyboards on a row at max
 
 // also possible
 InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup(new InlineKeybaordButton[][]{
-    new InlineKeybaordButton[]{
-      new InlineKeybaordButton("A").callbackData("a"), 
-      new InlineKeybaordButton("B").callbackData("b")
-    }, 
-    new InlineKeyboardButton[]{
-      new InlineKeyboardButton("Url").url("www.example.com")
-    } 
-  } 
+        new InlineKeybaordButton[]{
+                new InlineKeybaordButton("A").callbackData("a"),
+                new InlineKeybaordButton("B").callbackData("b")
+        },
+        new InlineKeyboardButton[]{
+                new InlineKeyboardButton("Url").url("www.example.com")
+        }
+}
 );
 
-context.sendMessage("Press one button").replyMarkup(inlineMarkup).exec();
+context.
+
+sendMessage("Press one button").
+
+replyMarkup(inlineMarkup).
+
+exec();
 ```
 
 ### ForceReply
+
 ```java
-import io.github.natanimn.types.ForceReply;
+import io.github.natanimn.types.keyboard.ForceReply;
+import io.github.natanimn.types.keyboard.ForceReply;
 
 context.sendMessage("Can you tell me your name please?")
-        .replyMarkup(new ForceReply())
-        .exec();
+        .
+
+replyMarkup(new io.github.natanimn.types.keyboard.ForceReply())
+        .
+
+exec();
 ```
 
 ### RemoveReplyKeyboard
+
 ```java
-import io.github.natanimn.types.ReplyKeyboardMarkup;
+import io.github.natanimn.types.keyboard.ReplyKeyboardMarkup;
 
 context.sendMessage("There is no reply keyboard now")
-        .replyMarkup(new RemoveReplyKeybaord())
-        .exec(); 
+        .
+
+replyMarkup(new RemoveReplyKeybaord())
+        .
+
+exec(); 
 ```
 
 ## Inline Bot
 
 ```java
-import io.github.natanimn.types.InlineQueryResult;
-import io.github.natanimn.types.InlineQueryResultArticle;
-import io.github.natanimn.types.InputTextMessageContent;
+import io.github.natanimn.types.inline.InlineQueryResult;
+import io.github.natanimn.types.inline.InlineQueryResultArticle;
+import io.github.natanimn.types.input.InputTextMessageContent;
 
 
-bot.onInline(filter -> filter.emptyQuery(), (context, query) -> {
-    InlineQueryResultArticle article = new InlineQueryResultArticle("1")
-            .title("Write something")
-            .description("click here")
-            .inputTextMessageContent(new InputTextMessageContent("Please write something"));
+bot.onInline(filter ->filter.
 
-    context.answerInline(new InlineQueryResult[]{article}).exec();
+emptyQuery(), (context,query)->{
+InlineQueryResultArticle article = new InlineQueryResultArticle("1")
+        .title("Write something")
+        .description("click here")
+        .inputTextMessageContent(new InputTextMessageContent("Please write something"));
+
+    context.
+
+answerInline(new InlineQueryResult[] {
+  article
+}).
+
+exec();
 });
 ```
 
