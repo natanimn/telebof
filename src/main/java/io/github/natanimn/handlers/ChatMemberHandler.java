@@ -2,7 +2,7 @@ package io.github.natanimn.handlers;
 
 
 import io.github.natanimn.BotContext;
-import io.github.natanimn.types.ChatMemberUpdated;
+import io.github.natanimn.types.updates.ChatMemberUpdated;
 
 @FunctionalInterface
 public interface ChatMemberHandler {
