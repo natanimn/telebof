@@ -1,6 +1,4 @@
-package io.github.natanimn.types;
-
-import io.github.natanimn.BotLog;
+package io.github.natanimn.types.inline;
 
 import java.io.Serializable;
 

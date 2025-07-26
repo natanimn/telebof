@@ -1,7 +1,4 @@
-package io.github.natanimn.types;
-
-import io.github.natanimn.BotLog;
-import io.github.natanimn.errors.TelegramError;
+package io.github.natanimn.types.inline;
 
 import java.io.Serializable;
 

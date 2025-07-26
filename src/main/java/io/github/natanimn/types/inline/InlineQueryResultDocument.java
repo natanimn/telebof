@@ -1,7 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.inline;
 
 import io.github.natanimn.enums.MimeType;
-import io.github.natanimn.requests.MediaContentType;
 
 import java.io.Serializable;
 
