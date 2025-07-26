@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.web;
 
 import java.io.Serializable;
 import java.util.Objects;
