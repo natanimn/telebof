@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
 
 import io.github.natanimn.enums.PollType;
 import org.jetbrains.annotations.NotNull;

@@ -1,8 +1,8 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
 
-import java.util.Map;
+import io.github.natanimn.types.chat_and_user.ChatAdministratorRights;
+
 import java.util.Objects;
-import java.util.TreeMap;
 
 /**
  * Natanim Negash
