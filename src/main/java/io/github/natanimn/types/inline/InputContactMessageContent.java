@@ -1,7 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.inline;
 
 import java.io.Serializable;
-import java.util.Map;
 
 /**
  * Natanim Negash

@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.input;
 
 import java.io.Serializable;
 

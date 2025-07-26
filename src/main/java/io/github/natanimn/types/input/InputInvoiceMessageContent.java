@@ -1,4 +1,6 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.input;
+
+import io.github.natanimn.types.payments.LabeledPrice;
 
 import java.io.Serializable;
 import java.util.List;
