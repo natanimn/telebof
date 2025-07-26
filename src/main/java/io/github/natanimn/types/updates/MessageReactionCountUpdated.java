@@ -1,17 +1,37 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.media_and_service.ReactionCount;
+import io.github.natanimn.types.chat_and_user.Chat;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents reaction changes on a message with anonymous reactions.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
-public class MessageReactionCountUpdated implements Serializable {
+public class MessageReactionCountUpdated {
+    /**
+     * The chat containing the message
+     */
     public Chat chat;
+
+    /**
+     * Unique message identifier inside the chat
+     */
     public int message_id;
+
+    /**
+     * Date of the change in Unix time
+     */
     public int date;
+
+    /**
+     * List of reactions that are present on the message
+     */
     public List<ReactionCount> reactions;
 
     @Override
