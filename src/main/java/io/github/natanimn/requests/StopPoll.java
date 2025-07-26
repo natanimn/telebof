@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.InlineKeyboardMarkup;
-import io.github.natanimn.types.Poll;
+import io.github.natanimn.types.keyboard.InlineKeyboardMarkup;
+import io.github.natanimn.types.updates.Poll;
 
 /**
  * Natanim Negash
