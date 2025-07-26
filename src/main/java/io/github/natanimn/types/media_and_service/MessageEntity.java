@@ -1,27 +1,26 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
 
 import io.github.natanimn.enums.EntityType;
+import io.github.natanimn.types.chat_and_user.User;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-
 /**
- * @author Natanim Negash
- */
-
-
-/**
- * Natanim Negash
- *  3 March 2025
+ *
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class MessageEntity implements Serializable {
-    public String url, language, type;
+    public String url, language;
     public Integer offset, length;
     public User user;
     public String custom_emoji_id;
+    public EntityType type;
 
     public MessageEntity type(EntityType type) {
-        this.type = type.name().toLowerCase();
+        this.type = type;
         return this;
     }
 
