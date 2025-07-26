@@ -34,14 +34,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.7.0</version>
+    <version>0.7.1</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.7.0'
+implementation 'io.github.natanimn:telebof:0.7.1'
 ```
 ### Your First Echo Bot
 
