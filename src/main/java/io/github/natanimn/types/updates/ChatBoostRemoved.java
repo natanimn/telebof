@@ -1,16 +1,36 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.chat_and_user.ChatBoostSource;
+import io.github.natanimn.types.chat_and_user.Chat;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * This object represents a boost removed from a chat.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class ChatBoostRemoved implements Serializable {
+    /**
+     * Chat which was boosted
+     */
     public Chat chat;
+
+    /**
+     * Unique identifier of the boost
+     */
     public String boost_id;
+
+    /**
+     * Point in time (Unix timestamp) when the boost was removed
+     */
     public Integer removed_date;
+
+    /**
+     * Source of the removed boost
+     */
     public ChatBoostSource source;
 
     @Override

@@ -1,14 +1,26 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.updates;
+
+import io.github.natanimn.types.chat_and_user.Chat;
+import io.github.natanimn.types.chat_and_user.ChatBoost;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * This object represents a boost added to a chat or changed.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class ChatBoostUpdated implements Serializable {
+    /**
+     * Chat which was boosted
+     */
     public Chat chat;
+
+    /**
+     * Information about the chat boost
+     */
     public ChatBoost boost;
 
     @Override
