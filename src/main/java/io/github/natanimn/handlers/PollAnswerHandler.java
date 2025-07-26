@@ -1,7 +1,7 @@
 package io.github.natanimn.handlers;
 
 import io.github.natanimn.BotContext;
-import io.github.natanimn.types.PollAnswer;
+import io.github.natanimn.types.updates.PollAnswer;
 
 @FunctionalInterface
 public interface PollAnswerHandler {

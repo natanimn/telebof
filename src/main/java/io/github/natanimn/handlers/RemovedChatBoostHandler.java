@@ -1,7 +1,7 @@
 package io.github.natanimn.handlers;
 
 import io.github.natanimn.BotContext;
-import io.github.natanimn.types.ChatBoostRemoved;
+import io.github.natanimn.types.updates.ChatBoostRemoved;
 
 @FunctionalInterface
 public interface RemovedChatBoostHandler {

@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
 
 import io.github.natanimn.enums.TypeReaction;
 
@@ -6,16 +6,18 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 public class ReactionType implements Serializable {
-    public String type;
+
+    public TypeReaction type;
     public String emoji;
     public String custom_emoji_id;
 
     public ReactionType(TypeReaction reaction){
-        this.type = reaction.name().toLowerCase();
+        this.type = reaction;
     }
 
     public void emoji(String emoji){

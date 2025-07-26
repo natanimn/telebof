@@ -1,6 +1,6 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.InputSticker;
+import io.github.natanimn.types.input.InputSticker;
 
 
 

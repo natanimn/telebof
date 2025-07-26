@@ -1,7 +1,7 @@
 package io.github.natanimn.handlers;
 
 import io.github.natanimn.BotContext;
-import io.github.natanimn.types.PaidMediaPurchased;
+import io.github.natanimn.types.payments.PaidMediaPurchased;
 
 @FunctionalInterface
 public interface PurchasedPaidMediaHandler {

@@ -1,10 +1,10 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
 
 import io.github.natanimn.enums.ParseMode;
+import io.github.natanimn.types.media_and_service.MessageEntity;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 /**

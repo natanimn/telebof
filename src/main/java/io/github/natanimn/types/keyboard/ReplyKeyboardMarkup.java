@@ -1,12 +1,10 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.keyboard;
 
 import io.github.natanimn.BotLog;
 
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Map;
 import java.util.Objects;
-import java.util.TreeMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
