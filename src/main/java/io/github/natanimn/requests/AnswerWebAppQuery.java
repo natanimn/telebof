@@ -1,8 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.Util;
-import io.github.natanimn.types.InlineQueryResult;
-import io.github.natanimn.types.SentWebAppMessage;
+import io.github.natanimn.types.inline.InlineQueryResult;
+import io.github.natanimn.types.media_and_service.SentWebAppMessage;
 
 /**
  * Natanim Negash

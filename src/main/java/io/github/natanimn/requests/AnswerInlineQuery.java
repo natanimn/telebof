@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.InlineQueryResult;
-import io.github.natanimn.types.InlineQueryResultsButton;
+import io.github.natanimn.types.inline.InlineQueryResult;
+import io.github.natanimn.types.inline.InlineQueryResultsButton;
 
 import java.util.List;
 

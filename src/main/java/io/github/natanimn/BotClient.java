@@ -19,9 +19,9 @@ import io.github.natanimn.enums.Updates;
 import io.github.natanimn.handlers.*;
 import io.github.natanimn.requests.*;
 import io.github.natanimn.states.StateMemoryStorage;
-import io.github.natanimn.types.Update;
-import io.github.natanimn.types.User;
-import io.github.natanimn.types.WebhookInfo;
+import io.github.natanimn.types.updates.Update;
+import io.github.natanimn.types.chat_and_user.User;
+import io.github.natanimn.types.web.WebhookInfo;
 import io.github.natanimn.filters.Filter;
 import io.github.natanimn.filters.FilterExecutor;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -29,8 +29,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.7
  */
 final public class BotClient {
     private Integer offset;

@@ -1,4 +1,4 @@
-package io.github.natanimn.types;
+package io.github.natanimn.types.media_and_service;
 
 import java.util.List;
 import java.util.Objects;

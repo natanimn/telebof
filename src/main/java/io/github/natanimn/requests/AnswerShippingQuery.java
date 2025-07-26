@@ -1,11 +1,8 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.ShippingOption;
+import io.github.natanimn.types.payments.ShippingOption;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Natanim Negash
