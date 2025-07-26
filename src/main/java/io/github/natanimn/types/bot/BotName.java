@@ -1,5 +1,4 @@
-package io.github.natanimn.types.chat_and_user.bot;
-
+package io.github.natanimn.types.bot;
 
 import java.util.Objects;
 
@@ -7,19 +6,19 @@ import java.util.Objects;
  * Natanim Negash 
  *  3 March 2025
  */
-public class BotDescription {
-    public String description;
+public class BotName {
+    public String name;
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        BotDescription that = (BotDescription) object;
-        return Objects.equals(description, that.description);
+        BotName botName = (BotName) object;
+        return Objects.equals(name, botName.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description);
+        return Objects.hash(name);
     }
 }

@@ -4,7 +4,7 @@ import io.github.natanimn.enums.ChatAction;
 import io.github.natanimn.enums.ParseMode;
 import io.github.natanimn.requests.*;
 import io.github.natanimn.states.StateMemoryStorage;
-import io.github.natanimn.types.chat_and_user.bot.BotCommand;
+import io.github.natanimn.types.bot.BotCommand;
 import io.github.natanimn.types.chat_and_user.ChatPermission;
 import io.github.natanimn.types.inline.InlineQueryResult;
 import io.github.natanimn.types.input.InputMedia;

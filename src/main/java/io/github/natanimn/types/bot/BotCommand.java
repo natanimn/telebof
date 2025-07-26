@@ -1,4 +1,4 @@
-package io.github.natanimn.types.chat_and_user.bot;
+package io.github.natanimn.types.bot;
 
 import java.io.Serializable;
 

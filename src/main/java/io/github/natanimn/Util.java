@@ -3,7 +3,7 @@ package io.github.natanimn;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import io.github.natanimn.types.chat_and_user.bot.BotCommand;
+import io.github.natanimn.types.bot.BotCommand;
 import io.github.natanimn.types.chat_and_user.ChatMember;
 import io.github.natanimn.types.media_and_service.GameHighScore;
 import io.github.natanimn.types.updates.Message;

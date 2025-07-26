@@ -1,7 +1,7 @@
 package io.github.natanimn.requests;
 
-import io.github.natanimn.types.chat_and_user.bot.BotCommand;
-import io.github.natanimn.types.chat_and_user.bot.BotCommandScope;
+import io.github.natanimn.types.bot.BotCommand;
+import io.github.natanimn.types.bot.BotCommandScope;
 
 import java.util.List;
 
