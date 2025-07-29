@@ -18,7 +18,7 @@ public class ReplyKeyboardMarkup implements Markup, Serializable {
     private Boolean is_persistent, resize_keyboard, one_time_keyboard, selective;
     private String input_field_placeholder;
 
-    private final List<List<KeyboardButton>> keyboard = new ArrayList<>();
+    public final List<List<KeyboardButton>> keyboard = new ArrayList<>();
     transient protected final int MAX_ROW_WIDTH = 12;
     transient private int rowWidth = 3;
 

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  *  3 March 2025
  */
 public class InlineKeyboardMarkup implements Markup, Serializable {
-    private final List<List<InlineKeyboardButton>> inline_keyboard = new ArrayList<>();
+    public final List<List<InlineKeyboardButton>> inline_keyboard = new ArrayList<>();
     transient public String text, url, callback_data;
     transient public LoginUrl login_url;
     transient public WebAppInfo web_app;
