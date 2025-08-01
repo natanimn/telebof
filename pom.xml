@@ -5,11 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.natanimn</groupId>
-    <artifactId>telebof</artifactId>
-    <version>0.7.1</version>
+    <artifactId>telebof-parent</artifactId>
+    <version>0.8.0</version>
     <description>Easy and modern Java Telegram bot API</description>
+    <modules>
+        <module>telebof</module>
+        <module>examples</module>
+    </modules>
     <name>Telebof</name>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
     <licenses>
         <license>
             <name>MIT License</name>
