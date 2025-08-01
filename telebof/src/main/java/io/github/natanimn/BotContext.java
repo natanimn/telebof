@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * @author Natanim
  * @since March 3, 2025
- * @version 0.6
+ * @version 0.8
  */
 @SuppressWarnings("unused")
 public class BotContext {
