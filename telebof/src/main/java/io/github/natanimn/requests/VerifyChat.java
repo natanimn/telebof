@@ -3,7 +3,7 @@ package io.github.natanimn.requests;
 /**
  * Verifies a chat on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
  * @author Natanim
- * @since 2 August 2025
+ * @since 1 August 2025
  * @version 0.8
  */
 public class VerifyChat extends AbstractBaseRequest<VerifyChat, Boolean>{
