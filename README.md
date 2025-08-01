@@ -34,14 +34,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.7.1</version>
+    <version>0.8.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.7.1'
+implementation 'io.github.natanimn:telebof:0.8.0'
 ```
 ### Your First Echo Bot
 
@@ -564,15 +564,9 @@ import io.github.natanimn.types.keyboard.KeyboardButton;
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup()
         .resizeKeyboard(true); // resize keyboard
         
-markup.
-
-add("A","B","C"); // You can add String or 
-markup.
-
-add("D","E"); 
-markup.
-
-add(new KeyboardButton("F")); // KeybaordButton class
+markup.add("A","B","C"); // You can add String or 
+markup.add("D","E"); 
+markup.add(new KeyboardButton("F")); // KeybaordButton class
 
 // also possible
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
@@ -580,15 +574,8 @@ ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
         new String[]{"D", "E"},
         new String[]{"F"}
 }).resizeKeyboard(true); // resize keyboard
-        
-        
-context.
 
-sendMssage("Hello, World!").
-
-replyMarkup(markup).
-
-exec();
+context.sendMssage("Hello, World!").replyMarkup(markup).exec();
 ```
 
 ### InlineKeyboardMarkup
@@ -597,53 +584,37 @@ example for using InlineKeyboardMarkup
 ```java
 import io.github.natanimn.types.keyboard.InlineKeyboardButton;
 
-InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup();
+InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
 
-inlineMarkup.
-
-addKeybaord(
-  new InlineKeybaordButton("A").
-
-callbackData("a"), 
-  new
-
-InlineKeybaordButton("C").
-
-callbackData("b"), 
-  new
-
-InlineKeybaordButton("Url").
-
-url("www.example.com")
+inlineMarkup.addKeybaord(
+  new InlineKeyboardButton("A").callbackData("a"), 
+  new InlineKeyboardButton("C").callbackData("b"), 
+  new InlineKeyboardButton("Url").url("www.example.com")
 ); // 3 keyboards on a row 
 
 // also  possible
-InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup(new InlineKeybaordButton[]{
-        new InlineKeybaordButton("A").callbackData("a"),
-        new InlineKeybaordButton("B").callbackData("b"),
-        new InlineKeyboardButton("Url").url("www.example.com")
+InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[]{
+        new InlineKeyboardMarkup("A").callbackData("a"),
+        new InlineKeyboardMarkup("B").callbackData("b"),
+        new InlineKeyboardMarkup("Url").url("www.example.com")
 
 }, 2); // 2 row width. i.e 2 keyboards on a row at max
 
 // also possible
-InlineKeybaordMarkup inlineMarkup = new InlineKeybaordMarkup(new InlineKeybaordButton[][]{
-        new InlineKeybaordButton[]{
-                new InlineKeybaordButton("A").callbackData("a"),
-                new InlineKeybaordButton("B").callbackData("b")
+InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[][]{
+        new InlineKeyboardMarkup[]{
+                new InlineKeyboardMarkup("A").callbackData("a"),
+                new InlineKeyboardMarkup("B").callbackData("b")
         },
-        new InlineKeyboardButton[]{
-                new InlineKeyboardButton("Url").url("www.example.com")
+        new InlineKeyboardMarkup[]{
+                new InlineKeyboardMarkup("Url").url("www.example.com")
         }
 }
 );
 
-context.
-
-sendMessage("Press one button").
-
-replyMarkup(inlineMarkup).
-
-exec();
+context.sendMessage("Press one button")
+        .replyMarkup(inlineMarkup)
+        .exec();
 ```
 
 ### ForceReply
@@ -653,12 +624,8 @@ import io.github.natanimn.types.keyboard.ForceReply;
 import io.github.natanimn.types.keyboard.ForceReply;
 
 context.sendMessage("Can you tell me your name please?")
-        .
-
-replyMarkup(new io.github.natanimn.types.keyboard.ForceReply())
-        .
-
-exec();
+        .replyMarkup(new io.github.natanimn.types.keyboard.ForceReply())
+        .exec();
 ```
 
 ### RemoveReplyKeyboard
