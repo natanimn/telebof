@@ -6,9 +6,10 @@
     <parent>
         <groupId>io.github.natanimn</groupId>
         <artifactId>telebof-parent</artifactId>
-        <version>0.7.1</version>
+        <version>0.1.0</version>
     </parent>
-
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
     <artifactId>examples</artifactId>
     <dependencies>
         <dependency>
@@ -19,8 +20,21 @@
     </dependencies>
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
-        <maven.compiler.target>24</maven.compiler.target>
+        <maven.compiler.target>20</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>3.1.2</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
