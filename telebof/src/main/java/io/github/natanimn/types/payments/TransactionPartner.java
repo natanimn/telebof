@@ -1,6 +1,7 @@
 package io.github.natanimn.types.payments;
 
 import io.github.natanimn.enums.TransactionPartnerType;
+import io.github.natanimn.types.chat_and_user.Chat;
 import io.github.natanimn.types.chat_and_user.User;
 import io.github.natanimn.types.gift_and_giveaway.Gift;
 import java.util.List;
@@ -10,31 +11,48 @@ import java.util.Objects;
  * This class describes the source of a transaction, or its recipient for outgoing transactions.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 0.9
  */
 public class TransactionPartner {
-    /* Type of the transaction partner */
+    /**
+     * Type of the transaction partner
+     */
     public TransactionPartnerType type;
 
-    /* Bot-specified invoice payload. Can be available only for “invoice_payment” transactions.*/
+    /**
+     * Bot-specified invoice payload. Can be available only for “invoice_payment” transactions.
+     */
     public String invoice_payload;
 
-    /* Information about the user */
+    /**
+     * Information about the user
+     */
     public User user;
 
-    /* State of the transaction if the transaction is outgoing */
+    /**
+     * State of the transaction if the transaction is outgoing
+     */
     public RevenueWithdrawalState withdrawal_state;
 
-    /* Information about the paid media bought by the user; for “paid_media_payment” transactions only */
+    /**
+     * Information about the paid media bought by the user; for “paid_media_payment” transactions only
+     */
     public List<PaidMedia> paid_media;
 
-    /* The number of successful requests that exceeded regular limits and were therefore billed */
+    /**
+     * The number of successful requests that exceeded regular limits and were therefore billed
+     */
     public Integer request_count;
 
-    /*  The duration of the paid subscription. Can be available only for “invoice_payment” transactions.*/
+    /**
+     * The duration of the paid subscription. Can be available only for “invoice_payment” transactions.
+     */
     public Integer subscription_period;
 
-    /* The gift sent to the user by the bot; for “gift_purchase” transactions only */
+    /**
+     * The gift sent to the user by the bot; for “gift_purchase” transactions only or
+     * The gift sent to the chat by the bot
+     */
     public Gift gift;
 
     /**
@@ -43,13 +61,20 @@ public class TransactionPartner {
      */
     public AffiliateInfo affiliate;
 
-    /* Information about the bot that sponsored the affiliate program */
+    /**
+     * Information about the bot that sponsored the affiliate program
+     */
     public User sponsor_user;
 
     /**
      * The number of Telegram Stars received by the bot for each 1000 Telegram Stars received by the affiliate program sponsor from referred users
      */
     public Integer commission_per_mille;
+
+    /**
+     * Information about the chat
+     */
+    public Chat chat;
 
     @Override
     public boolean equals(Object object) {
@@ -64,7 +89,8 @@ public class TransactionPartner {
                 Objects.equals(request_count, that.request_count) &&
                 Objects.equals(subscription_period, that.subscription_period) &&
                 Objects.equals(gift, that.gift) &&
-                Objects.equals(affiliate, that.affiliate);
+                Objects.equals(affiliate, that.affiliate) &&
+                Objects.equals(chat, that.chat);
     }
 
     @Override
