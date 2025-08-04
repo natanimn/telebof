@@ -217,7 +217,7 @@ optional parameters and then send a request to telegram. For example `sendMessag
 `parse_mode`, `reply_markup`. So you can pass their value for these parameters and send request to telegram.
 
 ```java
-import io.github.natanimn.enums.ParseMode;
+import enums.io.github.natanimn.ParseMode;
 
 context.sendMessage("*Hello, World*")
         .parseMode(ParseMode.MARKDOWN)
@@ -483,13 +483,13 @@ bot.onMessage(filter -> filter.Private() && (filter.audio() || filter.video()), 
 ### Writing your own filter
 You can write your own filter using `filter.customFilter`.
 
-This example will show you how you can write filters using `io.github.natanimn.filters.CustomFilter` and `filter.customFilter`.
+This example will show you how you can write filters using `filters.io.github.natanimn.CustomFilter` and `filter.customFilter`.
 
 Let's write simple custom filter whether incoming text starts with `!` or not.
 
 ```java
 import io.github.natanimn.BotContext;
-import io.github.natanimn.filters.CustomFilter;
+import filters.io.github.natanimn.CustomFilter;
 import io.github.natanimn.types.updates.Message;
 import io.github.natanimn.types.updates.Update;
 
@@ -732,8 +732,8 @@ BotClient bot = new BotClient
 Finally
 ```java
 import io.github.natanimn.BotClient;
-import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.enums.Updates;
+import enums.io.github.natanimn.ParseMode;
+import enums.io.github.natanimn.Updates;
 
 BotClient bot = new BotClient.Builder(TOKEN)
         .log(true) // Log current status

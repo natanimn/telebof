@@ -1,3 +1,4 @@
 /target
 .idea
-/examples/target
+examples/target
+telebof/target
