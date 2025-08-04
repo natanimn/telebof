@@ -464,7 +464,7 @@ final public class BotClient {
     }
 
     public void stop(){
-        stopPolling.set(false);
+        stopPolling.set(true);
     }
 
      /** This method notifies each of arrived updates.
