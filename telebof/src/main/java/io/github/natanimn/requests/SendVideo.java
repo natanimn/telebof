@@ -1,13 +1,15 @@
 package io.github.natanimn.requests;
 
+import io.github.natanimn.types.media_and_service.PhotoSize;
 import io.github.natanimn.types.updates.Message;
 import io.github.natanimn.types.media_and_service.MessageEntity;
 import java.io.File;
 import java.util.List;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class SendVideo extends DefaultParameters<SendVideo, Message> {
     public SendVideo(Object chatId, String video, RequestSender requestSender) {
@@ -60,6 +62,33 @@ public class SendVideo extends DefaultParameters<SendVideo, Message> {
 
     public SendVideo showCaptionAboveMedia(boolean show_caption_above_media){
         return add("show_caption_above_media", show_caption_above_media);
+    }
+
+    /**
+     * Optional
+     * @param cover Cover for the video in the message.
+     * @return {@link SendVideo}
+     */
+    public SendVideo cover(String cover){
+        return add("cover", cover);
+    }
+
+    /**
+     * Optional
+     * @param cover Cover for the video in the message.
+     * @return {@link SendVideo}
+     */
+    public SendVideo cover(File cover){
+        return add("cover", cover);
+    }
+
+    /**
+     * Optional
+     * @param start_timestamp Start timestamp for the video in the message
+     * @return {@link SendVideo}
+     */
+    public SendVideo startTimestamp(int start_timestamp){
+        return add("start_timestamp", start_timestamp);
     }
 
 }
