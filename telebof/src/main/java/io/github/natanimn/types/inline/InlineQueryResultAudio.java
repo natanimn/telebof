@@ -22,7 +22,7 @@ public class InlineQueryResultAudio extends InlineQueryMediaResult<InlineQueryRe
      * @param title Title
      */
     public InlineQueryResultAudio(String id, String audio_url, String title) {
-        super(id, "audio");
+        super("audio", id);
         this.audio_url = audio_url;
         this.title = title;
     }
