@@ -37,11 +37,6 @@
 </dependency>
 ```
 
-* Grade
-
-```groovy
-implementation 'io.github.natanimn:telebof:0.9.1'
-```
 ### Your First Echo Bot
 
 ```java

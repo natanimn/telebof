@@ -84,7 +84,7 @@
                 <version>1.5.0</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <flattenMode>removeParent</flattenMode>
+                    <flattenMode>oss</flattenMode>
                 </configuration>
                 <executions>
                     <execution>
