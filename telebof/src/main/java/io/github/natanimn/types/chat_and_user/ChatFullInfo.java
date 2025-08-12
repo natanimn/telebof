@@ -76,7 +76,7 @@ public class ChatFullInfo extends Chat{
     /**
      * Default chat member permissions, for groups and supergroups
      */
-    public ChatPermission permissions;
+    public ChatPermissions permissions;
 
     /**
      * For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user; in seconds
