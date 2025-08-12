@@ -1,30 +1,39 @@
 package io.github.natanimn.types.media_and_service;
 
-
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a general file (as opposed to {@link PhotoSize}, {@link Voice} and {@link Audio}).
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class Document implements Serializable {
-    public String file_id, file_unique_id, file_name, mime_type;
-    public Integer file_size;
+public class Document {
+    /**
+     * Identifier for this file, which can be used to download or reuse the file
+     */
+    public String file_id;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
+     */
+    public String file_unique_id;
+
+    /**
+     * Optional. Original filename as defined by the sender
+     */
+    public String file_name;
+
+    /**
+     * Optional. MIME type of the file as defined by the sender
+     */
+    public String mime_type;
+
+    /**
+     * Optional. File size in bytes.
+     */
+    public Long file_size;
+
+    /**
+     * Optional. Document thumbnail as defined by the sender
+     */
     public PhotoSize thumbnail;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Document document = (Document) object;
-        return Objects.equals(file_id, document.file_id) && Objects.equals(file_unique_id, document.file_unique_id) &&
-                Objects.equals(file_name, document.file_name) && Objects.equals(mime_type, document.mime_type) &&
-                Objects.equals(file_size, document.file_size) && Objects.equals(thumbnail, document.thumbnail);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, file_name, mime_type, file_size, thumbnail);
-    }
 }

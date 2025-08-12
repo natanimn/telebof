@@ -1,26 +1,20 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents an animated emoji that displays a random value.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class Dice implements Serializable {
+public class Dice {
+    /**
+     * Emoji on which the dice throw animation is based
+     */
     public String emoji;
+
+    /**
+     * Value of the dice, 1-6 for “🎲”, “🎯” and “🎳” base emoji, 1-5 for “🏀” and “⚽” base emoji, 1-64 for “🎰” base emoji
+     */
     public Integer value;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Dice dice = (Dice) object;
-        return Objects.equals(emoji, dice.emoji) && Objects.equals(value, dice.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(emoji, value);
-    }
 }
