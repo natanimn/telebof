@@ -3,8 +3,8 @@
  * It is example of echo bot.
  * Before going through, you must obtain your bot token from @BotFather first.
  */
+package io.github.natanimn;
 
-import io.github.natanimn.BotClient;
 
 public class EchoBot {
     static final String TOKEN = System.getenv("TOKEN");
@@ -15,18 +15,18 @@ public class EchoBot {
 
         //Register /start command handler
         bot.onMessage(filter -> filter.commands("start"), (ctx, message) -> {
-            ctx.sendMessage("Welcome!\nI am echo bot").exec();
+            ctx.sendMessage(message.chat.id, "Welcome!\nI am echo bot").exec();
         });
 
         //Register incoming text handler
         bot.onMessage(filter -> filter.text(), (ctx, message) -> {
             //Echo as a reply
-            ctx.reply(message.text).exec();
+            ctx.sendMessage(message.chat.id, message.text).exec();
 
         });
 
         // Run the bot
-        bot.run();
+        bot.startPolling();
 
     }
 }

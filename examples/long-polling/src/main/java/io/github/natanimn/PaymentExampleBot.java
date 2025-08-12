@@ -1,3 +1,5 @@
+package io.github.natanimn;
+
 import io.github.natanimn.BotClient;
 import io.github.natanimn.BotContext;
 import io.github.natanimn.enums.ParseMode;
@@ -26,18 +28,20 @@ public class PaymentExampleBot {
         bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
 
         // Register pre checkout
-        bot.onPreCheckout(PaymentExampleBot::processPrecheckOut);
+        bot.onPreCheckout(filter -> true, PaymentExampleBot::processPrecheckOut);
 
         // Register successful payment update
         bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPayment);
 
         // Run the bot
-        bot.run();
+        bot.startPolling();
     }
 
     static void start(BotContext context, Message message){
         User user = message.from;
-        context.sendMessage(String.format("<b>Hello %s!</b>,\n\nI am payment example bot.\n<i>Send /pay to try it out.</i>", user.mention()))
+        context.sendMessage(message.chat.id, String.format(
+                "<b>Hello %s!</b>,\n\nI am payment example bot.\n<i>Send /pay to try it out.</i>", user.mention()
+                ))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
@@ -47,13 +51,15 @@ public class PaymentExampleBot {
 
         LabeledPrice price = new LabeledPrice("Pay 10 star", 10);
 
-        /** Pass:
+        /**
+         * Pass:
          * title,
          * description,
          * payload,
          * array of labeled price
          */
         context.sendInvoice(
+                message.chat.id,
                 "Payment test",
                 "Pay 10 start for telebof payment test bot",
                 "pay-10",
@@ -64,7 +70,7 @@ public class PaymentExampleBot {
 
     static void processPrecheckOut(BotContext context, PreCheckoutQuery query){
         // Confirm checkout
-        context.answerPreCheckout(true).exec();
+        context.answerPreCheckoutQuery(query.id, true).exec();
     }
 
     static void acceptPayment(BotContext context, Message message){
@@ -73,7 +79,7 @@ public class PaymentExampleBot {
         // Refund the star payment to the user
         context.refundStarPayment(message.from.id, payment.telegram_payment_charge_id).exec();
 
-        context.sendMessage(
+        context.sendMessage(message.chat.id,
                 "<b>Yay, your money is refunded.</b>\n\n" +
                 "<i>Thanks for your generous donation</i>"
         ).parseMode(ParseMode.HTML).exec();
