@@ -1,27 +1,19 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * Represents a reaction added to a message along with the number of times it was added.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class ReactionCount implements Serializable {
+public class ReactionCount {
+    /**
+     * Type of the reaction
+     */
     public ReactionType type;
-    public int total_count;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ReactionCount that = (ReactionCount) object;
-        return total_count == that.total_count && Objects.equals(type, that.type);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, total_count);
-    }
+    /**
+     * Number of times the reaction was added
+     */
+    public Integer total_count;
 }

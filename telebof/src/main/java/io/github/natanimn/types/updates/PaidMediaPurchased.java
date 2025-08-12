@@ -1,4 +1,4 @@
-package io.github.natanimn.types.payments;
+package io.github.natanimn.types.updates;
 
 import io.github.natanimn.types.chat_and_user.User;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  * @version 0.7
  */
 
-public class PaidMediaPurchased {
+public class PaidMediaPurchased implements TelegramUpdate {
     /**
      * User who purchased the media
      */

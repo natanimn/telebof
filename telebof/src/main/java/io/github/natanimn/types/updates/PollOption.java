@@ -11,7 +11,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class PollOption {
+public class PollOption implements TelegramUpdate {
     /**
      * Option text, 1-100 characters
      */

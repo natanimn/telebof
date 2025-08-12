@@ -1,40 +1,35 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents one size of a photo or a file / sticker thumbnail.
+ * @author Natanim
+ * @since 3 March 2025
  */
-public class PhotoSize implements Serializable {
-    public String file_id, file_unique_id;
-    public Integer width, height;
+public class PhotoSize {
+    /**
+     * Identifier for this file, which can be used to download or reuse the file
+     */
+    public String file_id;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     */
+    public String file_unique_id;
+
+    /**
+     * Photo width
+     */
+    public Integer width;
+
+    /**
+     * Photo height
+     */
+    public Integer height;
+
+    /**
+     * Optional. File size in bytes
+     */
     public Integer file_size;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        PhotoSize photoSize = (PhotoSize) object;
-        return Objects.equals(file_id, photoSize.file_id) && Objects.equals(file_unique_id, photoSize.file_unique_id) &&
-                Objects.equals(width, photoSize.width) && Objects.equals(height, photoSize.height) &&
-                Objects.equals(file_size, photoSize.file_size);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, width, height, file_size);
-    }
-
-    @Override
-    public String toString() {
-        return "PhotoSize{" +
-                "file_id='" + file_id + '\'' +
-                ", file_unique_id='" + file_unique_id + '\'' +
-                ", width=" + width +
-                ", height=" + height +
-                ", file_size=" + file_size +
-                '}';
-    }
 }
