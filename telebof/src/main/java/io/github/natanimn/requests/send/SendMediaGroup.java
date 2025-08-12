@@ -1,7 +1,8 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.send;
 
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.BotLog;
+import io.github.natanimn.requests.RequestSender;
 import io.github.natanimn.types.input.InputMedia;
 import io.github.natanimn.types.keyboard.Markup;
 import io.github.natanimn.types.updates.Message;
@@ -11,36 +12,32 @@ import java.util.List;
 
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * SendMediaGroup class. Returns sent array of {@link Message} on success.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
+ * @implNote {@link io.github.natanimn.BotContext#sendMediaGroup}
  */
-public class SendMediaGroup extends DefaultParameters<SendMediaGroup, List<Message>> {
+public class SendMediaGroup extends SendBuilder<SendMediaGroup, List<Message>> {
 
     public static Type responseType = TypeToken.getParameterized(List.class, Message.class).getType();
     public  SendMediaGroup(Object chatId, InputMedia[] medias, RequestSender requestSender) {
         super(chatId, requestSender, "sendMediaGroup", responseType);
         add("media", medias);
         for (InputMedia im: medias){
-            if (im.isFile()){
-                add(im.getInputFile().file.getName(), im.getInputFile().file);
-                setContentType(im.getInputFile().contentType);
-                setHasMultipart(true);
-            }
-            if (im.hasThumbnailFile()){
-                add(im.getThumbnailFile().file.getName(), im.getThumbnailFile().file);
-                setContentType(im.getThumbnailFile().contentType);
-                setHasMultipart(true);
-            }
+            if (im.hasFile()) setHasMultipart(true);
         }
 
     }
 
+    /**
+     * Not implemented
+     */
     @Override
     @Deprecated(forRemoval = true)
     public SendMediaGroup replyMarkup(Markup replyMarkup) {
         BotLog.warn("`sendMediaGroup` method does not support replyMarkup option.");
         return this;
     }
-
 
 }
