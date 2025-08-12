@@ -1,9 +1,8 @@
 package io.github.natanimn.types.input;
 
-import io.github.natanimn.requests.MediaContentType;
-import io.github.natanimn.types.media_and_service.InputFile;
-
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Natanim 
@@ -14,32 +13,37 @@ public class InputPaidMediaVideo implements InputPaidMedia{
     private String type;
     private String media;
     private transient boolean isFile, hasThumbnailFile;
-    private transient InputFile inputFile, thumbnailFile;
     private String thumbnail;
     private Integer width, height, duration;
     private Boolean supports_streaming;
+    private String cover;
+    private Integer start_timestamp;
+
+    private transient Boolean hasFile;
+    private transient List<File> files = new ArrayList<>();
 
     public InputPaidMediaVideo(String media){
         this.type = "video";
         this.media = media;
-        this.isFile = false;
+        this.hasFile = false;
     }
+
     public InputPaidMediaVideo(File media){
         this.type = "video";
         this.media = "attach://"+media.getName();
-        this.isFile = true;
-        this.inputFile = new InputFile(media, MediaContentType.VIDEO);
+        this.hasFile = true;
+        this.files.add(media);
     }
 
     public void thumbnail(File thumbnail) {
         this.thumbnail = "attach://"+thumbnail.getName();
-        this.thumbnailFile = new InputFile(thumbnail, MediaContentType.PHOTO);
-        this.hasThumbnailFile = true;
+        this.hasFile = true;
+        this.files.add(thumbnail);
+
     }
 
     public void thumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-        this.hasThumbnailFile = false;
     }
 
     public void width(Integer width) {
@@ -58,23 +62,35 @@ public class InputPaidMediaVideo implements InputPaidMedia{
         this.supports_streaming = supports_streaming;
     }
 
-    @Override
-    public InputFile getThumbnailFile() {
-        return thumbnailFile;
+    /**
+     * Optional
+     * @param cover Cover for the video in the message.
+     * @return {@link InputMediaVideo}
+     */
+    public InputPaidMediaVideo cover(File cover){
+        this.cover = "attach://"+cover.getName();
+        this.hasFile = true;
+        this.files.add(cover);
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param start_timestamp Start timestamp for the video in the message
+     * @return {@link  InputMediaVideo}
+     */
+    public InputPaidMediaVideo starTimestamp(int start_timestamp){
+        this.start_timestamp = start_timestamp;
+        return this;
     }
 
     @Override
-    public boolean hasThumbnailFile() {
-        return hasThumbnailFile;
+    public boolean hasFile() {
+        return hasFile;
     }
 
     @Override
-    public InputFile getInputFile() {
-        return inputFile;
-    }
-
-    @Override
-    public boolean isFile() {
-        return isFile;
+    public List<File> getFiles() {
+        return files;
     }
 }

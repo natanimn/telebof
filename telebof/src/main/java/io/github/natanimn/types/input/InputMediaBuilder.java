@@ -1,11 +1,12 @@
 package io.github.natanimn.types.input;
 
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.requests.MediaContentType;
+import io.github.natanimn.requests.service.MediaContentType;
 import io.github.natanimn.types.media_and_service.InputFile;
 import io.github.natanimn.types.media_and_service.MessageEntity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,25 +16,26 @@ import java.util.List;
  * @version 0.8
  */
 @SuppressWarnings("unchecked")
-abstract public class InputMediaBuilder<T>{
+abstract public class InputMediaBuilder<T> implements InputMedia{
     protected String type, caption, media;
     protected ParseMode  parse_mode;
     protected List<MessageEntity> caption_entities;
-    transient private InputFile inputFile, thumbnailFile;
-    transient private boolean isFile, thumbnailIsFile;
+    transient List<File> files = new ArrayList<>();
+    transient Boolean hasFile;
+
     T thisT = (T)this;
 
     public InputMediaBuilder(String type, String media) {
         this.type = type;
         this.media = media;
-        setFile(false);
+        setHasFile(false);
     }
 
     public InputMediaBuilder(String type, File media, String contentType) {
-        this.inputFile = new InputFile(media, contentType);
         this.type = type;
-        this.media = ("attach://" + media.getName());
-        setFile(true);
+        this.media = "attach://"+media.getName();
+        setHasFile(true);
+        addFiles(media);
     }
 
     public T caption(String caption) {
@@ -51,28 +53,21 @@ abstract public class InputMediaBuilder<T>{
         return thisT;
     }
 
-    protected void setThumbnailFile(File file){
-        thumbnailFile = new InputFile(file, MediaContentType.PHOTO);
-        thumbnailIsFile = true;
+    protected void setHasFile(boolean hasFile){
+        this.hasFile = hasFile;
     }
 
-    public void setFile(boolean file) {
-        isFile = file;
+    protected void addFiles(File file){
+        files.add(file);
     }
 
-    public boolean isFile() {
-        return isFile;
+    @Override
+    public List<File> getFiles() {
+        return files;
     }
 
-    public InputFile getInputFile() {
-        return inputFile;
-    }
-
-    public boolean hasThumbnailFile() {
-        return thumbnailIsFile;
-    }
-
-    public InputFile getThumbnailFile() {
-        return thumbnailFile;
+    @Override
+    public boolean hasFile() {
+        return hasFile;
     }
 }
