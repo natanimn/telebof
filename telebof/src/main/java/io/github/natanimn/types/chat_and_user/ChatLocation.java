@@ -1,30 +1,23 @@
 package io.github.natanimn.types.chat_and_user;
 
-
 import io.github.natanimn.types.media_and_service.Location;
 
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
+ * Represents a location to which a chat is connected.
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
-public class ChatLocation implements Serializable {
+public class ChatLocation {
+    /**
+     * The location to which the supergroup is connected. Can't be a live location.
+     */
     public Location location;
+
+    /**
+     * Location address; 1-64 characters, as defined by the chat owner
+     */
     public String address;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatLocation that = (ChatLocation) object;
-        return Objects.equals(location, that.location) && Objects.equals(address, that.address);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(location, address);
-    }
 }

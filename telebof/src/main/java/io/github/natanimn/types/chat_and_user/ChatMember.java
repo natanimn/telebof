@@ -1,28 +1,170 @@
 package io.github.natanimn.types.chat_and_user;
 
-
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * This object contains information about one member of a chat.
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
-public class ChatMember implements Serializable {
-    public String status, custom_title;
+public class ChatMember {
+    /**
+     * 	The member's status in the chat, one of "member", "administrator", "creator", "banned", "restricted", "left"
+     */
+    public String status;
+
+    /**
+     * Optional. Custom title for this user
+     */
+    public String custom_title;
+
+    /**
+     * Information about the user
+     */
     public User user;
 
-    public Boolean can_be_edited, is_anonymous, can_manage_chat, can_delete_messages, can_manage_video_chats,
-            can_restrict_members, can_promote_members, can_change_info, can_invite_users,
-            can_post_messages, can_edit_messages, can_pin_messages, can_manage_topics;
+    /**
+     * True, if the bot is allowed to edit administrator privileges of that user
+     */
+    public Boolean can_be_edited;
 
-    public Boolean is_member, can_send_messages, can_send_audios, can_send_documents,
-            can_send_photos, can_send_videos, can_send_video_notes, can_send_voice_votes, can_send_polls,
-            can_send_other_messages, can_add_web_page_previews;
+    /**
+     * True, if the user's presence in the chat is hidden
+     */
+    public Boolean is_anonymous;
 
-    public Boolean can_post_stories, can_edit_stories, can_delete_stories;
+    /**
+     * True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members,
+     * report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars.
+     * Implied by any other administrator privilege.
+     */
+    public Boolean can_manage_chat;
 
+    /**
+     * True, if the administrator can delete messages of other users
+     */
+    public Boolean can_delete_messages;
+
+    /**
+     * True, if the administrator can manage video chats
+     */
+    public Boolean can_manage_video_chats;
+
+    /**
+     * True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics
+     */
+    public Boolean can_restrict_members;
+
+    /**
+     * True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted,
+     * directly or indirectly (promoted by administrators that were appointed by the user)
+     */
+    public Boolean can_promote_members;
+
+    /**
+     * True, if the user is allowed to change the chat title, photo and other settings
+     */
+    public Boolean can_change_info;
+
+    /**
+     * True, if the user is allowed to invite new users to the chat
+     */
+    public Boolean can_invite_users;
+
+    /**
+     * Optional. True, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
+     */
+    public Boolean can_post_messages;
+
+    /**
+     * Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only
+     */
+    public Boolean can_edit_messages;
+
+    /**
+     * Optional. True, if the user is allowed to pin messages; for groups and supergroups only
+     */
+    public Boolean can_pin_messages;
+
+    /**
+     * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
+     */
+    public Boolean can_manage_topics;
+
+    /**
+     * True, if the user is a member of the chat at the moment of the request
+     */
+    public Boolean is_member;
+
+    /**
+     * True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+     */
+    public Boolean can_send_messages;
+
+    /**
+     * True, if the user is allowed to send audios
+     */
+    public Boolean can_send_audios;
+
+    /**
+     * True, if the user is allowed to send documents
+     */
+    public Boolean can_send_documents;
+
+    /**
+     * True, if the user is allowed to send photos
+     */
+    public Boolean can_send_photos;
+
+    /**
+     * True, if the user is allowed to send videos
+     */
+    public Boolean can_send_videos;
+
+    /**
+     * True, if the user is allowed to send video notes
+     */
+    public Boolean can_send_video_notes;
+
+    /**
+     * True, if the user is allowed to send voice notes
+     */
+    public Boolean can_send_voice_votes;
+
+    /**
+     * True, if the user is allowed to send polls and checklists
+     */
+    public Boolean can_send_polls;
+
+    /**
+     * True, if the user is allowed to send animations, games, stickers and use inline bots
+     */
+    public Boolean can_send_other_messages;
+
+    /**
+     * True, if the user is allowed to add web page previews to their messages
+     */
+    public Boolean can_add_web_page_previews;
+
+    /**
+     * True, if the administrator can post stories to the chat
+     */
+    public Boolean can_post_stories;
+
+    /**
+     * True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
+     */
+    public Boolean can_edit_stories;
+
+    /**
+     * True, if the administrator can delete stories posted by other users
+     */
+    public Boolean can_delete_stories;
+
+    /**
+     * Optional. Date when the user's subscription will expire; Unix time
+     */
     public Integer until_date;
 
     @Override
@@ -74,11 +216,3 @@ public class ChatMember implements Serializable {
                 can_delete_stories, until_date);
     }
 }
-
-
-
-
-
-
-
-
