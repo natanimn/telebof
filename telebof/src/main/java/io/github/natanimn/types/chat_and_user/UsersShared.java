@@ -1,27 +1,22 @@
 package io.github.natanimn.types.chat_and_user;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object contains information about the users whose identifiers were shared with the bot using a {@link io.github.natanimn.types.keyboard.KeyboardButtonRequestUsers} button.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class UsersShared implements Serializable {
-    public int request_id;
+public class UsersShared {
+    /**
+     * Identifier of the request
+     */
+    public Integer request_id;
+
+    /**
+     * Information about users shared with the bot.
+     */
     public List<SharedUser> users;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        UsersShared that = (UsersShared) object;
-        return request_id == that.request_id && Objects.equals(users, that.users);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(request_id, users);
-    }
 }
