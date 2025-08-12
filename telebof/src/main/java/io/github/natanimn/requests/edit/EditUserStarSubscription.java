@@ -1,11 +1,14 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.edit;
+
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 
 /**
  * A class for sending request of `editUserStarSubscription`
  * @author Natanim
  * @since July 25, 2025
  */
-public class EditUserStarSubscription extends AbstractBaseRequest<EditUserStarSubscription, Boolean>{
+public class EditUserStarSubscription extends AbstractBaseRequest<EditUserStarSubscription, Boolean> {
     public EditUserStarSubscription(Long user_id, String telegram_charge_id, boolean is_canceled, RequestSender rs){
         super(rs, "editUserStarSubscription");
         add("user_id", user_id);

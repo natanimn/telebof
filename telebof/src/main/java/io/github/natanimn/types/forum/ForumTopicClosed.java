@@ -1,11 +1,12 @@
 package io.github.natanimn.types.forum;
 
-import java.io.Serializable;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a service message about a forum topic closed in the chat.
+ * Currently, holds no information.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class ForumTopicClosed implements Serializable {
-    // not implemented
+public class ForumTopicClosed {
+
 }
