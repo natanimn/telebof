@@ -1,5 +1,7 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.get;
 
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 import io.github.natanimn.types.chat_and_user.User;
 
 /**

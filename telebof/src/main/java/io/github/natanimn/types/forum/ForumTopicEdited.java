@@ -1,27 +1,20 @@
 package io.github.natanimn.types.forum;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * This object represents a service message about an edited forum topic.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class ForumTopicEdited  implements Serializable {
+public class ForumTopicEdited {
+    /**
+     * Optional. New name of the topic, if it was edited
+     */
+    public String name;
 
-    public String name, icon_custom_emoji_id;
+    /**
+     * Optional. New identifier of the custom emoji shown as the topic icon, if it was edited; an empty string if the icon was removed
+     */
+    public String icon_custom_emoji_id;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ForumTopicEdited that = (ForumTopicEdited) object;
-        return Objects.equals(name, that.name) && Objects.equals(icon_custom_emoji_id, that.icon_custom_emoji_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, icon_custom_emoji_id);
-    }
 }
