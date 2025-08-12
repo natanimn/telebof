@@ -1,25 +1,35 @@
 package io.github.natanimn.types.media_and_service;
 
+/**
+ * This object represents a phone contact.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
+ */
+public class Contact {
+    /**
+     * Contact's phone number
+     */
+    public String phone_number;
 
-import java.io.Serializable;
-import java.util.Objects;
+    /**
+     * Contact's first name
+     */
+    public String first_name;
 
-public  class Contact implements Serializable {
-    public String phone_number, first_name, last_name, vcard;
+    /**
+     * Optional. Contact's last name
+     */
+    public String last_name;
+
+    /**
+     * Optional. Additional data about the contact in the form of a <a href="https://en.wikipedia.org/wiki/VCard">vCard</a>
+     */
+    public String vcard;
+
+    /**
+     * Optional. Contact's user identifier in Telegram.
+     */
     public Long user_id;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Contact contact = (Contact) object;
-        return Objects.equals(phone_number, contact.phone_number) && Objects.equals(first_name, contact.first_name) &&
-                Objects.equals(last_name, contact.last_name) && Objects.equals(vcard, contact.vcard) &&
-                Objects.equals(user_id, contact.user_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(phone_number, first_name, last_name, vcard, user_id);
-    }
 }

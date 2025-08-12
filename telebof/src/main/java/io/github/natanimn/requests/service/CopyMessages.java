@@ -1,6 +1,8 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.service;
 
 import com.google.gson.reflect.TypeToken;
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 import io.github.natanimn.types.media_and_service.MessageEntity;
 import io.github.natanimn.types.media_and_service.MessageId;
 
