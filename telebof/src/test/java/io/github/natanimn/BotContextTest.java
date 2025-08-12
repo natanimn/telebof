@@ -71,7 +71,7 @@ class BotContextTest {
 
     @Test
     void testSendMediaGroup(){
-        InputMedia[] inputMedia = new InputMedia[10];
+        InputMedia[] inputMedia = new InputMedia[5];
         File pic = new File("src/test/resources/telegram.png");
         for (int i=0; i < 5; i++) inputMedia[i] = new InputMediaPhoto(pic);
         List<Message> messages = bot.context.sendMediaGroup(CHAT_ID, inputMedia).exec();

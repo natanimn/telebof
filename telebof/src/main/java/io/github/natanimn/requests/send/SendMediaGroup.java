@@ -21,10 +21,10 @@ import java.util.List;
 public class SendMediaGroup extends SendBuilder<SendMediaGroup, List<Message>> {
 
     public static Type responseType = TypeToken.getParameterized(List.class, Message.class).getType();
-    public  SendMediaGroup(Object chatId, InputMedia[] medias, RequestSender requestSender) {
+    public  SendMediaGroup(Object chatId, InputMedia[] media, RequestSender requestSender) {
         super(chatId, requestSender, "sendMediaGroup", responseType);
-        add("media", medias);
-        for (InputMedia im: medias){
+        add("media", media);
+        for (InputMedia im: media){
             if (im.hasFile()) setHasMultipart(true);
         }
 
