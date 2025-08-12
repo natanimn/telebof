@@ -37,5 +37,8 @@ public enum ChatAction {
     RECORD_VIDEO,
 
     @SerializedName("upload_video_note")
-    UPLOAD_VIDEO_NOTE;
+    UPLOAD_VIDEO_NOTE,
+
+    @SerializedName("record_video_note")
+    RECORD_VIDEO_NOTE,
 }
