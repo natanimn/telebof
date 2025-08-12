@@ -1,46 +1,27 @@
 package io.github.natanimn.filters;
 
 import io.github.natanimn.Util;
-import io.github.natanimn.types.media_and_service.Animation;
-import io.github.natanimn.types.media_and_service.Audio;
+import io.github.natanimn.types.media_and_service.*;
 import io.github.natanimn.types.chat_and_user.ChatBackground;
 import io.github.natanimn.types.chat_and_user.ChatBoostAdded;
-import io.github.natanimn.types.media_and_service.Contact;
-import io.github.natanimn.types.media_and_service.Dice;
-import io.github.natanimn.types.media_and_service.Document;
-import io.github.natanimn.types.media_and_service.Game;
 import io.github.natanimn.types.gift_and_giveaway.Giveaway;
 import io.github.natanimn.types.gift_and_giveaway.GiveawayCompleted;
 import io.github.natanimn.types.gift_and_giveaway.GiveawayCreated;
-import io.github.natanimn.types.media_and_service.Invoice;
-import io.github.natanimn.types.media_and_service.Location;
-import io.github.natanimn.types.media_and_service.MessageEntity;
-import io.github.natanimn.types.media_and_service.MessageOrigin;
 import io.github.natanimn.types.passport.PassportData;
-import io.github.natanimn.types.media_and_service.PhotoSize;
 import io.github.natanimn.types.payments.RefundedPayment;
-import io.github.natanimn.types.media_and_service.Sticker;
-import io.github.natanimn.types.media_and_service.TextQuote;
 import io.github.natanimn.types.updates.Update;
 import io.github.natanimn.states.StateMemoryStorage;
 import io.github.natanimn.types.updates.Message;
 import io.github.natanimn.types.chat_and_user.User;
-import io.github.natanimn.types.media_and_service.Venue;
-import io.github.natanimn.types.media_and_service.Video;
-import io.github.natanimn.types.media_and_service.VideoChatEnded;
-import io.github.natanimn.types.media_and_service.VideoChatParticipantsInvited;
-import io.github.natanimn.types.media_and_service.VideoChatScheduled;
-import io.github.natanimn.types.media_and_service.VideoChatStarted;
-import io.github.natanimn.types.media_and_service.VideoNote;
-import io.github.natanimn.types.media_and_service.Voice;
 import io.github.natanimn.types.web.WebAppData;
 
 import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class Filter{
     private final Update update;
@@ -411,6 +392,15 @@ public class Filter{
         else return false;
     }
 
+    public boolean reaction(String react){
+        if (update.message_reaction != null){
+            for (ReactionType reactionType: update.message_reaction.new_reaction){
+                System.out.println(reactionType.emoji);
+                if (reactionType.emoji.equals(react)) return true;
+            };
+        }
+        return false;
+    }
     private String getText(){
         if (update.message != null) return update.message.text;
         else if (update.edited_message != null) return update.edited_message.text;
