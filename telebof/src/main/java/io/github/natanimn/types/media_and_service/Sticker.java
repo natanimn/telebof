@@ -1,8 +1,6 @@
 package io.github.natanimn.types.media_and_service;
 
 import io.github.natanimn.enums.StickerType;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * This class represents a sticker.
@@ -10,7 +8,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class Sticker implements Serializable {
+public class Sticker {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -89,25 +87,4 @@ public class Sticker implements Serializable {
      */
     public Integer file_size;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Sticker sticker = (Sticker) object;
-        return Objects.equals(file_id, sticker.file_id) && Objects.equals(file_unique_id, sticker.file_unique_id) &&
-                Objects.equals(type, sticker.type) && Objects.equals(width, sticker.width) &&
-                Objects.equals(height, sticker.height) && Objects.equals(is_animated, sticker.is_animated) &&
-                Objects.equals(is_video, sticker.is_video) && Objects.equals(thumbnail, sticker.thumbnail) &&
-                Objects.equals(emoji, sticker.emoji) && Objects.equals(setName, sticker.setName) &&
-                Objects.equals(premium_animation, sticker.premium_animation) &&
-                Objects.equals(mask_position, sticker.mask_position) &&
-                Objects.equals(custom_emoji_id, sticker.custom_emoji_id) &&
-                Objects.equals(needs_repainting, sticker.needs_repainting) && Objects.equals(file_size, sticker.file_size);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, type, width, height, is_animated, is_video, thumbnail, emoji,
-                setName, premium_animation, mask_position, custom_emoji_id, needs_repainting, file_size);
-    }
 }
