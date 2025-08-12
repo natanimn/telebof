@@ -1,11 +1,14 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.set;
+
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 
 /**
  * @author Natanim
  * @since July 25, 2025
  * @version 0.6
  */
-public class SetUserEmojiStatus extends AbstractBaseRequest<SetUserEmojiStatus, Boolean>{
+public class SetUserEmojiStatus extends AbstractBaseRequest<SetUserEmojiStatus, Boolean> {
     /**
      * @param user_id Unique identifier of the target user
      * @param rs RequestSender class
