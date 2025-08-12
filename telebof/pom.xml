@@ -8,7 +8,7 @@
         <artifactId>telebof-parent</artifactId>
         <version>0.1.0</version>
     </parent>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
     <artifactId>telebof</artifactId>
     <description>Easy and modern Java Telegram bot API</description>
     <name>Telebof</name>
@@ -84,7 +84,7 @@
                 <version>1.5.0</version>
                 <configuration>
                     <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    <flattenMode>removeParent</flattenMode>
                 </configuration>
                 <executions>
                     <execution>
