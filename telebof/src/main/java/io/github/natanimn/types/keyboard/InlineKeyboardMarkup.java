@@ -1,21 +1,32 @@
 package io.github.natanimn.types.keyboard;
 
-
 import io.github.natanimn.BotLog;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
 
 /**
+ * This object represents an inline keyboard that appears right next to the message it belongs to.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class InlineKeyboardMarkup implements Markup, Serializable {
-    public List<List<InlineKeyboardButton>> inline_keyboard = new ArrayList<>();
+public class InlineKeyboardMarkup implements Markup {
+    /**
+     * Array of button rows, each represented by an Array of {@link InlineKeyboardButton} objects
+     */
+    public List<List<InlineKeyboardButton>> inline_keyboard;
     transient private int rowWidth = 3;
+
+    public InlineKeyboardMarkup(){
+        this.inline_keyboard = new ArrayList<>();
+    }
+
+    public InlineKeyboardMarkup(int rowWidth){
+        this.rowWidth        = rowWidth;
+        this.inline_keyboard = new ArrayList<>();
+    }
 
     public InlineKeyboardMarkup(InlineKeyboardButton[][] keyboard) {
         Arrays.stream(keyboard)
@@ -46,7 +57,7 @@ public class InlineKeyboardMarkup implements Markup, Serializable {
         }
     }
 
-    public void rowWidth(int rowWidth) {
+    public void setRowWidth(int rowWidth) {
         this.rowWidth = rowWidth;
     }
 }
