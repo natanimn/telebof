@@ -2,27 +2,17 @@ package io.github.natanimn.types.media_and_service;
 
 import io.github.natanimn.types.chat_and_user.User;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a service message about new members invited to a video chat.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class VideoChatParticipantsInvited implements Serializable {
+public class VideoChatParticipantsInvited {
+    /**
+     * New members that were invited to the video chat
+     */
     public List<User> users;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        VideoChatParticipantsInvited that = (VideoChatParticipantsInvited) object;
-        return Objects.equals(users, that.users);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(users);
-    }
 }

@@ -1,31 +1,42 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * This object represents a <a href="https://telegram.org/blog/video-messages-and-telescope">video message</a>
+ * (available in Telegram apps as of <a href="https://telegram.org/blog/video-messages-and-telescope">v.4.0</a>).
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
-public class VideoNote implements Serializable {
-    public String file_id, file_unique_id;
-    public Integer length, duration;
+public class VideoNote {
+    /**
+     * Identifier for this file, which can be used to download or reuse the file
+     */
+    public String file_id;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     */
+    public String file_unique_id;
+
+    /**
+     * Video width and height (diameter of the video message) as defined by the sender
+     */
+    public Integer length;
+
+    /**
+     * Duration of the video in seconds as defined by the sender
+     */
+    public Integer duration;
+
+    /**
+     * Optional. File size in bytes
+     */
     public Integer file_size;
+
+    /**
+     * Optional. Video thumbnail
+     */
     public PhotoSize thumbnail;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        VideoNote videoNote = (VideoNote) object;
-        return Objects.equals(file_id, videoNote.file_id) && Objects.equals(file_unique_id, videoNote.file_unique_id) &&
-                Objects.equals(length, videoNote.length) && Objects.equals(duration, videoNote.duration) &&
-                Objects.equals(file_size, videoNote.file_size) && Objects.equals(thumbnail, videoNote.thumbnail);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, length, duration, file_size, thumbnail);
-    }
 }

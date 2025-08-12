@@ -1,4 +1,7 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.service;
+
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 
 /**
  * Verifies a user on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
@@ -6,7 +9,7 @@ package io.github.natanimn.requests;
  * @since 1 August 2025
  * @version 0.8
  */
-public class VerifyUser extends AbstractBaseRequest<VerifyUser, Boolean>{
+public class VerifyUser extends AbstractBaseRequest<VerifyUser, Boolean> {
     /**
      * @param user_id Unique identifier of the target user
      * @param rs Request
