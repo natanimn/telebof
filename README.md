@@ -33,14 +33,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.9.0'
+implementation 'io.github.natanimn:telebof:0.9.1'
 ```
 ### Your First Echo Bot
 
@@ -514,7 +514,7 @@ Example for handling inline button through its callback data using `filter.callb
 ```java
 // handles inline button which its callback data equals with "a"
 bot.onCallback(filter -> filter.callbackData("a"), (context, callback) -> {
-    context.answer("You pressed A button!").exec();
+    context.answerCallbackQuery(callback.id, "You pressed A button!").exec();
 });
 ```
 
@@ -529,12 +529,12 @@ bot.onInline(filter -> filter.inlineQuery("hello"), (context, query) -> {});
 There is another special filter to make conversations with bot called `state filter`.
 ```java
 bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-    context.sendMessage("What is your name?").exec();
+    context.sendMessage(message.chat.id, "What is your name?").exec();
     bot.setState(message.from.id, "name"); // set our state to `name`. You can set whatever
 });
 
 bot.onMessage(filter -> filter.state("name") && filter.text(), (context, message) -> {     
-    context.sendMessage(String.format("Your name is %s", message.text)).exec();
+    context.sendMessage(message.chat.id, String.format("Your name is %s", message.text)).exec();
     context.clearState(message.from.id);
 });
 ```
@@ -562,7 +562,7 @@ ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
         new String[]{"F"}
 }).resizeKeyboard(true); // resize keyboard
 
-context.sendMssage("Hello, World!").replyMarkup(markup).exec();
+context.sendMssage(message.chat.id, "Hello, World!").replyMarkup(markup).exec();
 ```
 
 ### InlineKeyboardMarkup
@@ -639,7 +639,7 @@ bot.onInline(filter ->filter.emptyQuery(), (context, query)->{
         .description("click here")
         .inputTextMessageContent(new InputTextMessageContent("Please write something"));
 
-    context.answerInline(new InlineQueryResult[] {article}).exec();
+    context.answerInlineQuery(query.id, new InlineQueryResult[]{article}).exec();
 
 });
 ```
