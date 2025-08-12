@@ -2,31 +2,31 @@ package io.github.natanimn.types.gift_and_giveaway;
 
 import io.github.natanimn.types.updates.Message;
 
-import java.util.Objects;
-
 /**
+ * This object represents a service message about the completion of a giveaway without public winners.
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
 public class GiveawayCompleted {
-    public int winner_count;
+    /**
+     * Number of winners in the giveaway
+     */
+    public Integer winner_count;
+
+    /**
+     * Optional. Number of undistributed prizes
+     */
     public Integer unclaimed_prize_count;
+
+    /**
+     * Optional. Message with the giveaway that was completed, if it wasn't deleted
+     */
     public Message giveaway_message;
+
+    /**
+     * Optional. True, if the giveaway is a Telegram Star giveaway. Otherwise, currently, the giveaway is a Telegram Premium giveaway.
+     */
     public Boolean is_star_giveaway;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        GiveawayCompleted that = (GiveawayCompleted) object;
-        return winner_count == that.winner_count && Objects.equals(unclaimed_prize_count, that.unclaimed_prize_count)
-                && Objects.equals(giveaway_message, that.giveaway_message) &&
-                Objects.equals(is_star_giveaway, that.is_star_giveaway);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(winner_count, unclaimed_prize_count, giveaway_message, is_star_giveaway);
-    }
 }
