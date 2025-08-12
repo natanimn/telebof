@@ -1,34 +1,19 @@
 package io.github.natanimn.types.web;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * Describes data sent from a <a href="https://core.telegram.org/bots/webapps">Web App</a> to the bot.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class WebAppData implements Serializable {
-    public String data, button_text;
+public class WebAppData {
+    /**
+     * The data. Be aware that a bad client can send arbitrary data in this field.
+     */
+    public String data;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        WebAppData that = (WebAppData) object;
-        return Objects.equals(data, that.data) && Objects.equals(button_text, that.button_text);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(data, button_text);
-    }
-
-    @Override
-    public String toString() {
-        return "WebAppData{" +
-                "data='" + data + '\'' +
-                ", button_text='" + button_text + '\'' +
-                '}';
-    }
+    /**
+     * Text of the web_app keyboard button from which the Web App was opened. Be aware that a bad client can send arbitrary data in this field.
+     */
+    public String button_text;
 }

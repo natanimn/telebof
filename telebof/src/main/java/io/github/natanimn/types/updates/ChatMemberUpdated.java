@@ -13,7 +13,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class ChatMemberUpdated {
+public class ChatMemberUpdated implements TelegramUpdate {
     /**
      Chat the user belongs to
      */

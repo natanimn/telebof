@@ -1,18 +1,20 @@
 package io.github.natanimn.requests;
 
+import io.github.natanimn.requests.service.MediaContentType;
+
 import java.io.File;
 import java.lang.reflect.Type;
 import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 @SuppressWarnings("unchecked")
 abstract public class AbstractBaseRequest<T, R>{
-    Map<String, Object> parameters = new TreeMap<>();
-    private String contentType = MediaContentType.DEFAULT;
+    protected Map<String, Object> parameters = new TreeMap<>();
     private boolean hasMultipart;
     T type = (T) this;
     protected String methodName ;
@@ -30,13 +32,6 @@ abstract public class AbstractBaseRequest<T, R>{
         this.methodName = methodName;
         this.requestSender = requestSender;
         this.responseType = responseType;
-    }
-
-    public AbstractBaseRequest(Object chat_id, RequestSender requestSender, String methodName) {
-        add("chat_id", chat_id);
-        this.requestSender = requestSender;
-        this.methodName = methodName;
-        this.responseType = Boolean.class;
     }
 
     public AbstractBaseRequest(RequestSender requestSender, String methodName) {
@@ -72,12 +67,10 @@ abstract public class AbstractBaseRequest<T, R>{
         return hasMultipart;
     }
 
-    protected void setContentType(String contentType){
-         this.contentType = contentType;
-    }
+    protected void setContentType(String contentType){}
 
     protected String getContentType() {
-        return contentType;
+        return MediaContentType.DEFAULT;
     }
 
     public final R exec(){

@@ -11,6 +11,9 @@
     <modules>
         <module>telebof</module>
         <module>examples</module>
+        <module>examples/webhook</module>
+        <module>examples/webhook/spring</module>
+        <module>examples/long-polling</module>
     </modules>
     <name>Telebof-Parent</name>
     <packaging>pom</packaging>

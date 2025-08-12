@@ -1,6 +1,6 @@
 package io.github.natanimn.types.input;
 
-import io.github.natanimn.requests.MediaContentType;
+import io.github.natanimn.requests.service.MediaContentType;
 
 import java.io.File;
 import java.io.Serializable;
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Natanim Negash 
  *  3 March 2025
  */
-public class InputMediaPhoto extends InputMediaBuilder<InputMediaPhoto> implements Serializable {
+public class InputMediaPhoto extends InputMediaBuilder<InputMediaPhoto> {
     private Boolean has_spoiler;
 
     public InputMediaPhoto(String media) {

@@ -1,33 +1,27 @@
 package io.github.natanimn.types.keyboard;
 
 import io.github.natanimn.enums.PollType;
-import org.jetbrains.annotations.NotNull;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
+ * This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
 public class KeyboardButtonPollType implements Serializable {
 
-    private String type;
-    public KeyboardButtonPollType(@NotNull PollType type) {
-        this.type = type.name().toLowerCase();
-    }
+    private PollType type;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        KeyboardButtonPollType that = (KeyboardButtonPollType) object;
-        return Objects.equals(type, that.type);
-    }
+    public KeyboardButtonPollType(){}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(type);
+    /**
+     * Optional
+     * @param type If quiz is passed, the user will be allowed to create only polls in the quiz mode.
+     *             If regular is passed, only regular polls will be allowed.
+     *             Otherwise, the user will be allowed to create a poll of any type.
+     */
+    public KeyboardButtonPollType(PollType type) {
+        this.type = type;
     }
 }

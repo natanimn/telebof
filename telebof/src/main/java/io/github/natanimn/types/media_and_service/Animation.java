@@ -3,36 +3,58 @@ package io.github.natanimn.types.media_and_service;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * @author Natanim Negash
- * @version 0.1
- * @since 3/6/25
  /**
- * @author Natanim 
- * @since 3 March 2025
- * @version 0.8
- */
-public class Animation implements Serializable {
-    public String file_id, file_unique_id, file_name, mime_type;
-    public Integer width, height, duration;
-    public Integer file_size;
+  * This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+  * @author Natanim
+  * @since 3 March 2025
+  * @version 0.9
+  */
+public class Animation {
+     /**
+      * Identifier for this file, which can be used to download or reuse the file
+      */
+    public String file_id;
+
+     /**
+      * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+      * Can't be used to download or reuse the file.
+      */
+    public String file_unique_id;
+
+     /**
+      * Optional. Original animation filename as defined by the sender
+      */
+    public String file_name;
+
+     /**
+      * Optional. MIME type of the file as defined by the sender
+      */
+    public String mime_type;
+
+     /**
+      * Video width as defined by the sender
+      */
+    public Integer width;
+
+     /**
+      * Video height as defined by the sender
+      */
+    public Integer height;
+
+     /**
+      * Duration of the video in seconds as defined by the sender
+      */
+    public Integer duration;
+
+     /**
+      * Optional. File size in bytes.
+      */
+    public Long file_size;
+
+     /**
+      * Optional. Animation thumbnail as defined by the sender
+      */
     public PhotoSize thumbnail;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Animation animation = (Animation) object;
-        return Objects.equals(file_id, animation.file_id) && Objects.equals(file_unique_id, animation.file_unique_id) &&
-                Objects.equals(file_name, animation.file_name) && Objects.equals(mime_type, animation.mime_type) &&
-                Objects.equals(width, animation.width) && Objects.equals(height, animation.height) &&
-                Objects.equals(duration, animation.duration) && Objects.equals(file_size, animation.file_size) &&
-                Objects.equals(thumbnail, animation.thumbnail);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, file_name, mime_type, width, height, duration, file_size, thumbnail);
-    }
 }
 

@@ -3,7 +3,6 @@ package io.github.natanimn.types.updates;
 import io.github.natanimn.types.chat_and_user.User;
 import io.github.natanimn.types.media_and_service.Location;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class ChosenInlineResult {
+public class ChosenInlineResult implements TelegramUpdate{
     /**
      * The unique identifier for the result that was chosen
      */

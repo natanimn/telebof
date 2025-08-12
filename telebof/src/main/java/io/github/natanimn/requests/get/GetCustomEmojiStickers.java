@@ -1,0 +1,32 @@
+package io.github.natanimn.requests.get;
+
+import com.google.gson.reflect.TypeToken;
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
+import io.github.natanimn.types.media_and_service.Sticker;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+/**
+ * GetCustomEmojiStickers class. Returns a list of {@link Sticker}
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
+ * @implNote {@link io.github.natanimn.BotContext#getCustomEmojiStickers}
+ */
+public class GetCustomEmojiStickers extends AbstractBaseRequest<GetCustomEmojiStickers, List<Sticker>> {
+
+    private static final Type responseType = TypeToken.getParameterized(List.class, Sticker.class).getType();
+
+    /**
+     * Required
+     * @param custom_emoji_ids custom emoji ids
+     * @param requestSender request sender
+     */
+    public GetCustomEmojiStickers(String[] custom_emoji_ids, RequestSender requestSender) {
+        super(requestSender, "getCustomEmojiStickers", responseType);
+        add("custom_emoji_ids", List.of(custom_emoji_ids));
+    }
+
+}

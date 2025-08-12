@@ -1,17 +1,16 @@
 package io.github.natanimn.types.updates;
-import io.github.natanimn.types.payments.PaidMediaPurchased;
 import io.github.natanimn.enums.Updates;
-import java.io.Serializable;
 import java.util.Objects;
 
-/** This class represents an incoming updates.
+/**
+ * This class represents an incoming updates.
  * At most one of the optional parameters can be present in any given update.
  *
  * @author Natanim
  * @since  3 March 2025
- * @version 0.7
+ * @version 0.9
  */
-public class Update implements Serializable {
+public class Update implements TelegramUpdate {
     /**
      * The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially.
      * This identifier becomes especially handy if you're using webhook since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order.

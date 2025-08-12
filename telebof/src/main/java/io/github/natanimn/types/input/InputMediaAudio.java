@@ -1,6 +1,6 @@
 package io.github.natanimn.types.input;
 
-import io.github.natanimn.requests.MediaContentType;
+import io.github.natanimn.requests.service.MediaContentType;
 
 import java.io.File;
 import java.io.Serializable;
@@ -30,7 +30,8 @@ public class InputMediaAudio extends InputMediaBuilder<InputMediaAudio> implemen
 
     public InputMediaAudio thumbnail(File thumbnail) {
         this.thumbnail = "attach://"+thumbnail.getName();
-        setThumbnailFile(thumbnail);
+        setHasFile(true);
+        addFiles(thumbnail);
         return this;
     }
     public InputMediaAudio performer(String performer) {

@@ -2,27 +2,25 @@ package io.github.natanimn.types.media_and_service;
 
 import io.github.natanimn.types.chat_and_user.User;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents one row of the high scores table for a game.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class GameHighScore implements Serializable {
-    public Integer position, score;
+public class GameHighScore {
+    /**
+     * Position in high score table for the game
+     */
+    public Integer position;
+
+    /**
+     * Score
+     */
+    public Integer score;
+
+    /**
+     * User
+     */
     public User user;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        GameHighScore that = (GameHighScore) object;
-        return Objects.equals(position, that.position) && Objects.equals(score, that.score) && Objects.equals(user, that.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(position, score, user);
-    }
 }

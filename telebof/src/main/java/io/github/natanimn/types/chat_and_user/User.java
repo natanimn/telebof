@@ -1,20 +1,80 @@
 package io.github.natanimn.types.chat_and_user;
 
-import java.io.Serializable;
 import java.util.Objects;
 import io.github.natanimn.Util;
 
 /**
+ * This object represents a Telegram user or bot.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class User implements Serializable {
-    public long id;
-    public Boolean is_bot, is_premium, added_to_attachment_menu, can_join_groups,
-            can_read_all_group_messages, supports_inline_queries, can_connect_to_business,
-            has_main_web_app;
-    public String first_name, last_name, language_code, username;
+public class User {
+    /**
+     * Unique identifier for this user or bot.
+     */
+    public Long id;
+
+    /**
+     * True, if this user is a bot
+     */
+    public Boolean is_bot;
+
+    /**
+     * User's or bot's first name
+     */
+    public String first_name;
+
+    /**
+     * Optional. User's or bot's last name
+     */
+    public String last_name;
+
+    /**
+     * Optional.<a href="https://en.wikipedia.org/wiki/IETF_language_tag">IETF language tag </a> of the user's language
+     */
+    public String language_code;
+
+    /**
+     * Optional. User's or bot's username
+     */
+    public String username;
+
+    /**
+     * Optional. True, if this user is a Telegram Premium user
+     */
+    public Boolean is_premium;
+
+    /**
+     * Optional. True, if this user added the bot to the attachment menu
+     */
+    public Boolean added_to_attachment_menu;
+
+    /**
+     * Optional. True, if the bot can be invited to groups. Returned only in {@link io.github.natanimn.BotContext#getMe}.
+     */
+    public Boolean can_join_groups;
+
+    /**
+     * Optional. True, if privacy mode is disabled for the bot. Returned only in getMe.
+     */
+    public Boolean can_read_all_group_messages;
+
+    /**
+     * Optional. True, if the bot supports inline queries. Returned only in {@link io.github.natanimn.BotContext#getMe}.
+     */
+    public Boolean supports_inline_queries;
+
+    /**
+     * Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in {@link io.github.natanimn.BotContext#getMe}.
+     */
+    public Boolean can_connect_to_business;
+
+    /**
+     * Optional. True, if the bot has a main Web App. Returned only in {@link io.github.natanimn.BotContext#getMe}.
+     */
+    public Boolean has_main_web_app;
+
 
     public String mention(){
         // Do not forget to set parseMode to ParseMode.HTML

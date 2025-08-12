@@ -1,822 +1,767 @@
 package io.github.natanimn;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.nio.charset.StandardCharsets;
+
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpServer;
 import io.github.natanimn.errors.ConnectionError;
 import io.github.natanimn.errors.TelegramError;
-import io.github.natanimn.enums.ParseMode;
 import io.github.natanimn.enums.Updates;
-import io.github.natanimn.handlers.*;
-import io.github.natanimn.requests.*;
+import io.github.natanimn.requests.RequestSender;
+import io.github.natanimn.requests.get.GetUpdates;
 import io.github.natanimn.states.StateMemoryStorage;
-import io.github.natanimn.types.updates.Update;
+import io.github.natanimn.types.updates.*;
 import io.github.natanimn.types.chat_and_user.User;
-import io.github.natanimn.types.web.WebhookInfo;
 import io.github.natanimn.filters.Filter;
 import io.github.natanimn.filters.FilterExecutor;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
+
+record UpdateInfo(TelegramUpdate update, Updates uname){}
+
+record RequestInfo(String token, boolean test, Proxy proxy, String localApi){}
+
+record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
 
 /**
+ * Main class of Telebof library
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 0.9
  */
 final public class BotClient {
     private Integer offset;
-    private Webhook webhook;
     private final AtomicBoolean stopPolling = new AtomicBoolean(false);
     private boolean skipOldUpdates;
-    private final RequestSender requestSender;
-    private final ConcurrentLinkedQueue<Update> updatesQueue = new ConcurrentLinkedQueue<>();
-    private final LinkedHashMap<FilterExecutor, MessageHandler> messageHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, CallbackHandler> callbackQueryHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, InlineHandler> inlineQueryHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ChannelPostHandler> channelPostHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, MyChatMemberHandler> myChatMemberHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, EditedMessageHandler> editedMessages = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, PollHandler> pollHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, PollAnswerHandler> pollAnswerHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ChatMemberHandler> chatMemberHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ChatJoinRequestHandler> chatJoinRequestHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, PreCheckoutHandler> preCheckoutHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, EditedChannelPostHandler> editedChannelPostHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ChosenInlineResultHandler> chosenInlineResultHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ShippingHandler> shippingHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, MessageReactionHandler> messageReactionHandler = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, MessageReactionCountHandler> messageReactionCountUpdated = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, ChatBoostHandler> chatBoostHandler = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, RemovedChatBoostHandler> chatBoostRemoved = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, BusinessConnectionHandler> businessConnectionHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, BusinessMessageHandler> businessMessageHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, EditedBusinessMessageHandler> editedBusinessMessageHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, DeletedBusinessMessageHandler> deletedBusinessMessageHandlers = new LinkedHashMap<>();
-    private final LinkedHashMap<FilterExecutor, PurchasedPaidMediaHandler> purchasedPaidMediaHandlers = new LinkedHashMap<>();
-
-    private Filter filter;
-    private final GetUpdates getUpdates;
+    private ExecutorService executor;
     private User bot;
     private final StateMemoryStorage storage;
+    private Dispatcher dispatcher;
+    private RequestInfo requestInfo;
+    private GetUpdateInfo getUpdateInfo;
     public BotContext context;
-    private FilterExecutor filterExecutor;
-
+    private Boolean isConnected;
 
     /**
-     * @param botToken obtained from <a href="https://t.me/botfather">BotFather</a>
-     *
-     * @param parseMode default parseMode
+     * @param botToken bot token obtained from @BotFather
+     * @param skipOldUpdates skip last 24 hours update(supported on long polling)
+     * @param limit number of updates to receive(supported on long polling)
+     * @param offset offset (supported on long polling)
+     * @param timeout timeout (supported on long polling)
+     * @param allowedUpdates allowed updates to receive
+     * @param proxy custom proxy
+     * @param localBotApiUrl local bot api url
+     * @param useTestServer test server
+     * @param numThreads number of threads to run handlers parallel
      */
-    private BotClient(String botToken, boolean log, boolean skipOldUpdates, int limit, Integer offset,
-                      int timeout, Updates[] allowedUpdates, ParseMode parseMode, Proxy proxy, String localBotApiUrl,
-                      boolean useTestServer) {
-        this.skipOldUpdates = skipOldUpdates;
+    private BotClient(
+            String botToken,
+            boolean skipOldUpdates,
+            int limit,
+            Integer offset,
+            int timeout,
+            Updates[] allowedUpdates,
+            Proxy proxy,
+            String localBotApiUrl,
+            boolean useTestServer,
+            int numThreads
+    ) {
 
-        this.requestSender = new RequestSender(botToken, useTestServer, proxy, localBotApiUrl);
+        this.skipOldUpdates = skipOldUpdates;
+        this.getUpdateInfo = new GetUpdateInfo(limit, timeout, allowedUpdates);
         this.offset = offset;
-        this.getUpdates = new GetUpdates(requestSender)
-                    .allowedUpdates(allowedUpdates)
-                    .limit(limit)
-                    .timeout(timeout);
+        this.requestInfo = new RequestInfo(botToken, useTestServer, proxy, localBotApiUrl);
         this.storage = new StateMemoryStorage();
-        this.context = new BotContext(null, requestSender, storage, parseMode);
-        if (log) BotLog.logger.setLevel(Level.FINE);
-        else BotLog.logger.setLevel(Level.OFF);
+        this.executor  = Executors.newFixedThreadPool(numThreads);
+        this.dispatcher = new Dispatcher();
+        this.isConnected = false;
 
         BotLog.info("BotClient initialized");
+
+        var request = new RequestSender(
+                requestInfo.token(),
+                requestInfo.test(),
+                requestInfo.proxy(),
+                requestInfo.localApi()
+        );
+
+        this.context = new BotContext(
+                request,
+                storage
+        );
     }
 
     public BotClient(String botToken){
-        this(botToken, false, true, 100, null, 20, null, null, null, null, false);
+        this(
+                botToken,
+                true,
+                100,
+                null,
+                20,
+                null,
+                null,
+                null,
+                false,
+                2
+        );
     }
 
     public static class Builder {
         /**
          * A builder of <b>BotClient</b> class.
          * Through this class, you create a new object of <b>BotClient</b> class.
-         * @apiNote This class is builder of the main class.
-         *
          */
-
         private final String botToken;
-        private ParseMode parseMode;
         private String localBotApiUrl;
         private boolean skipOldUpdates;
         private Proxy proxy;
-        private boolean log;
         private int limit;
         private Integer offset;
         private int timeout;
         private Updates[] allowedUpdates;
         private boolean useTestServer;
+        private int numThreads;
         public Builder(String botToken){
             this.botToken = botToken;
             this.timeout = 20;
             this.localBotApiUrl = null;
             this.skipOldUpdates = true;
-            this.log = false;
             this.limit = 100;
             this.allowedUpdates = null;
             this.offset = null;
-            this.parseMode = null;
             this.proxy = null;
             this.useTestServer = false;
+            this.numThreads = 2;
         }
 
-
-        public Builder parseMode(ParseMode parseMode){
-            this.parseMode = parseMode;
+        /**
+         * Optional. Default is 2
+         * @param numThreads number of threads
+         * @return {@link Builder}
+         */
+        public Builder numThreads(int numThreads){
+            this.numThreads = numThreads;
             return this;
         }
 
+        /**
+         * Optional
+         * @param localBotApiUrl local bot api url.
+         * @return {@link Builder}
+         * @see <a href="https://core.telegram.org/bots/api#using-a-local-bot-api-server">Using local bot api server</a>
+         */
         public Builder localBotApiUrl(String localBotApiUrl){
             this.localBotApiUrl = localBotApiUrl;
             return this;
         }
 
+        /**
+         * Optional
+         * @param skip skip last 24 hours update(supported on long polling)
+         * @return {@link Builder}
+         */
         public Builder skipOldUpdates(boolean skip){
             this.skipOldUpdates = skip;
             return this;
         }
 
-
+        /**
+         * Optional
+         * @param proxy custom proxy server
+         * @return {@link Builder}
+         */
         public Builder proxy(Proxy proxy){
             this.proxy = proxy;
             return this;
         }
 
-        public Builder log(boolean log){
-            this.log = log;
-            return this;
-        }
-
+        /**
+         * Optional
+         * @param limit limit number of updates to receive(supported on long polling)
+         * @return {@link }
+         */
         public Builder limit(int limit) {
             this.limit = limit;
             return this;
         }
 
+        /**
+         * Optional
+         * @param timeout Timeout in seconds for long polling. Default is 20
+         * @return {@link Builder}
+         */
         public Builder timeout(int timeout) {
             this.timeout = timeout;
             return this;
         }
 
+        /**
+         * Optional
+         * @param offset Identifier of the first update to be returned.
+         * @return {@link Builder}
+         */
         public Builder offset(int offset) {
             this.offset = offset;
             return this;
         }
 
-        public Builder allowedUpdates(Updates[] allowedUpdates) {
-            this.allowedUpdates = allowedUpdates;
+        /**
+         * Optional
+         * @param allowed_updates A JSON-serialized list of the update types you want your bot to receive.
+         *                         Specify an empty list to receive all update types except {@link Update#chat_member}, {@link Update#message_reaction},
+         *                         and {@link Update#message_reaction_count} (default). If not specified, the previous setting will be used.
+         * @return {@link Builder}
+         */
+        public Builder allowedUpdates(Updates[] allowed_updates) {
+            this.allowedUpdates = allowed_updates;
             return this;
         }
 
+        /**
+         * Optional
+         * @param useTestServer Run the bot on test server
+         * @return {@link Builder}
+         */
         public Builder useTestServer(boolean useTestServer){
             this.useTestServer = useTestServer;
             return this;
         }
 
         public BotClient build(){
-            return new BotClient(botToken, log, skipOldUpdates, limit, offset, timeout, allowedUpdates,
-                    parseMode, proxy, localBotApiUrl, useTestServer);
+            return new BotClient(
+                    botToken,
+                    skipOldUpdates,
+                    limit,
+                    offset,
+                    timeout,
+                    allowedUpdates,
+                    proxy,
+                    localBotApiUrl,
+                    useTestServer,
+                    numThreads
+            );
         }
 
     }
 
-    public void onMessage(FilterExecutor filterExecutor, MessageHandler messageHandler){
-        messageHandlers.put(filterExecutor, messageHandler);
+    /**
+     * Use this method to register new handler for incoming {@link Update#message} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onMessage(FilterExecutor executor, UpdateHandler<Message> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.MESSAGE, map);
     }
 
-    public void onMessage(MessageHandler messageHandler){
-        messageHandlers.put(filter -> true, messageHandler);
-    }
-
-    public void onCallback(FilterExecutor filterExecutor, CallbackHandler callbackHandler){
-        callbackQueryHandlers.put(filterExecutor, callbackHandler);
-    }
-
-    public void onCallback(CallbackHandler callbackHandler){
-        callbackQueryHandlers.put(filter -> true, callbackHandler);
-    }
-
-    public void onInline(FilterExecutor filterExecutor, InlineHandler inlineHandler){
-        inlineQueryHandlers.put(filterExecutor, inlineHandler);
-    }
-
-    public void onInline(InlineHandler inlineHandler){
-        inlineQueryHandlers.put(filter -> true, inlineHandler);
-    }
-
-    public void onPoll(FilterExecutor filterExecutor, PollHandler pollHandler){
-        pollHandlers.put(filterExecutor, pollHandler);
-    }
-
-    public void onPoll(PollHandler pollHandler){
-        pollHandlers.put(filter -> true, pollHandler);
-    }
-
-    public void onMyChatMember(FilterExecutor filterExecutor, MyChatMemberHandler myChatMemberHandler){
-        myChatMemberHandlers.put(filterExecutor, myChatMemberHandler);
-    }
-
-    public void onMyChatMember(MyChatMemberHandler myChatMemberHandler){
-        myChatMemberHandlers.put(filter -> true, myChatMemberHandler);
-    }
-
-    public void onPollAnswer(FilterExecutor filterExecutor, PollAnswerHandler pollAnswerHandler){
-        pollAnswerHandlers.put(filterExecutor, pollAnswerHandler);
-    }
-
-    public void onPollAnswer(PollAnswerHandler pollAnswerHandler){
-        pollAnswerHandlers.put(filter -> true, pollAnswerHandler);
-    }
-
-    public void onPreCheckout(FilterExecutor filterExecutor, PreCheckoutHandler preCheckoutHandler){
-        preCheckoutHandlers.put(filterExecutor, preCheckoutHandler);
-    }
-
-    public void onPreCheckout(PreCheckoutHandler preCheckoutHandler){
-        preCheckoutHandlers.put(filter -> true, preCheckoutHandler);
-    }
-
-    public void onChatMember(FilterExecutor filterExecutor, ChatMemberHandler chatMemberHandler){
-        chatMemberHandlers.put(filterExecutor, chatMemberHandler);
-    }
-
-    public void onChatMember(ChatMemberHandler chatMemberHandler){
-        chatMemberHandlers.put(filter -> true, chatMemberHandler);
-    }
-
-    public void onEditedMessage(FilterExecutor filterExecutor, EditedMessageHandler editedMessageHandler){
-        editedMessages.put(filterExecutor, editedMessageHandler);
-    }
-
-    public void onEditedMessage(EditedMessageHandler editedMessageHandler){
-        editedMessages.put(filter -> true, editedMessageHandler);
-    }
-
-    public void onChannelPost(FilterExecutor filterExecutor, ChannelPostHandler channelPostHandler){
-        channelPostHandlers.put(filterExecutor, channelPostHandler);
-    }
-
-    public void onChannelPost(ChannelPostHandler channelPostHandler){
-        channelPostHandlers.put(filter -> true, channelPostHandler);
-    }
-
-    public void onEditedChannelPost(FilterExecutor filterExecutor, EditedChannelPostHandler editedChannelPostHandler) {
-        editedChannelPostHandlers.put(filterExecutor, editedChannelPostHandler);
-    }
-
-    public void onEditedChannelPost(EditedChannelPostHandler editedChannelPostHandler) {
-        editedChannelPostHandlers.put(filter -> true, editedChannelPostHandler);
-    }
-
-    public void onChatJoinRequest(FilterExecutor filterExecutor, ChatJoinRequestHandler chatJoinRequestHandler){
-        chatJoinRequestHandlers.put(filterExecutor, chatJoinRequestHandler);
-    }
-
-    public void onChatJoinRequest(ChatJoinRequestHandler chatJoinRequestHandler){
-        chatJoinRequestHandlers.put(filter -> true, chatJoinRequestHandler);
-    }
-
-    public void onChosenInlineResult(FilterExecutor filterExecutor, ChosenInlineResultHandler chosenInlineResult){
-        chosenInlineResultHandlers.put(filterExecutor, chosenInlineResult);
-    }
-
-    public void onChosenInlineResult(ChosenInlineResultHandler chosenInlineResult){
-        chosenInlineResultHandlers.put(filter -> true, chosenInlineResult);
-    }
-
-    public void onShipping(FilterExecutor filterExecutor, ShippingHandler shippingHandler){
-        shippingHandlers.put(filterExecutor, shippingHandler);
-    }
-
-    public void onShipping(ShippingHandler shippingHandler){
-        shippingHandlers.put(filter -> true, shippingHandler);
-    }
-
-    public void onReaction(FilterExecutor filterExecutor, MessageReactionHandler reactionHandler){
-        messageReactionHandler.put(filterExecutor, reactionHandler);
-    }
-
-    public void onReaction(MessageReactionHandler reactionHandler){
-        messageReactionHandler.put(filter -> true, reactionHandler);
-    }
-
-    public void onReactionCount(FilterExecutor filterExecutor, MessageReactionCountHandler reactionCountHandler){
-        messageReactionCountUpdated.put(filterExecutor, reactionCountHandler);
-    }
-
-    public void onReactionCount(MessageReactionCountHandler reactionCountHandler){
-        messageReactionCountUpdated.put(filter -> true, reactionCountHandler);
-    }
-
-    public void onChatBoost(FilterExecutor filterExecutor, ChatBoostHandler boostHandler){
-        chatBoostHandler.put(filterExecutor, boostHandler);
-    }
-
-    public void onChatBoost(ChatBoostHandler boostHandler){
-        chatBoostHandler.put(filter -> true, boostHandler);
-    }
-
-    public void onRemovedChatBoost(FilterExecutor filterExecutor, RemovedChatBoostHandler removedChatBoost){
-        chatBoostRemoved.put(filterExecutor, removedChatBoost);
-    }
-
-    public void onRemovedChatBoost(RemovedChatBoostHandler removedChatBoost){
-        chatBoostRemoved.put(filter -> true, removedChatBoost);
-    }
-
-    public void onBusinessConnection(FilterExecutor filterExecutor, BusinessConnectionHandler businessConnection){
-        businessConnectionHandlers.put(filterExecutor, businessConnection);
-    }
-
-    public void onBusinessConnection(BusinessConnectionHandler businessConnection){
-        businessConnectionHandlers.put(filter -> true, businessConnection);
-    }
-
-    public void onBusinessMessage(FilterExecutor filterExecutor, BusinessMessageHandler businessMessage){
-        businessMessageHandlers.put(filterExecutor, businessMessage);
-    }
-
-    public void onBusinessMessage(BusinessMessageHandler businessMessage){
-        businessMessageHandlers.put(filter -> true, businessMessage);
-    }
-
-    public void onEditedBusinessMessage(FilterExecutor filterExecutor, EditedBusinessMessageHandler editedBusiness){
-        editedBusinessMessageHandlers.put(filterExecutor, editedBusiness);
-    }
-
-    public void onEditedBusinessMessage(EditedBusinessMessageHandler editedBusiness){
-        editedBusinessMessageHandlers.put(filter -> true, editedBusiness);
-    }
-
-    public void onDeletedBusinessMessage(FilterExecutor filterExecutor, DeletedBusinessMessageHandler deletedBusiness){
-        deletedBusinessMessageHandlers.put(filterExecutor, deletedBusiness);
-    }
-
-    public void onDeletedBusinessMessages(DeletedBusinessMessageHandler deletedBusiness){
-        deletedBusinessMessageHandlers.put(filter -> true, deletedBusiness);
-    }
-
-    public void onPurchasedPaidMedia(FilterExecutor filterExecutor, PurchasedPaidMediaHandler paidMedia){
-        purchasedPaidMediaHandlers.put(filterExecutor, paidMedia);
-    }
-
-    public void onPurchasedPaidMedia(PurchasedPaidMediaHandler paidMedia){
-        purchasedPaidMediaHandlers.put(filter -> true, paidMedia);
-    }
 
     /**
-     * <p>Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever
-     * there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a
-     * JSON-serialized Update. In case of an unsuccessful request, we will give up after a reasonable</p>
-     *
-     * <p>If you'd like to make sure that the webhook was set by you, you can specify secret data in the
-     * parameter secretToken. If specified, the request will contain a header “X-Telegram-Bot-Api-Secret-Token”
-     * with the secret token as content.</p>
-     * @apiNote <p> 1. You will not be able to receive updates using getUpdates for as long as an outgoing webhook is set up.</p>
-     * <p>2. To use a self-signed certificate, you need to upload your public key certificate using
-     * certificate parameter. Please upload as InputFile, sending a String will not work.</p>
-     * <p>3. Ports currently supported for webhooks: 443, 80, 88, 8443.</p>
-     * If you're having any trouble setting up webhooks, please check out this <a href="https://core.telegram.org/bots/webhooks">amazing guide to  webhooks.</a>
-     * @param webhook holds parameters for webhook.
-     * @see <a href="https://core.telegram.org/bots/api#setwebhook">Telegram Documetation</a>
+     * Use this method to register new handler for incoming {@link Update#callback_query} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
      */
-    public void setWebhook(Webhook webhook){
-        this.webhook = webhook;
+    @SuppressWarnings("unchecked")
+    public void onCallback(FilterExecutor executor, UpdateHandler<CallbackQuery> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<CallbackQuery>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CALLBACK_QUERY, map);
     }
 
-    public WebhookInfo getWebhookInfo(){
-        return new GetWebhookInfo(requestSender).exec();
-    }
 
     /**
-     * Use this method to remove webhook integration if you decide to back getUpdates.
-     *
-     * @see <a href="https://core.telegram.org/bots/api#deletewebhook">Delete Webhook</a>
+     * Use this method to register new handler for incoming {@link Update#inline_query} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
      */
+    @SuppressWarnings("unchecked")
+    public void onInline(FilterExecutor executor, UpdateHandler<InlineQuery> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<InlineQuery>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.INLINE_QUERY, map);
 
-    public void deleteWebhook(){
-        new DeleteWebhook(requestSender).exec();
     }
 
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#poll} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onPoll(FilterExecutor executor, UpdateHandler<Poll> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Poll>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.POLL, map);
+
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#my_chat_member} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onMyChatMember(FilterExecutor executor, UpdateHandler<ChatMemberUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.MY_CHAT_MEMBER, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#poll_answer} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onPollAnswer(FilterExecutor executor, UpdateHandler<PollAnswer> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<PollAnswer>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.POLL_ANSWER, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#pre_checkout_query} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onPreCheckout(FilterExecutor executor, UpdateHandler<PreCheckoutQuery> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<PreCheckoutQuery>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.PRE_CHECKOUT_QUERY, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#chat_member} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onChatMember(FilterExecutor executor, UpdateHandler<ChatMemberUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CHAT_MEMBER, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#edited_message} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onEditedMessage(FilterExecutor executor, UpdateHandler<Message> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.EDITED_MESSAGE, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#channel_post} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onChannelPost(FilterExecutor executor, UpdateHandler<Message> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CHANNEL_POST, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#edited_channel_post} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onEditedChannelPost(FilterExecutor executor, UpdateHandler<Message> handler) {
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.EDITED_CHANNEL_POST, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#chat_join_request} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onChatJoinRequest(FilterExecutor executor, UpdateHandler<ChatJoinRequest> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChatJoinRequest>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CHAT_JOIN_REQUEST, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#chosen_inline_result} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onChosenInlineResult(FilterExecutor executor, UpdateHandler<ChosenInlineResult> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChosenInlineResult>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CHOSEN_INLINE_RESULT, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#shipping_query} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onShipping(FilterExecutor executor, UpdateHandler<ShippingQuery> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ShippingQuery>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.SHIPPING_QUERY, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#message_reaction} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onReaction(FilterExecutor executor, UpdateHandler<MessageReactionUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<MessageReactionUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.MESSAGE_REACTION, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#message_reaction_count} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onReactionCount(FilterExecutor executor, UpdateHandler<MessageReactionCountUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<MessageReactionCountUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.MESSAGE_REACTION_COUNT, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#chat_boost} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onChatBoost(FilterExecutor executor, UpdateHandler<ChatBoostUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChatBoostUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.CHAT_BOOST, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#removed_chat_boost} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onRemovedChatBoost(FilterExecutor executor, UpdateHandler<ChatBoostRemoved> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ChatBoostRemoved>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.REMOVED_CHAT_BOOST, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#business_connection} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onBusinessConnection(FilterExecutor executor, UpdateHandler<BusinessConnection> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<BusinessConnection>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.BUSINESS_CONNECTION, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#business_message} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onBusinessMessage(FilterExecutor executor, UpdateHandler<Message> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.BUSINESS_MESSAGE, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#edited_business_message} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onEditedBusinessMessage(FilterExecutor executor, UpdateHandler<Message> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.EDITED_BUSINESS_MESSAGE, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#deleted_business_messages} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onDeletedBusinessMessage(FilterExecutor executor, UpdateHandler<BusinessMessagesDeleted> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<BusinessMessagesDeleted>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.DELETED_BUSINESS_MESSAGES, map);
+    }
+
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#purchased_paid_media} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onPurchasedPaidMedia(FilterExecutor executor, UpdateHandler<PaidMediaPurchased> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<PaidMediaPurchased>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.PURCHASED_PAID_MEDIA, map);
+    }
 
     @SuppressWarnings("unchecked")
-    private void processWebhook(){
-        try {
-            String path = webhook.getPath();
-            HttpServer server = HttpServer.create(new InetSocketAddress(webhook.getPort()), 0);
-            server.createContext(path, httpExchange -> {
-                if (httpExchange.getRequestMethod().equals("POST")){
-                    String response = getString(httpExchange);
-                    ApiResponse<List<Update>> apiResponse = Util.parseApiResponse(response, Update.class);
-                    List<Update> updates = (apiResponse.result);
-                    httpExchange.sendResponseHeaders(200, response.length());
-                    OutputStream outputStream = httpExchange.getResponseBody();
-                    outputStream.write("!".getBytes());
-                    outputStream.close();
-                    updates.forEach(this::notifyUpdate);
-                }
-            });
+    private <T extends TelegramUpdate> void executeUpdate(
+            Updates updateName,
+            Filter filter,
+            TelegramUpdate update,
+            RequestSender request
+    ){
+        List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
 
-        } catch (IOException e){
+        try {
+            for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec: execs){
+                for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry: exec.entrySet()){
+                    FilterExecutor _filter = entry.getKey();
+                    UpdateHandler<T> handler = entry.getValue();
+                    if (_filter.execute(filter)){
+                        var context = new BotContext(
+                                request,
+                                storage
+                        );
+                        executor.execute(() -> {
+                            handler.invoke(context, (T) update);
+                            BotLog.info("Task executed");
+                        });
+                        return;
+                    }
+                }
+            }
+        } catch (Exception e){
             throw new RuntimeException(e);
         }
     }
 
-    private static String getString(HttpExchange httpExchange) throws IOException {
-        InputStreamReader inputStreamReader = new InputStreamReader(httpExchange.getRequestBody(), StandardCharsets.UTF_8);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-        StringBuilder requestBody = new StringBuilder();
-
-        while(bufferedReader.readLine() != null){
-            requestBody.append(bufferedReader.readLine());
-        }
-
-        bufferedReader.close();
-        return requestBody.toString();
+    /**
+     * Stop the bot
+     */
+    public void stop(){
+        stopPolling.set(true);
     }
 
+    public User me(){
+        if (!isConnected)
+            throw new TelegramError("The bot hasn't started yet");
+        return bot;
+    }
 
-    private void retrieveUpdates(){
+    private UpdateInfo getInfoFromUpdate(Update update){
+        if (update.message != null) {
+            return new UpdateInfo(update.message, Updates.MESSAGE);
+        } else if (update.callback_query != null) {
+            return new UpdateInfo(update.callback_query, Updates.CALLBACK_QUERY);
+        } else if (update.inline_query != null) {
+            return new UpdateInfo(update.inline_query, Updates.INLINE_QUERY);
+        } else if (update.channel_post != null) {
+            return new UpdateInfo(update.channel_post, Updates.CHANNEL_POST);
+        } else if (update.my_chat_member != null) {
+            return new UpdateInfo(update.my_chat_member, Updates.MY_CHAT_MEMBER);
+        } else if (update.edited_message != null) {
+            return new UpdateInfo(update.edited_message, Updates.EDITED_MESSAGE);
+        } else if (update.edited_channel_post != null) {
+            return new UpdateInfo(update.edited_channel_post, Updates.EDITED_CHANNEL_POST);
+        } else if (update.poll != null) {
+            return new UpdateInfo(update.poll, Updates.POLL);
+        } else if (update.chat_member != null) {
+            return new UpdateInfo(update.chat_member, Updates.CHAT_MEMBER);
+        } else if (update.message_reaction != null) {
+            return new UpdateInfo(update.message_reaction, Updates.MESSAGE_REACTION);
+        } else if (update.message_reaction_count != null) {
+            return new UpdateInfo(update.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
+        } else if (update.chat_boost != null) {
+            return new UpdateInfo(update.chat_boost, Updates.CHAT_BOOST);
+        } else if (update.removed_chat_boost != null) {
+            return new UpdateInfo(update.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
+        } else if (update.pre_checkout_query != null) {
+            return new UpdateInfo(update.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
+        } else if (update.shipping_query != null) {
+            return new UpdateInfo(update.shipping_query, Updates.SHIPPING_QUERY);
+        } else if (update.chat_join_request != null) {
+            return new UpdateInfo(update.chat_join_request, Updates.CHAT_JOIN_REQUEST);
+        } else if (update.chosen_inline_result != null) {
+            return new UpdateInfo(update.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
+        } else if (update.poll_answer != null) {
+            return new UpdateInfo(update.poll_answer, Updates.POLL_ANSWER);
+        } else if (update.business_connection != null) {
+            return new UpdateInfo(update.business_connection, Updates.BUSINESS_CONNECTION);
+        } else if (update.business_message != null) {
+            return new UpdateInfo(update.business_message, Updates.BUSINESS_MESSAGE);
+        } else if (update.edited_business_message != null) {
+            return new UpdateInfo(update.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
+        } else if (update.deleted_business_messages != null) {
+            return new UpdateInfo(update.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
+        } else if (update.purchased_paid_media != null) {
+            return new UpdateInfo(update.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Use this method to process updates you have received from webhook
+     * @param updates list of updates
+     */
+    public void processUpdates(List<Update> updates){
+        if (!updates.isEmpty()) {
+            BotLog.info("Processing updates");
+            var request = new RequestSender(
+                    requestInfo.token(),
+                    requestInfo.test(),
+                    requestInfo.proxy(),
+                    requestInfo.localApi()
+            );
+            for (Update update : updates) {
+                UpdateInfo info = getInfoFromUpdate(update);
+                var filter = new Filter(update, storage);
+                if (info != null)
+                    executeUpdate(info.uname(), filter, info.update(), request);
+            }
+        }
+    }
+
+    /**
+     * Process updates retrieved from long polling
+     * @param updates array of {@link Update}
+     * @param request request sender
+     */
+    private void processUpdates(List<Update> updates, RequestSender request){
+        for (Update update: updates) {
+            UpdateInfo info = getInfoFromUpdate(update);
+            var filter      = new Filter(update, storage);
+            if (info != null)
+                executeUpdate(info.uname(), filter, info.update(), request);
+        }
+    }
+
+    /**
+     * Retrieve updates
+     * @throws InterruptedException exception
+     */
+    private void retrieveUpdates() throws InterruptedException {
+        var request = new RequestSender(
+                requestInfo.token(),
+                requestInfo.test(),
+                requestInfo.proxy(),
+                requestInfo.localApi()
+        );
+
         if (skipOldUpdates) {
-            getUpdates.offset(-1).exec();
+            new GetUpdates(request)
+                    .allowedUpdates(getUpdateInfo.allowed())
+                    .limit(getUpdateInfo.limit())
+                    .timeout(getUpdateInfo.timeout())
+                    .offset(-1)
+                    .exec();
             skipOldUpdates = false;
         }
 
-        List<Update> updates = getUpdates.offset(offset).exec();
+        List<Update> updates = new GetUpdates(request)
+                .allowedUpdates(getUpdateInfo.allowed())
+                .limit(getUpdateInfo.limit())
+                .timeout(getUpdateInfo.timeout())
+                .offset(this.offset)
+                .exec();
+
         int count = updates.size();
         BotLog.info(String.format("Received %d updates", count));
-        if (!updates.isEmpty()) {
-            updatesQueue.addAll(updates);
-            this.offset = updates.get(count - 1).update_id + 1;
+        if (!updates.isEmpty()){
+           setOffset(updates.get(count - 1).update_id + 1);
+           processUpdates(updates, request);
         }
     }
 
-    public void stop(){
-        stopPolling.set(false);
-    }
-
-     /** This method notifies each of arrived updates.
-     *
-     * @param update Update class
+    /**
+     * Use this method to run the bot using long polling
      */
-
-    public void notifyUpdate(Update update){
-        this.context.setUpdate(update);
-        this.filter = new Filter(update, storage);
-        if (update.message != null) processMessages(update);
-        else if (update.callback_query != null) processCallbackQuery(update);
-        else if (update.inline_query != null) processInlineQuery(update);
-        else if (update.channel_post != null) processChannelPost(update);
-        else if (update.my_chat_member != null) processMyChatMember(update);
-        else if (update.edited_message != null) processEditedMessages(update);
-        else if (update.edited_channel_post != null) processEditedChannelPost(update);
-        else if (update.poll != null) processPoll(update);
-        else if (update.chat_member != null) processChatMember(update);
-        else if (update.message_reaction != null) processMessageReaction(update);
-        else if (update.message_reaction_count != null) processReactionCount(update);
-        else if (update.chat_boost != null) processChatBoost(update);
-        else if (update.removed_chat_boost != null) processRemovedChatBoost(update);
-        else if (update.pre_checkout_query != null) processPreCheckoutQuery(update);
-        else if (update.shipping_query != null) processShippingQuery(update);
-        else if (update.chat_join_request != null) processChatJoinRequest(update);
-        else if (update.chosen_inline_result != null) processChosenInlineResult(update);
-        else if (update.poll_answer != null) processPollAnswer(update);
-        else if (update.business_connection != null) processBusinessConnection(update);
-        else if (update.business_message != null) processBusinessMessage(update);
-        else if (update.edited_business_message != null) processBusinessMessage(update);
-        else if (update.deleted_business_messages != null) processDeletedBusinessMessage(update);
-        else if (update.purchased_paid_media != null) processPurchasedPaidMedia(update);
-
-    }
-
-    private void processMessages(Update update) {
-        for (Map.Entry<FilterExecutor, MessageHandler> entry: messageHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            MessageHandler messageHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                messageHandler.handle(this.context, update.message);
-                break;
-            }
-        }
-    }
-
-    private void processEditedMessages(Update update) {
-
-        for (Map.Entry<FilterExecutor, EditedMessageHandler> entry: editedMessages.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            EditedMessageHandler editedMessageHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                editedMessageHandler.handle(this.context, update.edited_message);
-                break;
-            }
-        }
-    }
-
-    private void processChannelPost(Update update) {
-        for (Map.Entry<FilterExecutor, ChannelPostHandler> entry: channelPostHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ChannelPostHandler channelPostHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                channelPostHandler.handle(this.context, update.channel_post);
-                break;
-            }
-        }
-    }
-
-    private void processEditedChannelPost(Update update) {
-        for (Map.Entry<FilterExecutor, EditedChannelPostHandler> entry: editedChannelPostHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            EditedChannelPostHandler editedChannelPostHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                editedChannelPostHandler.handle(this.context, update.edited_channel_post);
-                break;
-            }
-        }
-    }
-
-    private void processInlineQuery(Update update) {
-        for (Map.Entry<FilterExecutor, InlineHandler> entry: inlineQueryHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            InlineHandler inlineHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                inlineHandler.handle(this.context, update.inline_query);
-                break;
-            }
-        }
-    }
-
-    private void processCallbackQuery(Update update) {
-        for (Map.Entry<FilterExecutor, CallbackHandler> entry: callbackQueryHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            CallbackHandler callbackHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                callbackHandler.handle(this.context, update.callback_query);
-                break;
-            }
-        }
-    }
-
-    private void processChosenInlineResult(Update update) {
-        for (Map.Entry<FilterExecutor, ChosenInlineResultHandler> entry: chosenInlineResultHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ChosenInlineResultHandler chosenInlineResultHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                chosenInlineResultHandler.handle(this.context, update.chosen_inline_result);
-                break;
-            }
-        }
-    }
-
-    private void processShippingQuery(Update update) {
-        for (Map.Entry<FilterExecutor, ShippingHandler> entry: shippingHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ShippingHandler shippingHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                shippingHandler.handle(this.context, update.shipping_query);
-                break;
-            }
-        }
-    }
-
-    private void processPreCheckoutQuery(Update update) {
-        for (Map.Entry<FilterExecutor, PreCheckoutHandler> entry: preCheckoutHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            PreCheckoutHandler preCheckoutHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                preCheckoutHandler.handle(this.context, update.pre_checkout_query);
-                break;
-            }
-        }
-    }
-
-    private void processPoll(Update update){
-        for (Map.Entry<FilterExecutor, PollHandler> entry: pollHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            PollHandler pollHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                pollHandler.handle(this.context, update.poll);
-                break;
-            }
-        }
-    }
-
-    private void processPollAnswer(Update update) {
-        for (Map.Entry<FilterExecutor, PollAnswerHandler> entry: pollAnswerHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            PollAnswerHandler pollAnswerHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                pollAnswerHandler.handle(this.context, update.poll_answer);
-                break;
-            }
-        }
-    }
-
-    private void processMyChatMember(Update update) {
-        for (Map.Entry<FilterExecutor, MyChatMemberHandler> entry: myChatMemberHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            MyChatMemberHandler myChatMemberHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                myChatMemberHandler.handle(this.context, update.my_chat_member);
-                break;
-            }
-        }
-    }
-
-    private void processChatMember(Update update) {
-        for (Map.Entry<FilterExecutor, ChatMemberHandler> entry: chatMemberHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ChatMemberHandler chatMemberHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                chatMemberHandler.handle(this.context, update.chat_member);
-                break;
-            }
-        }
-    }
-
-    private void processChatJoinRequest(Update update) {
-        for (Map.Entry<FilterExecutor, ChatJoinRequestHandler> entry: chatJoinRequestHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ChatJoinRequestHandler chatJoinRequestHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                chatJoinRequestHandler.handle(this.context, update.chat_join_request);
-                break;
-            }
-        }
-    }
-
-    private void processMessageReaction(Update update){
-        for (Map.Entry<FilterExecutor, MessageReactionHandler> entry: messageReactionHandler.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            MessageReactionHandler reactionHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                reactionHandler.handle(this.context, update.message_reaction);
-                break;
-            }
-        }
-    }
-
-    private void processReactionCount(Update update){
-        for (Map.Entry<FilterExecutor, MessageReactionCountHandler> entry: messageReactionCountUpdated.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            MessageReactionCountHandler reactionCountHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                reactionCountHandler.handle(this.context, update.message_reaction_count);
-                break;
-            }
-        }
-    }
-
-    private void processChatBoost(Update update){
-        for (Map.Entry<FilterExecutor, ChatBoostHandler> entry: chatBoostHandler.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            ChatBoostHandler boostHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                boostHandler.handle(this.context, update.chat_boost);
-                break;
-            }
-        }
-    }
-
-    private void processDeletedBusinessMessage(Update update){
-        for (Map.Entry<FilterExecutor, DeletedBusinessMessageHandler> entry: deletedBusinessMessageHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            DeletedBusinessMessageHandler deletedBusinessMessageHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                deletedBusinessMessageHandler.handle(this.context, update.deleted_business_messages);
-                break;
-            }
-        }
-    }
-
-    private void processRemovedChatBoost(Update update){
-        for (Map.Entry<FilterExecutor, RemovedChatBoostHandler> entry: chatBoostRemoved.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            RemovedChatBoostHandler removedChatBoostHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                removedChatBoostHandler.handle(this.context, update.removed_chat_boost);
-                break;
-            }
-        }
-    }
-
-    private void processBusinessMessage(Update update){
-        for (Map.Entry<FilterExecutor, BusinessMessageHandler> entry: businessMessageHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            BusinessMessageHandler businessMessageHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                businessMessageHandler.handle(this.context, update.business_message);
-                break;
-            }
-        }
-    }
-
-    private void processBusinessConnection(Update update){
-        for (Map.Entry<FilterExecutor, BusinessConnectionHandler> entry: businessConnectionHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            BusinessConnectionHandler businessConnectionHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                businessConnectionHandler.handle(this.context, update.business_connection);
-                break;
-            }
-        }
-    }
-
-    private void processEditedBusinessMessage(Update update){
-        for (Map.Entry<FilterExecutor, EditedBusinessMessageHandler> entry: editedBusinessMessageHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            EditedBusinessMessageHandler editedBusinessMessageHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                editedBusinessMessageHandler.handle(this.context, update.edited_business_message);
-                break;
-            }
-        }
-    }
-
-
-    private void processPurchasedPaidMedia(Update update){
-        for (Map.Entry<FilterExecutor, PurchasedPaidMediaHandler> entry: purchasedPaidMediaHandlers.entrySet()){
-            FilterExecutor filterExecutor = entry.getKey();
-            PurchasedPaidMediaHandler paidMediaHandler = entry.getValue();
-            boolean executed = filterExecutor.execute(filter);
-            if (executed){
-                paidMediaHandler.handle(this.context, update.purchased_paid_media);
-                break;
-            }
-        }
-    }
-
-    private void startPolling(){
-
+    public void startPolling(){
+        BotLog.info("Bot started running via longPolling");
+        byte maxRetry    = 10, tried = 0;
+        this.bot         = this.context.getMe().exec();
+        this.isConnected = true;
         while (!stopPolling.get()){
             try{
                 retrieveUpdates();
-                if (!updatesQueue.isEmpty()) updatesQueue.forEach(this::notifyUpdate);
             } catch (TelegramError var1) {
                 throw var1;
             } catch (TelegramApiException apiException){
                 if (apiException.parameters !=null && apiException.parameters.retry_after != null){
                     int delay = apiException.parameters.retry_after;
                     BotLog.error(String.format("Trying after %d seconds", delay));
-                    if (BotLog.logger.getLevel() == Level.OFF)
-                        apiException.printStackTrace();
-                    else BotLog.error(apiException.description);
+                    BotLog.error(apiException.description);
+                    apiException.printStackTrace();
                     BotClient.this.sleep(delay);
                 } else {
-                    if (BotLog.logger.getLevel() == Level.OFF)
-                        apiException.printStackTrace();
-                    else BotLog.error(apiException.description);
+                    BotLog.error(apiException.description);
+                    apiException.printStackTrace();
                 }
             } catch (ConnectionError connectionError){
-                if (BotLog.logger.getLevel() == Level.OFF)
-                    connectionError.printStackTrace();
-                else BotLog.error(connectionError.getMessage());
-                BotClient.this.sleep(3);
-            } catch (RuntimeException exception) {
-                if (BotLog.logger.getLevel() == Level.OFF)
-                    exception.printStackTrace();
-                else BotLog.error(exception.getMessage());
+                if (tried == maxRetry) break;
+                BotLog.error(connectionError.getMessage());
+                System.err.println("Connection error. Trying after 5 seconds");
+                this.sleep(5);
+                tried += 1;
 
-            } finally {
-                updatesQueue.clear();
+            } catch (RuntimeException exception ) {
+              BotLog.error(exception.getMessage());
+              exception.printStackTrace();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
-       BotLog.info("Polling stopped");
+        executor.shutdown();
+        Thread.currentThread().interrupt();
+        BotLog.info("Polling stopped");
     }
 
+    private synchronized void setOffset(int offset){
+        this.offset = offset;
+    }
 
     private void sleep(int seconds){
         try{
@@ -825,17 +770,4 @@ final public class BotClient {
             throw new RuntimeException(exception);
         }
     }
-
-    public void run(){
-        if (webhook != null){
-            BotLog.info("Bot started running via webhook");
-            deleteWebhook();
-            setWebhook(webhook);
-            processWebhook();
-        } else {
-            BotLog.info("Bot started running via longPolling");
-            startPolling();
-        }
-    }
-
 }

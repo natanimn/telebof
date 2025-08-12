@@ -3,7 +3,6 @@ package io.github.natanimn.types.updates;
 import io.github.natanimn.enums.PollType;
 import io.github.natanimn.types.media_and_service.MessageEntity;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,7 +12,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class Poll{
+public class Poll implements TelegramUpdate{
     /**
      * Unique poll identifier
      */

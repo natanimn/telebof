@@ -15,7 +15,7 @@ public enum Updates{
     @SerializedName("edited_channel_post")
     EDITED_CHANNEL_POST,
 
-    @SerializedName("edited_channel_post")
+    @SerializedName("callback_query")
     CALLBACK_QUERY,
 
     @SerializedName("inline_query")
@@ -67,8 +67,10 @@ public enum Updates{
     EDITED_BUSINESS_MESSAGE,
 
     @SerializedName("deleted_business_messages")
-    DELETED_BUSINESS_MESSAGES;
+    DELETED_BUSINESS_MESSAGES,
 
+    @SerializedName("purchased_paid_media")
+    PURCHASED_PAID_MEDIA;
 
     public static final Updates[] ALL = {
             MESSAGE,
@@ -92,6 +94,7 @@ public enum Updates{
             BUSINESS_MESSAGE,
             BUSINESS_CONNECTION,
             EDITED_BUSINESS_MESSAGE,
-            DELETED_BUSINESS_MESSAGES
+            DELETED_BUSINESS_MESSAGES,
+            PURCHASED_PAID_MEDIA
     };
 }

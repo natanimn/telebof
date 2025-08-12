@@ -1,7 +1,5 @@
 package io.github.natanimn.types.inline;
 
-import io.github.natanimn.types.input.InputTextMessageContent;
-
 import java.io.Serializable;
 
 /**

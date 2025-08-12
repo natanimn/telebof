@@ -2,7 +2,6 @@ package io.github.natanimn.types.updates;
 
 import io.github.natanimn.types.media_and_service.MessageEntity;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,7 +11,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class PollOption {
+public class PollOption implements TelegramUpdate {
     /**
      * Option text, 1-100 characters
      */

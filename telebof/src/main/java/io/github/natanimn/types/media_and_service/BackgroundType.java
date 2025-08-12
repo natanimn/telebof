@@ -1,36 +1,57 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.util.Objects;
+import io.github.natanimn.enums.BackgroundTypeType;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object describes the type of a background.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class BackgroundType {
-    public String type, theme_name;
+    /**
+     * Type of the background
+     */
+    public BackgroundTypeType type;
+
+    /**
+     * Name of the chat theme, which is usually an emoji
+     */
+    public String theme_name;
+
+    /**
+     * The background fill that is combined with the pattern
+     */
     public BackgroundFill fill;
-    public Integer dark_theme_dimming, intensity;
+
+    /**
+     * Dimming of the background in dark themes, as a percentage; 0-100
+     */
+    public Integer dark_theme_dimming;
+
+    /**
+     * Intensity of the pattern when it is shown above the filled background; 0-100
+     */
+    public Integer intensity;
+
+    /**
+     * Document with the pattern
+     */
     public Document document;
-    public Boolean is_blurred, is_moving, is_inverted;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        BackgroundType that = (BackgroundType) object;
-        return Objects.equals(type, that.type) &&
-                Objects.equals(theme_name, that.theme_name) &&
-                Objects.equals(fill, that.fill) &&
-                Objects.equals(dark_theme_dimming, that.dark_theme_dimming) &&
-                Objects.equals(intensity, that.intensity) &&
-                Objects.equals(document, that.document) &&
-                Objects.equals(is_blurred, that.is_blurred) &&
-                Objects.equals(is_moving, that.is_moving) &&
-                Objects.equals(is_inverted, that.is_inverted);
-    }
+    /**
+     * True, if the wallpaper is downscaled to fit in a 450x450 square and then box-blurred with radius 12
+     */
+    public Boolean is_blurred;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, theme_name, fill, dark_theme_dimming, intensity, document, is_blurred, is_moving, is_inverted);
-    }
+    /**
+     * True, if the background moves slightly when the device is tilted
+     */
+    public Boolean is_moving;
+
+    /**
+     * True, if the background fill must be applied only to the pattern itself. All other pixels are black in this case.
+     * For dark themes only
+     */
+    public Boolean is_inverted;
 }

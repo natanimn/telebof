@@ -1,9 +1,9 @@
 package io.github.natanimn.types.input;
 
-import io.github.natanimn.requests.MediaContentType;
-import io.github.natanimn.types.media_and_service.InputFile;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Natanim 
@@ -13,39 +13,29 @@ import java.io.File;
 public class InputPaidMediaPhoto implements InputPaidMedia {
     private String type;
     private String media;
-    private transient boolean isFile;
-    private transient InputFile inputFile;
+    private transient Boolean hasFile;
+    private transient List<File> files = new ArrayList<>();
 
     public InputPaidMediaPhoto(String media){
         this.type = "photo";
         this.media = media;
-        this.isFile = false;
+        this.hasFile = false;
     }
 
     public InputPaidMediaPhoto(File media){
         this.type = "photo";
         this.media = "attach://" + media.getName();
-        this.isFile = true;
-        this.inputFile = new InputFile(media, MediaContentType.PHOTO);
+        this.hasFile = true;
+        this.files.add(media);
     }
 
     @Override
-    public boolean hasThumbnailFile() {
-        return false;
+    public List<File> getFiles() {
+        return files;
     }
 
     @Override
-    public boolean isFile() {
-        return isFile;
-    }
-
-    @Override
-    public InputFile getInputFile() {
-        return inputFile;
-    }
-
-    @Override
-    public InputFile getThumbnailFile() {
-        return null;
+    public boolean hasFile() {
+        return hasFile;
     }
 }

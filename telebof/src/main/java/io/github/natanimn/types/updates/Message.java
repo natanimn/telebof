@@ -2,11 +2,14 @@ package io.github.natanimn.types.updates;
 
 import io.github.natanimn.types.chat_and_user.*;
 import io.github.natanimn.types.forum.*;
+import io.github.natanimn.types.chat_and_user.*;
+import io.github.natanimn.types.forum.*;
 import io.github.natanimn.types.gift_and_giveaway.Giveaway;
 import io.github.natanimn.types.gift_and_giveaway.GiveawayCompleted;
 import io.github.natanimn.types.gift_and_giveaway.GiveawayCreated;
 import io.github.natanimn.types.gift_and_giveaway.GiveawayWinners;
 import io.github.natanimn.types.keyboard.InlineKeyboardMarkup;
+import io.github.natanimn.types.media_and_service.*;
 import io.github.natanimn.types.media_and_service.*;
 import io.github.natanimn.types.passport.PassportData;
 import io.github.natanimn.types.payments.PaidMediaInfo;
@@ -24,7 +27,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class Message implements Serializable {
+public class Message implements TelegramUpdate {
     /* Unique message identifier inside this chat. In specific instances */
     public Integer message_id;
 

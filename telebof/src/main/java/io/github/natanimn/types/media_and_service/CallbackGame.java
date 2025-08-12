@@ -1,12 +1,9 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-
 /**
+ * A placeholder, currently holds no information. Use @BotFather to set up your game.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class CallbackGame implements Serializable {
-
-}
+public class CallbackGame { }

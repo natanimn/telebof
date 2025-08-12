@@ -1,37 +1,55 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * This object represents an audio file to be treated as music by the Telegram clients.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class Audio implements Serializable {
-    public String file_id, file_unique_id, performer, title, file_name, mime_type;
+public class Audio {
+    /**
+     * Identifier for this file, which can be used to download or reuse the file
+     */
+    public String file_id;
+
+    /**
+     * Unique identifier for this file, which is supposed to be the same over time and for different bots.
+     * Can't be used to download or reuse the file.
+     */
+    public String file_unique_id;
+
+    /**
+     * Optional. Performer of the audio as defined by the sender or by audio tags
+     */
+    public String performer;
+
+    /**
+     * Optional. Title of the audio as defined by the sender or by audio tags
+     */
+    public String title;
+
+    /**
+     * Optional. Original filename as defined by the sender
+     */
+    public String file_name;
+
+    /**
+     * Optional. MIME type of the file as defined by the sender
+     */
+    public String mime_type;
+
+    /**
+     * Duration of the audio in seconds as defined by the sender
+     */
     public Integer duration;
-    public Integer file_size;
+
+    /**
+     * Optional. File size in bytes.
+     */
+    public Long file_size;
+
+    /**
+     * Optional. Thumbnail of the album cover to which the music file belongs
+     */
     public PhotoSize thumbnail;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Audio audio = (Audio) object;
-        return Objects.equals(file_id, audio.file_id) &&
-                Objects.equals(file_unique_id, audio.file_unique_id) &&
-                Objects.equals(performer, audio.performer) &&
-                Objects.equals(title, audio.title) &&
-                Objects.equals(file_name, audio.file_name) &&
-                Objects.equals(mime_type, audio.mime_type) &&
-                Objects.equals(duration, audio.duration) &&
-                Objects.equals(file_size, audio.file_size) &&
-                Objects.equals(thumbnail, audio.thumbnail);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(file_id, file_unique_id, performer, title, file_name, mime_type, duration, file_size, thumbnail);
-    }
 }

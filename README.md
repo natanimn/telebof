@@ -1,5 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 8.2 Bot API </p> 
+## <p align="center"> Supported 8.3 Bot API </p> 
 #### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
 
 ## Official Docs — Coming soon
@@ -17,7 +17,6 @@
     * [Remove Reply Keyboard](#removereplykeyboard)
     * [Force Reply](#forcereply)
 * [Inline Bot](#inline-bot)
-* [Using Webhook](#using-webhook)
 * [Advanced Usages](advanced-usages)
   * [Local Bot API Server](#local-bot-api-server)
   * [Logging](#logging)
@@ -34,14 +33,14 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
 </dependency>
 ```
 
 * Grade
 
 ```groovy
-implementation 'io.github.natanimn:telebof:0.8.0'
+implementation 'io.github.natanimn:telebof:0.9.0'
 ```
 ### Your First Echo Bot
 
@@ -53,19 +52,18 @@ public class MyFirstEchoBot {
 
   public static void main(String[] args) {
     final BotClient bot = new BotClient(TOKEN);
-    
    
     // Listening for /start command
     bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-        context.reply("Welcome!").exec();
+        context.sendMessage(message.chat.id, "Welcome!").exec();
     });
 
     // Listening for any incoming text
     bot.onMessage(filter -> filter.text(), (context, message) -> {
-        context.reply(message.text).exec();
+        context.sendMessage(message.chat.id, message.text).exec();
     });
 
-    bot.run(); // finally run the bot
+    bot.startPolling(); // finally run the bot
   }
 }
 ```
@@ -77,86 +75,83 @@ All Telegram types are defined in `io.github.natanimn.types` and organized in a 
 Their set method is their camelCased name method
 
 ## Available Methods
-All Telegram methods are defined in `io.github.natanimn.request` and implemented in `io.github.natanimn.BotContext` class.
-
-These methods can be used in 2 ways: Inside handler using `context` parameter and Outside handler using `bot.context` instance.
+All Telegram methods are defined in `io.github.natanimn.request` under their category and implemented in `io.github.natanimn.BotContext` class.
 
 ##### Inside handler
-No need to pass `chat_id` or `user_id` to the methods need it as argument using `context` argument or `bot.context` instance
+Use `context` parameter
 
 ##### Outside handler
-`chat_id` or `user_id` must be passed to the methods need it as argument using `bot.context` instance
+`bot.context` instance
 
 ```java
 /* Inside Handler */
 
 // send message
-context.sendMessage("Hello, World").exec(); // or
+context.sendMessage("@chat_username", "Hello, World").exec(); // or
 context.sendMessage(message.chat.id, "Hello, World").exec();
 
 // The same as 
 
-bot.context.sendMessage("Hello, World").exec();
+bot.context.sendMessage("@chat_username", "Hello, World").exec();
 bot.context.sendMessage(message.chat.id, "Hello, World").exec();
 
 // send Photo
-context.sendPhoto(new File("photo.png")).exec(); // or
+context.sendPhoto("@chat_username", new File("photo.png")).exec(); // or
 context.sendPhoto(message.chat.id, new File("photo.png")).exec();
 
 // The same as 
 
-bot.context.sendPhoto(new File("photo.png")).exec(); // or
+bot.context.sendPhoto("@chat_username", new File("photo.png")).exec(); // or
 bot.context.sendPhoto(message.chat.id, new File("photo.png")).exec();
 
 
 /* Outside Handler */
-
-bot.context.sendMessage(123456789L, "Hello, World").exec();
+bot.context.sendMessage("@chat_username", "Hello, World").exec();
 bot.context.sendPhoto(123456789L, new File("photo.png")).exec();
 ```
 **Assume that in our examples it is inside handler**
 
 ```java
 // send photo
-context.sendPhoto(new File("photo.png")).exec(); // or
-context.sendPhoto("FILE_ID").exec();
+context.sendPhoto(message.chat.id, new File("photo.png")).exec(); // or
+context.sendPhoto(message.chat.id, "FILE_ID").exec();
 
 // send audio
-context.sendAudio(new File("audio.mp3")).exec();
-context.sendAudio("FILE_ID").exec();
+context.sendAudio(message.chat.id, new File("audio.mp3")).exec();
+context.sendAudio(message.chat.id, "FILE_ID").exec();
 
 // send video
-context.sendVideo(new File("video.mp4")).exec();
-context.sendVideo("FILE_ID").exec();
+context.sendVideo(message.chat.id, new File("video.mp4")).exec();
+context.sendVideo(message.chat.id, "FILE_ID").exec();
 
 // send voice
-context.sendVoice(new File("voice.ogg")).exec();
-context.sendVoice("FILE_ID").exec();
+context.sendVoice(message.chat.id, new File("voice.ogg")).exec();
+context.sendVoice(message.chat.id, "FILE_ID").exec();
 
 // send document
-context.sendDocument(new File("doc.pdf")).exec();
-context.sendDucument("FILE_ID").exec();
+context.sendDocument(message.chat.id, new File("doc.pdf")).exec();
+context.sendDucument(message.chat.id, "FILE_ID").exec();
 
 // send animation
-context.sendAnimation(new File("animation.gif")).exec();
-context.sendAnimation("FILE_ID").exec();
+context.sendAnimation(message.chat.id, new File("animation.gif")).exec();
+context.sendAnimation(message.chat.id, "FILE_ID").exec();
 
 // send contact
-context.sendContact(phone_number, first_name).exec();
+context.sendContact(message.chat.id, phone_number, first_name).exec();
 
 // send poll
 InputPollOption option1 = new InputPollOption("option 1");
 InputPollOption option2 = new InputPollOption("option 2")
-context.sendPoll(question, new InputPollOption[]{option1, option2}).exec();
+context.sendPoll(message.chat.id, question, new InputPollOption[]{option1, option2}).exec();
 
 // send invoice
 LabeledPrice price1 = new LabeledPrice(label1, amount1);
-context.sendInvoice(title, dscription, payload, currency, new LabeledPrice[]{price1}).exec();
+context.sendInvoice(message.chat.id, title, dscription, payload, currency, new LabeledPrice[]{price1}).exec();
 
 // send media group
 InputMediaPhoto media1 = new InputMediaPhoto(new File("photo_1.png"));
 InputMediaPhoto media2 = new InputMediaPhoto(new File("photo_2.png"));
-context.sendMediaGroup(new InputMedia[]{media1, media2}).exec();
+context.sendMediaGroup(message.chat.id, new InputMedia[]{media1, media2}).exec();
 
 
 // get me
@@ -164,10 +159,10 @@ User me = context.getMe().exec();
 System.out.println(me.username);
 
 // ban chat member
-context.banChatMember(user_id).exec();
+context.banChatMember(message.chat.id, user_id).exec();
 
 // leave chat
-context.leaveChat().exec();
+context.leaveChat(message.chat.id).exec();
 ```
 
 ## Handling Updates
@@ -176,7 +171,7 @@ Update is an event that bot receives like incoming messages, pressing button.
 
 Updates are handled by [registering one or more callback classes](#types-of-handlers). 
 
-Each update has its own handler. These handlers take two parameters as argument: filter class 
+Each update handler uses UpdateHandler interface. This interface take two parameters as argument: filter class 
 and callback class. The filter class is a lambda class of `io.github.natanimn.filter.FilterExecutor` takes `io.github.natanimn.filter.Filter`
 as an argument and returns `Boolean`, so that if the condition of this filter 
 matches with the update sent from telegram, the callback class will be called and its body gets execute.
@@ -195,14 +190,14 @@ public class MyFirstEchoBot {
     final BotClient bot = new BotClient(TOKEN);
 
     bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-      context.reply("Welcome!").exec();
+      context.sendMessage(message.chat.id, "Welcome!").exec();
     });
 
     bot.onMessage(filter -> filter.text(), (context, message) -> {
-      context.reply(message.text).exec();
+      context.sendMessage(message.chat.id, message.text).exec();
     });
 
-    bot.run();
+    bot.startPolling();
   }
 }
 ```
@@ -210,20 +205,20 @@ We have two handlers: `/start` command handler and `text` handler.
 
 - The first handler handles `/start` command and send back a text `Welcome!`.
 - The second handler handles any incoming **text** and echoes the text.
-- The `reply` method is a shortage of `sendMessage` and replies message to the message.
+- `sendMessage` is used for sending a text.
 
 - `exec()` meaning `execute` is an enclosing and request sender method. This means before ending and sending request, you can pass 
 optional parameters and then send a request to telegram. For example `sendMessage` method has optional parameters 
 `parse_mode`, `reply_markup`. So you can pass their value for these parameters and send request to telegram.
 
 ```java
-import io.github.natanimn.enums.ParseMode;
+import enums.io.github.natanimn.ParseMode;
 
-context.sendMessage("*Hello, World*")
+context.sendMessage(message.chat.id, "*Hello, World*")
         .parseMode(ParseMode.MARKDOWN)
         .exec();
 ```
-Lastly we start our bot by using `run()` which does not take any parameter and run our bot via **long polling.** 
+Lastly we start our bot by using `startPolling()` which does not take any parameter and run our bot via **long polling.** 
 
 **IMPORTANT: All handlers are handled in the order in which they were registered.**
 
@@ -232,97 +227,87 @@ There are 22 types of updates to be handled
 
 #### Message Handler
 ```java
-bot.onMessage((context, message) -> {}); 
+bot.onMessage; 
 ```
 #### CallbackQuery handler
 ```java
-bot.onCallback((context, callback) -> {});
+bot.onCallback;
 ```
 #### InlineQuery Handler
 ```java
-bot.onInline((context, query) -> {} );
+bot.onInline;
 ```
 #### Poll Handler
 ```java
-bot.onPoll((context, poll) -> {});
+bot.onPoll;
 ```
 #### PollAnswer Handler
 ```java
-bot.onPoll((context, poll_answer) -> {});
+bot.onPoll;
 ```
 #### ShippingQuery Handler
 ```java
-bot.onShipping((context, shipping) -> {});
+bot.onShipping;
 ```
 #### ChannelPost Handler
 ```java
-bot.onChannelPost((context, channel_post) -> {});
+bot.onChannelPost;
 ```
 #### PreCheckoutQuery Handler
 ```java
-bot.onPreCheckout((context, pre_checkout) -> {});
+bot.onPreCheckout;
 ```
 #### EditedMessage Handler
 ```java
-bot.onEditedMessage((context, edited_message) -> {});
+bot.onEditedMessage;
 ```
 #### EditedChannelPost Handler
 ```java
-bot.onEditedChannelPost((context, edited_channel_post) -> {});
+bot.onEditedChannelPost;
 ```
 #### MyChatMember Handler
 ```java
-bot.onMychatMember((context, chat_updated) -> {});
+bot.onMychatMember;
 ```
 #### ChatMember Handler
 ```java
-bot.onChatMember((context, chat_member) -> {});
+bot.onChatMember;
 ```
 #### ChosenInlineResult Handler
 ```java
-bot.onChosenInlineResult((context, chosen) -> {});
+bot.onChosenInlineResult;
 ```
 #### MessageReaction Handler
 ```java
-bot.onReaction((context, reaction) -> {});
+bot.onReaction;
 ```
 #### MessageReactionCount Handler
 ```java
-bot.onReactionCount((context, reaction_count) -> {});
+bot.onReactionCount;
 ```
 #### ChatBoost Handler
 ```java
-bot.onChatBoost((context, chat_boost) -> {});
+bot.onChatBoost;
 ```
 #### RemovedChatBoost Handler
 ```java
-bot.onRemovedChatBoost((context, removed_chat_boost) -> {});
+bot.onRemovedChatBoost;
 ```
 #### BusinessMessage Handler
 ```java
-bot.onBusinessMessage((context, businnes_message) -> {});
+bot.onBusinessMessage;
 ```
 #### BusinessConnection Handler
 ```java
-bot.onBusinessConnection((context, business_connection) -> {});
+bot.onBusinessConnection;
 ```
 #### EditedBusinessMessage Handler
 ```java
-bot.onEditedBusinessMessage((context, edited_business_message) -> {});
+bot.onEditedBusinessMessage;
 ```
 #### DeletedBusinessMessage Handler
 ```java
-bot.onDeletedBusinessMessage((context, deleted_business_message) -> {});
-```
-
-**If only callback class is passed to a handler, the filter class will return `true` by default**
-
-```java
-bot.onMessage((context, message) -> {});
-```
-The same as
-```java
-bot.onMessage(filter -> true, (context, message) -> {});
+bot.onDeletedBusinessMessage;
 ```
 
 ## Filtering Updates
@@ -403,6 +388,7 @@ The filter class is used for filtering content of updates and separate the same 
 - `filter.chatUsernames(String... usernames)` - filter given username matched with current chat's username
 - `filter.usernames(String... usernames)` - filter given username matched with current user's username
 - `filter.regex(String pattern)`- regular expression filter for message text  
+- `filter.reaction(String... reactions)` - filter incoming emoji reactions (Used with bot.OnReaction)
 
 ```java
 // handles incoming texts
@@ -428,6 +414,7 @@ bot.onMessage(filter -> filter.chatUsernames("this_chat"), (context, message) ->
 
 // handles message from user whose username is @this_user
 bot.onMessage(filter -> filter.usernames("this_user"), (context, message) -> {});
+```
 
 ### Filtering message text
 Message text can be filtered by using the following methods: `filter.commands`, `filter.texts`, `filter.regex`.
@@ -483,13 +470,13 @@ bot.onMessage(filter -> filter.Private() && (filter.audio() || filter.video()), 
 ### Writing your own filter
 You can write your own filter using `filter.customFilter`.
 
-This example will show you how you can write filters using `io.github.natanimn.filters.CustomFilter` and `filter.customFilter`.
+This example will show you how you can write filters using `filters.io.github.natanimn.CustomFilter` and `filter.customFilter`.
 
 Let's write simple custom filter whether incoming text starts with `!` or not.
 
 ```java
 import io.github.natanimn.BotContext;
-import io.github.natanimn.filters.CustomFilter;
+import filters.io.github.natanimn.CustomFilter;
 import io.github.natanimn.types.updates.Message;
 import io.github.natanimn.types.updates.Update;
 
@@ -587,15 +574,15 @@ import io.github.natanimn.types.keyboard.InlineKeyboardButton;
 InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
 
 inlineMarkup.addKeybaord(
-  new InlineKeyboardButton("A").callbackData("a"), 
-  new InlineKeyboardButton("C").callbackData("b"), 
+  new InlineKeyboardButton("A", "a"), 
+  new InlineKeyboardButton("C", "b"), 
   new InlineKeyboardButton("Url").url("www.example.com")
 ); // 3 keyboards on a row 
 
 // also  possible
 InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[]{
-        new InlineKeyboardMarkup("A").callbackData("a"),
-        new InlineKeyboardMarkup("B").callbackData("b"),
+        new InlineKeyboardMarkup("A", "a"),
+        new InlineKeyboardMarkup("B", "b"),
         new InlineKeyboardMarkup("Url").url("www.example.com")
 
 }, 2); // 2 row width. i.e 2 keyboards on a row at max
@@ -603,8 +590,8 @@ InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardM
 // also possible
 InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[][]{
         new InlineKeyboardMarkup[]{
-                new InlineKeyboardMarkup("A").callbackData("a"),
-                new InlineKeyboardMarkup("B").callbackData("b")
+                new InlineKeyboardMarkup("A", "a"),
+                new InlineKeyboardMarkup("B", "b")
         },
         new InlineKeyboardMarkup[]{
                 new InlineKeyboardMarkup("Url").url("www.example.com")
@@ -612,7 +599,7 @@ InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardM
 }
 );
 
-context.sendMessage("Press one button")
+context.sendMessage(message.chat.id, "Press one button")
         .replyMarkup(inlineMarkup)
         .exec();
 ```
@@ -623,7 +610,7 @@ context.sendMessage("Press one button")
 import io.github.natanimn.types.keyboard.ForceReply;
 import io.github.natanimn.types.keyboard.ForceReply;
 
-context.sendMessage("Can you tell me your name please?")
+context.sendMessage(message.chat.id, "Can you tell me your name please?")
         .replyMarkup(new io.github.natanimn.types.keyboard.ForceReply())
         .exec();
 ```
@@ -633,13 +620,9 @@ context.sendMessage("Can you tell me your name please?")
 ```java
 import io.github.natanimn.types.keyboard.ReplyKeyboardMarkup;
 
-context.sendMessage("There is no reply keyboard now")
-        .
-
-replyMarkup(new RemoveReplyKeybaord())
-        .
-
-exec(); 
+context.sendMessage(message.chat.id, "There is no reply keyboard now")
+        .replyMarkup(new RemoveReplyKeybaord())
+        .exec(); 
 ```
 
 ## Inline Bot
@@ -650,42 +633,15 @@ import io.github.natanimn.types.inline.InlineQueryResultArticle;
 import io.github.natanimn.types.input.InputTextMessageContent;
 
 
-bot.onInline(filter ->filter.
-
-emptyQuery(), (context,query)->{
-InlineQueryResultArticle article = new InlineQueryResultArticle("1")
+bot.onInline(filter ->filter.emptyQuery(), (context, query)->{
+    InlineQueryResultArticle article = new InlineQueryResultArticle("1")
         .title("Write something")
         .description("click here")
         .inputTextMessageContent(new InputTextMessageContent("Please write something"));
 
-    context.
+    context.answerInline(new InlineQueryResult[] {article}).exec();
 
-answerInline(new InlineQueryResult[] {
-  article
-}).
-
-exec();
 });
-```
-
-## Using Webhook
-
-```java
-import io.github.natanimn.Webhook;
-import java.io.File;
-
-class MyWebhookBot {
-  public static void main(String[] args) {
-    Webhook webhook = new Webhook("www.example.com", "/bot");  // URL and path respectively
-    //...
-    bot.deleteWebhook(); // first delete webhook if any
-    bot.setWebhook(webhook); // set webhook
-
-    //... 
-    bot.run(); // start our bot on webhook
-
-  }
-}
 ```
 
 ## Advanced Usage
@@ -703,13 +659,18 @@ BotClient bot = new BotClient.Builder(TOKEN)
 **You have to log out your bot from the Telegram server before switching to your local API server using `bot.context.logOut().exec()`**
 
 ### Logging
-log current status of the bot.
+Use `BotLog` class to enable or disable logs. By default, it is on WARNING level.
 ```java
 import io.github.natanimn.BotClient;
+import io.github.natanim.BotLog;
+import java.util.logging.Level;
 
-BotClient bot = new BotClient.Builder(TOKEN)
-        .log(true)
-        .build();
+/**
+ * .....
+ */
+
+BotLog.setLevel(Level.INFO);
+BotClient bot = new BotClient(TOKEN);
 ```
 
 ### Proxy
@@ -732,19 +693,18 @@ BotClient bot = new BotClient
 Finally
 ```java
 import io.github.natanimn.BotClient;
-import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.enums.Updates;
+import enums.io.github.natanimn.ParseMode;
+import enums.io.github.natanimn.Updates;
 
 BotClient bot = new BotClient.Builder(TOKEN)
-        .log(true) // Log current status
         .skipOldUpdates(false) // Receive updates sent last 24 hours 
-        .parseMode(ParseMode.HTML) // Default parse mode passed to sendXyz methods
         .limit(10) // Limit how many updates should be received at maximum per request 
         .useTestServer(false) // Using test server
         .timeout(30) // timeout
         .offset(-1) // offset
         .allowedUpdates(Updates.ALL) // Allowed updates
-        .proxy(null) // proxy
+        .proxy(null)// proxy
+        .numThreads(3) // Number of threads execute handlers parallerly
         .build(); // build our client
 ```
 
@@ -754,7 +714,7 @@ BotClient bot = new BotClient.Builder(TOKEN)
 import io.github.natanimn.TelegramApiException;
 
 try {     
-    context.sendMessage("Hello, World").exec();    
+    context.sendMessage(message.chat.id, "Hello, World").exec();    
 } catch(TelegramApiException apiException){
     System.out.println(apiException.description);
 }

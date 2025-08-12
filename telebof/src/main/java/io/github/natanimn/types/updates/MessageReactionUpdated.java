@@ -4,7 +4,6 @@ import io.github.natanimn.types.chat_and_user.User;
 import io.github.natanimn.types.chat_and_user.Chat;
 import io.github.natanimn.types.media_and_service.ReactionType;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,7 +13,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class MessageReactionUpdated {
+public class MessageReactionUpdated implements TelegramUpdate{
     /**
      * The chat containing the message the user reacted to
      */

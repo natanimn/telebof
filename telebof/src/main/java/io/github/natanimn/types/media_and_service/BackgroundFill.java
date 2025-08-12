@@ -1,33 +1,43 @@
 package io.github.natanimn.types.media_and_service;
 
+import io.github.natanimn.enums.BackgroundFillType;
+
 import java.util.List;
-import java.util.Objects;
 
 /**
+ * This object describes the way a background is filled based on the selected colors
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
 public class BackgroundFill {
-    public String type;
-    public Integer color, top_color, bottom_color, rotation_angle;
+    /**
+     * Type of the background fill,
+     */
+    public BackgroundFillType type;
+
+    /**
+     * The color of the background fill in the RGB24 format
+     */
+    public Integer color;
+
+    /**
+     * Top color of the gradient in the RGB24 format
+     */
+    public Integer top_color;
+
+    /**
+     * Bottom color of the gradient in the RGB24 format
+     */
+    public Integer bottom_color;
+
+    /**
+     * Clockwise rotation angle of the background fill in degrees; 0-359
+     */
+    public Integer rotation_angle;
+
+    /**
+     * A list of the 3 or 4 base colors that are used to generate the freeform gradient in the RGB24 format
+     */
     public List<Integer> colors;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        BackgroundFill that = (BackgroundFill) object;
-        return Objects.equals(type, that.type) &&
-                Objects.equals(color, that.color) &&
-                Objects.equals(top_color, that.top_color) &&
-                Objects.equals(bottom_color, that.bottom_color) &&
-                Objects.equals(rotation_angle, that.rotation_angle) &&
-                Objects.equals(colors, that.colors);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, color, top_color, bottom_color, rotation_angle, colors);
-    }
 }

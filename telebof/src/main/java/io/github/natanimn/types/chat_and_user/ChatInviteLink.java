@@ -1,37 +1,68 @@
 package io.github.natanimn.types.chat_and_user;
 
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * Represents an invite link for a chat.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class ChatInviteLink implements Serializable {
-    public String invite_link, name;
+public class ChatInviteLink {
+    /**
+     * The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with “…”.
+     */
+    public String invite_link;
+
+    /**
+     * Optional. Invite link name
+     */
+    public String name;
+
+    /**
+     * Creator of the link
+     */
     public User creator;
-    public Integer expire_date, member_limit, pending_join_request_count, subscription_period, subscription_price;
-    public Boolean is_primary, is_revoked, creates_join_request;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatInviteLink that = (ChatInviteLink) object;
-        return Objects.equals(invite_link, that.invite_link) &&
-                Objects.equals(name, that.name) && Objects.equals(creator, that.creator) &&
-                Objects.equals(expire_date, that.expire_date) &&
-                Objects.equals(member_limit, that.member_limit) &&
-                Objects.equals(pending_join_request_count, that.pending_join_request_count) &&
-                Objects.equals(is_primary, that.is_primary) && Objects.equals(is_revoked, that.is_revoked) &&
-                Objects.equals(creates_join_request, that.creates_join_request) &&
-                Objects.equals(subscription_period, that.subscription_period) &&
-                Objects.equals(subscription_price, that.subscription_price);
-    }
+    /**
+     * Optional. Point in time (Unix timestamp) when the link will expire or has been expired
+     */
+    public Integer expire_date;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(invite_link, name, creator, expire_date, member_limit, pending_join_request_count,
-                is_primary, is_revoked, creates_join_request, subscription_period, subscription_price);
-    }
+    /**
+     * Optional.
+     * The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999
+     */
+    public Integer member_limit;
+
+    /**
+     * Optional. Number of pending join requests created using this link
+     */
+    public Integer pending_join_request_count;
+
+    /**
+     * Optional. The number of seconds the subscription will be active for before the next payment
+     */
+    public Integer subscription_period;
+
+    /**
+     * Optional.
+     * The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat using the link
+     */
+    public Integer subscription_price;
+
+    /**
+     * True, if the link is primary
+     */
+    public Boolean is_primary;
+
+    /**
+     * True, if the link is revoked
+     */
+    public Boolean is_revoked;
+
+    /**
+     * True, if users joining the chat via the link need to be approved by chat administrators
+     */
+    public Boolean creates_join_request;
+
 }

@@ -1,10 +1,13 @@
 package io.github.natanimn;
 
+import io.github.natanimn.types.media_and_service.ResponseParameters;
+
 import java.util.Objects;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * ApiResponse class. Telegram response
+ * @author Natanim
+ * @since 3 March 2025
  */
 public class ApiResponse<T> {
     public boolean ok;

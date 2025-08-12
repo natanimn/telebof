@@ -1,18 +1,32 @@
 package io.github.natanimn.types.chat_and_user;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * This object contains information about a chat boost.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
 public class ChatBoost {
-
+    /**
+     * Unique identifier of the boost
+     */
     public String boost_id;
+
+    /**
+     * Point in time (Unix timestamp) when the chat was boosted
+     */
     public Integer add_date;
+
+    /**
+     * Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
+     */
     public Integer expiration_data;
+
+    /**
+     * Source of the added boost
+     */
     public ChatBoostSource source;
 
     @Override

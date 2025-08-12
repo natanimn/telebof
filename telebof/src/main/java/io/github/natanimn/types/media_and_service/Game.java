@@ -1,32 +1,43 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class Game implements Serializable {
-    public String title, description;
+public class Game {
+    /**
+     * Title of the game
+     */
+    public String title;
+
+    /**
+     * Description of the game
+     */
+    public String description;
+
+    /**
+     * Photo that will be displayed in the game message in chats.
+     */
     public List<PhotoSize> photo;
+
+    /**
+     * Optional. Brief description of the game or high scores included in the game message.
+     * Can be automatically edited to include current high scores for the game when the bot calls {@link io.github.natanimn.BotContext#setGameScore},
+     * or manually edited using {@link io.github.natanimn.BotContext#editMessageText}. 0-4096 characters.
+     */
     public String text;
+
+    /**
+     * Optional. Special entities that appear in text, such as usernames, URLs, bot commands, etc.
+     */
     public List<MessageEntity> text_entities;
+
+    /**
+     * Optional. Animation that will be displayed in the game message in chats. Upload via @BotFather
+     */
     public Animation animation;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Game game = (Game) object;
-        return Objects.equals(title, game.title) && Objects.equals(description, game.description) &&
-                Objects.equals(photo, game.photo) && Objects.equals(text, game.text) &&
-                Objects.equals(text_entities, game.text_entities) && Objects.equals(animation, game.animation);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, photo, text, text_entities, animation);
-    }
 }

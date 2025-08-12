@@ -4,13 +4,36 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object describes the source of a chat boost.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class ChatBoostSource implements Serializable {
+public class ChatBoostSource {
+    /**
+     * Source of the boost, one of “premium”, "gift_code", "giveaway"
+     */
     public String source;
-    Integer giveaway_message_id, prize_star_count;
+
+    /**
+     * Identifier of a message in the chat with the giveaway; the message could have been deleted already.
+     * May be 0 if the message isn't sent yet.
+     */
+    public Integer giveaway_message_id;
+
+    /**
+     * The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only
+     */
+    public Integer prize_star_count;
+
+    /**
+     * User
+     */
     public User user;
+
+    /**
+     * True, if the giveaway was completed, but there was no user to win the prize
+     */
     public Boolean is_unclaimed;
 
     @Override

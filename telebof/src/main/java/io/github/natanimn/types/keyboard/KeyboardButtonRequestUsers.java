@@ -5,61 +5,85 @@ import java.util.Objects;
 
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object defines the criteria used to request suitable users.
+ * Information about the selected users will be shared with the bot when the corresponding button is pressed.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
+ * @see <a href="https://core.telegram.org/bots/features#chat-and-user-selection">More about requesting users »</a>
  */
 public class KeyboardButtonRequestUsers implements Serializable {
     private Long request_id;
     private Boolean user_is_bot, user_is_premium, request_name, request_username, request_photo;
-    private Integer max_quantity;
+    private Byte max_quantity;
 
-    public KeyboardButtonRequestUsers(long requestId) {
-        this.request_id = requestId;
+    /**
+     * Required
+     * @param request_id Signed 32-bit identifier of the request that will be received back in the {@link io.github.natanimn.types.chat_and_user.UsersShared} object.
+     *                   Must be unique within the message
+     */
+    public KeyboardButtonRequestUsers(long request_id) {
+        this.request_id = request_id;
     }
 
-    public KeyboardButtonRequestUsers userIsBot(boolean userIsBot) {
-        this.user_is_bot = userIsBot;
+    /**
+     * Optional
+     * @param user_is_bot Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.
+     * @return {@link KeyboardButtonRequestUsers}
+     */
+    public KeyboardButtonRequestUsers userIsBot(boolean user_is_bot) {
+        this.user_is_bot = user_is_bot;
         return this;
     }
 
-    public KeyboardButtonRequestUsers userIsPremium(boolean userIsPremium) {
-        this.user_is_premium = userIsPremium;
+    /**
+     * Optional
+     * @param user_is_premium Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied.
+     * @return {@link KeyboardButtonRequestUsers}
+     */
+    public KeyboardButtonRequestUsers userIsPremium(boolean user_is_premium) {
+        this.user_is_premium = user_is_premium;
         return this;
     }
 
-    public KeyboardButtonRequestUsers maxQuantity(Integer max_quantity){
+    /**
+     * Optional
+     * @param max_quantity The maximum number of users to be selected; 1-10. Defaults to 1
+     * @return {@link KeyboardButtonRequestUsers}
+     */
+    public KeyboardButtonRequestUsers maxQuantity(byte max_quantity){
         this.max_quantity = max_quantity;
         return this;
     }
 
-    public  KeyboardButtonRequestUsers requestName(boolean request_name){
+    /**
+     * Optional
+     * @param request_name Pass True to request the users' first and last names
+     * @return {@link KeyboardButtonRequestUsers}
+     */
+    public KeyboardButtonRequestUsers requestName(boolean request_name){
         this.request_name = request_name;
         return this;
     }
 
+    /**
+     * Optional
+     * @param request_username Pass True to request the users' usernames
+     * @return {@link KeyboardButtonRequestUsers}
+     */
     public  KeyboardButtonRequestUsers requestUsername(boolean request_username){
         this.request_username = request_username;
         return this;
     }
 
+    /**
+     * Optional
+     * @param request_photo Pass True to request the users' photos
+     * @return {@link KeyboardButtonRequestUsers}
+     */
     public  KeyboardButtonRequestUsers requestPhoto(boolean request_photo){
         this.request_photo = request_photo;
         return this;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        KeyboardButtonRequestUsers that = (KeyboardButtonRequestUsers) object;
-        return Objects.equals(request_id, that.request_id) && Objects.equals(user_is_bot, that.user_is_bot) &&
-                Objects.equals(user_is_premium, that.user_is_premium) && Objects.equals(request_name, that.request_name) &&
-                Objects.equals(request_username, that.request_username) && Objects.equals(request_photo, that.request_photo) &&
-                Objects.equals(max_quantity, that.max_quantity);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(request_id, user_is_bot, user_is_premium, request_name, request_username, request_photo, max_quantity);
-    }
 }

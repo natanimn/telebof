@@ -1,15 +1,37 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * Describes the options used for link preview generation.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 0.9
  */
-public class LinkPreviewOptions implements Serializable {
-    public Boolean is_disabled, prefer_small_media, prefer_large_media, show_above_text;
+public class LinkPreviewOptions {
+    /**
+     * Optional. True, if the link preview is disabled
+     */
+    public Boolean is_disabled;
+
+    /**
+     * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
+     */
+    public Boolean prefer_small_media;
+
+    /**
+     * Optional. True, if the media in the link preview is supposed to be enlarged;
+     * ignored if the URL isn't explicitly specified or media size change isn't supported for the preview
+     */
+    public Boolean prefer_large_media;
+
+    /**
+     * Optional. True, if the link preview must be shown above the message text;
+     * otherwise, the link preview will be shown below the message text
+     */
+    public Boolean show_above_text;
+
+    /**
+     * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
+     */
     public String url;
 
     public LinkPreviewOptions isDisabled(boolean is_disabled){
@@ -35,20 +57,5 @@ public class LinkPreviewOptions implements Serializable {
     public LinkPreviewOptions url(String url){
         this.url = url;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        LinkPreviewOptions that = (LinkPreviewOptions) object;
-        return Objects.equals(is_disabled, that.is_disabled) && Objects.equals(prefer_small_media, that.prefer_small_media) &&
-                Objects.equals(prefer_large_media, that.prefer_large_media) && Objects.equals(show_above_text, that.show_above_text) &&
-                Objects.equals(url, that.url);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(is_disabled, prefer_small_media, prefer_large_media, show_above_text, url);
     }
 }

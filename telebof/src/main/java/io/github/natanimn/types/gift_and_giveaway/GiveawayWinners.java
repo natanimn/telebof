@@ -7,38 +7,71 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a message about the completion of a giveaway with public winners.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class GiveawayWinners {
+    /**
+     * The chat that created the giveaway
+     */
     public Chat chat;
-    public int giveaway_message_id;
-    public int winners_selection_date;
-    public int winner_count;
+
+    /**
+     * Identifier of the message with the giveaway in the chat
+     */
+    public Integer giveaway_message_id;
+
+    /**
+     * Point in time (Unix timestamp) when winners of the giveaway were selected
+     */
+    public Integer winners_selection_date;
+
+    /**
+     * Total number of winners in the giveaway
+     */
+    public Integer winner_count;
+
+    /**
+     * List of up to 100 winners of the giveaway
+     */
     public List<User> winners;
-    public Integer additional_chat_count, premium_subscription_month_count, unclaimed_prize_count, prize_star_count ;
-    public Boolean only_new_members, was_refunded;
+
+    /**
+     * Optional. The number of other chats the user had to join in order to be eligible for the giveaway
+     */
+    public Integer additional_chat_count;
+
+    /**
+     * Optional. The number of months the Telegram Premium subscription won from the giveaway will be active for;
+     * for Telegram Premium giveaways only
+     */
+    public Integer premium_subscription_month_count;
+
+    /**
+     * Optional. Number of undistributed prizes
+     */
+    public Integer unclaimed_prize_count;
+
+    /**
+     * Optional. The number of Telegram Stars that were split between giveaway winners; for Telegram Star giveaways only
+     */
+    public Integer prize_star_count;
+
+    /**
+     * Optional. True, if only users who had joined the chats after the giveaway started were eligible to win
+     */
+    public Boolean only_new_members;
+
+    /**
+     * Optional. True, if the giveaway was canceled because the payment for it was refunded
+     */
+    public Boolean was_refunded;
+
+    /**
+     * Optional. Description of additional giveaway prize
+     */
     public String prize_description;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        GiveawayWinners that = (GiveawayWinners) object;
-        return giveaway_message_id == that.giveaway_message_id && winners_selection_date == that.winners_selection_date
-                && winner_count == that.winner_count && Objects.equals(chat, that.chat) &&
-                Objects.equals(winners, that.winners) && Objects.equals(additional_chat_count, that.additional_chat_count) &&
-                Objects.equals(premium_subscription_month_count, that.premium_subscription_month_count) &&
-                Objects.equals(unclaimed_prize_count, that.unclaimed_prize_count) &&
-                Objects.equals(only_new_members, that.only_new_members) && Objects.equals(was_refunded, that.was_refunded) &&
-                Objects.equals(prize_description, that.prize_description) &&
-                Objects.equals(prize_star_count, that.prize_star_count);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(chat, giveaway_message_id, winners_selection_date, winner_count, winners,
-                additional_chat_count, premium_subscription_month_count, unclaimed_prize_count, only_new_members,
-                was_refunded, prize_description, prize_star_count);
-    }
 }

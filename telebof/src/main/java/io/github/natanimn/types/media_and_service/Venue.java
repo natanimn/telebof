@@ -1,31 +1,44 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a venue.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class Venue implements Serializable {
-    public String title, address, foursquare_id, foursquare_type, google_place_id, google_place_type;
+public class Venue {
+    /**
+     * Name of the venue
+     */
+    public String title;
+
+    /**
+     * Address of the venue
+     */
+    public String address;
+
+    /**
+     * Optional. Foursquare identifier of the venue
+     */
+    public String foursquare_id;
+
+    /**
+     * Optional. Foursquare type of the venue. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+     */
+    public String foursquare_type;
+
+    /**
+     * Optional. Google Places identifier of the venue
+     */
+    public String google_place_id;
+
+    /**
+     * Optional. Google Places type of the venue. (See <a href="https://developers.google.com/places/web-service/supported_types">supported types.</a>)
+     */
+    public String google_place_type;
+
+    /**
+     * Venue location. Can't be a live location
+     */
     public Location location;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Venue venue = (Venue) object;
-        return Objects.equals(title, venue.title) && Objects.equals(address, venue.address) &&
-                Objects.equals(foursquare_id, venue.foursquare_id) &&
-                Objects.equals(foursquare_type, venue.foursquare_type) &&
-                Objects.equals(google_place_id, venue.google_place_id) &&
-                Objects.equals(google_place_type, venue.google_place_type) &&
-                Objects.equals(location, venue.location);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, address, foursquare_id, foursquare_type, google_place_id, google_place_type, location);
-    }
 }

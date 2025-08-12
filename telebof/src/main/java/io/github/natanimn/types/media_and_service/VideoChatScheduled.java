@@ -1,26 +1,14 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
+ * This object represents a service message about a video chat scheduled in the chat.
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
-public class VideoChatScheduled implements Serializable {
+public class VideoChatScheduled {
+    /**
+     * Point in time (Unix timestamp) when the video chat is supposed to be started by a chat administrator
+     */
     public Integer start_date;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        VideoChatScheduled that = (VideoChatScheduled) object;
-        return Objects.equals(start_date, that.start_date);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(start_date);
-    }
 }

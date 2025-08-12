@@ -2,10 +2,19 @@ package io.github.natanimn;
 
 import io.github.natanimn.enums.ChatAction;
 import io.github.natanimn.enums.ParseMode;
+import io.github.natanimn.types.inline.InlineQueryResult;
+import io.github.natanimn.types.inline.InlineQueryResultCachedVideo;
+import io.github.natanimn.types.inline.InlineQueryResultVideo;
+import io.github.natanimn.types.input.InputMedia;
+import io.github.natanimn.types.input.InputMediaDocument;
+import io.github.natanimn.types.input.InputMediaPhoto;
+import io.github.natanimn.types.input.InputMediaVideo;
 import io.github.natanimn.types.updates.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class BotContextTest {
@@ -17,11 +26,11 @@ class BotContextTest {
 
     @BeforeEach
     void setUp() {
-        this.TOKEN           = System.getenv("TOKEN");
-        this.bot             = new BotClient(TOKEN);
-        this.CHAT_ID         = 5213764043L;
-        this.BOT_USERNAME    = "TelebofTestBot";
-        this.BOT_ID          = 6145534151L;
+        this.TOKEN = System.getenv("TOKEN");
+        this.bot = new BotClient(TOKEN);
+        this.CHAT_ID = 5213764043L;
+        this.BOT_USERNAME = "TelebofTestBot";
+        this.BOT_ID = 6145534151L;
     }
 
     @Test
@@ -60,5 +69,27 @@ class BotContextTest {
         assertTrue(resp);
     }
 
+    @Test
+    void testSendMediaGroup(){
+        InputMedia[] inputMedia = new InputMedia[5];
+        File pic = new File("src/test/resources/telegram.png");
+        for (int i=0; i < 5; i++) inputMedia[i] = new InputMediaPhoto(pic);
+        List<Message> messages = bot.context.sendMediaGroup(CHAT_ID, inputMedia).exec();
+        for (Message msg: messages) assertNotNull(msg);
+    }
 
+    @Test
+    void sendVideo(){
+        String file_id = "BAACAgQAAxkDAAIUrmiQqBMRFaKIbgL03HN631gAAVT_ngACLBoAAu-EiFC0h2DtKDhRGzYE";
+        File thumb = new File("src/test/resources/telegram.png");
+
+        Message message = bot.context.sendVideo(CHAT_ID, file_id)
+                .caption("<b>Enjoy the video</b>")
+                .parseMode(ParseMode.HTML)
+                .cover(thumb)
+                .exec();
+
+        assertNotNull(message);
+        assertNotNull(message.chat);
+    }
 }

@@ -1,15 +1,17 @@
 package io.github.natanimn.types.chat_and_user;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
- *
+ * This object represents a service message about a user boosting a chat.
  * @author Natanim
  * @since 3 March 2025
  * @version 0.7
  */
-public class ChatBoostAdded implements Serializable{
+public class ChatBoostAdded {
+    /**
+     * Number of boosts added by the user
+     */
     public Integer boost_count;
 
     @Override
