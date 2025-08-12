@@ -4,20 +4,50 @@ import io.github.natanimn.enums.EntityType;
 import io.github.natanimn.types.chat_and_user.User;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
- *
+ * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 0.9
  */
 public class MessageEntity implements Serializable {
-    public String url, language;
-    public Integer offset, length;
+    /**
+     * Optional. For “text_link” only, URL that will be opened after user taps on the text
+     */
+    public String url;
+
+    /**
+     * Optional. For “pre” only, the programming language of the entity text
+     */
+    public String language;
+
+    /**
+     * Offset in <a href="https://core.telegram.org/api/entities#entity-length">UTF-16 code units</a> to the start of the entity
+     */
+    public Integer offset;
+
+    /**
+     * Length of the entity in <a href="https://core.telegram.org/api/entities#entity-length">UTF-16 code units</a>
+     */
+    public Integer length;
+
+    /**
+     * Optional. For “text_mention” only, the mentioned user
+     */
     public User user;
+
+    /**
+     * Optional. For “custom_emoji” only, unique identifier of the custom emoji.
+     * Use {@link io.github.natanimn.BotContext#getCustomEmojiStickers} to get full information about the sticker
+     */
     public String custom_emoji_id;
+
+    /**
+     * Type of the entity.
+     */
     public EntityType type;
+
 
     public MessageEntity type(EntityType type) {
         this.type = type;
@@ -50,24 +80,8 @@ public class MessageEntity implements Serializable {
 
     }
 
-    public MessageEntity customEmojiId(String customEmojiId) {
-        this.custom_emoji_id = customEmojiId;
+    public MessageEntity customEmojiId(String custom_emoji_id) {
+        this.custom_emoji_id = custom_emoji_id;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        MessageEntity entity = (MessageEntity) object;
-        return Objects.equals(url, entity.url) && Objects.equals(language, entity.language) &&
-                Objects.equals(type, entity.type) && Objects.equals(offset, entity.offset) &&
-                Objects.equals(length, entity.length) && Objects.equals(user, entity.user) &&
-                Objects.equals(custom_emoji_id, entity.custom_emoji_id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(url, language, type, offset, length, user, custom_emoji_id);
     }
 }

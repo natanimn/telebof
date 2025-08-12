@@ -1,8 +1,9 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.service;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class MediaContentType {
     public static final String PHOTO = "image/jpeg";

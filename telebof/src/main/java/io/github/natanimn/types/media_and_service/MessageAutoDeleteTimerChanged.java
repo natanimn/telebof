@@ -1,24 +1,15 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object represents a service message about a change in auto-delete timer settings.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class MessageAutoDeleteTimerChanged {
-    public Integer messageAutoDeleteTimerChanged;
+    /**
+     * New auto-delete time for messages in the chat; in seconds
+     */
+    public Integer message_auto_delete_time;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        MessageAutoDeleteTimerChanged that = (MessageAutoDeleteTimerChanged) object;
-        return Objects.equals(messageAutoDeleteTimerChanged, that.messageAutoDeleteTimerChanged);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(messageAutoDeleteTimerChanged);
-    }
 }

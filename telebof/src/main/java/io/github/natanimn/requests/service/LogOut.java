@@ -1,4 +1,7 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.service;
+
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 
 /**
  * Natanim Negash
