@@ -1,6 +1,8 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.send;
 
 import io.github.natanimn.enums.ParseMode;
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 import io.github.natanimn.types.media_and_service.MessageEntity;
 import java.util.List;
 
@@ -11,9 +13,9 @@ import java.util.List;
  * @version 0.8
  */
 
-public class SendGift extends AbstractBaseRequest<SendGift, Boolean>{
+public class SendGift extends AbstractBaseRequest<SendGift, Boolean> {
     public SendGift(Object chat_id, String gift_id,  RequestSender rs){
-        super(chat_id, rs, "sendGift");
+        super(chat_id, rs, "sendGift", Boolean.class);
         add("gift_id", gift_id);
     }
 
