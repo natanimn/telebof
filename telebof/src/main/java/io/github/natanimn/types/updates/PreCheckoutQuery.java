@@ -11,7 +11,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class PreCheckoutQuery {
+public class PreCheckoutQuery implements TelegramUpdate{
     /**
      * Unique query identifier
      */

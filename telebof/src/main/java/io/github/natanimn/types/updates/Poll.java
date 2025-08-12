@@ -12,7 +12,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class Poll{
+public class Poll implements TelegramUpdate{
     /**
      * Unique poll identifier
      */

@@ -27,7 +27,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class Message implements Serializable {
+public class Message implements TelegramUpdate {
     /* Unique message identifier inside this chat. In specific instances */
     public Integer message_id;
 

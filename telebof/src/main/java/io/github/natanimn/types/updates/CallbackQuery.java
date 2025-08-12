@@ -13,7 +13,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class CallbackQuery implements Serializable {
+public class CallbackQuery implements TelegramUpdate {
     /**
      * Unique identifier for this query
      */

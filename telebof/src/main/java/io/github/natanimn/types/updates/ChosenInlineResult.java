@@ -11,7 +11,7 @@ import java.util.Objects;
  * @since 3 March 2025
  * @version 0.7
  */
-public class ChosenInlineResult {
+public class ChosenInlineResult implements TelegramUpdate{
     /**
      * The unique identifier for the result that was chosen
      */
