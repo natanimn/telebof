@@ -845,6 +845,10 @@ public class BotContext {
         return new UnpinAllChatMessages(chat_id, this.requestSender);
     }
 
+    /**
+     * Returns the bot's Telegram Star transactions in chronological order.
+     * @return {@link io.github.natanimn.requests.get.GetStarTransactions}
+     */
     public GetStarTransactions getStarTransactions(){
         return new GetStarTransactions(requestSender);
     }
@@ -1668,6 +1672,14 @@ public class BotContext {
      */
     public SetMyName setMyName(){
         return new SetMyName(this.requestSender);
+    }
+
+    /**
+     * Use this method to get the current bot description for the given user language.
+     * @return {@link io.github.natanimn.requests.get.GetMyDescription}
+     */
+    public GetMyDescription getMyDescription(){
+        return new GetMyDescription(requestSender);
     }
 
     /**
