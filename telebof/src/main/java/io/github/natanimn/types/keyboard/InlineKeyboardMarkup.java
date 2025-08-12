@@ -17,6 +17,7 @@ public class InlineKeyboardMarkup implements Markup {
      * Array of button rows, each represented by an Array of {@link InlineKeyboardButton} objects
      */
     public List<List<InlineKeyboardButton>> inline_keyboard;
+
     transient private int rowWidth = 3;
 
     public InlineKeyboardMarkup(){
