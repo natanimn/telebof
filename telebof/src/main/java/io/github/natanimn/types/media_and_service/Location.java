@@ -1,30 +1,42 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
+ * This object represents a point on the map.
  * @author Natanim 
  * @since 3 March 2025
  * @version 0.8
  */
-public class Location implements Serializable {
-    public Double longitude, latitude, horizontal_accuracy;
-    public Integer live_period, heading, proximity_alert_radius;
+public class Location {
+    /**
+     * Longitude as defined by the sender
+     */
+    public Double longitude;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Location location = (Location) object;
-        return Objects.equals(longitude, location.longitude) && Objects.equals(latitude, location.latitude) &&
-                Objects.equals(horizontal_accuracy, location.horizontal_accuracy) &&
-                Objects.equals(live_period, location.live_period) && Objects.equals(heading, location.heading) &&
-                Objects.equals(proximity_alert_radius, location.proximity_alert_radius);
-    }
+    /**
+     * Latitude as defined by the sender
+     */
+    public Double latitude;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(longitude, latitude, horizontal_accuracy, live_period, heading, proximity_alert_radius);
-    }
+    /**
+     * Optional. The radius of uncertainty for the location, measured in meters; 0-1500
+     */
+    public Double horizontal_accuracy;
+
+    /**
+     * Optional. Time relative to the message sending date, during which the location can be updated; in seconds.
+     * For active live locations only.
+     */
+    public Integer live_period;
+
+    /**
+     * Optional. The direction in which user is moving, in degrees; 1-360. For active live locations only.
+     */
+    public Integer heading;
+
+    /**
+     * Optional. The maximum distance for proximity alerts about approaching another chat member, in meters.
+     * For sent live locations only.
+     */
+    public Integer proximity_alert_radius;
 }

@@ -1,28 +1,35 @@
 package io.github.natanimn.types.media_and_service;
 
-import java.io.Serializable;
-import java.util.Objects;
-
 /**
- * Natanim Negash 
- *  3 March 2025
+ * This object contains basic information about an invoice.
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
-public class Invoice implements Serializable {
-    public String title, description, start_parameter, currency;
+public class Invoice {
+    /**
+     * Product name
+     */
+    public String title;
+
+    /**
+     * Product description
+     */
+    public String description;
+
+    /**
+     * Unique bot deep-linking parameter that can be used to generate this invoice
+     */
+    public String start_parameter;
+
+    /**
+     * Three-letter ISO 4217 <a href="https://core.telegram.org/bots/payments#supported-currencies">currency code</a>, or “XTR” for payments in Telegram Stars
+     */
+    public String currency;
+
+    /**
+     * Total price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45 pass amount = 145.
+     *  See the exp parameter in <a href="https://core.telegram.org/bots/payments/currencies.json">currencies.json</a>, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).
+     */
     public Integer total_amount;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Invoice invoice = (Invoice) object;
-        return Objects.equals(title, invoice.title) && Objects.equals(description, invoice.description) &&
-                Objects.equals(start_parameter, invoice.start_parameter) && Objects.equals(currency, invoice.currency) &&
-                Objects.equals(total_amount, invoice.total_amount);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, start_parameter, currency, total_amount);
-    }
 }
