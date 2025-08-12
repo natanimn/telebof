@@ -65,7 +65,7 @@ public class BotContext {
     }
 
     public WebhookInfo getWebhookInfo(){
-        return new GetWebhookInfo(null).exec();
+        return new GetWebhookInfo(requestSender).exec();
     }
 
     /**
