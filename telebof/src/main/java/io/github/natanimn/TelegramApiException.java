@@ -1,12 +1,12 @@
 package io.github.natanimn;
 
+import io.github.natanimn.types.media_and_service.ResponseParameters;
 
 /**
- * Natanim Negash
- *  3 March 2025
- */    /**
- * Natanim Negash
- *  3 March 2025
+ * Describes Telegram error
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class TelegramApiException extends RuntimeException {
     public boolean ok;
