@@ -1,5 +1,7 @@
-package io.github.natanimn.requests;
+package io.github.natanimn.requests.service;
 
+import io.github.natanimn.requests.AbstractBaseRequest;
+import io.github.natanimn.requests.RequestSender;
 import io.github.natanimn.types.inline.InlineQueryResult;
 import io.github.natanimn.types.media_and_service.PreparedInlineMessage;
 
@@ -8,7 +10,7 @@ import io.github.natanimn.types.media_and_service.PreparedInlineMessage;
  * @since July 25, 2025
  * @version 0.6
  */
-public class SavePreparedInlineMessage extends AbstractBaseRequest<SavePreparedInlineMessage, PreparedInlineMessage>{
+public class SavePreparedInlineMessage extends AbstractBaseRequest<SavePreparedInlineMessage, PreparedInlineMessage> {
     /**
      * @param user_id Unique identifier of the target user that can use the prepared message
      * @param result A {@link InlineQueryResult} object describing the message to be sent
