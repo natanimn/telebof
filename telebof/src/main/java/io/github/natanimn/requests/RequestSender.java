@@ -5,8 +5,10 @@ import io.github.natanimn.ApiResponse;
 import io.github.natanimn.BotLog;
 import io.github.natanimn.Util;
 import io.github.natanimn.TelegramApiException;
+import io.github.natanimn.enums.ParseMode;
 import io.github.natanimn.errors.ConnectionError;
 import io.github.natanimn.errors.TelegramError;
+import io.github.natanimn.types.input.InputMedia;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -24,13 +26,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p>Class for sending request</p>
+ * A class to interact with telegram server
  * @author Natanim
- */
-
-/**
- * Natanim Negash
- *  3 March 2025
+ * @since 3 March 2025
+ * @version 0.9
  */
 public class RequestSender {
 
@@ -45,11 +44,12 @@ public class RequestSender {
 
     public RequestSender(String botToken, boolean useTestServer, Proxy proxy, @Nullable String localBotAPiUrl){
         this.botToken = botToken;
-        this.client = new OkHttpClient.Builder().readTimeout(TIMEOUT, TimeUnit.SECONDS)
-                        .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-                        .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-                        .proxy(proxy)
-                        .build();
+        this.client = new OkHttpClient.Builder()
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .proxy(proxy)
+                .build();
 
         this.builder = new Request.Builder();
         this.FILE_URL = "https://api.telegram.org/file/bot%s/%s";
@@ -86,13 +86,41 @@ public class RequestSender {
         String name = entry.getKey();
         Object value = entry.getValue();
 
+
+        if (value instanceof InputMedia ) {
+            if (((InputMedia) value).hasFile()) {
+                for (File file: ((InputMedia) value).getFiles())
+                    builder.addFormDataPart(
+                            file.getName(),
+                            file.getName(),
+                            RequestBody.create(file, contentType)
+                    );
+
+            }
+
+        } else if (value instanceof InputMedia[]) {
+            for (InputMedia media : (InputMedia[]) value) {
+                if (media.hasFile()) {
+                    for (File file : media.getFiles())
+                        builder.addFormDataPart(
+                                file.getName(),
+                                file.getName(),
+                                RequestBody.create(file, contentType)
+                        );
+                }
+            }
+        }
+
         if (value instanceof File file) {
             builder.addFormDataPart(
                     name,
                     file.getName(),
                     RequestBody.create(file, contentType)
             );
+
         } else {
+            if (name.equals("parse_mode"))
+                value = ((ParseMode)value).name().toLowerCase();
             String stringValue = convertToString(value);
             builder.addFormDataPart(name, stringValue);
         }
@@ -113,21 +141,28 @@ public class RequestSender {
                 MediaType.get("application/json; charset=utf-8")
         );
     }
+
     private String getUrl(AbstractBaseRequest<?, ?> baseRequest) {
         return String.format(URL, botToken, baseRequest.getMethodName());
     }
 
-    public <T> ApiResponse<T> postRequest(AbstractBaseRequest<?, ?> baseRequest){
+    public  <T> ApiResponse<T> postRequest(AbstractBaseRequest<?, ?> baseRequest){
         RequestBody requestBody = prepareRequest(baseRequest);
         Request request = builder.url(getUrl(baseRequest))
                 .post(requestBody).build();
 
+        String jsonString = "";
         try (Response response = client.newCall(request).execute()){
             ResponseBody responseBody = response.body();
-            return Util.parseApiResponse(responseBody.string(), baseRequest.getResponseType());
+            jsonString         = responseBody.string();
+
+            return Util.parseApiResponse(jsonString, baseRequest.getResponseType());
         } catch (UnknownHostException e){
             throw new ConnectionError(String.format("Unable to send request to %s", request.url().url().getHost()));
         } catch (IOException e){
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            System.out.println(jsonString + " " + baseRequest.getResponseType());
             throw new RuntimeException(e);
         }
     }
