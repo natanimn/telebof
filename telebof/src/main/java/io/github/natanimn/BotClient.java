@@ -554,27 +554,28 @@ final public class BotClient {
             RequestSender request
     ){
         List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
-
-        try {
-            for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec: execs){
-                for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry: exec.entrySet()){
-                    FilterExecutor _filter = entry.getKey();
-                    UpdateHandler<T> handler = entry.getValue();
-                    if (_filter.execute(filter)){
-                        var context = new BotContext(
-                                request,
-                                storage
-                        );
-                        executor.execute(() -> {
-                            handler.invoke(context, (T) update);
-                            BotLog.info("Task executed");
-                        });
-                        return;
+        if (execs != null) {
+            try {
+                for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec : execs) {
+                    for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry : exec.entrySet()) {
+                        FilterExecutor _filter = entry.getKey();
+                        UpdateHandler<T> handler = entry.getValue();
+                        if (_filter.execute(filter)) {
+                            var context = new BotContext(
+                                    request,
+                                    storage
+                            );
+                            executor.execute(() -> {
+                                handler.invoke(context, (T) update);
+                                BotLog.info("Task executed");
+                            });
+                            return;
+                        }
                     }
                 }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-        } catch (Exception e){
-            throw new RuntimeException(e);
         }
     }
 
