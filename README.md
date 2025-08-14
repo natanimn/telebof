@@ -33,13 +33,13 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.9.2</version>
+    <version>0.9.3</version>
 </dependency>
 ```
 
 * Gradle
 ```groovy
-implementation 'io.github.natanimn:telebof:0.9.2'
+implementation 'io.github.natanimn:telebof:0.9.3'
 ```
 ### Your First Echo Bot
 
