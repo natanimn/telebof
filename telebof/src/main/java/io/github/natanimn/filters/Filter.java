@@ -337,9 +337,20 @@ public class Filter{
 
     public boolean regex(String pattern){
         String text = getText();
-        if (text == null) return false;
-
         Pattern instance = Pattern.compile(pattern);
+
+        if (text == null) {
+            if (update.callback_query != null){
+                String data = update.callback_query.data;
+                return instance.matcher(data).find();
+            } else if (update.inline_query != null) {
+                String query = update.inline_query.query;
+                return instance.matcher(query).find();
+            } else {
+                return false;
+            }
+        }
+
         return instance.matcher(text).find();
     }
 
