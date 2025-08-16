@@ -1,10 +1,10 @@
 package io.github.natanimn;
 
 
-import io.github.natanimn.types.keyboard.InlineKeyboardButton;
-import io.github.natanimn.types.keyboard.InlineKeyboardMarkup;
-import io.github.natanimn.types.updates.CallbackQuery;
-import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
+import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
+import io.github.natanimn.telebof.types.updates.CallbackQuery;
+import io.github.natanimn.telebof.types.updates.Message;
 
 /**
  * This an Inline keyboard example bot of telebof library

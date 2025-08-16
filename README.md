@@ -44,7 +44,7 @@ implementation 'io.github.natanimn:telebof:0.9.3'
 ### Your First Echo Bot
 
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 
 public class MyFirstEchoBot {
   static final String TOKEN = "YOUR_BOT_TOKEN_HERE";
@@ -69,12 +69,12 @@ public class MyFirstEchoBot {
 **Do not worry if you do not understand what the above code mean, it will be explained in the next chapter.** 
 
 ## Available Types
-All Telegram types are defined in `io.github.natanimn.types` and organized in a package based on their relation. They are completely the same as Telegram types. 
+All Telegram types are defined in `io.github.natanimn.telebof.types` and organized in a package based on their relation. They are completely the same as Telegram types. 
 
 Their set method is their camelCased name method
 
 ## Available Methods
-All Telegram methods are defined in `io.github.natanimn.request` under their category and implemented in `io.github.natanimn.BotContext` class.
+All Telegram methods are defined in `io.github.natanimn.request` under their category and implemented in `io.github.natanimn.telebof.BotContext` class.
 
 ##### Inside handler
 Use `context` parameter
@@ -175,12 +175,12 @@ and callback class. The filter class is a lambda class of `io.github.natanimn.fi
 as an argument and returns `Boolean`, so that if the condition of this filter 
 matches with the update sent from telegram, the callback class will be called and its body gets execute.
 
-The callback class takes two parameters: `io.github.natanimn.BotContext` class and type of class of an update which is being handled
+The callback class takes two parameters: `io.github.natanimn.telebof.BotContext` class and type of class of an update which is being handled
 
 Let's back to the first [echo bot](#your-first-echo-bot) example.
 
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 
 public class MyFirstEchoBot {
   static final String TOKEN = "YOUR_BOT_TOKEN_HERE";
@@ -474,10 +474,10 @@ This example will show you how you can write filters using `filters.io.github.na
 Let's write simple custom filter whether incoming text starts with `!` or not.
 
 ```java
-import io.github.natanimn.BotContext;
+import io.github.natanimn.telebof.BotContext;
 import filters.io.github.natanimn.CustomFilter;
-import io.github.natanimn.types.updates.Message;
-import io.github.natanimn.types.updates.Update;
+import io.github.natanimn.telebof.types.updates.Message;
+import io.github.natanimn.telebof.types.updates.Update;
 
 
 // Filter whether the incoming message text starts with `!`. or not
@@ -544,15 +544,21 @@ bot.onMessage(filter -> filter.state("name") && filter.text(), (context, message
 Example for using reply markup
 
 ```java
-import io.github.natanimn.types.keyboard.ReplyKeyboardMarkup;
-import io.github.natanimn.types.keyboard.KeyboardButton;
+import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+import io.github.natanimn.telebof.types.keyboard.KeyboardButton;
 
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup()
         .resizeKeyboard(true); // resize keyboard
         
-markup.add("A","B","C"); // You can add String or 
-markup.add("D","E"); 
-markup.add(new KeyboardButton("F")); // KeybaordButton class
+markup.
+
+add("A","B","C"); // You can add String or 
+markup.
+
+add("D","E"); 
+markup.
+
+add(new KeyboardButton("F")); // KeybaordButton class
 
 // also possible
 ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
@@ -561,21 +567,35 @@ ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
         new String[]{"F"}
 }).resizeKeyboard(true); // resize keyboard
 
-context.sendMssage(message.chat.id, "Hello, World!").replyMarkup(markup).exec();
+context.
+
+sendMssage(message.chat.id, "Hello, World!").
+
+replyMarkup(markup).
+
+exec();
 ```
 
 ### InlineKeyboardMarkup
 example for using InlineKeyboardMarkup
 
 ```java
-import io.github.natanimn.types.keyboard.InlineKeyboardButton;
+import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
 
 InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
 
-inlineMarkup.addKeybaord(
+inlineMarkup.
+
+addKeybaord(
   new InlineKeyboardButton("A", "a"), 
-  new InlineKeyboardButton("C", "b"), 
-  new InlineKeyboardButton("Url").url("www.example.com")
+  new
+
+InlineKeyboardButton("C","b"), 
+  new
+
+InlineKeyboardButton("Url").
+
+url("www.example.com")
 ); // 3 keyboards on a row 
 
 // also  possible
@@ -598,47 +618,69 @@ InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardM
 }
 );
 
-context.sendMessage(message.chat.id, "Press one button")
-        .replyMarkup(inlineMarkup)
-        .exec();
+context.
+
+sendMessage(message.chat.id, "Press one button")
+        .
+
+replyMarkup(inlineMarkup)
+        .
+
+exec();
 ```
 
 ### ForceReply
 
 ```java
-import io.github.natanimn.types.keyboard.ForceReply;
-import io.github.natanimn.types.keyboard.ForceReply;
+
+import io.github.natanimn.telebof.types.keyboard.ForceReply;
 
 context.sendMessage(message.chat.id, "Can you tell me your name please?")
-        .replyMarkup(new io.github.natanimn.types.keyboard.ForceReply())
-        .exec();
+        .
+
+replyMarkup(new io.github.natanimn.telebof.types.keyboard.ForceReply())
+        .
+
+exec();
 ```
 
 ### RemoveReplyKeyboard
 
 ```java
-import io.github.natanimn.types.keyboard.ReplyKeyboardMarkup;
+import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
 
 context.sendMessage(message.chat.id, "There is no reply keyboard now")
-        .replyMarkup(new RemoveReplyKeybaord())
-        .exec(); 
+        .
+
+replyMarkup(new RemoveReplyKeybaord())
+        .
+
+exec(); 
 ```
 
 ## Inline Bot
 
 ```java
-import io.github.natanimn.types.inline.InlineQueryResult;
-import io.github.natanimn.types.inline.InlineQueryResultArticle;
-import io.github.natanimn.types.input.InputTextMessageContent;
+import io.github.natanimn.telebof.types.inline.InlineQueryResult;
+import io.github.natanimn.telebof.types.inline.InlineQueryResultArticle;
+import io.github.natanimn.telebof.types.input.InputTextMessageContent;
 
 
-bot.onInline(filter ->filter.emptyQuery(), (context, query)->{
-    InlineQueryResultArticle article = new InlineQueryResultArticle("1")
+bot.onInline(filter ->filter.
+
+emptyQuery(), (context,query)->{
+InlineQueryResultArticle article = new InlineQueryResultArticle("1")
         .title("Write something")
         .description("click here")
         .inputTextMessageContent(new InputTextMessageContent("Please write something"));
 
-    context.answerInlineQuery(query.id, new InlineQueryResult[]{article}).exec();
+    context.
+
+answerInlineQuery(query.id, new InlineQueryResult[] {
+  article
+}).
+
+exec();
 
 });
 ```
@@ -648,7 +690,7 @@ bot.onInline(filter ->filter.emptyQuery(), (context, query)->{
 ### Local Bot API Server
 
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 
 String url = "https://example.com/bot%s/%s";
 BotClient bot = new BotClient.Builder(TOKEN)
@@ -660,7 +702,7 @@ BotClient bot = new BotClient.Builder(TOKEN)
 ### Logging
 Use `BotLog` class to enable or disable logs. By default, it is on WARNING level.
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 import io.github.natanim.BotLog;
 import java.util.logging.Level;
 
@@ -675,7 +717,7 @@ BotClient bot = new BotClient(TOKEN);
 ### Proxy
 
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 
@@ -691,7 +733,7 @@ BotClient bot = new BotClient
 
 Finally
 ```java
-import io.github.natanimn.BotClient;
+import io.github.natanimn.telebof.BotClient;
 import enums.io.github.natanimn.ParseMode;
 import enums.io.github.natanimn.Updates;
 
@@ -710,7 +752,7 @@ BotClient bot = new BotClient.Builder(TOKEN)
 ## Error Handling
 
 ```java
-import io.github.natanimn.TelegramApiException;
+import io.github.natanimn.telebof.TelegramApiException;
 
 try {     
     context.sendMessage(message.chat.id, "Hello, World").exec();    

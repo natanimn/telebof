@@ -1,7 +1,7 @@
 package io.github.natanimn;
 
-import io.github.natanimn.filters.Filter;
-import io.github.natanimn.types.updates.Update;
+import io.github.natanimn.telebof.filters.Filter;
+import io.github.natanimn.telebof.types.updates.Update;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.PostMapping;

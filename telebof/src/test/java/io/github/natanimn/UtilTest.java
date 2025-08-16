@@ -1,5 +1,6 @@
 package io.github.natanimn;
 
+import io.github.natanimn.telebof.Util;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

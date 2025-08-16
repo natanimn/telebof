@@ -1,15 +1,11 @@
 package io.github.natanimn;
 
-import io.github.natanimn.enums.ChatAction;
-import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.inline.InlineQueryResult;
-import io.github.natanimn.types.inline.InlineQueryResultCachedVideo;
-import io.github.natanimn.types.inline.InlineQueryResultVideo;
-import io.github.natanimn.types.input.InputMedia;
-import io.github.natanimn.types.input.InputMediaDocument;
-import io.github.natanimn.types.input.InputMediaPhoto;
-import io.github.natanimn.types.input.InputMediaVideo;
-import io.github.natanimn.types.updates.Message;
+import io.github.natanimn.telebof.enums.ChatAction;
+import io.github.natanimn.telebof.enums.ParseMode;
+import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.types.input.InputMedia;
+import io.github.natanimn.telebof.types.input.InputMediaPhoto;
+import io.github.natanimn.telebof.types.updates.Message;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.File;

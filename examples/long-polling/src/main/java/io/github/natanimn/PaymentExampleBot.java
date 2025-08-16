@@ -3,11 +3,11 @@ package io.github.natanimn;
 import io.github.natanimn.BotClient;
 import io.github.natanimn.BotContext;
 import io.github.natanimn.enums.ParseMode;
-import io.github.natanimn.types.chat_and_user.User;
-import io.github.natanimn.types.payments.LabeledPrice;
-import io.github.natanimn.types.payments.SuccessfulPayment;
-import io.github.natanimn.types.updates.Message;
-import io.github.natanimn.types.updates.PreCheckoutQuery;
+import io.github.natanimn.telebof.types.chat_and_user.User;
+import io.github.natanimn.telebof.types.payments.LabeledPrice;
+import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
+import io.github.natanimn.telebof.types.updates.Message;
+import io.github.natanimn.telebof.types.updates.PreCheckoutQuery;
 
 /**
  * Payment example bot of telebof library
