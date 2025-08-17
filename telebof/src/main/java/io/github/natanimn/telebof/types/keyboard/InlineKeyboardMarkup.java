@@ -38,6 +38,8 @@ public class InlineKeyboardMarkup implements Markup {
     }
 
     public InlineKeyboardMarkup(InlineKeyboardButton[] buttons, int rowWidth) {
+        this.inline_keyboard = new ArrayList<>();
+
         this.rowWidth = Math.min(rowWidth, 8);
         if (rowWidth > 8) {
             BotLog.warn("Telegram supports maximum 8 buttons per row");
@@ -50,6 +52,7 @@ public class InlineKeyboardMarkup implements Markup {
     }
 
     public void addKeyboard(InlineKeyboardButton... buttons) {
+        this.inline_keyboard = new ArrayList<>();
         addButtons(buttons);
     }
 
