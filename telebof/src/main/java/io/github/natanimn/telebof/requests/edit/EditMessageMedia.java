@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.edit;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
@@ -20,11 +20,11 @@ public class EditMessageMedia extends AbstractBaseRequest<EditMessageMedia, Obje
      * @param media media
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageMedia(Object, InputMedia, int)
      */
-    public EditMessageMedia(InputMedia media, Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "editMessageMedia", Message.class);
+    public EditMessageMedia(InputMedia media, Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "editMessageMedia", Message.class);
         add("media", media);
         add("message_id", message_id);
         if (media.hasFile()) setHasMultipart(true);
@@ -34,11 +34,11 @@ public class EditMessageMedia extends AbstractBaseRequest<EditMessageMedia, Obje
      * Required
      * @param media media
      * @param inline_message_id inline message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageMedia(String, InputMedia)
      */
-    public EditMessageMedia(InputMedia media, String inline_message_id, RequestSender requestSender) {
-        super(requestSender, "editMessageMedia", Boolean.class);
+    public EditMessageMedia(InputMedia media, String inline_message_id, Api api) {
+        super(api, "editMessageMedia", Boolean.class);
         add("media", media);
         add("inline_message_id", inline_message_id);
         if (media.hasFile()) setHasMultipart(true);

@@ -19,25 +19,25 @@ abstract public class AbstractBaseRequest<T, R>{
     private boolean hasMultipart;
     T type = (T) this;
     protected String methodName ;
-    protected RequestSender requestSender;
+    protected Api api;
     private final Type responseType;
 
-    public AbstractBaseRequest(Object chat_id, RequestSender requestSender, String methodName, Type responseType) {
+    public AbstractBaseRequest(Object chat_id, Api api, String methodName, Type responseType) {
         add("chat_id", chat_id);
-        this.requestSender = requestSender;
+        this.api = api;
         this.methodName = methodName;
         this.responseType = responseType;
     }
 
-    public AbstractBaseRequest(RequestSender requestSender, String methodName, Type responseType) {
+    public AbstractBaseRequest(Api api, String methodName, Type responseType) {
         this.methodName = methodName;
-        this.requestSender = requestSender;
+        this.api = api;
         this.responseType = responseType;
     }
 
-    public AbstractBaseRequest(RequestSender requestSender, String methodName) {
+    public AbstractBaseRequest(Api api, String methodName) {
         this.methodName = methodName;
-        this.requestSender = requestSender;
+        this.api = api;
         this.responseType = Boolean.class;
     }
 
@@ -77,7 +77,7 @@ abstract public class AbstractBaseRequest<T, R>{
      * @return {@link R}
      */
     public final R exec(){
-        return requestSender.makeRequest(this);
+        return api.makeRequest(this);
     }
 
 }

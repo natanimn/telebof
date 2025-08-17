@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.send;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.keyboard.ReplyParameters;
 import io.github.natanimn.telebof.types.updates.Message;
@@ -16,12 +16,12 @@ import java.lang.reflect.Type;
  */
 abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
 
-    public SendBuilder(Object chatId, RequestSender requestSender, String methodName) {
-        super(chatId, requestSender, methodName, Message.class);
+    public SendBuilder(Object chatId, Api api, String methodName) {
+        super(chatId, api, methodName, Message.class);
     }
 
-    public SendBuilder(Object chatId, RequestSender requestSender, String methodName, Type type) {
-        super(chatId, requestSender, methodName, type);
+    public SendBuilder(Object chatId, Api api, String methodName, Type type) {
+        super(chatId, api, methodName, type);
     }
 
     /**

@@ -34,11 +34,11 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 public class BotContext {
-    private final RequestSender requestSender;
+    private final Api api;
     private StateMemoryStorage storage;
 
-    public BotContext( RequestSender requestSender, StateMemoryStorage storage){
-        this.requestSender = requestSender;
+    public BotContext(Api api, StateMemoryStorage storage){
+        this.api = api;
         this.storage = storage;
     }
 
@@ -60,11 +60,11 @@ public class BotContext {
      * @see <a href="https://core.telegram.org/bots/api#setwebhook">Telegram Documetation</a>
      */
     public SetWebhook setWebhook(String url){
-        return new SetWebhook(url, requestSender);
+        return new SetWebhook(url, api);
     }
 
     public WebhookInfo getWebhookInfo(){
-        return new GetWebhookInfo(requestSender).exec();
+        return new GetWebhookInfo(api).exec();
     }
 
     /**
@@ -72,7 +72,7 @@ public class BotContext {
      * @see <a href="https://core.telegram.org/bots/api#deletewebhook">Delete Webhook</a>
      */
     public void deleteWebhook(){
-        new DeleteWebhook(requestSender).exec();
+        new DeleteWebhook(api).exec();
     }
 
     /**
@@ -80,7 +80,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetMe}
      */
     public GetMe getMe() {
-        return new GetMe(this.requestSender);
+        return new GetMe(this.api);
     }
 
     /**
@@ -90,7 +90,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.LogOut}
      */
     public LogOut logOut() {
-        return new LogOut(this.requestSender);
+        return new LogOut(this.api);
     }
 
     /**
@@ -100,7 +100,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.Close}
      */
     public Close close() {
-        return new Close(this.requestSender);
+        return new Close(this.api);
     }
 
     /**
@@ -110,7 +110,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendMessage}
      */
     public SendMessage sendMessage(Object chat_id, String text) {
-        return new SendMessage(chat_id, text, this.requestSender);
+        return new SendMessage(chat_id, text, this.api);
     }
 
     /**
@@ -121,7 +121,7 @@ public class BotContext {
      * @return array of byte
      */
     public byte[] downloadFile(String file_path) {
-        return requestSender.downloadFile(file_path);
+        return api.downloadFile(file_path);
     }
 
     /**
@@ -132,7 +132,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ForwardMessage}
      */
     public ForwardMessage forward(Object chat_id, Object from_chat_id, int message_id) {
-        return new ForwardMessage(chat_id, from_chat_id, message_id, this.requestSender);
+        return new ForwardMessage(chat_id, from_chat_id, message_id, this.api);
     }
 
     /**
@@ -145,7 +145,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.CopyMessage}
      */
     public CopyMessage copy(Object chat_id, Object from_chat_id, int message_id) {
-        return new CopyMessage(chat_id, from_chat_id, message_id, this.requestSender);
+        return new CopyMessage(chat_id, from_chat_id, message_id, this.api);
     }
 
     /**
@@ -157,7 +157,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ForwardMessages}
      */
     public ForwardMessages forwardMessages(Object chat_id, Object from_chat_id, int[] message_id) {
-        return new ForwardMessages(chat_id, from_chat_id, message_id, this.requestSender);
+        return new ForwardMessages(chat_id, from_chat_id, message_id, this.api);
     }
 
     /**
@@ -168,7 +168,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendPhoto}
      */
     public SendPhoto sendPhoto(Object chat_id, String photo) {
-        return new SendPhoto(chat_id, photo, this.requestSender);
+        return new SendPhoto(chat_id, photo, this.api);
     }
 
     /**
@@ -180,7 +180,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendPhoto}
      */
     public SendPhoto sendPhoto(Object chat_id, File photo) {
-        return new SendPhoto(chat_id, photo, this.requestSender);
+        return new SendPhoto(chat_id, photo, this.api);
     }
 
     /**
@@ -192,7 +192,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendAudio}
      */
     public SendAudio sendAudio(Object chat_id, String audio) {
-        return new SendAudio(chat_id, audio, this.requestSender);
+        return new SendAudio(chat_id, audio, this.api);
     }
 
     /**
@@ -203,7 +203,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendAudio}
      */
     public SendAudio sendAudio(Object chat_id, File audio) {
-        return new SendAudio(chat_id, audio, this.requestSender);
+        return new SendAudio(chat_id, audio, this.api);
     }
 
     /**
@@ -215,7 +215,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendDocument}
      */
     public SendDocument sendDocument(Object chat_id, String document) {
-        return new SendDocument(chat_id, document, this.requestSender);
+        return new SendDocument(chat_id, document, this.api);
     }
 
     /**
@@ -226,7 +226,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendDocument}
      */
     public SendDocument sendDocument(Object chat_id, File document) {
-        return new SendDocument(chat_id, document, this.requestSender);
+        return new SendDocument(chat_id, document, this.api);
     }
 
     /**
@@ -238,7 +238,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideo}
      */
     public SendVideo sendVideo(Object chat_id, String video) {
-        return new SendVideo(chat_id, video, this.requestSender);
+        return new SendVideo(chat_id, video, this.api);
     }
 
     /**
@@ -249,7 +249,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideo}
      */
     public SendVideo sendVideo(Object chat_id, File video) {
-        return new SendVideo(chat_id, video, this.requestSender);
+        return new SendVideo(chat_id, video, this.api);
     }
 
     /**
@@ -261,7 +261,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendAnimation}
      */
     public SendAnimation sendAnimation(Object chat_id, String animation) {
-        return new SendAnimation(chat_id, animation, this.requestSender);
+        return new SendAnimation(chat_id, animation, this.api);
     }
 
     /**
@@ -272,7 +272,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendAnimation}
      */
     public SendAnimation sendAnimation(Object chat_id, File animation) {
-        return new SendAnimation(chat_id, animation, this.requestSender);
+        return new SendAnimation(chat_id, animation, this.api);
     }
 
     /**
@@ -285,7 +285,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVoice}
      */
     public SendVoice sendVoice(Object chat_id, String voice) {
-        return new SendVoice(chat_id, voice, this.requestSender);
+        return new SendVoice(chat_id, voice, this.api);
     }
 
     /**
@@ -297,7 +297,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVoice}
      */
     public SendVoice sendVoice(Object chat_id, File voice) {
-        return new SendVoice(chat_id, voice, this.requestSender);
+        return new SendVoice(chat_id, voice, this.api);
     }
 
     /**
@@ -308,7 +308,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideoNote}
      */
     public SendVideoNote sendVideoNote(Object chat_id, String video_note) {
-        return new SendVideoNote(chat_id, video_note, this.requestSender);
+        return new SendVideoNote(chat_id, video_note, this.api);
     }
 
     /**
@@ -319,7 +319,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideoNote}
      */
     public SendVideoNote sendVideoNote(Object chat_id, File video_note) {
-        return new SendVideoNote(chat_id, video_note, this.requestSender);
+        return new SendVideoNote(chat_id, video_note, this.api);
     }
 
     /**
@@ -332,7 +332,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendMediaGroup}
      */
     public SendMediaGroup sendMediaGroup(Object chat_id, InputMedia[] media) {
-        return new SendMediaGroup(chat_id, media, this.requestSender);
+        return new SendMediaGroup(chat_id, media, this.api);
     }
 
     /**
@@ -345,7 +345,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendPaidMedia}
      */
     public SendPaidMedia sendPaidMedia(Object chat_id, short star_count, InputPaidMedia[] media){
-        return new SendPaidMedia(chat_id, star_count, media, requestSender);
+        return new SendPaidMedia(chat_id, star_count, media, api);
     }
 
     /**
@@ -356,7 +356,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendLocation}
      */
     public SendLocation sendLocation(Object chat_id, double latitude, double longitude) {
-        return new SendLocation(chat_id, latitude, longitude, this.requestSender);
+        return new SendLocation(chat_id, latitude, longitude, this.api);
     }
 
     /**
@@ -370,7 +370,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageLiveLocation}
      */
     public EditMessageLiveLocation editMessageLiveLocation(Object chat_id, double latitude, double longitude, int message_id) {
-        return new EditMessageLiveLocation(chat_id, latitude, longitude, message_id, this.requestSender);
+        return new EditMessageLiveLocation(chat_id, latitude, longitude, message_id, this.api);
     }
 
     /**
@@ -383,7 +383,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageLiveLocation}
      */
     public EditMessageLiveLocation editMessageLiveLocation(String inline_message_id, double latitude, double longitude) {
-        return new EditMessageLiveLocation(inline_message_id, latitude, longitude, this.requestSender);
+        return new EditMessageLiveLocation(inline_message_id, latitude, longitude, this.api);
     }
 
     /**
@@ -395,7 +395,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditUserStarSubscription}
      */
     public EditUserStarSubscription editUserStarSubscription(long user_id, String telegram_charge_id, boolean is_cancelled){
-        return new EditUserStarSubscription(user_id, telegram_charge_id, is_cancelled, requestSender);
+        return new EditUserStarSubscription(user_id, telegram_charge_id, is_cancelled, api);
     }
 
     /**
@@ -407,7 +407,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.StopMessageLiveLocation}
      */
     public StopMessageLiveLocation stopMessageLiveLocation(Object chat_id, int message_id) {
-        return new StopMessageLiveLocation(chat_id, message_id, this.requestSender);
+        return new StopMessageLiveLocation(chat_id, message_id, this.api);
     }
 
     /**
@@ -418,7 +418,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.StopMessageLiveLocation}
      */
     public StopMessageLiveLocation stopMessageLiveLocation(String inline_message_id) {
-        return new StopMessageLiveLocation(inline_message_id, this.requestSender);
+        return new StopMessageLiveLocation(inline_message_id, this.api);
     }
 
     /**
@@ -431,7 +431,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendVenue}
      */
     public SendVenue sendVenue(Object chat_id, double latitude, double longitude, String title, String address) {
-        return new SendVenue(chat_id, latitude, longitude, title, address, this.requestSender);
+        return new SendVenue(chat_id, latitude, longitude, title, address, this.api);
     }
 
     /**
@@ -442,7 +442,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendContact}
      */
     public SendContact sendContact(Object chat_id, String phone_number, String first_name) {
-        return new SendContact(chat_id, phone_number, first_name, this.requestSender);
+        return new SendContact(chat_id, phone_number, first_name, this.api);
     }
 
     /**
@@ -453,7 +453,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendPoll}
      */
     public SendPoll sendPoll(Object chat_id, String question, InputPollOption[] options) {
-        return new SendPoll(chat_id, question, options, this.requestSender);
+        return new SendPoll(chat_id, question, options, this.api);
     }
 
     /**
@@ -462,7 +462,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendDice}
      */
     public SendDice sendDice(Object chat_id) {
-        return new SendDice(chat_id, this.requestSender);
+        return new SendDice(chat_id, this.api);
     }
 
     /**
@@ -478,7 +478,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendChatAction}
      */
     public SendChatAction sendChatAction(Object chat_id, ChatAction action) {
-        return new SendChatAction(chat_id, action, this.requestSender);
+        return new SendChatAction(chat_id, action, this.api);
     }
 
     /**
@@ -488,7 +488,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendGift}
      */
     public SendGift sendGift(long user_id, String gift_id){
-        return new SendGift(user_id, gift_id, requestSender);
+        return new SendGift(user_id, gift_id, api);
     }
 
     /**
@@ -498,7 +498,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendGift}
      */
     public SendGift sendGift(Object chat_id, String gift_id){
-        return new SendGift(chat_id, gift_id, requestSender);
+        return new SendGift(chat_id, gift_id, api);
     }
 
     /**
@@ -507,7 +507,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetUserProfilePhotos}
      */
     public GetUserProfilePhotos getUserProfilePhotos(long user_id) {
-        return new GetUserProfilePhotos(user_id, this.requestSender);
+        return new GetUserProfilePhotos(user_id, this.api);
     }
 
     /**
@@ -517,7 +517,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.RefundStarPayment}
      */
     public RefundStarPayment refundStarPayment(long user_id, String telegram_payment_change_id) {
-        return new RefundStarPayment(user_id, telegram_payment_change_id, requestSender);
+        return new RefundStarPayment(user_id, telegram_payment_change_id, api);
     }
 
     /**
@@ -526,7 +526,7 @@ public class BotContext {
      * @return {@link VerifyUser}
      */
     public VerifyUser verifyUser(long user_id){
-        return new VerifyUser(user_id, requestSender);
+        return new VerifyUser(user_id, api);
     }
 
     /**
@@ -535,7 +535,7 @@ public class BotContext {
      * @return {@link VerifyUser}
      */
     public VerifyChat verifyUChat(Object chat_id){
-        return new VerifyChat(chat_id, requestSender);
+        return new VerifyChat(chat_id, api);
     }
 
     /**
@@ -544,7 +544,7 @@ public class BotContext {
      * @return {@link RemoveUserVerification}
      */
     public RemoveUserVerification removeUserVerification(long user_id){
-        return new RemoveUserVerification(user_id, requestSender);
+        return new RemoveUserVerification(user_id, api);
     }
 
     /**
@@ -553,7 +553,7 @@ public class BotContext {
      * @return {@link RemoveUserVerification}
      */
     public RemoveChatVerification removeChatVerification(Object chat_id){
-        return new RemoveChatVerification(chat_id, requestSender);
+        return new RemoveChatVerification(chat_id, api);
     }
 
     /**
@@ -564,7 +564,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetFile}
      */
     public GetFile getFile(String file_id) {
-        return new GetFile(file_id, this.requestSender);
+        return new GetFile(file_id, this.api);
     }
 
     /**
@@ -576,7 +576,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.BanChatMember}
      */
     public BanChatMember banChatMember(Object chat_id, long user_id) {
-        return new BanChatMember(chat_id, user_id, this.requestSender);
+        return new BanChatMember(chat_id, user_id, this.api);
     }
 
     /**
@@ -589,7 +589,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnbanChatMember}
      */
     public UnbanChatMember unbanChatMember(Object chat_id, long user_id) {
-        return new UnbanChatMember(chat_id, user_id, this.requestSender);
+        return new UnbanChatMember(chat_id, user_id, this.api);
     }
 
     /**
@@ -600,7 +600,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnbanChatSenderChat}
      */
     public UnbanChatSenderChat unbanChatSenderChat(Object chat_id, long sender_chat_id){
-        return new UnbanChatSenderChat(chat_id, sender_chat_id, requestSender);
+        return new UnbanChatSenderChat(chat_id, sender_chat_id, api);
     }
 
     /**
@@ -613,7 +613,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.RestrictChatMember}
      */
     public RestrictChatMember restrictChatMember(Object chat_id, long user_id, ChatPermissions permissions) {
-        return new RestrictChatMember(chat_id, user_id, permissions, this.requestSender);
+        return new RestrictChatMember(chat_id, user_id, permissions, this.api);
     }
 
     /**
@@ -625,7 +625,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.PromoteChatMember}
      */
     public PromoteChatMember promoteChatMember(Object chat_id, long user_id) {
-        return new PromoteChatMember(chat_id, user_id, this.requestSender);
+        return new PromoteChatMember(chat_id, user_id, this.api);
     }
 
     /**
@@ -636,7 +636,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatAdministratorCustomTitle}
      */
     public SetChatAdministratorCustomTitle setChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title) {
-        return new SetChatAdministratorCustomTitle(chat_id, user_id, custom_title, this.requestSender);
+        return new SetChatAdministratorCustomTitle(chat_id, user_id, custom_title, this.api);
     }
 
     /**
@@ -647,7 +647,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetUserEmojiStatus}
      */
     public SetUserEmojiStatus setUserEmojiStatus(long user_id){
-        return new SetUserEmojiStatus(user_id, requestSender);
+        return new SetUserEmojiStatus(user_id, api);
     }
 
     /**
@@ -659,7 +659,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.BanChatSenderChat}
      */
     public BanChatSenderChat banChatSenderChat(Object chat_id, long sender_chat_id) {
-        return new BanChatSenderChat(chat_id, sender_chat_id, this.requestSender);
+        return new BanChatSenderChat(chat_id, sender_chat_id, this.api);
     }
 
     /**
@@ -670,7 +670,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatPermissions}
      */
     public SetChatPermissions setChatPermissions(Object chat_id, ChatPermissions permissions) {
-        return new SetChatPermissions(chat_id, permissions, this.requestSender);
+        return new SetChatPermissions(chat_id, permissions, this.api);
     }
 
     /**
@@ -684,7 +684,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ExportChatInviteLink}
      */
     public ExportChatInviteLink exportChatInviteLink(Object chat_id) {
-        return new ExportChatInviteLink(chat_id, this.requestSender);
+        return new ExportChatInviteLink(chat_id, this.api);
     }
 
     /**
@@ -695,7 +695,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.create.CreateChatInviteLink}
      */
     public CreateChatInviteLink createChatInviteLink(Object chat_id) {
-        return new CreateChatInviteLink(chat_id, this.requestSender);
+        return new CreateChatInviteLink(chat_id, this.api);
     }
 
     /**
@@ -709,7 +709,7 @@ public class BotContext {
      */
     public CreateChatSubscriptionInviteLink createChatSubscriptionInviteLink(Object chat_id, int subscription_period,
                                                                              int subscription_price) {
-        return new CreateChatSubscriptionInviteLink(chat_id, subscription_period, subscription_price, this.requestSender);
+        return new CreateChatSubscriptionInviteLink(chat_id, subscription_period, subscription_price, this.api);
     }
 
     /**
@@ -720,7 +720,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditChatInviteLink}
      */
     public EditChatInviteLink editChatInviteLink(Object chat_id, String invite_link) {
-        return new EditChatInviteLink(chat_id, invite_link, this.requestSender);
+        return new EditChatInviteLink(chat_id, invite_link, this.api);
     }
 
     /**
@@ -730,7 +730,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditChatSubscriptionInviteLink}
      */
     public EditChatSubscriptionInviteLink editChatSubscriptionInviteLink(Object chat_id, String invite_link) {
-        return new EditChatSubscriptionInviteLink(chat_id, invite_link, this.requestSender);
+        return new EditChatSubscriptionInviteLink(chat_id, invite_link, this.api);
     }
 
     /**
@@ -741,7 +741,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.RevokeChatInviteLink}
      */
     public RevokeChatInviteLink revokeChatInviteLink(Object chat_id, String invite_link) {
-        return new RevokeChatInviteLink(chat_id, invite_link, this.requestSender);
+        return new RevokeChatInviteLink(chat_id, invite_link, this.api);
     }
 
     /**
@@ -752,7 +752,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ApproveChatJoinRequest}
      */
     public ApproveChatJoinRequest approveChatJoinRequest(Object chat_id, long user_id) {
-        return new ApproveChatJoinRequest(chat_id, user_id, this.requestSender);
+        return new ApproveChatJoinRequest(chat_id, user_id, this.api);
     }
 
     /**
@@ -763,7 +763,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.DeclineChatJoinRequest}
      */
     public DeclineChatJoinRequest declineChatJoinRequest(Object chat_id, long user_id) {
-        return new DeclineChatJoinRequest(chat_id, user_id, this.requestSender);
+        return new DeclineChatJoinRequest(chat_id, user_id, this.api);
     }
 
     /**
@@ -774,7 +774,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatPhoto}
      */
     public SetChatPhoto setChatPhoto(Object chat_id, File photo) {
-        return new SetChatPhoto(chat_id, photo, this.requestSender);
+        return new SetChatPhoto(chat_id, photo, this.api);
     }
 
     /**
@@ -784,7 +784,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteChatPhoto}
      */
     public DeleteChatPhoto deleteChatPhoto(Object chat_id) {
-        return new DeleteChatPhoto(chat_id, this.requestSender);
+        return new DeleteChatPhoto(chat_id, this.api);
     }
 
     /**
@@ -795,7 +795,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatTitle}
      */
     public SetChatTitle setChatTitle(Object chat_id, String title) {
-        return new SetChatTitle(chat_id, title, this.requestSender);
+        return new SetChatTitle(chat_id, title, this.api);
     }
 
 
@@ -807,7 +807,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatDescription}
      */
     public SetChatDescription setChatDescription(Object chat_id, String description) {
-        return new SetChatDescription(chat_id, description, this.requestSender);
+        return new SetChatDescription(chat_id, description, this.api);
     }
 
     /**
@@ -819,7 +819,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.PinChatMessage}
      */
     public PinChatMessage pinChatMessage(Object chat_id, int message_id) {
-        return new PinChatMessage(chat_id, message_id, this.requestSender);
+        return new PinChatMessage(chat_id, message_id, this.api);
     }
 
     /**
@@ -830,7 +830,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnpinChatMessage}
      */
     public UnpinChatMessage unpinChatMessage(Object chat_id) {
-        return new UnpinChatMessage(chat_id, this.requestSender);
+        return new UnpinChatMessage(chat_id, this.api);
     }
 
     /**
@@ -841,7 +841,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllChatMessages}
      */
     public UnpinAllChatMessages unpinAllChatMessages(Object chat_id) {
-        return new UnpinAllChatMessages(chat_id, this.requestSender);
+        return new UnpinAllChatMessages(chat_id, this.api);
     }
 
     /**
@@ -849,7 +849,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetStarTransactions}
      */
     public GetStarTransactions getStarTransactions(){
-        return new GetStarTransactions(requestSender);
+        return new GetStarTransactions(api);
     }
 
     /**
@@ -858,7 +858,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.LeaveChat}
      */
     public LeaveChat leaveChat(Object chat_id) {
-        return new LeaveChat(chat_id, this.requestSender);
+        return new LeaveChat(chat_id, this.api);
     }
 
     /**
@@ -867,7 +867,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetChat}
      */
     public GetChat getChat(Object chat_id) {
-        return new GetChat(chat_id, this.requestSender);
+        return new GetChat(chat_id, this.api);
     }
 
     /**
@@ -877,7 +877,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetUserChatBoosts}
      */
     public GetUserChatBoosts getUserChatBoosts(Object chat_id, long user_id){
-        return new GetUserChatBoosts(chat_id, user_id, requestSender);
+        return new GetUserChatBoosts(chat_id, user_id, api);
     }
 
     /**
@@ -886,7 +886,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatAdministrators}
      */
     public GetChatAdministrators getChatAdministrators(Object chat_id) {
-        return new GetChatAdministrators(chat_id, this.requestSender);
+        return new GetChatAdministrators(chat_id, this.api);
     }
 
     /**
@@ -895,7 +895,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatMemberCount}
      */
     public GetChatMemberCount getChatMemberCount(Object chat_id) {
-        return new GetChatMemberCount(chat_id, this.requestSender);
+        return new GetChatMemberCount(chat_id, this.api);
     }
 
     /**
@@ -906,7 +906,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatMember}
      */
     public GetChatMember getChatMember(Object chat_id, long user_id) {
-        return new GetChatMember(chat_id, user_id, this.requestSender);
+        return new GetChatMember(chat_id, user_id, this.api);
     }
 
     /**
@@ -918,7 +918,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetMessageReaction}
      */
     public SetMessageReaction setMessageReaction(Object chat_id, int message_id){
-        return new SetMessageReaction(chat_id, message_id, requestSender);
+        return new SetMessageReaction(chat_id, message_id, api);
     }
 
     /**
@@ -930,7 +930,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatStickerSet}
      */
     public SetChatStickerSet setChatStickerSet(Object chat_id, String sticker_set_name) {
-        return new SetChatStickerSet(chat_id, sticker_set_name, this.requestSender);
+        return new SetChatStickerSet(chat_id, sticker_set_name, this.api);
     }
 
     /**
@@ -941,7 +941,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteChatStickerSet}
      */
     public DeleteChatStickerSet deleteChatStickerSet(Object chat_id) {
-        return new DeleteChatStickerSet(chat_id, this.requestSender);
+        return new DeleteChatStickerSet(chat_id, this.api);
     }
 
     /**
@@ -949,7 +949,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetForumTopicIconStickers}
      */
     public GetForumTopicIconStickers getForumTopicIconStickers() {
-        return new GetForumTopicIconStickers(this.requestSender);
+        return new GetForumTopicIconStickers(this.api);
     }
 
     /**
@@ -960,7 +960,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.create.CreateForumTopic}
      */
     public CreateForumTopic createForumTopic(Object chat_id, String name) {
-        return new CreateForumTopic(chat_id, name, this.requestSender);
+        return new CreateForumTopic(chat_id, name, this.api);
     }
 
     /**
@@ -971,7 +971,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditForumTopic}
      */
     public EditForumTopic editForumTopic(Object chat_id, int message_thread_id) {
-        return new EditForumTopic(chat_id, message_thread_id, this.requestSender);
+        return new EditForumTopic(chat_id, message_thread_id, this.api);
     }
 
     /**
@@ -982,7 +982,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.CloseForumTopic}
      */
     public CloseForumTopic closeForumTopic(Object chat_id, int message_thread_id){
-        return new CloseForumTopic(chat_id, message_thread_id, requestSender);
+        return new CloseForumTopic(chat_id, message_thread_id, api);
     }
 
     /**
@@ -993,7 +993,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ReopenForumTopic}
      */
     public ReopenForumTopic reopenForumTopic(Object chat_id, int message_thread_id) {
-        return new ReopenForumTopic(chat_id, message_thread_id, this.requestSender);
+        return new ReopenForumTopic(chat_id, message_thread_id, this.api);
     }
 
     /**
@@ -1004,7 +1004,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteForumTopic}
      */
     public DeleteForumTopic deleteForumTopic(Object chat_id, int message_thread_id) {
-        return new DeleteForumTopic(chat_id, message_thread_id, this.requestSender);
+        return new DeleteForumTopic(chat_id, message_thread_id, this.api);
     }
 
     /**
@@ -1015,7 +1015,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllForumTopicMessages}
      */
     public UnpinAllForumTopicMessages unpinAllForumTopicMessages(Object chat_id, int message_thread_id) {
-        return new UnpinAllForumTopicMessages(chat_id, message_thread_id, this.requestSender);
+        return new UnpinAllForumTopicMessages(chat_id, message_thread_id, this.api);
     }
 
     /**
@@ -1026,7 +1026,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditGeneralForumTopic}
      */
     public EditGeneralForumTopic editGeneralForumTopic(Object chat_id, String name) {
-        return new EditGeneralForumTopic(chat_id, name, this.requestSender);
+        return new EditGeneralForumTopic(chat_id, name, this.api);
     }
 
     /**
@@ -1036,7 +1036,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.CloseForumTopic}
      */
     public CloseGeneralForumTopic closeGeneralForumTopic(Object chat_id) {
-        return new CloseGeneralForumTopic(chat_id, this.requestSender);
+        return new CloseGeneralForumTopic(chat_id, this.api);
     }
 
     /**
@@ -1047,7 +1047,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ReopenGeneralForumTopic}
      */
     public ReopenGeneralForumTopic reopenGeneralForumTopic(Object chat_id) {
-        return new ReopenGeneralForumTopic(chat_id, this.requestSender);
+        return new ReopenGeneralForumTopic(chat_id, this.api);
     }
 
     /**
@@ -1058,7 +1058,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.HideGeneralForumTopic}
      */
     public HideGeneralForumTopic hideGeneralForumTopic(Object chat_id) {
-        return new HideGeneralForumTopic(chat_id, this.requestSender);
+        return new HideGeneralForumTopic(chat_id, this.api);
     }
 
     /**
@@ -1068,7 +1068,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnHideGeneralForumTopic}
      */
     public UnHideGeneralForumTopic unHideGeneralForumTopic(Object chat_id) {
-        return new UnHideGeneralForumTopic(chat_id, this.requestSender);
+        return new UnHideGeneralForumTopic(chat_id, this.api);
     }
 
     /**
@@ -1078,7 +1078,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllGeneralForumTopicMessages}
      */
     public UnpinAllGeneralForumTopicMessages unpinAllGeneralForumTopicMessages(Object chat_id){
-        return new UnpinAllGeneralForumTopicMessages(chat_id, this.requestSender);
+        return new UnpinAllGeneralForumTopicMessages(chat_id, this.api);
     }
 
 
@@ -1089,7 +1089,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery}
      */
     public AnswerCallbackQuery answerCallbackQuery(String callback_query_id) {
-        return new AnswerCallbackQuery(callback_query_id, this.requestSender);
+        return new AnswerCallbackQuery(callback_query_id, this.api);
     }
 
     /**
@@ -1099,7 +1099,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery}
      */
     public AnswerCallbackQuery answerCallbackQuery(String callback_query_id, String text) {
-        return new AnswerCallbackQuery(callback_query_id, this.requestSender).text(text);
+        return new AnswerCallbackQuery(callback_query_id, this.api).text(text);
     }
 
     /**
@@ -1109,7 +1109,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetMyCommands}
      */
     public SetMyCommands setMyCommands(BotCommand[] commands) {
-        return new SetMyCommands(commands, this.requestSender);
+        return new SetMyCommands(commands, this.api);
     }
 
     /**
@@ -1118,7 +1118,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteMyCommands}
      */
     public DeleteMyCommands deleteMyCommands() {
-        return new DeleteMyCommands(this.requestSender);
+        return new DeleteMyCommands(this.api);
     }
 
     /**
@@ -1126,7 +1126,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetMyCommands}
      */
     public GetMyCommands getMyCommands() {
-        return new GetMyCommands(this.requestSender);
+        return new GetMyCommands(this.api);
     }
 
     /**
@@ -1134,7 +1134,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatMenuButton}
      */
     public SetChatMenuButton setChatMenuButton() {
-        return new SetChatMenuButton(this.requestSender);
+        return new SetChatMenuButton(this.api);
     }
 
     /**
@@ -1142,7 +1142,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatMenuButton}
      */
     public GetChatMenuButton getChatMenuButton() {
-        return new GetChatMenuButton(this.requestSender);
+        return new GetChatMenuButton(this.api);
     }
 
     /**
@@ -1151,7 +1151,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetMyDefaultAdministratorRights}
      */
     public SetMyDefaultAdministratorRights setMyDefaultAdministratorRights() {
-        return new SetMyDefaultAdministratorRights(this.requestSender);
+        return new SetMyDefaultAdministratorRights(this.api);
     }
 
     /**
@@ -1159,7 +1159,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetMyDefaultAdministratorRights}
      */
     public GetMyDefaultAdministratorRights getMyDefaultAdministratorRights() {
-        return new GetMyDefaultAdministratorRights(this.requestSender);
+        return new GetMyDefaultAdministratorRights(this.api);
     }
 
     /**
@@ -1172,7 +1172,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
      */
     public EditMessageText editMessageText(String text, Object chat_id, int message_id) {
-        return new EditMessageText(text, chat_id, message_id, this.requestSender);
+        return new EditMessageText(text, chat_id, message_id, this.api);
     }
 
     /**
@@ -1183,7 +1183,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
      */
     public EditMessageText editMessageText(String text, String inline_message_id) {
-        return new EditMessageText(text, inline_message_id, this.requestSender);
+        return new EditMessageText(text, inline_message_id, this.api);
     }
 
     /**
@@ -1194,7 +1194,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageCaption}
      */
     public EditMessageCaption editMessageCaption(Object chat_id, int message_id) {
-        return new EditMessageCaption(chat_id, message_id, this.requestSender);
+        return new EditMessageCaption(chat_id, message_id, this.api);
     }
 
     /**
@@ -1204,7 +1204,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageCaption}
      */
     public EditMessageCaption editMessageCaption(String inline_message_id) {
-        return new EditMessageCaption(inline_message_id, this.requestSender);
+        return new EditMessageCaption(inline_message_id, this.api);
     }
 
     /**
@@ -1219,7 +1219,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageMedia}
      */
     public EditMessageMedia editMessageMedia(Object chat_id, InputMedia media, int message_id) {
-        return new EditMessageMedia(media, chat_id, message_id, this.requestSender);
+        return new EditMessageMedia(media, chat_id, message_id, this.api);
     }
 
     /**
@@ -1232,7 +1232,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageMedia}
      */
     public EditMessageMedia editMessageMedia(String inline_message_id, InputMedia media) {
-        return new EditMessageMedia(media, inline_message_id, this.requestSender);
+        return new EditMessageMedia(media, inline_message_id, this.api);
     }
 
     /**
@@ -1244,7 +1244,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageReplyMarkup}
      */
     public EditMessageReplyMarkup editMessageReplyMarkup(Object chat_id, int message_id) {
-        return new EditMessageReplyMarkup(chat_id, message_id, this.requestSender);
+        return new EditMessageReplyMarkup(chat_id, message_id, this.api);
     }
 
     /**
@@ -1255,7 +1255,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageReplyMarkup}
      */
     public EditMessageReplyMarkup editMessageReplyMarkup(String inline_message_id) {
-        return new EditMessageReplyMarkup(inline_message_id, this.requestSender);
+        return new EditMessageReplyMarkup(inline_message_id, this.api);
     }
 
     /**
@@ -1265,7 +1265,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.StopPoll}
      */
     public StopPoll stopPoll(Object chat_id, int message_id) {
-        return new StopPoll(chat_id, message_id, this.requestSender);
+        return new StopPoll(chat_id, message_id, this.api);
     }
 
     /**
@@ -1285,7 +1285,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteMessage}
      */
     public DeleteMessage deleteMessage(Object chat_id, int message_id) {
-        return new DeleteMessage(chat_id, message_id, this.requestSender);
+        return new DeleteMessage(chat_id, message_id, this.api);
     }
 
     /**
@@ -1295,7 +1295,7 @@ public class BotContext {
      * @return
      */
     public DeleteMessages deleteMessages(Object chat_id, int[] message_ids) {
-        return new DeleteMessages(chat_id, message_ids, this.requestSender);
+        return new DeleteMessages(chat_id, message_ids, this.api);
     }
 
     /**
@@ -1305,7 +1305,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendSticker}
      */
     public SendSticker sendSticker(Object chat_id, File sticker) {
-        return new SendSticker(chat_id, sticker, this.requestSender);
+        return new SendSticker(chat_id, sticker, this.api);
     }
 
     /**
@@ -1317,7 +1317,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendSticker}
      */
     public SendSticker sendSticker(Object chat_id, String sticker) {
-        return new SendSticker(chat_id, sticker, this.requestSender);
+        return new SendSticker(chat_id, sticker, this.api);
     }
 
     /**
@@ -1326,7 +1326,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetStickerSet}
      */
     public GetStickerSet getStickerSet(String name) {
-        return new GetStickerSet(name, this.requestSender);
+        return new GetStickerSet(name, this.api);
     }
 
     /**
@@ -1335,7 +1335,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetCustomEmojiStickers}
      */
     public GetCustomEmojiStickers getCustomEmojiStickers(String[] custom_emoji_ids) {
-        return new GetCustomEmojiStickers(custom_emoji_ids, this.requestSender);
+        return new GetCustomEmojiStickers(custom_emoji_ids, this.api);
     }
 
     /**
@@ -1346,7 +1346,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.UploadStickerFile}
      */
     public UploadStickerFile uploadStickerFile(long user_id, File sticker, StickerFormat sticker_format) {
-        return new UploadStickerFile(user_id, sticker, sticker_format, this.requestSender);
+        return new UploadStickerFile(user_id, sticker, sticker_format, this.api);
     }
 
     /**
@@ -1360,7 +1360,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.create.CreateNewStickerSet}
      */
     public CreateNewStickerSet createNewStickerSet(long user_id, String name, String title, InputSticker[] stickers) {
-        return new CreateNewStickerSet(user_id, name, title, stickers, this.requestSender);
+        return new CreateNewStickerSet(user_id, name, title, stickers, this.api);
     }
 
     /**
@@ -1373,7 +1373,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.AddStickerToSet}
      */
     public AddStickerToSet addStickerToSet(long user_id, String name, InputSticker sticker) {
-        return new AddStickerToSet(user_id, name, sticker, this.requestSender);
+        return new AddStickerToSet(user_id, name, sticker, this.api);
     }
 
     /**
@@ -1383,7 +1383,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerPositionInSet}
      */
     public SetStickerPositionInSet setStickerPositionInSet(String sticker, int position) {
-        return new SetStickerPositionInSet(sticker, position, this.requestSender);
+        return new SetStickerPositionInSet(sticker, position, this.api);
     }
 
     /**
@@ -1392,7 +1392,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteStickerFromSet}
      */
     public DeleteStickerFromSet deleteStickerFromSet(String sticker) {
-        return new DeleteStickerFromSet(sticker, this.requestSender);
+        return new DeleteStickerFromSet(sticker, this.api);
     }
 
     /**
@@ -1403,7 +1403,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerEmojiList}
      */
     public SetStickerEmojiList setStickerEmojiList(String sticker, String[] emoji_list) {
-        return new SetStickerEmojiList(sticker, emoji_list, this.requestSender);
+        return new SetStickerEmojiList(sticker, emoji_list, this.api);
     }
 
     /**
@@ -1414,7 +1414,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerKeywords}
      */
     public SetStickerKeywords setStickerKeywords(String sticker, String[] keywords) {
-        return new SetStickerKeywords(sticker, keywords, this.requestSender);
+        return new SetStickerKeywords(sticker, keywords, this.api);
     }
 
     /**
@@ -1424,7 +1424,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerMaskPosition}
      */
     public SetStickerMaskPosition setStickerMaskPosition(String sticker) {
-        return new SetStickerMaskPosition(sticker, this.requestSender);
+        return new SetStickerMaskPosition(sticker, this.api);
     }
 
     /**
@@ -1434,7 +1434,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerSetTitle}
      */
     public SetStickerSetTitle setStickerSetTitle(String name, String title) {
-        return new SetStickerSetTitle(name, title, this.requestSender);
+        return new SetStickerSetTitle(name, title, this.api);
     }
 
     /**
@@ -1447,7 +1447,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.ReplaceStickerInSet}
      */
     public ReplaceStickerInSet replaceStickerInSet(long user_id, String name, String  old_sticker, InputSticker sticker){
-        return new ReplaceStickerInSet(user_id, name, old_sticker, sticker, requestSender);
+        return new ReplaceStickerInSet(user_id, name, old_sticker, sticker, api);
     }
 
     /**
@@ -1465,7 +1465,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerSetThumbnail}
      */
     public SetStickerSetThumbnail setStickerSetThumbnail(String name, long user_id, File thumbnail, StickerFormat format) {
-        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.requestSender);
+        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.api);
     }
 
     /**
@@ -1482,7 +1482,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerSetThumbnail}
      */
     public SetStickerSetThumbnail setStickerSetThumbnail(String name, long user_id, String thumbnail, StickerFormat format) {
-        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.requestSender);
+        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.api);
     }
 
     /**
@@ -1491,7 +1491,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetCustomEmojiStickerSetThumbnail}
      */
     public SetCustomEmojiStickerSetThumbnail setCustomEmojiStickerSetThumbnail(String name) {
-        return new SetCustomEmojiStickerSetThumbnail(name, this.requestSender);
+        return new SetCustomEmojiStickerSetThumbnail(name, this.api);
     }
 
     /**
@@ -1500,7 +1500,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteStickerSet}
      */
     public DeleteStickerSet deleteStickerSet(String name) {
-        return new DeleteStickerSet(name, this.requestSender);
+        return new DeleteStickerSet(name, this.api);
     }
 
     /**
@@ -1509,7 +1509,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetBusinessConnection}
      */
     public GetBusinessConnection getBusinessConnection(String business_connection_id){
-        return new GetBusinessConnection(business_connection_id, requestSender);
+        return new GetBusinessConnection(business_connection_id, api);
     }
 
     /**
@@ -1520,7 +1520,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerInlineQuery}
      */
     public AnswerInlineQuery answerInlineQuery(String inline_query_id, InlineQueryResult[] results) {
-        return new AnswerInlineQuery(inline_query_id, results, this.requestSender);
+        return new AnswerInlineQuery(inline_query_id, results, this.api);
     }
 
     /**
@@ -1530,7 +1530,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.service.SavePreparedInlineMessage}
      */
     public SavePreparedInlineMessage savePreparedInlineMessage(long user_id, InlineQueryResult result){
-        return new SavePreparedInlineMessage(user_id, result, requestSender);
+        return new SavePreparedInlineMessage(user_id, result, api);
     }
 
     /**
@@ -1540,7 +1540,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerWebAppQuery}
      */
     public AnswerWebAppQuery answerWebAppQuery(String web_app_query_id, InlineQueryResult result) {
-        return new AnswerWebAppQuery(web_app_query_id, result, this.requestSender);
+        return new AnswerWebAppQuery(web_app_query_id, result, this.api);
     }
 
     /**
@@ -1557,7 +1557,7 @@ public class BotContext {
      */
     public SendInvoice sendInvoice(Object chat_id, String title, String description, String payload, String currency,
                                    LabeledPrice[] prices) {
-        return new SendInvoice(chat_id, title, description, payload, currency, prices, this.requestSender)
+        return new SendInvoice(chat_id, title, description, payload, currency, prices, this.api)
                 ;
     }
 
@@ -1572,7 +1572,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.create.CreateInvoiceLink}
      */
     public CreateInvoiceLink createInvoiceLink(String title, String description, String payload, String currency, LabeledPrice[] prices) {
-        return new CreateInvoiceLink(title, description, payload, currency, prices, this.requestSender);
+        return new CreateInvoiceLink(title, description, payload, currency, prices, this.api);
     }
 
     /**
@@ -1583,7 +1583,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerShippingQuery}
      */
     public AnswerShippingQuery answerShippingQuery(String shipping_query_id, boolean ok) {
-        return new AnswerShippingQuery(shipping_query_id, ok, this.requestSender);
+        return new AnswerShippingQuery(shipping_query_id, ok, this.api);
     }
 
     /**
@@ -1595,7 +1595,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerPreCheckoutQuery}
      */
     public AnswerPreCheckoutQuery answerPreCheckoutQuery(String pre_checkout_query_id, boolean ok) {
-        return new AnswerPreCheckoutQuery(pre_checkout_query_id, ok, this.requestSender);
+        return new AnswerPreCheckoutQuery(pre_checkout_query_id, ok, this.api);
     }
 
     /**
@@ -1610,7 +1610,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetPassportDataErrors}
      */
     public SetPassportDataErrors setPassportDataErrors(long user_id, PassportElementError[] errors) {
-        return new SetPassportDataErrors(user_id, errors, this.requestSender);
+        return new SetPassportDataErrors(user_id, errors, this.api);
     }
 
     /**
@@ -1620,7 +1620,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.send.SendGame}
      */
     public SendGame sendGame(long chat_id, String game_short_name) {
-        return new SendGame(chat_id, game_short_name, this.requestSender);
+        return new SendGame(chat_id, game_short_name, this.api);
     }
 
     /**
@@ -1633,7 +1633,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetGameScore}
      */
     public SetGameScore setGameScore(long chat_id, long user_id, int score, int message_id) {
-        return new SetGameScore(chat_id, user_id, score, message_id, this.requestSender);
+        return new SetGameScore(chat_id, user_id, score, message_id, this.api);
     }
 
     /**
@@ -1645,7 +1645,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetGameScore}
      */
     public SetGameScore setGameScore(String inline_message_id, long user_id, int score) {
-        return new SetGameScore(inline_message_id, user_id, score, this.requestSender);
+        return new SetGameScore(inline_message_id, user_id, score, this.api);
     }
 
     /**
@@ -1654,7 +1654,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetAvailableGifts}
      */
     public GetAvailableGifts getAvailableGifts(){
-        return new GetAvailableGifts(requestSender);
+        return new GetAvailableGifts(api);
     }
 
     /**
@@ -1662,7 +1662,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetMyName}
      */
     public GetMyName getMyName(){
-        return new GetMyName(this.requestSender);
+        return new GetMyName(this.api);
     }
 
     /**
@@ -1670,7 +1670,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetMyName}
      */
     public SetMyName setMyName(){
-        return new SetMyName(this.requestSender);
+        return new SetMyName(this.api);
     }
 
     /**
@@ -1678,7 +1678,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetMyDescription}
      */
     public GetMyDescription getMyDescription(){
-        return new GetMyDescription(requestSender);
+        return new GetMyDescription(api);
     }
 
     /**
@@ -1686,7 +1686,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.set.SetMyDescription}
      */
     public SetMyDescription setMyDescription(){
-        return new SetMyDescription(requestSender);
+        return new SetMyDescription(api);
     }
 
     /**
@@ -1700,7 +1700,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetGameHighScores}
      */
     public GetGameHighScores getGameHighScores(long chat_id, long user_id, int message_id) {
-        return new GetGameHighScores(chat_id, user_id, message_id, this.requestSender);
+        return new GetGameHighScores(chat_id, user_id, message_id, this.api);
     }
 
     /**
@@ -1713,7 +1713,7 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetGameHighScores}
      */
     public GetGameHighScores getGameHighScores(String inline_message_id, long user_id) {
-        return new GetGameHighScores(inline_message_id, user_id, this.requestSender);
+        return new GetGameHighScores(inline_message_id, user_id, this.api);
     }
 
     /**
@@ -1776,6 +1776,6 @@ public class BotContext {
      * @return {@link io.github.natanimn.telebof.requests.get.GetUpdates}
      */
     public GetUpdates getUpdates(){
-        return new GetUpdates(requestSender);
+        return new GetUpdates(api);
     }
 }

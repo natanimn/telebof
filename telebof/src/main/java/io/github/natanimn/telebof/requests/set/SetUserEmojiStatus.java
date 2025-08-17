@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * @author Natanim
@@ -11,9 +11,9 @@ import io.github.natanimn.telebof.requests.RequestSender;
 public class SetUserEmojiStatus extends AbstractBaseRequest<SetUserEmojiStatus, Boolean> {
     /**
      * @param user_id Unique identifier of the target user
-     * @param rs RequestSender class
+     * @param rs Api class
      */
-    public SetUserEmojiStatus(long user_id, RequestSender rs){
+    public SetUserEmojiStatus(long user_id, Api rs){
         super(rs, "setUserEmojiStatus");
         add("user_id", user_id);
     }

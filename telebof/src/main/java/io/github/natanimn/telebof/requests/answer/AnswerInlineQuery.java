@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.answer;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
 import io.github.natanimn.telebof.types.inline.InlineQueryResultsButton;
 
@@ -20,10 +20,10 @@ public class AnswerInlineQuery extends AbstractBaseRequest<AnswerInlineQuery, Bo
      * Required
      * @param inline_query_id inline query id
      * @param results results
-     * @param requestSender request sender
+     * @param api api
      */
-    public AnswerInlineQuery(String inline_query_id, InlineQueryResult[] results, RequestSender requestSender) {
-        super(requestSender, "answerInlineQuery");
+    public AnswerInlineQuery(String inline_query_id, InlineQueryResult[] results, Api api) {
+        super(api, "answerInlineQuery");
         add("inline_query_id", inline_query_id);
         add("results", List.of(results));
     }

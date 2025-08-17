@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * BanChatSenderChat class. Return True on success.
@@ -16,10 +16,10 @@ public class BanChatSenderChat extends AbstractBaseRequest<BanChatSenderChat, Bo
      * Required
      * @param chat_id chat is
      * @param sender_chat_id sender chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public BanChatSenderChat(Object chat_id, long sender_chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "banChatSenderChat", Boolean.class);
+    public BanChatSenderChat(Object chat_id, long sender_chat_id, Api api) {
+        super(chat_id, api, "banChatSenderChat", Boolean.class);
         add("sender_chat_id", sender_chat_id);
     }
 

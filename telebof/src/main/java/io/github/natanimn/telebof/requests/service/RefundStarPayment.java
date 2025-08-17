@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * RefundStarPayment class. Returns True on success.
@@ -14,10 +14,10 @@ public class RefundStarPayment extends AbstractBaseRequest<RefundStarPayment, Bo
      * Required
      * @param user_id user id
      * @param telegram_payment_charge_id telegram payment charge id
-     * @param requestSender request sender
+     * @param api api
      */
-    public RefundStarPayment(long user_id, String telegram_payment_charge_id, RequestSender requestSender){
-        super(requestSender, "refundStarPayment");
+    public RefundStarPayment(long user_id, String telegram_payment_charge_id, Api api){
+        super(api, "refundStarPayment");
         add("user_id", user_id);
         add("telegram_payment_charge_id", telegram_payment_charge_id);
     }

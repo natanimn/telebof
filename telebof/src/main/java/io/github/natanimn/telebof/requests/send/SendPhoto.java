@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -18,11 +18,11 @@ public class SendPhoto extends SendBuilder<SendPhoto, Message> {
      * Required
      * @param chat_id Chat id
      * @param photo file id or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendPhoto(Object, String)
      */
-    public SendPhoto(Object chat_id, String photo, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendPhoto");
+    public SendPhoto(Object chat_id, String photo, Api api) {
+        super(chat_id, api, "sendPhoto");
         add("photo", photo);
     }
 
@@ -30,11 +30,11 @@ public class SendPhoto extends SendBuilder<SendPhoto, Message> {
      * Required
      * @param chat_id Chat id
      * @param photo file id or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendPhoto(Object, File)
      */
-    public SendPhoto(Object chat_id, File photo, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendPhoto");
+    public SendPhoto(Object chat_id, File photo, Api api) {
+        super(chat_id, api, "sendPhoto");
         add("photo", photo);
     }
 

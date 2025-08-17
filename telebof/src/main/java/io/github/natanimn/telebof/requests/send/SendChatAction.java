@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.enums.ChatAction;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -18,10 +18,10 @@ public class SendChatAction extends AbstractBaseRequest<SendChatAction, Boolean>
      * Required
      * @param chat_id chat id
      * @param action action
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendChatAction(Object chat_id, ChatAction action, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendChatAction", Boolean.class);
+    public SendChatAction(Object chat_id, ChatAction action, Api api) {
+        super(chat_id, api, "sendChatAction", Boolean.class);
         add("action", action);
     }
 

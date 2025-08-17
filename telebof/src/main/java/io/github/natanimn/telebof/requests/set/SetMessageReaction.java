@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.ReactionType;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class SetMessageReaction extends AbstractBaseRequest<SetMessageReaction, 
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetMessageReaction(Object chat_id, int message_id, RequestSender requestSender){
-        super(chat_id, requestSender, "setMessageReaction", Boolean.class);
+    public SetMessageReaction(Object chat_id, int message_id, Api api){
+        super(chat_id, api, "setMessageReaction", Boolean.class);
         add("message_id", message_id);
     }
 

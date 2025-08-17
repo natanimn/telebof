@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.edit;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -21,21 +21,21 @@ public class EditMessageCaption extends AbstractBaseRequest<EditMessageCaption, 
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageCaption(Object, int)
      */
-    public EditMessageCaption(Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "editMessageCaption", Message.class);
+    public EditMessageCaption(Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "editMessageCaption", Message.class);
         add("message_id", message_id);
     }
 
     /**
      * Required
      * @param inline_message_id inline message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public EditMessageCaption(String inline_message_id, RequestSender requestSender) {
-        super(requestSender, "editMessageCaption", Boolean.class);
+    public EditMessageCaption(String inline_message_id, Api api) {
+        super(api, "editMessageCaption", Boolean.class);
         add("inline_message_id", inline_message_id);
     }
 

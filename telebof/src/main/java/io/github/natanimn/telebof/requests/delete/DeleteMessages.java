@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.delete;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * DeleteMessages class. Returns True on success.
@@ -16,10 +16,10 @@ public class DeleteMessages extends AbstractBaseRequest<DeleteMessages, Boolean>
      * Required
      * @param chat_id chat id
      * @param message_ids message ids
-     * @param requestSender request sender
+     * @param api api
      */
-    public DeleteMessages(Object chat_id, int[] message_ids, RequestSender requestSender) {
-        super(chat_id, requestSender, "deleteMessages", Boolean.class);
+    public DeleteMessages(Object chat_id, int[] message_ids, Api api) {
+        super(chat_id, api, "deleteMessages", Boolean.class);
         add("message_id", message_ids);
     }
 }

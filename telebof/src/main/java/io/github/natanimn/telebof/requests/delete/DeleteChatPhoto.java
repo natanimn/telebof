@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.delete;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -15,10 +15,10 @@ public class DeleteChatPhoto extends AbstractBaseRequest<DeleteChatPhoto, Boolea
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public DeleteChatPhoto(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "deleteChatPhoto", Boolean.class);
+    public DeleteChatPhoto(Object chat_id, Api api) {
+        super(chat_id, api, "deleteChatPhoto", Boolean.class);
     }
 
 }

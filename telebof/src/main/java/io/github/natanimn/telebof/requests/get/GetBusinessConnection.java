@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.BusinessConnection;
 
 /**
@@ -16,10 +16,10 @@ public class GetBusinessConnection extends AbstractBaseRequest<GetBusinessConnec
     /**
      * Required
      * @param business_connection_id business connection id
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetBusinessConnection(String business_connection_id, RequestSender requestSender){
-        super(requestSender, "getBusinessConnection", BusinessConnection.class);
+    public GetBusinessConnection(String business_connection_id, Api api){
+        super(api, "getBusinessConnection", BusinessConnection.class);
     }
 
 }

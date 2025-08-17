@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * SetChatDescription class. Returns True on success.
@@ -16,10 +16,10 @@ public class SetChatDescription extends AbstractBaseRequest<SetChatDescription, 
      * Required
      * @param chat_id chat id
      * @param title title
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetChatDescription(Object chat_id, String title, RequestSender requestSender) {
-        super(chat_id, requestSender, "setChatDescription", Boolean.class);
+    public SetChatDescription(Object chat_id, String title, Api api) {
+        super(chat_id, api, "setChatDescription", Boolean.class);
         add("description", title);
     }
 

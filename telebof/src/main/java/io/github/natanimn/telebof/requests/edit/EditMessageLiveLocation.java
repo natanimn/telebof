@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.edit;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Message;
 
@@ -19,11 +19,11 @@ public class EditMessageLiveLocation extends AbstractBaseRequest<EditMessageLive
      * @param latitude latitude
      * @param longitude longitude
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageLiveLocation(Object, double, double, int)
      */
-    public EditMessageLiveLocation(Object chat_id, double latitude, double longitude, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "editMessageLiveLocation", Message.class);
+    public EditMessageLiveLocation(Object chat_id, double latitude, double longitude, int message_id, Api api) {
+        super(chat_id, api, "editMessageLiveLocation", Message.class);
         add("latitude", latitude);
         add("longitude", longitude);
         add("message_id", message_id);
@@ -34,10 +34,10 @@ public class EditMessageLiveLocation extends AbstractBaseRequest<EditMessageLive
      * @param inline_message_id inline message id
      * @param latitude latitude
      * @param longitude longitude
-     * @param requestSender request sender
+     * @param api api
      */
-    public EditMessageLiveLocation(String inline_message_id, double latitude, double longitude, RequestSender requestSender) {
-        super(requestSender, "editMessageLiveLocation", Boolean.class);
+    public EditMessageLiveLocation(String inline_message_id, double latitude, double longitude, Api api) {
+        super(api, "editMessageLiveLocation", Boolean.class);
         add("latitude", latitude);
         add("longitude", longitude);
         add("inline_message_id", inline_message_id);

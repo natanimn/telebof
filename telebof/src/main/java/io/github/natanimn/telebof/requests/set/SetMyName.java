@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * SetMyName class. Returns True on success.
@@ -14,10 +14,10 @@ import io.github.natanimn.telebof.requests.RequestSender;
 public class SetMyName extends AbstractBaseRequest<SetMyName, Boolean> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetMyName(RequestSender requestSender){
-        super(requestSender, "setMyName");
+    public SetMyName(Api api){
+        super(api, "setMyName");
 
     }
 

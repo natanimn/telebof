@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.create;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class CreateInvoiceLink extends AbstractBaseRequest<CreateInvoiceLink, St
      * @param payload payload
      * @param currency currency
      * @param prices prices
-     * @param requestSender request sender
+     * @param api api
      */
     public CreateInvoiceLink(String title, String description, String payload,
-                             String currency, LabeledPrice[] prices, RequestSender requestSender) {
-        super(requestSender, "createInvoiceLink", Object.class);
+                             String currency, LabeledPrice[] prices, Api api) {
+        super(api, "createInvoiceLink", Object.class);
         add("title", title);
         add("description", description);
         add("payload", payload);

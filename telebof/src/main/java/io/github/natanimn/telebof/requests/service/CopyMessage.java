@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class CopyMessage extends AbstractBaseRequest<CopyMessage, MessageId> {
 
-    public CopyMessage(Object chat, Object fromChatId, int messageId, RequestSender requestSender) {
-        super(chat, requestSender, "copyMessage", MessageId.class);
+    public CopyMessage(Object chat, Object fromChatId, int messageId, Api api) {
+        super(chat, api, "copyMessage", MessageId.class);
         add("from_chat_id", fromChatId);
         add("message_id", messageId);
     }

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.answer;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * AnswerCallbackQuery class. Returns True on success.
@@ -15,10 +15,10 @@ public class AnswerCallbackQuery extends AbstractBaseRequest<AnswerCallbackQuery
     /**
      * Required
      * @param callback_query_id callback query id
-     * @param requestSender request sender
+     * @param api api
      */
-    public AnswerCallbackQuery(String callback_query_id, RequestSender requestSender) {
-        super(requestSender, "answerCallbackQuery");
+    public AnswerCallbackQuery(String callback_query_id, Api api) {
+        super(api, "answerCallbackQuery");
         add("callback_query_id", callback_query_id);
     }
 

@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * Verifies a user on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
@@ -14,7 +14,7 @@ public class VerifyUser extends AbstractBaseRequest<VerifyUser, Boolean> {
      * @param user_id Unique identifier of the target user
      * @param rs Request
      */
-    public VerifyUser(long user_id, RequestSender rs){
+    public VerifyUser(long user_id, Api rs){
         super(rs, "verifyUser");
         add("user_id", user_id);
     }

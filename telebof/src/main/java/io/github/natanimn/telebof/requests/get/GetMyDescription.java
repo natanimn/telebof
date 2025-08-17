@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.bot.BotDescription;
 
 /**
@@ -13,8 +13,8 @@ import io.github.natanimn.telebof.types.bot.BotDescription;
  * @see BotContext#getMyDescription()
  */
 public class GetMyDescription extends AbstractBaseRequest<GetMyDescription, BotDescription> {
-    public GetMyDescription(RequestSender requestSender) {
-        super(requestSender, "getMyDescription", BotDescription.class);
+    public GetMyDescription(Api api) {
+        super(api, "getMyDescription", BotDescription.class);
     }
 
     /**

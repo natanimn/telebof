@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.BotLog;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.updates.Message;
 import java.util.List;
@@ -23,11 +23,11 @@ public class SendInvoice extends SendBuilder<SendInvoice, Message> {
      * @param payload payload
      * @param currency currency
      * @param prices prices
-     * @param requestSender request sender
+     * @param api api
      */
     public SendInvoice(Object chat_id, String title, String description, String payload,
-                       String currency, LabeledPrice[] prices, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendInvoice");
+                       String currency, LabeledPrice[] prices, Api api) {
+        super(chat_id, api, "sendInvoice");
         add("title", title);
         add("description", description);
         add("payload", payload);

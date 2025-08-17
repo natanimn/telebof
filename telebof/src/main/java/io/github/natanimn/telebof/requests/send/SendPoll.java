@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.send;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.enums.PollType;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputPollOption;
 import io.github.natanimn.telebof.types.keyboard.Markup;
@@ -26,10 +26,10 @@ public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
      * @param chat_id chat id
      * @param question question
      * @param options options
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendPoll(Object chat_id, String question, InputPollOption[] options, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendPoll", Message.class);
+    public SendPoll(Object chat_id, String question, InputPollOption[] options, Api api) {
+        super(chat_id, api, "sendPoll", Message.class);
         add("question", question);
         add("options", List.of(options));
     }

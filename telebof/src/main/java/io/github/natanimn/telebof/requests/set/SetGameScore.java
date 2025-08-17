@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 
 /**
@@ -18,11 +18,11 @@ public class SetGameScore extends AbstractBaseRequest<SetGameScore, Object> {
      * @param user_id user id
      * @param score score
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#setGameScore(long, long, int, int)
      */
-    public SetGameScore(long chat_id, long user_id, int score, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "setGameScore", Message.class);
+    public SetGameScore(long chat_id, long user_id, int score, int message_id, Api api) {
+        super(chat_id, api, "setGameScore", Message.class);
         add("user_id", user_id);
         add("message_id", message_id);
         add("score", score);
@@ -33,11 +33,11 @@ public class SetGameScore extends AbstractBaseRequest<SetGameScore, Object> {
      * @param inline_message_id inline message id
      * @param user_id user id
      * @param score score
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#setGameScore(String, long, int)
      */
-    public SetGameScore(String inline_message_id, long user_id, int score, RequestSender requestSender) {
-        super(requestSender, "setGameScore", Boolean.class);
+    public SetGameScore(String inline_message_id, long user_id, int score, Api api) {
+        super(api, "setGameScore", Boolean.class);
         add("user_id", user_id);
         add("inline_message_id", inline_message_id);
         add("score",score);

@@ -8,7 +8,7 @@ import java.util.Map;
 import io.github.natanimn.telebof.errors.ConnectionError;
 import io.github.natanimn.telebof.errors.TelegramError;
 import io.github.natanimn.telebof.enums.Updates;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.requests.get.GetUpdates;
 import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.updates.*;
@@ -80,7 +80,7 @@ final public class BotClient {
 
         BotLog.info("BotClient initialized");
 
-        var request = new RequestSender(
+        var request = new Api(
                 requestInfo.token(),
                 requestInfo.test(),
                 requestInfo.proxy(),
@@ -551,7 +551,7 @@ final public class BotClient {
             Updates updateName,
             Filter filter,
             TelegramUpdate update,
-            RequestSender request
+            Api request
     ){
         List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
         if (execs != null) {
@@ -651,7 +651,7 @@ final public class BotClient {
     public void processUpdates(List<Update> updates){
         if (!updates.isEmpty()) {
             BotLog.info("Processing updates");
-            var request = new RequestSender(
+            var request = new Api(
                     requestInfo.token(),
                     requestInfo.test(),
                     requestInfo.proxy(),
@@ -671,7 +671,7 @@ final public class BotClient {
      * @param updates array of {@link Update}
      * @param request request sender
      */
-    private void processUpdates(List<Update> updates, RequestSender request){
+    private void processUpdates(List<Update> updates, Api request){
         for (Update update: updates) {
             UpdateInfo info = getInfoFromUpdate(update);
             var filter      = new Filter(update, storage);
@@ -685,7 +685,7 @@ final public class BotClient {
      * @throws InterruptedException exception
      */
     private void retrieveUpdates() throws InterruptedException {
-        var request = new RequestSender(
+        var request = new Api(
                 requestInfo.token(),
                 requestInfo.test(),
                 requestInfo.proxy(),

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.answer;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.payments.ShippingOption;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class AnswerShippingQuery extends AbstractBaseRequest<AnswerShippingQuery
      * Required
      * @param shipping_query_id shipping query id
      * @param ok ok
-     * @param requestSender request sender
+     * @param api api
      */
-    public AnswerShippingQuery(String shipping_query_id, boolean ok, RequestSender requestSender) {
-        super(requestSender, "answerShippingQuery");
+    public AnswerShippingQuery(String shipping_query_id, boolean ok, Api api) {
+        super(api, "answerShippingQuery");
         add("shipping_query_id", shipping_query_id);
         add("ok", ok);
     }

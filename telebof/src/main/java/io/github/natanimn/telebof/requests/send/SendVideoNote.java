@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 import java.io.File;
 
@@ -17,11 +17,11 @@ public class SendVideoNote extends SendBuilder<SendVideoNote, Message> {
      * Required
      * @param chat_id chat id
      * @param video_note file id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendVideoNote(Object, String)
      */
-    public SendVideoNote(Object chat_id, String video_note, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVideoNote");
+    public SendVideoNote(Object chat_id, String video_note, Api api) {
+        super(chat_id, api, "sendVideoNote");
         add("video_note", video_note);
     }
 
@@ -29,10 +29,10 @@ public class SendVideoNote extends SendBuilder<SendVideoNote, Message> {
      * Required
      * @param chat_id chat id
      * @param video_note file
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendVideoNote(Object chat_id, File video_note, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVideoNote");
+    public SendVideoNote(Object chat_id, File video_note, Api api) {
+        super(chat_id, api, "sendVideoNote");
         add("video_note", video_note);
     }
 

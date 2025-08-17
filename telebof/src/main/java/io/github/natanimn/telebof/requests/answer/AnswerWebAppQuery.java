@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.answer;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
 import io.github.natanimn.telebof.types.media_and_service.SentWebAppMessage;
 
@@ -18,10 +18,10 @@ public class AnswerWebAppQuery extends AbstractBaseRequest<AnswerWebAppQuery, Se
      * Required
      * @param web_app_query_id web app query id
      * @param result result
-     * @param requestSender request sender
+     * @param api api
      */
-    public AnswerWebAppQuery(String web_app_query_id, InlineQueryResult result, RequestSender requestSender) {
-        super(requestSender, "answerWebAppQuery", SentWebAppMessage.class);
+    public AnswerWebAppQuery(String web_app_query_id, InlineQueryResult result, Api api) {
+        super(api, "answerWebAppQuery", SentWebAppMessage.class);
         add("web_app_query_id", web_app_query_id);
         add("result", result);
     }

@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.delete;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -15,10 +15,10 @@ public class DeleteStickerFromSet extends AbstractBaseRequest<DeleteStickerFromS
     /**
      * Required
      * @param sticker sticker
-     * @param requestSender request sender
+     * @param api api
      */
-    public DeleteStickerFromSet(String sticker, RequestSender requestSender){
-        super(requestSender, "deleteStickerFromSet");
+    public DeleteStickerFromSet(String sticker, Api api){
+        super(api, "deleteStickerFromSet");
         add("sticker", sticker);
     }
 

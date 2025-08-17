@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class SetStickerEmojiList extends AbstractBaseRequest<SetStickerEmojiList
      * Required
      * @param sticker sticker
      * @param emoji_list emoji list
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetStickerEmojiList(String sticker, String[] emoji_list, RequestSender requestSender) {
-        super(requestSender, "setStickerEmojiList");
+    public SetStickerEmojiList(String sticker, String[] emoji_list, Api api) {
+        super(api, "setStickerEmojiList");
         add("sticker", sticker);
         add("emoji_list", List.of(emoji_list));
     }

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.MenuButton;
 
 /**
@@ -15,10 +15,10 @@ import io.github.natanimn.telebof.types.keyboard.MenuButton;
 public class GetChatMenuButton extends AbstractBaseRequest<GetChatMenuButton, MenuButton> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetChatMenuButton(RequestSender requestSender) {
-        super(requestSender, "getChatMenuButton", MenuButton.class);
+    public GetChatMenuButton(Api api) {
+        super(api, "getChatMenuButton", MenuButton.class);
     }
 
     /**

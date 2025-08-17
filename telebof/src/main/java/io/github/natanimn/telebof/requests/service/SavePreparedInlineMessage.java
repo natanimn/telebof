@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
 import io.github.natanimn.telebof.types.media_and_service.PreparedInlineMessage;
 
@@ -14,9 +14,9 @@ public class SavePreparedInlineMessage extends AbstractBaseRequest<SavePreparedI
     /**
      * @param user_id Unique identifier of the target user that can use the prepared message
      * @param result A {@link InlineQueryResult} object describing the message to be sent
-     * @param rs {@link RequestSender} object
+     * @param rs {@link Api} object
      */
-    public SavePreparedInlineMessage(long user_id, InlineQueryResult result, RequestSender rs){
+    public SavePreparedInlineMessage(long user_id, InlineQueryResult result, Api rs){
         super(rs, "savePreparedInlineMessage");
         add("user_id", user_id);
         add("result", result);

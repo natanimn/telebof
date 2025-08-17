@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * Close class. Returns True on success.
@@ -12,8 +12,8 @@ import io.github.natanimn.telebof.requests.RequestSender;
  * @see BotContext#close()
  */
 public class Close extends AbstractBaseRequest<Close, Boolean> {
-    public Close(RequestSender requestSender){
-        super(requestSender, "close");
+    public Close(Api api){
+        super(api, "close");
     }
 
 }

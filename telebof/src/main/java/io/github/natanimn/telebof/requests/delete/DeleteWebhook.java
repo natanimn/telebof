@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.delete;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * DeleteWebhook class. Returns True on success.
@@ -10,8 +10,8 @@ import io.github.natanimn.telebof.requests.RequestSender;
  * @version 0.9
  */
 public class DeleteWebhook extends AbstractBaseRequest<DeleteWebhook, Boolean> {
-    public DeleteWebhook(RequestSender requestSender){
-        super(requestSender, "deleteWebhook");
+    public DeleteWebhook(Api api){
+        super(api, "deleteWebhook");
     }
 
     /**

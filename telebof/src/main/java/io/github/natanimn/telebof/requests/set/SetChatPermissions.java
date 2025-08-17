@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.ChatPermissions;
 
 /**
@@ -17,10 +17,10 @@ public class SetChatPermissions extends AbstractBaseRequest<SetChatPermissions, 
      * Required
      * @param chat_id chat id
      * @param permissions permissions
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetChatPermissions(Object chat_id, ChatPermissions permissions, RequestSender requestSender) {
-        super(chat_id, requestSender, "setChatPermissions", Boolean.class);
+    public SetChatPermissions(Object chat_id, ChatPermissions permissions, Api api) {
+        super(chat_id, api, "setChatPermissions", Boolean.class);
         add("permissions", permissions);
     }
 

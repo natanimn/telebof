@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.bot.BotCommand;
 import io.github.natanimn.telebof.types.bot.BotCommandScope;
 
@@ -19,10 +19,10 @@ public class SetMyCommands extends AbstractBaseRequest<SetMyCommands, Boolean> {
     /**
      * Required
      * @param commands commands
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetMyCommands(BotCommand[] commands, RequestSender requestSender) {
-        super(requestSender, "setMyCommands");
+    public SetMyCommands(BotCommand[] commands, Api api) {
+        super(api, "setMyCommands");
         add("commands", List.of(commands));
     }
 

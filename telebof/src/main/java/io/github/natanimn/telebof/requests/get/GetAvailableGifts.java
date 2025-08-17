@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
 
 /**
@@ -15,9 +15,9 @@ import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
 public class GetAvailableGifts extends AbstractBaseRequest<GetAvailableGifts, Gifts> {
     /**
      * Requireed
-     * @param rs request sender
+     * @param rs api
      */
-    public GetAvailableGifts(RequestSender rs){
+    public GetAvailableGifts(Api rs){
         super(rs, "getAvailableGifts");
     }
 }

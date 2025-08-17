@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.get;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.Sticker;
 
 import java.lang.reflect.Type;
@@ -23,10 +23,10 @@ public class GetCustomEmojiStickers extends AbstractBaseRequest<GetCustomEmojiSt
     /**
      * Required
      * @param custom_emoji_ids custom emoji ids
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetCustomEmojiStickers(String[] custom_emoji_ids, RequestSender requestSender) {
-        super(requestSender, "getCustomEmojiStickers", responseType);
+    public GetCustomEmojiStickers(String[] custom_emoji_ids, Api api) {
+        super(api, "getCustomEmojiStickers", responseType);
         add("custom_emoji_ids", List.of(custom_emoji_ids));
     }
 

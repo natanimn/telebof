@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.service;
 import io.github.natanimn.telebof.enums.StickerFormat;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.File;
 
 /**
@@ -19,10 +19,10 @@ public class UploadStickerFile extends AbstractBaseRequest<UploadStickerFile, Fi
      * @param user_id user id
      * @param sticker sticker
      * @param sticker_format sticker format
-     * @param requestSender request sender
+     * @param api api
      */
-    public UploadStickerFile(long user_id, java.io.File sticker, StickerFormat sticker_format, RequestSender requestSender) {
-        super(requestSender, "uploadStickerFile", File.class);
+    public UploadStickerFile(long user_id, java.io.File sticker, StickerFormat sticker_format, Api api) {
+        super(api, "uploadStickerFile", File.class);
         add("user_id", user_id);
         add("sticker", sticker);
         add("sticker_format", sticker_format);

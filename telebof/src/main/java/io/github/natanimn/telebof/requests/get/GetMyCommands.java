@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.get;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.bot.BotCommand;
 import io.github.natanimn.telebof.types.bot.BotCommandScope;
 import java.lang.reflect.Type;
@@ -21,10 +21,10 @@ public class GetMyCommands extends AbstractBaseRequest<GetMyCommands, List<BotCo
 
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetMyCommands(RequestSender requestSender) {
-        super(requestSender, "getMyCommands", responseType);
+    public GetMyCommands(Api api) {
+        super(api, "getMyCommands", responseType);
     }
 
     /**

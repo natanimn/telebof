@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.ChatFullInfo;
 
 /**
@@ -16,10 +16,10 @@ public class GetChat extends AbstractBaseRequest<GetChat, ChatFullInfo> {
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetChat(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "getChat", ChatFullInfo.class);
+    public GetChat(Object chat_id, Api api) {
+        super(chat_id, api, "getChat", ChatFullInfo.class);
     }
 
 }

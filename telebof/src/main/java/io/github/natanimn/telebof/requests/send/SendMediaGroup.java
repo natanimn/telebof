@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotLog;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import io.github.natanimn.telebof.types.keyboard.Markup;
@@ -22,8 +22,8 @@ import java.util.List;
 public class SendMediaGroup extends SendBuilder<SendMediaGroup, List<Message>> {
 
     public static Type responseType = TypeToken.getParameterized(List.class, Message.class).getType();
-    public  SendMediaGroup(Object chatId, InputMedia[] media, RequestSender requestSender) {
-        super(chatId, requestSender, "sendMediaGroup", responseType);
+    public  SendMediaGroup(Object chatId, InputMedia[] media, Api api) {
+        super(chatId, api, "sendMediaGroup", responseType);
         add("media", media);
         for (InputMedia im: media){
             if (im.hasFile()) setHasMultipart(true);

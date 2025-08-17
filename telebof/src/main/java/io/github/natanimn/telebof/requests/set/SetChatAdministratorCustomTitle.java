@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * SetChatAdministratorCustomTitle class. Returns True on success.
@@ -18,10 +18,10 @@ public class SetChatAdministratorCustomTitle extends AbstractBaseRequest<SetChat
      * @param chat_id chat id
      * @param user_id user id
      * @param custom_title custom title
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title, RequestSender requestSender) {
-        super(chat_id, requestSender, "setChatAdministratorCustomTitle", Boolean.class);
+    public SetChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title, Api api) {
+        super(chat_id, api, "setChatAdministratorCustomTitle", Boolean.class);
         add("user_id", user_id);
         add("custom_title", custom_title);
     }

@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.answer;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -16,10 +16,10 @@ public class AnswerPreCheckoutQuery extends AbstractBaseRequest<AnswerPreCheckou
      * Required
      * @param pre_checkout_query_id pre checkout query id
      * @param ok ok
-     * @param requestSender request sender
+     * @param api api
      */
-    public AnswerPreCheckoutQuery(String pre_checkout_query_id, boolean ok, RequestSender requestSender) {
-        super(requestSender, "answerPreCheckoutQuery");
+    public AnswerPreCheckoutQuery(String pre_checkout_query_id, boolean ok, Api api) {
+        super(api, "answerPreCheckoutQuery");
         add("pre_checkout_query_id", pre_checkout_query_id);
         add("ok", ok);
     }

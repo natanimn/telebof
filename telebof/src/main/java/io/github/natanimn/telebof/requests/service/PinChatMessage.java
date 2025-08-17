@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * PinChatMessage class. Returns True on success.
@@ -16,10 +16,10 @@ public class PinChatMessage extends AbstractBaseRequest<PinChatMessage, Boolean>
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public PinChatMessage(Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "pinChatMessage", Boolean.class);
+    public PinChatMessage(Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "pinChatMessage", Boolean.class);
         add("message_id", message_id);
     }
 

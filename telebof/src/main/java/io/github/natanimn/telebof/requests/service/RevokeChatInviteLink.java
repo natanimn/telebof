@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.chat_and_user.ChatInviteLink;
 
@@ -17,10 +17,10 @@ public class RevokeChatInviteLink extends AbstractBaseRequest<RevokeChatInviteLi
      * Required
      * @param chat_id chat id
      * @param invite_link invite link
-     * @param requestSender request sender
+     * @param api api
      */
-    public RevokeChatInviteLink(Object chat_id, String invite_link, RequestSender requestSender) {
-        super(chat_id, requestSender, "revokeChatInviteLink", ChatInviteLink.class);
+    public RevokeChatInviteLink(Object chat_id, String invite_link, Api api) {
+        super(chat_id, api, "revokeChatInviteLink", ChatInviteLink.class);
         add("invite_link", invite_link);
     }
 

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.edit;
 
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.media_and_service.LinkPreviewOptions;
@@ -24,11 +24,11 @@ public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object
      * @param text test
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageText(String, Object, int)
      */
-    public EditMessageText(String text, Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "editMessageText", Message.class);
+    public EditMessageText(String text, Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "editMessageText", Message.class);
         add("text", text);
         add("message_id", message_id);
     }
@@ -37,11 +37,11 @@ public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object
      * Required
      * @param text test
      * @param inline_message_id inline message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageText(String, String)
      */
-    public EditMessageText(String text, String inline_message_id, RequestSender requestSender) {
-        super(requestSender, "editMessageText", Boolean.class);
+    public EditMessageText(String text, String inline_message_id, Api api) {
+        super(api, "editMessageText", Boolean.class);
         add("text", text);
         add("inline_message_id", inline_message_id);
     }

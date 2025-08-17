@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.get;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.ChatMember;
 
 import java.lang.reflect.Type;
@@ -23,10 +23,10 @@ public class GetChatAdministrators extends AbstractBaseRequest<GetChatAdministra
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetChatAdministrators(Object chat_id, RequestSender requestSender){
-        super(chat_id, requestSender, "getChatAdministrators", responseType);
+    public GetChatAdministrators(Object chat_id, Api api){
+        super(chat_id, api, "getChatAdministrators", responseType);
     }
 
 }

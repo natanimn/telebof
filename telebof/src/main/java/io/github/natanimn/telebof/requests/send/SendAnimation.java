@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -19,11 +19,11 @@ public class SendAnimation extends SendBuilder<SendAnimation, Message> {
      * Required
      * @param chat_id chat id
      * @param animation file id or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendAnimation(Object, String)
      */
-    public SendAnimation(Object chat_id, String animation, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendAnimation");
+    public SendAnimation(Object chat_id, String animation, Api api) {
+        super(chat_id, api, "sendAnimation");
         add("animation", animation);
 
     }
@@ -32,11 +32,11 @@ public class SendAnimation extends SendBuilder<SendAnimation, Message> {
      * Required
      * @param chat_id chat id
      * @param animation file
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendAnimation(Object, File)
      */
-    public SendAnimation(Object chat_id, File animation, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendAnimation");
+    public SendAnimation(Object chat_id, File animation, Api api) {
+        super(chat_id, api, "sendAnimation");
         add("animation", animation);
     }
 

@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.create;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.forum.ForumTopic;
 
@@ -18,10 +18,10 @@ public class CreateForumTopic extends AbstractBaseRequest<CreateForumTopic, Foru
      * Required
      * @param chat_id chat id
      * @param name name
-     * @param requestSender request sender
+     * @param api api
      */
-    public CreateForumTopic(Object chat_id, String name, RequestSender requestSender) {
-        super(chat_id, requestSender, "createForumTopic", ForumTopic.class);
+    public CreateForumTopic(Object chat_id, String name, Api api) {
+        super(chat_id, api, "createForumTopic", ForumTopic.class);
         add("name", name);
     }
 

@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 
@@ -20,10 +20,10 @@ public class ForwardMessage extends AbstractBaseRequest<ForwardMessage, Message>
      * @param chat_id chat id
      * @param from_chat_id from chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public ForwardMessage(Object chat_id, Object from_chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "forwardMessage", Message.class);
+    public ForwardMessage(Object chat_id, Object from_chat_id, int message_id, Api api) {
+        super(chat_id, api, "forwardMessage", Message.class);
         add("from_chat_id", from_chat_id);
         add("message_id", message_id);
     }

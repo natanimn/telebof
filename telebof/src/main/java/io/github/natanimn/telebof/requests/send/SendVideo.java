@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -19,11 +19,11 @@ public class SendVideo extends SendBuilder<SendVideo, Message> {
      * Required
      * @param chat_id chat id
      * @param video file id or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendVideo(Object, String)
      */
-    public SendVideo(Object chat_id, String video, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVideo");
+    public SendVideo(Object chat_id, String video, Api api) {
+        super(chat_id, api, "sendVideo");
         add("video", video);
     }
 
@@ -31,11 +31,11 @@ public class SendVideo extends SendBuilder<SendVideo, Message> {
      * Required
      * @param chat_id chat id
      * @param video file id or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendVideo(Object, File)
      */
-    public SendVideo(Object chat_id, File video, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVideo");
+    public SendVideo(Object chat_id, File video, Api api) {
+        super(chat_id, api, "sendVideo");
         add("video", video);
     }
 

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 import java.io.File;
 
@@ -16,10 +16,10 @@ public class SetWebhook extends AbstractBaseRequest<SetWebhook, Boolean> {
     /**
      * Required
      * @param url url
-     * @param requestSender
+     * @param api
      */
-    public SetWebhook(String url, RequestSender requestSender){
-        super(requestSender, "setWebhook");
+    public SetWebhook(String url, Api api){
+        super(api, "setWebhook");
         add("url", url);
     }
 

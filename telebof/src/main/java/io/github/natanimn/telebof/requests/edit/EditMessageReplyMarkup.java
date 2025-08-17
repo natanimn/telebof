@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.edit;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Message;
@@ -17,22 +17,22 @@ public class EditMessageReplyMarkup extends AbstractBaseRequest<EditMessageReply
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageReplyMarkup(Object, int)
      */
-    public EditMessageReplyMarkup(Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "editMessageReplyMarkup", Message.class);
+    public EditMessageReplyMarkup(Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "editMessageReplyMarkup", Message.class);
         add("message_id", message_id);
     }
 
     /**
      * Required
      * @param inline_message_id inline message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#editMessageReplyMarkup(String)
      */
-    public EditMessageReplyMarkup(String inline_message_id, RequestSender requestSender) {
-        super(requestSender, "editMessageReplyMarkup", Boolean.class);
+    public EditMessageReplyMarkup(String inline_message_id, Api api) {
+        super(api, "editMessageReplyMarkup", Boolean.class);
         add("inline_message_id", inline_message_id);
     }
 

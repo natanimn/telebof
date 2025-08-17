@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.StickerSet;
 
 /**
@@ -16,10 +16,10 @@ public class GetStickerSet extends AbstractBaseRequest<GetStickerSet, StickerSet
     /**
      * Required
      * @param name name
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetStickerSet(String name, RequestSender requestSender) {
-        super(requestSender, "getStickerSet", StickerSet.class);
+    public GetStickerSet(String name, Api api) {
+        super(api, "getStickerSet", StickerSet.class);
         add("name", name);
     }
 

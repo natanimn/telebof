@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * Removes verification from a chat that is currently verified on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> represented by the bot.
@@ -12,9 +12,9 @@ import io.github.natanimn.telebof.requests.RequestSender;
 public class RemoveChatVerification extends AbstractBaseRequest<RemoveChatVerification, Boolean> {
     /**
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param rs Request sender
+     * @param rs api
      */
-    public RemoveChatVerification(Object chat_id, RequestSender rs){
+    public RemoveChatVerification(Object chat_id, Api rs){
         super(chat_id, rs, "removeChatVerification", Boolean.class);
     }
 

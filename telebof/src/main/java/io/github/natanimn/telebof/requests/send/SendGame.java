@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 
@@ -16,10 +16,10 @@ public class SendGame extends SendBuilder<SendGame, Message> {
      * Required
      * @param chat_id chat id
      * @param game_short_name game short name
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendGame(long chat_id, String game_short_name, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendGame");
+    public SendGame(long chat_id, String game_short_name, Api api) {
+        super(chat_id, api, "sendGame");
         add("game_short_name", game_short_name);
     }
 

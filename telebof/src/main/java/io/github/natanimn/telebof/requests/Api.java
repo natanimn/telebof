@@ -31,18 +31,17 @@ import java.util.concurrent.TimeUnit;
  * @since 3 March 2025
  * @version 0.9
  */
-public class RequestSender {
+public class Api {
 
     protected int TIMEOUT = 120;
     private final String URL;
     private final String FILE_URL;
     private final OkHttpClient client;
     private final Gson gson = new Gson();
-    private final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private final String botToken;
     private final Request.Builder builder;
 
-    public RequestSender(String botToken, boolean useTestServer, Proxy proxy, @Nullable String localBotAPiUrl){
+    public Api(String botToken, boolean useTestServer, Proxy proxy, @Nullable String localBotAPiUrl){
         this.botToken = botToken;
         this.client = new OkHttpClient.Builder()
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)

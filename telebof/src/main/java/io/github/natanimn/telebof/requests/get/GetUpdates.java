@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.get;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Update;
 import io.github.natanimn.telebof.enums.Updates;
 
@@ -23,10 +23,10 @@ public class GetUpdates extends AbstractBaseRequest<GetUpdates, List<Update>> {
 
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetUpdates(RequestSender requestSender){
-        super(requestSender, "getUpdates", responseType);
+    public GetUpdates(Api api){
+        super(api, "getUpdates", responseType);
     }
 
     /**

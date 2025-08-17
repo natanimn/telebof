@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.create;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * CreateChatSubscriptionInviteLink class
@@ -18,11 +18,11 @@ public class CreateChatSubscriptionInviteLink extends AbstractBaseRequest<Create
      * @param chat_id chat id
      * @param subscription_period period
      * @param subscription_price price
-     * @param requestSender request sender
+     * @param api api
      */
     public CreateChatSubscriptionInviteLink(Object chat_id, int subscription_period, int subscription_price,
-                                            RequestSender requestSender) {
-        super(chat_id, requestSender, "createChatSubscriptionInviteLink", CreateChatSubscriptionInviteLink.class);
+                                            Api api) {
+        super(chat_id, api, "createChatSubscriptionInviteLink", CreateChatSubscriptionInviteLink.class);
         add("subscription_period", subscription_period);
         add("subscription_price", subscription_price);
     }

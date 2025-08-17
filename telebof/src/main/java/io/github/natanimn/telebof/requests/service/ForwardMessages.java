@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.service;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.MessageId;
 
 import java.lang.reflect.Type;
@@ -21,8 +21,8 @@ public class ForwardMessages extends AbstractBaseRequest<ForwardMessages, List<M
 
     private static final Type responseType = TypeToken.getParameterized(List.class, MessageId.class).getType();
 
-    public ForwardMessages(Object chatId, Object fromChatId, int[] message_ids, RequestSender requestSender) {
-        super(chatId, requestSender, "forwardMessages", responseType);
+    public ForwardMessages(Object chatId, Object fromChatId, int[] message_ids, Api api) {
+        super(chatId, api, "forwardMessages", responseType);
         add("from_chat_id", fromChatId);
         add("message_id", message_ids);
     }

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.UserProfilePhotos;
 
 /**
@@ -17,10 +17,10 @@ public class GetUserProfilePhotos extends AbstractBaseRequest<GetUserProfilePhot
     /**
      * Required
      * @param user_id user id
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetUserProfilePhotos(long user_id, RequestSender requestSender) {
-        super(requestSender, "getUserProfilePhotos", UserProfilePhotos.class);
+    public GetUserProfilePhotos(long user_id, Api api) {
+        super(api, "getUserProfilePhotos", UserProfilePhotos.class);
         add("user_id", user_id);
     }
 

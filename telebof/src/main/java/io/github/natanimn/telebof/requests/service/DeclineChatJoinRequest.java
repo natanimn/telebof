@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -16,10 +16,10 @@ public class DeclineChatJoinRequest extends AbstractBaseRequest<DeclineChatJoinR
      * Required
      * @param chat_id chat id
      * @param user_id user id
-     * @param requestSender request sender
+     * @param api api
      */
-    public DeclineChatJoinRequest(Object chat_id, long user_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "declineChatJoinRequest", Boolean.class);
+    public DeclineChatJoinRequest(Object chat_id, long user_id, Api api) {
+        super(chat_id, api, "declineChatJoinRequest", Boolean.class);
         add("user_id", user_id);
     }
 

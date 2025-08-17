@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Message;
@@ -17,21 +17,21 @@ public class StopMessageLiveLocation extends AbstractBaseRequest<StopMessageLive
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#stopMessageLiveLocation(Object, int)
      */
-    public StopMessageLiveLocation(Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "stopMessageLiveLocation", Message.class);
+    public StopMessageLiveLocation(Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "stopMessageLiveLocation", Message.class);
         add("message_id", message_id);
     }
 
     /**
      * Required
      * @param inline_message_id inline message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public StopMessageLiveLocation(String inline_message_id, RequestSender requestSender) {
-        super(requestSender, "stopMessageLiveLocation", Boolean.class);
+    public StopMessageLiveLocation(String inline_message_id, Api api) {
+        super(api, "stopMessageLiveLocation", Boolean.class);
         add("inline_message_id", inline_message_id);
     }
 

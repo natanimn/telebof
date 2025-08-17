@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.send;
 import io.github.natanimn.telebof.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 import org.jetbrains.annotations.NotNull;
 
@@ -22,11 +22,11 @@ public class SendSticker extends SendBuilder<SendSticker, Message> {
      * Required
      * @param chat_id chat id
      * @param sticker sticker
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendSticker(Object, File)
      */
-    public SendSticker(Object chat_id, File sticker, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendSticker");
+    public SendSticker(Object chat_id, File sticker, Api api) {
+        super(chat_id, api, "sendSticker");
         add("sticker", sticker);
     }
 
@@ -34,11 +34,11 @@ public class SendSticker extends SendBuilder<SendSticker, Message> {
      * Required
      * @param chat_id chat id
      * @param sticker sticker
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendSticker(Object, String)
      */
-    public SendSticker(Object chat_id, String sticker, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendSticker");
+    public SendSticker(Object chat_id, String sticker, Api api) {
+        super(chat_id, api, "sendSticker");
         add("sticker", sticker);
     }
 

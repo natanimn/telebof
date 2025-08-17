@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.set;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.enums.MenuButtonType;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.MenuButton;
 
 /**
@@ -16,10 +16,10 @@ import io.github.natanimn.telebof.types.keyboard.MenuButton;
 public class SetChatMenuButton extends AbstractBaseRequest<SetChatMenuButton, Boolean> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetChatMenuButton(RequestSender requestSender) {
-        super(requestSender, "setChatMenuButton");
+    public SetChatMenuButton(Api api) {
+        super(api, "setChatMenuButton");
     }
 
     /**

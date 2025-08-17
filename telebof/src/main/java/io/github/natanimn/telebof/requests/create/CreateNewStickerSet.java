@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.create;
 
 import io.github.natanimn.telebof.enums.StickerType;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputSticker;
 
@@ -21,10 +21,10 @@ public class CreateNewStickerSet extends AbstractBaseRequest<CreateNewStickerSet
      * @param name name
      * @param title title
      * @param stickers stickers
-     * @param requestSender request sender
+     * @param api api
      */
-    public CreateNewStickerSet(long user_id, String name, String title, InputSticker[] stickers, RequestSender requestSender) {
-        super(requestSender, "createNewStickerSet");
+    public CreateNewStickerSet(long user_id, String name, String title, InputSticker[] stickers, Api api) {
+        super(api, "createNewStickerSet");
         add("user_id", user_id);
         add("name", name);
         add("title", title);

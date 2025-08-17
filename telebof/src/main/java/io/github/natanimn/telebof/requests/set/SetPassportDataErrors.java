@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.passport.PassportElementError;
 
 /**
@@ -17,10 +17,10 @@ public class SetPassportDataErrors extends AbstractBaseRequest<SetPassportDataEr
      * Required
      * @param user_id user id
      * @param errors errors
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetPassportDataErrors(long user_id, PassportElementError[] errors, RequestSender requestSender) {
-        super(requestSender, "setPassportDataErrors");
+    public SetPassportDataErrors(long user_id, PassportElementError[] errors, Api api) {
+        super(api, "setPassportDataErrors");
         add("user_id", user_id);
         add("errors", errors);
     }

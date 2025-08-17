@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * ReopenGeneralForumTopic class. Returns True on success.
@@ -15,10 +15,10 @@ public class ReopenGeneralForumTopic extends AbstractBaseRequest<ReopenGeneralFo
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public ReopenGeneralForumTopic(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "reopenGeneralForumTopic", Boolean.class);
+    public ReopenGeneralForumTopic(Object chat_id, Api api) {
+        super(chat_id, api, "reopenGeneralForumTopic", Boolean.class);
     }
 
 }

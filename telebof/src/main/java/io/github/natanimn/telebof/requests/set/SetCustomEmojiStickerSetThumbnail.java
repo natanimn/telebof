@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * SetCustomEmojiStickerSetThumbnail class. Returns True on success.
@@ -15,10 +15,10 @@ public class SetCustomEmojiStickerSetThumbnail extends AbstractBaseRequest<SetCu
     /**
      * Required
      * @param name name
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetCustomEmojiStickerSetThumbnail(String name, RequestSender requestSender) {
-        super(requestSender, "setCustomEmojiStickerSetThumbnail");
+    public SetCustomEmojiStickerSetThumbnail(String name, Api api) {
+        super(api, "setCustomEmojiStickerSetThumbnail");
         add("name", name);
     }
 

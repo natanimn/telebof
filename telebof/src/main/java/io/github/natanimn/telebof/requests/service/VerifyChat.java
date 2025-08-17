@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * Verifies a chat on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
@@ -14,7 +14,7 @@ public class VerifyChat extends AbstractBaseRequest<VerifyChat, Boolean> {
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param rs Request
      */
-    public VerifyChat(Object chat_id, RequestSender rs){
+    public VerifyChat(Object chat_id, Api rs){
         super(chat_id, rs, "verifyChat", Boolean.class);
     }
 

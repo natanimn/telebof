@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -15,10 +15,10 @@ public class ExportChatInviteLink extends AbstractBaseRequest<ExportChatInviteLi
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public ExportChatInviteLink(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "exportChatInviteLink", Object.class);
+    public ExportChatInviteLink(Object chat_id, Api api) {
+        super(chat_id, api, "exportChatInviteLink", Object.class);
     }
 
 }

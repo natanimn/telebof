@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * HideGeneralForumTopic class. Returns True on success.
@@ -14,10 +14,10 @@ public class HideGeneralForumTopic extends AbstractBaseRequest<HideGeneralForumT
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public HideGeneralForumTopic(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "hideGeneralForumTopic", Boolean.class);
+    public HideGeneralForumTopic(Object chat_id, Api api) {
+        super(chat_id, api, "hideGeneralForumTopic", Boolean.class);
     }
 
 }

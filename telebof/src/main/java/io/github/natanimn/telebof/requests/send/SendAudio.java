@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -19,11 +19,11 @@ public class SendAudio extends SendBuilder<SendAudio, Message> {
      * Required
      * @param chat_id chat id
      * @param audio file or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendAudio(Object, String)
      */
-    public SendAudio(Object chat_id, String audio, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendAudio");
+    public SendAudio(Object chat_id, String audio, Api api) {
+        super(chat_id, api, "sendAudio");
         add("audio", audio);
     }
 
@@ -31,11 +31,11 @@ public class SendAudio extends SendBuilder<SendAudio, Message> {
      * Required
      * @param chat_id chat id
      * @param audio File
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendAudio(Object, File)
      */
-    public SendAudio(Object chat_id, File audio, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendAudio");
+    public SendAudio(Object chat_id, File audio, Api api) {
+        super(chat_id, api, "sendAudio");
         add("audio", audio);
     }
 

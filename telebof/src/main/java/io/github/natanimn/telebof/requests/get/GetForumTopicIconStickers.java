@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.get;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.Sticker;
 
 import java.lang.reflect.Type;
@@ -21,10 +21,10 @@ public class GetForumTopicIconStickers extends AbstractBaseRequest<GetForumTopic
 
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetForumTopicIconStickers(RequestSender requestSender) {
-        super(requestSender, "getForumTopicIconStickers", responseType);
+    public GetForumTopicIconStickers(Api api) {
+        super(api, "getForumTopicIconStickers", responseType);
     }
 
 }

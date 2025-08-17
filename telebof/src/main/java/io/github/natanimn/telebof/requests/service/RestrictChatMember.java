@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.ChatPermissions;
 
 /**
@@ -19,10 +19,10 @@ public class RestrictChatMember extends AbstractBaseRequest<RestrictChatMember, 
      * @param chat_id chat id
      * @param user_id user id
      * @param permissions permissions
-     * @param requestSender request sender
+     * @param api api
      */
-    public RestrictChatMember(Object chat_id, long user_id, ChatPermissions permissions, RequestSender requestSender){
-        super(chat_id, requestSender, "restrictChatMember", Boolean.class);
+    public RestrictChatMember(Object chat_id, long user_id, ChatPermissions permissions, Api api){
+        super(chat_id, api, "restrictChatMember", Boolean.class);
         parameters.put("user_id", user_id);
         parameters.put("permissions", permissions);
     }

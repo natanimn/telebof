@@ -3,7 +3,7 @@ package io.github.natanimn.telebof.requests.send;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 
 /**
@@ -22,10 +22,10 @@ public class SendVenue extends SendBuilder<SendVenue, Message> {
      * @param longitude longitude
      * @param title title
      * @param address address
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendVenue(Object chat_id, double latitude, double longitude, String title, String address, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVenue", Message.class);
+    public SendVenue(Object chat_id, double latitude, double longitude, String title, String address, Api api) {
+        super(chat_id, api, "sendVenue", Message.class);
         add("latitude", latitude);
         add("longitude", longitude);
         add("title", title);

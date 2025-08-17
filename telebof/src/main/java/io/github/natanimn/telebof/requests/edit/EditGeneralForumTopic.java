@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.edit;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * EditGeneralForumTopic class. Returns True on success.
@@ -16,10 +16,10 @@ public class EditGeneralForumTopic extends AbstractBaseRequest<EditGeneralForumT
      * Required
      * @param chat_id chat id
      * @param name name
-     * @param requestSender request sender
+     * @param api api
      */
-    public EditGeneralForumTopic(Object chat_id, String name, RequestSender requestSender) {
-        super(chat_id, requestSender, "editGeneralForumTopic", Boolean.class);
+    public EditGeneralForumTopic(Object chat_id, String name, Api api) {
+        super(chat_id, api, "editGeneralForumTopic", Boolean.class);
         add("name", name);
     }
 

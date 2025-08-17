@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 
 /**
@@ -18,10 +18,10 @@ public class SendContact extends SendBuilder<SendContact, Message> {
      * @param chat_id chat id
      * @param phone_number phone number
      * @param first_name first name
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendContact(Object chat_id, String phone_number, String first_name, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendContact", Message.class);
+    public SendContact(Object chat_id, String phone_number, String first_name, Api api) {
+        super(chat_id, api, "sendContact", Message.class);
         add("phone_number", phone_number);
         add("first_name", first_name);
     }

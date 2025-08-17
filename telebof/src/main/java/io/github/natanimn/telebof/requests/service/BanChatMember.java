@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * BanChatMember class. Returns True on success.
@@ -17,10 +17,10 @@ public class BanChatMember extends AbstractBaseRequest<BanChatMember, Boolean> {
      * Required
      * @param chat_id chat id
      * @param user_id user id
-     * @param requestSender request sender
+     * @param api api
      */
-    public BanChatMember(Object chat_id, long user_id, RequestSender requestSender){
-        super(chat_id, requestSender, "banChatMember", Boolean.class);
+    public BanChatMember(Object chat_id, long user_id, Api api){
+        super(chat_id, api, "banChatMember", Boolean.class);
         add("user_id", user_id);
     }
 

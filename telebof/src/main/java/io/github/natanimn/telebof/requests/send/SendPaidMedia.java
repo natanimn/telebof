@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputPaidMedia;
 import io.github.natanimn.telebof.types.keyboard.Markup;
@@ -26,10 +26,10 @@ public class SendPaidMedia extends AbstractBaseRequest<SendPaidMedia, Message> {
      * @param chat_id chat id
      * @param star_count star count
      * @param media input media
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendPaidMedia(Object chat_id, short star_count, InputPaidMedia[] media, RequestSender requestSender){
-        super(chat_id, requestSender, "sendPaidMedia", Message.class);
+    public SendPaidMedia(Object chat_id, short star_count, InputPaidMedia[] media, Api api){
+        super(chat_id, api, "sendPaidMedia", Message.class);
         add("star_count", star_count);
         add("media", List.of(media));
         for (InputPaidMedia im: media){

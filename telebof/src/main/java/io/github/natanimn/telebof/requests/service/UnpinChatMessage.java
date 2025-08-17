@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 
 /**
@@ -15,10 +15,10 @@ public class UnpinChatMessage extends AbstractBaseRequest<UnpinChatMessage, Bool
     /**
      * Required
      * @param chat_id chat id
-     * @param requestSender request sender
+     * @param api api
      */
-    public UnpinChatMessage(Object chat_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "unpinChatMessage", Boolean.class);
+    public UnpinChatMessage(Object chat_id, Api api) {
+        super(chat_id, api, "unpinChatMessage", Boolean.class);
     }
 
     /**

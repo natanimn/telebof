@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.bot.BotName;
 
 /**
@@ -15,10 +15,10 @@ import io.github.natanimn.telebof.types.bot.BotName;
 public class GetMyName extends AbstractBaseRequest<GetMyName, BotName> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetMyName(RequestSender requestSender){
-        super(requestSender, "getMyName", BotName.class);
+    public GetMyName(Api api){
+        super(api, "getMyName", BotName.class);
     }
 
     /**

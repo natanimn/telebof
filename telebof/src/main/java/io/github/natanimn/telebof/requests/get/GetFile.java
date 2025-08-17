@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.media_and_service.File;
 
@@ -17,10 +17,10 @@ public class GetFile extends AbstractBaseRequest<GetFile, File> {
     /**
      * Required
      * @param file_id file id
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetFile(String file_id, RequestSender requestSender) {
-        super(requestSender, "getFile", File.class);
+    public GetFile(String file_id, Api api) {
+        super(api, "getFile", File.class);
         add("file_id", file_id);
     }
 

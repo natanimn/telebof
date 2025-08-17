@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 /**
  * SetStickerPositionInSet class. Returns True on success.
@@ -16,10 +16,10 @@ public class SetStickerPositionInSet extends AbstractBaseRequest<SetStickerPosit
      * Required
      * @param sticker sticker
      * @param position position
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetStickerPositionInSet(String sticker, int position, RequestSender requestSender) {
-        super(requestSender, "setStickerPositionInSet");
+    public SetStickerPositionInSet(String sticker, int position, Api api) {
+        super(api, "setStickerPositionInSet");
         add("sticker", sticker);
         add("position", position);
     }

@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.ChatAdministratorRights;
 
 /**
@@ -15,10 +15,10 @@ import io.github.natanimn.telebof.types.chat_and_user.ChatAdministratorRights;
 public class GetMyDefaultAdministratorRights extends AbstractBaseRequest<GetMyDefaultAdministratorRights, ChatAdministratorRights> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetMyDefaultAdministratorRights(RequestSender requestSender) {
-        super(requestSender, "getMyDefaultAdministratorRights", ChatAdministratorRights.class);
+    public GetMyDefaultAdministratorRights(Api api) {
+        super(api, "getMyDefaultAdministratorRights", ChatAdministratorRights.class);
     }
 
     /**

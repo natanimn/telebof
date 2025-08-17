@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.input.InputSticker;
 
 /**
@@ -19,10 +19,10 @@ public class ReplaceStickerInSet extends AbstractBaseRequest<ReplaceStickerInSet
      * @param name name
      * @param old_sticker old sticker
      * @param sticker sticker
-     * @param requestSender request sender
+     * @param api api
      */
-    public ReplaceStickerInSet(long user_id, String name, String old_sticker, InputSticker sticker, RequestSender requestSender){
-        super(requestSender, "replaceStickerInSet");
+    public ReplaceStickerInSet(long user_id, String name, String old_sticker, InputSticker sticker, Api api){
+        super(api, "replaceStickerInSet");
         add("user_id", user_id);
         add("name", name);
         add("old_sticker", old_sticker);

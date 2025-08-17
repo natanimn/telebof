@@ -1,7 +1,5 @@
 package io.github.natanimn.telebof.types.input;
 
-import io.github.natanimn.telebof.requests.service.MediaContentType;
-
 import java.io.File;
 
 /**
@@ -28,7 +26,7 @@ public class InputMediaAnimation extends InputMediaBuilder<InputMediaAnimation> 
      * @param media File to send.
      */
     public InputMediaAnimation(File media) {
-        super("animation", media, MediaContentType.GIF);
+        super("animation", media);
     }
 
     /**

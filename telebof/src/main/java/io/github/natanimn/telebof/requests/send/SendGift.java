@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import java.util.List;
 
@@ -14,12 +14,12 @@ import java.util.List;
  */
 
 public class SendGift extends AbstractBaseRequest<SendGift, Boolean> {
-    public SendGift(Object chat_id, String gift_id,  RequestSender rs){
+    public SendGift(Object chat_id, String gift_id,  Api rs){
         super(chat_id, rs, "sendGift", Boolean.class);
         add("gift_id", gift_id);
     }
 
-    public SendGift(long user_id, String gift_id,  RequestSender rs){
+    public SendGift(long user_id, String gift_id,  Api rs){
         super(rs, "sendGift");
         add("user_id", user_id);
         add("gift_id", gift_id);

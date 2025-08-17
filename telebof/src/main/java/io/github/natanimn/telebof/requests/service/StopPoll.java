@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.service;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Poll;
@@ -18,10 +18,10 @@ public class StopPoll extends AbstractBaseRequest<StopPoll, Poll> {
      * Required
      * @param chat_id chat id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      */
-    public StopPoll(Object chat_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "stopPoll", Poll.class);
+    public StopPoll(Object chat_id, int message_id, Api api) {
+        super(chat_id, api, "stopPoll", Poll.class);
         add("message_id", message_id);
     }
 

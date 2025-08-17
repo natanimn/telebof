@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.keyboard.ReplyParameters;
@@ -19,10 +19,10 @@ public class SendLocation extends AbstractBaseRequest<SendLocation, Message> {
      * @param chat_id chat id
      * @param latitude latitude
      * @param longitude longitude
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendLocation(Object chat_id, double latitude, double longitude, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendLocation", Message.class);
+    public SendLocation(Object chat_id, double latitude, double longitude, Api api) {
+        super(chat_id, api, "sendLocation", Message.class);
         add("longitude", longitude);
         add("latitude", latitude);
     }

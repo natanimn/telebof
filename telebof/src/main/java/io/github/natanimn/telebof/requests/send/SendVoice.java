@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -19,11 +19,11 @@ public class SendVoice extends SendBuilder<SendVoice, Message> {
      * Required
      * @param chat_id Chat id
      * @param voice file or url
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendVoice(Object, String)
      */
-    public SendVoice(Object chat_id, String voice, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVoice");
+    public SendVoice(Object chat_id, String voice, Api api) {
+        super(chat_id, api, "sendVoice");
         add("voice", voice);
     }
 
@@ -31,11 +31,11 @@ public class SendVoice extends SendBuilder<SendVoice, Message> {
      * Required
      * @param chat_id chat id
      * @param voice File
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#sendVoice(Object, File)
      */
-    public SendVoice(Object chat_id, File voice, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendVoice");
+    public SendVoice(Object chat_id, File voice, Api api) {
+        super(chat_id, api, "sendVoice");
         add("voice", voice);
     }
 

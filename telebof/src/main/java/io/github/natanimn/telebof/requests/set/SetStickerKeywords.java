@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class SetStickerKeywords extends AbstractBaseRequest<SetStickerKeywords, 
      * Required
      * @param sticker stciker
      * @param keywords keywords
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetStickerKeywords(String sticker, String[] keywords, RequestSender requestSender) {
-        super(requestSender, "setStickerKeywords");
+    public SetStickerKeywords(String sticker, String[] keywords, Api api) {
+        super(api, "setStickerKeywords");
         add("sticker", sticker);
         add("keywords", List.of(keywords));
     }

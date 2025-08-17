@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.payments.StarTransactions;
 
 /**
@@ -15,10 +15,10 @@ import io.github.natanimn.telebof.types.payments.StarTransactions;
 public class GetStarTransactions extends AbstractBaseRequest<GetStarTransactions, StarTransactions> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public GetStarTransactions(RequestSender requestSender){
-      super(requestSender, "getStarTransactions", StarTransactions.class);
+    public GetStarTransactions(Api api){
+      super(api, "getStarTransactions", StarTransactions.class);
     }
 
     /**

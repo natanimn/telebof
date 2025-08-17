@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.get;
 
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.media_and_service.GameHighScore;
 
@@ -23,11 +23,11 @@ public class GetGameHighScores extends AbstractBaseRequest<GetGameHighScores, Li
      * @param chat_id chat id
      * @param user_id user id
      * @param message_id message id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#getGameHighScores(long, long, int)
      */
-    public GetGameHighScores(long chat_id, long user_id, int message_id, RequestSender requestSender) {
-        super(chat_id, requestSender, "getGameHighScores", responseType);
+    public GetGameHighScores(long chat_id, long user_id, int message_id, Api api) {
+        super(chat_id, api, "getGameHighScores", responseType);
         add("user_id", user_id);
         add("message_id", message_id);
     }
@@ -36,11 +36,11 @@ public class GetGameHighScores extends AbstractBaseRequest<GetGameHighScores, Li
      * Required
      * @param inline_message_id inline message id
      * @param user_id user id
-     * @param requestSender request sender
+     * @param api api
      * @see BotContext#getGameHighScores(String, long)
      */
-    public GetGameHighScores(String inline_message_id, long user_id, RequestSender requestSender) {
-        super(requestSender, "getGameHighScores", responseType);
+    public GetGameHighScores(String inline_message_id, long user_id, Api api) {
+        super(api, "getGameHighScores", responseType);
         add("user_id", user_id);
         add("inline_message_id", inline_message_id);
     }

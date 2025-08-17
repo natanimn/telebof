@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.set;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.media_and_service.MaskPosition;
 
@@ -16,10 +16,10 @@ public class SetStickerMaskPosition extends AbstractBaseRequest<SetStickerMaskPo
     /**
      * Required
      * @param sticker sticker
-     * @param requestSender request sender
+     * @param api api
      */
-    public SetStickerMaskPosition(String sticker, RequestSender requestSender) {
-        super(requestSender, "setStickerMaskPosition");
+    public SetStickerMaskPosition(String sticker, Api api) {
+        super(api, "setStickerMaskPosition");
         add("sticker", sticker);
     }
 

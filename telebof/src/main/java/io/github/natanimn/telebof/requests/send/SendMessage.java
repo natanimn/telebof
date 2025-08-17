@@ -1,5 +1,5 @@
 package io.github.natanimn.telebof.requests.send;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
 
 /**
@@ -13,10 +13,10 @@ public class SendMessage extends SendBuilder<SendMessage, Message> {
      * Required
      * @param chat_id Chat Id
      * @param text test
-     * @param requestSender request sender
+     * @param api api
      */
-    public SendMessage(Object chat_id,  String text, RequestSender requestSender) {
-        super(chat_id, requestSender, "sendMessage");
+    public SendMessage(Object chat_id,  String text, Api api) {
+        super(chat_id, api, "sendMessage");
         add("text", text);
      }
 

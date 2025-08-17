@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests.delete;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
-import io.github.natanimn.telebof.requests.RequestSender;
+import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.bot.BotCommandScope;
 
 /**
@@ -15,10 +15,10 @@ import io.github.natanimn.telebof.types.bot.BotCommandScope;
 public class DeleteMyCommands extends AbstractBaseRequest<DeleteMyCommands, Boolean> {
     /**
      * Required
-     * @param requestSender request sender
+     * @param api api
      */
-    public DeleteMyCommands(RequestSender requestSender) {
-        super(requestSender, "deleteMyCommands");
+    public DeleteMyCommands(Api api) {
+        super(api, "deleteMyCommands");
     }
 
     /**
