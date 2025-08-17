@@ -52,7 +52,6 @@ public class InlineKeyboardMarkup implements Markup {
     }
 
     public void addKeyboard(InlineKeyboardButton... buttons) {
-        this.inline_keyboard = new ArrayList<>();
         addButtons(buttons);
     }
 
