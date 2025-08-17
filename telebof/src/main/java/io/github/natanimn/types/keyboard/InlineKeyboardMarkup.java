@@ -30,6 +30,8 @@ public class InlineKeyboardMarkup implements Markup {
     }
 
     public InlineKeyboardMarkup(InlineKeyboardButton[][] keyboard) {
+        this.inline_keyboard = new ArrayList<>();
+        
         Arrays.stream(keyboard)
                 .map(List::of)
                 .forEach(inline_keyboard::add);
