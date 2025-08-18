@@ -1,6 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
 ## <p align="center"> Supported 8.3 Bot API </p> 
-#### <p align='center'>Highly inspired with [Pyrogram](https://pyrogram.org) </p>
 
 ## Official Docs — Coming soon
 
@@ -33,13 +32,13 @@
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.9.4</version>
+    <version>0.9.5</version>
 </dependency>
 ```
 
 * Gradle
 ```groovy
-implementation 'io.github.natanimn:telebof:0.9.4'
+implementation 'io.github.natanimn:telebof:0.9.5'
 ```
 ### Your First Echo Bot
 
@@ -666,21 +665,13 @@ import io.github.natanimn.telebof.types.inline.InlineQueryResultArticle;
 import io.github.natanimn.telebof.types.input.InputTextMessageContent;
 
 
-bot.onInline(filter ->filter.
-
-emptyQuery(), (context,query)->{
+bot.onInline(filter ->filter.emptyQuery(), (context,query)->{
 InlineQueryResultArticle article = new InlineQueryResultArticle("1")
         .title("Write something")
         .description("click here")
         .inputTextMessageContent(new InputTextMessageContent("Please write something"));
 
-    context.
-
-answerInlineQuery(query.id, new InlineQueryResult[] {
-  article
-}).
-
-exec();
+    context.answerInlineQuery(query.id, new InlineQueryResult[] {article}).exec();
 
 });
 ```
@@ -752,7 +743,7 @@ BotClient bot = new BotClient.Builder(TOKEN)
 ## Error Handling
 
 ```java
-import io.github.natanimn.telebof.TelegramApiException;
+import io.github.natanimn.telebof.exceptions.TelegramApiException;
 
 try {     
     context.sendMessage(message.chat.id, "Hello, World").exec();    
