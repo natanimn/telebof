@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import io.github.natanimn.telebof.ApiResponse;
 import io.github.natanimn.telebof.BotLog;
 import io.github.natanimn.telebof.Util;
-import io.github.natanimn.telebof.TelegramApiException;
+import io.github.natanimn.telebof.exceptions.TelegramApiException;
 import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.errors.ConnectionError;
-import io.github.natanimn.telebof.errors.TelegramError;
+import io.github.natanimn.telebof.exceptions.ConnectionError;
+import io.github.natanimn.telebof.exceptions.TelegramError;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import okhttp3.RequestBody;
 import okhttp3.MediaType;
@@ -171,7 +171,9 @@ public class Api {
         BotLog.debug(String.format("Request: method=%s, url=%s", abstractBase.methodName, getUrl(abstractBase)));
         ApiResponse<R> response = postRequest(abstractBase);
         BotLog.debug(String.format("The server returned: %s", response.result));
-        if (!response.ok) throw new TelegramApiException(response);
+        if (!response.ok) {
+            throw TelegramApiException.throwIt(response);
+        }
         else return response.result;
     }
 
