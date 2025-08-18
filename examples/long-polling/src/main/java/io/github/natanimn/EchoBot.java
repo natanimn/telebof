@@ -6,6 +6,8 @@
 package io.github.natanimn;
 
 
+import io.github.natanimn.telebof.BotClient;
+
 public class EchoBot {
     static final String TOKEN = System.getenv("TOKEN");
 

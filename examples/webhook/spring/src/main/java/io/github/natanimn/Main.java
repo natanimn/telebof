@@ -1,5 +1,7 @@
 package io.github.natanimn;
 
+import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.BotLog;
 import io.github.natanimn.telebof.filters.Filter;
 import io.github.natanimn.telebof.types.updates.Update;
 import org.springframework.boot.SpringApplication;

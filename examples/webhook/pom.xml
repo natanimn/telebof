@@ -11,7 +11,13 @@
     </parent>
 
     <artifactId>webhook</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>io.github.natanimn</groupId>
+            <artifactId>telebof</artifactId>
+            <version>0.9.4</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
         <maven.compiler.target>24</maven.compiler.target>

@@ -1,6 +1,8 @@
 package io.github.natanimn;
 
 
+import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.CallbackQuery;

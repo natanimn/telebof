@@ -1,8 +1,8 @@
 package io.github.natanimn;
 
-import io.github.natanimn.BotClient;
-import io.github.natanimn.BotContext;
-import io.github.natanimn.enums.ParseMode;
+import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
