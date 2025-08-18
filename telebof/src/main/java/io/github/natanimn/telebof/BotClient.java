@@ -5,8 +5,10 @@ import java.net.Proxy;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import io.github.natanimn.telebof.errors.ConnectionError;
-import io.github.natanimn.telebof.errors.TelegramError;
+import io.github.natanimn.telebof.exceptions.ConnectionError;
+import io.github.natanimn.telebof.exceptions.FloodError;
+import io.github.natanimn.telebof.exceptions.TelegramApiException;
+import io.github.natanimn.telebof.exceptions.TelegramError;
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.requests.get.GetUpdates;
@@ -730,17 +732,14 @@ final public class BotClient {
                 retrieveUpdates();
             } catch (TelegramError var1) {
                 throw var1;
+            } catch (FloodError error){
+                int delay = error.parameters.retry_after;
+                BotLog.error(error.description);
+                error.printStackTrace();
+                BotClient.this.sleep(delay);
             } catch (TelegramApiException apiException){
-                if (apiException.parameters !=null && apiException.parameters.retry_after != null){
-                    int delay = apiException.parameters.retry_after;
-                    BotLog.error(String.format("Trying after %d seconds", delay));
                     BotLog.error(apiException.description);
                     apiException.printStackTrace();
-                    BotClient.this.sleep(delay);
-                } else {
-                    BotLog.error(apiException.description);
-                    apiException.printStackTrace();
-                }
             } catch (ConnectionError connectionError){
                 if (tried == maxRetry) break;
                 BotLog.error(connectionError.getMessage());
