@@ -1,8 +1,9 @@
-package io.github.natanimn.telebof.errors;
+package io.github.natanimn.telebof.exceptions;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * Describes connection error
+ * @author Natanim
+ * @since 3 March 2025
  */
 public class ConnectionError extends RuntimeException{
     public ConnectionError(String msg){
