@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.updates;
 
+import io.github.natanimn.telebof.types.business.BusinessBotRights;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
  * Describes the connection of the bot with a business account.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.0.0
  */
 public class BusinessConnection implements TelegramUpdate{
     /**
@@ -32,9 +33,10 @@ public class BusinessConnection implements TelegramUpdate{
     public Integer date;
 
     /**
-     * True, if the bot can send and edit messages in the private chats that had incoming messages in the last 24 hours
+     * Optional.
+     * Rights of the business bot
      */
-    public Boolean can_reply;
+    public BusinessBotRights rights;
 
     /**
      * True, if the connection is active
@@ -49,13 +51,14 @@ public class BusinessConnection implements TelegramUpdate{
         return Objects.equals(id, that.id) &&
                 Objects.equals(user, that.user) &&
                 Objects.equals(user_Chat_id, that.user_Chat_id) &&
-                Objects.equals(date, that.date) && Objects.equals(can_reply, that.can_reply) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(rights, that.rights) &&
                 Objects.equals(is_enabled, that.is_enabled);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, user_Chat_id, date, can_reply, is_enabled);
+        return Objects.hash(id, user, user_Chat_id, date, rights, is_enabled);
     }
 
     @Override
@@ -65,7 +68,7 @@ public class BusinessConnection implements TelegramUpdate{
                 ", user=" + user +
                 ", user_Chat_id=" + user_Chat_id +
                 ", date=" + date +
-                ", can_reply=" + can_reply +
+                ", rights=" + rights +
                 ", is_enabled=" + is_enabled +
                 '}';
     }
