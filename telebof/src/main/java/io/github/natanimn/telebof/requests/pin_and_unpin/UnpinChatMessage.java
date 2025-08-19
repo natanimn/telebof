@@ -1,4 +1,4 @@
-package io.github.natanimn.telebof.requests.service;
+package io.github.natanimn.telebof.requests.pin_and_unpin;
 
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
@@ -23,7 +23,7 @@ public class UnpinChatMessage extends AbstractBaseRequest<UnpinChatMessage, Bool
 
     /**
      * Optional
-     * @param message_id Identifier of the message to unpin. Required if {@link #businessConnectionId} is specified.
+     * @param message_id Identifier of the message to pin_and_unpin. Required if {@link #businessConnectionId} is specified.
      *                   If not specified, the most recent pinned message (by sending date) will be unpinned.
      * @return {@link UnpinChatMessage}
      */

@@ -1,4 +1,4 @@
-package io.github.natanimn.telebof.requests.service;
+package io.github.natanimn.telebof.requests.pin_and_unpin;
 
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
