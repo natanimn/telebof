@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class InputProfilePhotoStatic implements InputProfilePhoto {
     private String photo, type;
-    private File file;
+    transient private File file;
 
     /**
      * Required
