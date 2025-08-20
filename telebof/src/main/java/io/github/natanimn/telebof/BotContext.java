@@ -8,18 +8,17 @@ import io.github.natanimn.telebof.requests.create.*;
 import io.github.natanimn.telebof.requests.delete.*;
 import io.github.natanimn.telebof.requests.edit.*;
 import io.github.natanimn.telebof.requests.get.*;
+import io.github.natanimn.telebof.requests.pin_and_unpin.*;
 import io.github.natanimn.telebof.requests.send.*;
 import io.github.natanimn.telebof.requests.service.*;
 import io.github.natanimn.telebof.requests.set.*;
 import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.bot.BotCommand;
 import io.github.natanimn.telebof.types.chat_and_user.ChatPermissions;
+import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
-import io.github.natanimn.telebof.types.input.InputMedia;
-import io.github.natanimn.telebof.types.input.InputPaidMedia;
-import io.github.natanimn.telebof.types.input.InputPollOption;
-import io.github.natanimn.telebof.types.input.InputSticker;
+import io.github.natanimn.telebof.types.input.*;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.passport.PassportElementError;
 import io.github.natanimn.telebof.types.web.WebhookInfo;
@@ -502,6 +501,17 @@ public class BotContext {
     }
 
     /**
+     * Gifts a Telegram Premium subscription to the given user.
+     * @param user_id Unique identifier of the target user who will receive a Telegram Premium subscription
+     * @param month_count Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
+     * @param star_count Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
+     * @return {@link GiftPremiumSubscription}
+     */
+    public GiftPremiumSubscription giftPremiumSubscription(long user_id, Integer month_count, Integer star_count){
+        return new GiftPremiumSubscription(user_id, month_count, star_count, api);
+    }
+
+    /**
      * Use this method to get a list of profile pictures for a user.
      * @param user_id Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.get.GetUserProfilePhotos}
@@ -554,6 +564,184 @@ public class BotContext {
      */
     public RemoveChatVerification removeChatVerification(Object chat_id){
         return new RemoveChatVerification(chat_id, api);
+    }
+
+    /**
+     * Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right.
+     * @param chat_id Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
+     * @param business_connection_id Unique identifier of the business connection on behalf of which to read the message
+     * @param message_id Unique identifier of the message to mark as read
+     * @return {@link ReadBusinessMessage}
+     */
+    public ReadBusinessMessage readBusinessMessage(long chat_id, String business_connection_id, int message_id){
+        return new ReadBusinessMessage(chat_id, business_connection_id, message_id, api);
+    }
+
+    /**
+     * Delete messages on behalf of a business account.
+     * Requires the can_delete_sent_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message.
+     * @param business_connection_id Unique identifier of the business connection on behalf of which to delete the messages
+     * @param message_ids A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat<br>
+     *                     See {@link #deleteMessage} for limitations on which messages can be deleted
+     *
+     * @return {@link DeleteBusinessMessages}
+     */
+    public DeleteBusinessMessages deleteBusinessMessages(String business_connection_id, Integer[] message_ids){
+        return new DeleteBusinessMessages(business_connection_id, message_ids, api);
+    }
+
+    /**
+     * Changes the first and last name of a managed business account. Requires the can_change_name business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param first_name The new value of the first name for the business account; 1-64 characters
+     * @return {@link SetBusinessAccountName}
+     */
+    public SetBusinessAccountName setBusinessAccountName(String business_connection_id, String first_name){
+        return new SetBusinessAccountName(business_connection_id, first_name, api);
+    }
+
+    /**
+     * Changes the username of a managed business account. Requires the can_change_username business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @return {@link SetBusinessAccountUsername}
+     */
+    public SetBusinessAccountUsername setBusinessAccountUsername(String business_connection_id){
+        return new SetBusinessAccountUsername(business_connection_id, api);
+    }
+
+    /**
+     * Changes the bio of a managed business account. Requires the can_change_bio business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @return {@link SetBusinessAccountBio}
+     */
+    public SetBusinessAccountBio setBusinessAccountBio(String business_connection_id){
+        return new SetBusinessAccountBio(business_connection_id, api);
+    }
+
+    /**
+     * Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param photo The new profile photo to set
+     * @return {@link SetBusinessAccountProfilePhoto}
+     */
+    public SetBusinessAccountProfilePhoto setBusinessAccountProfilePhoto(String business_connection_id, InputProfilePhoto photo){
+        return new SetBusinessAccountProfilePhoto(business_connection_id, photo, api);
+    }
+
+    /**
+     * Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right
+     * @param business_connection_id Unique identifier of the business connection
+     * @return {@link RemoveBusinessAccountProfilePhoto}
+     */
+    public RemoveBusinessAccountProfilePhoto removeBusinessAccountProfilePhoto(String business_connection_id){
+        return new RemoveBusinessAccountProfilePhoto(business_connection_id, api);
+    }
+
+    /**
+     * Changes the privacy settings pertaining to incoming gifts in a managed business account.
+     * Requires the can_change_gift_settings business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param show_gift_button Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+     * @param accepted_gift_types Types of gifts accepted by the business account
+     * @return {@link SetBusinessAccountGiftSettings}
+     */
+    public SetBusinessAccountGiftSettings setBusinessAccountGiftSettings(String business_connection_id, boolean show_gift_button,
+                                                                         AcceptedGiftTypes accepted_gift_types){
+        return new SetBusinessAccountGiftSettings(business_connection_id, show_gift_button, accepted_gift_types, api);
+    }
+
+    /**
+     * Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @return {@link GetBusinessAccountStarBalance}
+     */
+    public GetBusinessAccountStarBalance getBusinessAccountStarBalance(String business_connection_id){
+        return new GetBusinessAccountStarBalance(business_connection_id, api);
+    }
+
+    /**
+     * Transfers Telegram Stars from the business account balance to the bot's balance. Requires the can_transfer_stars business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param star_count Number of Telegram Stars to transfer; 1-10000
+     * @return {@link TransferBusinessAccountStars}
+     */
+    public TransferBusinessAccountStars transferBusinessAccountStars(String business_connection_id, short star_count){
+        return new TransferBusinessAccountStars(business_connection_id, star_count, api);
+    }
+
+    /**
+     * Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @return {@link GetBusinessAccountGifts}
+     */
+    public GetBusinessAccountGifts getBusinessAccountGifts(String business_connection_id){
+        return new GetBusinessAccountGifts(business_connection_id, api);
+    }
+
+    /**
+     * Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param owned_gift_id Unique identifier of the regular gift that should be converted to Telegram Stars
+     * @return {@link ConvertGiftToStars}
+     */
+    public ConvertGiftToStars convertGiftToStars(String business_connection_id, String owned_gift_id){
+        return new ConvertGiftToStars(business_connection_id, owned_gift_id, api);
+    }
+
+    /**
+     * Upgrades a given regular gift to a unique gift. Requires the can_transfer_and_upgrade_gifts business bot right.
+     * Additionally, requires the can_transfer_stars business bot right if the upgrade is paid.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param owned_gift_id Unique identifier of the regular gift that should be upgraded to a unique one
+     * @return {@link UpgradeGift}
+     */
+    public UpgradeGift upgradeGift(String business_connection_id, String owned_gift_id){
+        return new UpgradeGift(business_connection_id, owned_gift_id, api);
+    }
+
+    /**
+     * Transfers an owned unique gift to another user. Requires the can_transfer_and_upgrade_gifts business bot right.
+     * Requires can_transfer_stars business bot right if the transfer is paid.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param owned_gift_id Unique identifier of the regular gift that should be transferred
+     * @param new_owner_chat_id Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
+     * @return {@link TransferGift}
+     */
+    public TransferGift transferGift(String business_connection_id, String owned_gift_id, long new_owner_chat_id){
+        return new TransferGift(business_connection_id, owned_gift_id, new_owner_chat_id, api);
+    }
+
+    /**
+     * Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param content Content of the story
+     * @param active_period Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400
+     * @return {@link PostStory}
+     */
+    public PostStory postStory(String business_connection_id, InputStoryContent content, Integer active_period){
+        return new PostStory(business_connection_id, content, active_period, api);
+    }
+
+    /**
+     * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param story_id Unique identifier of the story to edit
+     * @param content Content of the story
+     * @return {@link EditStory}
+     */
+    public EditStory editStory(String business_connection_id, Integer story_id, InputStoryContent content){
+        return new EditStory(business_connection_id, story_id, content, api);
+    }
+
+    /**
+     * Deletes a story previously posted by the bot on behalf of a managed business account.
+     * Requires the can_manage_stories business bot right.
+     * @param business_connection_id Unique identifier of the business connection
+     * @param story_id Unique identifier of the story to delete
+     * @return {@link DeleteStory}
+     */
+    public DeleteStory deleteStory(String business_connection_id, Integer story_id){
+        return new DeleteStory(business_connection_id, story_id, api);
     }
 
     /**
@@ -816,7 +1004,7 @@ public class BotContext {
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param message_id Identifier of a message to pin
-     * @return {@link io.github.natanimn.telebof.requests.service.PinChatMessage}
+     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.PinChatMessage}
      */
     public PinChatMessage pinChatMessage(Object chat_id, int message_id) {
         return new PinChatMessage(chat_id, message_id, this.api);
@@ -827,7 +1015,7 @@ public class BotContext {
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @return {@link io.github.natanimn.telebof.requests.service.UnpinChatMessage}
+     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinChatMessage}
      */
     public UnpinChatMessage unpinChatMessage(Object chat_id) {
         return new UnpinChatMessage(chat_id, this.api);
@@ -838,7 +1026,7 @@ public class BotContext {
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
      * administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllChatMessages}
+     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllChatMessages}
      */
     public UnpinAllChatMessages unpinAllChatMessages(Object chat_id) {
         return new UnpinAllChatMessages(chat_id, this.api);
@@ -1012,7 +1200,7 @@ public class BotContext {
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @param message_thread_id Unique identifier for the target message thread of the forum topic
-     * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllForumTopicMessages}
+     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllForumTopicMessages}
      */
     public UnpinAllForumTopicMessages unpinAllForumTopicMessages(Object chat_id, int message_thread_id) {
         return new UnpinAllForumTopicMessages(chat_id, message_thread_id, this.api);
@@ -1075,7 +1263,7 @@ public class BotContext {
      * Use this method to clear the list of pinned messages in a General forum topic.
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @return {@link io.github.natanimn.telebof.requests.service.UnpinAllGeneralForumTopicMessages}
+     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllGeneralForumTopicMessages}
      */
     public UnpinAllGeneralForumTopicMessages unpinAllGeneralForumTopicMessages(Object chat_id){
         return new UnpinAllGeneralForumTopicMessages(chat_id, this.api);
