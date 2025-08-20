@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class InputProfilePhotoAnimated implements InputProfilePhoto {
     private String animation, type;
-    private File file;
+    transient private File file;
     private Double main_frame_timestamp;
 
     /**
