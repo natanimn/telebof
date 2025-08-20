@@ -2,16 +2,14 @@ package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.types.chat_and_user.*;
 import io.github.natanimn.telebof.types.forum.*;
-import io.github.natanimn.telebof.types.gift_and_giveaway.Giveaway;
-import io.github.natanimn.telebof.types.gift_and_giveaway.GiveawayCompleted;
-import io.github.natanimn.telebof.types.gift_and_giveaway.GiveawayCreated;
-import io.github.natanimn.telebof.types.gift_and_giveaway.GiveawayWinners;
+import io.github.natanimn.telebof.types.gift_and_giveaway.*;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.media_and_service.*;
 import io.github.natanimn.telebof.types.passport.PassportData;
 import io.github.natanimn.telebof.types.payments.PaidMediaInfo;
 import io.github.natanimn.telebof.types.payments.RefundedPayment;
 import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
+import io.github.natanimn.telebof.types.story.Story;
 import io.github.natanimn.telebof.types.web.WebAppData;
 
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.Objects;
  * This class represents message
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.0.0
  */
 public class Message implements TelegramUpdate {
     /* Unique message identifier inside this chat. In specific instances */
@@ -462,6 +460,26 @@ public class Message implements TelegramUpdate {
      */
     public RefundedPayment refunded_payment;
 
+    /**
+     * Optional. Service message: a regular gift was sent or received
+     */
+    public GiftInfo gift;
+
+    /**
+     * Optional. Service message: a unique gift was sent or received
+     */
+    public UniqueGift unique_gift;
+
+    /**
+     * Optional. Service message: the price for paid messages has changed in the chat
+     */
+    public PaidMessagePriceChanged paid_message_price_changed;
+
+    /**
+     * Optional. The number of Telegram Stars that were paid by the sender of the message to send it
+     */
+    public Integer paid_star_count;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -550,7 +568,11 @@ public class Message implements TelegramUpdate {
                 Objects.equals(effect_id, message.effect_id) &&
                 Objects.equals(show_caption_above_media, message.show_caption_above_media) &&
                 Objects.equals(paid_media, message.paid_media) &&
-                Objects.equals(refunded_payment, message.refunded_payment);
+                Objects.equals(refunded_payment, message.refunded_payment) &&
+                Objects.equals(gift, message.gift) &&
+                Objects.equals(unique_gift, message.unique_gift) &&
+                Objects.equals(paid_message_price_changed, message.paid_message_price_changed) &&
+                Objects.equals(paid_star_count, message.paid_star_count);
     }
 
     @Override
@@ -567,7 +589,8 @@ public class Message implements TelegramUpdate {
                 general_forum_topic_hidden, general_forum_topic_unhidden, video_chat_scheduled, video_chat_started, video_chat_ended,
                 video_chat_participants_invited, web_app_data, reply_markup, external_reply, quote, link_preview_options, giveaway,
                 giveaway_created, giveaway_winners, giveaway_completed, forward_origin, boost_added, sender_boost_count, reply_to_story,
-                chat_background_set, effect_id, show_caption_above_media, paid_media);
+                chat_background_set, effect_id, show_caption_above_media, paid_media, gift, unique_gift, paid_message_price_changed,
+                paid_star_count);
     }
 
 
@@ -658,6 +681,10 @@ public class Message implements TelegramUpdate {
                 ", effect_id='" + effect_id + '\'' +
                 ", show_caption_above_media=" + show_caption_above_media +
                 ", paid_media=" + paid_media +
+                ", gift=" + gift +
+                ", unique_gift=" + unique_gift +
+                ", paid_message_price_changed=" + paid_message_price_changed +
+                ", paid_star_count=" + paid_star_count +
                 '}';
     }
 }
