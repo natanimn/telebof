@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
+import io.github.natanimn.telebof.types.story.Story;
 import io.github.natanimn.telebof.types.updates.Poll;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.payments.PaidMediaInfo;
