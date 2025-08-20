@@ -3,6 +3,7 @@ package io.github.natanimn.telebof.types.chat_and_user;
 import io.github.natanimn.telebof.types.business.BusinessIntro;
 import io.github.natanimn.telebof.types.business.BusinessLocation;
 import io.github.natanimn.telebof.types.business.BusinessOpeningHours;
+import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
 import io.github.natanimn.telebof.types.media_and_service.Birthdate;
 import io.github.natanimn.telebof.types.media_and_service.Location;
 import io.github.natanimn.telebof.types.media_and_service.ReactionType;
@@ -14,7 +15,7 @@ import java.util.Objects;
  * This object contains full information about a chat.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.0.0
  */
 public class ChatFullInfo extends Chat{
     /**
@@ -207,6 +208,11 @@ public class ChatFullInfo extends Chat{
      */
     public Boolean can_send_paid_media;
 
+    /**
+     * Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
+     */
+    public AcceptedGiftTypes accepted_gift_types;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -253,7 +259,8 @@ public class ChatFullInfo extends Chat{
                 Objects.equals(business_opening_hours, that.business_opening_hours) &&
                 Objects.equals(personal_chat, that.personal_chat) &&
                 Objects.equals(birthdate, that.birthdate) &&
-                Objects.equals(can_send_paid_media, that.can_send_paid_media);
+                Objects.equals(can_send_paid_media, that.can_send_paid_media) &&
+                Objects.equals(accepted_gift_types, that.accepted_gift_types);
     }
 
     @Override
@@ -266,7 +273,7 @@ public class ChatFullInfo extends Chat{
                 emoji_status_expiration_date, available_reactions, has_visible_history, accent_color_id,
                 max_reaction_count, background_custom_emoji_id, profile_accent_color_id, profile_background_custom_emoji_id,
                 unrestrict_boost_count, custom_emoji_sticker_set_name, business_intro, business_location,
-                business_opening_hours, personal_chat, birthdate, can_send_paid_media);
+                business_opening_hours, personal_chat, birthdate, can_send_paid_media, accepted_gift_types);
     }
 
     @Override
@@ -316,6 +323,7 @@ public class ChatFullInfo extends Chat{
                 ", personal_chat=" + personal_chat +
                 ", birthdate=" + birthdate +
                 ", can_send_paid_media=" + can_send_paid_media +
+                ", accepted_gift_types=" + accepted_gift_types +
                 '}';
     }
 }
