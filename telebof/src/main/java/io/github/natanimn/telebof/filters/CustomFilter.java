@@ -9,5 +9,5 @@ import io.github.natanimn.telebof.types.updates.Update;
  * @version 0.9.4
  */
 public interface CustomFilter {
-    boolean check(Update update);
+    boolean run(Update update);
 }

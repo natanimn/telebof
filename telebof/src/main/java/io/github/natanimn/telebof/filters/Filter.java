@@ -557,9 +557,8 @@ public class Filter{
      * @return {@link Boolean}
      */
     public boolean customFilter(CustomFilter customFilter){
-        return customFilter.check(update);
+        return customFilter.run(update);
     }
-
     /**
      * Filters state
      * @param name state name
