@@ -11,13 +11,21 @@ import java.util.Objects;
  * This class describes the source of a transaction, or its recipient for outgoing transactions.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.0.0
  */
 public class TransactionPartner {
     /**
      * Type of the transaction partner
      */
     public TransactionPartnerType type;
+
+    /**
+     * Type of the transaction, currently one of {@link io.github.natanimn.telebof.enums.TransactionType#INVOICE_PAYMENT} for payments via invoices,
+     * {@link io.github.natanimn.telebof.enums.TransactionType#PAID_MEDIA_PAYMENT} for payments for paid media, {@link io.github.natanimn.telebof.enums.TransactionType#GIFT_PURCHASE} for gifts sent by the bot,
+     * {@link io.github.natanimn.telebof.enums.TransactionType#PREMIUM_PURCHASE} for Telegram Premium subscriptions gifted by the bot,
+     * {@link io.github.natanimn.telebof.enums.TransactionType#BUSINESS_ACCOUNT_TRANSFER} for direct transfers from managed business accounts
+     */
+    public String transaction_type;
 
     /**
      * Bot-specified invoice payload. Can be available only for “invoice_payment” transactions.
@@ -76,35 +84,9 @@ public class TransactionPartner {
      */
     public Chat chat;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        TransactionPartner that = (TransactionPartner) object;
-        return Objects.equals(type, that.type) &&
-                Objects.equals(invoice_payload, that.invoice_payload) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(withdrawal_state, that.withdrawal_state) &&
-                Objects.equals(paid_media, that.paid_media) &&
-                Objects.equals(request_count, that.request_count) &&
-                Objects.equals(subscription_period, that.subscription_period) &&
-                Objects.equals(gift, that.gift) &&
-                Objects.equals(affiliate, that.affiliate) &&
-                Objects.equals(chat, that.chat);
-    }
+    /**
+     * Optional. Number of months the gifted Telegram Premium subscription will be active for; for “premium_purchase” transactions only
+     */
+    public Integer premium_subscription_duration;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                type,
-                invoice_payload,
-                user,
-                withdrawal_state,
-                paid_media,
-                request_count,
-                subscription_period,
-                gift,
-                affiliate
-        );
-    }
 }
