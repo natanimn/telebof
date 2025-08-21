@@ -327,7 +327,7 @@ The filter class is used for filtering content of updates and separate the same 
 - `filter.document()` - filter message is document
 - `filter.videoNote()` - filter message is video note
 - `filter.contact()` - filter message is contact
-- `filter.loaction()` - filter message is location
+- `filter.location()` - filter message is location
 - `filter.game()` - filter message is game
 - `filter.venue()` - filter message is venue
 - `filter.sticker()` - filter message is sticker
