@@ -711,7 +711,6 @@ public class Filter{
     public boolean reaction(String react){
         if (update.message_reaction != null){
             for (ReactionType reactionType: update.message_reaction.new_reaction){
-                System.out.println(reactionType.emoji);
                 if (reactionType.emoji.equals(react)) return true;
             };
         }
