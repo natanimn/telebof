@@ -1,75 +1,54 @@
 package io.github.natanimn;
 
-
 import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
-import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
-import io.github.natanimn.telebof.types.updates.CallbackQuery;
-import io.github.natanimn.telebof.types.updates.Message;
+import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+import io.github.natanimn.telebof.enums.ParseMode;
 
-/**
- * This an Inline keyboard example bot of telebof library
- */
 public class KeyboardBot {
-    static String TOKEN = System.getenv("TOKEN");
+    public static void main(String[] args) {
+        final String TOKEN = "BOT_TOKEN"; // Replace with your actual bot token
+        var bot = new BotClient(TOKEN);
 
-    public static void main(String[] args){
-        BotClient bot = new BotClient(TOKEN);
+        // Handle /start command with keyboard
+        bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+            var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+            keyboard.add("ID", "Username", "Language");
 
-        // Register /start handler
-        bot.onMessage(filter -> filter.commands("start"), KeyboardBot::start);
-
-        // Register pressed inline keyboard handler
-        bot.onCallback(filter -> true, KeyboardBot::onKeyboard);
-
-        // Run the bot
-        bot.startPolling();
-    }
-
-    /* Hello and Hey inline keyboard buttons */
-    private static InlineKeyboardMarkup getKeyboard(){
-        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-        keyboard.addKeyboard(
-                new InlineKeyboardButton("Hello", "hello"),
-                new InlineKeyboardButton("Hey", "hey")
-        );
-        keyboard.addKeyboard(new InlineKeyboardButton("Exit", "exit"));
-        return keyboard;
-    }
-
-    /* Back inline keyboard button */
-    private static InlineKeyboardMarkup back(){
-        return new InlineKeyboardMarkup(new InlineKeyboardButton[]{
-                new InlineKeyboardButton("Back", "back")
+            context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
+                    .replyMarkup(keyboard)
+                    .exec();
         });
-    }
 
-    /* Start command handler */
-    static void start(BotContext context, Message message){
-        context.sendMessage(message.chat.id, "Hello, I am inline keyboard button")
-                .replyMarkup(getKeyboard())
-                .exec();
+        // Handle keyboard button presses
+        bot.onMessage(filter -> filter.texts("ID", "Username", "Language"), (context, message) -> {
+            var user = message.from;
+            String response;
 
-    }
+            switch (message.text) {
+                case "ID":
+                    response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
+                    break;
+                case "Username":
+                    if (user.username == null) {
+                        response = "<i>You don't have a username set.</i>";
+                    } else {
+                        response = String.format("<b>Your username is:</b> @%s", user.username);
+                    }
+                    break;
+                case "Language":
+                    String language = (user.language_code != null) ? user.language_code : "not specified";
+                    response = String.format("<b>Your language code is:</b> %s", language);
+                    break;
+                default:
+                    response = "Unknown option.";
+            }
 
-    /* Inline keyboard buttons handler */
-    static void onKeyboard(BotContext context, CallbackQuery query) {
-        context.answerCallbackQuery(query.id).exec(); // Answer inline keyboard (removes loading)
-
-        String data = query.data;
-
-        if (data.equals("exit")) context.editMessageText("keyboard exited", query.from.id, query.message.message_id).exec();
-
-        else if (data.equals("back")) {
-            context.editMessageText("Hello, I am inline keyboard button", query.from.id, query.message.message_id)
-                    .replyMarkup(getKeyboard())
+            context.sendMessage(message.chat.id, response)
+                    .parseMode(ParseMode.HTML)
                     .exec();
-        } else {
-            context.editMessageText(String.format("What's up you have pressed %s button", data), query.from.id, query.message.message_id)
-                    .replyMarkup(back())
-                    .exec();
+        });
 
-        }
+        // Start the bot
+        bot.startPolling();
     }
 }

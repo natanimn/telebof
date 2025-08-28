@@ -51,13 +51,6 @@ public class PaymentExampleBot {
 
         LabeledPrice price = new LabeledPrice("Pay 10 star", 10);
 
-        /**
-         * Pass:
-         * title,
-         * description,
-         * payload,
-         * array of labeled price
-         */
         context.sendInvoice(
                 message.chat.id,
                 "Payment test",

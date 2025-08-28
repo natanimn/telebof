@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.updates;
 
+import io.github.natanimn.telebof.enums.ChatType;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.media_and_service.Location;
 
@@ -38,7 +39,7 @@ public class InlineQuery implements TelegramUpdate{
      * Can be either “sender” for a private chat with the inline query sender, “private”, “group”, “supergroup”, or “channel”.
      * The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat
      */
-    public String chat_type;
+    public ChatType chat_type;
 
     /**
      * Sender location, only for bots that request user location
