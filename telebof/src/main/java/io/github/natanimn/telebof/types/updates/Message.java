@@ -279,7 +279,7 @@ public class Message implements TelegramUpdate {
     /**
      * Service message: auto-delete timer settings changed in the chat
      */
-    public Integer message_auto_delete_timer_changed;
+    public MessageAutoDeleteTimerChanged message_auto_delete_timer_changed;
 
     /**
      * Message is an invoice for a <a href="https://core.telegram.org/bots/api#payments">payment</a>, information about the invoice.
