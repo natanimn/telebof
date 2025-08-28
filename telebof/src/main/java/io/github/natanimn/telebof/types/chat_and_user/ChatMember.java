@@ -1,18 +1,20 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
+import io.github.natanimn.telebof.enums.ChatMemberStatus;
+
 import java.util.Objects;
 
 /**
  * This object contains information about one member of a chat.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.0.0
  */
 public class ChatMember {
     /**
-     * 	The member's status in the chat, one of "member", "administrator", "creator", "banned", "restricted", "left"
+     * 	The member's status in the chat.
      */
-    public String status;
+    public ChatMemberStatus status;
 
     /**
      * Optional. Custom title for this user
