@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.filters;
 
 import io.github.natanimn.telebof.Util;
+import io.github.natanimn.telebof.enums.ChatType;
 import io.github.natanimn.telebof.types.media_and_service.*;
 import io.github.natanimn.telebof.types.chat_and_user.ChatBackground;
 import io.github.natanimn.telebof.types.chat_and_user.ChatBoostAdded;
@@ -51,7 +52,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean Private(){
-        return chatType("private");
+        return chatType(ChatType.PRIVATE);
     }
 
     /**
@@ -59,7 +60,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean channel(){
-        return chatType("channel");
+        return chatType(ChatType.CHANNEL);
     }
 
     /**
@@ -67,7 +68,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean supergroup(){
-        return chatType("supergroup");
+        return chatType(ChatType.SUPERGROUP);
     }
 
     /**
@@ -75,7 +76,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean group(){
-        return chatType("group");
+        return chatType(ChatType.GROUP);
     }
 
     /**
@@ -518,11 +519,11 @@ public class Filter{
     }
 
 
-    private boolean chatType(String chat){
-        if (update.message!=null) return update.message.chat.type.equals(chat);
-        else if (update.callback_query != null) return update.callback_query.message.chat.type.equals(chat);
-        else if (update.edited_message != null) return update.edited_message.chat.type.equals(chat);
-        else if (update.inline_query != null) return update.inline_query.chat_type.equals(chat);
+    private boolean chatType(ChatType chat){
+        if (update.message!=null) return update.message.chat.type == chat;
+        else if (update.callback_query != null) return update.callback_query.message.chat.type == chat;
+        else if (update.edited_message != null) return update.edited_message.chat.type == chat;
+        else if (update.inline_query != null) return update.inline_query.chat_type == chat;
         else return false;
     }
 
@@ -711,7 +712,6 @@ public class Filter{
     public boolean reaction(String react){
         if (update.message_reaction != null){
             for (ReactionType reactionType: update.message_reaction.new_reaction){
-                System.out.println(reactionType.emoji);
                 if (reactionType.emoji.equals(react)) return true;
             };
         }
