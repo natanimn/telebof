@@ -1,771 +1,171 @@
 # <p align="center">Telebo<i>f</i></p>
-## <p align="center"> Supported 8.3 Bot API </p> 
+## <p align="center">Easy and modern Telegram Bot API for Java </p>
 
-## Official Docs — Coming soon
+<p align="center">
+  <a href="https://github.com/natanimn/telebof/releases">
+    <img src="https://img.shields.io/github/v/release/natanimn/telebof?color=blue&label=Version" alt="Latest Release">
+  </a>
+  <a href="https://github.com/natanimn/telebof/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/natanimn/telebof?color=green" alt="License">
+  </a>
+  <a href="https://t.me/telebofchat">
+    <img src="https://img.shields.io/badge/Telegram-Support%20Group-blue?logo=telegram" alt="Telegram Support">
+  </a>
+  <a href="https://github.com/natanimn/telebof/stargazers">
+    <img src="https://img.shields.io/github/stars/natanimn/telebof?color=yellow&label=Stars" alt="GitHub Stars">
+  </a>
+</p>
 
-* [Installation](#installation)
-* [Your First Echo Bot](#your-first-echo-bot)
-* [Available Types](#available-types) 
-* [Available Methods](#available-methods)
-* [Handling Updates](#handling-updates)
-* [Types of Handlers](#types-of-handlers)
-* [Filtering Updates](#filtering-updates)
-* [Markup](#markup)
-    * [Reply Keyboard Markup](#replymarkup)
-    * [Inline Keyboard Markup](#inlinekeyboardmarkup)
-    * [Remove Reply Keyboard](#removereplykeyboard)
-    * [Force Reply](#forcereply)
-* [Inline Bot](#inline-bot)
-* [Advanced Usages](advanced-usages)
-  * [Local Bot API Server](#local-bot-api-server)
-  * [Logging](#logging)
-  * [Proxy](#proxy)
-* [Error Handling](#error-handling)
-* [Conclusion](#conclusion)
-  
+## Overview
+
+Telebof is a modern, easy Java library for building Telegram bots using the Telegram Bot API. It provides a simple interface while supporting all the advanced features of the Telegram platform.
+
+---
 
 ## Installation
 
-* Maven 
+### Maven
+Add the following dependency to your `pom.xml`:
 
 ```xml
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>0.9.5</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
-* Gradle
+### Gradle
+Add the following to your `build.gradle`:
+
 ```groovy
-implementation 'io.github.natanimn:telebof:0.9.5'
+implementation 'io.github.natanimn:telebof:1.0.0'
 ```
-### Your First Echo Bot
+
+### Manual Installation
+Download the latest JAR from the [releases page](https://github.com/natanimn/telebof/releases/tag/v1.0.0) and add it to your classpath.
+
+---
+
+## Quick Start: Your First Echo Bot
 
 ```java
 import io.github.natanimn.telebof.BotClient;
 
 public class MyFirstEchoBot {
-  static final String TOKEN = "YOUR_BOT_TOKEN_HERE";
+    static final String TOKEN = "YOUR_BOT_TOKEN_HERE"; // Get from @BotFather
 
-  public static void main(String[] args) {
-    final BotClient bot = new BotClient(TOKEN);
-   
-    // Listening for /start command
-    bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-        context.sendMessage(message.chat.id, "Welcome!").exec();
-    });
+    public static void main(String[] args) {
+        final BotClient bot = new BotClient(TOKEN);
+       
+        // Handle /start command
+        bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+            context.sendMessage(message.chat.id, "Welcome to my echo bot! 👋").exec();
+        });
 
-    // Listening for any incoming text
-    bot.onMessage(filter -> filter.text(), (context, message) -> {
-        context.sendMessage(message.chat.id, message.text).exec();
-    });
+        // Echo any text message
+        bot.onMessage(filter -> filter.text(), (context, message) -> {
+            context.sendMessage(message.chat.id, "You said: " + message.text).exec();
+        });
 
-    bot.startPolling(); // finally run the bot
-  }
+        bot.startPolling(); // Start the bot
+    }
 }
 ```
-**Do not worry if you do not understand what the above code mean, it will be explained in the next chapter.** 
 
-## Available Types
-All Telegram types are defined in `io.github.natanimn.telebof.types` and organized in a package based on their relation. They are completely the same as Telegram types. 
+**To get started:**
+1. Create a bot with [@BotFather](https://t.me/BotFather) on Telegram
+2. Replace `YOUR_BOT_TOKEN_HERE` with your actual bot token
+3. Run the code and send a message to your bot!
 
-Their set method is their camelCased name method
+---
 
-## Available Methods
-All Telegram methods are defined in `io.github.natanimn.request` under their category and implemented in `io.github.natanimn.telebof.BotContext` class.
+## Documentation
 
-##### Inside handler
-Use `context` parameter
+### Full Library Documentation
+Visit our comprehensive documentation at:  
+[https://natanimn.github.io/telebof](https://natanimn.github.io/telebof)
 
-##### Outside handler
-`bot.context` instance
+### API Reference
+Detailed API reference available at:  
+[https://natanimn.github.io/telebof-api](https://natanimn.github.io/telebof-api)
 
-```java
-/* Inside Handler */
+---
 
-// send message
-context.sendMessage("@chat_username", "Hello, World").exec(); // or
-context.sendMessage(message.chat.id, "Hello, World").exec();
-
-// The same as 
-
-bot.context.sendMessage("@chat_username", "Hello, World").exec();
-bot.context.sendMessage(message.chat.id, "Hello, World").exec();
-
-// send Photo
-context.sendPhoto("@chat_username", new File("photo.png")).exec(); // or
-context.sendPhoto(message.chat.id, new File("photo.png")).exec();
-
-// The same as 
-
-bot.context.sendPhoto("@chat_username", new File("photo.png")).exec(); // or
-bot.context.sendPhoto(message.chat.id, new File("photo.png")).exec();
-
-
-/* Outside Handler */
-bot.context.sendMessage("@chat_username", "Hello, World").exec();
-bot.context.sendPhoto(123456789L, new File("photo.png")).exec();
-```
-**Assume that in our examples it is inside handler**
-
-```java
-// send photo
-context.sendPhoto(message.chat.id, new File("photo.png")).exec(); // or
-context.sendPhoto(message.chat.id, "FILE_ID").exec();
-
-// send audio
-context.sendAudio(message.chat.id, new File("audio.mp3")).exec();
-context.sendAudio(message.chat.id, "FILE_ID").exec();
-
-// send video
-context.sendVideo(message.chat.id, new File("video.mp4")).exec();
-context.sendVideo(message.chat.id, "FILE_ID").exec();
-
-// send voice
-context.sendVoice(message.chat.id, new File("voice.ogg")).exec();
-context.sendVoice(message.chat.id, "FILE_ID").exec();
-
-// send document
-context.sendDocument(message.chat.id, new File("doc.pdf")).exec();
-context.sendDucument(message.chat.id, "FILE_ID").exec();
-
-// send animation
-context.sendAnimation(message.chat.id, new File("animation.gif")).exec();
-context.sendAnimation(message.chat.id, "FILE_ID").exec();
-
-// send contact
-context.sendContact(message.chat.id, phone_number, first_name).exec();
-
-// send poll
-InputPollOption option1 = new InputPollOption("option 1");
-InputPollOption option2 = new InputPollOption("option 2")
-context.sendPoll(message.chat.id, question, new InputPollOption[]{option1, option2}).exec();
-
-// send invoice
-LabeledPrice price1 = new LabeledPrice(label1, amount1);
-context.sendInvoice(message.chat.id, title, dscription, payload, currency, new LabeledPrice[]{price1}).exec();
-
-// send media group
-InputMediaPhoto media1 = new InputMediaPhoto(new File("photo_1.png"));
-InputMediaPhoto media2 = new InputMediaPhoto(new File("photo_2.png"));
-context.sendMediaGroup(message.chat.id, new InputMedia[]{media1, media2}).exec();
-
-
-// get me
-User me = context.getMe().exec();
-System.out.println(me.username);
-
-// ban chat member
-context.banChatMember(message.chat.id, user_id).exec();
-
-// leave chat
-context.leaveChat(message.chat.id).exec();
-```
-
-## Handling Updates
-### Update
-Update is an event that bot receives like incoming messages, pressing button.
-
-Updates are handled by [registering one or more callback classes](#types-of-handlers). 
-
-Each update handler uses UpdateHandler interface. This interface take two parameters as argument: filter class 
-and callback class. The filter class is a lambda class of `io.github.natanimn.filter.FilterExecutor` takes `io.github.natanimn.filter.Filter`
-as an argument and returns `Boolean`, so that if the condition of this filter 
-matches with the update sent from telegram, the callback class will be called and its body gets execute.
-
-The callback class takes two parameters: `io.github.natanimn.telebof.BotContext` class and type of class of an update which is being handled
-
-Let's back to the first [echo bot](#your-first-echo-bot) example.
+### Advanced Example: Inline Keyboard Bot
 
 ```java
 import io.github.natanimn.telebof.BotClient;
-
-public class MyFirstEchoBot {
-  static final String TOKEN = "YOUR_BOT_TOKEN_HERE";
-
-  public static void main(String[] args) {
-    final BotClient bot = new BotClient(TOKEN);
-
-    bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-      context.sendMessage(message.chat.id, "Welcome!").exec();
-    });
-
-    bot.onMessage(filter -> filter.text(), (context, message) -> {
-      context.sendMessage(message.chat.id, message.text).exec();
-    });
-
-    bot.startPolling();
-  }
-}
-```
-We have two handlers: `/start` command handler and `text` handler.
-
-- The first handler handles `/start` command and send back a text `Welcome!`.
-- The second handler handles any incoming **text** and echoes the text.
-- `sendMessage` is used for sending a text.
-
-- `exec()` meaning `execute` is an enclosing and request sender method. This means before ending and sending request, you can pass 
-optional parameters and then send a request to telegram. For example `sendMessage` method has optional parameters 
-`parse_mode`, `reply_markup`. So you can pass their value for these parameters and send request to telegram.
-
-```java
-import enums.io.github.natanimn.ParseMode;
-
-context.sendMessage(message.chat.id, "*Hello, World*")
-        .parseMode(ParseMode.MARKDOWN)
-        .exec();
-```
-Lastly we start our bot by using `startPolling()` which does not take any parameter and run our bot via **long polling.** 
-
-**IMPORTANT: All handlers are handled in the order in which they were registered.**
-
-## Types of Handlers
-There are 22 types of updates to be handled
-
-#### Message Handler
-```java
-bot.onMessage; 
-```
-#### CallbackQuery handler
-```java
-bot.onCallback;
-```
-#### InlineQuery Handler
-```java
-bot.onInline;
-```
-#### Poll Handler
-```java
-bot.onPoll;
-```
-#### PollAnswer Handler
-```java
-bot.onPoll;
-```
-#### ShippingQuery Handler
-```java
-bot.onShipping;
-```
-#### ChannelPost Handler
-```java
-bot.onChannelPost;
-```
-#### PreCheckoutQuery Handler
-```java
-bot.onPreCheckout;
-```
-#### EditedMessage Handler
-```java
-bot.onEditedMessage;
-```
-#### EditedChannelPost Handler
-```java
-bot.onEditedChannelPost;
-```
-#### MyChatMember Handler
-```java
-bot.onMychatMember;
-```
-#### ChatMember Handler
-```java
-bot.onChatMember;
-```
-#### ChosenInlineResult Handler
-```java
-bot.onChosenInlineResult;
-```
-#### MessageReaction Handler
-```java
-bot.onReaction;
-```
-#### MessageReactionCount Handler
-```java
-bot.onReactionCount;
-```
-#### ChatBoost Handler
-```java
-bot.onChatBoost;
-```
-#### RemovedChatBoost Handler
-```java
-bot.onRemovedChatBoost;
-```
-#### BusinessMessage Handler
-```java
-bot.onBusinessMessage;
-```
-#### BusinessConnection Handler
-```java
-bot.onBusinessConnection;
-```
-#### EditedBusinessMessage Handler
-```java
-bot.onEditedBusinessMessage;
-```
-#### DeletedBusinessMessage Handler
-```java
-bot.onDeletedBusinessMessage;
-```
-
-## Filtering Updates
-
-In previous topic we have seen how to create handlers and how they work. In this section we will talk about how filters 
-work and how we use them.
-
-As previously discussed, all handlers take two parameters: filter class and callback class. 
-
-The filter class is used for filtering content of updates and separate the same update by content they hold. 
-
-### Predefined Filters 
-- `filter.text()` - filter message is text  
-- `filer.photo()` - filter message is photo 
-- `filter.video()` - filter message is video
-- `filter.voice()` - filter message is voice
-- `filter.audio()` - filter message is audio
-- `filter.animation()` - filter message is animation
-- `filter.document()` - filter message is document
-- `filter.videoNote()` - filter message is video note
-- `filter.contact()` - filter message is contact
-- `filter.loaction()` - filter message is location
-- `filter.game()` - filter message is game
-- `filter.venue()` - filter message is venue
-- `filter.sticker()` - filter message is sticker
-- `filter.dice()` - filter message is dice
-- `filter.invoice()` - message is an invoice for a payment
-- `filter.media()` - filter message is one of the following: photo, video, audio, sticker, video_note, voice, animation, document.
-- `filter.passportData()` - message is Telegram passport data
-- `filter.usersShared()` - filter users were shared with the bot
-- `filter.chatShared()` - filter chat was shared with the bot
-- `filter.newChatMember()` - filter new members joined or added to the group
-- `filter.leftChatMember()` - filter member left from the group
-- `filter.newChatPhoto()` - filter a chat photo was changed
-- `filter.newChatTitle()` - filter a chat title was changed
-- `filter.groupCreated()` - filter a group chat was created
-- `filter.supergroupCreated()` - filter a supergroup chat was created
-- `filter.channelCreated()` - filter a channel was created
-- `filter.messageAutoDeleteTimerChanged()` - filter auto-delete timer settings changed in the chat
-- `filter.migrated()` - filter the group/supergroup has been migrated to/from a supergroup/group
-- `filter.chatBackgroundSet()` filter chat background set
-- `filter.pinnedMessage()` - filter a message was pinned
-- `filter.successfulPayment()` - filter message about successful payment
-- `filter.refundedPayment()` - filter message about refunded payment 
-- `filter.proximityAlertTrigged()` - filter a user in the chat triggered another user's proximity alert
-- `filter.boostAdded()` - filter user boosted the chat
-- `filter.giveaway()` - filter message is scheduled giveaway
-- `filter.giveawayCreated()` - filter a scheduled giveaway was created
-- `filter.giveawayCompleted()` -  a giveaway without public winners was completed
-- `filter.forumTopicCreated()` - filter forum topic created
-- `filter.forumTopicClosed()` - filter forum topic closed
-- `filter.forumTopicEdited()` - filter forum topic edited
-- `filter.forumTopicReopned()` - filter forum topic reopened
-- `filter.webAppData()` - filter data sent by a Web App
-- `filter.videoChatStarted()` - filter video chat was started in the chat
-- `filter.videoChatEnded()` - filter video chat was ended in the chat
-- `filter.videoChatParticipantsInvited()` - filter new participants invited to a video chat
-- `filter.videoChatScheduled()` - filter video chat scheduled
-- `filter.forwarded()` - filter message was forwarded
-- `filter.replied()` - filter message was replied to another message
-- `filter.repliedToStory()` - filter message was replied to chat story
-- `filter.entities()` - filter message text contains entities(bold, italic, underline, mention, url, hashtag)
-- `filter.quote()` - filter message text contains quote
-- `filter.bot()` - filter user is bot
-- `filter.emptyQuery()` - filter query is empty
-- `filter.Private()` - filter the chat is `private`
-- `filter.group()` - filter the chat type is `group`
-- `filter.supergroup()` - filter chat type is `supergroup`
-- `filter.channel()` - filter chat type is `channel`
-- `filter.commands(String... commands)` - filter message is given commands.
-- `filter.callbackData(String... datas)` - filter given callback_data belongs to the pressed button.  
-- `filter.inlineQuery(String... queries)` - filter given query is queried
-- `filter.customFilter(CustomFilter cf)` - filter given filter
-- `filter.state(String state)` - filter current state is given state. Pass `*` for filtering any state
-- `filter.texts(String... texts)` - filter given text matched with message text
-- `filter.chatIds(Long... ids)` - filter given id matched with current chat's id
-- `filter.fromIds(Long... ids)` - filter given id matched with current user's id
-- `filter.chatUsernames(String... usernames)` - filter given username matched with current chat's username
-- `filter.usernames(String... usernames)` - filter given username matched with current user's username
-- `filter.regex(String pattern)`- regular expression filter for message text  
-- `filter.reaction(String... reactions)` - filter incoming emoji reactions (Used with bot.OnReaction)
-
-```java
-// handles incoming texts
-bot.onMessage(filter -> filter.text(), (context, message) -> {});
-
-// handles incoming photos
-bot.onMessage(filter -> filter.photo(), (context, message) -> {});
-
-
-// handles incoming videos
-bot.onMessage(filter -> filter.video(), (context, message) -> {});
-```
-
-```java
-// handles message in chat with chat_id of 123456789
-bot.onMessage(filter -> filter.chatIds(123456789L), (context, message) -> {});
-
-// handles message from user whose id is 123456789 
-bot.onMessage(filter -> filter.fromIds(123456789L), (context, message) -> {});
-
-// handles message in chat username @this_chat
-bot.onMessage(filter -> filter.chatUsernames("this_chat"), (context, message) -> {});
-
-// handles message from user whose username is @this_user
-bot.onMessage(filter -> filter.usernames("this_user"), (context, message) -> {});
-```
-
-### Filtering message text
-Message text can be filtered by using the following methods: `filter.commands`, `filter.texts`, `filter.regex`.
-
-#### Filtering command
-```java
-// handles /start command
-bot.onMessage(filter -> filter.commands("start"), (context, message) -> {});
-
-// handles /help command
-bot.onMessage(filter -> filter.commands("help"), (context, message) -> {});
-```
-
-#### Filtering Text
-```java
-// handles hi text
-bot.onMessage(filter -> filter.texts("hi"), (context, message) -> {});
-
-// handles hello text
-bot.onMessage(filter -> filter.texts("hello"), (context, message) -> {});
-```
-
-#### Filtering using Regular Expression
-```java
-// handles any text starts with hi 
-bot.onMessage(filter -> filter.regex("^hi"), (context, message) -> {});
-
-// handles any text ends with bye
-bot.onMessage(filter -> filter.regex("bye$"), (context, message) -> {});
-```
-
-
-### Combining filters
-You may want to handle `text` and `photo` in one handler or a `text` in different chats. To do so use logical operators
-(&&, ||, !) and combine them together.
-
-Here are some examples
-
-```java
-// handles incoming text in private chat
-bot.onMessage(filter -> filter.text() && filter.Private(), (context, message) -> {});
-
-// handles an incoming text or photo
-bot.onMessage(filter -> filter.text() || filter.photo(), (context, message) -> {});
-
-// handles incoming text in supergroup chat 
-bot.onMessage(filter -> filter.text() && filter.supergroup(), (context, message) -> {});
-
-// handles incoming audio or video in private chat
-bot.onMessage(filter -> filter.Private() && (filter.audio() || filter.video()), (context, message) -> {});
-```
-
-### Writing your own filter
-You can write your own filter using `filter.customFilter`.
-
-This example will show you how you can write filters using `filters.io.github.natanimn.CustomFilter` and `filter.customFilter`.
-
-Let's write simple custom filter whether incoming text starts with `!` or not.
-
-```java
-import io.github.natanimn.telebof.BotContext;
-import filters.io.github.natanimn.CustomFilter;
-import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.updates.Update;
-
-
-// Filter whether the incoming message text starts with `!`. or not
-
-class StartsWithFilter implements CustomFilter {
-  @Override
-  public boolean check(Update update) {
-    return update.message.text.startsWith("!");
-  }
-}
-
-public class FilterBot {
-
-  static void startsWith(BotContext context, Message message) {
-    context.sendMessage("Message starts with !").exec();
-  }
-
-  public static void main(String[] args) {
-    // ...
-    bot.onMessage(filter -> filter.text() && filter.customFilter(new StartsWithFilter()),
-            FilterBot::startsWith);
-  }
-}
-```
-
-### Advanced Filters
-
-There are some advanced filters for handling `pressing button` and `inline query`. These are
-`filter.callbackData` and `filter.inlineQuery` respectively.
-
-Example for handling inline button through its callback data using `filter.callbackData`
-
-```java
-// handles inline button which its callback data equals with "a"
-bot.onCallback(filter -> filter.callbackData("a"), (context, callback) -> {
-    context.answerCallbackQuery(callback.id, "You pressed A button!").exec();
-});
-```
-
-Example for handling inline query using `filter.inlineQuery`
-```java
-// handles an inline query which its query equals with a word "hello"
-bot.onInline(filter -> filter.inlineQuery("hello"), (context, query) -> {});
-```
-[Sample](#inline-bot)
-
-### State Filter
-There is another special filter to make conversations with bot called `state filter`.
-```java
-bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-    context.sendMessage(message.chat.id, "What is your name?").exec();
-    bot.setState(message.from.id, "name"); // set our state to `name`. You can set whatever
-});
-
-bot.onMessage(filter -> filter.state("name") && filter.text(), (context, message) -> {     
-    context.sendMessage(message.chat.id, String.format("Your name is %s", message.text)).exec();
-    context.clearState(message.from.id);
-});
-```
-
-
-## Markups
-### ReplyMarkup
-Example for using reply markup
-
-```java
-import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
-import io.github.natanimn.telebof.types.keyboard.KeyboardButton;
-
-ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup()
-        .resizeKeyboard(true); // resize keyboard
-        
-markup.
-
-add("A","B","C"); // You can add String or 
-markup.
-
-add("D","E"); 
-markup.
-
-add(new KeyboardButton("F")); // KeybaordButton class
-
-// also possible
-ReplyKeyboardMarkup markup = new ReplyKeyboardMarkup(new String[][]{
-        new String[]{"A", "B", "C"},
-        new String[]{"D", "E"},
-        new String[]{"F"}
-}).resizeKeyboard(true); // resize keyboard
-
-context.
-
-sendMssage(message.chat.id, "Hello, World!").
-
-replyMarkup(markup).
-
-exec();
-```
-
-### InlineKeyboardMarkup
-example for using InlineKeyboardMarkup
-
-```java
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
+import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 
-InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup();
+public class AdvancedBot {
+    public static void main(String[] args) {
+        final BotClient bot = new BotClient(TOKEN);
 
-inlineMarkup.
+        bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+            var keyboard = new InlineKeyboardMarkup();
+            keyboard.addKeyboard(new InlineKeyboardButton("Option 1", "opt1"));
+            keyboard.addKeyboard(new InlineKeyboardButton("Option 2", "opt2"));
+            
+            context.sendMessage(message.chat.id, "Choose an option:")
+                   .replyMarkup(keyboard)
+                   .exec();
+        });
 
-addKeybaord(
-  new InlineKeyboardButton("A", "a"), 
-  new
+        bot.onCallback(filter -> filter.callbackData("opt1", "opt2"), (context, callback) -> {
+            context.answerCallbackQuery(callback.id, "Option selected!").exec();
+        });
 
-InlineKeyboardButton("C","b"), 
-  new
-
-InlineKeyboardButton("Url").
-
-url("www.example.com")
-); // 3 keyboards on a row 
-
-// also  possible
-InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[]{
-        new InlineKeyboardMarkup("A", "a"),
-        new InlineKeyboardMarkup("B", "b"),
-        new InlineKeyboardMarkup("Url").url("www.example.com")
-
-}, 2); // 2 row width. i.e 2 keyboards on a row at max
-
-// also possible
-InlineKeyboardMarkup inlineMarkup = new InlineKeyboardMarkup(new InlineKeyboardMarkup[][]{
-        new InlineKeyboardMarkup[]{
-                new InlineKeyboardMarkup("A", "a"),
-                new InlineKeyboardMarkup("B", "b")
-        },
-        new InlineKeyboardMarkup[]{
-                new InlineKeyboardMarkup("Url").url("www.example.com")
-        }
-}
-);
-
-context.
-
-sendMessage(message.chat.id, "Press one button")
-        .
-
-replyMarkup(inlineMarkup)
-        .
-
-exec();
-```
-
-### ForceReply
-
-```java
-
-import io.github.natanimn.telebof.types.keyboard.ForceReply;
-
-context.sendMessage(message.chat.id, "Can you tell me your name please?")
-        .
-
-replyMarkup(new io.github.natanimn.telebof.types.keyboard.ForceReply())
-        .
-
-exec();
-```
-
-### RemoveReplyKeyboard
-
-```java
-import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
-
-context.sendMessage(message.chat.id, "There is no reply keyboard now")
-        .
-
-replyMarkup(new RemoveReplyKeybaord())
-        .
-
-exec(); 
-```
-
-## Inline Bot
-
-```java
-import io.github.natanimn.telebof.types.inline.InlineQueryResult;
-import io.github.natanimn.telebof.types.inline.InlineQueryResultArticle;
-import io.github.natanimn.telebof.types.input.InputTextMessageContent;
-
-
-bot.onInline(filter ->filter.emptyQuery(), (context,query)->{
-InlineQueryResultArticle article = new InlineQueryResultArticle("1")
-        .title("Write something")
-        .description("click here")
-        .inputTextMessageContent(new InputTextMessageContent("Please write something"));
-
-    context.answerInlineQuery(query.id, new InlineQueryResult[] {article}).exec();
-
-});
-```
-
-## Advanced Usage
-
-### Local Bot API Server
-
-```java
-import io.github.natanimn.telebof.BotClient;
-
-String url = "https://example.com/bot%s/%s";
-BotClient bot = new BotClient.Builder(TOKEN)
-        .localBotApiUrl(url)
-        .build();
-```
-**You have to log out your bot from the Telegram server before switching to your local API server using `bot.context.logOut().exec()`**
-
-### Logging
-Use `BotLog` class to enable or disable logs. By default, it is on WARNING level.
-```java
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanim.BotLog;
-import java.util.logging.Level;
-
-/**
- * .....
- */
-
-BotLog.setLevel(Level.INFO);
-BotClient bot = new BotClient(TOKEN);
-```
-
-### Proxy
-
-```java
-import io.github.natanimn.telebof.BotClient;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-
-InetSocketAddress address = new InetSocketAddress(80, "127.97.91"); //port and hostname respectively 
-
-Proxy proxy = new Proxy(Proxy.Type.SOCKS, address);
-BotClient bot = new BotClient
-        .Builder(TOKEN)
-        .proxy(proxy)
-        .build();
-```
-
-
-Finally
-```java
-import io.github.natanimn.telebof.BotClient;
-import enums.io.github.natanimn.ParseMode;
-import enums.io.github.natanimn.Updates;
-
-BotClient bot = new BotClient.Builder(TOKEN)
-        .skipOldUpdates(false) // Receive updates sent last 24 hours 
-        .limit(10) // Limit how many updates should be received at maximum per request 
-        .useTestServer(false) // Using test server
-        .timeout(30) // timeout
-        .offset(-1) // offset
-        .allowedUpdates(Updates.ALL) // Allowed updates
-        .proxy(null)// proxy
-        .numThreads(3) // Number of threads execute handlers parallerly
-        .build(); // build our client
-```
-
-## Error Handling
-
-```java
-import io.github.natanimn.telebof.exceptions.TelegramApiException;
-
-try {     
-    context.sendMessage(message.chat.id, "Hello, World").exec();    
-} catch(TelegramApiException apiException){
-    System.out.println(apiException.description);
+        bot.startPolling();
+    }
 }
 ```
+---
 
-## Do you want your bot to be listed here?
-* Just make a pull request; Only bots with public source code are accepted.
+## Community and Support
 
-## Contribution
-We welcome your contribution; Feel free to contribute to this library. Just pull request. 
+### Official Channels
+- **Support Group**: [Join our Telegram group](https://t.me/telebofchat) for help and discussions
+- **News Channel**: [Follow our channel](https://t.me/telebof) for updates and announcements
 
-## Conclusion
+### Getting Help
+1. **Documentation**: Check our [comprehensive docs](https://natanimn.github.io/telebof) first
+2. **GitHub Discussions**: [Ask questions](https://github.com/natanimn/telebof/discussions) in our community forum
+3. **Issue Tracker**: [Report bugs](https://github.com/natanimn/telebof/issues) or request features
 
-Finally, we now assume that you have basic understanding of this library in this brief tutorial; however, if you have any question or need 
-support regarding this library, you have the following options
+## Share Your Bot
+Want your bot to be featured in our examples?  
+**Requirements**: Public source code<br>
+**How to submit**: Make a pull request with your bot implementation!
 
-1. Ping us on [our official Telegram group](https://t.me/telebofchat). 
-2. Ask questions by opening a [discussion](https://github.com/natanimn/Telebof/discussions/new)
+---
 
+## Contributing
 
-And join [our official Telegram channel](https://t.me/telebof) for update news.
+We welcome contributions from the community! Here's how you can help:
 
+### Ways to Contribute
+1. **Code Contributions**: Implement new features or fix bugs
+2. **Documentation**: Improve documentation and examples
+3. **Testing**: Help test new features and report issues
+4. **Examples**: Create and share example bots
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Support the Project
+
+If you find Telebof useful, please consider:
+
+1. ⭐ **Star the repository** on GitHub
+2. 🐛 **Report issues** and help improve the library
+3. 💬 **Join our community** and help other developers
+4. 📢 **Share** with others who might find it useful
+
+---
