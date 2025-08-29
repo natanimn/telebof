@@ -46,11 +46,11 @@ Before diving in, make sure you have:
 ---
 
 ### User's Guide
-- [Installation](/installation)
-- [Handling Updates](/handling-updates)
-- [Filters](/filters)
-- [Using States](/states)
-- [Advanced Features](/advance)
-- [Error Handling](/error_handling)
-- [Example Bots](/examples)
-- [Full API Reference](https://github.natanimn.io/telebof-api)
+- [Installation](/telebof/installation)
+- [Handling Updates](/telebof/handling-updates)
+- [Filters](/telebof/filters)
+- [Using States](/telebof/states)
+- [Advanced Features](/telebof/advance)
+- [Error Handling](/telebof/error_handling)
+- [Example Bots](/telebof/examples)
+- [Full API Reference](/telebof-api)
