@@ -47,7 +47,7 @@ Download the latest JAR from the [releases page](https://github.com/natanimn/tel
 
 ---
 
-## Quick Start: Your First Echo Bot
+### Quick Start: Your First Echo Bot
 
 ```java
 import io.github.natanimn.telebof.BotClient;
