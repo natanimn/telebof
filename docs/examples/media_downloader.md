@@ -108,7 +108,7 @@ private void start(BotContext context, Message message){
 }
 ```
 
-<img src="../img/md1.png">
+<img src="img/md1.png">
 ---
 
 **Handle media download when user sends photos, videos, GIFs, or audio**
@@ -202,7 +202,7 @@ context.sendMessage(message.chat.id, String.format("Send <code>/%s_%s</code> to 
 This provides the user with a specific command they can use later to retrieve this exact media file.
 
 
-<img src="../img/md2.png">
+<img src="img/md2.png">
 ---
 
 **Handle media retrieval using special commands**
@@ -270,7 +270,7 @@ public static void main(String[] args){
 }
 ```
 
-<img src="../img/md3.png">
+<img src="img/md3.png">
 
 ---
 

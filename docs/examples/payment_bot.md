@@ -67,7 +67,7 @@ static void start(BotContext context, Message message){
 bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
 ```
 
-<img src="../img/p1.png">
+<img src="img/p1.png">
 
 
 ---
@@ -106,7 +106,7 @@ static void pay(BotContext context, Message message){
 bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
 ```
 
-<img src="../img/p2.png">
+<img src="img/p2.png">
 
 ---
 
@@ -205,7 +205,7 @@ public static void main(String[] args){
 }
 ```
 
-<img src="../img/p3.png">
+<img src="img/p3.png">
 
 ---
 

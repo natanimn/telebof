@@ -68,17 +68,17 @@ bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
 
 **Result without `replyMarkup`:**
 
-<img src="../img/k1.png">
+<img src="img/k1.png">
 
 
 **Result with `replyMarkup` but without `resizeKeyboard`:**
 
-<img src="../img/k2.png">
+<img src="img/k2.png">
 
 
 **Final result with both `replyMarkup` and `resizeKeyboard(true)`:**
 
-<img src="../img/k3.png">
+<img src="img/k3.png">
 
 ---
 
@@ -202,4 +202,4 @@ This bot demonstrates how to:
 **The full source code can be found on** [examples/keyboard_bot](https://github.com/natanimn/telebof/blob/main/examples/long-polling/src/main/java/io/github/natanimn/KeyboardBot.java)
 
 **Final result showing the interaction flow:**
-<img src="../img/k4.png">
+<img src="img/k4.png">
