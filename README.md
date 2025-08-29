@@ -18,9 +18,7 @@
 
 ## Overview
 
-Telebof is a modern, easy Java library for building Telegram bots using the Telegram Bot API. It provides a simple interface while supporting all the advanced features of the Telegram platform.
-
----
+Telebof is easy and modern Java library for building Telegram bots using the Telegram Bot API. 
 
 ## Installation
 
