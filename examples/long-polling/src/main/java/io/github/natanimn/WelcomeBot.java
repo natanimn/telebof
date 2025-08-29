@@ -65,23 +65,26 @@ public class WelcomeBot {
     }
 
     private void botPromoted(BotContext context, ChatMemberUpdated member){
-        if (member.new_chat_member.status != ChatMemberStatus.LEFT ||
-            member.new_chat_member.status != ChatMemberStatus.BANNED)
-        {
-            if (member.new_chat_member.status != ChatMemberStatus.ADMINISTRATOR ||
-                    member.new_chat_member.can_delete_messages != true) {
-                try {
-                    context.sendMessage(
-                            member.chat.id,
-                                    "<b>Sorry, I cannot stay in this group without having <i>Delete message</i> permission.</b>")
-                            .parseMode(ParseMode.HTML)
-                            .exec();
-                } finally {
-                    context.leaveChat(member.chat.id).exec();
-                }
-            } else {
-                context.sendMessage(member.chat.id, "Thank you for promoting me in this group").exec();
+        ChatMemberStatus newStatus = member.new_chat_member.status;
+
+         if (newStatus == ChatMemberStatus.LEFT || newStatus == ChatMemberStatus.BANNED) return;
+
+        boolean isAdminWithDeletePerms = (newStatus == ChatMemberStatus.ADMINISTRATOR
+                && member.new_chat_member.can_delete_messages == true);
+
+        if (!isAdminWithDeletePerms) {
+            try {
+                context.sendMessage(
+                                member.chat.id,
+                                "<b>Sorry, I cannot stay in this group without having <i>Delete message</i> permission.</b>")
+                        .parseMode(ParseMode.HTML)
+                        .exec();
+            } catch (Exception e) {
+            } finally {
+                context.leaveChat(member.chat.id).exec();
             }
+        } else {
+            context.sendMessage(member.chat.id, "Thank you for promoting me in this group!").exec();
         }
     }
 
@@ -111,7 +114,7 @@ public class WelcomeBot {
     }
 
     public static void main(String[] args){
-        final var TOKEN = ("7915695686:AAEqrnKq-cgsp_Cm0aWt0oXD8Bk6WMCGSQo");
+        final var TOKEN = "BOT_TOKEN";
         final var welcomeBot = new WelcomeBot(TOKEN);
         welcomeBot.runBot();
     }
