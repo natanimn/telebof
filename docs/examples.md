@@ -10,12 +10,12 @@ All examples are production-ready and can be run immediately after setting up yo
 
 | Example | Description | Key Features Demonstrated |
 |---------|-------------|---------------------------|
-| **[KeyboardBot](/examples/keyboard_bot)** | Interactive bot with custom reply keyboard | Reply keyboards, button handling, user input processing |
-| **[InlineKeyboardBot](/examples/inline_keyboard_bot)** | Bot with interactive inline buttons | Inline keyboards, callback queries, message editing |
-| **[InlineBot](/examples/inline_bot)** | Inline mode implementation | Inline queries, instant results, cross-chat functionality |
-| **[PaymentBot](/examples/payment_bot)** | Telegram Stars payment integration | Payment processing, invoices, pre-checkout queries |
-| **[StateBot](/examples/state_bot)** | Multi-step conversation handling | State management, conversational flows, data persistence |
-| **[WelcomeBot](/examples/welcome_bot)** | Group welcome and moderation bot | New member handling, permissions checking, auto-moderation |
-| **[MediaDownloader](/examples/media_downloader)** | File download and storage system | Media handling, file operations, custom filters |
-| **[Spring Boot Webhook Bot](/examples/webhook_spring)** | Webhook bot using Spring boot framework | Handling rest endpoints |
+| **[KeyboardBot](/telebof/examples/keyboard_bot)** | Interactive bot with custom reply keyboard | Reply keyboards, button handling, user input processing |
+| **[InlineKeyboardBot](/telebof/examples/inline_keyboard_bot)** | Bot with interactive inline buttons | Inline keyboards, callback queries, message editing |
+| **[InlineBot](/telebof/examples/inline_bot)** | Inline mode implementation | Inline queries, instant results, cross-chat functionality |
+| **[PaymentBot](/telebof/examples/payment_bot)** | Telegram Stars payment integration | Payment processing, invoices, pre-checkout queries |
+| **[StateBot](/telebof/examples/state_bot)** | Multi-step conversation handling | State management, conversational flows, data persistence |
+| **[WelcomeBot](/telebof/examples/welcome_bot)** | Group welcome and moderation bot | New member handling, permissions checking, auto-moderation |
+| **[MediaDownloader](/telebof/examples/media_downloader)** | File download and storage system | Media handling, file operations, custom filters |
+| **[Spring Boot Webhook Bot](/telebof/examples/webhook_spring)** | Webhook bot using Spring boot framework | Handling rest endpoints |
 
