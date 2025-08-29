@@ -90,7 +90,7 @@ Each `InlineKeyboardButton` takes two parameters:
 **Visual Result:**<br>
 The user sees a message with three colorful buttons below it that they can interact with.
 
-<img src="telebof/img/ik1.png">
+<img src="https://natanimn.github.io/telebof/img/ik1.png">
 
 ---
 

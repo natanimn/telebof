@@ -81,7 +81,7 @@ private void startPrivate(BotContext context, Message message){
 bot.onMessage(filter -> filter.commands("start") && filter.Private(), this::startPrivate);
 ```
 
-<img src="telebof/img/w1.png">
+<img src="https://natanimn.github.io/telebof/img/w1.png">
 
 
 ---
@@ -133,7 +133,7 @@ private void botPromoted(BotContext context, ChatMemberUpdated member){
 bot.onMyChatMember(_ -> true, this::botPromoted);
 ```
 
-<img src="telebof/img/w2.png">
+<img src="https://natanimn.github.io/telebof/img/w2.png">
 
 ---
 
