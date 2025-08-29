@@ -163,7 +163,7 @@ private void cancel(BotContext ctx, Message message){
 - `clearState(user_id)` removes both the state marker and any associated data
 
 
-<img src="img/s2.png">
+<img src="telebof/img/s2.png">
 
 ---
 
@@ -185,7 +185,7 @@ public static void main(String[] args){
 
 ## Conversation Flow Example
 
-<img src="img/s1.png">
+<img src="telebof/img/s1.png">
 
 1. User sends `/start` → Bot sets state to `"name"` and asks for name
 2. User provides name → Bot stores name, sets state to `"age"`, asks for age

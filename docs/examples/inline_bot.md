@@ -79,7 +79,7 @@ bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
 - The empty string `""` means no pre-filled query text
 
 **Result:**
-<img src="img/i1.png">
+<img src="telebof/img/i1.png">
 
 ---
 
@@ -111,7 +111,7 @@ bot.onInline(filter -> filter.emptyQuery(), (context, query) -> {
 - `InputTextMessageContent("Write something")` is the message that will be sent if the user selects this result
 - `answerInlineQuery()` sends the results back to Telegram for display
 
-<img src="img/i2.jpg">
+<img src="telebof/img/i2.jpg">
 
 ---
 
@@ -145,7 +145,7 @@ bot.onInline(_ -> true, (context, query) -> {
 **User Experience:**
 When users type `@botusername some text`, they see a result that says "some text" and can send a message saying "You said: some text".
 
-<img src="img/i3.jpg"> <img src="img/i4.png">
+<img src="telebof/img/i3.jpg"> <img src="telebof/img/i4.png">
 ---
 
 **Final Complete Code**
