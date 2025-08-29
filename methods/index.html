@@ -1,0 +1,2323 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>BotContext Methods Reference - Telebof</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#botcontext-methods-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Telebof" class="md-header__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Telebof
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              BotContext Methods Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Telebof" class="md-nav__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Telebof
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Getting Started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installing Telebof
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Handling Updates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Filters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../states/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Using states
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Advanced Features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Error Handling
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Examples
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Keyboard Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inline Keyboard Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inline Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/payment_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Payment Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/state_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    State Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/welcome_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Welcome Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/media_downloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Media Downloader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/webhook_spring" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring Boot Webhook Bot
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#webhook-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Webhook Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bot-information-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Information Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-sending-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Sending Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-management-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Management Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-management-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Management Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#chat-management-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Management Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forum-topic-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Forum Topic Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sticker-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sticker Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inline-query-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inline Query Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#payment-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#game-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Game Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bot-settings-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bot Settings Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#business-account-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Business Account Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#star-transactions-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Star Transactions Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verification Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gift-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gift Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-management-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Management Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#update-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Update Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#callback-query-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Callback Query Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#live-location-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Live Location Methods
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passport-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passport Methods
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="botcontext-methods-reference">BotContext Methods Reference</h1>
+<h2 id="webhook-methods">Webhook Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setWebhook(String url)</code></td>
+<td>Specify URL to receive incoming updates via webhook</td>
+<td><code>url</code>: Webhook URL</td>
+<td><code>SetWebhook</code></td>
+</tr>
+<tr>
+<td><code>getWebhookInfo()</code></td>
+<td>Get current webhook information</td>
+<td>None</td>
+<td><code>WebhookInfo</code></td>
+</tr>
+<tr>
+<td><code>deleteWebhook()</code></td>
+<td>Remove webhook integration</td>
+<td>None</td>
+<td><code>void</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="bot-information-methods">Bot Information Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getMe()</code></td>
+<td>Get bot information</td>
+<td>None</td>
+<td><code>GetMe</code></td>
+</tr>
+<tr>
+<td><code>logOut()</code></td>
+<td>Log out from cloud Bot API server</td>
+<td>None</td>
+<td><code>LogOut</code></td>
+</tr>
+<tr>
+<td><code>close()</code></td>
+<td>Close bot instance before moving servers</td>
+<td>None</td>
+<td><code>Close</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="message-sending-methods">Message Sending Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sendMessage(Object chat_id, String text)</code></td>
+<td>Send text messages</td>
+<td><code>chat_id</code>: Target chat, <code>text</code>: Message text</td>
+<td><code>SendMessage</code></td>
+</tr>
+<tr>
+<td><code>sendPhoto(Object chat_id, String photo)</code></td>
+<td>Send photos (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>photo</code>: Photo file_id/URL</td>
+<td><code>SendPhoto</code></td>
+</tr>
+<tr>
+<td><code>sendPhoto(Object chat_id, File photo)</code></td>
+<td>Send photos (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>photo</code>: Photo file</td>
+<td><code>SendPhoto</code></td>
+</tr>
+<tr>
+<td><code>sendAudio(Object chat_id, String audio)</code></td>
+<td>Send audio files (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>audio</code>: Audio file_id/URL</td>
+<td><code>SendAudio</code></td>
+</tr>
+<tr>
+<td><code>sendAudio(Object chat_id, File audio)</code></td>
+<td>Send audio files (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>audio</code>: Audio file</td>
+<td><code>SendAudio</code></td>
+</tr>
+<tr>
+<td><code>sendDocument(Object chat_id, String document)</code></td>
+<td>Send documents (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>document</code>: Document file_id/URL</td>
+<td><code>SendDocument</code></td>
+</tr>
+<tr>
+<td><code>sendDocument(Object chat_id, File document)</code></td>
+<td>Send documents (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>document</code>: Document file</td>
+<td><code>SendDocument</code></td>
+</tr>
+<tr>
+<td><code>sendVideo(Object chat_id, String video)</code></td>
+<td>Send video files (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>video</code>: Video file_id/URL</td>
+<td><code>SendVideo</code></td>
+</tr>
+<tr>
+<td><code>sendVideo(Object chat_id, File video)</code></td>
+<td>Send video files (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>video</code>: Video file</td>
+<td><code>SendVideo</code></td>
+</tr>
+<tr>
+<td><code>sendAnimation(Object chat_id, String animation)</code></td>
+<td>Send animations (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>animation</code>: Animation file_id/URL</td>
+<td><code>SendAnimation</code></td>
+</tr>
+<tr>
+<td><code>sendAnimation(Object chat_id, File animation)</code></td>
+<td>Send animations (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>animation</code>: Animation file</td>
+<td><code>SendAnimation</code></td>
+</tr>
+<tr>
+<td><code>sendVoice(Object chat_id, String voice)</code></td>
+<td>Send voice messages (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>voice</code>: Voice file_id/URL</td>
+<td><code>SendVoice</code></td>
+</tr>
+<tr>
+<td><code>sendVoice(Object chat_id, File voice)</code></td>
+<td>Send voice messages (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>voice</code>: Voice file</td>
+<td><code>SendVoice</code></td>
+</tr>
+<tr>
+<td><code>sendVideoNote(Object chat_id, String video_note)</code></td>
+<td>Send video notes (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>video_note</code>: Video note file_id/URL</td>
+<td><code>SendVideoNote</code></td>
+</tr>
+<tr>
+<td><code>sendVideoNote(Object chat_id, File video_note)</code></td>
+<td>Send video notes (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>video_note</code>: Video note file</td>
+<td><code>SendVideoNote</code></td>
+</tr>
+<tr>
+<td><code>sendMediaGroup(Object chat_id, InputMedia[] media)</code></td>
+<td>Send media group</td>
+<td><code>chat_id</code>: Target chat, <code>media</code>: Array of input media</td>
+<td><code>SendMediaGroup</code></td>
+</tr>
+<tr>
+<td><code>sendPaidMedia(Object chat_id, short star_count, InputPaidMedia[] media)</code></td>
+<td>Send paid media</td>
+<td><code>chat_id</code>: Target chat, <code>star_count</code>: Star count, <code>media</code>: Paid media array</td>
+<td><code>SendPaidMedia</code></td>
+</tr>
+<tr>
+<td><code>sendLocation(Object chat_id, double latitude, double longitude)</code></td>
+<td>Send location</td>
+<td><code>chat_id</code>: Target chat, <code>latitude</code>: Latitude, <code>longitude</code>: Longitude</td>
+<td><code>SendLocation</code></td>
+</tr>
+<tr>
+<td><code>sendVenue(Object chat_id, double latitude, double longitude, String title, String address)</code></td>
+<td>Send venue information</td>
+<td><code>chat_id</code>: Target chat, <code>latitude</code>: Latitude, <code>longitude</code>: Longitude, <code>title</code>: Venue title, <code>address</code>: Venue address</td>
+<td><code>SendVenue</code></td>
+</tr>
+<tr>
+<td><code>sendContact(Object chat_id, String phone_number, String first_name)</code></td>
+<td>Send phone contact</td>
+<td><code>chat_id</code>: Target chat, <code>phone_number</code>: Phone number, <code>first_name</code>: First name</td>
+<td><code>SendContact</code></td>
+</tr>
+<tr>
+<td><code>sendPoll(Object chat_id, String question, InputPollOption[] options)</code></td>
+<td>Send native poll</td>
+<td><code>chat_id</code>: Target chat, <code>question</code>: Poll question, <code>options</code>: Poll options</td>
+<td><code>SendPoll</code></td>
+</tr>
+<tr>
+<td><code>sendDice(Object chat_id)</code></td>
+<td>Send dice</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>SendDice</code></td>
+</tr>
+<tr>
+<td><code>sendChatAction(Object chat_id, ChatAction action)</code></td>
+<td>Send chat action</td>
+<td><code>chat_id</code>: Target chat, <code>action</code>: Chat action type</td>
+<td><code>SendChatAction</code></td>
+</tr>
+<tr>
+<td><code>sendGift(long user_id, String gift_id)</code></td>
+<td>Send gift to user</td>
+<td><code>user_id</code>: Target user, <code>gift_id</code>: Gift identifier</td>
+<td><code>SendGift</code></td>
+</tr>
+<tr>
+<td><code>sendGift(Object chat_id, String gift_id)</code></td>
+<td>Send gift to chat</td>
+<td><code>chat_id</code>: Target chat, <code>gift_id</code>: Gift identifier</td>
+<td><code>SendGift</code></td>
+</tr>
+<tr>
+<td><code>sendSticker(Object chat_id, File sticker)</code></td>
+<td>Send stickers (upload file)</td>
+<td><code>chat_id</code>: Target chat, <code>sticker</code>: Sticker file</td>
+<td><code>SendSticker</code></td>
+</tr>
+<tr>
+<td><code>sendSticker(Object chat_id, String sticker)</code></td>
+<td>Send stickers (file_id or URL)</td>
+<td><code>chat_id</code>: Target chat, <code>sticker</code>: Sticker file_id/URL</td>
+<td><code>SendSticker</code></td>
+</tr>
+<tr>
+<td><code>sendGame(long chat_id, String game_short_name)</code></td>
+<td>Send game</td>
+<td><code>chat_id</code>: Target chat, <code>game_short_name</code>: Game short name</td>
+<td><code>SendGame</code></td>
+</tr>
+<tr>
+<td><code>sendInvoice(Object chat_id, String title, String description, String payload, String currency, LabeledPrice[] prices)</code></td>
+<td>Send invoice</td>
+<td><code>chat_id</code>: Target chat, <code>title</code>: Product title, <code>description</code>: Product description, <code>payload</code>: Invoice payload, <code>currency</code>: Currency code, <code>prices</code>: Price breakdown</td>
+<td><code>SendInvoice</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="message-management-methods">Message Management Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>forward(Object chat_id, Object from_chat_id, int message_id)</code></td>
+<td>Forward message</td>
+<td><code>chat_id</code>: Target chat, <code>from_chat_id</code>: Source chat, <code>message_id</code>: Message ID</td>
+<td><code>ForwardMessage</code></td>
+</tr>
+<tr>
+<td><code>copy(Object chat_id, Object from_chat_id, int message_id)</code></td>
+<td>Copy message</td>
+<td><code>chat_id</code>: Target chat, <code>from_chat_id</code>: Source chat, <code>message_id</code>: Message ID</td>
+<td><code>CopyMessage</code></td>
+</tr>
+<tr>
+<td><code>forwardMessages(Object chat_id, Object from_chat_id, int[] message_id)</code></td>
+<td>Forward multiple messages</td>
+<td><code>chat_id</code>: Target chat, <code>from_chat_id</code>: Source chat, <code>message_id</code>: Array of message IDs</td>
+<td><code>ForwardMessages</code></td>
+</tr>
+<tr>
+<td><code>editMessageText(String text, Object chat_id, int message_id)</code></td>
+<td>Edit message text</td>
+<td><code>text</code>: New text, <code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>EditMessageText</code></td>
+</tr>
+<tr>
+<td><code>editMessageText(String text, String inline_message_id)</code></td>
+<td>Edit inline message text</td>
+<td><code>text</code>: New text, <code>inline_message_id</code>: Inline message ID</td>
+<td><code>EditMessageText</code></td>
+</tr>
+<tr>
+<td><code>editMessageCaption(Object chat_id, int message_id)</code></td>
+<td>Edit message caption</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>EditMessageCaption</code></td>
+</tr>
+<tr>
+<td><code>editMessageCaption(String inline_message_id)</code></td>
+<td>Edit inline message caption</td>
+<td><code>inline_message_id</code>: Inline message ID</td>
+<td><code>EditMessageCaption</code></td>
+</tr>
+<tr>
+<td><code>editMessageMedia(Object chat_id, InputMedia media, int message_id)</code></td>
+<td>Edit message media</td>
+<td><code>chat_id</code>: Target chat, <code>media</code>: New media, <code>message_id</code>: Message ID</td>
+<td><code>EditMessageMedia</code></td>
+</tr>
+<tr>
+<td><code>editMessageMedia(String inline_message_id, InputMedia media)</code></td>
+<td>Edit inline message media</td>
+<td><code>inline_message_id</code>: Inline message ID, <code>media</code>: New media</td>
+<td><code>EditMessageMedia</code></td>
+</tr>
+<tr>
+<td><code>editMessageReplyMarkup(Object chat_id, int message_id)</code></td>
+<td>Edit message reply markup</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>EditMessageReplyMarkup</code></td>
+</tr>
+<tr>
+<td><code>editMessageReplyMarkup(String inline_message_id)</code></td>
+<td>Edit inline message reply markup</td>
+<td><code>inline_message_id</code>: Inline message ID</td>
+<td><code>EditMessageReplyMarkup</code></td>
+</tr>
+<tr>
+<td><code>editMessageLiveLocation(Object chat_id, double latitude, double longitude, int message_id)</code></td>
+<td>Edit message live location</td>
+<td><code>chat_id</code>: Target chat, <code>latitude</code>: New latitude, <code>longitude</code>: New longitude, <code>message_id</code>: Message ID</td>
+<td><code>EditMessageLiveLocation</code></td>
+</tr>
+<tr>
+<td><code>editMessageLiveLocation(String inline_message_id, double latitude, double longitude)</code></td>
+<td>Edit inline message live location</td>
+<td><code>inline_message_id</code>: Inline message ID, <code>latitude</code>: New latitude, <code>longitude</code>: New longitude</td>
+<td><code>EditMessageLiveLocation</code></td>
+</tr>
+<tr>
+<td><code>deleteMessage(Object chat_id, int message_id)</code></td>
+<td>Delete message</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>DeleteMessage</code></td>
+</tr>
+<tr>
+<td><code>deleteMessages(Object chat_id, int[] message_ids)</code></td>
+<td>Delete multiple messages</td>
+<td><code>chat_id</code>: Target chat, <code>message_ids</code>: Array of message IDs</td>
+<td><code>DeleteMessages</code></td>
+</tr>
+<tr>
+<td><code>stopPoll(Object chat_id, int message_id)</code></td>
+<td>Stop poll</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>StopPoll</code></td>
+</tr>
+<tr>
+<td><code>setMessageReaction(Object chat_id, int message_id)</code></td>
+<td>Set message reaction</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>SetMessageReaction</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="file-management-methods">File Management Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>downloadFile(String file_path)</code></td>
+<td>Download file</td>
+<td><code>file_path</code>: File path from getFile response</td>
+<td><code>byte[]</code></td>
+</tr>
+<tr>
+<td><code>getFile(String file_id)</code></td>
+<td>Get file information</td>
+<td><code>file_id</code>: File identifier</td>
+<td><code>GetFile</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="chat-management-methods">Chat Management Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>banChatMember(Object chat_id, long user_id)</code></td>
+<td>Ban chat member</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>BanChatMember</code></td>
+</tr>
+<tr>
+<td><code>unbanChatMember(Object chat_id, long user_id)</code></td>
+<td>Unban chat member</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>UnbanChatMember</code></td>
+</tr>
+<tr>
+<td><code>unbanChatSenderChat(Object chat_id, long sender_chat_id)</code></td>
+<td>Unban chat sender</td>
+<td><code>chat_id</code>: Target chat, <code>sender_chat_id</code>: Sender chat ID</td>
+<td><code>UnbanChatSenderChat</code></td>
+</tr>
+<tr>
+<td><code>restrictChatMember(Object chat_id, long user_id, ChatPermissions permissions)</code></td>
+<td>Restrict chat member</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID, <code>permissions</code>: Chat permissions</td>
+<td><code>RestrictChatMember</code></td>
+</tr>
+<tr>
+<td><code>promoteChatMember(Object chat_id, long user_id)</code></td>
+<td>Promote chat member</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>PromoteChatMember</code></td>
+</tr>
+<tr>
+<td><code>setChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title)</code></td>
+<td>Set admin custom title</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID, <code>custom_title</code>: Custom title</td>
+<td><code>SetChatAdministratorCustomTitle</code></td>
+</tr>
+<tr>
+<td><code>banChatSenderChat(Object chat_id, long sender_chat_id)</code></td>
+<td>Ban chat sender</td>
+<td><code>chat_id</code>: Target chat, <code>sender_chat_id</code>: Sender chat ID</td>
+<td><code>BanChatSenderChat</code></td>
+</tr>
+<tr>
+<td><code>setChatPermissions(Object chat_id, ChatPermissions permissions)</code></td>
+<td>Set chat permissions</td>
+<td><code>chat_id</code>: Target chat, <code>permissions</code>: Chat permissions</td>
+<td><code>SetChatPermissions</code></td>
+</tr>
+<tr>
+<td><code>exportChatInviteLink(Object chat_id)</code></td>
+<td>Export chat invite link</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>ExportChatInviteLink</code></td>
+</tr>
+<tr>
+<td><code>createChatInviteLink(Object chat_id)</code></td>
+<td>Create chat invite link</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>CreateChatInviteLink</code></td>
+</tr>
+<tr>
+<td><code>createChatSubscriptionInviteLink(Object chat_id, int subscription_period, int subscription_price)</code></td>
+<td>Create subscription invite link</td>
+<td><code>chat_id</code>: Target chat, <code>subscription_period</code>: Subscription period, <code>subscription_price</code>: Subscription price</td>
+<td><code>CreateChatSubscriptionInviteLink</code></td>
+</tr>
+<tr>
+<td><code>editChatInviteLink(Object chat_id, String invite_link)</code></td>
+<td>Edit chat invite link</td>
+<td><code>chat_id</code>: Target chat, <code>invite_link</code>: Invite link to edit</td>
+<td><code>EditChatInviteLink</code></td>
+</tr>
+<tr>
+<td><code>editChatSubscriptionInviteLink(Object chat_id, String invite_link)</code></td>
+<td>Edit subscription invite link</td>
+<td><code>chat_id</code>: Target chat, <code>invite_link</code>: Invite link to edit</td>
+<td><code>EditChatSubscriptionInviteLink</code></td>
+</tr>
+<tr>
+<td><code>revokeChatInviteLink(Object chat_id, String invite_link)</code></td>
+<td>Revoke chat invite link</td>
+<td><code>chat_id</code>: Target chat, <code>invite_link</code>: Invite link to revoke</td>
+<td><code>RevokeChatInviteLink</code></td>
+</tr>
+<tr>
+<td><code>approveChatJoinRequest(Object chat_id, long user_id)</code></td>
+<td>Approve chat join request</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>ApproveChatJoinRequest</code></td>
+</tr>
+<tr>
+<td><code>declineChatJoinRequest(Object chat_id, long user_id)</code></td>
+<td>Decline chat join request</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>DeclineChatJoinRequest</code></td>
+</tr>
+<tr>
+<td><code>setChatPhoto(Object chat_id, File photo)</code></td>
+<td>Set chat photo</td>
+<td><code>chat_id</code>: Target chat, <code>photo</code>: New chat photo</td>
+<td><code>SetChatPhoto</code></td>
+</tr>
+<tr>
+<td><code>deleteChatPhoto(Object chat_id)</code></td>
+<td>Delete chat photo</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>DeleteChatPhoto</code></td>
+</tr>
+<tr>
+<td><code>setChatTitle(Object chat_id, String title)</code></td>
+<td>Set chat title</td>
+<td><code>chat_id</code>: Target chat, <code>title</code>: New chat title</td>
+<td><code>SetChatTitle</code></td>
+</tr>
+<tr>
+<td><code>setChatDescription(Object chat_id, String description)</code></td>
+<td>Set chat description</td>
+<td><code>chat_id</code>: Target chat, <code>description</code>: New chat description</td>
+<td><code>SetChatDescription</code></td>
+</tr>
+<tr>
+<td><code>pinChatMessage(Object chat_id, int message_id)</code></td>
+<td>Pin chat message</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>PinChatMessage</code></td>
+</tr>
+<tr>
+<td><code>unpinChatMessage(Object chat_id)</code></td>
+<td>Unpin chat message</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>UnpinChatMessage</code></td>
+</tr>
+<tr>
+<td><code>unpinAllChatMessages(Object chat_id)</code></td>
+<td>Unpin all chat messages</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>UnpinAllChatMessages</code></td>
+</tr>
+<tr>
+<td><code>leaveChat(Object chat_id)</code></td>
+<td>Leave chat</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>LeaveChat</code></td>
+</tr>
+<tr>
+<td><code>getChat(Object chat_id)</code></td>
+<td>Get chat information</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>GetChat</code></td>
+</tr>
+<tr>
+<td><code>getChatAdministrators(Object chat_id)</code></td>
+<td>Get chat administrators</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>GetChatAdministrators</code></td>
+</tr>
+<tr>
+<td><code>getChatMemberCount(Object chat_id)</code></td>
+<td>Get chat member count</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>GetChatMemberCount</code></td>
+</tr>
+<tr>
+<td><code>getChatMember(Object chat_id, long user_id)</code></td>
+<td>Get chat member</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>GetChatMember</code></td>
+</tr>
+<tr>
+<td><code>setChatStickerSet(Object chat_id, String sticker_set_name)</code></td>
+<td>Set chat sticker set</td>
+<td><code>chat_id</code>: Target chat, <code>sticker_set_name</code>: Sticker set name</td>
+<td><code>SetChatStickerSet</code></td>
+</tr>
+<tr>
+<td><code>deleteChatStickerSet(Object chat_id)</code></td>
+<td>Delete chat sticker set</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>DeleteChatStickerSet</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="forum-topic-methods">Forum Topic Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getForumTopicIconStickers()</code></td>
+<td>Get forum topic icon stickers</td>
+<td>None</td>
+<td><code>GetForumTopicIconStickers</code></td>
+</tr>
+<tr>
+<td><code>createForumTopic(Object chat_id, String name)</code></td>
+<td>Create forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>name</code>: Topic name</td>
+<td><code>CreateForumTopic</code></td>
+</tr>
+<tr>
+<td><code>editForumTopic(Object chat_id, int message_thread_id)</code></td>
+<td>Edit forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>message_thread_id</code>: Message thread ID</td>
+<td><code>EditForumTopic</code></td>
+</tr>
+<tr>
+<td><code>closeForumTopic(Object chat_id, int message_thread_id)</code></td>
+<td>Close forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>message_thread_id</code>: Message thread ID</td>
+<td><code>CloseForumTopic</code></td>
+</tr>
+<tr>
+<td><code>reopenForumTopic(Object chat_id, int message_thread_id)</code></td>
+<td>Reopen forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>message_thread_id</code>: Message thread ID</td>
+<td><code>ReopenForumTopic</code></td>
+</tr>
+<tr>
+<td><code>deleteForumTopic(Object chat_id, int message_thread_id)</code></td>
+<td>Delete forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>message_thread_id</code>: Message thread ID</td>
+<td><code>DeleteForumTopic</code></td>
+</tr>
+<tr>
+<td><code>unpinAllForumTopicMessages(Object chat_id, int message_thread_id)</code></td>
+<td>Unpin all forum topic messages</td>
+<td><code>chat_id</code>: Target chat, <code>message_thread_id</code>: Message thread ID</td>
+<td><code>UnpinAllForumTopicMessages</code></td>
+</tr>
+<tr>
+<td><code>editGeneralForumTopic(Object chat_id, String name)</code></td>
+<td>Edit general forum topic</td>
+<td><code>chat_id</code>: Target chat, <code>name</code>: New topic name</td>
+<td><code>EditGeneralForumTopic</code></td>
+</tr>
+<tr>
+<td><code>closeGeneralForumTopic(Object chat_id)</code></td>
+<td>Close general forum topic</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>CloseGeneralForumTopic</code></td>
+</tr>
+<tr>
+<td><code>reopenGeneralForumTopic(Object chat_id)</code></td>
+<td>Reopen general forum topic</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>ReopenGeneralForumTopic</code></td>
+</tr>
+<tr>
+<td><code>hideGeneralForumTopic(Object chat_id)</code></td>
+<td>Hide general forum topic</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>HideGeneralForumTopic</code></td>
+</tr>
+<tr>
+<td><code>unHideGeneralForumTopic(Object chat_id)</code></td>
+<td>Unhide general forum topic</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>UnHideGeneralForumTopic</code></td>
+</tr>
+<tr>
+<td><code>unpinAllGeneralForumTopicMessages(Object chat_id)</code></td>
+<td>Unpin all general forum topic messages</td>
+<td><code>chat_id</code>: Target chat</td>
+<td><code>UnpinAllGeneralForumTopicMessages</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="sticker-methods">Sticker Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getStickerSet(String name)</code></td>
+<td>Get sticker set</td>
+<td><code>name</code>: Sticker set name</td>
+<td><code>GetStickerSet</code></td>
+</tr>
+<tr>
+<td><code>getCustomEmojiStickers(String[] custom_emoji_ids)</code></td>
+<td>Get custom emoji stickers</td>
+<td><code>custom_emoji_ids</code>: Array of custom emoji IDs</td>
+<td><code>GetCustomEmojiStickers</code></td>
+</tr>
+<tr>
+<td><code>uploadStickerFile(long user_id, File sticker, StickerFormat sticker_format)</code></td>
+<td>Upload sticker file</td>
+<td><code>user_id</code>: User ID, <code>sticker</code>: Sticker file, <code>sticker_format</code>: Sticker format</td>
+<td><code>UploadStickerFile</code></td>
+</tr>
+<tr>
+<td><code>createNewStickerSet(long user_id, String name, String title, InputSticker[] stickers)</code></td>
+<td>Create new sticker set</td>
+<td><code>user_id</code>: User ID, <code>name</code>: Sticker set name, <code>title</code>: Sticker set title, <code>stickers</code>: Array of input stickers</td>
+<td><code>CreateNewStickerSet</code></td>
+</tr>
+<tr>
+<td><code>addStickerToSet(long user_id, String name, InputSticker sticker)</code></td>
+<td>Add sticker to set</td>
+<td><code>user_id</code>: User ID, <code>name</code>: Sticker set name, <code>sticker</code>: Input sticker</td>
+<td><code>AddStickerToSet</code></td>
+</tr>
+<tr>
+<td><code>setStickerPositionInSet(String sticker, int position)</code></td>
+<td>Set sticker position in set</td>
+<td><code>sticker</code>: Sticker file ID, <code>position</code>: New position</td>
+<td><code>SetStickerPositionInSet</code></td>
+</tr>
+<tr>
+<td><code>deleteStickerFromSet(String sticker)</code></td>
+<td>Delete sticker from set</td>
+<td><code>sticker</code>: Sticker file ID</td>
+<td><code>DeleteStickerFromSet</code></td>
+</tr>
+<tr>
+<td><code>setStickerEmojiList(String sticker, String[] emoji_list)</code></td>
+<td>Set sticker emoji list</td>
+<td><code>sticker</code>: Sticker file ID, <code>emoji_list</code>: Array of emojis</td>
+<td><code>SetStickerEmojiList</code></td>
+</tr>
+<tr>
+<td><code>setStickerKeywords(String sticker, String[] keywords)</code></td>
+<td>Set sticker keywords</td>
+<td><code>sticker</code>: Sticker file ID, <code>keywords</code>: Array of keywords</td>
+<td><code>SetStickerKeywords</code></td>
+</tr>
+<tr>
+<td><code>setStickerMaskPosition(String sticker)</code></td>
+<td>Set sticker mask position</td>
+<td><code>sticker</code>: Sticker file ID</td>
+<td><code>SetStickerMaskPosition</code></td>
+</tr>
+<tr>
+<td><code>setStickerSetTitle(String name, String title)</code></td>
+<td>Set sticker set title</td>
+<td><code>name</code>: Sticker set name, <code>title</code>: New title</td>
+<td><code>SetStickerSetTitle</code></td>
+</tr>
+<tr>
+<td><code>replaceStickerInSet(long user_id, String name, String old_sticker, InputSticker sticker)</code></td>
+<td>Replace sticker in set</td>
+<td><code>user_id</code>: User ID, <code>name</code>: Sticker set name, <code>old_sticker</code>: Old sticker ID, <code>sticker</code>: New sticker</td>
+<td><code>ReplaceStickerInSet</code></td>
+</tr>
+<tr>
+<td><code>setStickerSetThumbnail(String name, long user_id, File thumbnail, StickerFormat format)</code></td>
+<td>Set sticker set thumbnail (upload file)</td>
+<td><code>name</code>: Sticker set name, <code>user_id</code>: User ID, <code>thumbnail</code>: Thumbnail file, <code>format</code>: Thumbnail format</td>
+<td><code>SetStickerSetThumbnail</code></td>
+</tr>
+<tr>
+<td><code>setStickerSetThumbnail(String name, long user_id, String thumbnail, StickerFormat format)</code></td>
+<td>Set sticker set thumbnail (file_id or URL)</td>
+<td><code>name</code>: Sticker set name, <code>user_id</code>: User ID, <code>thumbnail</code>: Thumbnail file_id/URL, <code>format</code>: Thumbnail format</td>
+<td><code>SetStickerSetThumbnail</code></td>
+</tr>
+<tr>
+<td><code>setCustomEmojiStickerSetThumbnail(String name)</code></td>
+<td>Set custom emoji sticker set thumbnail</td>
+<td><code>name</code>: Sticker set name</td>
+<td><code>SetCustomEmojiStickerSetThumbnail</code></td>
+</tr>
+<tr>
+<td><code>deleteStickerSet(String name)</code></td>
+<td>Delete sticker set</td>
+<td><code>name</code>: Sticker set name</td>
+<td><code>DeleteStickerSet</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="inline-query-methods">Inline Query Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>answerInlineQuery(String inline_query_id, InlineQueryResult[] results)</code></td>
+<td>Answer inline query</td>
+<td><code>inline_query_id</code>: Inline query ID, <code>results</code>: Array of inline query results</td>
+<td><code>AnswerInlineQuery</code></td>
+</tr>
+<tr>
+<td><code>savePreparedInlineMessage(long user_id, InlineQueryResult result)</code></td>
+<td>Save prepared inline message</td>
+<td><code>user_id</code>: User ID, <code>result</code>: Inline query result</td>
+<td><code>SavePreparedInlineMessage</code></td>
+</tr>
+<tr>
+<td><code>answerWebAppQuery(String web_app_query_id, InlineQueryResult result)</code></td>
+<td>Answer web app query</td>
+<td><code>web_app_query_id</code>: Web app query ID, <code>result</code>: Inline query result</td>
+<td><code>AnswerWebAppQuery</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="payment-methods">Payment Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>createInvoiceLink(String title, String description, String payload, String currency, LabeledPrice[] prices)</code></td>
+<td>Create invoice link</td>
+<td><code>title</code>: Product title, <code>description</code>: Product description, <code>payload</code>: Invoice payload, <code>currency</code>: Currency code, <code>prices</code>: Price breakdown</td>
+<td><code>CreateInvoiceLink</code></td>
+</tr>
+<tr>
+<td><code>answerShippingQuery(String shipping_query_id, boolean ok)</code></td>
+<td>Answer shipping query</td>
+<td><code>shipping_query_id</code>: Shipping query ID, <code>ok</code>: Delivery possible</td>
+<td><code>AnswerShippingQuery</code></td>
+</tr>
+<tr>
+<td><code>answerPreCheckoutQuery(String pre_checkout_query_id, boolean ok)</code></td>
+<td>Answer pre-checkout query</td>
+<td><code>pre_checkout_query_id</code>: Pre-checkout query ID, <code>ok</code>: Order ready</td>
+<td><code>AnswerPreCheckoutQuery</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="game-methods">Game Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setGameScore(long chat_id, long user_id, int score, int message_id)</code></td>
+<td>Set game score</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID, <code>score</code>: New score, <code>message_id</code>: Message ID</td>
+<td><code>SetGameScore</code></td>
+</tr>
+<tr>
+<td><code>setGameScore(String inline_message_id, long user_id, int score)</code></td>
+<td>Set inline game score</td>
+<td><code>inline_message_id</code>: Inline message ID, <code>user_id</code>: User ID, <code>score</code>: New score</td>
+<td><code>SetGameScore</code></td>
+</tr>
+<tr>
+<td><code>getGameHighScores(long chat_id, long user_id, int message_id)</code></td>
+<td>Get game high scores</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID, <code>message_id</code>: Message ID</td>
+<td><code>GetGameHighScores</code></td>
+</tr>
+<tr>
+<td><code>getGameHighScores(String inline_message_id, long user_id)</code></td>
+<td>Get inline game high scores</td>
+<td><code>inline_message_id</code>: Inline message ID, <code>user_id</code>: User ID</td>
+<td><code>GetGameHighScores</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="bot-settings-methods">Bot Settings Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setMyCommands(BotCommand[] commands)</code></td>
+<td>Set bot commands</td>
+<td><code>commands</code>: Array of bot commands</td>
+<td><code>SetMyCommands</code></td>
+</tr>
+<tr>
+<td><code>deleteMyCommands()</code></td>
+<td>Delete bot commands</td>
+<td>None</td>
+<td><code>DeleteMyCommands</code></td>
+</tr>
+<tr>
+<td><code>getMyCommands()</code></td>
+<td>Get bot commands</td>
+<td>None</td>
+<td><code>GetMyCommands</code></td>
+</tr>
+<tr>
+<td><code>setChatMenuButton()</code></td>
+<td>Set chat menu button</td>
+<td>None</td>
+<td><code>SetChatMenuButton</code></td>
+</tr>
+<tr>
+<td><code>getChatMenuButton()</code></td>
+<td>Get chat menu button</td>
+<td>None</td>
+<td><code>GetChatMenuButton</code></td>
+</tr>
+<tr>
+<td><code>setMyDefaultAdministratorRights()</code></td>
+<td>Set default admin rights</td>
+<td>None</td>
+<td><code>SetMyDefaultAdministratorRights</code></td>
+</tr>
+<tr>
+<td><code>getMyDefaultAdministratorRights()</code></td>
+<td>Get default admin rights</td>
+<td>None</td>
+<td><code>GetMyDefaultAdministratorRights</code></td>
+</tr>
+<tr>
+<td><code>getMyName()</code></td>
+<td>Get bot name</td>
+<td>None</td>
+<td><code>GetMyName</code></td>
+</tr>
+<tr>
+<td><code>setMyName()</code></td>
+<td>Set bot name</td>
+<td>None</td>
+<td><code>SetMyName</code></td>
+</tr>
+<tr>
+<td><code>getMyDescription()</code></td>
+<td>Get bot description</td>
+<td>None</td>
+<td><code>GetMyDescription</code></td>
+</tr>
+<tr>
+<td><code>setMyDescription()</code></td>
+<td>Set bot description</td>
+<td>None</td>
+<td><code>SetMyDescription</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="user-methods">User Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getUserProfilePhotos(long user_id)</code></td>
+<td>Get user profile photos</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>GetUserProfilePhotos</code></td>
+</tr>
+<tr>
+<td><code>setUserEmojiStatus(long user_id)</code></td>
+<td>Set user emoji status</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>SetUserEmojiStatus</code></td>
+</tr>
+<tr>
+<td><code>getUserChatBoosts(Object chat_id, long user_id)</code></td>
+<td>Get user chat boosts</td>
+<td><code>chat_id</code>: Target chat, <code>user_id</code>: User ID</td>
+<td><code>GetUserChatBoosts</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="business-account-methods">Business Account Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getBusinessConnection(String business_connection_id)</code></td>
+<td>Get business connection</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>GetBusinessConnection</code></td>
+</tr>
+<tr>
+<td><code>readBusinessMessage(long chat_id, String business_connection_id, int message_id)</code></td>
+<td>Read business message</td>
+<td><code>chat_id</code>: Chat ID, <code>business_connection_id</code>: Business connection ID, <code>message_id</code>: Message ID</td>
+<td><code>ReadBusinessMessage</code></td>
+</tr>
+<tr>
+<td><code>deleteBusinessMessages(String business_connection_id, Integer[] message_ids)</code></td>
+<td>Delete business messages</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>message_ids</code>: Array of message IDs</td>
+<td><code>DeleteBusinessMessages</code></td>
+</tr>
+<tr>
+<td><code>setBusinessAccountName(String business_connection_id, String first_name)</code></td>
+<td>Set business account name</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>first_name</code>: First name</td>
+<td><code>SetBusinessAccountName</code></td>
+</tr>
+<tr>
+<td><code>setBusinessAccountUsername(String business_connection_id)</code></td>
+<td>Set business account username</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>SetBusinessAccountUsername</code></td>
+</tr>
+<tr>
+<td><code>setBusinessAccountBio(String business_connection_id)</code></td>
+<td>Set business account bio</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>SetBusinessAccountBio</code></td>
+</tr>
+<tr>
+<td><code>setBusinessAccountProfilePhoto(String business_connection_id, InputProfilePhoto photo)</code></td>
+<td>Set business account profile photo</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>photo</code>: Profile photo</td>
+<td><code>SetBusinessAccountProfilePhoto</code></td>
+</tr>
+<tr>
+<td><code>removeBusinessAccountProfilePhoto(String business_connection_id)</code></td>
+<td>Remove business account profile photo</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>RemoveBusinessAccountProfilePhoto</code></td>
+</tr>
+<tr>
+<td><code>setBusinessAccountGiftSettings(String business_connection_id, boolean show_gift_button, AcceptedGiftTypes accepted_gift_types)</code></td>
+<td>Set business account gift settings</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>show_gift_button</code>: Show gift button, <code>accepted_gift_types</code>: Accepted gift types</td>
+<td><code>SetBusinessAccountGiftSettings</code></td>
+</tr>
+<tr>
+<td><code>getBusinessAccountStarBalance(String business_connection_id)</code></td>
+<td>Get business account star balance</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>GetBusinessAccountStarBalance</code></td>
+</tr>
+<tr>
+<td><code>transferBusinessAccountStars(String business_connection_id, short star_count)</code></td>
+<td>Transfer business account stars</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>star_count</code>: Star count</td>
+<td><code>TransferBusinessAccountStars</code></td>
+</tr>
+<tr>
+<td><code>getBusinessAccountGifts(String business_connection_id)</code></td>
+<td>Get business account gifts</td>
+<td><code>business_connection_id</code>: Business connection ID</td>
+<td><code>GetBusinessAccountGifts</code></td>
+</tr>
+<tr>
+<td><code>convertGiftToStars(String business_connection_id, String owned_gift_id)</code></td>
+<td>Convert gift to stars</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>owned_gift_id</code>: Owned gift ID</td>
+<td><code>ConvertGiftToStars</code></td>
+</tr>
+<tr>
+<td><code>upgradeGift(String business_connection_id, String owned_gift_id)</code></td>
+<td>Upgrade gift</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>owned_gift_id</code>: Owned gift ID</td>
+<td><code>UpgradeGift</code></td>
+</tr>
+<tr>
+<td><code>transferGift(String business_connection_id, String owned_gift_id, long new_owner_chat_id)</code></td>
+<td>Transfer gift</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>owned_gift_id</code>: Owned gift ID, <code>new_owner_chat_id</code>: New owner chat ID</td>
+<td><code>TransferGift</code></td>
+</tr>
+<tr>
+<td><code>postStory(String business_connection_id, InputStoryContent content, Integer active_period)</code></td>
+<td>Post story</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>content</code>: Story content, <code>active_period</code>: Active period</td>
+<td><code>PostStory</code></td>
+</tr>
+<tr>
+<td><code>editStory(String business_connection_id, Integer story_id, InputStoryContent content)</code></td>
+<td>Edit story</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>story_id</code>: Story ID, <code>content</code>: Story content</td>
+<td><code>EditStory</code></td>
+</tr>
+<tr>
+<td><code>deleteStory(String business_connection_id, Integer story_id)</code></td>
+<td>Delete story</td>
+<td><code>business_connection_id</code>: Business connection ID, <code>story_id</code>: Story ID</td>
+<td><code>DeleteStory</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="star-transactions-methods">Star Transactions Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getStarTransactions()</code></td>
+<td>Get star transactions</td>
+<td>None</td>
+<td><code>GetStarTransactions</code></td>
+</tr>
+<tr>
+<td><code>refundStarPayment(long user_id, String telegram_payment_change_id)</code></td>
+<td>Refund star payment</td>
+<td><code>user_id</code>: User ID, <code>telegram_payment_change_id</code>: Telegram payment change ID</td>
+<td><code>RefundStarPayment</code></td>
+</tr>
+<tr>
+<td><code>editUserStarSubscription(long user_id, String telegram_charge_id, boolean is_cancelled)</code></td>
+<td>Edit user star subscription</td>
+<td><code>user_id</code>: User ID, <code>telegram_charge_id</code>: Telegram charge ID, <code>is_cancelled</code>: Is cancelled</td>
+<td><code>EditUserStarSubscription</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="verification-methods">Verification Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>verifyUser(long user_id)</code></td>
+<td>Verify user</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>VerifyUser</code></td>
+</tr>
+<tr>
+<td><code>verifyUChat(Object chat_id)</code></td>
+<td>Verify chat</td>
+<td><code>chat_id</code>: Chat ID</td>
+<td><code>VerifyChat</code></td>
+</tr>
+<tr>
+<td><code>removeUserVerification(long user_id)</code></td>
+<td>Remove user verification</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>RemoveUserVerification</code></td>
+</tr>
+<tr>
+<td><code>removeChatVerification(Object chat_id)</code></td>
+<td>Remove chat verification</td>
+<td><code>chat_id</code>: Chat ID</td>
+<td><code>RemoveChatVerification</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gift-methods">Gift Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>giftPremiumSubscription(long user_id, Integer month_count, Integer star_count)</code></td>
+<td>Gift premium subscription</td>
+<td><code>user_id</code>: User ID, <code>month_count</code>: Month count, <code>star_count</code>: Star count</td>
+<td><code>GiftPremiumSubscription</code></td>
+</tr>
+<tr>
+<td><code>getAvailableGifts()</code></td>
+<td>Get available gifts</td>
+<td>None</td>
+<td><code>GetAvailableGifts</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="state-management-methods">State Management Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setState(long chat_id, long user_id, String name)</code></td>
+<td>Set state (group chat)</td>
+<td><code>chat_id</code>: Chat ID, <code>user_id</code>: User ID, <code>name</code>: State name</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>setState(long user_id, String name)</code></td>
+<td>Set state (private chat)</td>
+<td><code>user_id</code>: User ID, <code>name</code>: State name</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>clearState(long chat_id, long user_id)</code></td>
+<td>Clear state (group chat)</td>
+<td><code>chat_id</code>: Chat ID, <code>user_id</code>: User ID</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>clearState(long user_id)</code></td>
+<td>Clear state (private chat)</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>void</code></td>
+</tr>
+<tr>
+<td><code>getStateData(long chat_id, long user_id)</code></td>
+<td>Get state data (group chat)</td>
+<td><code>chat_id</code>: Chat ID, <code>user_id</code>: User ID</td>
+<td><code>Map&lt;String, Object&gt;</code></td>
+</tr>
+<tr>
+<td><code>getStateData(long user_id)</code></td>
+<td>Get state data (private chat)</td>
+<td><code>user_id</code>: User ID</td>
+<td><code>Map&lt;String, Object&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="update-methods">Update Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getUpdates()</code></td>
+<td>Get updates</td>
+<td>None</td>
+<td><code>GetUpdates</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="callback-query-methods">Callback Query Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>answerCallbackQuery(String callback_query_id)</code></td>
+<td>Answer callback query</td>
+<td><code>callback_query_id</code>: Callback query ID</td>
+<td><code>AnswerCallbackQuery</code></td>
+</tr>
+<tr>
+<td><code>answerCallbackQuery(String callback_query_id, String text)</code></td>
+<td>Answer callback query with text</td>
+<td><code>callback_query_id</code>: Callback query ID, <code>text</code>: Notification text</td>
+<td><code>AnswerCallbackQuery</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="live-location-methods">Live Location Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stopMessageLiveLocation(Object chat_id, int message_id)</code></td>
+<td>Stop message live location</td>
+<td><code>chat_id</code>: Target chat, <code>message_id</code>: Message ID</td>
+<td><code>StopMessageLiveLocation</code></td>
+</tr>
+<tr>
+<td><code>stopMessageLiveLocation(String inline_message_id)</code></td>
+<td>Stop inline message live location</td>
+<td><code>inline_message_id</code>: Inline message ID</td>
+<td><code>StopMessageLiveLocation</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="passport-methods">Passport Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+<th>Parameters</th>
+<th>Return Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setPassportDataErrors(long user_id, PassportElementError[] errors)</code></td>
+<td>Set passport data errors</td>
+<td><code>user_id</code>: User ID, <code>errors</code>: Array of passport element errors</td>
+<td><code>SetPassportDataErrors</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Natanim
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/natanimn/telebof" target="_blank" rel="noopener" title="Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/telebof" target="_blank" rel="noopener" title="Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mvnrepository.com/artifact/io.github.natanimn/telebof" target="_blank" rel="noopener" title="mvnrepository.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path fill="currentColor" d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.top", "content.code.copy", "navigation.footer"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
