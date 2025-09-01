@@ -41,9 +41,6 @@ Add the following to your `build.gradle`:
 implementation 'io.github.natanimn:telebof:1.1.0'
 ```
 
-### Manual Installation
-Download the latest JAR from the [releases page](https://github.com/natanimn/telebof/releases/tag/v1.1.0) and add it to your classpath.
-
 ---
 
 ### Quick Start: Your First Echo Bot
