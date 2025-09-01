@@ -9,7 +9,7 @@ import io.github.natanimn.telebof.requests.Api;
  * @author Natanim
  * @since 3 March 2025
  * @version 0.9
- * @see BotContext#deleteMessages(Object, int[])
+ * @see BotContext#deleteMessages(Object, Integer[])
  */
 public class DeleteMessages extends AbstractBaseRequest<DeleteMessages, Boolean> {
     /**
@@ -18,7 +18,7 @@ public class DeleteMessages extends AbstractBaseRequest<DeleteMessages, Boolean>
      * @param message_ids message ids
      * @param api api
      */
-    public DeleteMessages(Object chat_id, int[] message_ids, Api api) {
+    public DeleteMessages(Object chat_id, Integer[] message_ids, Api api) {
         super(chat_id, api, "deleteMessages", Boolean.class);
         add("message_id", message_ids);
     }

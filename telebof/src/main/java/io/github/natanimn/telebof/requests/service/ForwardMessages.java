@@ -21,7 +21,7 @@ public class ForwardMessages extends AbstractBaseRequest<ForwardMessages, List<M
 
     private static final Type responseType = TypeToken.getParameterized(List.class, MessageId.class).getType();
 
-    public ForwardMessages(Object chatId, Object fromChatId, int[] message_ids, Api api) {
+    public ForwardMessages(Object chatId, Object fromChatId, Integer[] message_ids, Api api) {
         super(chatId, api, "forwardMessages", responseType);
         add("from_chat_id", fromChatId);
         add("message_id", message_ids);
