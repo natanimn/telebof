@@ -451,6 +451,15 @@ public class Filter{
     }
 
     /**
+     * Filter messages for containing {@link io.github.natanimn.telebof.types.checklist.Checklist}
+     * @return {@link Boolean}
+     */
+    public Boolean checklist(){
+        return update.message != null && update.message.checklist != null;
+    }
+
+
+    /**
      * Filter service messages for checklist tasks done
      * @return {@link Boolean}
      */
