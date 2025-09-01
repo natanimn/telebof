@@ -1,6 +1,8 @@
 package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.types.chat_and_user.*;
+import io.github.natanimn.telebof.types.checklist.ChecklistTasksAdded;
+import io.github.natanimn.telebof.types.checklist.ChecklistTasksDone;
 import io.github.natanimn.telebof.types.forum.*;
 import io.github.natanimn.telebof.types.gift_and_giveaway.*;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
@@ -19,13 +21,17 @@ import java.util.Objects;
  * This class represents message
  * @author Natanim
  * @since 3 March 2025
- * @version 1.0.0
+ * @version 1.1.0
  */
 public class Message implements TelegramUpdate {
-    /* Unique message identifier inside this chat. In specific instances */
+    /**
+     *  Unique message identifier inside this chat. In specific instances
+     */
     public Integer message_id;
 
-    /*  Unique identifier of a message thread to which the message belongs; for supergroups only */
+    /**
+     * Unique identifier of a message thread to which the message belongs; for supergroups only
+     */
     public Integer message_thread_id;
 
     /**
@@ -39,7 +45,7 @@ public class Message implements TelegramUpdate {
     public Integer edit_date;
 
     /**
-     *  The group has been migrated to a supergroup with the specified identifier.
+     * The group has been migrated to a supergroup with the specified identifier.
      */
     public Long migrate_to_chat_id;
 
@@ -480,6 +486,21 @@ public class Message implements TelegramUpdate {
      */
     public Integer paid_star_count;
 
+    /**
+     * Optional. Service message: some tasks in a checklist were marked as done or not done
+     */
+    public ChecklistTasksAdded checklist_tasks_done;
+
+    /**
+     * Optional. Service message: tasks were added to a checklist
+     */
+    public ChecklistTasksDone checklist_tasks_added;
+
+    /**
+     * Optional. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
+     */
+    public DirectMessagePriceChanged direct_message_price_changed;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -572,7 +593,10 @@ public class Message implements TelegramUpdate {
                 Objects.equals(gift, message.gift) &&
                 Objects.equals(unique_gift, message.unique_gift) &&
                 Objects.equals(paid_message_price_changed, message.paid_message_price_changed) &&
-                Objects.equals(paid_star_count, message.paid_star_count);
+                Objects.equals(paid_star_count, message.paid_star_count) &&
+                Objects.equals(checklist_tasks_added, message.checklist_tasks_added) &&
+                Objects.equals(checklist_tasks_done, message.checklist_tasks_done) &&
+                Objects.equals(direct_message_price_changed, message.direct_message_price_changed);
     }
 
     @Override
@@ -590,7 +614,7 @@ public class Message implements TelegramUpdate {
                 video_chat_participants_invited, web_app_data, reply_markup, external_reply, quote, link_preview_options, giveaway,
                 giveaway_created, giveaway_winners, giveaway_completed, forward_origin, boost_added, sender_boost_count, reply_to_story,
                 chat_background_set, effect_id, show_caption_above_media, paid_media, gift, unique_gift, paid_message_price_changed,
-                paid_star_count);
+                paid_star_count, checklist_tasks_done, checklist_tasks_added, direct_message_price_changed);
     }
 
 
@@ -685,6 +709,9 @@ public class Message implements TelegramUpdate {
                 ", unique_gift=" + unique_gift +
                 ", paid_message_price_changed=" + paid_message_price_changed +
                 ", paid_star_count=" + paid_star_count +
-                '}';
+                ", checklist_tasks_added=" + checklist_tasks_added +
+                ", checklist_tasks_done=" + checklist_tasks_done +
+                ", direct_message_price_changed=" + direct_message_price_changed +
+                "}";
     }
 }
