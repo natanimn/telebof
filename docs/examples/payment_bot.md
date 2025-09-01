@@ -209,23 +209,4 @@ public static void main(String[] args){
 
 ---
 
-**Summary**
-
-This bot demonstrates a complete payment workflow using Telegram Stars:
-
-1.  **Command:** User sends `/pay`.
-2.  **Invoice:** Bot sends an invoice for 10 Stars.
-3.  **PreCheckout:** Bot automatically authorizes the payment request.
-4.  **Payment:** User completes the payment in the Telegram client.
-5.  **Fulfillment:** Bot receives the successful payment update.
-6.  **Refund (Demo):** Bot immediately refunds the payment to showcase the API method.
-
-**Key Takeaways for a Real Application:**
-
-
-*   Implement validation logic in `processPrecheckOut`.
-*   Replace the refund logic in `acceptPayment` with actual product delivery.
-*   Use a unique, identifiable `payload` for each invoice to link payments to orders in your database.
-*   The `SuccessfulPayment` object contains valuable information like `invoice_payload`, `telegram_payment_charge_id`, `currency`, and `total_amount` which should be stored.
-
-**The full source code can be found on** [examples/payment_bot](https://github.com/natanimn/telebof/blob/main/examples/src/main/java/io/github/natanimn/PaymentExampleBot.java)
+**The full source code can be found on** [examples/payment_bot](https://github.com/natanimn/telebof/blob/main/examples/long-polling/src/main/java/io/github/natanimn/PaymentExampleBot.java)
