@@ -218,6 +218,21 @@ Filters when a forum topic is reopened
 
 ---
 
+#### filter.checklistTasksAdded
+Filters when checklist task is added
+
+---
+
+#### filter.checklistTasksDone
+Filters when checklist task is added
+
+---
+
+#### filter.directMessagePriceChanged
+Filters when direct message price is changed
+
+---
+
 ### Video Chat Filters
 
 #### filter.webAppData()
@@ -467,7 +482,7 @@ import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.updates.Update;
 
 // Filter to check if incoming message text starts with a given prefix
-class Prefixilter implements CustomFilter {
+class PrefixFilter implements CustomFilter {
     private String prefix;
 
     public StartsWithFilter(String prefix){
