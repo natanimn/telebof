@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
+import io.github.natanimn.telebof.types.checklist.Checklist;
 import io.github.natanimn.telebof.types.story.Story;
 import io.github.natanimn.telebof.types.updates.Poll;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
@@ -123,5 +124,10 @@ public class ExternalReplyInfo {
      * Optional. Message contains paid media; information about the paid media
      */
     public PaidMediaInfo paid_media;
+
+    /**
+     * Optional. Message is a checklist
+     */
+    public Checklist checklist;
 
 }
