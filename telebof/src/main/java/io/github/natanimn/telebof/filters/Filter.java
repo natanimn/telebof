@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * A class for filtering updates
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9.4
+ * @version 1.1.0
  */
 public class Filter{
     private final Update update;
@@ -448,6 +448,30 @@ public class Filter{
      */
     public Boolean writeAccessAllowed() {
         return update.message != null && update.message.write_access_allowed != null;
+    }
+
+    /**
+     * Filter service messages for checklist tasks done
+     * @return {@link Boolean}
+     */
+    public Boolean checklistTasksDone(){
+        return update.message != null && update.message.checklist_tasks_done != null;
+    }
+
+    /**
+     * Filter service messages for checklist tasks added
+     * @return {@link Boolean}
+     */
+    public Boolean checklistTasksAdded(){
+        return update.message != null && update.message.checklist_tasks_added != null;
+    }
+
+    /**
+     * Filter service messages for direct message price changed
+     * @return {@link Boolean}
+     */
+    public Boolean directMessagePriceChanged(){
+        return update.message != null && update.message.direct_message_price_changed != null;
     }
 
     /**
