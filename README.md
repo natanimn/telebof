@@ -1,6 +1,5 @@
 # <p align="center">Telebo<i>f</i></p>
 ## <p align="center">Easy and modern Telegram Bot API for Java </p>
-
 <p align="center">
   <a href="https://github.com/natanimn/telebof/releases">
     <img src="https://img.shields.io/github/v/release/natanimn/telebof?color=blue&label=Version" alt="Latest Release">
@@ -16,6 +15,8 @@
   </a>
 </p>
 
+### <p align='center'>Supported 9.2 BotAPI</b>
+
 ## Overview
 
 Telebof is easy and modern Java library for building Telegram bots using the Telegram Bot API. 
@@ -29,7 +30,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
@@ -37,11 +38,11 @@ Add the following dependency to your `pom.xml`:
 Add the following to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.natanimn:telebof:1.0.0'
+implementation 'io.github.natanimn:telebof:1.1.0'
 ```
 
 ### Manual Installation
-Download the latest JAR from the [releases page](https://github.com/natanimn/telebof/releases/tag/v1.0.0) and add it to your classpath.
+Download the latest JAR from the [releases page](https://github.com/natanimn/telebof/releases/tag/v1.1.0) and add it to your classpath.
 
 ---
 
