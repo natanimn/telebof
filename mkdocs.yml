@@ -1,7 +1,7 @@
 site_name: Telebof 
 nav:
-    - Getting Started: index.md
-    - Installing Telebof: installation.md
+    - Introduction: index.md
+    - Installation: installation.md
     - Handling Updates: handling-updates.md
     - Filters: filters.md
     - Using states: states.md
