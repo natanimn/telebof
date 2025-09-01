@@ -176,31 +176,10 @@ bot.onMessage(Filter::text, (ctx, message) -> {
 
 ## Configuration Requirements
 
-### 1. Environment Variables
-For production use, avoid hardcoding sensitive data:
-
-```java
-// application.properties or application.yml
-bot.token=${BOT_TOKEN:default_token}
-webhook.url=${WEBHOOK_URL:https://localhost:8080}
-```
-
-```java
-// In WebhookController
-@Value("${bot.token}")
-private String token;
-
-@Value("${webhook.url}")  
-private String webhookUrl;
-```
-
-### 2. SSL Certificate (Production)
-
 **Webhooks require HTTPS in production:**
 
 - Obtain SSL certificate for your domain
 - Configure Spring Boot for HTTPS
 - **Ensure your domain is accessible publicly**
-
 
 **The full source code can be found on** [examples/webhook_bot](https://github.com/natanimn/telebof/blob/main/examples/webhook/spring/src/main/java/io/github/natanimn/Main.java)
