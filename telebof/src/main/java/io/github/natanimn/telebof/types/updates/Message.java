@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.types.chat_and_user.*;
+import io.github.natanimn.telebof.types.checklist.Checklist;
 import io.github.natanimn.telebof.types.checklist.ChecklistTasksAdded;
 import io.github.natanimn.telebof.types.checklist.ChecklistTasksDone;
 import io.github.natanimn.telebof.types.forum.*;
@@ -487,6 +488,11 @@ public class Message implements TelegramUpdate {
     public Integer paid_star_count;
 
     /**
+     * Optional. Message is a checklist
+     */
+    public Checklist checklist;
+
+    /**
      * Optional. Service message: some tasks in a checklist were marked as done or not done
      */
     public ChecklistTasksAdded checklist_tasks_done;
@@ -594,6 +600,7 @@ public class Message implements TelegramUpdate {
                 Objects.equals(unique_gift, message.unique_gift) &&
                 Objects.equals(paid_message_price_changed, message.paid_message_price_changed) &&
                 Objects.equals(paid_star_count, message.paid_star_count) &&
+                Objects.equals(checklist, message.checklist) &&
                 Objects.equals(checklist_tasks_added, message.checklist_tasks_added) &&
                 Objects.equals(checklist_tasks_done, message.checklist_tasks_done) &&
                 Objects.equals(direct_message_price_changed, message.direct_message_price_changed);
@@ -614,7 +621,7 @@ public class Message implements TelegramUpdate {
                 video_chat_participants_invited, web_app_data, reply_markup, external_reply, quote, link_preview_options, giveaway,
                 giveaway_created, giveaway_winners, giveaway_completed, forward_origin, boost_added, sender_boost_count, reply_to_story,
                 chat_background_set, effect_id, show_caption_above_media, paid_media, gift, unique_gift, paid_message_price_changed,
-                paid_star_count, checklist_tasks_done, checklist_tasks_added, direct_message_price_changed);
+                paid_star_count, checklist, checklist_tasks_done, checklist_tasks_added, direct_message_price_changed);
     }
 
 
@@ -709,6 +716,7 @@ public class Message implements TelegramUpdate {
                 ", unique_gift=" + unique_gift +
                 ", paid_message_price_changed=" + paid_message_price_changed +
                 ", paid_star_count=" + paid_star_count +
+                ", checklist=" + checklist +
                 ", checklist_tasks_added=" + checklist_tasks_added +
                 ", checklist_tasks_done=" + checklist_tasks_done +
                 ", direct_message_price_changed=" + direct_message_price_changed +
