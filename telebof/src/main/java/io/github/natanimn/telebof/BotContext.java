@@ -25,6 +25,7 @@ import io.github.natanimn.telebof.types.web.WebhookInfo;
 
 import java.io.File;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author Natanim
@@ -155,7 +156,7 @@ public class BotContext {
      * @param message_id A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
      * @return {@link io.github.natanimn.telebof.requests.service.ForwardMessages}
      */
-    public ForwardMessages forwardMessages(Object chat_id, Object from_chat_id, int[] message_id) {
+    public ForwardMessages forwardMessages(Object chat_id, Object from_chat_id, Integer[] message_id) {
         return new ForwardMessages(chat_id, from_chat_id, message_id, this.api);
     }
 
@@ -421,6 +422,18 @@ public class BotContext {
     }
 
     /**
+     * Use this method to edit a checklist on behalf of a connected business account.
+     * @param business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+     * @param chat_id Unique identifier for the target chat
+     * @param message_id Unique identifier for the target message
+     * @param checklist A JSON-serialized object for the new checklist
+     * @return {@link EditMessageChecklist}
+     */
+    public EditMessageChecklist editMessageChecklist(String business_connection_id, Object chat_id, Integer message_id, InputChecklist checklist){
+        return new EditMessageChecklist(business_connection_id, chat_id, message_id, checklist, api);
+    }
+
+    /**
      * Use this method to send information about a venue.
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param latitude Latitude of the venue
@@ -453,6 +466,17 @@ public class BotContext {
      */
     public SendPoll sendPoll(Object chat_id, String question, InputPollOption[] options) {
         return new SendPoll(chat_id, question, options, this.api);
+    }
+
+    /**
+     * Use this method to send a checklist on behalf of a connected business account.
+     * @param business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+     * @param chat_id Unique identifier for the target chat
+     * @param checklist A JSON-serialized object for the checklist to send
+     * @return {@link SendChecklist}
+     */
+    public SendChecklist sendChecklist(String business_connection_id, Object chat_id, InputChecklist checklist){
+        return new SendChecklist(business_connection_id, chat_id, checklist, api);
     }
 
     /**
@@ -1033,6 +1057,14 @@ public class BotContext {
     }
 
     /**
+     * A method to get the current Telegram Stars balance of the bot. Requires no parameters.
+     * @return {@link GetMyStarBalance}
+     */
+    public GetMyStarBalance getMyStarBalance(){
+        return new GetMyStarBalance(api);
+    }
+
+    /**
      * Returns the bot's Telegram Star transactions in chronological order.
      * @return {@link io.github.natanimn.telebof.requests.get.GetStarTransactions}
      */
@@ -1482,7 +1514,7 @@ public class BotContext {
      * @param message_ids A JSON-serialized list of 1-100 identifiers of messages to delete.
      * @return
      */
-    public DeleteMessages deleteMessages(Object chat_id, int[] message_ids) {
+    public DeleteMessages deleteMessages(Object chat_id, Integer[] message_ids) {
         return new DeleteMessages(chat_id, message_ids, this.api);
     }
 
