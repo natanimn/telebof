@@ -28,9 +28,10 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 0.8
+ * @version 1.1.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
