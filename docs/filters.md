@@ -104,6 +104,11 @@ Filters when a chat is shared with the bot
 
 ---
 
+#### filter.checklist()
+Filters checklist messages
+
+---
+
 ### Chat Event Filters
 
 #### filter.newChatMember()
