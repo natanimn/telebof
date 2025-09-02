@@ -1,10 +1,19 @@
 package io.github.natanimn.telebof;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.reflect.InvocationTargetException;
 import java.net.Proxy;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import io.github.natanimn.telebof.annotations.CallbackHandler;
+import io.github.natanimn.telebof.annotations.MessageHandler;
+import io.github.natanimn.telebof.enums.ChatType;
+import io.github.natanimn.telebof.enums.MessageType;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
 import io.github.natanimn.telebof.exceptions.FloodError;
 import io.github.natanimn.telebof.exceptions.TelegramApiException;
@@ -562,6 +571,103 @@ final public class BotClient {
         this.dispatcher.add(Updates.PURCHASED_PAID_MEDIA, map);
     }
 
+    private void addMessageHandler(MessageHandler handler, MethodHandle method) {
+        onMessage(filter -> {
+            boolean result = true;
+
+            // Commands (AND condition)
+            if (handler.commands().length > 0) {
+                result &= filter.commands(handler.commands());
+            }
+
+            // Texts (AND condition)
+            if (handler.texts().length > 0) {
+                result &= filter.texts(handler.texts());
+            }
+
+            // Regex (AND condition)
+            if (!handler.regex().isEmpty()) {
+                result &= filter.regex(handler.regex());
+            }
+
+            // Chat types (OR condition, but grouped as one AND)
+            if (handler.chatType().length > 0) {
+                boolean chatMatch = false;
+                for (ChatType ct : handler.chatType()) {
+                    switch (ct) {
+                        case PRIVATE -> chatMatch |= filter.Private();
+                        case GROUP -> chatMatch |= filter.group();
+                        case SUPERGROUP -> chatMatch |= filter.supergroup();
+                        case CHANNEL -> chatMatch |= filter.channel();
+                    }
+                }
+                result &= chatMatch; // combine OR group with the main AND
+            }
+
+            if (handler.type().length > 0){
+                boolean type = false;
+                for (MessageType t: handler.type()){
+                    switch (t) {
+                        case TEXT -> type |= filter.text();
+                        case PHOTO -> type |= filter.photo();
+                        case AUDIO ->  type |= filter.audio();
+                    }
+                }
+                result &= type;
+            }
+
+            return result;
+        }, method::invoke);
+    }
+
+    private void addCallbackHandler(CallbackHandler handler, MethodHandle method){
+        onCallback(filter -> {
+            boolean result = true;
+
+           // data (AND condition)
+            if (handler.data().length > 0) {
+                result &= filter.callbackData(handler.data());
+            }
+
+            // Regex (AND condition)
+            if (!handler.regex().isEmpty()) {
+                result &= filter.regex(handler.regex());
+            }
+
+            // Chat types (OR condition, but grouped as one AND)
+            if (handler.chatType().length > 0) {
+                boolean chatMatch = false;
+                for (ChatType ct : handler.chatType()) {
+                    switch (ct) {
+                        case PRIVATE -> chatMatch |= filter.Private();
+                        case GROUP -> chatMatch |= filter.group();
+                        case SUPERGROUP -> chatMatch |= filter.supergroup();
+                        case CHANNEL -> chatMatch |= filter.channel();
+                    }
+                }
+                result &= chatMatch; // combine OR group with the main AND
+            }
+
+            return result;
+        }, method::invoke);
+    }
+
+    public void addHandler(Class<?> clazz) {
+        try {
+            var lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
+            for (var method: clazz.getDeclaredMethods()){
+                var handle = lookup.unreflect(method);
+                for (var anno : method.getDeclaredAnnotations()) {
+                    if (anno instanceof MessageHandler)
+                        addMessageHandler((MessageHandler) anno, handle);
+                    if (anno instanceof CallbackHandler)
+                        addCallbackHandler((CallbackHandler) anno, handle);
+                }
+            }
+        } catch (RuntimeException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @SuppressWarnings("unchecked")
     private <T extends TelegramUpdate> void executeUpdate(
             Updates updateName,
@@ -577,7 +683,11 @@ final public class BotClient {
                         UpdateHandler<T> handler = entry.getValue();
                         if (_filter.execute(filter)) {
                             executor.execute(() -> {
-                                handler.invoke(context, (T) update);
+                                try {
+                                    handler.invoke(context, (T) update);
+                                } catch (Throwable e) {
+                                    throw new RuntimeException(e);
+                                }
                                 BotLog.info("Task executed");
                             });
                             return;
