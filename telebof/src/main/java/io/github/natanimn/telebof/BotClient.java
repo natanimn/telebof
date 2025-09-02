@@ -20,6 +20,7 @@ import io.github.natanimn.telebof.filters.FilterExecutor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Function;
 
 record UpdateInfo(TelegramUpdate update, Updates uname){}
 
@@ -45,6 +46,7 @@ final public class BotClient {
     private GetUpdateInfo getUpdateInfo;
     public BotContext context;
     private Boolean isConnected;
+    private GetUpdates getUpdates;
 
     /**
      * @param botToken bot token obtained from @BotFather
@@ -88,6 +90,18 @@ final public class BotClient {
                 requestInfo.proxy(),
                 requestInfo.localApi()
         );
+
+        var getUpdatesApi = new Api(
+                requestInfo.token(),
+                requestInfo.test(),
+                requestInfo.proxy(),
+                requestInfo.localApi()
+        );
+
+        this.getUpdates = new GetUpdates(getUpdatesApi)
+                .allowedUpdates(getUpdateInfo.allowed())
+                .limit(getUpdateInfo.limit())
+                .timeout(getUpdateInfo.timeout());
 
         this.context = new BotContext(
                 request,
@@ -552,8 +566,7 @@ final public class BotClient {
     private <T extends TelegramUpdate> void executeUpdate(
             Updates updateName,
             Filter filter,
-            TelegramUpdate update,
-            Api request
+            TelegramUpdate update
     ){
         List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
         if (execs != null) {
@@ -563,10 +576,6 @@ final public class BotClient {
                         FilterExecutor _filter = entry.getKey();
                         UpdateHandler<T> handler = entry.getValue();
                         if (_filter.execute(filter)) {
-                            var context = new BotContext(
-                                    request,
-                                    storage
-                            );
                             executor.execute(() -> {
                                 handler.invoke(context, (T) update);
                                 BotLog.info("Task executed");
@@ -594,91 +603,55 @@ final public class BotClient {
         return bot;
     }
 
-    private UpdateInfo getInfoFromUpdate(Update update){
-        if (update.message != null) {
-            return new UpdateInfo(update.message, Updates.MESSAGE);
-        } else if (update.callback_query != null) {
-            return new UpdateInfo(update.callback_query, Updates.CALLBACK_QUERY);
-        } else if (update.inline_query != null) {
-            return new UpdateInfo(update.inline_query, Updates.INLINE_QUERY);
-        } else if (update.channel_post != null) {
-            return new UpdateInfo(update.channel_post, Updates.CHANNEL_POST);
-        } else if (update.my_chat_member != null) {
-            return new UpdateInfo(update.my_chat_member, Updates.MY_CHAT_MEMBER);
-        } else if (update.edited_message != null) {
-            return new UpdateInfo(update.edited_message, Updates.EDITED_MESSAGE);
-        } else if (update.edited_channel_post != null) {
-            return new UpdateInfo(update.edited_channel_post, Updates.EDITED_CHANNEL_POST);
-        } else if (update.poll != null) {
-            return new UpdateInfo(update.poll, Updates.POLL);
-        } else if (update.chat_member != null) {
-            return new UpdateInfo(update.chat_member, Updates.CHAT_MEMBER);
-        } else if (update.message_reaction != null) {
-            return new UpdateInfo(update.message_reaction, Updates.MESSAGE_REACTION);
-        } else if (update.message_reaction_count != null) {
-            return new UpdateInfo(update.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
-        } else if (update.chat_boost != null) {
-            return new UpdateInfo(update.chat_boost, Updates.CHAT_BOOST);
-        } else if (update.removed_chat_boost != null) {
-            return new UpdateInfo(update.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
-        } else if (update.pre_checkout_query != null) {
-            return new UpdateInfo(update.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
-        } else if (update.shipping_query != null) {
-            return new UpdateInfo(update.shipping_query, Updates.SHIPPING_QUERY);
-        } else if (update.chat_join_request != null) {
-            return new UpdateInfo(update.chat_join_request, Updates.CHAT_JOIN_REQUEST);
-        } else if (update.chosen_inline_result != null) {
-            return new UpdateInfo(update.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
-        } else if (update.poll_answer != null) {
-            return new UpdateInfo(update.poll_answer, Updates.POLL_ANSWER);
-        } else if (update.business_connection != null) {
-            return new UpdateInfo(update.business_connection, Updates.BUSINESS_CONNECTION);
-        } else if (update.business_message != null) {
-            return new UpdateInfo(update.business_message, Updates.BUSINESS_MESSAGE);
-        } else if (update.edited_business_message != null) {
-            return new UpdateInfo(update.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
-        } else if (update.deleted_business_messages != null) {
-            return new UpdateInfo(update.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
-        } else if (update.purchased_paid_media != null) {
-            return new UpdateInfo(update.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
-        } else {
-            return null;
-        }
+    private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
+
+    static {
+        updateMap.put(u -> u.message, Updates.MESSAGE);
+        updateMap.put(u -> u.callback_query, Updates.CALLBACK_QUERY);
+        updateMap.put(u -> u.inline_query, Updates.INLINE_QUERY);
+        updateMap.put(u -> u.channel_post, Updates.CHANNEL_POST);
+        updateMap.put(u -> u.my_chat_member, Updates.MY_CHAT_MEMBER);
+        updateMap.put(u -> u.edited_message, Updates.EDITED_MESSAGE);
+        updateMap.put(u -> u.edited_channel_post, Updates.EDITED_CHANNEL_POST);
+        updateMap.put(u -> u.poll, Updates.POLL);
+        updateMap.put(u -> u.chat_member, Updates.CHAT_MEMBER);
+        updateMap.put(u -> u.message_reaction, Updates.MESSAGE_REACTION);
+        updateMap.put(u -> u.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
+        updateMap.put(u -> u.chat_boost, Updates.CHAT_BOOST);
+        updateMap.put(u -> u.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
+        updateMap.put(u -> u.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
+        updateMap.put(u -> u.shipping_query, Updates.SHIPPING_QUERY);
+        updateMap.put(u -> u.chat_join_request, Updates.CHAT_JOIN_REQUEST);
+        updateMap.put(u -> u.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
+        updateMap.put(u -> u.poll_answer, Updates.POLL_ANSWER);
+        updateMap.put(u -> u.business_connection, Updates.BUSINESS_CONNECTION);
+        updateMap.put(u -> u.business_message, Updates.BUSINESS_MESSAGE);
+        updateMap.put(u -> u.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
+        updateMap.put(u -> u.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
+        updateMap.put(u -> u.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
     }
 
-    /**
-     * Use this method to process updates you have received from webhook
-     * @param updates list of updates
-     */
-    public void processUpdates(List<Update> updates){
-        if (!updates.isEmpty()) {
-            BotLog.info("Processing updates");
-            var request = new Api(
-                    requestInfo.token(),
-                    requestInfo.test(),
-                    requestInfo.proxy(),
-                    requestInfo.localApi()
-            );
-            for (Update update : updates) {
-                UpdateInfo info = getInfoFromUpdate(update);
-                var filter = new Filter(update, storage);
-                if (info != null)
-                    executeUpdate(info.uname(), filter, info.update(), request);
+    private UpdateInfo getInfoFromUpdate(Update update) {
+        for (Map.Entry<Function<Update, TelegramUpdate>, Updates> entry : updateMap.entrySet()) {
+            TelegramUpdate val = entry.getKey().apply(update);
+            if (val != null) {
+                return new UpdateInfo(val, entry.getValue());
             }
         }
+        return null;
     }
 
     /**
-     * Process updates retrieved from long polling
+     * Process updates retrieved from long polling or webhook
      * @param updates array of {@link Update}
-     * @param request request sender
      */
-    private void processUpdates(List<Update> updates, Api request){
+    public void processUpdates(List<Update> updates){
+        BotLog.info("Processing updates");
         for (Update update: updates) {
             UpdateInfo info = getInfoFromUpdate(update);
             var filter      = new Filter(update, storage);
             if (info != null)
-                executeUpdate(info.uname(), filter, info.update(), request);
+                executeUpdate(info.uname(), filter, info.update());
         }
     }
 
@@ -687,35 +660,19 @@ final public class BotClient {
      * @throws InterruptedException exception
      */
     private void retrieveUpdates() throws InterruptedException {
-        var request = new Api(
-                requestInfo.token(),
-                requestInfo.test(),
-                requestInfo.proxy(),
-                requestInfo.localApi()
-        );
 
         if (skipOldUpdates) {
-            new GetUpdates(request)
-                    .allowedUpdates(getUpdateInfo.allowed())
-                    .limit(getUpdateInfo.limit())
-                    .timeout(getUpdateInfo.timeout())
-                    .offset(-1)
-                    .exec();
+            getUpdates.offset(-1).exec();
             skipOldUpdates = false;
         }
 
-        List<Update> updates = new GetUpdates(request)
-                .allowedUpdates(getUpdateInfo.allowed())
-                .limit(getUpdateInfo.limit())
-                .timeout(getUpdateInfo.timeout())
-                .offset(this.offset)
-                .exec();
+        List<Update> updates = getUpdates.offset(this.offset).exec();
 
         int count = updates.size();
         BotLog.info(String.format("Received %d updates", count));
         if (!updates.isEmpty()){
            setOffset(updates.get(count - 1).update_id + 1);
-           processUpdates(updates, request);
+           processUpdates(updates);
         }
     }
 
