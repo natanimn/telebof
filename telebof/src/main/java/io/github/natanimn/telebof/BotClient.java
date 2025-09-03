@@ -3,6 +3,7 @@ package io.github.natanimn.telebof;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.net.Proxy;
 
 import java.util.Arrays;
@@ -604,16 +605,77 @@ final public class BotClient {
                 result &= chatMatch; // combine OR group with the main AND
             }
 
-            if (handler.type().length > 0){
-                boolean type = false;
-                for (MessageType t: handler.type()){
+            // Message types (OR condition, but grouped as one AND)
+            if (handler.type().length > 0) {
+                boolean typeMatch = false;
+                for (MessageType t : handler.type()) {
                     switch (t) {
-                        case TEXT -> type |= filter.text();
-                        case PHOTO -> type |= filter.photo();
-                        case AUDIO ->  type |= filter.audio();
+                        case TEXT -> typeMatch |= filter.text();
+                        case PHOTO -> typeMatch |= filter.photo();
+                        case VIDEO -> typeMatch |= filter.video();
+                        case AUDIO -> typeMatch |= filter.audio();
+                        case ANIMATION -> typeMatch |= filter.animation();
+                        case DOCUMENT -> typeMatch |= filter.document();
+                        case VOICE -> typeMatch |= filter.voice();
+                        case VIDEO_NOTE -> typeMatch |= filter.videoNote();
+                        case CONTACT -> typeMatch |= filter.contact();
+                        case LOCATION -> typeMatch |= filter.location();
+                        case VENUE -> typeMatch |= filter.venue();
+                        case GAME -> typeMatch |= filter.game();
+                        case DICE -> typeMatch |= filter.dice();
+                        case STICKER -> typeMatch |= filter.sticker();
+                        case INVOICE -> typeMatch |= filter.invoice();
+                        case QUOTE -> typeMatch |= filter.quote();
+                        case GIVEAWAY -> typeMatch |= filter.giveaway();
+                        case MEDIA -> typeMatch |= filter.media();
+                        case NEW_CHAT_MEMBER -> typeMatch |= filter.newChatMember();
+                        case LEFT_CHAT_MEMBER -> typeMatch |= filter.leftChatMember();
+                        case PINNED_MESSAGE -> typeMatch |= filter.pinnedMessage();
+                        case NEW_CHAT_PHOTO -> typeMatch |= filter.newChatPhoto();
+                        case NEW_CHAT_TITLE -> typeMatch |= filter.newChatTitle();
+                        case GROUP_CREATED -> typeMatch |= filter.groupCreated();
+                        case SUPERGROUP_CREATED -> typeMatch |= filter.supergroupCreated();
+                        case CHANNEL_CREATED -> typeMatch |= filter.channelCreated();
+                        case MESSAGE_AUTO_DELETE_TIMER_CHANGED -> typeMatch |= filter.messageAutoDeleteTimerChanged();
+                        case MIGRATED -> typeMatch |= filter.migrated();
+                        case SUCCESSFUL_PAYMENT -> typeMatch |= filter.successfulPayment();
+                        case PROXIMITY_ALERT_TRIGGERED -> typeMatch |= filter.proximityAlertTriggered();
+                        case FORUM_TOPIC_CREATED -> typeMatch |= filter.forumTopicCreated();
+                        case FORUM_TOPIC_EDITED -> typeMatch |= filter.forumTopicEdited();
+                        case FORUM_TOPIC_CLOSED -> typeMatch |= filter.forumTopicClosed();
+                        case FORUM_TOPIC_REOPENED -> typeMatch |= filter.forumTopicReopened();
+                        case VIDEO_CHAT_STARTED -> typeMatch |= filter.videoChatStarted();
+                        case VIDEO_CHAT_SCHEDULED -> typeMatch |= filter.videoChatScheduled();
+                        case VIDEO_CHAT_PARTICIPANT_INVITED -> typeMatch |= filter.videoChatParticipantInvited();
+                        case VIDEO_CHAT_ENDED -> typeMatch |= filter.videoChatEnded();
+                        case FORWARDED -> typeMatch |= filter.forwarded();
+                        case REPLIED -> typeMatch |= filter.replied();
+                        case REPLIED_TO_STORY -> typeMatch |= filter.repliedToStory();
+                        case BOT -> typeMatch |= filter.bot();
+                        case GIVEAWAY_CREATED -> typeMatch |= filter.giveawayCreated();
+                        case GIVEAWAY_COMPLETED -> typeMatch |= filter.giveawayCompleted();
+                        case BOOST_ADDED -> typeMatch |= filter.boostAdded();
+                        case USERS_SHARED -> typeMatch |= filter.usersShared();
+                        case WRITE_ACCESS_ALLOWED -> typeMatch |= filter.writeAccessAllowed();
+                        case CHECKLIST -> typeMatch |= filter.checklist();
+                        case CHECKLIST_TASKS_DONE -> typeMatch |= filter.checklistTasksDone();
+                        case CHECKLIST_TASKS_ADDED -> typeMatch |= filter.checklistTasksAdded();
+                        case DIRECT_MESSAGE_PRICE_CHANGED -> typeMatch |= filter.directMessagePriceChanged();
+                        case ENTITIES -> typeMatch |= filter.entities();
+                        case CHAT_BACKGROUND_SET -> typeMatch |= filter.chatBackgroundSet();
+                        case CHAT_SHARED -> typeMatch |= filter.chatShared();
+                        case EMPTY_QUERY -> typeMatch |= filter.emptyQuery();
+                        case WEB_APP_DATA -> typeMatch |= filter.webAppData();
+                        case PASSPORT_DATA -> typeMatch |= filter.passportData();
+                        case REFUNDED_PAYMENT -> typeMatch |= filter.refundedPayment();
+                        case SUGGESTED_POST_APPROVED -> typeMatch |= filter.suggestedPostApproved();
+                        case SUGGESTED_POST_APPROVAL_FAILED -> typeMatch |= filter.suggestedPostApprovalFailed();
+                        case SUGGESTED_POST_DECLINED -> typeMatch |= filter.suggestedPostDeclined();
+                        case SUGGESTED_POST_PAID -> typeMatch |= filter.suggestedPostPaid();
+                        case SUGGESTED_POST_REFUNDED -> typeMatch |= filter.suggestedPostRefunded();
                     }
                 }
-                result &= type;
+                result &= typeMatch; // combine OR group with the main AND
             }
 
             return result;
@@ -652,11 +714,15 @@ final public class BotClient {
         }, method::invoke);
     }
 
-    public void addHandler(Class<?> clazz) {
+    public void addHandler(Object object) {
         try {
+            var clazz = object.getClass();
             var lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
             for (var method: clazz.getDeclaredMethods()){
                 var handle = lookup.unreflect(method);
+                if (!Modifier.isStatic(method.getModifiers())) {
+                    handle = handle.bindTo(object);
+                }
                 for (var anno : method.getDeclaredAnnotations()) {
                     if (anno instanceof MessageHandler)
                         addMessageHandler((MessageHandler) anno, handle);
