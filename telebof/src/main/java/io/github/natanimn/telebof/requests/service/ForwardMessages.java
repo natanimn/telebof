@@ -54,4 +54,13 @@ public class ForwardMessages extends AbstractBaseRequest<ForwardMessages, List<M
         return add("protect_content", protect_content);
     }
 
+    /***
+     * Optional
+     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @return {@link ForwardMessages}
+     */
+    public ForwardMessages directMessagesTopicId(int direct_messages_topic_id){
+        return add("direct_messages_topic_id", direct_messages_topic_id);
+    }
+
 }
