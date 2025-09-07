@@ -3,6 +3,7 @@ nav:
     - Introduction: index.md
     - Installation: installation.md
     - Handling Updates: handling-updates.md
+    - Annotations: annotations.md
     - Filters: filters.md
     - Using states: states.md
     - Advanced Features: advance.md
