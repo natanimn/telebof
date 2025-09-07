@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.updates;
 
+import io.github.natanimn.telebof.types.DirectMessagesTopic;
 import io.github.natanimn.telebof.types.chat_and_user.*;
 import io.github.natanimn.telebof.types.checklist.Checklist;
 import io.github.natanimn.telebof.types.checklist.ChecklistTasksAdded;
@@ -13,6 +14,7 @@ import io.github.natanimn.telebof.types.payments.PaidMediaInfo;
 import io.github.natanimn.telebof.types.payments.RefundedPayment;
 import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
 import io.github.natanimn.telebof.types.story.Story;
+import io.github.natanimn.telebof.types.suggested.*;
 import io.github.natanimn.telebof.types.web.WebAppData;
 
 import java.util.List;
@@ -507,6 +509,46 @@ public class Message implements TelegramUpdate {
      */
     public DirectMessagePriceChanged direct_message_price_changed;
 
+    /**
+     * Optional. Identifier of the specific checklist task that is being replied to
+     */
+    public Integer reply_to_checklist_task_id;
+
+    /**
+     * Optional. Information about the direct messages chat topic that contains the message
+     */
+    public DirectMessagesTopic direct_messages_topic;
+
+    /**
+     * Optional. True, if the message is a paid post. Note that such posts must not be deleted for 24 hours to receive the payment and can't be edited.
+     */
+    public Boolean is_paid_post;
+
+    /**
+     * Optional. Service message: a suggested post was approved
+     */
+    public SuggestedPostApproved suggested_post_approved;
+
+    /**
+     * Optional. Service message: approval of a suggested post has failed
+     */
+    public SuggestedPostApprovalFailed suggested_post_approval_failed;
+
+    /**
+     * Optional. Service message: a suggested post was declined
+     */
+    public SuggestedPostDeclined suggested_post_declined;
+
+    /**
+     * Optional. Service message: payment for a suggested post was received
+     */
+    public SuggestedPostPaid suggested_post_paid;
+
+    /**
+     * Optional. Service message: payment for a suggested post was refunded
+     */
+    public SuggestedPostRefunded suggested_post_refunded;
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -603,7 +645,15 @@ public class Message implements TelegramUpdate {
                 Objects.equals(checklist, message.checklist) &&
                 Objects.equals(checklist_tasks_added, message.checklist_tasks_added) &&
                 Objects.equals(checklist_tasks_done, message.checklist_tasks_done) &&
-                Objects.equals(direct_message_price_changed, message.direct_message_price_changed);
+                Objects.equals(direct_message_price_changed, message.direct_message_price_changed) &&
+                Objects.equals(reply_to_checklist_task_id, message.reply_to_checklist_task_id) &&
+                Objects.equals(direct_messages_topic, message.direct_messages_topic) &&
+                Objects.equals(is_paid_post, message.is_paid_post) &&
+                Objects.equals(suggested_post_approved, message.suggested_post_approved) &&
+                Objects.equals(suggested_post_approval_failed, message.suggested_post_approval_failed) &&
+                Objects.equals(suggested_post_declined, message.suggested_post_declined) &&
+                Objects.equals(suggested_post_paid, message.suggested_post_paid) &&
+                Objects.equals(suggested_post_refunded, message.suggested_post_refunded);
     }
 
     @Override
@@ -621,7 +671,9 @@ public class Message implements TelegramUpdate {
                 video_chat_participants_invited, web_app_data, reply_markup, external_reply, quote, link_preview_options, giveaway,
                 giveaway_created, giveaway_winners, giveaway_completed, forward_origin, boost_added, sender_boost_count, reply_to_story,
                 chat_background_set, effect_id, show_caption_above_media, paid_media, gift, unique_gift, paid_message_price_changed,
-                paid_star_count, checklist, checklist_tasks_done, checklist_tasks_added, direct_message_price_changed);
+                paid_star_count, checklist, checklist_tasks_done, checklist_tasks_added, direct_message_price_changed, reply_to_checklist_task_id,
+                direct_messages_topic, is_paid_post, suggested_post_approved, suggested_post_approval_failed, suggested_post_declined,
+                suggested_post_paid, suggested_post_refunded);
     }
 
 
@@ -720,6 +772,14 @@ public class Message implements TelegramUpdate {
                 ", checklist_tasks_added=" + checklist_tasks_added +
                 ", checklist_tasks_done=" + checklist_tasks_done +
                 ", direct_message_price_changed=" + direct_message_price_changed +
+                ", reply_to_checklist_task_id=" + reply_to_checklist_task_id +
+                ", direct_messages_topic=" + direct_messages_topic +
+                ", is_paid_post=" + is_paid_post +
+                ", suggested_post_approved=" + suggested_post_approved +
+                ", suggested_post_approval_failed=" + suggested_post_approval_failed +
+                ", suggested_post_declined=" + suggested_post_declined +
+                ", suggested_post_paid=" + suggested_post_paid +
+                ", suggested_post_refunded=" + suggested_post_refunded +
                 "}";
     }
 }
