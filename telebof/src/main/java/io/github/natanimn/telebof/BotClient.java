@@ -36,7 +36,7 @@ record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
 /**
  * Main class of Telebof library
  * @author Natanim
- * @since 0.1
+ * @since 3 March 2025
  * @version 1.2.0
  */
 final public class BotClient {
