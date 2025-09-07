@@ -3,8 +3,9 @@ package io.github.natanimn.telebof.requests.send;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.keyboard.Markup;
+import io.github.natanimn.telebof.types.suggested.SuggestedPostParameters;
 import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.keyboard.ReplyParameters;
+import io.github.natanimn.telebof.types.ReplyParameters;
 
 /**
  * SendLocation class. Returns sent {@link Message} on success.
@@ -118,5 +119,24 @@ public class SendLocation extends AbstractBaseRequest<SendLocation, Message> {
      */
     public SendLocation messageEffectId(String message_effect_id ){
         return add("message_effect_id ", message_effect_id);
+    }
+
+    /***
+     * Optional
+     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @return {@link SendLocation}
+     */
+    public SendLocation directMessagesTopicId(int direct_messages_topic_id){
+        return add("direct_messages_topic_id", direct_messages_topic_id);
+    }
+
+    /**
+     * Optional
+     * @param suggested_post_parameters A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only.
+     *                                  If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     * @return {@link SendLocation}
+     */
+    public SendLocation suggestedPostParameters(SuggestedPostParameters suggested_post_parameters){
+        return add("suggested_post_parameters", suggested_post_parameters);
     }
 }
