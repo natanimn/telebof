@@ -2,19 +2,14 @@ package io.github.natanimn.telebof;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
-import io.github.natanimn.telebof.annotations.CallbackHandler;
-import io.github.natanimn.telebof.annotations.MessageHandler;
-import io.github.natanimn.telebof.enums.ChatType;
-import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.annotations.*;
+import io.github.natanimn.telebof.annotations.meta.*;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
 import io.github.natanimn.telebof.exceptions.FloodError;
 import io.github.natanimn.telebof.exceptions.TelegramApiException;
@@ -41,8 +36,8 @@ record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
 /**
  * Main class of Telebof library
  * @author Natanim
- * @since 3 March 2025
- * @version 0.9
+ * @since 0.1
+ * @version 1.2.0
  */
 final public class BotClient {
     private Integer offset;
@@ -57,6 +52,34 @@ final public class BotClient {
     public BotContext context;
     private Boolean isConnected;
     private GetUpdates getUpdates;
+    private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
+
+    static {
+        updateMap.put(u -> u.message, Updates.MESSAGE);
+        updateMap.put(u -> u.callback_query, Updates.CALLBACK_QUERY);
+        updateMap.put(u -> u.inline_query, Updates.INLINE_QUERY);
+        updateMap.put(u -> u.channel_post, Updates.CHANNEL_POST);
+        updateMap.put(u -> u.my_chat_member, Updates.MY_CHAT_MEMBER);
+        updateMap.put(u -> u.edited_message, Updates.EDITED_MESSAGE);
+        updateMap.put(u -> u.edited_channel_post, Updates.EDITED_CHANNEL_POST);
+        updateMap.put(u -> u.poll, Updates.POLL);
+        updateMap.put(u -> u.chat_member, Updates.CHAT_MEMBER);
+        updateMap.put(u -> u.message_reaction, Updates.MESSAGE_REACTION);
+        updateMap.put(u -> u.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
+        updateMap.put(u -> u.chat_boost, Updates.CHAT_BOOST);
+        updateMap.put(u -> u.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
+        updateMap.put(u -> u.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
+        updateMap.put(u -> u.shipping_query, Updates.SHIPPING_QUERY);
+        updateMap.put(u -> u.chat_join_request, Updates.CHAT_JOIN_REQUEST);
+        updateMap.put(u -> u.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
+        updateMap.put(u -> u.poll_answer, Updates.POLL_ANSWER);
+        updateMap.put(u -> u.business_connection, Updates.BUSINESS_CONNECTION);
+        updateMap.put(u -> u.business_message, Updates.BUSINESS_MESSAGE);
+        updateMap.put(u -> u.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
+        updateMap.put(u -> u.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
+        updateMap.put(u -> u.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
+    }
+
 
     /**
      * @param botToken bot token obtained from @BotFather
@@ -134,11 +157,11 @@ final public class BotClient {
         );
     }
 
+    /**
+     * A builder of <b>BotClient</b> class.
+     * Through this class, you create a new object of <b>BotClient</b> class.
+     */
     public static class Builder {
-        /**
-         * A builder of <b>BotClient</b> class.
-         * Through this class, you create a new object of <b>BotClient</b> class.
-         */
         private final String botToken;
         private String localBotApiUrl;
         private boolean skipOldUpdates;
@@ -206,7 +229,7 @@ final public class BotClient {
         /**
          * Optional
          * @param limit limit number of updates to receive(supported on long polling)
-         * @return {@link }
+         * @return {@link Builder}
          */
         public Builder limit(int limit) {
             this.limit = limit;
@@ -572,168 +595,246 @@ final public class BotClient {
         this.dispatcher.add(Updates.PURCHASED_PAID_MEDIA, map);
     }
 
-    private void addMessageHandler(MessageHandler handler, MethodHandle method) {
-        onMessage(filter -> {
-            boolean result = true;
+    private void addMessageHandler(MessageHandler handler, MethodHandle method){
+        MessageHandlerMeta meta = new MessageHandlerMeta(handler, method);
+        onMessage(meta::matches, method::invoke);
 
-            // Commands (AND condition)
-            if (handler.commands().length > 0) {
-                result &= filter.commands(handler.commands());
-            }
+    }
 
-            // Texts (AND condition)
-            if (handler.texts().length > 0) {
-                result &= filter.texts(handler.texts());
-            }
-
-            // Regex (AND condition)
-            if (!handler.regex().isEmpty()) {
-                result &= filter.regex(handler.regex());
-            }
-
-            // Chat types (OR condition, but grouped as one AND)
-            if (handler.chatType().length > 0) {
-                boolean chatMatch = false;
-                for (ChatType ct : handler.chatType()) {
-                    switch (ct) {
-                        case PRIVATE -> chatMatch |= filter.Private();
-                        case GROUP -> chatMatch |= filter.group();
-                        case SUPERGROUP -> chatMatch |= filter.supergroup();
-                        case CHANNEL -> chatMatch |= filter.channel();
-                    }
-                }
-                result &= chatMatch; // combine OR group with the main AND
-            }
-
-            // Message types (OR condition, but grouped as one AND)
-            if (handler.type().length > 0) {
-                boolean typeMatch = false;
-                for (MessageType t : handler.type()) {
-                    switch (t) {
-                        case TEXT -> typeMatch |= filter.text();
-                        case PHOTO -> typeMatch |= filter.photo();
-                        case VIDEO -> typeMatch |= filter.video();
-                        case AUDIO -> typeMatch |= filter.audio();
-                        case ANIMATION -> typeMatch |= filter.animation();
-                        case DOCUMENT -> typeMatch |= filter.document();
-                        case VOICE -> typeMatch |= filter.voice();
-                        case VIDEO_NOTE -> typeMatch |= filter.videoNote();
-                        case CONTACT -> typeMatch |= filter.contact();
-                        case LOCATION -> typeMatch |= filter.location();
-                        case VENUE -> typeMatch |= filter.venue();
-                        case GAME -> typeMatch |= filter.game();
-                        case DICE -> typeMatch |= filter.dice();
-                        case STICKER -> typeMatch |= filter.sticker();
-                        case INVOICE -> typeMatch |= filter.invoice();
-                        case QUOTE -> typeMatch |= filter.quote();
-                        case GIVEAWAY -> typeMatch |= filter.giveaway();
-                        case MEDIA -> typeMatch |= filter.media();
-                        case NEW_CHAT_MEMBER -> typeMatch |= filter.newChatMember();
-                        case LEFT_CHAT_MEMBER -> typeMatch |= filter.leftChatMember();
-                        case PINNED_MESSAGE -> typeMatch |= filter.pinnedMessage();
-                        case NEW_CHAT_PHOTO -> typeMatch |= filter.newChatPhoto();
-                        case NEW_CHAT_TITLE -> typeMatch |= filter.newChatTitle();
-                        case GROUP_CREATED -> typeMatch |= filter.groupCreated();
-                        case SUPERGROUP_CREATED -> typeMatch |= filter.supergroupCreated();
-                        case CHANNEL_CREATED -> typeMatch |= filter.channelCreated();
-                        case MESSAGE_AUTO_DELETE_TIMER_CHANGED -> typeMatch |= filter.messageAutoDeleteTimerChanged();
-                        case MIGRATED -> typeMatch |= filter.migrated();
-                        case SUCCESSFUL_PAYMENT -> typeMatch |= filter.successfulPayment();
-                        case PROXIMITY_ALERT_TRIGGERED -> typeMatch |= filter.proximityAlertTriggered();
-                        case FORUM_TOPIC_CREATED -> typeMatch |= filter.forumTopicCreated();
-                        case FORUM_TOPIC_EDITED -> typeMatch |= filter.forumTopicEdited();
-                        case FORUM_TOPIC_CLOSED -> typeMatch |= filter.forumTopicClosed();
-                        case FORUM_TOPIC_REOPENED -> typeMatch |= filter.forumTopicReopened();
-                        case VIDEO_CHAT_STARTED -> typeMatch |= filter.videoChatStarted();
-                        case VIDEO_CHAT_SCHEDULED -> typeMatch |= filter.videoChatScheduled();
-                        case VIDEO_CHAT_PARTICIPANT_INVITED -> typeMatch |= filter.videoChatParticipantInvited();
-                        case VIDEO_CHAT_ENDED -> typeMatch |= filter.videoChatEnded();
-                        case FORWARDED -> typeMatch |= filter.forwarded();
-                        case REPLIED -> typeMatch |= filter.replied();
-                        case REPLIED_TO_STORY -> typeMatch |= filter.repliedToStory();
-                        case BOT -> typeMatch |= filter.bot();
-                        case GIVEAWAY_CREATED -> typeMatch |= filter.giveawayCreated();
-                        case GIVEAWAY_COMPLETED -> typeMatch |= filter.giveawayCompleted();
-                        case BOOST_ADDED -> typeMatch |= filter.boostAdded();
-                        case USERS_SHARED -> typeMatch |= filter.usersShared();
-                        case WRITE_ACCESS_ALLOWED -> typeMatch |= filter.writeAccessAllowed();
-                        case CHECKLIST -> typeMatch |= filter.checklist();
-                        case CHECKLIST_TASKS_DONE -> typeMatch |= filter.checklistTasksDone();
-                        case CHECKLIST_TASKS_ADDED -> typeMatch |= filter.checklistTasksAdded();
-                        case DIRECT_MESSAGE_PRICE_CHANGED -> typeMatch |= filter.directMessagePriceChanged();
-                        case ENTITIES -> typeMatch |= filter.entities();
-                        case CHAT_BACKGROUND_SET -> typeMatch |= filter.chatBackgroundSet();
-                        case CHAT_SHARED -> typeMatch |= filter.chatShared();
-                        case EMPTY_QUERY -> typeMatch |= filter.emptyQuery();
-                        case WEB_APP_DATA -> typeMatch |= filter.webAppData();
-                        case PASSPORT_DATA -> typeMatch |= filter.passportData();
-                        case REFUNDED_PAYMENT -> typeMatch |= filter.refundedPayment();
-                        case SUGGESTED_POST_APPROVED -> typeMatch |= filter.suggestedPostApproved();
-                        case SUGGESTED_POST_APPROVAL_FAILED -> typeMatch |= filter.suggestedPostApprovalFailed();
-                        case SUGGESTED_POST_DECLINED -> typeMatch |= filter.suggestedPostDeclined();
-                        case SUGGESTED_POST_PAID -> typeMatch |= filter.suggestedPostPaid();
-                        case SUGGESTED_POST_REFUNDED -> typeMatch |= filter.suggestedPostRefunded();
-                    }
-                }
-                result &= typeMatch; // combine OR group with the main AND
-            }
-
-            return result;
-        }, method::invoke);
+    private void addEditedMessageHandler(EditedMessageHandler handler, MethodHandle method) {
+        var meta = new EditedMessageHandlerMeta(handler, method);
+        onEditedMessage(meta::matches, method::invoke);
     }
 
     private void addCallbackHandler(CallbackHandler handler, MethodHandle method){
-        onCallback(filter -> {
-            boolean result = true;
+        var meta = new CallbackHandlerMeta(handler, method);
+        onCallback(meta::matches, method::invoke);
+    }
 
-           // data (AND condition)
-            if (handler.data().length > 0) {
-                result &= filter.callbackData(handler.data());
-            }
+    private void addChannelPostHandler(ChannelPostHandler handler, MethodHandle method) {
+        var meta = new ChannelPostHandlerMeta(handler, method);
+        onChannelPost(meta::matches, method::invoke);
+    }
 
-            // Regex (AND condition)
-            if (!handler.regex().isEmpty()) {
-                result &= filter.regex(handler.regex());
-            }
+    private void addEditedChannelPostHandler(EditedChannelPostHandler handler, MethodHandle method) {
+        var meta = new EditedChannelPostHandlerMeta(handler, method);
+        onEditedChannelPost(meta::matches, method::invoke);
+    }
 
-            // Chat types (OR condition, but grouped as one AND)
-            if (handler.chatType().length > 0) {
-                boolean chatMatch = false;
-                for (ChatType ct : handler.chatType()) {
-                    switch (ct) {
-                        case PRIVATE -> chatMatch |= filter.Private();
-                        case GROUP -> chatMatch |= filter.group();
-                        case SUPERGROUP -> chatMatch |= filter.supergroup();
-                        case CHANNEL -> chatMatch |= filter.channel();
-                    }
-                }
-                result &= chatMatch; // combine OR group with the main AND
-            }
+    private void addInlineHandler(InlineHandler handler, MethodHandle method) {
+        var meta = new InlineHandlerMeta(handler, method);
+        onInline(meta::matches, method::invoke);
+    }
 
-            return result;
-        }, method::invoke);
+    private void addPollHandler(PollHandler handler, MethodHandle method) {
+        var meta = new PollHandlerMeta(handler, method);
+        onPoll(meta::matches, method::invoke);
+    }
+
+    private void addPollAnswerHandler(PollAnswerHandler handler, MethodHandle method) {
+        var meta = new PollAnswerHandlerMeta(handler, method);
+        onPollAnswer(meta::matches, method::invoke);
+    }
+
+    private void addReactionHandler(ReactionHandler handler, MethodHandle method) {
+        var meta = new ReactionHandlerMeta(handler, method);
+        onReaction(meta::matches, method::invoke);
+    }
+
+    private void addReactionCountHandler(ReactionCountHandler handler, MethodHandle method) {
+        var meta = new ReactionCountHandlerMeta(handler, method);
+        onReactionCount(meta::matches, method::invoke);
+    }
+
+    private void addChatJoinRequestHandler(ChatJoinRequestHandler handler, MethodHandle method) {
+        var meta = new ChatJoinRequestHandlerMeta(handler, method);
+        onChatJoinRequest(meta::matches, method::invoke);
+    }
+
+    private void addPurchasedPaidMediaHandler(PurchasedPaidMediaHandler handler, MethodHandle method) {
+        var meta = new PurchasedPaidMediaHandlerMeta(handler, method);
+        onPurchasedPaidMedia(meta::matches, method::invoke);
+    }
+
+    private void addPreCheckoutHandler(PreCheckoutHandler handler, MethodHandle method) {
+        var meta = new PreCheckoutHandlerMeta(handler, method);
+        onPreCheckout(meta::matches, method::invoke);
+    }
+
+    private void addShippingHandler(ShippingHandler handler, MethodHandle method) {
+        var meta = new ShippingHandlerMeta(handler, method);
+        onShipping(meta::matches, method::invoke);
+    }
+
+    private void addChatBoostHandler(ChatBoostHandler handler, MethodHandle method) {
+        var meta = new ChatBoostHandlerMeta(handler, method);
+        onChatBoost(meta::matches, method::invoke);
+    }
+
+    private void addChatMemberHandler(ChatMemberHandler handler, MethodHandle method) {
+        var meta = new ChatMemberHandlerMeta(handler, method);
+        onChatMember(meta::matches, method::invoke);
+    }
+
+    private void addMyChatMemberHandler(MyChatMemberHandler handler, MethodHandle method) {
+        var meta = new MyChatMemberHandlerMeta(handler, method);
+        onMyChatMember(meta::matches, method::invoke);
+    }
+
+    private void addRemovedChatBoostHandler(RemovedChatBoostHandler handler, MethodHandle method) {
+        var meta = new RemovedChatBoostHandlerMeta(handler, method);
+        onRemovedChatBoost(meta::matches, method::invoke);
+    }
+
+    private void addBusinessMessageHandler(BusinessMessageHandler handler, MethodHandle method) {
+        var meta = new BusinessMessageHandlerMeta(handler, method);
+        onBusinessMessage(meta::matches, method::invoke);
+    }
+
+    private void addBusinessConnectionHandler(BusinessConnectionHandler handler, MethodHandle method) {
+        var meta = new BusinessConnectionHandlerMeta(handler, method);
+        onBusinessConnection(meta::matches, method::invoke);
+    }
+
+    private void addDeletedBusinessMessageHandler(DeletedBusinessMessageHandler handler, MethodHandle method) {
+        var meta = new DeletedBusinessMessageHandlerMeta(handler, method);
+        onDeletedBusinessMessage(meta::matches, method::invoke);
+    }
+
+    private void addEditedBusinessMessageHandler(EditedBusinessMessageHandler handler, MethodHandle method) {
+        var meta = new EditedBusinessMessageHandlerMeta(handler, method);
+        onEditedBusinessMessage(meta::matches, method::invoke);
+    }
+
+    private void addChosenInlineHandler(ChosenInlineHandler handler, MethodHandle method) {
+        var meta = new ChosenInlineHandlerMeta(handler, method);
+        onChosenInlineResult(meta::matches, method::invoke);
+    }
+
+    private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
+
+        // Collect all MessageHandler annotations
+        for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(CallbackHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(EditedMessageHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChannelPostHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChannelPostHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(EditedChannelPostHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(InlineHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(PollHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(PollAnswerHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ReactionHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ReactionCountHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChatJoinRequestHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(PurchasedPaidMediaHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(PreCheckoutHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ShippingHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChatBoostHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChatMemberHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(MyChatMemberHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(RemovedChatBoostHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(BusinessMessageHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(BusinessConnectionHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(DeletedBusinessMessageHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(EditedBusinessMessageHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ChosenInlineHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
     }
 
     public void addHandler(Object object) {
         try {
             var clazz = object.getClass();
             var lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
-            for (var method: clazz.getDeclaredMethods()){
+            List<AnnotatedHandler> annotatedMethods = new ArrayList<>();
+
+            for (var method : clazz.getDeclaredMethods()) {
                 var handle = lookup.unreflect(method);
-                if (!Modifier.isStatic(method.getModifiers())) {
-                    handle = handle.bindTo(object);
-                }
-                for (var anno : method.getDeclaredAnnotations()) {
-                    if (anno instanceof MessageHandler)
-                        addMessageHandler((MessageHandler) anno, handle);
-                    if (anno instanceof CallbackHandler)
-                        addCallbackHandler((CallbackHandler) anno, handle);
-                }
+
+                if (!Modifier.isStatic(method.getModifiers())) handle = handle.bindTo(object);
+                addToList(handle, method, annotatedMethods);
             }
-        } catch (RuntimeException | IllegalAccessException e) {
+
+            // Sort all collected methods by their order value
+            annotatedMethods.sort(Comparator.comparingInt(AnnotatedHandler::getOrder));
+
+            // Register handlers in sorted order
+            for (AnnotatedHandler handler : annotatedMethods) {
+                if (handler.getAnnotation() instanceof MessageHandler mh)
+                    addMessageHandler(mh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedMessageHandler emh)
+                    addEditedMessageHandler(emh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof CallbackHandler ch)
+                    addCallbackHandler(ch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChannelPostHandler cph)
+                    addChannelPostHandler(cph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedChannelPostHandler ecph)
+                    addEditedChannelPostHandler(ecph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof InlineHandler ih)
+                    addInlineHandler(ih, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PollHandler ph)
+                    addPollHandler(ph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PollAnswerHandler pah)
+                    addPollAnswerHandler(pah, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ReactionHandler rh)
+                    addReactionHandler(rh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ReactionCountHandler rch)
+                    addReactionCountHandler(rch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatJoinRequestHandler cjrh)
+                    addChatJoinRequestHandler(cjrh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PurchasedPaidMediaHandler ppmh)
+                    addPurchasedPaidMediaHandler(ppmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PreCheckoutHandler pch)
+                    addPreCheckoutHandler(pch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ShippingHandler sh)
+                    addShippingHandler(sh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatBoostHandler cbh)
+                    addChatBoostHandler(cbh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatMemberHandler cmh)
+                    addChatMemberHandler(cmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof MyChatMemberHandler mcmh)
+                    addMyChatMemberHandler(mcmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof RemovedChatBoostHandler rcbh)
+                    addRemovedChatBoostHandler(rcbh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof BusinessMessageHandler bmh)
+                    addBusinessMessageHandler(bmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof BusinessConnectionHandler bch)
+                    addBusinessConnectionHandler(bch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof DeletedBusinessMessageHandler dbmh)
+                    addDeletedBusinessMessageHandler(dbmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedBusinessMessageHandler ebmh)
+                    addEditedBusinessMessageHandler(ebmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChosenInlineHandler cih)
+                    addChosenInlineHandler(cih, handler.getMethodHandle());
+            }
+
+        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
+
     @SuppressWarnings("unchecked")
     private <T extends TelegramUpdate> void executeUpdate(
             Updates updateName,
@@ -742,26 +843,23 @@ final public class BotClient {
     ){
         List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
         if (execs != null) {
-            try {
-                for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec : execs) {
-                    for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry : exec.entrySet()) {
-                        FilterExecutor _filter = entry.getKey();
-                        UpdateHandler<T> handler = entry.getValue();
-                        if (_filter.execute(filter)) {
-                            executor.execute(() -> {
-                                try {
-                                    handler.invoke(context, (T) update);
-                                } catch (Throwable e) {
-                                    throw new RuntimeException(e);
-                                }
+            for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec : execs) {
+                for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry : exec.entrySet()) {
+                    FilterExecutor _filter = entry.getKey();
+                    UpdateHandler<T> handler = entry.getValue();
+                    if (_filter.execute(filter)) {
+                        executor.execute(() -> {
+                            try {
+                                handler.invoke(context, (T) update);
+                            } catch (Throwable e) {
+                                throw new RuntimeException(e);
+                            } finally {
                                 BotLog.info("Task executed");
-                            });
-                            return;
-                        }
+                            }
+                        });
+                        return;
                     }
                 }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
             }
         }
     }
@@ -777,34 +875,6 @@ final public class BotClient {
         if (!isConnected)
             throw new TelegramError("The bot hasn't started yet");
         return bot;
-    }
-
-    private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
-
-    static {
-        updateMap.put(u -> u.message, Updates.MESSAGE);
-        updateMap.put(u -> u.callback_query, Updates.CALLBACK_QUERY);
-        updateMap.put(u -> u.inline_query, Updates.INLINE_QUERY);
-        updateMap.put(u -> u.channel_post, Updates.CHANNEL_POST);
-        updateMap.put(u -> u.my_chat_member, Updates.MY_CHAT_MEMBER);
-        updateMap.put(u -> u.edited_message, Updates.EDITED_MESSAGE);
-        updateMap.put(u -> u.edited_channel_post, Updates.EDITED_CHANNEL_POST);
-        updateMap.put(u -> u.poll, Updates.POLL);
-        updateMap.put(u -> u.chat_member, Updates.CHAT_MEMBER);
-        updateMap.put(u -> u.message_reaction, Updates.MESSAGE_REACTION);
-        updateMap.put(u -> u.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
-        updateMap.put(u -> u.chat_boost, Updates.CHAT_BOOST);
-        updateMap.put(u -> u.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
-        updateMap.put(u -> u.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
-        updateMap.put(u -> u.shipping_query, Updates.SHIPPING_QUERY);
-        updateMap.put(u -> u.chat_join_request, Updates.CHAT_JOIN_REQUEST);
-        updateMap.put(u -> u.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
-        updateMap.put(u -> u.poll_answer, Updates.POLL_ANSWER);
-        updateMap.put(u -> u.business_connection, Updates.BUSINESS_CONNECTION);
-        updateMap.put(u -> u.business_message, Updates.BUSINESS_MESSAGE);
-        updateMap.put(u -> u.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
-        updateMap.put(u -> u.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
-        updateMap.put(u -> u.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
     }
 
     private UpdateInfo getInfoFromUpdate(Update update) {
