@@ -73,4 +73,16 @@ public class MessageHandlerTest {
                 .exec();
     }
 
+    @MessageHandler(commands = "state")
+    void state(BotContext context, Message message){
+        context.sendMessage(message.chat.id, "What is your name?").exec();
+        context.setState(message.chat.id, "name");
+    }
+
+    @MessageHandler(type = MessageType.TEXT, state = "name")
+    void getName(BotContext context, Message message){
+        context.sendMessage(message.chat.id, "Your name is " + message.text).exec();
+        context.clearState(message.chat.id);
+    }
+
 }
