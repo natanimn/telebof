@@ -15,7 +15,7 @@ import java.util.Objects;
  * This object contains full information about a chat.
  * @author Natanim 
  * @since 3 March 2025
- * @version 1.0.0
+ * @version 1.2.0
  */
 public class ChatFullInfo extends Chat{
     /**
@@ -213,6 +213,17 @@ public class ChatFullInfo extends Chat{
      */
     public AcceptedGiftTypes accepted_gift_types;
 
+    /**
+     * Optional. True, if the chat is the direct messages chat of a channel
+     */
+    public Boolean is_direct_messages;
+
+    /**
+     * Optional. Information about the corresponding channel chat; for direct messages chats only
+     */
+    public Boolean parent_chat;
+
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -260,7 +271,8 @@ public class ChatFullInfo extends Chat{
                 Objects.equals(personal_chat, that.personal_chat) &&
                 Objects.equals(birthdate, that.birthdate) &&
                 Objects.equals(can_send_paid_media, that.can_send_paid_media) &&
-                Objects.equals(accepted_gift_types, that.accepted_gift_types);
+                Objects.equals(accepted_gift_types, that.accepted_gift_types) &&
+                Objects.equals(parent_chat, that.parent_chat);
     }
 
     @Override
@@ -273,7 +285,7 @@ public class ChatFullInfo extends Chat{
                 emoji_status_expiration_date, available_reactions, has_visible_history, accent_color_id,
                 max_reaction_count, background_custom_emoji_id, profile_accent_color_id, profile_background_custom_emoji_id,
                 unrestrict_boost_count, custom_emoji_sticker_set_name, business_intro, business_location,
-                business_opening_hours, personal_chat, birthdate, can_send_paid_media, accepted_gift_types);
+                business_opening_hours, personal_chat, birthdate, can_send_paid_media, accepted_gift_types, parent_chat);
     }
 
     @Override
@@ -324,6 +336,7 @@ public class ChatFullInfo extends Chat{
                 ", birthdate=" + birthdate +
                 ", can_send_paid_media=" + can_send_paid_media +
                 ", accepted_gift_types=" + accepted_gift_types +
+                ", parent_chat=" + parent_chat +
                 '}';
     }
 }
