@@ -1,6 +1,7 @@
-package io.github.natanimn.telebof.types.media_and_service;
+package io.github.natanimn.telebof.types;
 
 import io.github.natanimn.telebof.enums.BackgroundTypeType;
+import io.github.natanimn.telebof.types.media_and_service.Document;
 
 /**
  * This object describes the type of a background.

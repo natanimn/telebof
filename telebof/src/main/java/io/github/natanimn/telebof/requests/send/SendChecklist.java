@@ -6,7 +6,7 @@ import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.input.InputChecklist;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.keyboard.ReplyParameters;
+import io.github.natanimn.telebof.types.ReplyParameters;
 
 /**
  * SendChecklist class. Returns {@link Message} on success.

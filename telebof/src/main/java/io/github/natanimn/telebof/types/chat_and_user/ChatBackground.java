@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
-import io.github.natanimn.telebof.types.media_and_service.BackgroundType;
+import io.github.natanimn.telebof.types.BackgroundType;
 
 import java.util.Objects;
 

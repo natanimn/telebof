@@ -1,9 +1,10 @@
 package io.github.natanimn.telebof.enums;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.BackgroundType;
 
 /**
- * Describes of {@link io.github.natanimn.telebof.types.media_and_service.BackgroundType#type}
+ * Describes of {@link BackgroundType#type}
  * @author Natanim
  * @since 12 August 2025
  * @version 0.9

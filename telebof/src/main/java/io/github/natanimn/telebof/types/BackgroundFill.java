@@ -1,4 +1,4 @@
-package io.github.natanimn.telebof.types.media_and_service;
+package io.github.natanimn.telebof.types;
 
 import io.github.natanimn.telebof.enums.BackgroundFillType;
 

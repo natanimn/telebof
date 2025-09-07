@@ -9,7 +9,7 @@ import io.github.natanimn.telebof.types.input.InputPollOption;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
-import io.github.natanimn.telebof.types.keyboard.ReplyParameters;
+import io.github.natanimn.telebof.types.ReplyParameters;
 import java.util.List;
 
 /**
