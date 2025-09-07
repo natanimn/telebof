@@ -1,12 +1,13 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
+import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.media_and_service.Sticker;
 
 /**
  * This class represents a gift that can be sent by the bot.
  * @author Natnim
  * @since July 25, 2025
- * @version 0.8
+ * @version 1.2.0
  */
 
 public class Gift {
@@ -28,4 +29,8 @@ public class Gift {
     /* The number of remaining gifts of this type that can be sent; for limited gifts only */
     public Integer remaining_count;
 
+    /**
+     * Optional. Information about the chat that published the gift
+     */
+    public Chat publisher_chat;
 }
