@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.requests.Api;
  * PromoteChatMember class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.0
  * @see BotContext#promoteChatMember
  */
 public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Boolean> {
@@ -162,4 +162,12 @@ public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Bo
         return add("can_delete_stories", can_delete_stories);
     }
 
+    /**
+     * Optional
+     * @param can_manage_direct_messages Pass True if the administrator can manage direct messages within the channel and decline suggested posts; for channels only
+     * @return {@link PromoteChatMember}
+     */
+    public PromoteChatMember canManageDirectMessages(boolean can_manage_direct_messages){
+        return add("can_manage_direct_messages", can_manage_direct_messages);
+    }
 }
