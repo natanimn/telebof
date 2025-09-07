@@ -3,6 +3,7 @@ package io.github.natanimn.telebof.requests.service;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.types.suggested.SuggestedPostParameters;
 import io.github.natanimn.telebof.types.updates.Message;
 
 /**
@@ -64,5 +65,23 @@ public class ForwardMessage extends AbstractBaseRequest<ForwardMessage, Message>
         return add("video_start_timestamp", video_start_timestamp);
     }
 
+    /***
+     * Optional
+     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @return {@link ForwardMessage}
+     */
+    public ForwardMessage directMessagesTopicId(int direct_messages_topic_id){
+        return add("direct_messages_topic_id", direct_messages_topic_id);
+    }
+
+    /**
+     * Optional
+     * @param suggested_post_parameters A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only.
+     *                                  If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
+     * @return {@link ForwardMessage}
+     */
+    public ForwardMessage suggestedPostParameters(SuggestedPostParameters suggested_post_parameters){
+        return add("suggested_post_parameters", suggested_post_parameters);
+    }
 }
 
