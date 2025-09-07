@@ -15,38 +15,66 @@ This bot demonstrates how to:<br>
 
 We will use two types of handlers:<br>
 
-* `onMessage` for handling the `/start` command and displaying the inline keyboard
-* `onCallback` for handling user interactions with the inline buttons
+* `onMessage` or `@MessageHandler` for handling the `/start` command and displaying the inline keyboard
+* `onCallback` or `@CallbackHandler` for handling user interactions with the inline buttons
 
 ---
 
 **Import necessary classes**
 
-```java
-package io.github.natanimn;
+=== "Method"
+      ```java 
+      package io.github.natanimn;
+      
+      import io.github.natanimn.telebof.BotClient;
+      import io.github.natanimn.telebof.enums.ParseMode;
+      import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
+      import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
+      ```
 
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
-import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
-```
-
+=== "Annotation"
+      ```java
+      package io.github.natanimn;
+      
+      import io.github.natanimn.telebof.BotClient;
+      import io.github.natanimn.telebof.BotContext;
+      import io.github.natanimn.telebof.enums.ParseMode;
+      import io.github.natanimn.telebof.types.annotations.MessageHandler;
+      import io.github.natanimn.telebof.types.annotations.CallbackHandler;
+      import io.github.natanimn.telebof.types.keyboard.InlineKeyboardButton;
+      import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
+      ```
 ---
 
 **Create `InlineKeyboardBot` class and initialize `BotClient`**
 
-```java
-public class InlineKeyboardBot {
-    public static void main(String[] args){
-        final var TOKEN = System.getenv("TOKEN"); // Get bot token from environment variable
-        final var bot = new BotClient(TOKEN); // Initialize bot client
-        
-        // Add handlers here
-        
-        bot.startPolling(); // Start the bot
-    }
-}
-```
+=== "Method"
+      ```java
+      public class InlineKeyboardBot {
+          public static void main(String[] args){
+              final var TOKEN = System.getenv("TOKEN"); // Get bot token from environment variable
+              final var bot = new BotClient(TOKEN); // Initialize bot client
+              
+              // Add handlers here
+              
+              bot.startPolling(); // Start the bot
+          }
+       }
+      ```
+
+=== "Annotation"
+      ```java
+      public class InlineKeyboardBot {
+          public static void main(String[] args){
+              final var TOKEN = System.getenv("TOKEN"); // Get bot token from environment variable
+              final var bot = new BotClient(TOKEN); // Initialize bot client
+              
+              bot.addHandler(new InlineKeyboardBot());
+              
+              bot.startPolling(); // Start the bot
+          }
+      }
+      ```
 
 ---
 
@@ -54,23 +82,42 @@ public class InlineKeyboardBot {
 
 **Add `/start` handler that creates and displays an inline keyboard**
 
-```java
-bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-    // Create an inline keyboard markup
-    var keyboard = new InlineKeyboardMarkup();
-    
-    // Add buttons with emojis and callback data
-    keyboard.addKeyboard(new InlineKeyboardButton("🟩 Green", "color-green"));
-    keyboard.addKeyboard(new InlineKeyboardButton("🟨 Yellow", "color-yellow"));
-    keyboard.addKeyboard(new InlineKeyboardButton("🟥 Red", "color-red"));
+=== "Method"
+      ```java
+      bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+          // Create an inline keyboard markup
+          var keyboard = new InlineKeyboardMarkup();
+          
+          // Add buttons with emojis and callback data
+          keyboard.addKeyboard(new InlineKeyboardButton("🟩 Green", "color-green"));
+          keyboard.addKeyboard(new InlineKeyboardButton("🟨 Yellow", "color-yellow"));
+          keyboard.addKeyboard(new InlineKeyboardButton("🟥 Red", "color-red"));
+      
+          // Send message with inline keyboard attached
+          context.sendMessage(message.chat.id, "Press one of the following inline buttons: ")
+                  .replyMarkup(keyboard) // Attach the inline keyboard to the message
+                  .exec();
+      });
+      ```
 
-    // Send message with inline keyboard attached
-    context.sendMessage(message.chat.id, "Press one of the following inline buttons: ")
-            .replyMarkup(keyboard) // Attach the inline keyboard to the message
-            .exec();
-});
-```
-
+=== "Annotation"
+      ```java
+       @MessageHandler(commands = "start")
+       void start(BotContext context, Message message)  {
+           // Create an inline keyboard markup
+           var keyboard = new InlineKeyboardMarkup();
+   
+           // Add buttons with emojis and callback data
+           keyboard.addKeyboard(new InlineKeyboardButton("🟩 Green", "color-green"));
+           keyboard.addKeyboard(new InlineKeyboardButton("🟨 Yellow", "color-yellow"));
+           keyboard.addKeyboard(new InlineKeyboardButton("🟥 Red", "color-red"));
+   
+           // Send message with inline keyboard attached
+           context.sendMessage(message.chat.id, "Press one of the following inline buttons: ")
+                   .replyMarkup(keyboard) // Attach the inline keyboard to the message
+                   .exec();
+       }
+      ```
 **Explanation:**<br>
 
 - `InlineKeyboardMarkup()` creates an inline keyboard that appears below the message content
@@ -98,32 +145,61 @@ The user sees a message with three colorful buttons below it that they can inter
 
 **Add handler to process inline button presses**
 
-```java
-bot.onCallback(filter -> filter.regex("color-"), (context, callback) -> {
-    // Immediately acknowledge the callback query
-    // This removes the loading indicator from the button
-    context.answerCallbackQuery(callback.id).exec();
+=== "Method"
+      ```java
+      bot.onCallback(filter -> filter.regex("color-"), (context, callback) -> {
+          // Immediately acknowledge the callback query
+          // This removes the loading indicator from the button
+          context.answerCallbackQuery(callback.id).exec();
+      
+          // Extract the color name from the callback data
+          // Example: "color-green" → "green"
+          var color = callback.data.split("-")[1];
+      
+          // Create an appropriate response message based on the button pressed
+          String response = switch (color) {
+              case "green" -> "You have pressed <b>Green</b> button!";
+              case "yellow" -> "You have pressed <b>Yellow</b> button!";
+              case "red" -> "You have pressed <b>Red</b> button";
+              default -> "You have pressed <b>Unknown</b> button";
+          };
+      
+          // Edit the original message to show which button was pressed
+          context.editMessageText(response, callback.message.chat.id, callback.message.message_id)
+                  .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
+                  .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
+                  .exec();
+      });
+      ```
 
-    // Extract the color name from the callback data
-    // Example: "color-green" → "green"
-    var color = callback.data.split("-")[1];
-
-    // Create an appropriate response message based on the button pressed
-    String response = switch (color) {
-        case "green" -> "You have pressed <b>Green</b> button!";
-        case "yellow" -> "You have pressed <b>Yellow</b> button!";
-        case "red" -> "You have pressed <b>Red</b> button";
-        default -> "You have pressed <b>Unknown</b> button";
-    };
-
-    // Edit the original message to show which button was pressed
-    context.editMessageText(response, callback.message.chat.id, callback.message.message_id)
-            .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
-            .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
-            .exec();
-});
-```
-
+=== "Annotation"
+      ```java
+      @CallbackHandler(regex = "color-")
+      void button(BotContext context, Message message){
+         // Immediately acknowledge the callback query
+         // This removes the loading indicator from the button
+         context.answerCallbackQuery(callback.id).exec();
+      
+         // Extract the color name from the callback data
+         // Example: "color-green" → "green"
+         var color = callback.data.split("-")[1];
+      
+         // Create an appropriate response message based on the button pressed
+         String response = switch (color) {
+            case "green" -> "You have pressed <b>Green</b> button!";
+            case "yellow" -> "You have pressed <b>Yellow</b> button!";
+            case "red" -> "You have pressed <b>Red</b> button";
+            default -> "You have pressed <b>Unknown</b> button";
+         };
+      
+         // Edit the original message to show which button was pressed
+         context.editMessageText(response, callback.message.chat.id, callback.message.message_id)
+                 .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
+                 .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
+                 .exec();
+      }
+      ```
+      
 **Explanation:**
 
 

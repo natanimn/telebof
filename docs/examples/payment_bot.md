@@ -6,37 +6,65 @@ In this example section, we will create a bot that demonstrates Telegram's Stars
 
 We will use two different types of handlers:
 
-*   `onMessage` for handling commands (`/start`, `/pay`) and successful payment updates.
-*   `onPreCheckout` for handling Precheckout queries (authorizing payments to proceed).
+*   `onMessage` or `@MessageHandler` for handling commands (`/start`, `/pay`) and successful payment updates.
+*   `onPreCheckout` or `@PreCheckoutHandler` for handling Precheckout queries (authorizing payments to proceed).
 
 ---
 
 **Import necessary classes**
 
-```java
-package io.github.natanimn;
+=== "Method"
+    ```java
+    package io.github.natanimn;
 
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.types.payments.LabeledPrice;
-import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.updates.PreCheckoutQuery;
-```
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.types.payments.LabeledPrice;
+    import io.github.natanimn.telebof.types.updates.Message;
+    import io.github.natanimn.telebof.types.updates.PreCheckoutQuery;
+    ```
+
+=== "Annotation"
+    ```java
+    package io.github.natanimn;
+
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.enums.MessageType;
+    import io.github.natanimn.telebof.types.payments.LabeledPrice;
+    import io.github.natanimn.telebof.types.updates.Message;
+    import io.github.natanimn.telebof.types.updates.PreCheckoutQuery;
+    import io.github.natanimn.telebof.annotations.MessageHandler;
+    import io.github.natanimn.telebof.annotations.PreCheckoutHandler;
+    ```
 
 ---
 
 **Let us create the `PaymentExampleBot` class and initialize the `BotClient` with a `token` from an environment variable**
 
-```java
-public class PaymentExampleBot {
-    static String TOKEN = System.getenv("TOKEN");
-    public static void main(String[] args){
-        BotClient bot = new BotClient(TOKEN);
-        ...
+=== "Method"
+    ```java
+    public class PaymentExampleBot {
+        static String TOKEN = System.getenv("TOKEN");
+        public static void main(String[] args){
+            BotClient bot = new BotClient(TOKEN);
+            // Add handlers here
+        }
     }
-}
-```
+    ```
+=== "Annotation"
+    ```java
+    public class PaymentExampleBot {
+        static String TOKEN = System.getenv("TOKEN");
+            public static void main(String[] args){
+                BotClient bot = new BotClient(TOKEN);
+                bot.addHandler(new PaymentExampleBot());
+                bot.startPolling();
+            }
+        }
+    ```
 
 Our bot will be handling the following events:
 
@@ -51,24 +79,36 @@ Our bot will be handling the following events:
 
 When the user types `/start`, the bot responds with a welcome message explaining its purpose.
 
-```java
-static void start(BotContext context, Message message){
-    var user = message.from;
-    context.sendMessage(message.chat.id, String.format(
-            "<b>Hello %s!</b>,\n\nI am payment example bot.\n<i>Send /pay to try it out.</i>", user.mention()
-            ))
-            .parseMode(ParseMode.HTML)
-            .exec();
-}
-```
-
-**Add the handler inside the main method**
-```java
-bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
-```
+=== "Method"
+    ```java
+    static void start(BotContext context, Message message){
+        var user = message.from;
+        context.sendMessage(message.chat.id, String.format(
+        "<b>Hello %s!</b>,\n\nI am payment example bot.\n<i>Send /pay to try it out.</i>", user.mention()
+        ))
+        .parseMode(ParseMode.HTML)
+        .exec();
+    }
+    ```
+            
+    ```java        
+    // Add in main method:
+    bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
+    ```
+=== "Annotation"
+    ```java
+    @MessageHandler(commands = "start")
+    void start(BotContext context, Message message){
+        var user = message.from;
+        context.sendMessage(message.chat.id, String.format(
+                "<b>Hello %s!</b>,\n\nI am payment example bot.\n<i>Send /pay to try it out.</i>", user.mention()
+        ))
+         .parseMode(ParseMode.HTML)
+         .exec();
+    }
+    ```
 
 <img src="https://natanimn.github.io/telebof/img/p1.png">
-
 
 ---
 
@@ -76,35 +116,63 @@ bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
 
 When the user types `/pay`, the bot sends an invoice for 10 Telegram Stars.
 
-```java
-static void pay(BotContext context, Message message){
-    // Create a price object for 10 Telegram Stars
-    LabeledPrice price = new LabeledPrice("Pay 10 star", 10);
+=== "Method"
+    ```java
+    static void pay(BotContext context, Message message){
+        // Create a price object for 10 Telegram Stars
+        LabeledPrice price = new LabeledPrice("Pay 10 star", 10);
 
-    /**
-     * Send an invoice with the following parameters:
-     * - chatId: The chat to send the invoice to
-     * - title: The title of the invoice
-     * - description: A description of what the user is paying for
-     * - payload: A unique identifier for this transaction (used for validation)
-     * - currency: "XTR" is the currency code for Telegram Stars
-     * - prices: An array of LabeledPrice objects defining the cost
-     */
-    context.sendInvoice(
-            message.chat.id,
-            "Payment test",
-            "Pay 10 start for telebof payment test bot",
-            "pay-10", // In a real application, this should be a unique value per transaction
-            "XTR",
-            new LabeledPrice[]{price}
-    ).exec();
-}
-```
+        /**
+         * Send an invoice with the following parameters:
+         * - chatId: The chat to send the invoice to
+         * - title: The title of the invoice
+         * - description: A description of what the user is paying for
+         * - payload: A unique identifier for this transaction (used for validation)
+         * - currency: "XTR" is the currency code for Telegram Stars
+         * - prices: An array of LabeledPrice objects defining the cost
+         */
+        context.sendInvoice(
+                message.chat.id,
+                "Payment test",
+                "Pay 10 start for telebof payment test bot",
+                "pay-10", // In a real application, this should be a unique value per transaction
+                "XTR",
+                new LabeledPrice[]{price}
+        ).exec();
+    }
+    ```
+    
+    ```java
+    // Add in main method:
+    bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
+    ```
 
-**Add the handler inside the main method**
-```java
-bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
-```
+=== "Annotation"
+    ```java
+    @MessageHandler(commands = "pay")
+    void pay(BotContext context, Message message){
+        // Create a price object for 10 Telegram Stars
+        LabeledPrice price = new LabeledPrice("Pay 10 star", 10);
+
+        /**
+         * Send an invoice with the following parameters:
+         * - chatId: The chat to send the invoice to
+         * - title: The title of the invoice
+         * - description: A description of what the user is paying for
+         * - payload: A unique identifier for this transaction (used for validation)
+         * - currency: "XTR" is the currency code for Telegram Stars
+         * - prices: An array of LabeledPrice objects defining the cost
+         */
+        context.sendInvoice(
+                message.chat.id,
+                "Payment test",
+                "Pay 10 start for telebof payment test bot",
+                "pay-10", // In a real application, this should be a unique value per transaction
+                "XTR",
+                new LabeledPrice[]{price}
+        ).exec();
+    }
+    ```
 
 <img src="https://natanimn.github.io/telebof/img/p2.png">
 
@@ -116,31 +184,41 @@ After the user confirms payment in the invoice, Telegram sends a **precheckout q
 
 *This is a crucial step where you would typically:*
 
-
-1.  Validate the payment details (e.g., check item prices, ensure the `payload` is valid).
-2.  Check if the items are still in stock.
-3.  Based on this check, confirm or deny the payment.
+1. Validate the payment details (e.g., check item prices, ensure the `payload` is valid).
+2. Check if the items are still in stock.
+3. Based on this check, confirm or deny the payment.
 
 *For this example, we automatically confirm all queries.*
 
-```java
-static void processPrecheckOut(BotContext context, PreCheckoutQuery query){
-    // Always confirm the checkout for this demo.
-    // In a real application, add your validation logic here and answer false if it fails.
-    context.answerPreCheckoutQuery(query.id, true).exec();
-}
-```
-**Explanation:**
+=== "Method"
+    ```java
+    static void processPrecheckOut(BotContext context, PreCheckoutQuery query){
+        // Always confirm the checkout for this demo.
+        // In a real application, add your validation logic here and answer false if it fails.
+        context.answerPreCheckoutQuery(query.id, true).exec();
+    }
+    ```
 
+    ```java    
+    // Add in main method:
+    bot.onPreCheckout(filter -> true, PaymentExampleBot::processPrecheckOut);
+    ```
+
+=== "Annotation"
+    ```java
+    @PreCheckoutHandler
+    void processPrecheckOut(BotContext context, PreCheckoutQuery query){
+        // Always confirm the checkout for this demo.
+        // In a real application, add your validation logic here and answer false if it fails.
+        context.answerPreCheckoutQuery(query.id, true).exec();
+    }
+    ```
+
+**Explanation:**
 
 - The `PreCheckoutQuery` object contains all details about the impending payment.
 - Calling `answerPreCheckoutQuery` with `true` tells Telegram the payment is authorized to be completed by the user.
 - Calling it with `false` and an optional error message would decline the payment and inform the user.
-
-**Add the handler inside the main method**
-```java
-bot.onPreCheckout(filter -> true, PaymentExampleBot::processPrecheckOut);
-```
 
 ---
 
@@ -157,29 +235,51 @@ Once the Precheckout query is answered successfully and the user completes the p
 
 *For this **demonstration**, we immediately refund the payment.*
 
-```java
-static void acceptPayment(BotContext context, Message message){
-    // Extract the payment details from the message
-    var payment = message.successful_payment;
+=== "Method"
+    ```java
+    static void acceptPayment(BotContext context, Message message){
+        // Extract the payment details from the message
+        var payment = message.successful_payment;
 
-    // REFUND THE PAYMENT (DEMONSTRATION ONLY)
-    // This showcases the refundStars method.
-    // In a real application, you would NOT do this; you would deliver the product instead.
-    context.refundStarPayment(message.from.id, payment.telegram_payment_charge_id).exec();
+        // REFUND THE PAYMENT (DEMONSTRATION ONLY)
+        // This showcases the refundStars method.
+        // In a real application, you would NOT do this; you would deliver the product instead.
+        context.refundStarPayment(message.from.id, payment.telegram_payment_charge_id).exec();
 
-    // Inform the user that their payment was received and immediately refunded
-    context.sendMessage(message.chat.id,
-            "<b>Yay, your money is refunded.</b>\n\n" +
-            "<i>Thanks for your generous donation</i>"
-    ).parseMode(ParseMode.HTML).exec();
-}
-```
+        // Inform the user that their payment was received and immediately refunded
+        context.sendMessage(message.chat.id,
+                "<b>Yay, your money is refunded.</b>\n\n" +
+                "<i>Thanks for your generous donation</i>"
+        ).parseMode(ParseMode.HTML).exec();
+    }
+    ```    
+
+    ```java
+    // Add in main method:
+    bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPayment);
+    ```
+
+=== "Annotation"
+    ```java
+    @MessageHandler(type = MessageType.SUCCESSFUL_PAYMENT)
+    void acceptPayment(BotContext context, Message message){
+        // Extract the payment details from the message
+        var payment = message.successful_payment;
+
+        // REFUND THE PAYMENT (DEMONSTRATION ONLY)
+        // This showcases the refundStars method.
+        // In a real application, you would NOT do this; you would deliver the product instead.
+        context.refundStarPayment(message.from.id, payment.telegram_payment_charge_id).exec();
+
+        // Inform the user that their payment was received and immediately refunded
+        context.sendMessage(message.chat.id,
+                "<b>Yay, your money is refunded.</b>\n\n" +
+                "<i>Thanks for your generous donation</i>"
+        ).parseMode(ParseMode.HTML).exec();
+    }
+    ```
+
 > **Important Note:** The `refundStarPayment` call is for **demonstration purposes only**. A real bot would not charge users and then instantly refund them. This method is useful for handling legitimate refund requests or errors.
-
-**Add the handler inside the main method**
-```java
-bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPayment);
-```
 
 ---
 
@@ -187,23 +287,49 @@ bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPay
 
 All handlers are registered in the `main` method, and the bot is started using Long Polling.
 
-```java
-public static void main(String[] args){
+=== "Method"
+    ```java
+    public static void main(String[] args){
     // Initialize the bot client with the token from an environment variable
-    final var bot = new BotClient(TOKEN);
+        final var bot = new BotClient(TOKEN);
 
-    // Register command handlers
-    bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
-    bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
+        // Register command handlers
+        bot.onMessage(filter -> filter.commands("start"), PaymentExampleBot::start);
+        bot.onMessage(filter -> filter.commands("pay"), PaymentExampleBot::pay);
 
-    // Register payment handlers
-    bot.onPreCheckout(filter -> true, PaymentExampleBot::processPrecheckOut);
-    bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPayment);
+        // Register payment handlers
+        bot.onPreCheckout(filter -> true, PaymentExampleBot::processPrecheckOut);
+        bot.onMessage(filter -> filter.successfulPayment(), PaymentExampleBot::acceptPayment);
 
-    // Start the bot
-    bot.startPolling();
-}
-```
+        // Start the bot
+        bot.startPolling();
+    }
+    ```
+
+=== "Annotation"
+    ```java
+    public class PaymentExampleBot {
+        static String TOKEN = System.getenv("TOKEN");
+
+        public static void main(String[] args){
+            BotClient bot = new BotClient(TOKEN);
+            bot.addHandler(new PaymentExampleBot());
+            bot.startPolling();
+        }
+        
+        @MessageHandler(commands = "start")
+        void start(BotContext context, Message message){ /* ... */ }
+        
+        @MessageHandler(commands = "pay")
+        void pay(BotContext context, Message message){ /* ... */ }
+        
+        @PreCheckoutHandler
+        void processPrecheckOut(BotContext context, PreCheckoutQuery query){ /* ... */ }
+        
+        @MessageHandler(type = MessageType.SUCCESSFUL_PAYMENT)
+        void acceptPayment(BotContext context, Message message){ /* ... */ }
+    }
+    ```
 
 <img src="https://natanimn.github.io/telebof/img/p3.png">
 

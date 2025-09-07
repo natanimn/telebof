@@ -6,13 +6,25 @@ In this example, we will create a bot that uses a custom reply keyboard to inter
 
 **Import necessary classes**
 
-```java
-package io.github.natanimn;
-
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
-import io.github.natanimn.telebof.enums.ParseMode;
-```
+=== "Method"
+    ```java
+    package io.github.natanimn;
+    
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    ```
+=== "Annotation"
+    ```java
+    package io.github.natanimn;
+    
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.types.updates.Message;
+    import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.annotations.MesageHandler;
+    ```
 
 ---
 
@@ -44,20 +56,40 @@ Our bot will present a keyboard with three buttons and respond appropriately whe
 
 The `/start` command initializes the conversation and displays the custom keyboard to the user.
 
-```java
-bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-    // Create a reply keyboard with resize option for better mobile appearance
-    var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+=== "Method"
+    ```java
+    bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+        // Create a reply keyboard with resize option for better mobile appearance
+        var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+        
+        // Add buttons to the keyboard (in a single row by default)
+        keyboard.add("ID", "Username", "Language");
     
-    // Add buttons to the keyboard (in a single row by default)
-    keyboard.add("ID", "Username", "Language");
+        // Send welcome message with the keyboard attached
+        context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
+               .replyMarkup(keyboard) // Attach the keyboard to the message
+               .exec();
+    });
+    ```
 
-    // Send welcome message with the keyboard attached
-    context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
-           .replyMarkup(keyboard) // Attach the keyboard to the message
-           .exec();
-});
-```
+=== "Annotation"
+    ```java
+    @MessageHandler(commands = "start")
+    void start(BotContext context, Message message){
+    
+        // Create a reply keyboard with resize option for better mobile appearance
+        var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+    
+        // Add buttons to the keyboard (in a single row by default)
+        keyboard.add("ID", "Username", "Language");
+    
+        // Send welcome message with the keyboard attached
+        context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
+                .replyMarkup(keyboard) // Attach the keyboard to the message
+                .exec();
+    }
+    ```
+
 
 **Explanation:**
 
@@ -86,107 +118,224 @@ bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
 
 When a user presses any of the custom keyboard buttons, Telegram sends the button text as a regular message. We use the `filter.texts()` method to capture these specific messages.
 
-```java
-bot.onMessage(filter -> filter.texts("ID", "Username", "Language"), (context, message) -> {
-    var user = message.from;
-    String response;
+=== "Method"
+    ```java
+    bot.onMessage(filter -> filter.texts("ID", "Username", "Language"), (context, message) -> {
+        var user = message.from;
+        String response;
+    
+        switch (message.text) {
+            case "ID":
+                response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
+                break;
+                
+            case "Username":
+                if (user.username == null) {
+                    response = "<i>You don't have a username set in your Telegram profile.</i>";
+                } else {
+                    response = String.format("<b>Your username is:</b> @%s", user.username);
+                }
+                break;
+                
+            case "Language":
+                String language = (user.language_code != null) ? user.language_code : "not specified";
+                response = String.format("<b>Your language code is:</b> %s", language);
+                break;
+                
+            default:
+                response = "Unknown option selected.";
+        }
+    
+        context.sendMessage(message.chat.id, response)
+               .parseMode(ParseMode.HTML)
+               .exec();
+    });
+    ```
 
-    switch (message.text) {
-        case "ID":
-            response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
-            break;
-            
-        case "Username":
-            if (user.username == null) {
-                response = "<i>You don't have a username set in your Telegram profile.</i>";
-            } else {
-                response = String.format("<b>Your username is:</b> @%s", user.username);
-            }
-            break;
-            
-        case "Language":
-            String language = (user.language_code != null) ? user.language_code : "not specified";
-            response = String.format("<b>Your language code is:</b> %s", language);
-            break;
-            
-        default:
-            response = "Unknown option selected.";
-    }
+    **Explanation:**
+    
+    - `filter.texts("ID", "Username", "Language")` captures messages that exactly match these button texts. 
+    - We use a switch statement for cleaner control flow when handling multiple button options.
+    - The response is formatted using HTML for better presentation (bold text, code formatting for ID).
+    - We handle edge cases like missing username or language code gracefully.
 
-    context.sendMessage(message.chat.id, response)
-           .parseMode(ParseMode.HTML)
-           .exec();
-});
-```
-
-**Explanation:**
-
-- `filter.texts("ID", "Username", "Language")` captures messages that exactly match these button texts.
-- We use a switch statement for cleaner control flow when handling multiple button options.
-- The response is formatted using HTML for better presentation (bold text, code formatting for ID).
-- We handle edge cases like missing username or language code gracefully.
-
+=== "Annotation"
+    ```java
+    @MessageHandler(texts = {"ID", "Username", "Language"})
+    void text(BotContext context, Message message){
+        var user = message.from;
+        String response;
+    
+        switch (message.text) {
+            case "ID":
+                response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
+                break;
+    
+            case "Username":
+                if (user.username == null) {
+                    response = "<i>You don't have a username set in your Telegram profile.</i>";
+                } else {
+                    response = String.format("<b>Your username is:</b> @%s", user.username);
+                }
+                break;
+    
+            case "Language":
+                String language = (user.language_code != null) ? user.language_code : "not specified";
+                response = String.format("<b>Your language code is:</b> %s", language);
+                break;
+    
+            default:
+                response = "Unknown option selected.";
+        }
+    
+        context.sendMessage(message.chat.id, response)
+                .parseMode(ParseMode.HTML)
+                .exec();
+        }
+    ```
+    **Explanation:**
+    
+    - `texts = {"ID", "Username", "Language"}` captures messages that exactly match these button texts. 
+    - We use a switch statement for cleaner control flow when handling multiple button options.
+    - The response is formatted using HTML for better presentation (bold text, code formatting for ID).
+    - We handle edge cases like missing username or language code gracefully.
+    
+    **Finally, add the class**
+    ```java
+    bot.addHandler(new KeyboardBot());
 ---
 
 **Final Complete Code**
 
-```java
-package io.github.natanimn;
+=== "Method"
+    ```java
+    package io.github.natanimn;
+    
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    
+    public class KeyboardBot {
+        public static void main(String[] args) {
+            final String TOKEN = "BOT_TOKEN"; // Replace with your actual bot token
+            var bot = new BotClient(TOKEN);
+    
+            // Handle /start command with keyboard
+            bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+                var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+                keyboard.add("ID", "Username", "Language");
+    
+                context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
+                       .replyMarkup(keyboard)
+                       .exec();
+            });
+    
+            // Handle keyboard button presses
+            bot.onMessage(filter -> filter.texts("ID", "Username", "Language"), (context, message) -> {
+                var user = message.from;
+                String response;
+    
+                switch (message.text) {
+                    case "ID":
+                        response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
+                        break;
+                    case "Username":
+                        if (user.username == null) {
+                            response = "<i>You don't have a username set.</i>";
+                        } else {
+                            response = String.format("<b>Your username is:</b> @%s", user.username);
+                        }
+                        break;
+                    case "Language":
+                        String language = (user.language_code != null) ? user.language_code : "not specified";
+                        response = String.format("<b>Your language code is:</b> %s", language);
+                        break;
+                    default:
+                        response = "Unknown option.";
+                }
+    
+                context.sendMessage(message.chat.id, response)
+                       .parseMode(ParseMode.HTML)
+                       .exec();
+            });
+    
+            // Start the bot
+            bot.startPolling();
+        }
+    }
+    ```
 
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
-import io.github.natanimn.telebof.enums.ParseMode;
+=== "Annotation"
+    ```java
+    package io.github.natanimn;
 
-public class KeyboardBot {
-    public static void main(String[] args) {
-        final String TOKEN = "BOT_TOKEN"; // Replace with your actual bot token
-        var bot = new BotClient(TOKEN);
-
-        // Handle /start command with keyboard
-        bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.types.updates.Message;
+    import io.github.natanimn.telebof.types.keyboard.ReplyKeyboardMarkup;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.annotations.MesageHandler;
+    
+    public class KeyboardBot {
+        public static void main(String[] args) {
+            final String TOKEN = "BOT_TOKEN"; // Replace with your actual bot token
+            var bot = new BotClient(TOKEN);
+            
+            // Add the class    
+            bot.addHandler(this);
+            
+            // Start the bot
+            bot.startPolling();
+        }
+        
+        @MessageHandler(commands = "start")
+        void start(BotContext context, Message message){
+        
+            // Create a reply keyboard with resize option for better mobile appearance
             var keyboard = new ReplyKeyboardMarkup().resizeKeyboard(true);
+        
+            // Add buttons to the keyboard (in a single row by default)
             keyboard.add("ID", "Username", "Language");
-
+        
+            // Send welcome message with the keyboard attached
             context.sendMessage(message.chat.id, "Welcome! Please choose an option:")
-                   .replyMarkup(keyboard)
-                   .exec();
-        });
-
-        // Handle keyboard button presses
-        bot.onMessage(filter -> filter.texts("ID", "Username", "Language"), (context, message) -> {
+                    .replyMarkup(keyboard) // Attach the keyboard to the message
+                    .exec();
+        }
+        
+        @MessageHandler(texts = {"ID", "Username", "Language"})
+        void text(BotContext context, Message message){
             var user = message.from;
             String response;
-
+        
             switch (message.text) {
                 case "ID":
                     response = String.format("<b>Your ID is:</b> <code>%d</code>", user.id);
                     break;
+        
                 case "Username":
                     if (user.username == null) {
-                        response = "<i>You don't have a username set.</i>";
+                        response = "<i>You don't have a username set in your Telegram profile.</i>";
                     } else {
                         response = String.format("<b>Your username is:</b> @%s", user.username);
                     }
                     break;
+        
                 case "Language":
                     String language = (user.language_code != null) ? user.language_code : "not specified";
                     response = String.format("<b>Your language code is:</b> %s", language);
                     break;
+        
                 default:
-                    response = "Unknown option.";
+                    response = "Unknown option selected.";
             }
-
+        
             context.sendMessage(message.chat.id, response)
-                   .parseMode(ParseMode.HTML)
-                   .exec();
-        });
-
-        // Start the bot
-        bot.startPolling();
+                    .parseMode(ParseMode.HTML)
+                    .exec();
+        }
     }
-}
-```
-
+    ```
 ---
 
 **Summary**

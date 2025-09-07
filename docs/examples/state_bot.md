@@ -6,42 +6,69 @@ In this example section, we will create a bot that demonstrates Telegram's state
 
 We will use the following handlers:
 
-* `onMessage` with `filter.commands()` for command triggers
-* `onMessage` with `filter.state()` for state-specific message handling
+* `onMessage` with `filter.commands()` or `@MessageHandler` with `command` parameter for command triggers 
+* `onMessage` with `filter.state()` or `@MessageHandler` with `state` parameter for state-specific message handling
 
 ---
 
 **Import necessary classes**
 
-```java
-package io.github.natanimn;
+=== "Method"
+    ```java
+    package io.github.natanimn;
+    
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.types.updates.Message;
+    ```
 
-import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.types.updates.Message;
-```
+=== "Annotation"
+    ```java
+    package io.github.natanimn;
+    
+    import io.github.natanimn.telebof.BotClient;
+    import io.github.natanimn.telebof.BotContext;
+    import io.github.natanimn.telebof.enums.ParseMode;
+    import io.github.natanimn.telebof.enums.MessageType;
+    import io.github.natanimn.telebof.annotations.MessageHandler;
+    import io.github.natanimn.telebof.types.updates.Message;
+    ```
 
 ---
 
 **Create `StateExampleBot` class and initialize `BotClient` with state handlers**
 
-```java
-public class StateExampleBot {
-
-    BotClient bot;
+=== "Method"
+    ```java
+    public class StateExampleBot {
     
-    public StateExampleBot(String token){
-        bot = new BotClient(token);
+        BotClient bot;
         
-        // Register handlers for different states and commands
-        bot.onMessage(filter -> filter.commands("start"), this::start);
-        bot.onMessage(filter -> filter.commands("cancel") && filter.state("*"), this::cancel);
-        bot.onMessage(filter -> filter.state("name") && filter.text(), this::getName);
-        bot.onMessage(filter -> filter.state("age") && filter.text(), this::getAge);
+        public StateExampleBot(String token){
+            bot = new BotClient(token);
+            
+            // Register handlers for different states and commands
+            bot.onMessage(filter -> filter.commands("start"), this::start);
+            bot.onMessage(filter -> filter.commands("cancel") && filter.state("*"), this::cancel);
+            bot.onMessage(filter -> filter.state("name") && filter.text(), this::getName);
+            bot.onMessage(filter -> filter.state("age") && filter.text(), this::getAge);
+        }
     }
-}
-```
+    ```
+
+=== "Annotation"
+    ```java
+    public class StateExampleBot {
+    
+        BotClient bot;
+        
+        public StateExampleBot(String token){
+            bot = new BotClient(token);
+            bot.addHandler(this);
+        }
+    }
+    ``` 
 
 Our bot will manage the following conversation flow using states:
 
@@ -58,15 +85,28 @@ Our bot will manage the following conversation flow using states:
 
 The `/start` command begins the multi-step interaction by setting the initial state.
 
-```java
-private void start(BotContext ctx, Message message){
-    // Ask for the user's name
-    ctx.sendMessage(message.from.id, "Hey! What is your name?").exec();
+=== "Method"
+    ```java
+    private void start(BotContext ctx, Message message){
+        // Ask for the user's name
+        ctx.sendMessage(message.from.id, "Hey! What is your name?").exec();
+        
+        // Set the user's state to "name" to indicate we're expecting their name next
+        ctx.setState(message.from.id, "name");
+    }
+    ```
+
+=== "Annotation"
+    ```java
+    @MessageHandler(commands = "start")
+    private void start(BotContext ctx, Message message){
+        // Ask for the user's name
+        ctx.sendMessage(message.from.id, "Hey! What is your name?").exec();
     
-    // Set the user's state to "name" to indicate we're expecting their name next
-    ctx.setState(message.from.id, "name");
-}
-```
+        // Set the user's state to "name" to indicate we're expecting their name next
+        ctx.setState(message.from.id, "name");
+    }
+    ```
 
 **Explanation:**
 
@@ -79,62 +119,117 @@ private void start(BotContext ctx, Message message){
 
 This handler is triggered when a user in the `"name"` state sends any message.
 
-```java
-private void getName(BotContext ctx, Message message){
-    // Ask for the user's age
-    ctx.sendMessage(message.from.id, "How old are you?").exec();
+=== "Method"
+    ```java
+    private void getName(BotContext ctx, Message message){
+        // Ask for the user's age
+        ctx.sendMessage(message.from.id, "How old are you?").exec();
+        
+        // Transition to the "age" state
+        ctx.setState(message.from.id, "age");
+        
+        // Store the provided name in state data for later use
+        var data = ctx.getStateData(message.from.id);
+        data.put("name", message.text);
+    }
+    ```
+    **Key Concepts:**
+
+    - `filter.state("name")` ensures this handler only processes messages from users in the "name" state
+    - `filter.text()` ensures that user only enter `text`
+    - `getStateData(user_id)` retrieves a Map where we can store temporary conversation data
+    - `data.put("name", message.text)` saves the user's name for the final summary
+
+
+=== "Annotation"
+    ```java
+    @MessageHandler(type = MessageType.TEXT, state = "name")
+    private void getName(BotContext ctx, Message message){
+        // Ask for the user's age
+        ctx.sendMessage(message.from.id, "How old are you?").exec();
     
-    // Transition to the "age" state
-    ctx.setState(message.from.id, "age");
+        // Transition to the "age" state
+        ctx.setState(message.from.id, "age");
+        
+        // Store the provided name in state data for later use
+        var data = ctx.getStateData(message.from.id);
+        data.put("name", message.text);
+    }
+    ```
     
-    // Store the provided name in state data for later use
-    var data = ctx.getStateData(message.from.id);
-    data.put("name", message.text);
-}
-```
+    **Key Concepts:**
 
-**Key Concepts:**
-
-- `filter.state("name")` ensures this handler only processes messages from users in the "name" state
-- `filter.text()` ensures that user only enter `text`
-- `getStateData(user_id)` retrieves a Map where we can store temporary conversation data
-- `data.put("name", message.text)` saves the user's name for the final summary
-
+    - `state = "name"` ensures this handler only processes messages from users in the "name" state
+    - `type = MessageType.TEXT` ensures that user only enter `text`
+    - `getStateData(user_id)` retrieves a Map where we can store temporary conversation data
+    - `data.put("name", message.text)` saves the user's name for the final summary
 ---
 
 ### 3. Age Handler - Collecting and Processing Age
 
 This handler processes messages from users in the `"age"` state.
 
-```java
-private void getAge(BotContext ctx, Message message){
-    int age;
-    
-    // Validate that the input is a number
-    try {
-        age = Integer.parseInt(message.text);
-    } catch (NumberFormatException e) {
-        ctx.sendMessage(message.from.id, "Please enter a valid number").exec();
-        return; // Stay in the "age" state until valid input is provided
+=== "Method"
+    ```java
+    private void getAge(BotContext ctx, Message message){
+        int age;
+        
+        // Validate that the input is a number
+        try {
+            age = Integer.parseInt(message.text);
+        } catch (NumberFormatException e) {
+            ctx.sendMessage(message.from.id, "Please enter a valid number").exec();
+            return; // Stay in the "age" state until valid input is provided
+        }
+        
+        // Retrieve the stored name from state data
+        var data = ctx.getStateData(message.from.id);
+        
+        // Send confirmation message
+        ctx.sendMessage(message.from.id, "Thank you for the information you have provided.").exec();
+        
+        // Display the collected information
+        ctx.sendMessage(message.from.id, 
+                String.format("<b>Name:</b> %s\n<b>Age:</b> %d", data.get("name"), age))
+                .parseMode(ParseMode.HTML)
+                .exec();
+                
+        // The state is automatically cleared after the conversation completes
+        ctx.clearState(message.from.id);
     }
-    
-    // Retrieve the stored name from state data
-    var data = ctx.getStateData(message.from.id);
-    
-    // Send confirmation message
-    ctx.sendMessage(message.from.id, "Thank you for the information you have provided.").exec();
-    
-    // Display the collected information
-    ctx.sendMessage(message.from.id, 
-            String.format("<b>Name:</b> %s\n<b>Age:</b> %d", data.get("name"), age))
-            .parseMode(ParseMode.HTML)
-            .exec();
-            
-    // The state is automatically cleared after the conversation completes
-    ctx.clearState(message.from.id);
-}
-```
+    ```
 
+=== "Annotation"
+    ```java
+    @MessageHandler(state = "age", type = MessageType.TEXT)
+    private void getAge(BotContext ctx, Message message){
+        int age;
+
+        // Validate that the input is a number
+        try {
+            age = Integer.parseInt(message.text);
+        } catch (NumberFormatException e) {
+            ctx.sendMessage(message.from.id, "Please enter a valid number").exec();
+            return; // Stay in the "age" state until valid input is provided
+        }
+        
+        // Retrieve the stored name from state data
+        var data = ctx.getStateData(message.from.id);
+        
+        // Send confirmation message
+        ctx.sendMessage(message.from.id, "Thank you for the information you have provided.").exec();
+        
+        // Display the collected information
+        ctx.sendMessage(message.from.id, 
+                String.format("<b>Name:</b> %s\n<b>Age:</b> %d", data.get("name"), age))
+                .parseMode(ParseMode.HTML)
+                .exec();
+                
+        // The state is automatically cleared after the conversation completes
+        ctx.clearState(message.from.id);
+    }
+    ```
+            
 **Explanation:**
 
 - Input validation ensures we get a valid age before proceeding
@@ -147,21 +242,39 @@ private void getAge(BotContext ctx, Message message){
 
 The `/cancel` command can be used at any point to abort the current conversation.
 
-```java
-private void cancel(BotContext ctx, Message message){
-    // Clear the user's current state and any stored data
-    ctx.clearState(message.from.id);
+=== "Method"
+    ```java
+    private void cancel(BotContext ctx, Message message){
+        // Clear the user's current state and any stored data
+        ctx.clearState(message.from.id);
+        
+        ctx.sendMessage(message.from.id, 
+                "Your information has been cleared. Type /start to begin again.").exec();
+    }
+    ```
+
+    **Key Feature:**
     
-    ctx.sendMessage(message.from.id, 
-            "Your information has been cleared. Type /start to begin again.").exec();
-}
-```
+    - `filter.state("*")` matches users in **any** active state, allowing cancellation from any step
+    - `clearState(user_id)` removes both the state marker and any associated data
 
-**Key Feature:**
 
-- `filter.state("*")` matches users in **any** active state, allowing cancellation from any step
-- `clearState(user_id)` removes both the state marker and any associated data
+=== "Method"
+    ```java
+    @MessageHandler(commands = "cancel", state = "*", priority = -1)
+    private void cancel(BotContext ctx, Message message){
+        // Clear the user's current state and any stored data
+        ctx.clearState(message.from.id);
+            ctx.sendMessage(message.from.id, 
+            "Your information has been cleared. Type /start to begin again."
+        ).exec();
+    }
+    ```
+    **Key Feature:**
 
+    - `state = "*"` matches users in **any** active state, allowing cancellation from any step
+    - `priority = -1` registered and executed before all handlers 
+    - `clearState(user_id)` removes both the state marker and any associated data
 
 <img src="https://natanimn.github.io/telebof/img/s2.png">
 

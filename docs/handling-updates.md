@@ -2,9 +2,11 @@
 
 ### What is an Update?
 An **update** is an event sent by Telegram to your bot — for example, a new message, a button press, a poll answer, or a payment event.  
-In Telebof, you handle updates by [registering handler methods](#types-of-handlers).
+In Telebof, you handle updates by using [handler method](#types-of-handlers) or [annotation](/telebof/annotations) (Recommended).
 
-Each handler method:
+**In this section, we will learn how we can handle updates by using [handler methods](#types-of-handlers)**
+
+*Each handler method:*
 
 - Accepts a **filter** to determine which updates it should process.
 - Accepts a **callback** that is executed when the filter matches.
