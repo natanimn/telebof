@@ -42,7 +42,7 @@ public enum Updates{
     @SerializedName("chat_member")
     CHAT_MEMBER,
 
-    @SerializedName("chat_join_result")
+    @SerializedName("chat_join_request")
     CHAT_JOIN_REQUEST,
 
     @SerializedName("message_reaction")

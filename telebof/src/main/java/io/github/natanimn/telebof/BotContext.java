@@ -150,6 +150,20 @@ public class BotContext {
     }
 
     /**
+     * Use this method to copy messages of any kind. If some of the specified messages can't be found or copied, they are skipped.
+     * Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
+     * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages,
+     * but the copied messages don't have a link to the original message. Album grouping is kept for copied messages.
+     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+     * @param message_ids  A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+     * @return {@link io.github.natanimn.telebof.requests.service.CopyMessage}
+     */
+    public CopyMessages copyMessages(Object chat_id, Object from_chat_id, Integer[] message_ids) {
+        return new CopyMessages(chat_id, from_chat_id, message_ids, this.api);
+    }
+
+    /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped.
      * Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages.
      * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -600,6 +614,29 @@ public class BotContext {
      */
     public ReadBusinessMessage readBusinessMessage(long chat_id, String business_connection_id, int message_id){
         return new ReadBusinessMessage(chat_id, business_connection_id, message_id, api);
+    }
+
+    /**
+     * Use this method to approve a suggested post in a direct messages chat.
+     * The bot must have the 'can_post_messages' administrator right in the corresponding channel chat.
+     * @param chat_id Unique identifier for the target direct messages chat
+     * @param message_id Identifier of a suggested post message to approve
+     * @return {@link ApproveSuggestedPost}
+     */
+    public ApproveSuggestedPost approveSuggestedPost(long chat_id, int message_id){
+        return new ApproveSuggestedPost(chat_id, message_id, api);
+    }
+
+
+    /**
+     * Use this method to decline a suggested post in a direct messages chat.
+     * The bot must have the 'can_manage_direct_messages' administrator right in the corresponding channel chat.
+     * @param chat_id Unique identifier for the target direct messages chat
+     * @param message_id Identifier of a suggested post message to approve
+     * @return {@link ApproveSuggestedPost}
+     */
+    public DeclineSuggestedPost declineSuggestedPost(long chat_id, int message_id){
+        return new DeclineSuggestedPost(chat_id, message_id, api);
     }
 
     /**

@@ -1,0 +1,75 @@
+package io.github.natanimn.telebof.annotations.type;
+
+import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.filters.Filter;
+
+import java.util.Map;
+import java.util.function.Predicate;
+
+public class TypeChecker {
+    public static final Map<MessageType, Predicate<Filter>> field = Map.<MessageType, Predicate<Filter>>ofEntries(
+            Map.entry(MessageType.TEXT, Filter::text),
+            Map.entry(MessageType.PHOTO, Filter::photo),
+            Map.entry(MessageType.VIDEO, Filter::video),
+            Map.entry(MessageType.AUDIO, Filter::audio),
+            Map.entry(MessageType.ANIMATION, Filter::animation),
+            Map.entry(MessageType.DOCUMENT, Filter::document),
+            Map.entry(MessageType.VOICE, Filter::voice),
+            Map.entry(MessageType.VIDEO_NOTE, Filter::videoNote),
+            Map.entry(MessageType.CONTACT, Filter::contact),
+            Map.entry(MessageType.LOCATION, Filter::location),
+            Map.entry(MessageType.VENUE, Filter::venue),
+            Map.entry(MessageType.GAME, Filter::game),
+            Map.entry(MessageType.DICE, Filter::dice),
+            Map.entry(MessageType.STICKER, Filter::sticker),
+            Map.entry(MessageType.INVOICE, Filter::invoice),
+            Map.entry(MessageType.QUOTE, Filter::quote),
+            Map.entry(MessageType.GIVEAWAY, Filter::giveaway),
+            Map.entry(MessageType.MEDIA, Filter::media),
+            Map.entry(MessageType.NEW_CHAT_MEMBER, Filter::newChatMember),
+            Map.entry(MessageType.LEFT_CHAT_MEMBER, Filter::leftChatMember),
+            Map.entry(MessageType.PINNED_MESSAGE, Filter::pinnedMessage),
+            Map.entry(MessageType.NEW_CHAT_PHOTO, Filter::newChatPhoto),
+            Map.entry(MessageType.NEW_CHAT_TITLE, Filter::newChatTitle),
+            Map.entry(MessageType.GROUP_CREATED, Filter::groupCreated),
+            Map.entry(MessageType.SUPERGROUP_CREATED, Filter::supergroupCreated),
+            Map.entry(MessageType.CHANNEL_CREATED, Filter::channelCreated),
+            Map.entry(MessageType.MESSAGE_AUTO_DELETE_TIMER_CHANGED, Filter::messageAutoDeleteTimerChanged),
+            Map.entry(MessageType.MIGRATED, Filter::migrated),
+            Map.entry(MessageType.SUCCESSFUL_PAYMENT, Filter::successfulPayment),
+            Map.entry(MessageType.PROXIMITY_ALERT_TRIGGERED, Filter::proximityAlertTriggered),
+            Map.entry(MessageType.FORUM_TOPIC_CREATED, Filter::forumTopicCreated),
+            Map.entry(MessageType.FORUM_TOPIC_EDITED, Filter::forumTopicEdited),
+            Map.entry(MessageType.FORUM_TOPIC_CLOSED, Filter::forumTopicClosed),
+            Map.entry(MessageType.FORUM_TOPIC_REOPENED, Filter::forumTopicReopened),
+            Map.entry(MessageType.VIDEO_CHAT_STARTED, Filter::videoChatStarted),
+            Map.entry(MessageType.VIDEO_CHAT_SCHEDULED, Filter::videoChatScheduled),
+            Map.entry(MessageType.VIDEO_CHAT_PARTICIPANT_INVITED, Filter::videoChatParticipantInvited),
+            Map.entry(MessageType.VIDEO_CHAT_ENDED, Filter::videoChatEnded),
+            Map.entry(MessageType.FORWARDED, Filter::forwarded),
+            Map.entry(MessageType.REPLIED, Filter::replied),
+            Map.entry(MessageType.REPLIED_TO_STORY, Filter::repliedToStory),
+            Map.entry(MessageType.BOT, Filter::bot),
+            Map.entry(MessageType.GIVEAWAY_CREATED, Filter::giveawayCreated),
+            Map.entry(MessageType.GIVEAWAY_COMPLETED, Filter::giveawayCompleted),
+            Map.entry(MessageType.BOOST_ADDED, Filter::boostAdded),
+            Map.entry(MessageType.USERS_SHARED, Filter::usersShared),
+            Map.entry(MessageType.WRITE_ACCESS_ALLOWED, Filter::writeAccessAllowed),
+            Map.entry(MessageType.CHECKLIST, Filter::checklist),
+            Map.entry(MessageType.CHECKLIST_TASKS_DONE, Filter::checklistTasksDone),
+            Map.entry(MessageType.CHECKLIST_TASKS_ADDED, Filter::checklistTasksAdded),
+            Map.entry(MessageType.DIRECT_MESSAGE_PRICE_CHANGED, Filter::directMessagePriceChanged),
+            Map.entry(MessageType.ENTITIES, Filter::entities),
+            Map.entry(MessageType.CHAT_BACKGROUND_SET, Filter::chatBackgroundSet),
+            Map.entry(MessageType.CHAT_SHARED, Filter::chatShared),
+            Map.entry(MessageType.WEB_APP_DATA, Filter::webAppData),
+            Map.entry(MessageType.PASSPORT_DATA, Filter::passportData),
+            Map.entry(MessageType.REFUNDED_PAYMENT, Filter::refundedPayment),
+            Map.entry(MessageType.SUGGESTED_POST_APPROVED, Filter::suggestedPostApproved),
+            Map.entry(MessageType.SUGGESTED_POST_APPROVAL_FAILED, Filter::suggestedPostApprovalFailed),
+            Map.entry(MessageType.SUGGESTED_POST_DECLINED, Filter::suggestedPostDeclined),
+            Map.entry(MessageType.SUGGESTED_POST_PAID, Filter::suggestedPostPaid),
+            Map.entry(MessageType.SUGGESTED_POST_REFUNDED, Filter::suggestedPostRefunded)
+    );
+
+}

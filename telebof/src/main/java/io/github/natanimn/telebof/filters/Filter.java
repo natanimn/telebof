@@ -540,6 +540,46 @@ public class Filter{
     }
 
     /**
+     * Filter service messages for approved suggested post
+     * @return {@link Boolean}
+     */
+    public Boolean suggestedPostApproved(){
+        return update.message != null && update.message.suggested_post_approved != null;
+    }
+
+    /**
+     * Filter service messages for approval failed suggested post
+     * @return {@link Boolean}
+     */
+    public Boolean suggestedPostApprovalFailed(){
+        return update.message != null && update.message.suggested_post_approval_failed != null;
+    }
+
+    /**
+     * Filter service messages for declined suggested post
+     * @return {@link Boolean}
+     */
+    public Boolean suggestedPostDeclined(){
+        return update.message != null && update.message.suggested_post_declined != null;
+    }
+
+    /**
+     * Filter service messages for paid suggested post
+     * @return {@link Boolean}
+     */
+    public Boolean suggestedPostPaid(){
+        return update.message != null && update.message.suggested_post_paid != null;
+    }
+
+    /**
+     * Filter service messages for refunded suggested post
+     * @return {@link Boolean}
+     */
+    public Boolean suggestedPostRefunded(){
+        return (update.message != null && update.message.suggested_post_refunded != null);
+    }
+
+    /**
      * Filter commands
      * @param commands The command or array of commands as string
      * @return {@link Boolean}
@@ -591,7 +631,11 @@ public class Filter{
      * @return {@link Boolean}
      */
     public boolean customFilter(CustomFilter customFilter){
-        return customFilter.check(update);
+        try {
+            return customFilter.check(update);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
