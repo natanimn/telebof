@@ -69,6 +69,36 @@ public class MyFirstEchoBot {
 }
 ```
 
+### Using annotation
+
+```java
+import io.github.natanimn.telebof.annotations.MessageHandler;
+import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.types.Message;
+import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.BotClient;
+
+public class MyFirstEchoBot {
+    static final String TOKEN = "YOUR_BOT_TOKEN_HERE"; // Get from @BotFather
+
+    public static void main(String[] args) {
+        final BotClient bot = new BotClient(TOKEN);
+        bot.addHandler(new MyFirstEchoBot());
+        bot.startPolling();
+    }
+
+    @MessageHandler(commands = "start")
+    void start(BotContext context, Message message){
+        context.sendMessage(message.chat.id, "Welcome to my echo bot! 👋").exec();
+    }
+
+    @MessageHandler(type = MessageType.TEXT, priority = 1)
+    void echo(BotContext context, Message message){
+        context.sendMessage(message.chat.id, "You said: " + message.text).exec();
+    }
+} 
+```
+
 **To get started:**
 1. Create a bot with [@BotFather](https://t.me/BotFather) on Telegram
 2. Replace `YOUR_BOT_TOKEN_HERE` with your actual bot token
