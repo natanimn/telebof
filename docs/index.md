@@ -48,6 +48,7 @@ Before diving in, make sure you have:
 ### User's Guide
 - [Installation](/telebof/installation)
 - [Handling Updates](/telebof/handling-updates)
+- [Annotations](/telebof/annotations)
 - [Filters](/telebof/filters)
 - [Using States](/telebof/states)
 - [Advanced Features](/telebof/advance)
