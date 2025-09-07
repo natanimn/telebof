@@ -1,4 +1,4 @@
-package io.github.natanimn.telebof.types.keyboard;
+package io.github.natanimn.telebof.types;
 
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -20,7 +20,7 @@ public class ReplyParameters implements Serializable {
     private String quote;
     private ParseMode quote_parse_mode;
     private MessageEntity[] quote_entities;
-    private Integer quote_position;
+    private Integer quote_position, checklist_task_id;
 
     /**
      * Required
@@ -92,6 +92,16 @@ public class ReplyParameters implements Serializable {
      */
     public ReplyParameters quotePosition(Integer quote_position){
         this.quote_position = quote_position;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param checklist_task_id Identifier of the specific checklist task to be replied to
+     * @return {@link ReplyParameters}
+     */
+    public ReplyParameters checklistTaskId(Integer checklist_task_id){
+        this.checklist_task_id = checklist_task_id;
         return this;
     }
 
