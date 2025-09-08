@@ -9,13 +9,7 @@ import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
 import io.github.natanimn.telebof.exceptions.TelegramError;
 import io.github.natanimn.telebof.types.input.InputMedia;
-import okhttp3.RequestBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Response;
-import okhttp3.ResponseBody;
-import okhttp3.Request;
+import okhttp3.*;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -29,11 +23,11 @@ import java.util.concurrent.TimeUnit;
  * A class to interact with telegram server
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.1
  */
 public class Api {
 
-    protected int TIMEOUT = 120;
+    protected int TIMEOUT = 70;
     private final String URL;
     private final String FILE_URL;
     private final OkHttpClient client;
@@ -43,11 +37,14 @@ public class Api {
 
     public Api(String botToken, boolean useTestServer, Proxy proxy, @Nullable String localBotAPiUrl){
         this.botToken = botToken;
+
         this.client = new OkHttpClient.Builder()
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .proxy(proxy)
+                .retryOnConnectionFailure(true)
+                .connectionPool(new ConnectionPool(20, 5, TimeUnit.MINUTES))
                 .build();
 
         this.builder = new Request.Builder();
@@ -56,7 +53,7 @@ public class Api {
         if (localBotAPiUrl != null && !localBotAPiUrl.isEmpty())
             this.URL = localBotAPiUrl;
         else
-            this.URL = "https://api.telegram.org/bot%s" + (useTestServer?"/test/%s":"/%s");
+            this.URL = "https://api.telegram.org/bot%s" + (useTestServer ? "/test/%s" : "/%s");
     }
 
     private RequestBody prepareRequest(AbstractBaseRequest<?, ?> baseRequest) {
