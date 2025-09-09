@@ -1,15 +1,13 @@
 package io.github.natanimn.telebof.annotations;
 
 import io.github.natanimn.telebof.UpdateHandler;
+import io.github.natanimn.telebof.annotations.container.CallbackHandlers;
 import io.github.natanimn.telebof.enums.ChatType;
 import io.github.natanimn.telebof.filters.CustomFilter;
 import io.github.natanimn.telebof.filters.DefaultCustomFilter;
 import io.github.natanimn.telebof.filters.FilterExecutor;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Annotation for handling incoming callback queries in a declarative manner.
@@ -66,6 +64,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
+@Repeatable(CallbackHandlers.class)
 public @interface CallbackHandler {
 
     /**
