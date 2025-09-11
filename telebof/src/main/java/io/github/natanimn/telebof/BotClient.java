@@ -6,14 +6,12 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
 
+import java.net.SocketTimeoutException;
 import java.util.*;
 
 import io.github.natanimn.telebof.annotations.*;
 import io.github.natanimn.telebof.annotations.meta.*;
-import io.github.natanimn.telebof.exceptions.ConnectionError;
-import io.github.natanimn.telebof.exceptions.FloodError;
-import io.github.natanimn.telebof.exceptions.TelegramApiException;
-import io.github.natanimn.telebof.exceptions.TelegramError;
+import io.github.natanimn.telebof.exceptions.*;
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.requests.get.GetUpdates;
@@ -943,6 +941,8 @@ final public class BotClient {
             } catch (TelegramApiException apiException){
                     BotLog.error(apiException.description);
                     apiException.printStackTrace();
+            } catch (TimeoutException e) {
+                continue;
             } catch (ConnectionError connectionError){
                 if (tried == maxRetry) break;
                 BotLog.error(connectionError.getMessage());

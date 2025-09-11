@@ -8,6 +8,7 @@ import io.github.natanimn.telebof.exceptions.TelegramApiException;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
 import io.github.natanimn.telebof.exceptions.TelegramError;
+import io.github.natanimn.telebof.exceptions.TimeoutException;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import okhttp3.*;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,9 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.net.Proxy;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -39,6 +42,7 @@ public class Api {
         this.botToken = botToken;
 
         this.client = new OkHttpClient.Builder()
+                .protocols(Collections.singletonList(Protocol.HTTP_1_1))
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
@@ -142,23 +146,22 @@ public class Api {
         return String.format(URL, botToken, baseRequest.getMethodName());
     }
 
-    public  <T> ApiResponse<T> postRequest(AbstractBaseRequest<?, ?> baseRequest){
+    public  <T> ApiResponse<T> postRequest(AbstractBaseRequest<?, ?> baseRequest) {
         RequestBody requestBody = prepareRequest(baseRequest);
         Request request = builder.url(getUrl(baseRequest))
                 .post(requestBody).build();
 
         String jsonString = "";
-        try (Response response = client.newCall(request).execute()){
+        try (Response response = client.newCall(request).execute()) {
             ResponseBody responseBody = response.body();
-            jsonString         = responseBody.string();
+            jsonString = responseBody.string();
 
             return Util.parseApiResponse(jsonString, baseRequest.getResponseType());
-        } catch (UnknownHostException e){
+        } catch (UnknownHostException e) {
             throw new ConnectionError(String.format("Unable to send request to %s", request.url().url().getHost()));
-        } catch (IOException e){
-            throw new RuntimeException(e);
+        } catch (SocketTimeoutException e){
+            throw new TimeoutException(e.getMessage());
         } catch (Exception e) {
-            System.out.println(jsonString + " " + baseRequest.getResponseType());
             throw new RuntimeException(e);
         }
     }
