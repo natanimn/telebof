@@ -1,31 +1,20 @@
 package io.github.natanimn.telebof.types.forum;
 
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This object represents a forum topic.
- * @author Natanim 
+ * @param messageThreadId Unique identifier of the forum topic
+ * @param iconColor Color of the topic icon in RGB format
+ * @param name Name of the topic
+ * @param iconCustomEmojiId Optional. Unique identifier of the custom emoji shown as the topic icon
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.4
  */
-public class ForumTopic {
-    /**
-     * Unique identifier of the forum topic
-     */
-    public Integer message_thread_id;
-
-    /**
-     * Color of the topic icon in RGB format
-     */
-    public Integer icon_color;
-
-    /**
-     * Name of the topic
-     */
-    public String name;
-
-    /**
-     * Optional. Unique identifier of the custom emoji shown as the topic icon
-     */
-    public String icon_custom_emoji_id;
-
-}
+public record ForumTopic(
+        @SerializedName("message_thread_id") Integer messageThreadId,
+        @SerializedName("icon_color") Integer iconColor,
+        String name,
+        @SerializedName("icon_custom_emoji_id") String iconCustomEmojiId
+) {}
