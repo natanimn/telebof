@@ -1,67 +1,40 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.ChatType;
-
-import java.util.Objects;
 
 /**
  * Represents a chat.
- * @author Natanim 
+ * @param id Unique identifier for this chat.
+ * @param type Type of the chat, can be either {@link ChatType#PRIVATE}, {@link ChatType#GROUP}, {@link ChatType#SUPERGROUP} or {@link ChatType#CHANNEL}
+ * @param title Title, for supergroups, channels and group chats
+ * @param username Username, for private chats, supergroups and channels if available
+ * @param firstName First name of the other party in a private chat
+ * @param lastName Last name of the other party in a private chat
+ * @param isForum True, if the supergroup chat is a forum
+ * @param isDirectMessages True, if the chat is the direct messages chat of a channel
+ * @author Natanim
  * @since 3 March 2025
- * @version 1.2.0
+ * @version 1.2.4
  */
-public class Chat{
-    /**
-     * Unique identifier for this chat.
-     */
-    public long id;
+public record Chat(
+     long id,
 
-    /**
-     * Type of the chat, can be either {@link ChatType#PRIVATE}, {@link ChatType#GROUP}, {@link ChatType#SUPERGROUP} or {@link ChatType#CHANNEL}
-     */
-    public ChatType type;
+     ChatType type,
 
-    /**
-     * Title, for supergroups, channels and group chats
-     */
-    public String title;
+     String title,
 
-    /**
-     * Username, for private chats, supergroups and channels if available
-     */
-    public String username;
+     String username,
 
-    /**
-     * First name of the other party in a private chat
-     */
-    public String first_name;
+     @SerializedName("first_name")
+     String firstName,
 
-    /**
-     * Last name of the other party in a private chat
-     */
-    public String last_name;
+     @SerializedName("last_name")
+     String lastName,
 
-    /**
-     * True, if the supergroup chat is a forum
-     */
-    public Boolean is_forum;
+     @SerializedName("is_forum")
+     Boolean isForum,
 
-    /**
-     * Optional. True, if the chat is the direct messages chat of a channel
-     */
-    public Boolean is_direct_messages;
-
-    @Override
-    public String toString() {
-        return "Chat{" +
-                "id=" + id +
-                ", type='" + type + '\'' +
-                ", title='" + title + '\'' +
-                ", username='" + username + '\'' +
-                ", first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", is_forum=" + is_forum +
-                ", is_direct_messages=" + is_direct_messages +
-                '}';
-    }
-}
+     @SerializedName("is_direct_messages")
+     Boolean isDirectMessages
+){}
