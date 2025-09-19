@@ -1,181 +1,158 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Describes actions that a non-administrator user is allowed to take in a chat.
- * @author Natanim 
+ * @param canSendMessages Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
+ * @param canSendAudios Optional. True, if the user is allowed to send audios
+ * @param canSendDocuments Optional. True, if the user is allowed to send documents
+ * @param canSendPhotos Optional. True, if the user is allowed to send photos
+ * @param canSendVideos Optional. True, if the user is allowed to send videos
+ * @param canSendVideoNotes Optional. True, if the user is allowed to send video notes
+ * @param canSendVoiceNotes Optional. True, if the user is allowed to send voice notes
+ * @param canSendPolls Optional. True, if the user is allowed to send polls and checklists
+ * @param canSendOtherMessages Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
+ * @param canAddWebPagePreviews Optional. True, if the user is allowed to add web page previews to their messages
+ * @param canChangeInfo Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
+ * @param canInviteUsers Optional. True, if the user is allowed to invite new users to the chat
+ * @param canPinMessages Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
+ * @param canManageTopics Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.4
  */
-public class ChatPermissions implements Serializable {
-    /**
-     * Optional.
-     * True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
-     */
-    public Boolean can_send_messages;
+public record ChatPermissions(
+        @SerializedName("can_send_messages") Boolean canSendMessages,
+        @SerializedName("can_send_audios") Boolean canSendAudios,
+        @SerializedName("can_send_documents") Boolean canSendDocuments,
+        @SerializedName("can_send_photos") Boolean canSendPhotos,
+        @SerializedName("can_send_videos") Boolean canSendVideos,
+        @SerializedName("can_send_video_notes") Boolean canSendVideoNotes,
+        @SerializedName("can_send_voice_notes") Boolean canSendVoiceNotes,
+        @SerializedName("can_send_polls") Boolean canSendPolls,
+        @SerializedName("can_send_other_messages") Boolean canSendOtherMessages,
+        @SerializedName("can_add_web_page_previews") Boolean canAddWebPagePreviews,
+        @SerializedName("can_change_info") Boolean canChangeInfo,
+        @SerializedName("can_invite_users") Boolean canInviteUsers,
+        @SerializedName("can_pin_messages") Boolean canPinMessages,
+        @SerializedName("can_manage_topics") Boolean canManageTopics
+) implements Serializable {
 
     /**
-     * Optional. True, if the user is allowed to send audios
+     * Creates a new ChatPermissions builder
      */
-    public Boolean can_send_audios;
+    public static ChatPermissionsBuilder builder() {
+        return new ChatPermissionsBuilder();
+    }
 
     /**
-     * Optional. True, if the user is allowed to send documents
+     * Builder class for ChatPermissions
      */
-    public Boolean can_send_documents;
+    public static class ChatPermissionsBuilder {
+        private Boolean canSendMessages;
+        private Boolean canSendAudios;
+        private Boolean canSendDocuments;
+        private Boolean canSendPhotos;
+        private Boolean canSendVideos;
+        private Boolean canSendVideoNotes;
+        private Boolean canSendVoiceNotes;
+        private Boolean canSendPolls;
+        private Boolean canSendOtherMessages;
+        private Boolean canAddWebPagePreviews;
+        private Boolean canChangeInfo;
+        private Boolean canInviteUsers;
+        private Boolean canPinMessages;
+        private Boolean canManageTopics;
 
-    /**
-     * Optional. True, if the user is allowed to send photos
-     */
-    public Boolean can_send_photos;
+        public ChatPermissionsBuilder canSendMessages(boolean canSendMessages) {
+            this.canSendMessages = canSendMessages;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to send videos
-     */
-    public Boolean can_send_videos;
+        public ChatPermissionsBuilder canSendAudios(boolean canSendAudios) {
+            this.canSendAudios = canSendAudios;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to send video notes
-     */
-    public Boolean can_send_video_notes;
+        public ChatPermissionsBuilder canSendDocuments(boolean canSendDocuments) {
+            this.canSendDocuments = canSendDocuments;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to send voice notes
-     */
-    public Boolean can_send_voice_notes;
+        public ChatPermissionsBuilder canSendPhotos(boolean canSendPhotos) {
+            this.canSendPhotos = canSendPhotos;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to send polls and checklists
-     */
-    public Boolean can_send_polls;
+        public ChatPermissionsBuilder canSendVideos(boolean canSendVideos) {
+            this.canSendVideos = canSendVideos;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to send animations, games, stickers and use inline bots
-     */
-    public Boolean can_send_other_messages;
+        public ChatPermissionsBuilder canSendVideoNotes(boolean canSendVideoNotes) {
+            this.canSendVideoNotes = canSendVideoNotes;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to add web page previews to their messages
-     */
-    public Boolean can_add_web_page_previews;
+        public ChatPermissionsBuilder canSendVoiceNotes(boolean canSendVoiceNotes) {
+            this.canSendVoiceNotes = canSendVoiceNotes;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to change the chat title, photo and other settings. Ignored in public supergroups
-     */
-    public Boolean can_change_info;
+        public ChatPermissionsBuilder canSendPolls(boolean canSendPolls) {
+            this.canSendPolls = canSendPolls;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to invite new users to the chat
-     */
-    public Boolean can_invite_users;
+        public ChatPermissionsBuilder canSendOtherMessages(boolean canSendOtherMessages) {
+            this.canSendOtherMessages = canSendOtherMessages;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to pin messages. Ignored in public supergroups
-     */
-    public Boolean can_pin_messages;
+        public ChatPermissionsBuilder canAddWebPagePreviews(boolean canAddWebPagePreviews) {
+            this.canAddWebPagePreviews = canAddWebPagePreviews;
+            return this;
+        }
 
-    /**
-     * Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
-     */
-    public Boolean can_manage_topics;
+        public ChatPermissionsBuilder canChangeInfo(boolean canChangeInfo) {
+            this.canChangeInfo = canChangeInfo;
+            return this;
+        }
 
-    public ChatPermissions canSendMessages(boolean canSendMessages) {
-        this.can_send_messages = canSendMessages;
-        return this;
-    }
+        public ChatPermissionsBuilder canInviteUsers(boolean canInviteUsers) {
+            this.canInviteUsers = canInviteUsers;
+            return this;
+        }
 
-    public ChatPermissions canSendAudios(boolean canSendAudios) {
-        this.can_send_audios = canSendAudios;
-        return this;
-    }
+        public ChatPermissionsBuilder canPinMessages(boolean canPinMessages) {
+            this.canPinMessages = canPinMessages;
+            return this;
+        }
 
-    public ChatPermissions canSendDocuments(boolean canSendDocuments) {
-        this.can_send_documents = canSendDocuments;
-        return this;
-    }
+        public ChatPermissionsBuilder canManageTopics(boolean canManageTopics) {
+            this.canManageTopics = canManageTopics;
+            return this;
+        }
 
-    public ChatPermissions canSendPhotos(boolean canSendPhotos) {
-        this.can_send_photos = canSendPhotos;
-        return this;
-    }
-
-    public ChatPermissions canSendVideos(boolean canSendVideos) {
-        this.can_send_videos = canSendVideos;
-        return this;
-    }
-
-    public ChatPermissions canSendVideoNotes(boolean canSendVideoNotes) {
-        this.can_send_video_notes = canSendVideoNotes;
-        return this;
-    }
-
-    public ChatPermissions canSendVoiceNotes(boolean canSendVoiceNotes) {
-        this.can_send_voice_notes = canSendVoiceNotes;
-        return this;
-    }
-
-    public ChatPermissions canSendPolls(boolean canSendPolls) {
-        this.can_send_polls = canSendPolls;
-        return this;
-    }
-
-    public ChatPermissions canSendOtherMessages(boolean canSendOtherMessages) {
-        this.can_send_other_messages = canSendOtherMessages;
-        return this;
-    }
-
-    public ChatPermissions canAddWebPagePreviews(boolean canAddWebPagePreviews) {
-        this.can_add_web_page_previews = canAddWebPagePreviews;
-        return this;
-    }
-
-    public ChatPermissions canChangeInfo(boolean canChangeInfo) {
-        this.can_change_info = canChangeInfo;
-        return this;
-    }
-
-    public ChatPermissions canInviteUsers(boolean canInviteUsers) {
-        this.can_invite_users = canInviteUsers;
-        return this;
-    }
-
-    public ChatPermissions canPinMessages(boolean canPinMessages) {
-        this.can_pin_messages = canPinMessages;
-        return this;
-    }
-
-    public ChatPermissions canManageTopics(boolean canManageTopics) {
-        this.can_manage_topics = canManageTopics;
-        return this;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatPermissions that = (ChatPermissions) object;
-        return Objects.equals(can_send_messages, that.can_send_messages) &&
-                Objects.equals(can_send_audios, that.can_send_audios) &&
-                Objects.equals(can_send_documents, that.can_send_documents) &&
-                Objects.equals(can_send_photos, that.can_send_photos) &&
-                Objects.equals(can_send_videos, that.can_send_videos) &&
-                Objects.equals(can_send_video_notes, that.can_send_video_notes) &&
-                Objects.equals(can_send_voice_notes, that.can_send_voice_notes) &&
-                Objects.equals(can_send_polls, that.can_send_polls) &&
-                Objects.equals(can_send_other_messages, that.can_send_other_messages) &&
-                Objects.equals(can_add_web_page_previews, that.can_add_web_page_previews) &&
-                Objects.equals(can_change_info, that.can_change_info) &&
-                Objects.equals(can_invite_users, that.can_invite_users) &&
-                Objects.equals(can_pin_messages, that.can_pin_messages) &&
-                Objects.equals(can_manage_topics, that.can_manage_topics);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(can_send_messages, can_send_audios, can_send_documents, can_send_photos, can_send_videos,
-                can_send_video_notes, can_send_voice_notes, can_send_polls, can_send_other_messages, can_add_web_page_previews,
-                can_change_info, can_invite_users, can_pin_messages, can_manage_topics);
+        public ChatPermissions build() {
+            return new ChatPermissions(
+                    canSendMessages,
+                    canSendAudios,
+                    canSendDocuments,
+                    canSendPhotos,
+                    canSendVideos,
+                    canSendVideoNotes,
+                    canSendVoiceNotes,
+                    canSendPolls,
+                    canSendOtherMessages,
+                    canAddWebPagePreviews,
+                    canChangeInfo,
+                    canInviteUsers,
+                    canPinMessages,
+                    canManageTopics
+            );
+        }
     }
 }
