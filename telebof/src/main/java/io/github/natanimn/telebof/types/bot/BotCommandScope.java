@@ -9,10 +9,7 @@ import java.io.Serializable;
  * @version 0.8
  */
 abstract public class BotCommandScope implements Serializable  {
-    /**
-     * Scope type
-     */
-    public String type;
+    private String type;
 
     /**
      * Initialize command scope
@@ -20,5 +17,13 @@ abstract public class BotCommandScope implements Serializable  {
      */
     public BotCommandScope(String type) {
         this.type = type;
+    }
+
+    /**
+     * Scope type
+     * @return Scope type
+     */
+    public String type() {
+        return type;
     }
 }
