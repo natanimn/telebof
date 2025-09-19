@@ -1,26 +1,18 @@
 package io.github.natanimn.telebof.types.forum;
 
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This object represents a service message about a new forum topic created in the chat.
+ * @param name Name of the topic
+ * @param iconCustomEmojiId Color of the topic icon in RGB format
+ * @param iconColor Optional. Unique identifier of the custom emoji shown as the topic icon
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.4
  */
-public class ForumTopicCreated {
-    /**
-     * Name of the topic
-     */
-    public String name;
-
-    /**
-     * Color of the topic icon in RGB format
-     */
-    public String icon_custom_emoji_id;
-
-    /**
-     * Optional. Unique identifier of the custom emoji shown as the topic icon
-     */
-    public Integer icon_color;
-
-}
+public record ForumTopicCreated(
+        String name,
+        @SerializedName("icon_custom_emoji_id") String iconCustomEmojiId,
+        @SerializedName("icon_color") Integer iconColor
+) {}
