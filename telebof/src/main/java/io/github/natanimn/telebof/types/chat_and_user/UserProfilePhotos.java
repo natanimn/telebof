@@ -1,24 +1,18 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
  * This object represent a user's profile pictures.
- * @author Natanim 
+ * @param totalCount Total number of profile pictures the target user has
+ * @param photos Requested profile pictures (in up to 4 sizes each)
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.2.4
  */
-public class UserProfilePhotos {
-    /**
-     * Total number of profile pictures the target user has
-     */
-    public Integer total_count;
-
-    /**
-     * Requested profile pictures (in up to 4 sizes each)
-     */
-    public List<PhotoSize> photos;
-
-}
+public record UserProfilePhotos(
+        @SerializedName("total_count") Integer totalCount,
+        List<PhotoSize> photos
+) {}
