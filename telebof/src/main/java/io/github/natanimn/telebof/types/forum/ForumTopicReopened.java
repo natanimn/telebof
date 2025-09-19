@@ -6,8 +6,6 @@ package io.github.natanimn.telebof.types.forum;
  * Currently, holds no information.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.4
  */
-public class ForumTopicReopened {
-
-}
+public record ForumTopicReopened() { }
