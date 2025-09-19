@@ -1,47 +1,26 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
-import java.util.Objects;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This object contains information about a chat boost.
- * @author Natanim 
+ * @param boostId Unique identifier of the boost
+ * @param addDate Point in time (Unix timestamp) when the chat was boosted
+ * @param expirationData Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
+ * @param source Source of the added boost
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.2.4
  */
-public class ChatBoost {
-    /**
-     * Unique identifier of the boost
-     */
-    public String boost_id;
+public record ChatBoost(
+        @SerializedName("boost_id")
+        String boostId,
 
-    /**
-     * Point in time (Unix timestamp) when the chat was boosted
-     */
-    public Integer add_date;
+        @SerializedName("add_date")
+        Integer addDate,
 
-    /**
-     * Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
-     */
-    public Integer expiration_data;
+        @SerializedName("expiration_data")
+        Integer expirationData,
 
-    /**
-     * Source of the added boost
-     */
-    public ChatBoostSource source;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatBoost chatBoost = (ChatBoost) object;
-        return Objects.equals(boost_id, chatBoost.boost_id) &&
-                Objects.equals(add_date, chatBoost.add_date) &&
-                Objects.equals(expiration_data, chatBoost.expiration_data) &&
-                Objects.equals(source, chatBoost.source);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(boost_id, add_date, expiration_data, source);
-    }
-}
+        ChatBoostSource source
+){}
