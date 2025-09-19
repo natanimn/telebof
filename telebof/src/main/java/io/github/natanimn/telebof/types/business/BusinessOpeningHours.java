@@ -1,5 +1,7 @@
 package io.github.natanimn.telebof.types.business;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -7,29 +9,14 @@ import java.util.Objects;
  * Describes the opening hours of a business.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.2.4
+ * @param timeZoneName Unique name of the time zone for which the opening hours are defined
+ * @param openingHours List of time intervals describing business opening hours
  */
-public class BusinessOpeningHours{
-    /**
-     * Unique name of the time zone for which the opening hours are defined
-     */
-    public String time_zone_name;
+public record BusinessOpeningHours(
+     @SerializedName("time_zone_name")
+     String timeZoneName,
 
-    /**
-     * List of time intervals describing business opening hours
-     */
-    public List<BusinessOpeningHoursInterval> opening_hours;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        BusinessOpeningHours that = (BusinessOpeningHours) object;
-        return Objects.equals(time_zone_name, that.time_zone_name) && Objects.equals(opening_hours, that.opening_hours);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(time_zone_name, opening_hours);
-    }
-}
+     @SerializedName("opening_hours")
+     List<BusinessOpeningHoursInterval> openingHours
+){ }
