@@ -1,36 +1,12 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
-import java.util.Objects;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This object represents a service message about a user boosting a chat.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.2.4
+ * @param boostCount Number of boosts added by the user
  */
-public class ChatBoostAdded {
-    /**
-     * Number of boosts added by the user
-     */
-    public Integer boost_count;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatBoostAdded that = (ChatBoostAdded) object;
-        return Objects.equals(boost_count, that.boost_count);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(boost_count);
-    }
-
-    @Override
-    public String toString() {
-        return "ChatBoostAdded{" +
-                "boost_count=" + boost_count +
-                '}';
-    }
-}
+public record ChatBoostAdded(@SerializedName("boost_count") Integer boostCount) { }
