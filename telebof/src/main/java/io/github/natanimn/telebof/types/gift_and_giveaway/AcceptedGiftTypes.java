@@ -1,49 +1,67 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
-
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
  * This object describes the types of gifts that can be gifted to a user or a chat.
+ * @param unlimitedGifts True, if unlimited regular gifts are accepted
+ * @param limitedGifts True, if limited regular gifts are accepted
+ * @param uniqueGifts True, if unique gifts or gifts that can be upgraded to unique for free are accepted
+ * @param premiumSubscription True, if a Telegram Premium subscription is accepted
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.2.4
  */
-public class AcceptedGiftTypes implements Serializable {
-    /**
-     * True, if unlimited regular gifts are accepted
-     */
-    public Boolean unlimited_gifts;
+public record AcceptedGiftTypes(
+        @SerializedName("unlimited_gifts") Boolean unlimitedGifts,
+        @SerializedName("limited_gifts") Boolean limitedGifts,
+        @SerializedName("unique_gifts") Boolean uniqueGifts,
+        @SerializedName("premium_subscription") Boolean premiumSubscription
+) implements Serializable {
 
     /**
-     * True, if limited regular gifts are accepted
+     * Creates a new AcceptedGiftTypes builder
      */
-    public Boolean limited_gifts;
+    public static AcceptedGiftTypesBuilder builder() {
+        return new AcceptedGiftTypesBuilder();
+    }
 
     /**
-     * True, if unique gifts or gifts that can be upgraded to unique for free are accepted
+     * Builder class for AcceptedGiftTypes
      */
-    public Boolean unique_gifts;
+    public static class AcceptedGiftTypesBuilder {
+        private Boolean unlimitedGifts;
+        private Boolean limitedGifts;
+        private Boolean uniqueGifts;
+        private Boolean premiumSubscription;
 
-    /**
-     * True, if a Telegram Premium subscription is accepted
-     */
-    public Boolean premium_subscription;
+        public AcceptedGiftTypesBuilder unlimitedGifts(Boolean unlimitedGifts) {
+            this.unlimitedGifts = unlimitedGifts;
+            return this;
+        }
 
+        public AcceptedGiftTypesBuilder limitedGifts(Boolean limitedGifts) {
+            this.limitedGifts = limitedGifts;
+            return this;
+        }
 
-    public void setUnlimitedGifts(Boolean unlimited_gifts) {
-        this.unlimited_gifts = unlimited_gifts;
+        public AcceptedGiftTypesBuilder uniqueGifts(Boolean uniqueGifts) {
+            this.uniqueGifts = uniqueGifts;
+            return this;
+        }
+
+        public AcceptedGiftTypesBuilder premiumSubscription(Boolean premiumSubscription) {
+            this.premiumSubscription = premiumSubscription;
+            return this;
+        }
+
+        public AcceptedGiftTypes build() {
+            return new AcceptedGiftTypes(
+                    unlimitedGifts,
+                    limitedGifts,
+                    uniqueGifts,
+                    premiumSubscription
+            );
+        }
     }
-
-    public void setLimitedGifts(Boolean limited_gifts) {
-        this.limited_gifts = limited_gifts;
-    }
-
-    public void setUniqueGifts(Boolean unique_gifts) {
-        this.unique_gifts = unique_gifts;
-    }
-
-    public void setPremiumSubscription(Boolean premium_subscription) {
-        this.premium_subscription = premium_subscription;
-    }
-
 }
