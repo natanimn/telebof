@@ -1,8 +1,6 @@
 package io.github.natanimn.telebof.types.passport;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * <p>
@@ -12,31 +10,13 @@ import java.util.Objects;
  * </p>
  * <br>
  *  This class describes Telegram Passport data shared with the bot by the user.
+ * @param data Array with information about documents and other Telegram Passport elements that was shared with the bot
+ * @param credentials Encrypted credentials required to decrypt the data
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
-public class PassportData implements Serializable {
-    /**
-     * Array with information about documents and other Telegram Passport elements that was shared with the bot
-     */
-    public List<EncryptedPassportElement> data;
-
-    /**
-     * Encrypted credentials required to decrypt the data
-     */
-    public EncryptedCredentials credentials;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        PassportData that = (PassportData) object;
-        return Objects.equals(data, that.data) && Objects.equals(credentials, that.credentials);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(data, credentials);
-    }
-}
+public record PassportData(
+        List<EncryptedPassportElement> data,
+        EncryptedCredentials credentials
+)  {}
