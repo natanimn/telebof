@@ -1,30 +1,20 @@
 package io.github.natanimn.telebof.types.payments;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * This class represents information about an order.
- * @author Natanim Negash
+ * @param name User's name
+ * @param phoneNumber User's phone number
+ * @param email User's email
+ * @param shippingAddress User's shipping address
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
-public class OrderInfo {
-    /**
-     * User's name
-     */
-    public String name;
-
-    /**
-     * User's phone number
-     */
-    public String phone_number;
-
-    /**
-     * User's email
-     */
-    public String email;
-
-    /**
-     * User's shipping address
-     */
-    public ShippingAddress shipping_address;
-
-}
+public record OrderInfo(
+        String name,
+        @SerializedName("phone_number") String phoneNumber,
+        String email,
+        @SerializedName("shipping_address") ShippingAddress shippingAddress
+) {}
