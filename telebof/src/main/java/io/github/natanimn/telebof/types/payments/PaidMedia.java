@@ -2,62 +2,25 @@ package io.github.natanimn.telebof.types.payments;
 
 import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
 import io.github.natanimn.telebof.types.media_and_service.Video;
-
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class describes paid media.
- * @author Natanim Negash
+ * @param type Type of media
+ * @param width Media width as defined by the sender
+ * @param height Media height as defined by the sender
+ * @param duration Duration of the media in seconds as defined by the sender
+ * @param photo The photo
+ * @param video The video
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
-public class PaidMedia {
-    /**
-     * Type of media
-     */
-    public String type;
-
-    /**
-     * Media width as defined by the sender
-     */
-    public Integer width;
-
-    /**
-     * Media height as defined by the sender
-     */
-    public Integer height;
-
-    /**
-     * Duration of the media in seconds as defined by the sender
-     */
-    public Integer duration;
-
-    /**
-     * The photo
-     */
-    public List<PhotoSize> photo;
-
-    /**
-     * The video
-     */
-    public Video video;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        PaidMedia paidMedia = (PaidMedia) object;
-        return Objects.equals(type, paidMedia.type) &&
-                Objects.equals(width, paidMedia.width) &&
-                Objects.equals(height, paidMedia.height) &&
-                Objects.equals(duration, paidMedia.duration) &&
-                Objects.equals(photo, paidMedia.photo) &&
-                Objects.equals(video, paidMedia.video);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(type, width, height, duration, photo, video);
-    }
-}
+public record PaidMedia(
+        String type,
+        Integer width,
+        Integer height,
+        Integer duration,
+        List<PhotoSize> photo,
+        Video video
+) {}
