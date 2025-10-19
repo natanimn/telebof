@@ -16,7 +16,7 @@ public class InlineKeyboardMarkup implements Markup {
     /**
      * Array of button rows, each represented by an Array of {@link InlineKeyboardButton} objects
      */
-    public List<List<InlineKeyboardButton>> inline_keyboard;
+    private List<List<InlineKeyboardButton>> inline_keyboard;
 
     transient private int rowWidth = 3;
 
@@ -60,6 +60,10 @@ public class InlineKeyboardMarkup implements Markup {
             int end = Math.min(i + rowWidth, buttons.length);
             inline_keyboard.add(List.of(Arrays.copyOfRange(buttons, i, end)));
         }
+    }
+
+    public List<List<InlineKeyboardButton>> inlineKeyboard() {
+        return inline_keyboard;
     }
 
     public void setRowWidth(int rowWidth) {
