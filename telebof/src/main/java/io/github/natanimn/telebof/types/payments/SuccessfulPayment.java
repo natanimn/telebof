@@ -1,99 +1,34 @@
 package io.github.natanimn.telebof.types.payments;
 
-import java.io.Serializable;
-import java.util.Objects;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * This class contains basic information about a successful payment.
  * Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance.
  * This is outside of Telegram's control.
+ * @param currency Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
+ * @param totalAmount Total refunded price in the smallest units of the currency (integer, not float/double). For example, for a price of US$ 1.45, total_amount = 145. See the exp parameter in currencies.json, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)
+ * @param subscriptionExpirationDate Expiration date of the subscription, in Unix time; for recurring payments only
+ * @param invoicePayload Bot-specified invoice payload
+ * @param shippingOptionId Identifier of the shipping option chosen by the user
+ * @param orderInfo Order information provided by the user
+ * @param telegramPaymentChargeId Telegram payment identifier
+ * @param providerPaymentChargeId Provider payment identifier
+ * @param isRecurring True, if the payment is a recurring payment for a subscription
+ * @param isFirstRecurring True, if the payment is the first payment for a subscription
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
-public class SuccessfulPayment implements Serializable {
-    /**
-     * Three-letter ISO 4217 <a href="https://core.telegram.org/bots/payments#supported-currencies">currency</a> code, or “XTR” for payments in Telegram Stars
-     */
-    public String currency;
-
-    /**
-     * Total refunded price in the smallest units of the currency (integer, not float/double).
-     * For example, for a price of US$ 1.45, total_amount = 145.
-     * See the exp parameter in <a href="https://core.telegram.org/bots/payments/currencies.json">currencies.json</a>, it shows the number of digits past the decimal point for each currency (2 for the majority of currencies)
-     */
-    public Integer total_amount;
-
-    /**
-     *  Expiration date of the subscription, in Unix time; for recurring payments only
-     */
-    public Integer subscription_expiration_date;
-
-    /**
-     * Bot-specified invoice payload
-     */
-    public String invoice_payload;
-
-    /**
-     * Identifier of the shipping option chosen by the user
-     */
-    public String shipping_option_id;
-
-    /**
-     *  Order information provided by the user
-     */
-    public OrderInfo order_info;
-
-    /**
-     * Telegram payment identifier
-     */
-    public String telegram_payment_charge_id;
-
-    /**
-     * Provider payment identifier
-     */
-    public String provider_payment_charge_id;
-
-    /**
-     * True, if the payment is a recurring payment for a subscription
-     */
-    public Boolean is_recurring;
-
-    /**
-     * True, if the payment is the first payment for a subscription
-     */
-    public Boolean is_first_recurring;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        SuccessfulPayment that = (SuccessfulPayment) object;
-        return  Objects.equals(currency, that.currency) &&
-                Objects.equals(total_amount, that.total_amount) &&
-                Objects.equals(invoice_payload, that.invoice_payload) &&
-                Objects.equals(shipping_option_id, that.shipping_option_id) &&
-                Objects.equals(order_info, that.order_info) &&
-                Objects.equals(telegram_payment_charge_id, that.telegram_payment_charge_id) &&
-                Objects.equals(provider_payment_charge_id, that.provider_payment_charge_id) &&
-                Objects.equals(subscription_expiration_date, that.subscription_expiration_date) &&
-                Objects.equals(is_recurring, that.is_recurring) &&
-                Objects.equals(is_first_recurring, that.is_first_recurring);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(
-                currency,
-                total_amount,
-                invoice_payload,
-                shipping_option_id,
-                order_info,
-                telegram_payment_charge_id,
-                provider_payment_charge_id,
-                subscription_expiration_date,
-                is_recurring,
-                is_first_recurring
-        );
-    }
-}
+public record SuccessfulPayment(
+        String currency,
+        @SerializedName("total_amount") Integer totalAmount,
+        @SerializedName("subscription_expiration_date") Integer subscriptionExpirationDate,
+        @SerializedName("invoice_payload") String invoicePayload,
+        @SerializedName("shipping_option_id") String shippingOptionId,
+        @SerializedName("order_info") OrderInfo orderInfo,
+        @SerializedName("telegram_payment_charge_id") String telegramPaymentChargeId,
+        @SerializedName("provider_payment_charge_id") String providerPaymentChargeId,
+        @SerializedName("is_recurring") Boolean isRecurring,
+        @SerializedName("is_first_recurring") Boolean isFirstRecurring
+) {}
