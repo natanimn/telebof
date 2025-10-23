@@ -31,7 +31,7 @@ public record InputMediaAudio(
         @SerializedName("has_spoiler") Boolean hasSpoiler,
         String caption,
         @SerializedName("parse_mode") String parseMode,
-        @SerializedName("caption_entities") List<MessageEntity> captionEntities,
+        @SerializedName("caption_entities") MessageEntity[] captionEntities,
         List<File> files
 ) implements InputMediaInt{
 
@@ -78,7 +78,7 @@ public record InputMediaAudio(
         private Boolean hasSpoiler;
         private String caption;
         private String parseMode;
-        private List<MessageEntity> captionEntities;
+        private MessageEntity[] captionEntities;
         private List<File> files = new ArrayList<>();
 
         public InputMediaAudioBuilder(String media) {
@@ -131,7 +131,7 @@ public record InputMediaAudio(
             return this;
         }
 
-        public InputMediaAudioBuilder captionEntities(List<MessageEntity> captionEntities) {
+        public InputMediaAudioBuilder captionEntities(MessageEntity[] captionEntities) {
             this.captionEntities = captionEntities;
             return this;
         }
