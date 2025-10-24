@@ -3,7 +3,6 @@ package io.github.natanimn.telebof.types.input;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
