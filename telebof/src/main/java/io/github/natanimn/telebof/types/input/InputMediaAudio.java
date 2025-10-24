@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.input;
 
+import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
@@ -30,7 +31,7 @@ public record InputMediaAudio(
         Integer duration,
         @SerializedName("has_spoiler") Boolean hasSpoiler,
         String caption,
-        @SerializedName("parse_mode") String parseMode,
+        @SerializedName("parse_mode") ParseMode parseMode,
         @SerializedName("caption_entities") MessageEntity[] captionEntities,
         List<File> files
 ) implements InputMediaInt{
@@ -77,7 +78,7 @@ public record InputMediaAudio(
         private Integer duration;
         private Boolean hasSpoiler;
         private String caption;
-        private String parseMode;
+        private ParseMode parseMode;
         private MessageEntity[] captionEntities;
         private List<File> files = new ArrayList<>();
 
@@ -126,7 +127,7 @@ public record InputMediaAudio(
             return this;
         }
 
-        public InputMediaAudioBuilder parseMode(String parseMode) {
+        public InputMediaAudioBuilder parseMode(ParseMode parseMode) {
             this.parseMode = parseMode;
             return this;
         }
