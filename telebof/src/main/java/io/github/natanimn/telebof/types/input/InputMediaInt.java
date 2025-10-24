@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.input;
 
+import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import java.io.File;
 import java.util.List;
@@ -14,7 +15,7 @@ public interface InputMediaInt extends InputMedia {
     String type();
     String media();
     String caption();
-    String parseMode();
+    ParseMode parseMode();
     MessageEntity[] captionEntities();
     List<File> getFiles();
     boolean hasFile();
