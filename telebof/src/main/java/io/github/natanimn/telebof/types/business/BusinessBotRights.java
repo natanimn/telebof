@@ -4,64 +4,163 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents the rights of a business bot.
- * @param canReply Optional. True, if the bot can send and edit messages in the  chats that had incoming messages in the last 24 hours
- * @param canReadMessages Optional. True, if the bot can mark incoming  messages as read
- * @param canDeleteSentMessages Optional. True, if the bot can delete messages sent by the bot
- * @param canDeleteAllMessages Optional. True, if the bot can delete all  messages in managed chats
- * @param canEditName Optional. True, if the bot can edit the first and last name of the business account
- * @param canEditBio Optional. True, if the bot can edit the bio of the business account
- * @param canEditProfilePhoto True, if the bot can edit the profile photo of the business account
- * @param canEditUsername True, if the bot can edit the username of the business account
- * @param canChangeGiftSettings True, if the bot can change the privacy settings pertaining to gifts for the business account
- * @param canViewGiftsAndStars True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
- * @param canConvertGiftsToStars True, if the bot can convert regular gifts owned by the business account to Telegram Stars
- * @param canTransferAndUpgradeGifts True, if the bot can transfer and upgrade gifts owned by the business account
- * @param canTransferStars True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
- * @param canManageStories True, if the bot can post, edit and delete stories on behalf of the business account
  * @author Natanim
  * @since 19 August 20025
- * @version 1.2.4
+ * @version 1.3.0
  */
-public record BusinessBotRights(
+public class BusinessBotRights {
     @SerializedName("can_reply")
-     Boolean canReply,
+    private Boolean canReply;
 
     @SerializedName("can_read_messages")
-     Boolean canReadMessages,
+    private Boolean canReadMessages;
 
     @SerializedName("can_delete_sent_messages")
-     Boolean canDeleteSentMessages,
+    private Boolean canDeleteSentMessages;
 
     @SerializedName("can_delete_all_messages")
-     Boolean canDeleteAllMessages,
+    private Boolean canDeleteAllMessages;
 
     @SerializedName("can_edit_name")
-     Boolean canEditName,
+    private Boolean canEditName;
 
     @SerializedName("can_edit_bio")
-     Boolean canEditBio,
+    private Boolean canEditBio;
 
     @SerializedName("can_edit_profile_photo")
-     Boolean canEditProfilePhoto,
+    private Boolean canEditProfilePhoto;
 
     @SerializedName("can_edit_username")
-     Boolean canEditUsername,
+    private Boolean canEditUsername;
 
     @SerializedName("can_change_gift_settings")
-     Boolean canChangeGiftSettings,
+    private Boolean canChangeGiftSettings;
 
     @SerializedName("can_view_gifts_and_stars")
-     Boolean canViewGiftsAndStars,
+    private Boolean canViewGiftsAndStars;
 
     @SerializedName("can_convert_gifts_to_stars")
-     Boolean canConvertGiftsToStars,
+    private Boolean canConvertGiftsToStars;
 
     @SerializedName("can_transfer_and_upgrade_gifts")
-     Boolean canTransferAndUpgradeGifts,
+    private Boolean canTransferAndUpgradeGifts;
 
     @SerializedName("can_transfer_stars")
-     Boolean canTransferStars,
+    private Boolean canTransferStars;
 
     @SerializedName("can_manage_stories")
-     Boolean canManageStories
-    ){ }
+    private Boolean canManageStories;
+
+    /**
+     * Gets whether the bot can reply to messages.
+     * @return True, if the bot can send and edit messages in the chats that had incoming messages in the last 24 hours
+     */
+    public Boolean getCanReply() {
+        return canReply;
+    }
+
+    /**
+     * Gets whether the bot can read messages.
+     * @return True, if the bot can mark incoming messages as read
+     */
+    public Boolean getCanReadMessages() {
+        return canReadMessages;
+    }
+
+    /**
+     * Gets whether the bot can delete sent messages.
+     * @return True, if the bot can delete messages sent by the bot
+     */
+    public Boolean getCanDeleteSentMessages() {
+        return canDeleteSentMessages;
+    }
+
+    /**
+     * Gets whether the bot can delete all messages.
+     * @return True, if the bot can delete all messages in managed chats
+     */
+    public Boolean getCanDeleteAllMessages() {
+        return canDeleteAllMessages;
+    }
+
+    /**
+     * Gets whether the bot can edit name.
+     * @return True, if the bot can edit the first and last name of the business account
+     */
+    public Boolean getCanEditName() {
+        return canEditName;
+    }
+
+    /**
+     * Gets whether the bot can edit bio.
+     * @return True, if the bot can edit the bio of the business account
+     */
+    public Boolean getCanEditBio() {
+        return canEditBio;
+    }
+
+    /**
+     * Gets whether the bot can edit profile photo.
+     * @return True, if the bot can edit the profile photo of the business account
+     */
+    public Boolean getCanEditProfilePhoto() {
+        return canEditProfilePhoto;
+    }
+
+    /**
+     * Gets whether the bot can edit username.
+     * @return True, if the bot can edit the username of the business account
+     */
+    public Boolean getCanEditUsername() {
+        return canEditUsername;
+    }
+
+    /**
+     * Gets whether the bot can change gift settings.
+     * @return True, if the bot can change the privacy settings pertaining to gifts for the business account
+     */
+    public Boolean getCanChangeGiftSettings() {
+        return canChangeGiftSettings;
+    }
+
+    /**
+     * Gets whether the bot can view gifts and stars.
+     * @return True, if the bot can view gifts and the amount of Telegram Stars owned by the business account
+     */
+    public Boolean getCanViewGiftsAndStars() {
+        return canViewGiftsAndStars;
+    }
+
+    /**
+     * Gets whether the bot can convert gifts to stars.
+     * @return True, if the bot can convert regular gifts owned by the business account to Telegram Stars
+     */
+    public Boolean getCanConvertGiftsToStars() {
+        return canConvertGiftsToStars;
+    }
+
+    /**
+     * Gets whether the bot can transfer and upgrade gifts.
+     * @return True, if the bot can transfer and upgrade gifts owned by the business account
+     */
+    public Boolean getCanTransferAndUpgradeGifts() {
+        return canTransferAndUpgradeGifts;
+    }
+
+    /**
+     * Gets whether the bot can transfer stars.
+     * @return True, if the bot can transfer Telegram Stars received by the business account to its own account,
+     * or use them to upgrade and transfer gifts
+     */
+    public Boolean getCanTransferStars() {
+        return canTransferStars;
+    }
+
+    /**
+     * Gets whether the bot can manage stories.
+     * @return True, if the bot can post, edit and delete stories on behalf of the business account
+     */
+    public Boolean getCanManageStories() {
+        return canManageStories;
+    }
+}
