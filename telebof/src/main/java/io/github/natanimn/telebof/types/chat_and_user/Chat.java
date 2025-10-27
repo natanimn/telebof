@@ -5,89 +5,36 @@ import io.github.natanimn.telebof.enums.ChatType;
 
 /**
  * Represents a chat.
+ * @param id Unique identifier for this chat.
+ * @param type Type of the chat, can be either {@link ChatType#PRIVATE}, {@link ChatType#GROUP}, {@link ChatType#SUPERGROUP} or {@link ChatType#CHANNEL}
+ * @param title Title, for supergroups, channels and group chats
+ * @param username Username, for private chats, supergroups and channels if available
+ * @param firstName First name of the other party in a private chat
+ * @param lastName Last name of the other party in a private chat
+ * @param isForum True, if the supergroup chat is a forum
+ * @param isDirectMessages True, if the chat is the direct messages chat of a channel
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.2.4
  */
-public class Chat {
-    private long id;
-    private ChatType type;
-    private String title;
-    private String username;
+public record Chat(
+     long id,
 
-    @SerializedName("first_name")
-    private String firstName;
+     ChatType type,
 
-    @SerializedName("last_name")
-    private String lastName;
+     String title,
 
-    @SerializedName("is_forum")
-    private Boolean isForum;
+     String username,
 
-    @SerializedName("is_direct_messages")
-    private Boolean isDirectMessages;
+     @SerializedName("first_name")
+     String firstName,
 
-    /**
-     * Gets the unique identifier for this chat.
-     * @return Unique identifier for this chat
-     */
-    public long getId() {
-        return id;
-    }
+     @SerializedName("last_name")
+     String lastName,
 
-    /**
-     * Gets the type of the chat.
-     * @return Type of the chat, can be either {@link ChatType#PRIVATE}, {@link ChatType#GROUP}, {@link ChatType#SUPERGROUP} or {@link ChatType#CHANNEL}
-     */
-    public ChatType getType() {
-        return type;
-    }
+     @SerializedName("is_forum")
+     Boolean isForum,
 
-    /**
-     * Gets the title of the chat.
-     * @return Title, for supergroups, channels and group chats
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Gets the username of the chat.
-     * @return Username, for private chats, supergroups and channels if available
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Gets the first name of the other party in a private chat.
-     * @return First name of the other party in a private chat
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * Gets the last name of the other party in a private chat.
-     * @return Last name of the other party in a private chat
-     */
-    public String getLastName() {
-        return lastName;
-    }
-
-    /**
-     * Gets whether the supergroup chat is a forum.
-     * @return True, if the supergroup chat is a forum
-     */
-    public Boolean getIsForum() {
-        return isForum;
-    }
-
-    /**
-     * Gets whether the chat is the direct messages chat of a channel.
-     * @return True, if the chat is the direct messages chat of a channel
-     */
-    public Boolean getIsDirectMessages() {
-        return isDirectMessages;
-    }
-}
+     @SerializedName("is_direct_messages")
+     Boolean isDirectMessages
+){}
