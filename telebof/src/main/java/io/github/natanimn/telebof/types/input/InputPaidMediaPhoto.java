@@ -1,59 +1,52 @@
 package io.github.natanimn.telebof.types.input;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The paid media to send is a photo.
- * @author Natanim 
+ * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
+ * @param files List of files to be uploaded
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
-public class InputPaidMediaPhoto implements InputPaidMedia {
-    private String type;
-    private String media;
-    private transient Boolean hasFile;
-    private transient List<File> files = new ArrayList<>();
+public record InputPaidMediaPhoto(
+        String media,
+        List<File> files
+) implements InputPaidMedia {
 
-    /**
-     * Required
-     * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or
-     *              pass an HTTP URL for Telegram to get a file from the Internet.
-     */
-    public InputPaidMediaPhoto(String media){
-        this.type = "photo";
-        this.media = media;
-        this.hasFile = false;
+    @Override
+    public String type() {
+        return "photo";
     }
 
-    /**
-     * Required
-     * @param media File to send. Pass an object of {@link File} to upload from your local machine.
-     */
-    public InputPaidMediaPhoto(File media){
-        this.type = "photo";
-        this.media = "attach://" + media.getName();
-        this.hasFile = true;
-        this.files.add(media);
+    @Override
+    public boolean hasFile() {
+        return files != null && !files.isEmpty();
     }
 
-    /**
-     * Used only for internal purpose
-     * @return list of file
-     */
     @Override
     public List<File> getFiles() {
         return files;
     }
 
     /**
-     * Used only for internal purpose
-     * @return boolean
+     * Creates a new InputPaidMediaPhoto
+     * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
      */
-    @Override
-    public boolean hasFile() {
-        return hasFile;
+    public static InputPaidMediaPhoto fromString(String media) {
+        return new InputPaidMediaPhoto(media, new ArrayList<>());
+    }
+
+    /**
+     * Creates a new InputPaidMediaPhoto
+     * @param media File to send. Pass an object of File to upload from your local machine.
+     */
+    public static InputPaidMediaPhoto fromFile(File media) {
+        List<File> files = new ArrayList<>();
+        files.add(media);
+        return new InputPaidMediaPhoto("attach://" + media.getName(), files);
     }
 }
