@@ -3,73 +3,25 @@ package io.github.natanimn.telebof.types.updates;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.ChatInviteLink;
 import io.github.natanimn.telebof.types.chat_and_user.User;
-
-import java.util.Objects;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents a join request sent to a chat.
+ * @param chat Chat to which the request was sent
+ * @param from User that sent the join request
+ * @param userChatId Identifier of a private chat with the user who sent the join request.
+ * @param date Date the request was sent in Unix time
+ * @param bio Bio of the user.
+ * @param inviteLink Chat invite link that was used by the user to send the join request
  * @author Natanim
  * @since  3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
-public class ChatJoinRequest implements TelegramUpdate{
-    /**
-     * Chat to which the request was sent
-     */
-    public Chat chat;
-
-    /**
-     * User that sent the join request
-     */
-    public User from;
-
-    /**
-     * Identifier of a private chat with the user who sent the join request.
-     */
-    public Long user_chat_id;
-
-    /**
-     * Date the request was sent in Unix time
-     */
-    public Integer date;
-
-    /**
-     * Bio of the user.
-     */
-    public String bio;
-
-    /**
-     * Chat invite link that was used by the user to send the join request
-     */
-    public ChatInviteLink invite_link;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatJoinRequest that = (ChatJoinRequest) object;
-        return  Objects.equals(chat, that.chat) &&
-                Objects.equals(from, that.from) &&
-                Objects.equals(user_chat_id, that.user_chat_id) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(bio, that.bio) &&
-                Objects.equals(invite_link, that.invite_link);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(chat, from, user_chat_id, date, bio, invite_link);
-    }
-
-    @Override
-    public String toString() {
-        return "ChatJoinRequest{" +
-                "chat=" + chat +
-                ", from=" + from +
-                ", user_chat_id=" + user_chat_id +
-                ", date=" + date +
-                ", bio='" + bio + '\'' +
-                ", invite_link=" + invite_link +
-                '}';
-    }
-}
+public record ChatJoinRequest(
+        Chat chat,
+        User from,
+        @SerializedName("user_chat_id") Long userChatId,
+        Integer date,
+        String bio,
+        @SerializedName("invite_link") ChatInviteLink inviteLink
+) implements TelegramUpdate {}
