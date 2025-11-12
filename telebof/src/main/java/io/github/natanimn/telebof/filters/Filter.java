@@ -215,7 +215,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean media(){
-        return update.message !=null && (photo() || video() || videoNote() || sticker() || audio() || animation() || document() || voice() );
+        return update.message() !=null && (photo() || video() || videoNote() || sticker() || audio() || animation() || document() || voice() );
     }
 
     /**
@@ -223,7 +223,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean newChatMember(){
-        return update.message !=null && update.message.new_chat_members != null;
+        return update.message() !=null && update.message().newChatMembers() != null;
     }
 
     /**
@@ -231,7 +231,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean leftChatMember(){
-        return update.message !=null && update.message.left_chat_member != null;
+        return update.message() !=null && update.message().leftChatMember() != null;
     }
 
     /**
@@ -247,7 +247,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean newChatPhoto(){
-        return update.message !=null && update.message.new_chat_photo != null;
+        return update.message() !=null && update.message().newChatPhoto() != null;
     }
 
     /**
@@ -255,7 +255,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean newChatTitle(){
-        return update.message !=null && update.message.new_chat_title != null;
+        return update.message() !=null && update.message().newChatTitle() != null;
     }
 
     /**
@@ -263,7 +263,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean groupCreated(){
-        return update.message !=null && update.message.group_chat_created != null;
+        return update.message() !=null && update.message().groupChatCreated() != null;
     }
 
     /**
@@ -271,7 +271,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean supergroupCreated(){
-        return update.message !=null && update.message.supergroup_chat_created != null;
+        return update.message() !=null && update.message().supergroupChatCreated() != null;
     }
 
     /**
@@ -279,7 +279,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean channelCreated(){
-        return update.message !=null && update.message.channel_chat_created != null;
+        return update.message() !=null && update.message().channelChatCreated() != null;
     }
 
     /**
@@ -287,7 +287,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean messageAutoDeleteTimerChanged(){
-        return update.message !=null && update.message.message_auto_delete_timer_changed != null;
+        return update.message() !=null && update.message().messageAutoDeleteTimerChanged() != null;
     }
 
     /**
@@ -295,7 +295,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean migrated(){
-        return update.message !=null && (update.message.migrate_to_chat_id != null || update.message.migrate_from_chat_id != null);
+        return update.message() !=null && (update.message().migrateToChatId() != null || update.message().migrateFromChatId() != null);
     }
 
     /**
@@ -303,7 +303,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean successfulPayment() {
-        return update.message != null && update.message.successful_payment != null;
+        return update.message() != null && update.message().successfulPayment() != null;
     }
 
     /**
@@ -311,7 +311,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean proximityAlertTriggered() {
-        return update.message != null && update.message.proximity_alert_triggered != null;
+        return update.message() != null && update.message().proximityAlertTriggered() != null;
     }
 
     /**
@@ -319,7 +319,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean forumTopicCreated() {
-        return update.message != null && update.message.forum_topic_edited != null;
+        return update.message() != null && update.message().forum_topic_edited != null;
     }
 
     /**
@@ -327,7 +327,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean forumTopicEdited() {
-        return update.message != null && update.message.forum_topic_edited != null;
+        return update.message() != null && update.message().forum_topic_edited != null;
     }
 
     /**
@@ -335,7 +335,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean forumTopicClosed() {
-        return update.message != null && update.message.forum_topic_closed != null;
+        return update.message() != null && update.message().forum_topic_closed != null;
     }
 
     /**
@@ -343,7 +343,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean forumTopicReopened() {
-        return update.message != null && update.message.forum_topic_reopened != null;
+        return update.message() != null && update.message().forum_topic_reopened != null;
     }
 
     /**
@@ -399,7 +399,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean repliedToStory() {
-        return update.message != null && update.message.reply_to_story != null;
+        return update.message() != null && update.message().reply_to_story != null;
     }
 
     /**
@@ -439,7 +439,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean usersShared() {
-        return update.message != null && update.message.users_shared != null;
+        return update.message() != null && update.message().users_shared != null;
     }
 
     /**
@@ -447,7 +447,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean writeAccessAllowed() {
-        return update.message != null && update.message.write_access_allowed != null;
+        return update.message() != null && update.message().write_access_allowed != null;
     }
 
     /**
@@ -455,7 +455,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean checklist(){
-        return update.message != null && update.message.checklist != null;
+        return update.message() != null && update.message().checklist != null;
     }
 
 
@@ -464,7 +464,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean checklistTasksDone(){
-        return update.message != null && update.message.checklist_tasks_done != null;
+        return update.message() != null && update.message().checklist_tasks_done != null;
     }
 
     /**
@@ -472,7 +472,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean checklistTasksAdded(){
-        return update.message != null && update.message.checklist_tasks_added != null;
+        return update.message() != null && update.message().checklist_tasks_added != null;
     }
 
     /**
@@ -480,7 +480,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean directMessagePriceChanged(){
-        return update.message != null && update.message.direct_message_price_changed != null;
+        return update.message() != null && update.message().direct_message_price_changed != null;
     }
 
     /**
@@ -504,7 +504,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean chatShared() {
-        return update.message != null && update.message.chat_shared != null;
+        return update.message() != null && update.message().chat_shared != null;
     }
 
     /**
@@ -544,7 +544,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean suggestedPostApproved(){
-        return update.message != null && update.message.suggested_post_approved != null;
+        return update.message() != null && update.message().suggested_post_approved != null;
     }
 
     /**
@@ -552,7 +552,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean suggestedPostApprovalFailed(){
-        return update.message != null && update.message.suggested_post_approval_failed != null;
+        return update.message() != null && update.message().suggested_post_approval_failed != null;
     }
 
     /**
@@ -560,7 +560,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean suggestedPostDeclined(){
-        return update.message != null && update.message.suggested_post_declined != null;
+        return update.message() != null && update.message().suggested_post_declined != null;
     }
 
     /**
@@ -568,7 +568,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean suggestedPostPaid(){
-        return update.message != null && update.message.suggested_post_paid != null;
+        return update.message() != null && update.message().suggested_post_paid != null;
     }
 
     /**
@@ -576,7 +576,7 @@ public class Filter{
      * @return {@link Boolean}
      */
     public Boolean suggestedPostRefunded(){
-        return (update.message != null && update.message.suggested_post_refunded != null);
+        return (update.message() != null && update.message().suggested_post_refunded != null);
     }
 
     /**
@@ -593,7 +593,7 @@ public class Filter{
 
 
     private boolean chatType(ChatType chat){
-        if (update.message!=null) return update.message.chat.type == chat;
+        if (update.message()!=null) return update.message().chat.type == chat;
         else if (update.callback_query != null) return update.callback_query.message.chat.type == chat;
         else if (update.edited_message != null) return update.edited_message.chat.type == chat;
         else if (update.inline_query != null) return update.inline_query.chat_type == chat;
@@ -647,11 +647,11 @@ public class Filter{
         Message message;
         User user;
 
-        if (update.message != null) {
+        if (update.message() != null) {
             // In accessible message
-            if (update.message.date == 0) return false;
+            if (update.message().date == 0) return false;
 
-            message = update.message;
+            message = update.message();
             user = message.from;
         }
 
@@ -719,7 +719,7 @@ public class Filter{
      */
     public boolean chatIds(Long... ids){
         List<Long> chatsId = List.of(ids);
-        if (update.message !=null) return chatsId.contains(update.message.chat.id);
+        if (update.message() !=null) return chatsId.contains(update.message().chat.id);
         else if (update.channel_post !=null) return chatsId.contains(update.channel_post.chat.id);
         else if (update.business_message !=null) return chatsId.contains(update.business_message.chat.id);
         else if (update.edited_channel_post !=null) return chatsId.contains(update.edited_channel_post.chat.id);
@@ -736,7 +736,7 @@ public class Filter{
      */
     public boolean fromIds(Long... ids){
         List<Long> usersId = List.of(ids);
-        if (update.message !=null) return usersId.contains(update.message.from.id);
+        if (update.message() !=null) return usersId.contains(update.message().from.id);
         else if (update.channel_post !=null) return usersId.contains(update.channel_post.from.id);
         else if (update.business_message !=null) return usersId.contains(update.business_message.from.id);
         else if (update.edited_channel_post !=null) return usersId.contains(update.edited_channel_post.from.id);
@@ -754,7 +754,7 @@ public class Filter{
      */
     public boolean chatUsernames(String... usernames){
         List<String> chatUsernames = List.of(usernames);
-        if (update.message !=null) return chatUsernames.contains(update.message.chat.username);
+        if (update.message() !=null) return chatUsernames.contains(update.message().chat.username);
         else if (update.channel_post !=null) return chatUsernames.contains(update.channel_post.chat.username);
         else if (update.business_message !=null) return chatUsernames.contains(update.business_message.chat.username);
         else if (update.edited_channel_post !=null) return chatUsernames.contains(update.edited_channel_post.chat.username);
@@ -771,7 +771,7 @@ public class Filter{
      */
     public boolean usernames(String... usernames){
         List<String> $usernames = List.of(usernames);
-        if (update.message !=null) return $usernames.contains(update.message.from.username);
+        if (update.message() !=null) return $usernames.contains(update.message().from.username);
         else if (update.channel_post !=null) return $usernames.contains(update.channel_post.from.username);
         else if (update.business_message !=null) return $usernames.contains(update.business_message.from.username);
         else if (update.edited_channel_post !=null) return $usernames.contains(update.edited_channel_post.from.username);
@@ -787,15 +787,15 @@ public class Filter{
      * @return {@link Boolean}
      */
     public boolean reaction(String react){
-        if (update.message_reaction != null){
-            for (ReactionType reactionType: update.message_reaction.new_reaction){
+        if (update.message()_reaction != null){
+            for (ReactionType reactionType: update.message()_reaction.new_reaction){
                 if (reactionType.emoji.equals(react)) return true;
             };
         }
         return false;
     }
     private String getText(){
-        if (update.message != null) return update.message.text;
+        if (update.message() != null) return update.message().text;
         else if (update.edited_message != null) return update.edited_message.text;
         else if (update.edited_business_message != null) return update.edited_business_message.text;
         else if (update.edited_channel_post != null) return update.edited_channel_post.text;
@@ -805,7 +805,7 @@ public class Filter{
     }
 
     private List<PhotoSize> getPhoto(){
-        if (update.message != null) return update.message.photo;
+        if (update.message() != null) return update.message().photo;
         else if (update.edited_message != null) return update.edited_message.photo;
         else if (update.edited_business_message != null) return update.edited_business_message.photo;
         else if (update.edited_channel_post != null) return update.edited_channel_post.photo;
@@ -815,7 +815,7 @@ public class Filter{
     }
 
     private Video getVideo(){
-        if (update.message != null) return update.message.video;
+        if (update.message() != null) return update.message().video;
         else if (update.edited_message != null) return update.edited_message.video;
         else if (update.edited_business_message != null) return update.edited_business_message.video;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video;
@@ -825,7 +825,7 @@ public class Filter{
     }
 
     private Document getDocument(){
-        if (update.message != null) return update.message.document;
+        if (update.message() != null) return update.message().document;
         else if (update.edited_message != null) return update.edited_message.document;
         else if (update.edited_business_message != null) return update.edited_business_message.document;
         else if (update.edited_channel_post != null) return update.edited_channel_post.document;
@@ -835,7 +835,7 @@ public class Filter{
     }
 
     private Animation getAnimation(){
-        if (update.message != null) return update.message.animation;
+        if (update.message() != null) return update.message().animation;
         else if (update.edited_message != null) return update.edited_message.animation;
         else if (update.edited_business_message != null) return update.edited_business_message.animation;
         else if (update.edited_channel_post != null) return update.edited_channel_post.animation;
@@ -845,7 +845,7 @@ public class Filter{
     }
 
     private Audio getAudio(){
-        if (update.message != null) return update.message.audio;
+        if (update.message() != null) return update.message().audio;
         else if (update.edited_message != null) return update.edited_message.audio;
         else if (update.edited_business_message != null) return update.edited_business_message.audio;
         else if (update.edited_channel_post != null) return update.edited_channel_post.audio;
@@ -855,7 +855,7 @@ public class Filter{
     }
 
     private Voice getVoice(){
-        if (update.message != null) return update.message.voice;
+        if (update.message() != null) return update.message().voice;
         else if (update.edited_message != null) return update.edited_message.voice;
         else if (update.edited_business_message != null) return update.edited_business_message.voice;
         else if (update.edited_channel_post != null) return update.edited_channel_post.voice;
@@ -865,7 +865,7 @@ public class Filter{
     }
 
     private VideoNote getVideoNote(){
-        if (update.message != null) return update.message.video_note;
+        if (update.message() != null) return update.message().video_note;
         else if (update.edited_message != null) return update.edited_message.video_note;
         else if (update.edited_business_message != null) return update.edited_business_message.video_note;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video_note;
@@ -875,7 +875,7 @@ public class Filter{
     }
 
     private Contact getContact(){
-        if (update.message != null) return update.message.contact;
+        if (update.message() != null) return update.message().contact;
         else if (update.edited_message != null) return update.edited_message.contact;
         else if (update.edited_business_message != null) return update.edited_business_message.contact;
         else if (update.edited_channel_post != null) return update.edited_channel_post.contact;
@@ -885,7 +885,7 @@ public class Filter{
     }
 
     private List<MessageEntity> getEntities(){
-        if (update.message != null) return update.message.entities;
+        if (update.message() != null) return update.message().entities;
         else if (update.edited_message != null) return update.edited_message.entities;
         else if (update.edited_business_message != null) return update.edited_business_message.entities;
         else if (update.edited_channel_post != null) return update.edited_channel_post.entities;
@@ -895,7 +895,7 @@ public class Filter{
     }
 
     private RefundedPayment getRefundedPayment(){
-        if (update.message != null) return update.message.refunded_payment;
+        if (update.message() != null) return update.message().refunded_payment;
         else if (update.edited_message != null) return update.edited_message.refunded_payment;
         else if (update.edited_business_message != null) return update.edited_business_message.refunded_payment;
         else if (update.edited_channel_post != null) return update.edited_channel_post.refunded_payment;
@@ -905,7 +905,7 @@ public class Filter{
     }
 
     private MessageOrigin getForwardedMessage(){
-        if (update.message != null) return update.message.forward_origin;
+        if (update.message() != null) return update.message().forward_origin;
         else if (update.edited_message != null) return update.edited_message.forward_origin;
         else if (update.edited_business_message != null) return update.edited_business_message.forward_origin;
         else if (update.edited_channel_post != null) return update.edited_channel_post.forward_origin;
@@ -915,7 +915,7 @@ public class Filter{
     }
 
     private Message getRepliedMessage(){
-        if (update.message != null) return update.message.reply_to_message;
+        if (update.message() != null) return update.message().reply_to_message;
         else if (update.edited_message != null) return update.edited_message.reply_to_message;
         else if (update.edited_business_message != null) return update.edited_business_message.reply_to_message;
         else if (update.edited_channel_post != null) return update.edited_channel_post.reply_to_message;
@@ -925,7 +925,7 @@ public class Filter{
     }
 
     private Invoice getInvoice(){
-        if (update.message != null) return update.message.invoice;
+        if (update.message() != null) return update.message().invoice;
         else if (update.edited_message != null) return update.edited_message.invoice;
         else if (update.edited_business_message != null) return update.edited_business_message.invoice;
         else if (update.edited_channel_post != null) return update.edited_channel_post.invoice;
@@ -935,7 +935,7 @@ public class Filter{
     }
 
     private Sticker getSticker(){
-        if (update.message != null) return update.message.sticker;
+        if (update.message() != null) return update.message().sticker;
         else if (update.edited_message != null) return update.edited_message.sticker;
         else if (update.edited_business_message != null) return update.edited_business_message.sticker;
         else if (update.edited_channel_post != null) return update.edited_channel_post.sticker;
@@ -945,7 +945,7 @@ public class Filter{
     }
 
     private Location getLocation(){
-        if (update.message != null) return update.message.location;
+        if (update.message() != null) return update.message().location;
         else if (update.edited_message != null) return update.edited_message.location;
         else if (update.edited_business_message != null) return update.edited_business_message.location;
         else if (update.edited_channel_post != null) return update.edited_channel_post.location;
@@ -956,7 +956,7 @@ public class Filter{
 
 
     private Venue getVenue(){
-        if (update.message != null) return update.message.venue;
+        if (update.message() != null) return update.message().venue;
         else if (update.edited_message != null) return update.edited_message.venue;
         else if (update.edited_business_message != null) return update.edited_business_message.venue;
         else if (update.edited_channel_post != null) return update.edited_channel_post.venue;
@@ -966,7 +966,7 @@ public class Filter{
     }
 
     private Game getGame(){
-        if (update.message != null) return update.message.game;
+        if (update.message() != null) return update.message().game;
         else if (update.edited_message != null) return update.edited_message.game;
         else if (update.edited_business_message != null) return update.edited_business_message.game;
         else if (update.edited_channel_post != null) return update.edited_channel_post.game;
@@ -976,7 +976,7 @@ public class Filter{
     }
 
     private Dice getDice(){
-        if (update.message != null) return update.message.dice;
+        if (update.message() != null) return update.message().dice;
         else if (update.edited_message != null) return update.edited_message.dice;
         else if (update.edited_business_message != null) return update.edited_business_message.dice;
         else if (update.edited_channel_post != null) return update.edited_channel_post.dice;
@@ -986,7 +986,7 @@ public class Filter{
     }
 
     private TextQuote getQuote(){
-        if (update.message != null) return update.message.quote;
+        if (update.message() != null) return update.message().quote;
         else if (update.edited_message != null) return update.edited_message.quote;
         else if (update.edited_business_message != null) return update.edited_business_message.quote;
         else if (update.edited_channel_post != null) return update.edited_channel_post.quote;
@@ -996,7 +996,7 @@ public class Filter{
     }
 
     private Giveaway getGiveaway(){
-        if (update.message != null) return update.message.giveaway;
+        if (update.message() != null) return update.message().giveaway;
         else if (update.edited_message != null) return update.edited_message.giveaway;
         else if (update.edited_business_message != null) return update.edited_business_message.giveaway;
         else if (update.edited_channel_post != null) return update.edited_channel_post.giveaway;
@@ -1006,7 +1006,7 @@ public class Filter{
     }
 
     private GiveawayCompleted getGiveawayCompleted(){
-        if (update.message != null) return update.message.giveaway_completed;
+        if (update.message() != null) return update.message().giveaway_completed;
         else if (update.edited_message != null) return update.edited_message.giveaway_completed;
         else if (update.edited_business_message != null) return update.edited_business_message.giveaway_completed;
         else if (update.edited_channel_post != null) return update.edited_channel_post.giveaway_completed;
@@ -1016,7 +1016,7 @@ public class Filter{
     }
 
     private GiveawayCreated getGiveawayCreated(){
-        if (update.message != null) return update.message.giveaway_created;
+        if (update.message() != null) return update.message().giveaway_created;
         else if (update.edited_message != null) return update.edited_message.giveaway_created;
         else if (update.edited_business_message != null) return update.edited_business_message.giveaway_created;
         else if (update.edited_channel_post != null) return update.edited_channel_post.giveaway_created;
@@ -1026,7 +1026,7 @@ public class Filter{
     }
 
     private Message getPinnedMessage(){
-        if (update.message != null) return update.message.pinned_message;
+        if (update.message() != null) return update.message().pinned_message;
         else if (update.edited_message != null) return update.edited_message.pinned_message;
         else if (update.edited_business_message != null) return update.edited_business_message.pinned_message;
         else if (update.edited_channel_post != null) return update.edited_channel_post.pinned_message;
@@ -1036,7 +1036,7 @@ public class Filter{
     }
 
     private VideoChatStarted getVideoChatStarted(){
-        if (update.message != null) return update.message.video_chat_started;
+        if (update.message() != null) return update.message().video_chat_started;
         else if (update.edited_message != null) return update.edited_message.video_chat_started;
         else if (update.edited_business_message != null) return update.edited_business_message.video_chat_started;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video_chat_started;
@@ -1046,7 +1046,7 @@ public class Filter{
     }
 
     private VideoChatScheduled getVideoChatScheduled(){
-        if (update.message != null) return update.message.video_chat_scheduled;
+        if (update.message() != null) return update.message().video_chat_scheduled;
         else if (update.edited_message != null) return update.edited_message.video_chat_scheduled;
         else if (update.edited_business_message != null) return update.edited_business_message.video_chat_scheduled;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video_chat_scheduled;
@@ -1056,7 +1056,7 @@ public class Filter{
     }
 
     private VideoChatEnded getVideoChatEnded(){
-        if (update.message != null) return update.message.video_chat_ended;
+        if (update.message() != null) return update.message().video_chat_ended;
         else if (update.edited_message != null) return update.edited_message.video_chat_ended;
         else if (update.edited_business_message != null) return update.edited_business_message.video_chat_ended;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video_chat_ended;
@@ -1066,7 +1066,7 @@ public class Filter{
     }
 
     private VideoChatParticipantsInvited getVideoChatParticipantInvited(){
-        if (update.message != null) return update.message.video_chat_participants_invited;
+        if (update.message() != null) return update.message().video_chat_participants_invited;
         else if (update.edited_message != null) return update.edited_message.video_chat_participants_invited;
         else if (update.edited_business_message != null) return update.edited_business_message.video_chat_participants_invited;
         else if (update.edited_channel_post != null) return update.edited_channel_post.video_chat_participants_invited;
@@ -1076,7 +1076,7 @@ public class Filter{
     }
 
     private Boolean isBot(){
-        if (update.message != null) return update.message.from.is_bot;
+        if (update.message() != null) return update.message().from.is_bot;
         else if (update.edited_message != null) return update.edited_message.from.is_bot;
         else if (update.edited_business_message != null) return update.edited_business_message.from.is_bot;
         else if (update.edited_channel_post != null) return update.edited_channel_post.from.is_bot;
@@ -1088,7 +1088,7 @@ public class Filter{
     }
 
     private ChatBoostAdded getBoostAdded(){
-        if (update.message != null) return update.message.boost_added;
+        if (update.message() != null) return update.message().boost_added;
         else if (update.edited_message != null) return update.edited_message.boost_added;
         else if (update.edited_business_message != null) return update.edited_business_message.boost_added;
         else if (update.edited_channel_post != null) return update.edited_channel_post.boost_added;
@@ -1098,7 +1098,7 @@ public class Filter{
     }
 
     private ChatBackground getChatBackgroundSet(){
-        if (update.message != null) return update.message.chat_background_set;
+        if (update.message() != null) return update.message().chat_background_set;
         else if (update.edited_message != null) return update.edited_message.chat_background_set;
         else if (update.edited_business_message != null) return update.edited_business_message.chat_background_set;
         else if (update.edited_channel_post != null) return update.edited_channel_post.chat_background_set;
@@ -1108,7 +1108,7 @@ public class Filter{
     }
 
     private WebAppData getWebAppData(){
-        if (update.message != null) return update.message.web_app_data;
+        if (update.message() != null) return update.message().web_app_data;
         else if (update.edited_message != null) return update.edited_message.web_app_data;
         else if (update.edited_business_message != null) return update.edited_business_message.web_app_data;
         else if (update.edited_channel_post != null) return update.edited_channel_post.web_app_data;
@@ -1118,7 +1118,7 @@ public class Filter{
     }
 
     private PassportData getPassportData(){
-        if (update.message != null) return update.message.passport_data;
+        if (update.message() != null) return update.message().passport_data;
         else if (update.edited_message != null) return update.edited_message.passport_data;
         else if (update.edited_business_message != null) return update.edited_business_message.passport_data;
         else if (update.edited_channel_post != null) return update.edited_channel_post.passport_data;
