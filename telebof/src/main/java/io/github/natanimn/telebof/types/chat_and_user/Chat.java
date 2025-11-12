@@ -15,7 +15,7 @@ import io.github.natanimn.telebof.enums.ChatType;
  * @param isDirectMessages True, if the chat is the direct messages chat of a channel
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record Chat(
      long id,
