@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
  * This object represents the bot's short description.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  * @param shortDescription The bot's short description
  */
 public record BotShortDescription(
