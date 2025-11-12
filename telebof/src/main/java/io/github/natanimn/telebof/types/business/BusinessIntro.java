@@ -9,6 +9,6 @@ import io.github.natanimn.telebof.types.media_and_service.Sticker;
  * @param sticker Sticker of the business intro
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record BusinessIntro(String title, String message, Sticker sticker){ }
