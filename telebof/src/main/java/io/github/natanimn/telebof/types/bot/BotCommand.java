@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public record BotCommand(
         String command,
