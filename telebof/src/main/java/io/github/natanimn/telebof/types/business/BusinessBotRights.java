@@ -20,7 +20,7 @@ import com.google.gson.annotations.SerializedName;
  * @param canManageStories True, if the bot can post, edit and delete stories on behalf of the business account
  * @author Natanim
  * @since 19 August 20025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record BusinessBotRights(
     @SerializedName("can_reply")
