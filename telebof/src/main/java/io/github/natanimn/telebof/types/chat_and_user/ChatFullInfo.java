@@ -63,7 +63,7 @@ import java.util.List;
  * @param parentChat Optional. Information about the corresponding channel chat, for direct messages chats only
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatFullInfo(
         long id,
