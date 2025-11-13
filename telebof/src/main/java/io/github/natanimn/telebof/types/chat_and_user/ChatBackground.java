@@ -6,7 +6,7 @@ import io.github.natanimn.telebof.types.BackgroundType;
  * This class represents a chat background.
  * @author Natanim 
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  * @param type Type of the background
  */
 public record ChatBackground(BackgroundType type) { }
