@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
  * @param isUnclaimed True, if the giveaway was completed, but there was no user to win the prize
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatBoostSource(
     String source,
