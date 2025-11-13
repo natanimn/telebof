@@ -21,7 +21,7 @@ import java.io.Serializable;
  * @param canManageTopics Optional. True, if the user is allowed to create forum topics. If omitted defaults to the value of can_pin_messages
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatPermissions(
         @SerializedName("can_send_messages") Boolean canSendMessages,
