@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * @param bigFileUniqueId Unique file identifier of big (640x640) chat photo, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatPhoto(
         @SerializedName("small_file_id") String smallFileId,
