@@ -17,7 +17,7 @@ import com.google.gson.annotations.SerializedName;
  * @param createsJoinRequest True, if users joining the chat via the link need to be approved by chat administrators
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatInviteLink(
         @SerializedName("invite_link") String inviteLink,
