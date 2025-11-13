@@ -38,7 +38,7 @@ import com.google.gson.annotations.SerializedName;
  * @param untilDate Optional. Date when the user's subscription will expire; Unix time
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatMember(
         ChatMemberStatus status,
