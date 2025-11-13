@@ -8,6 +8,6 @@ import io.github.natanimn.telebof.types.media_and_service.Location;
  * @param address Location address; 1-64 characters, as defined by the chat owner
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChatLocation(Location location, String address) {}
