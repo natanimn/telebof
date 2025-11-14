@@ -26,11 +26,11 @@ public class ReactionHandlerTest {
 
     @MessageHandler(commands = "start")
     void start(BotContext context, Message message){
-        context.sendMessage(message.chat.id, "React to this message").exec();
+        context.sendMessage(message.chat().id(), "React to this message").exec();
     }
 
     @ReactionHandler
     void reaction(BotContext context, MessageReactionUpdated reactionUpdated){
-        context.sendMessage(reactionUpdated.chat.id, "Reacted " + reactionUpdated.new_reaction.get(0).emoji).exec();
+        context.sendMessage(reactionUpdated.chat().id(), "Reacted " + reactionUpdated.newReaction().get(0).emoji()).exec();
     }
 }

@@ -40,16 +40,16 @@ class BotContextTest {
     @Test
     void sendMessage() {
         Message message1 = bot.context.sendMessage(CHAT_ID, "HELLO, WORLD").exec();
-        assertEquals(message1.chat.id(), CHAT_ID);
-        assertNull(message1.audio);
+        assertEquals(message1.chat().id(), CHAT_ID);
+        assertNull(message1.audio());
     }
 
     @Test
     void sendPhoto() {
         Message message1 = bot.context.sendPhoto(CHAT_ID, new File("src/test/resources/telegram.png")).exec();
-        assertEquals(message1.chat.isForum(), CHAT_ID);
-        assertNull(message1.audio);
-        assertNotNull(message1.photo);
+        assertEquals(message1.chat().isForum(), CHAT_ID);
+        assertNull(message1.audio());
+        assertNotNull(message1.photo());
         Video video = null;
 //        video.fileUniqueId();
     }
@@ -72,7 +72,7 @@ class BotContextTest {
     void testSendMediaGroup(){
         InputMedia[] inputMedia = new InputMedia[5];
         File pic = new File("src/test/resources/telegram.png");
-        for (int i=0; i < 5; i++) inputMedia[i] = new InputMediaPhoto(pic);
+        for (int i=0; i < 5; i++) inputMedia[i] =  InputMediaPhoto.builder(pic).build();
         List<Message> messages = bot.context.sendMediaGroup(CHAT_ID, inputMedia).exec();
         for (Message msg: messages) assertNotNull(msg);
     }
@@ -89,6 +89,6 @@ class BotContextTest {
                 .exec();
 
         assertNotNull(message);
-        assertNotNull(message.chat);
+        assertNotNull(message.chat());
     }
 }

@@ -29,6 +29,6 @@ public class PurchasedPaidMediaHandlerMeta {
 
     public boolean matches(Filter filter) {
         if (!(customFilter instanceof DefaultCustomFilter) && !(filter.customFilter(customFilter))) return false;
-        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.purchased_paid_media.paid_media_payload));
+        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.purchasedPaidMedia().paidMediaPayload()));
     }
 }

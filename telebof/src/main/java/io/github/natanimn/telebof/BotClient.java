@@ -53,29 +53,29 @@ final public class BotClient {
     private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
 
     static {
-        updateMap.put(u -> u.message, Updates.MESSAGE);
-        updateMap.put(u -> u.callback_query, Updates.CALLBACK_QUERY);
-        updateMap.put(u -> u.inline_query, Updates.INLINE_QUERY);
-        updateMap.put(u -> u.channel_post, Updates.CHANNEL_POST);
-        updateMap.put(u -> u.my_chat_member, Updates.MY_CHAT_MEMBER);
-        updateMap.put(u -> u.edited_message, Updates.EDITED_MESSAGE);
-        updateMap.put(u -> u.edited_channel_post, Updates.EDITED_CHANNEL_POST);
-        updateMap.put(u -> u.poll, Updates.POLL);
-        updateMap.put(u -> u.chat_member, Updates.CHAT_MEMBER);
-        updateMap.put(u -> u.message_reaction, Updates.MESSAGE_REACTION);
-        updateMap.put(u -> u.message_reaction_count, Updates.MESSAGE_REACTION_COUNT);
-        updateMap.put(u -> u.chat_boost, Updates.CHAT_BOOST);
-        updateMap.put(u -> u.removed_chat_boost, Updates.REMOVED_CHAT_BOOST);
-        updateMap.put(u -> u.pre_checkout_query, Updates.PRE_CHECKOUT_QUERY);
-        updateMap.put(u -> u.shipping_query, Updates.SHIPPING_QUERY);
-        updateMap.put(u -> u.chat_join_request, Updates.CHAT_JOIN_REQUEST);
-        updateMap.put(u -> u.chosen_inline_result, Updates.CHOSEN_INLINE_RESULT);
-        updateMap.put(u -> u.poll_answer, Updates.POLL_ANSWER);
-        updateMap.put(u -> u.business_connection, Updates.BUSINESS_CONNECTION);
-        updateMap.put(u -> u.business_message, Updates.BUSINESS_MESSAGE);
-        updateMap.put(u -> u.edited_business_message, Updates.EDITED_BUSINESS_MESSAGE);
-        updateMap.put(u -> u.deleted_business_messages, Updates.DELETED_BUSINESS_MESSAGES);
-        updateMap.put(u -> u.purchased_paid_media, Updates.PURCHASED_PAID_MEDIA);
+        updateMap.put(Update::message, Updates.MESSAGE);
+        updateMap.put(Update::callbackQuery, Updates.CALLBACK_QUERY);
+        updateMap.put(Update::inlineQuery, Updates.INLINE_QUERY);
+        updateMap.put(Update::channelPost, Updates.CHANNEL_POST);
+        updateMap.put(Update::chatMember, Updates.MY_CHAT_MEMBER);
+        updateMap.put(Update::editedMessage, Updates.EDITED_MESSAGE);
+        updateMap.put(Update::editedChannelPost, Updates.EDITED_CHANNEL_POST);
+        updateMap.put(Update::poll, Updates.POLL);
+        updateMap.put(Update::chatMember, Updates.CHAT_MEMBER);
+        updateMap.put(Update::messageReaction, Updates.MESSAGE_REACTION);
+        updateMap.put(Update::messageReactionCount, Updates.MESSAGE_REACTION_COUNT);
+        updateMap.put(Update::chatBoost, Updates.CHAT_BOOST);
+        updateMap.put(Update::removedChatBoost, Updates.REMOVED_CHAT_BOOST);
+        updateMap.put(Update::preCheckoutQuery, Updates.PRE_CHECKOUT_QUERY);
+        updateMap.put(Update::shippingQuery, Updates.SHIPPING_QUERY);
+        updateMap.put(Update::chatJoinRequest, Updates.CHAT_JOIN_REQUEST);
+        updateMap.put(Update::chosenInlineResult, Updates.CHOSEN_INLINE_RESULT);
+        updateMap.put(Update::pollAnswer, Updates.POLL_ANSWER);
+        updateMap.put(Update::businessConnection, Updates.BUSINESS_CONNECTION);
+        updateMap.put(Update::businessMessage, Updates.BUSINESS_MESSAGE);
+        updateMap.put(Update::editedBusinessMessage, Updates.EDITED_BUSINESS_MESSAGE);
+        updateMap.put(Update::deletedBusinessMessages, Updates.DELETED_BUSINESS_MESSAGES);
+        updateMap.put(Update::purchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
     }
 
 
@@ -915,7 +915,7 @@ final public class BotClient {
         int count = updates.size();
         BotLog.info(String.format("Received %d updates", count));
         if (!updates.isEmpty()){
-           setOffset(updates.get(count - 1).update_id + 1);
+           setOffset(updates.get(count - 1).updateId() + 1);
            processUpdates(updates);
         }
     }
@@ -934,7 +934,7 @@ final public class BotClient {
             } catch (TelegramError var1) {
                 throw var1;
             } catch (FloodError error){
-                int delay = error.parameters.retry_after;
+                int delay = error.parameters.retryAfter();
                 BotLog.error(error.description);
                 error.printStackTrace();
                 BotClient.this.sleep(delay);

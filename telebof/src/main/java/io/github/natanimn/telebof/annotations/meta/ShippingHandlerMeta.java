@@ -29,6 +29,6 @@ public class ShippingHandlerMeta {
 
     public boolean matches(Filter filter) {
         if (!(customFilter instanceof DefaultCustomFilter) && !(filter.customFilter(customFilter))) return false;
-        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.shipping_query.invoice_payload));
+        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.shippingQuery().invoicePayload()));
     }
 }

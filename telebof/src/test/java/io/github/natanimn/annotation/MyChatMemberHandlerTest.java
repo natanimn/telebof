@@ -25,12 +25,12 @@ public class MyChatMemberHandlerTest {
 
     @MyChatMemberHandler(status = ChatMemberStatus.MEMBER)
     void member(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "I am just a member").exec();
+        context.sendMessage(updated.chat().id(), "I am just a member").exec();
     }
 
     @MyChatMemberHandler(status = ChatMemberStatus.ADMINISTRATOR)
     void admin(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "I am now admin :)").exec();
+        context.sendMessage(updated.chat().id(), "I am now admin :)").exec();
     }
 
     @MyChatMemberHandler(status = ChatMemberStatus.LEFT)
@@ -41,7 +41,7 @@ public class MyChatMemberHandlerTest {
     @MyChatMemberHandler(status = ChatMemberStatus.RESTRICTED)
     void restricted(BotContext context, ChatMemberUpdated updated){
         System.out.println("Bot restricted in the the chat");
-        context.leaveChat(updated.chat.id).exec();
+        context.leaveChat(updated.chat().id()).exec();
     }
 
     @MyChatMemberHandler(status = ChatMemberStatus.BANNED)
@@ -51,7 +51,7 @@ public class MyChatMemberHandlerTest {
 
     @MyChatMemberHandler(priority = 1)
     void any(BotContext context, ChatMemberUpdated updated){
-        System.out.println("Bot current status " + updated.new_chat_member.status);
+        System.out.println("Bot current status " + updated.newChatMember().status());
     }
 
 }

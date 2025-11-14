@@ -29,7 +29,7 @@ public class MyChatMemberHandlerMeta {
     }
 
     public boolean matches(Filter filter) {
-        if (!status.isEmpty() && !filter.customFilter(update -> status.contains(update.my_chat_member.new_chat_member.status))) return false;
+        if (!status.isEmpty() && !filter.customFilter(update -> status.contains(update.myChatMember().newChatMember().status()))) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }
 }

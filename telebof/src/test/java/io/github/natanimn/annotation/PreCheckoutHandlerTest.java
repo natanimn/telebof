@@ -17,7 +17,7 @@ public class PreCheckoutHandlerTest {
     @BeforeEach
     void setUp(){
         this.client = new BotClient(System.getenv("TOKEN"));
-        System.out.println(client.context.getMe().exec().id);
+        System.out.println(client.context.getMe().exec().id());
         client.addHandler(this);
 
     }
@@ -28,18 +28,18 @@ public class PreCheckoutHandlerTest {
     }
     @MessageHandler(commands = "start")
     void start(BotContext context, Message message){
-        context.sendInvoice(message.chat.id, "test", "test a precheckout", "test", "XTR",
+        context.sendInvoice(message.chat().id(), "test", "test a precheckout", "test", "XTR",
                 new LabeledPrice[]{new LabeledPrice("10", 5)}).exec();
     }
 
     @PreCheckoutHandler
     void processPrecheckOut(BotContext context, PreCheckoutQuery query){
-        context.answerPreCheckoutQuery(query.id, true).exec();
+        context.answerPreCheckoutQuery(query.id(), true).exec();
     }
 
     @MessageHandler(type = MessageType.SUCCESSFUL_PAYMENT)
     void acceptPayment(BotContext context, Message message){
-        context.refundStarPayment(message.from.id, message.successful_payment.telegram_payment_charge_id).exec();
+        context.refundStarPayment(message.from().id(), message.successfulPayment().telegramPaymentChargeId()).exec();
     }
 
 }

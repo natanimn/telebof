@@ -31,7 +31,7 @@ public class PreCheckoutHandlerMeta {
     }
 
     public boolean matches(Filter filter) {
-        if (!payload.isEmpty() && !filter.customFilter(update -> payload.contains(update.pre_checkout_query.invoice_payload))) return false;
+        if (!payload.isEmpty() && !filter.customFilter(update -> payload.contains(update.preCheckoutQuery().invoicePayload()))) return false;
         if (!regex.isEmpty() && !filter.regex(regex)) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }

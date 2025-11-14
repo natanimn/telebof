@@ -32,7 +32,7 @@ public class ChosenInlineHandlerMeta {
         if (query.length > 0 && !filter.inlineQuery(query)) return false;
         if (resultId.length > 0 && !filter.customFilter(
                 update ->
-                        Arrays.asList(resultId).contains(update.chosen_inline_result.result_id))) return false;
+                        Arrays.asList(resultId).contains(update.chosenInlineResult().resultId()))) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }
 }

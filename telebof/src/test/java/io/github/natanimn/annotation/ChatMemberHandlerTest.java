@@ -29,42 +29,42 @@ public class ChatMemberHandlerTest {
 
     @ChatMemberHandler(status = ChatMemberStatus.MEMBER)
     void member(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "%s demoted in the chat".formatted(updated.new_chat_member.user.mention()))
+        context.sendMessage(updated.chat().id(), "%s demoted in the chat".formatted(updated.newChatMember().user().mention()))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
 
     @ChatMemberHandler(status = ChatMemberStatus.ADMINISTRATOR)
     void admin(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "%s promoted in the chat".formatted(updated.new_chat_member.user.mention()))
+        context.sendMessage(updated.chat().id(), "%s promoted in the chat".formatted(updated.newChatMember().user().mention()))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
 
     @ChatMemberHandler(status = ChatMemberStatus.LEFT)
     void left(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "%s left the chat".formatted(updated.new_chat_member.user.mention()))
+        context.sendMessage(updated.chat().id(), "%s left the chat".formatted(updated.newChatMember().user().mention()))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
 
     @ChatMemberHandler(status = ChatMemberStatus.RESTRICTED)
     void restricted(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "User %s restricted in the chat".formatted(updated.new_chat_member.user.mention()))
+        context.sendMessage(updated.chat().id(), "User %s restricted in the chat".formatted(updated.newChatMember().user().mention()))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
 
     @ChatMemberHandler(status = ChatMemberStatus.BANNED)
     void banned(BotContext context, ChatMemberUpdated updated){
-        context.sendMessage(updated.chat.id, "%s banned from the chat".formatted(updated.new_chat_member.user.mention()))
+        context.sendMessage(updated.chat().id(), "%s banned from the chat".formatted(updated.newChatMember().user().mention()))
                 .parseMode(ParseMode.HTML)
                 .exec();
     }
 
     @ChatMemberHandler(priority = 1)
     void any(BotContext context, ChatMemberUpdated updated){
-        System.out.println("user current status " + updated.new_chat_member.status);
+        System.out.println("user current status " + updated.newChatMember().status());
     }
 
 }
