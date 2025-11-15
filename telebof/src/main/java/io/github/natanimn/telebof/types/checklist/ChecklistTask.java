@@ -14,7 +14,7 @@ import java.util.List;
  * @param completionDate Optional. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
  * @author Natanim
  * @since 1 September 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChecklistTask(
         Integer id,
