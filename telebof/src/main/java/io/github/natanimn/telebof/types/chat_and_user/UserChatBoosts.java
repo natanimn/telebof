@@ -8,6 +8,6 @@ import com.google.gson.annotations.SerializedName;
  * @param boosts The list of boosts added to the chat by the user
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public record UserChatBoosts(List<ChatBoost> boosts) {}
