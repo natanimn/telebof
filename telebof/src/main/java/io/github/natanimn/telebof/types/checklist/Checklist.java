@@ -13,7 +13,7 @@ import java.util.List;
  * @param othersCanMarkTasksAsDone Optional. True, if users other than the creator of the list can mark tasks as done or not done
  * @author Natanim
  * @since 1 September 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record Checklist(
         String title,
