@@ -21,7 +21,7 @@ import com.google.gson.annotations.SerializedName;
  * @param hasMainWebApp Optional. True, if the bot has a main Web App. Returned only in {@link BotContext#getMe}.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record User(
         Long id,
