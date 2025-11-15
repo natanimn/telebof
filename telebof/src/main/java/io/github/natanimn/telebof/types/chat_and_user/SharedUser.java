@@ -13,7 +13,7 @@ import java.util.List;
  * @param photo Optional. Available sizes of the chat photo, if the photo was requested by the bot
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record SharedUser(
         @SerializedName("user_id") Long userId,
