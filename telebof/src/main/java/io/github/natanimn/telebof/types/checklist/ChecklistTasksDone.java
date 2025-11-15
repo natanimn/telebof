@@ -11,7 +11,7 @@ import java.util.List;
  * @param markedAsNotDoneTaskIds Optional. Identifiers of the tasks that were marked as not done
  * @author Natanim
  * @since 1 September 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChecklistTasksDone(
         @SerializedName("checklist_message") Message checklistMessage,
