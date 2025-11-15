@@ -9,7 +9,7 @@ import java.util.List;
  * @param users Information about users shared with the bot.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record UsersShared(
         @SerializedName("request_id") Integer requestId,
