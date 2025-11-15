@@ -10,7 +10,7 @@ import java.util.List;
  * @param tasks List of tasks added to the checklist
  * @author Natanim
  * @since 1 September 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
 public record ChecklistTasksAdded(
         @SerializedName("checklist_message") Message checklistMessage,
