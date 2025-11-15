@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.input;
 
+import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
@@ -24,7 +25,7 @@ public record InputMediaDocument(
         String thumbnail,
         @SerializedName("disable_content_type_detection") Boolean disableContentTypeDetection,
         String caption,
-        @SerializedName("parse_mode") String parseMode,
+        @SerializedName("parse_mode") ParseMode parseMode,
         @SerializedName("caption_entities") MessageEntity[] captionEntities,
         List<File> files
 ) implements InputMediaInt {
@@ -68,7 +69,7 @@ public record InputMediaDocument(
         private String thumbnail;
         private Boolean disableContentTypeDetection;
         private String caption;
-        private String parseMode;
+        private ParseMode parseMode;
         private MessageEntity[] captionEntities;
         private List<File> files = new ArrayList<>();
 
@@ -102,7 +103,7 @@ public record InputMediaDocument(
             return this;
         }
 
-        public InputMediaDocumentBuilder parseMode(String parseMode) {
+        public InputMediaDocumentBuilder parseMode(ParseMode parseMode) {
             this.parseMode = parseMode;
             return this;
         }
