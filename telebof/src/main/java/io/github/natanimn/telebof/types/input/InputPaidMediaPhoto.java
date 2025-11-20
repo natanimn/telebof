@@ -32,21 +32,34 @@ public record InputPaidMediaPhoto(
         return files;
     }
 
-    /**
-     * Creates a new InputPaidMediaPhoto
-     * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
-     */
-    public static InputPaidMediaPhoto fromString(String media) {
-        return new InputPaidMediaPhoto(media, new ArrayList<>());
-    }
+    public static class InputPaidMediaPhotoBuilder{
+        public String media;
+        public File mediaX;
 
-    /**
-     * Creates a new InputPaidMediaPhoto
-     * @param media File to send. Pass an object of File to upload from your local machine.
-     */
-    public static InputPaidMediaPhoto fromFile(File media) {
-        List<File> files = new ArrayList<>();
-        files.add(media);
-        return new InputPaidMediaPhoto("attach://" + media.getName(), files);
+        /**
+         * Creates a new InputPaidMediaPhotoBuilder
+         * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
+         */
+        public InputPaidMediaPhotoBuilder(String media) {
+            this.media = media;
+        }
+
+        /**
+         * Creates a new InputPaidMediaPhotoBuilder
+         * @param media File to send. Pass an object of File to upload from your local machine.
+         */
+        public InputPaidMediaPhotoBuilder(File media){
+            this.mediaX = media;
+        }
+
+        public InputPaidMediaPhoto build(){
+            if (media != null)
+                return new InputPaidMediaPhoto(media, new ArrayList<>());
+            else {
+                List<File> files = new ArrayList<>();
+                files.add(mediaX);
+                return new InputPaidMediaPhoto("attach://" + mediaX.getName(), files);
+            }
+        }
     }
 }
