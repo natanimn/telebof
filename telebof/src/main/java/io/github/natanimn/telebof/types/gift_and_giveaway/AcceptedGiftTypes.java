@@ -4,64 +4,68 @@ import java.io.Serializable;
 
 /**
  * This object describes the types of gifts that can be gifted to a user or a chat.
- * @param unlimitedGifts True, if unlimited regular gifts are accepted
- * @param limitedGifts True, if limited regular gifts are accepted
- * @param uniqueGifts True, if unique gifts or gifts that can be upgraded to unique for free are accepted
- * @param premiumSubscription True, if a Telegram Premium subscription is accepted
  * @author Natanim
  * @since 19 August 2025
- * @version 1.2.4
+ * @version 1.3.0
  */
-public record AcceptedGiftTypes(
-        @SerializedName("unlimited_gifts") Boolean unlimitedGifts,
-        @SerializedName("limited_gifts") Boolean limitedGifts,
-        @SerializedName("unique_gifts") Boolean uniqueGifts,
-        @SerializedName("premium_subscription") Boolean premiumSubscription
-) implements Serializable {
+public class AcceptedGiftTypes implements Serializable {
+    /**
+     * True, if unlimited regular gifts are accepted
+     */
+    @SerializedName("unlimited_gifts")
+    private Boolean unlimitedGifts;
 
     /**
-     * Creates a new AcceptedGiftTypes builder
+     * True, if limited regular gifts are accepted
      */
-    public static AcceptedGiftTypesBuilder builder() {
-        return new AcceptedGiftTypesBuilder();
+    @SerializedName("limited_gifts")
+    private Boolean limitedGifts;
+
+    /**
+     * True, if unique gifts or gifts that can be upgraded to unique for free are accepted
+     */
+    @SerializedName("unique_gifts")
+    private Boolean uniqueGifts;
+
+    /**
+     * True, if a Telegram Premium subscription is accepted
+     */
+    @SerializedName("premium_subscription")
+    private Boolean premiumSubscription;
+
+    public Boolean getUnlimitedGifts() {
+        return unlimitedGifts;
     }
 
-    /**
-     * Builder class for AcceptedGiftTypes
-     */
-    public static class AcceptedGiftTypesBuilder {
-        private Boolean unlimitedGifts;
-        private Boolean limitedGifts;
-        private Boolean uniqueGifts;
-        private Boolean premiumSubscription;
+    public AcceptedGiftTypes setUnlimitedGifts(Boolean unlimitedGifts) {
+        this.unlimitedGifts = unlimitedGifts;
+        return this;
+    }
 
-        public AcceptedGiftTypesBuilder unlimitedGifts(Boolean unlimitedGifts) {
-            this.unlimitedGifts = unlimitedGifts;
-            return this;
-        }
+    public Boolean getLimitedGifts() {
+        return limitedGifts;
+    }
 
-        public AcceptedGiftTypesBuilder limitedGifts(Boolean limitedGifts) {
-            this.limitedGifts = limitedGifts;
-            return this;
-        }
+    public AcceptedGiftTypes setLimitedGifts(Boolean limitedGifts) {
+        this.limitedGifts = limitedGifts;
+        return this;
+    }
 
-        public AcceptedGiftTypesBuilder uniqueGifts(Boolean uniqueGifts) {
-            this.uniqueGifts = uniqueGifts;
-            return this;
-        }
+    public Boolean getUniqueGifts() {
+        return uniqueGifts;
+    }
 
-        public AcceptedGiftTypesBuilder premiumSubscription(Boolean premiumSubscription) {
-            this.premiumSubscription = premiumSubscription;
-            return this;
-        }
+    public AcceptedGiftTypes setUniqueGifts(Boolean uniqueGifts) {
+        this.uniqueGifts = uniqueGifts;
+        return this;
+    }
 
-        public AcceptedGiftTypes build() {
-            return new AcceptedGiftTypes(
-                    unlimitedGifts,
-                    limitedGifts,
-                    uniqueGifts,
-                    premiumSubscription
-            );
-        }
+    public Boolean getPremiumSubscription() {
+        return premiumSubscription;
+    }
+
+    public AcceptedGiftTypes setPremiumSubscription(Boolean premiumSubscription) {
+        this.premiumSubscription = premiumSubscription;
+        return this;
     }
 }
