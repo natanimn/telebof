@@ -7,9 +7,15 @@ import com.google.gson.annotations.SerializedName;
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
- * @param shortDescription The bot's short description
  */
-public record BotShortDescription(
+public class BotShortDescription {
+    /**
+     * The bot's short description
+     */
     @SerializedName("short_description")
-    String shortDescription
-){}
+    private String shortDescription;
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+}
