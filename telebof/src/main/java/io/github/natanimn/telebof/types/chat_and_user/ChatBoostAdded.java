@@ -7,6 +7,15 @@ import com.google.gson.annotations.SerializedName;
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
- * @param boostCount Number of boosts added by the user
  */
-public record ChatBoostAdded(@SerializedName("boost_count") Integer boostCount) { }
+public class ChatBoostAdded {
+    /**
+     * Number of boosts added by the user
+     */
+    @SerializedName("boost_count")
+    private Integer boostCount;
+
+    public Integer getBoostCount() {
+        return boostCount;
+    }
+}
