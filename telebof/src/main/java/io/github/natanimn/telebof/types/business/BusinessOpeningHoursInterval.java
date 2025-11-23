@@ -7,13 +7,25 @@ import com.google.gson.annotations.SerializedName;
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
- * @param openingMinute The minute's sequence number in a week, starting on Monday, marking the start of the time interval during which the business is open; 0 - 7 * 24 * 60
- * @param closingMinute The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 * 24 * 60
  */
-public record BusinessOpeningHoursInterval(
+public class BusinessOpeningHoursInterval {
+    /**
+     * The minute's sequence number in a week, starting on Monday, marking the start of the time interval during which the business is open; 0 - 7 * 24 * 60
+     */
     @SerializedName("opening_minute")
-    Integer openingMinute,
+    private Integer openingMinute;
 
+    /**
+     * The minute's sequence number in a week, starting on Monday, marking the end of the time interval during which the business is open; 0 - 8 * 24 * 60
+     */
     @SerializedName("closing_minute")
-    Integer closingMinute
-){}
+    private Integer closingMinute;
+
+    public Integer getOpeningMinute() {
+        return openingMinute;
+    }
+
+    public Integer getClosingMinute() {
+        return closingMinute;
+    }
+}
