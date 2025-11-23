@@ -7,7 +7,23 @@ import io.github.natanimn.telebof.types.media_and_service.Location;
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
- * @param address Address of the business
- * @param location Location of the business
  */
-public record BusinessLocation(String address, Location location){ }
+public class BusinessLocation {
+    /**
+     * Address of the business
+     */
+    private String address;
+
+    /**
+     * Location of the business
+     */
+    private Location location;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+}
