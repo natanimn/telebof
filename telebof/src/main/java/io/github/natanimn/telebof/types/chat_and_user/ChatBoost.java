@@ -4,23 +4,47 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * This object contains information about a chat boost.
- * @param boostId Unique identifier of the boost
- * @param addDate Point in time (Unix timestamp) when the chat was boosted
- * @param expirationData Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
- * @param source Source of the added boost
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record ChatBoost(
-        @SerializedName("boost_id")
-        String boostId,
+public class ChatBoost {
+    /**
+     * Unique identifier of the boost
+     */
+    @SerializedName("boost_id")
+    private String boostId;
 
-        @SerializedName("add_date")
-        Integer addDate,
+    /**
+     * Point in time (Unix timestamp) when the chat was boosted
+     */
+    @SerializedName("add_date")
+    private Integer addDate;
 
-        @SerializedName("expiration_data")
-        Integer expirationData,
+    /**
+     * Point in time (Unix timestamp) when the boost will automatically expire, unless the booster's Telegram Premium subscription is prolonged
+     */
+    @SerializedName("expiration_data")
+    private Integer expirationData;
 
-        ChatBoostSource source
-){}
+    /**
+     * Source of the added boost
+     */
+    private ChatBoostSource source;
+
+    public String getBoostId() {
+        return boostId;
+    }
+
+    public Integer getAddDate() {
+        return addDate;
+    }
+
+    public Integer getExpirationData() {
+        return expirationData;
+    }
+
+    public ChatBoostSource getSource() {
+        return source;
+    }
+}
