@@ -14,103 +14,468 @@ import java.util.List;
 
 /**
  * This object contains full information about a chat.
- * @param id Unique identifier for this chat
- * @param type Type of the chat
- * @param title Title, for supergroups, channels and group chats
- * @param username Username, for private chats, supergroups and channels if available
- * @param firstName First name of the other party in a private chat
- * @param lastName Last name of the other party in a private chat
- * @param isForum True, if the supergroup chat is a forum
- * @param isDirectMessages True, if the chat is the direct messages chat of a channel
- * @param photo Chat photo
- * @param activeUsernames If non-empty, the list of all active chat usernames
- * @param emojiStatusCustomEmojiId Custom emoji identifier of the emoji status of the chat or the other party in a private chat
- * @param bio Bio of the other party in a private chat
- * @param hasPrivateForwards True, if privacy settings of the other party in the private chat allows to use tg://user?id=<user_id> links only in chats with the user
- * @param hasRestrictedVoiceAndVideoMessages True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat
- * @param joinToSendMessages True, if users need to join the supergroup before they can send messages
- * @param joinByRequest True, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators
- * @param description Description, for groups, supergroups and channel chats
- * @param inviteLink Primary invite link, for groups, supergroups and channel chats
- * @param pinnedMessage The most recent pinned message (by sending date)
- * @param permissions Default chat member permissions, for groups and supergroups
- * @param slowModeDelay For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user, in seconds
- * @param messageAutoDeleteTime The time after which all messages sent to the chat will be automatically deleted, in seconds
- * @param hasAggressiveAntiSpamEnabled True, if aggressive anti-spam checks are enabled in the supergroup
- * @param hasHiddenMembers True, if non-administrators can only get the list of bots and administrators in the chat
- * @param hasProtectedContent True, if messages from the chat can't be forwarded to other chats
- * @param stickerSetName For supergroups, name of the group sticker set
- * @param canSetStickerSet True, if the bot can change the group sticker set
- * @param linkedChatId Unique identifier for the linked chat
- * @param location For supergroups, the location to which the supergroup is connected
- * @param emojiStatusExpirationDate Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any
- * @param availableReactions List of available reactions allowed in the chat
- * @param hasVisibleHistory True, if new chat members will have access to old messages
- * @param accentColorId Identifier of the accent color for the chat name and backgrounds
- * @param maxReactionCount The maximum number of reactions that can be set on a message in the chat
- * @param backgroundCustomEmojiId Custom emoji identifier of the emoji chosen by the chat for the reply header and link preview background
- * @param profileAccentColorId Identifier of the accent color for the chat's profile background
- * @param profileBackgroundCustomEmojiId Custom emoji identifier of the emoji chosen by the chat for its profile background
- * @param unrestrictBoostCount For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
- * @param customEmojiStickerSetName For supergroups, the name of the group's custom emoji sticker set
- * @param businessIntro For private chats with business accounts, the intro of the business
- * @param businessLocation For private chats with business accounts, the location of the business
- * @param businessOpeningHours For private chats with business accounts, the opening hours of the business
- * @param personalChat For private chats, the personal channel of the user
- * @param birthdate For private chats, the date of birth of the user
- * @param canSendPaidMedia True, if paid media messages can be sent or forwarded to the channel chat
- * @param acceptedGiftTypes Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
- * @param parentChat Optional. Information about the corresponding channel chat, for direct messages chats only
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record ChatFullInfo(
-        long id,
-        ChatType type,
-        String title,
-        String username,
-        @SerializedName("first_name") String firstName,
-        @SerializedName("last_name") String lastName,
-        @SerializedName("is_forum") Boolean isForum,
-        @SerializedName("is_direct_messages") Boolean isDirectMessages,
-        ChatPhoto photo,
-        @SerializedName("active_usernames") List<String> activeUsernames,
-        @SerializedName("emoji_status_custom_emoji_id") String emojiStatusCustomEmojiId,
-        String bio,
-        @SerializedName("has_private_forwards") Boolean hasPrivateForwards,
-        @SerializedName("has_restricted_voice_and_video_messages") Boolean hasRestrictedVoiceAndVideoMessages,
-        @SerializedName("join_to_send_messages") Boolean joinToSendMessages,
-        @SerializedName("join_by_request") Boolean joinByRequest,
-        String description,
-        @SerializedName("invite_link") String inviteLink,
-        @SerializedName("pinned_message") Message pinnedMessage,
-        ChatPermissions permissions,
-        @SerializedName("slow_mode_delay") Integer slowModeDelay,
-        @SerializedName("message_auto_delete_time") Integer messageAutoDeleteTime,
-        @SerializedName("has_aggressive_anti_spam_enabled") Boolean hasAggressiveAntiSpamEnabled,
-        @SerializedName("has_hidden_members") Boolean hasHiddenMembers,
-        @SerializedName("has_protected_content") Boolean hasProtectedContent,
-        @SerializedName("sticker_set_name") String stickerSetName,
-        @SerializedName("can_set_sticker_set") Boolean canSetStickerSet,
-        @SerializedName("linked_chat_id") Long linkedChatId,
-        Location location,
-        @SerializedName("emoji_status_expiration_date") Integer emojiStatusExpirationDate,
-        @SerializedName("available_reactions") List<ReactionType> availableReactions,
-        @SerializedName("has_visible_history") Boolean hasVisibleHistory,
-        @SerializedName("accent_color_id") Integer accentColorId,
-        @SerializedName("max_reaction_count") Integer maxReactionCount,
-        @SerializedName("background_custom_emoji_id") String backgroundCustomEmojiId,
-        @SerializedName("profile_accent_color_id") Integer profileAccentColorId,
-        @SerializedName("profile_background_custom_emoji_id") String profileBackgroundCustomEmojiId,
-        @SerializedName("unrestrict_boost_count") Integer unrestrictBoostCount,
-        @SerializedName("custom_emoji_sticker_set_name") String customEmojiStickerSetName,
-        @SerializedName("business_intro") BusinessIntro businessIntro,
-        @SerializedName("business_location") BusinessLocation businessLocation,
-        @SerializedName("business_opening_hours") BusinessOpeningHours businessOpeningHours,
-        @SerializedName("personal_chat") Chat personalChat,
-        Birthdate birthdate,
-        @SerializedName("can_send_paid_media") Boolean canSendPaidMedia,
-        AcceptedGiftTypes acceptedGiftTypes,
-        @SerializedName("parent_chat") Boolean parentChat
-) {}
+public class ChatFullInfo {
+    /**
+     * Unique identifier for this chat
+     */
+    private long id;
+
+    /**
+     * Type of the chat
+     */
+    private ChatType type;
+
+    /**
+     * Title, for supergroups, channels and group chats
+     */
+    private String title;
+
+    /**
+     * Username, for private chats, supergroups and channels if available
+     */
+    private String username;
+
+    /**
+     * First name of the other party in a private chat
+     */
+    @SerializedName("first_name")
+    private String firstName;
+
+    /**
+     * Last name of the other party in a private chat
+     */
+    @SerializedName("last_name")
+    private String lastName;
+
+    /**
+     * True, if the supergroup chat is a forum
+     */
+    @SerializedName("is_forum")
+    private Boolean isForum;
+
+    /**
+     * True, if the chat is the direct messages chat of a channel
+     */
+    @SerializedName("is_direct_messages")
+    private Boolean isDirectMessages;
+
+    /**
+     * Chat photo
+     */
+    private ChatPhoto photo;
+
+    /**
+     * If non-empty, the list of all active chat usernames
+     */
+    @SerializedName("active_usernames")
+    private List<String> activeUsernames;
+
+    /**
+     * Custom emoji identifier of the emoji status of the chat or the other party in a private chat
+     */
+    @SerializedName("emoji_status_custom_emoji_id")
+    private String emojiStatusCustomEmojiId;
+
+    /**
+     * Bio of the other party in a private chat
+     */
+    private String bio;
+
+    /**
+     * True, if privacy settings of the other party in the private chat allows to use tg://user?id=<user_id> links only in chats with the user
+     */
+    @SerializedName("has_private_forwards")
+    private Boolean hasPrivateForwards;
+
+    /**
+     * True, if the privacy settings of the other party restrict sending voice and video note messages in the private chat
+     */
+    @SerializedName("has_restricted_voice_and_video_messages")
+    private Boolean hasRestrictedVoiceAndVideoMessages;
+
+    /**
+     * True, if users need to join the supergroup before they can send messages
+     */
+    @SerializedName("join_to_send_messages")
+    private Boolean joinToSendMessages;
+
+    /**
+     * True, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators
+     */
+    @SerializedName("join_by_request")
+    private Boolean joinByRequest;
+
+    /**
+     * Description, for groups, supergroups and channel chats
+     */
+    private String description;
+
+    /**
+     * Primary invite link, for groups, supergroups and channel chats
+     */
+    @SerializedName("invite_link")
+    private String inviteLink;
+
+    /**
+     * The most recent pinned message (by sending date)
+     */
+    @SerializedName("pinned_message")
+    private Message pinnedMessage;
+
+    /**
+     * Default chat member permissions, for groups and supergroups
+     */
+    private ChatPermissions permissions;
+
+    /**
+     * For supergroups, the minimum allowed delay between consecutive messages sent by each unprivileged user, in seconds
+     */
+    @SerializedName("slow_mode_delay")
+    private Integer slowModeDelay;
+
+    /**
+     * The time after which all messages sent to the chat will be automatically deleted, in seconds
+     */
+    @SerializedName("message_auto_delete_time")
+    private Integer messageAutoDeleteTime;
+
+    /**
+     * True, if aggressive anti-spam checks are enabled in the supergroup
+     */
+    @SerializedName("has_aggressive_anti_spam_enabled")
+    private Boolean hasAggressiveAntiSpamEnabled;
+
+    /**
+     * True, if non-administrators can only get the list of bots and administrators in the chat
+     */
+    @SerializedName("has_hidden_members")
+    private Boolean hasHiddenMembers;
+
+    /**
+     * True, if messages from the chat can't be forwarded to other chats
+     */
+    @SerializedName("has_protected_content")
+    private Boolean hasProtectedContent;
+
+    /**
+     * For supergroups, name of the group sticker set
+     */
+    @SerializedName("sticker_set_name")
+    private String stickerSetName;
+
+    /**
+     * True, if the bot can change the group sticker set
+     */
+    @SerializedName("can_set_sticker_set")
+    private Boolean canSetStickerSet;
+
+    /**
+     * Unique identifier for the linked chat
+     */
+    @SerializedName("linked_chat_id")
+    private Long linkedChatId;
+
+    /**
+     * For supergroups, the location to which the supergroup is connected
+     */
+    private Location location;
+
+    /**
+     * Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any
+     */
+    @SerializedName("emoji_status_expiration_date")
+    private Integer emojiStatusExpirationDate;
+
+    /**
+     * List of available reactions allowed in the chat
+     */
+    @SerializedName("available_reactions")
+    private List<ReactionType> availableReactions;
+
+    /**
+     * True, if new chat members will have access to old messages
+     */
+    @SerializedName("has_visible_history")
+    private Boolean hasVisibleHistory;
+
+    /**
+     * Identifier of the accent color for the chat name and backgrounds
+     */
+    @SerializedName("accent_color_id")
+    private Integer accentColorId;
+
+    /**
+     * The maximum number of reactions that can be set on a message in the chat
+     */
+    @SerializedName("max_reaction_count")
+    private Integer maxReactionCount;
+
+    /**
+     * Custom emoji identifier of the emoji chosen by the chat for the reply header and link preview background
+     */
+    @SerializedName("background_custom_emoji_id")
+    private String backgroundCustomEmojiId;
+
+    /**
+     * Identifier of the accent color for the chat's profile background
+     */
+    @SerializedName("profile_accent_color_id")
+    private Integer profileAccentColorId;
+
+    /**
+     * Custom emoji identifier of the emoji chosen by the chat for its profile background
+     */
+    @SerializedName("profile_background_custom_emoji_id")
+    private String profileBackgroundCustomEmojiId;
+
+    /**
+     * For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions
+     */
+    @SerializedName("unrestrict_boost_count")
+    private Integer unrestrictBoostCount;
+
+    /**
+     * For supergroups, the name of the group's custom emoji sticker set
+     */
+    @SerializedName("custom_emoji_sticker_set_name")
+    private String customEmojiStickerSetName;
+
+    /**
+     * For private chats with business accounts, the intro of the business
+     */
+    @SerializedName("business_intro")
+    private BusinessIntro businessIntro;
+
+    /**
+     * For private chats with business accounts, the location of the business
+     */
+    @SerializedName("business_location")
+    private BusinessLocation businessLocation;
+
+    /**
+     * For private chats with business accounts, the opening hours of the business
+     */
+    @SerializedName("business_opening_hours")
+    private BusinessOpeningHours businessOpeningHours;
+
+    /**
+     * For private chats, the personal channel of the user
+     */
+    @SerializedName("personal_chat")
+    private Chat personalChat;
+
+    /**
+     * For private chats, the date of birth of the user
+     */
+    private Birthdate birthdate;
+
+    /**
+     * True, if paid media messages can be sent or forwarded to the channel chat
+     */
+    @SerializedName("can_send_paid_media")
+    private Boolean canSendPaidMedia;
+
+    /**
+     * Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
+     */
+    @SerializedName("accepted_gift_types")
+    private AcceptedGiftTypes acceptedGiftTypes;
+
+    /**
+     * Optional. Information about the corresponding channel chat, for direct messages chats only
+     */
+    @SerializedName("parent_chat")
+    private Boolean parentChat;
+
+    public long getId() {
+        return id;
+    }
+
+    public ChatType getType() {
+        return type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Boolean getIsForum() {
+        return isForum;
+    }
+
+    public Boolean getIsDirectMessages() {
+        return isDirectMessages;
+    }
+
+    public ChatPhoto getPhoto() {
+        return photo;
+    }
+
+    public List<String> getActiveUsernames() {
+        return activeUsernames;
+    }
+
+    public String getEmojiStatusCustomEmojiId() {
+        return emojiStatusCustomEmojiId;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public Boolean getHasPrivateForwards() {
+        return hasPrivateForwards;
+    }
+
+    public Boolean getHasRestrictedVoiceAndVideoMessages() {
+        return hasRestrictedVoiceAndVideoMessages;
+    }
+
+    public Boolean getJoinToSendMessages() {
+        return joinToSendMessages;
+    }
+
+    public Boolean getJoinByRequest() {
+        return joinByRequest;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getInviteLink() {
+        return inviteLink;
+    }
+
+    public Message getPinnedMessage() {
+        return pinnedMessage;
+    }
+
+    public ChatPermissions getPermissions() {
+        return permissions;
+    }
+
+    public Integer getSlowModeDelay() {
+        return slowModeDelay;
+    }
+
+    public Integer getMessageAutoDeleteTime() {
+        return messageAutoDeleteTime;
+    }
+
+    public Boolean getHasAggressiveAntiSpamEnabled() {
+        return hasAggressiveAntiSpamEnabled;
+    }
+
+    public Boolean getHasHiddenMembers() {
+        return hasHiddenMembers;
+    }
+
+    public Boolean getHasProtectedContent() {
+        return hasProtectedContent;
+    }
+
+    public String getStickerSetName() {
+        return stickerSetName;
+    }
+
+    public Boolean getCanSetStickerSet() {
+        return canSetStickerSet;
+    }
+
+    public Long getLinkedChatId() {
+        return linkedChatId;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public Integer getEmojiStatusExpirationDate() {
+        return emojiStatusExpirationDate;
+    }
+
+    public List<ReactionType> getAvailableReactions() {
+        return availableReactions;
+    }
+
+    public Boolean getHasVisibleHistory() {
+        return hasVisibleHistory;
+    }
+
+    public Integer getAccentColorId() {
+        return accentColorId;
+    }
+
+    public Integer getMaxReactionCount() {
+        return maxReactionCount;
+    }
+
+    public String getBackgroundCustomEmojiId() {
+        return backgroundCustomEmojiId;
+    }
+
+    public Integer getProfileAccentColorId() {
+        return profileAccentColorId;
+    }
+
+    public String getProfileBackgroundCustomEmojiId() {
+        return profileBackgroundCustomEmojiId;
+    }
+
+    public Integer getUnrestrictBoostCount() {
+        return unrestrictBoostCount;
+    }
+
+    public String getCustomEmojiStickerSetName() {
+        return customEmojiStickerSetName;
+    }
+
+    public BusinessIntro getBusinessIntro() {
+        return businessIntro;
+    }
+
+    public BusinessLocation getBusinessLocation() {
+        return businessLocation;
+    }
+
+    public BusinessOpeningHours getBusinessOpeningHours() {
+        return businessOpeningHours;
+    }
+
+    public Chat getPersonalChat() {
+        return personalChat;
+    }
+
+    public Birthdate getBirthdate() {
+        return birthdate;
+    }
+
+    public Boolean getCanSendPaidMedia() {
+        return canSendPaidMedia;
+    }
+
+    public AcceptedGiftTypes getAcceptedGiftTypes() {
+        return acceptedGiftTypes;
+    }
+
+    public Boolean getParentChat() {
+        return parentChat;
+    }
+}
