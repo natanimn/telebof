@@ -7,6 +7,14 @@ import io.github.natanimn.telebof.types.BackgroundType;
  * @author Natanim 
  * @since 3 March 2025
  * @version 1.3.0
- * @param type Type of the background
  */
-public record ChatBackground(BackgroundType type) { }
+public class ChatBackground {
+    /**
+     * Type of the background
+     */
+    private BackgroundType type;
+
+    public BackgroundType getType() {
+        return type;
+    }
+}
