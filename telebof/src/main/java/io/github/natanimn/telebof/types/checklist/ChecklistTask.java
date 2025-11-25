@@ -7,19 +7,56 @@ import java.util.List;
 
 /**
  * This object represents a task in a checklist.
- * @param id Unique identifier of the task
- * @param text Text of the task
- * @param textEntities Optional. Special entities that appear in the task text
- * @param completedByUser Optional. User that completed the task; omitted if the task wasn't completed
- * @param completionDate Optional. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
  * @author Natanim
  * @since 1 September 2025
  * @version 1.3.0
  */
-public record ChecklistTask(
-        Integer id,
-        String text,
-        @SerializedName("text_entities") List<MessageEntity> textEntities,
-        @SerializedName("completed_by_user") User completedByUser,
-        @SerializedName("completion_date") Integer completionDate
-) {}
+public class ChecklistTask {
+    /**
+     * Unique identifier of the task
+     */
+    private Integer id;
+
+    /**
+     * Text of the task
+     */
+    private String text;
+
+    /**
+     * Optional. Special entities that appear in the task text
+     */
+    @SerializedName("text_entities")
+    private List<MessageEntity> textEntities;
+
+    /**
+     * Optional. User that completed the task; omitted if the task wasn't completed
+     */
+    @SerializedName("completed_by_user")
+    private User completedByUser;
+
+    /**
+     * Optional. Point in time (Unix timestamp) when the task was completed; 0 if the task wasn't completed
+     */
+    @SerializedName("completion_date")
+    private Integer completionDate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public List<MessageEntity> getTextEntities() {
+        return textEntities;
+    }
+
+    public User getCompletedByUser() {
+        return completedByUser;
+    }
+
+    public Integer getCompletionDate() {
+        return completionDate;
+    }
+}
