@@ -4,17 +4,47 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * This object represents a forum topic.
- * @param messageThreadId Unique identifier of the forum topic
- * @param iconColor Color of the topic icon in RGB format
- * @param name Name of the topic
- * @param iconCustomEmojiId Optional. Unique identifier of the custom emoji shown as the topic icon
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record ForumTopic(
-        @SerializedName("message_thread_id") Integer messageThreadId,
-        @SerializedName("icon_color") Integer iconColor,
-        String name,
-        @SerializedName("icon_custom_emoji_id") String iconCustomEmojiId
-) {}
+public class ForumTopic {
+    /**
+     * Unique identifier of the forum topic
+     */
+    @SerializedName("message_thread_id")
+    private Integer messageThreadId;
+
+    /**
+     * Color of the topic icon in RGB format
+     */
+    @SerializedName("icon_color")
+    private Integer iconColor;
+
+    /**
+     * Name of the topic
+     */
+    private String name;
+
+    /**
+     * Optional. Unique identifier of the custom emoji shown as the topic icon
+     */
+    @SerializedName("icon_custom_emoji_id")
+    private String iconCustomEmojiId;
+
+    public Integer getMessageThreadId() {
+        return messageThreadId;
+    }
+
+    public Integer getIconColor() {
+        return iconColor;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getIconCustomEmojiId() {
+        return iconCustomEmojiId;
+    }
+}
