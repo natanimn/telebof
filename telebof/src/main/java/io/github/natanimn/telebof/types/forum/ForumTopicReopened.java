@@ -8,4 +8,4 @@ package io.github.natanimn.telebof.types.forum;
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record ForumTopicReopened() { }
+public class ForumTopicReopened { }
