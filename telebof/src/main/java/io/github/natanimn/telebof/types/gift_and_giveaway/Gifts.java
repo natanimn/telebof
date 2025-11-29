@@ -4,11 +4,17 @@ import java.util.List;
 
 /**
  * This class represent a list of gifts.
- * @param gifts Array of {@link Gift}
  * @author Natanim
  * @since July 25, 2025
  * @version 1.3.0
  */
-public record Gifts(
-        List<Gift> gifts
-) {}
+public class Gifts {
+    /**
+     * Array of {@link Gift}
+     */
+    private List<Gift> gifts;
+
+    public List<Gift> getGifts() {
+        return gifts;
+    }
+}
