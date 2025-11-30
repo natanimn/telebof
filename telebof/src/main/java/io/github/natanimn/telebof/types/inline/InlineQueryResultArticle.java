@@ -2,47 +2,52 @@ package io.github.natanimn.telebof.types.inline;
 
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.input.InputTextMessageContent;
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * Represents a link to an article or web page.
- * @author Natanim 
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultArticle implements Serializable, InlineQueryResult {
     private String id;
     private String type;
     private String url;
     private String description;
-    private String thumbnail_url;
+    @SerializedName("thumbnail_url")
+    private String thumbnailUrl;
     private String title;
-    private Integer thumbnail_width;
-    private Integer thumbnail_height;
-    private InputTextMessageContent input_message_content;
-    private InlineKeyboardMarkup reply_markup;
+    @SerializedName("thumbnail_width")
+    private Integer thumbnailWidth;
+    @SerializedName("thumbnail_height")
+    private Integer thumbnailHeight;
+    @SerializedName("input_message_content")
+    private InputTextMessageContent inputMessageContent;
+    @SerializedName("reply_markup")
+    private InlineKeyboardMarkup replyMarkup;
 
     /**
      * Required
      * @param id Unique identifier for this result, 1-64 Bytes
      * @param title Title of the result
-     * @param input_message_content Content of the message to be sent
+     * @param inputMessageContent Content of the message to be sent
      */
-    public InlineQueryResultArticle(String id, String title, InputTextMessageContent input_message_content) {
+    public InlineQueryResultArticle(String id, String title, InputTextMessageContent inputMessageContent) {
         this.type = "article";
         this.id = id;
         this.title = title;
-        this.input_message_content = input_message_content;
+        this.inputMessageContent = inputMessageContent;
     }
 
     /**
      * Optional
-     * @param keyboard {@link InlineKeyboardMarkup Inline keyboard} attached to the message
+     * @param replyMarkup {@link InlineKeyboardMarkup Inline keyboard} attached to the message
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle replyMarkup(InlineKeyboardMarkup keyboard) {
-        this.reply_markup = keyboard;
+    public InlineQueryResultArticle setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
+        this.replyMarkup = replyMarkup;
         return this;
     }
 
@@ -51,7 +56,7 @@ public class InlineQueryResultArticle implements Serializable, InlineQueryResult
      * @param url URL of the result. Pass an empty string to hide
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle url(String url) {
+    public InlineQueryResultArticle setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -61,7 +66,7 @@ public class InlineQueryResultArticle implements Serializable, InlineQueryResult
      * @param description Short description of the result
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle description(String description) {
+    public InlineQueryResultArticle setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -71,8 +76,8 @@ public class InlineQueryResultArticle implements Serializable, InlineQueryResult
      * @param thumbnailUrl Url of the thumbnail for the result
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle thumbnailUrl(String thumbnailUrl) {
-        this.thumbnail_url = thumbnailUrl;
+    public InlineQueryResultArticle setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
@@ -81,41 +86,18 @@ public class InlineQueryResultArticle implements Serializable, InlineQueryResult
      * @param thumbnailWidth Thumbnail width
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle thumbnailWidth(int thumbnailWidth) {
-        this.thumbnail_width = thumbnailWidth;
+    public InlineQueryResultArticle setThumbnailWidth(Integer thumbnailWidth) {
+        this.thumbnailWidth = thumbnailWidth;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnailHeight Thumbnail heigh
+     * @param thumbnailHeight Thumbnail height
      * @return {@link InlineQueryResultArticle}
      */
-    public InlineQueryResultArticle thumbnailHeight(int thumbnailHeight) {
-        this.thumbnail_height = thumbnailHeight;
+    public InlineQueryResultArticle setThumbnailHeight(Integer thumbnailHeight) {
+        this.thumbnailHeight = thumbnailHeight;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        InlineQueryResultArticle article = (InlineQueryResultArticle) object;
-        return Objects.equals(id, article.id) &&
-                Objects.equals(type, article.type) &&
-                Objects.equals(url, article.url) &&
-                Objects.equals(description, article.description) &&
-                Objects.equals(thumbnail_url, article.thumbnail_url) &&
-                Objects.equals(title, article.title) &&
-                Objects.equals(thumbnail_width, article.thumbnail_width) &&
-                Objects.equals(thumbnail_height, article.thumbnail_height) &&
-                Objects.equals(input_message_content, article.input_message_content) &&
-                Objects.equals(reply_markup, article.reply_markup);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, type, url, description, thumbnail_url, title, thumbnail_width,
-                thumbnail_height, input_message_content, reply_markup);
     }
 }
