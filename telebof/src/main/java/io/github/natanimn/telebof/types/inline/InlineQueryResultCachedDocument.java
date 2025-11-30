@@ -1,29 +1,31 @@
 package io.github.natanimn.telebof.types.inline;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
- * @author Natanim 
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultCachedDocument extends InlineQueryMediaResult<InlineQueryResultCachedDocument> {
     private String title;
-    private String document_file_id;
+    @SerializedName("document_file_id")
+    private String documentFileId;
     private String description;
 
     /**
      * Required
      * @param id Unique identifier for this result, 1-64 bytes
      * @param title Title for the result
-     * @param document_file_id A valid file identifier for the file
+     * @param documentFileId A valid file identifier for the file
      */
-    public InlineQueryResultCachedDocument(String id, String title, String document_file_id) {
+    public InlineQueryResultCachedDocument(String id, String title, String documentFileId) {
         super("document", id);
         this.title = title;
-        this.document_file_id = document_file_id;
+        this.documentFileId = documentFileId;
     }
 
-
-    public InlineQueryResultCachedDocument description(String description) {
+    public InlineQueryResultCachedDocument setDescription(String description) {
         this.description = description;
         return this;
     }
