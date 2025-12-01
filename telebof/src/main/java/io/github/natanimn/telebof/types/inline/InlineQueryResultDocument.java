@@ -1,76 +1,80 @@
 package io.github.natanimn.telebof.types.inline;
 
 import io.github.natanimn.telebof.enums.MimeType;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents a link to a file. By default, this file will be sent by the user with an optional caption.
- * Alternatively, you can use {@link #inputMessageContent} to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
- * @author Natanim 
+ * Alternatively, you can use {@link #setInputMessageContent} to send a message with the specified content instead of the file. Currently, only .PDF and .ZIP files can be sent using this method.
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultDocument extends InlineQueryMediaResult<InlineQueryResultDocument> {
-    private String document_url;
-    private String document;
+    @SerializedName("document_url")
+    private String documentUrl;
     private String description;
-    private MimeType mime_type;
-    private String thumbnail_url;
-    private Integer thumbnail_width;
-    private Integer thumbnail_height;
+    @SerializedName("mime_type")
+    private MimeType mimeType;
+    @SerializedName("thumbnail_url")
+    private String thumbnailUrl;
+    @SerializedName("thumbnail_width")
+    private Integer thumbnailWidth;
+    @SerializedName("thumbnail_height")
+    private Integer thumbnailHeight;
     private String title;
 
     /**
      * Required
      * @param id Unique identifier for this result, 1-64 bytes
-     * @param document_url A valid URL for the file
+     * @param documentUrl A valid URL for the file
      * @param title Title for the result
-     * @param mime_type MIME type of the content of the file, either {@link MimeType#PDF} or {@link MimeType#ZIP}
+     * @param mimeType MIME type of the content of the file, either {@link MimeType#PDF} or {@link MimeType#ZIP}
      */
-    public InlineQueryResultDocument(String id, String document_url, String title, MimeType mime_type) {
+    public InlineQueryResultDocument(String id, String documentUrl, String title, MimeType mimeType) {
         super("document", id);
-        this.document_url = document_url;
+        this.documentUrl = documentUrl;
         this.title = title;
-        this.mime_type = mime_type;
+        this.mimeType = mimeType;
     }
 
     /**
      * Optional
-     * @param thumbnail_url URL of the thumbnail (JPEG only) for the file
+     * @param thumbnailUrl URL of the thumbnail (JPEG only) for the file
      * @return {@link InlineQueryResultDocument}
      */
-    public InlineQueryResultDocument thumbnailUrl(String thumbnail_url){
-        this.thumbnail_url = thumbnail_url;
+    public InlineQueryResultDocument setThumbnailUrl(String thumbnailUrl){
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_width Thumbnail Width
+     * @param thumbnailWidth Thumbnail Width
      * @return {@link InlineQueryResultDocument}
      */
-    public InlineQueryResultDocument thumbnailWidth(int thumbnail_width) {
-        this.thumbnail_width = thumbnail_width;
+    public InlineQueryResultDocument setThumbnailWidth(Integer thumbnailWidth) {
+        this.thumbnailWidth = thumbnailWidth;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_height Thumbnail height
+     * @param thumbnailHeight Thumbnail height
      * @return {@link InlineQueryResultDocument}
      */
-    public InlineQueryResultDocument thumbnailHeight(int thumbnail_height) {
-        this.thumbnail_height = thumbnail_height;
+    public InlineQueryResultDocument setThumbnailHeight(Integer thumbnailHeight) {
+        this.thumbnailHeight = thumbnailHeight;
         return this;
     }
 
     /**
      * Optional
-     * @param description hort description of the result
+     * @param description Short description of the result
      * @return {@link InlineQueryResultDocument}
      */
-    public InlineQueryResultDocument description(String description) {
+    public InlineQueryResultDocument setDescription(String description) {
         this.description = description;
         return this;
     }
-
 }
