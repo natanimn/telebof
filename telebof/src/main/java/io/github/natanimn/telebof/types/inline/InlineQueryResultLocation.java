@@ -2,31 +2,38 @@ package io.github.natanimn.telebof.types.inline;
 
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.input.InputTextMessageContent;
-
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents a location on a map. By default, the location will be sent by the user.
- * Alternatively, you can use {@link #inputMessageContent} to send a message with the specified content instead of the location.
- * @author Natanim 
+ * Alternatively, you can use {@link #setInputMessageContent} to send a message with the specified content instead of the location.
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultLocation implements InlineQueryResult {
     private String id;
     private String type;
-    private String location;
-    private String thumbnail_url;
     private String title;
-    private Integer live_period;
+    @SerializedName("live_period")
+    private Integer livePeriod;
     private Integer heading;
-    private Integer proximity_alert_radius;
-    private Integer thumbnail_width;
-    private Integer thumbnail_height;
+    @SerializedName("proximity_alert_radius")
+    private Integer proximityAlertRadius;
+    @SerializedName("thumbnail_url")
+    private String thumbnailUrl;
+    @SerializedName("thumbnail_width")
+    private Integer thumbnailWidth;
+    @SerializedName("thumbnail_height")
+    private Integer thumbnailHeight;
     private Double latitude;
     private Double longitude;
-    private Float horizontal_accuracy;
-    private InputTextMessageContent input_message_content;
-    private InlineKeyboardMarkup reply_markup;
+    @SerializedName("horizontal_accuracy")
+    private Float horizontalAccuracy;
+    @SerializedName("input_message_content")
+    private InputTextMessageContent inputMessageContent;
+    @SerializedName("reply_markup")
+    private InlineKeyboardMarkup replyMarkup;
 
     /**
      * Required
@@ -35,7 +42,7 @@ public class InlineQueryResultLocation implements InlineQueryResult {
      * @param longitude Location longitude in degrees
      * @param title Location title
      */
-    public InlineQueryResultLocation(String id, double latitude, double longitude, String title) {
+    public InlineQueryResultLocation(String id, Double latitude, Double longitude, String title) {
         this.type = "location";
         this.id = id;
         this.latitude = latitude;
@@ -45,21 +52,21 @@ public class InlineQueryResultLocation implements InlineQueryResult {
 
     /**
      * Optional
-     * @param horizontal_accuracy The radius of uncertainty for the location, measured in meters; 0-1500
+     * @param horizontalAccuracy The radius of uncertainty for the location, measured in meters; 0-1500
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation horizontalAccuracy(Float horizontal_accuracy) {
-        this.horizontal_accuracy = horizontal_accuracy;
+    public InlineQueryResultLocation setHorizontalAccuracy(Float horizontalAccuracy) {
+        this.horizontalAccuracy = horizontalAccuracy;
         return this;
     }
 
     /**
      * Optional
-     * @param live_period Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+     * @param livePeriod Period in seconds during which the location can be updated, should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation livePeriod(int live_period) {
-        this.live_period = live_period;
+    public InlineQueryResultLocation setLivePeriod(Integer livePeriod) {
+        this.livePeriod = livePeriod;
         return this;
     }
 
@@ -68,69 +75,68 @@ public class InlineQueryResultLocation implements InlineQueryResult {
      * @param heading For live locations, a direction in which the user is moving, in degrees. Must be between 1 and 360 if specified.
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation heading(int heading) {
+    public InlineQueryResultLocation setHeading(Integer heading) {
         this.heading = heading;
         return this;
     }
 
     /**
      * Optional
-     * @param proximity_alert_radius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
+     * @param proximityAlertRadius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters. Must be between 1 and 100000 if specified.
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation proximityAlertRadius(int proximity_alert_radius) {
-        this.proximity_alert_radius = proximity_alert_radius;
+    public InlineQueryResultLocation setProximityAlertRadius(Integer proximityAlertRadius) {
+        this.proximityAlertRadius = proximityAlertRadius;
         return this;
     }
 
     /**
      * Optional
-     * @param input_message_content Content of the message to be sent instead of the location
+     * @param inputMessageContent Content of the message to be sent instead of the location
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation inputMessageContent(InputTextMessageContent input_message_content) {
-        this.input_message_content = input_message_content;
+    public InlineQueryResultLocation setInputMessageContent(InputTextMessageContent inputMessageContent) {
+        this.inputMessageContent = inputMessageContent;
         return this;
     }
 
     /**
      * Optional
-     * @param keyboard {@link InlineKeyboardMarkup Inline keyboard} attached to the message
+     * @param replyMarkup {@link InlineKeyboardMarkup Inline keyboard} attached to the message
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation replyMarkup(InlineKeyboardMarkup keyboard) {
-        this.reply_markup = keyboard;
+    public InlineQueryResultLocation setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
+        this.replyMarkup = replyMarkup;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_url Url of the thumbnail for the result
+     * @param thumbnailUrl Url of the thumbnail for the result
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation thumbnailUrl(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+    public InlineQueryResultLocation setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_width Thumbnail width
+     * @param thumbnailWidth Thumbnail width
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation thumbnailWidth(int thumbnail_width) {
-        this.thumbnail_width = thumbnail_width;
+    public InlineQueryResultLocation setThumbnailWidth(Integer thumbnailWidth) {
+        this.thumbnailWidth = thumbnailWidth;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_height Thumbnail height
+     * @param thumbnailHeight Thumbnail height
      * @return {@link InlineQueryResultLocation}
      */
-    public InlineQueryResultLocation thumbnailHeight(int thumbnail_height) {
-        this.thumbnail_height = thumbnail_height;
+    public InlineQueryResultLocation setThumbnailHeight(Integer thumbnailHeight) {
+        this.thumbnailHeight = thumbnailHeight;
         return this;
     }
-
 }
