@@ -1,20 +1,21 @@
 package io.github.natanimn.telebof.types.inline;
 
 import io.github.natanimn.telebof.types.web.WebAppInfo;
-
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * This object represents a button to be shown above inline query results. You must use exactly one of the optional fields.
- * @author Natanim 
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultsButton implements Serializable {
     private String text;
-    private String start_parameter;
-    private WebAppInfo web_app_info;
+    @SerializedName("start_parameter")
+    private String startParameter;
+    @SerializedName("web_app_info")
+    private WebAppInfo webAppInfo;
 
     /**
      * Required
@@ -26,38 +27,23 @@ public class InlineQueryResultsButton implements Serializable {
 
     /**
      * Optional
-     * @param web_app_info Description of the Web App that will be launched when the user presses the button.
+     * @param webAppInfo Description of the Web App that will be launched when the user presses the button.
      *                     The Web App will be able to switch back to the inline mode using the method switchInlineQuery inside the Web App.
      * @return {@link InlineQueryResultsButton}
      */
-    public InlineQueryResultsButton webAppInfo(WebAppInfo web_app_info){
-        this.web_app_info = web_app_info;
+    public InlineQueryResultsButton setWebAppInfo(WebAppInfo webAppInfo){
+        this.webAppInfo = webAppInfo;
         return this;
     }
 
     /**
      * Optional
-     * @param start_parameter <a href="https://core.telegram.org/bots/features#deep-linking">Deep-linking parameter</a> for the /start message sent to the bot when a user presses the button.
+     * @param startParameter <a href="https://core.telegram.org/bots/features#deep-linking">Deep-linking parameter</a> for the /start message sent to the bot when a user presses the button.
      *                         1-64 characters, only A-Z, a-z, 0-9, _ and - are allowed.
      * @return {@link InlineQueryResultsButton}
      */
-    public InlineQueryResultsButton startParameter(String start_parameter){
-        this.start_parameter = start_parameter;
+    public InlineQueryResultsButton setStartParameter(String startParameter){
+        this.startParameter = startParameter;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        InlineQueryResultsButton that = (InlineQueryResultsButton) object;
-        return Objects.equals(text, that.text) &&
-                Objects.equals(start_parameter, that.start_parameter) &&
-                Objects.equals(web_app_info, that.web_app_info);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(text, start_parameter, web_app_info);
     }
 }
