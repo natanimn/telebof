@@ -2,33 +2,43 @@ package io.github.natanimn.telebof.types.inline;
 
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.input.InputTextMessageContent;
-
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 /**
  * Represents a venue. By default, the venue will be sent by the user.
- * Alternatively, you can use {@link #inputMessageContent} to send a message with the specified content instead of the venue.
- * @author Natanim 
+ * Alternatively, you can use {@link #setInputMessageContent} to send a message with the specified content instead of the venue.
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class InlineQueryResultVenue implements Serializable, InlineQueryResult {
     private String id;
     private String type;
-    private String thumbnail_url;
+    @SerializedName("thumbnail_url")
+    private String thumbnailUrl;
     private String title;
     private String address;
-    private String foursquare_id;
-    private String foursquare_type;
-    private String google_place_id;
-    private String google_place_type;
-    private Integer thumbnail_width;
-    private Integer thumbnail_height;
+    @SerializedName("foursquare_id")
+    private String foursquareId;
+    @SerializedName("foursquare_type")
+    private String foursquareType;
+    @SerializedName("google_place_id")
+    private String googlePlaceId;
+    @SerializedName("google_place_type")
+    private String googlePlaceType;
+    @SerializedName("thumbnail_width")
+    private Integer thumbnailWidth;
+    @SerializedName("thumbnail_height")
+    private Integer thumbnailHeight;
     private Double latitude;
     private Double longitude;
-    private Float horizontal_accuracy;
-    private InputTextMessageContent input_message_content;
-    private InlineKeyboardMarkup reply_markup;
+    @SerializedName("horizontal_accuracy")
+    private Float horizontalAccuracy;
+    @SerializedName("input_message_content")
+    private InputTextMessageContent inputMessageContent;
+    @SerializedName("reply_markup")
+    private InlineKeyboardMarkup replyMarkup;
 
     /**
      * Required
@@ -38,7 +48,7 @@ public class InlineQueryResultVenue implements Serializable, InlineQueryResult {
      * @param title Title of the venue
      * @param address Address of the venue
      */
-    public InlineQueryResultVenue(String id, double latitude, double longitude, String title, String address) {
+    public InlineQueryResultVenue(String id, Double latitude, Double longitude, String title, String address) {
         this.type = "venue";
         this.id = id;
         this.latitude = latitude;
@@ -49,92 +59,91 @@ public class InlineQueryResultVenue implements Serializable, InlineQueryResult {
 
     /**
      * Optional
-     * @param foursquare_id Foursquare identifier of the venue if known
+     * @param foursquareId Foursquare identifier of the venue if known
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue foursquareId(String foursquare_id) {
-        this.foursquare_id = foursquare_id;
+    public InlineQueryResultVenue setFoursquareId(String foursquareId) {
+        this.foursquareId = foursquareId;
         return this;
     }
 
     /**
      * Optional
-     * @param foursquare_type Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
+     * @param foursquareType Foursquare type of the venue, if known. (For example, “arts_entertainment/default”, “arts_entertainment/aquarium” or “food/icecream”.)
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue foursquareType(String foursquare_type) {
-        this.foursquare_type = foursquare_type;
+    public InlineQueryResultVenue setFoursquareType(String foursquareType) {
+        this.foursquareType = foursquareType;
         return this;
     }
 
     /**
      * Optional
-     * @param google_place_id Google Places identifier of the venue
+     * @param googlePlaceId Google Places identifier of the venue
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue googlePlaceId(String google_place_id) {
-        this.google_place_id = google_place_id;
+    public InlineQueryResultVenue setGooglePlaceId(String googlePlaceId) {
+        this.googlePlaceId = googlePlaceId;
         return this;
     }
 
     /**
      * Optional
-     * @param google_place_type Google Places type of the venue.
+     * @param googlePlaceType Google Places type of the venue.
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue googlePlaceType(String google_place_type) {
-        this.google_place_type = google_place_type;
-        return this;
-    }
-    
-    /**
-     * Optional
-     * @param thumbnail_url Url of the thumbnail for the result
-     * @return {@link InlineQueryResultVenue}
-     */
-    public InlineQueryResultVenue thumbnailUrl(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+    public InlineQueryResultVenue setGooglePlaceType(String googlePlaceType) {
+        this.googlePlaceType = googlePlaceType;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_width Thumbnail width
+     * @param thumbnailUrl Url of the thumbnail for the result
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue thumbnailWidth(int thumbnail_width) {
-        this.thumbnail_width = thumbnail_width;
+    public InlineQueryResultVenue setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
         return this;
     }
 
     /**
      * Optional
-     * @param thumbnail_height Thumbnail height
+     * @param thumbnailWidth Thumbnail width
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue thumbnailHeight(int thumbnail_height) {
-        this.thumbnail_height = thumbnail_height;
+    public InlineQueryResultVenue setThumbnailWidth(Integer thumbnailWidth) {
+        this.thumbnailWidth = thumbnailWidth;
         return this;
     }
 
     /**
      * Optional
-     * @param input_message_content Content of the message to be sent instead of the venue
+     * @param thumbnailHeight Thumbnail height
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue inputMessageContent(InputTextMessageContent input_message_content) {
-        this.input_message_content = input_message_content;
+    public InlineQueryResultVenue setThumbnailHeight(Integer thumbnailHeight) {
+        this.thumbnailHeight = thumbnailHeight;
         return this;
     }
 
     /**
      * Optional
-     * @param keyboard {@link InlineKeyboardMarkup Inline keyboard} attached to the message
+     * @param inputMessageContent Content of the message to be sent instead of the venue
      * @return {@link InlineQueryResultVenue}
      */
-    public InlineQueryResultVenue replyMarkup(InlineKeyboardMarkup keyboard) {
-        this.reply_markup = keyboard;
+    public InlineQueryResultVenue setInputMessageContent(InputTextMessageContent inputMessageContent) {
+        this.inputMessageContent = inputMessageContent;
         return this;
     }
 
+    /**
+     * Optional
+     * @param replyMarkup {@link InlineKeyboardMarkup Inline keyboard} attached to the message
+     * @return {@link InlineQueryResultVenue}
+     */
+    public InlineQueryResultVenue setReplyMarkup(InlineKeyboardMarkup replyMarkup) {
+        this.replyMarkup = replyMarkup;
+        return this;
+    }
 }
