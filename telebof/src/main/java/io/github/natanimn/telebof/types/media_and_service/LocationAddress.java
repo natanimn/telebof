@@ -5,64 +5,65 @@ import java.io.Serializable;
 
 /**
  * Describes the physical address of a location.
- * @param countryCode The two-letter ISO 3166-1 alpha-2 country code of the country where the location is located
- * @param state Optional. State of the location
- * @param city Optional. City of the location
- * @param street Optional. Street address of the location
  * @author Natanim
  * @since 19 August 2025
  * @version 1.3.0
  */
-public record LocationAddress(
-        @SerializedName("country_code") String countryCode,
-        String state,
-        String city,
-        String street
-) implements Serializable {
+public class LocationAddress implements Serializable {
+    /**
+     * The two-letter ISO 3166-1 alpha-2 country code of the country where the location is located
+     */
+    @SerializedName("country_code")
+    private String countryCode;
 
     /**
-     * Creates a new LocationAddress builder
-     * @param countryCode The two-letter ISO 3166-1 alpha-2 country code of the country where the location is located
+     * Optional. State of the location
      */
-    public static LocationAddressBuilder builder(String countryCode) {
-        return new LocationAddressBuilder(countryCode);
+    private String state;
+
+    /**
+     * Optional. City of the location
+     */
+    private String city;
+
+    /**
+     * Optional. Street address of the location
+     */
+    private String street;
+
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    /**
-     * Builder class for LocationAddress
-     */
-    public static class LocationAddressBuilder {
-        private final String countryCode;
-        private String state;
-        private String city;
-        private String street;
+    public LocationAddress setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+        return this;
+    }
 
-        public LocationAddressBuilder(String countryCode) {
-            this.countryCode = countryCode;
-        }
+    public String getState() {
+        return state;
+    }
 
-        public LocationAddressBuilder state(String state) {
-            this.state = state;
-            return this;
-        }
+    public LocationAddress setState(String state) {
+        this.state = state;
+        return this;
+    }
 
-        public LocationAddressBuilder city(String city) {
-            this.city = city;
-            return this;
-        }
+    public String getCity() {
+        return city;
+    }
 
-        public LocationAddressBuilder street(String street) {
-            this.street = street;
-            return this;
-        }
+    public LocationAddress setCity(String city) {
+        this.city = city;
+        return this;
+    }
 
-        public LocationAddress build() {
-            return new LocationAddress(
-                    countryCode,
-                    state,
-                    city,
-                    street
-            );
-        }
+    public String getStreet() {
+        return street;
+    }
+
+    public LocationAddress setStreet(String street) {
+        this.street = street;
+        return this;
     }
 }
