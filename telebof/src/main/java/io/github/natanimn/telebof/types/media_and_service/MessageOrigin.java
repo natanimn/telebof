@@ -8,23 +8,111 @@ import java.io.Serializable;
 
 /**
  * This class describes the origin of a message
- * @param type Type of the message origin,
- * @param date Date the message was sent originally in Unix time
- * @param senderUser User that sent the message originally
- * @param senderUserName Name of the user that sent the message originally
- * @param senderChat Chat that sent the message originally
- * @param authorSignature For messages originally sent by an anonymous chat administrator, original message author signature, or Signature of the original post author
- * @param messageId Unique message identifier inside the chat
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record MessageOrigin(
-        MessageOriginType type,
-        Integer date,
-        @SerializedName("sender_user") User senderUser,
-        @SerializedName("sender_user_name") String senderUserName,
-        @SerializedName("sender_chat") Chat senderChat,
-        @SerializedName("author_signature") String authorSignature,
-        @SerializedName("message_id") Integer messageId
-) implements Serializable {}
+public class MessageOrigin implements Serializable {
+    /**
+     * Type of the message origin
+     */
+    private MessageOriginType type;
+
+    /**
+     * Date the message was sent originally in Unix time
+     */
+    private Integer date;
+
+    /**
+     * User that sent the message originally
+     */
+    @SerializedName("sender_user")
+    private User senderUser;
+
+    /**
+     * Name of the user that sent the message originally
+     */
+    @SerializedName("sender_user_name")
+    private String senderUserName;
+
+    /**
+     * Chat that sent the message originally
+     */
+    @SerializedName("sender_chat")
+    private Chat senderChat;
+
+    /**
+     * For messages originally sent by an anonymous chat administrator, original message author signature, or Signature of the original post author
+     */
+    @SerializedName("author_signature")
+    private String authorSignature;
+
+    /**
+     * Unique message identifier inside the chat
+     */
+    @SerializedName("message_id")
+    private Integer messageId;
+
+    public MessageOriginType getType() {
+        return type;
+    }
+
+    public MessageOrigin setType(MessageOriginType type) {
+        this.type = type;
+        return this;
+    }
+
+    public Integer getDate() {
+        return date;
+    }
+
+    public MessageOrigin setDate(Integer date) {
+        this.date = date;
+        return this;
+    }
+
+    public User getSenderUser() {
+        return senderUser;
+    }
+
+    public MessageOrigin setSenderUser(User senderUser) {
+        this.senderUser = senderUser;
+        return this;
+    }
+
+    public String getSenderUserName() {
+        return senderUserName;
+    }
+
+    public MessageOrigin setSenderUserName(String senderUserName) {
+        this.senderUserName = senderUserName;
+        return this;
+    }
+
+    public Chat getSenderChat() {
+        return senderChat;
+    }
+
+    public MessageOrigin setSenderChat(Chat senderChat) {
+        this.senderChat = senderChat;
+        return this;
+    }
+
+    public String getAuthorSignature() {
+        return authorSignature;
+    }
+
+    public MessageOrigin setAuthorSignature(String authorSignature) {
+        this.authorSignature = authorSignature;
+        return this;
+    }
+
+    public Integer getMessageId() {
+        return messageId;
+    }
+
+    public MessageOrigin setMessageId(Integer messageId) {
+        this.messageId = messageId;
+        return this;
+    }
+}
