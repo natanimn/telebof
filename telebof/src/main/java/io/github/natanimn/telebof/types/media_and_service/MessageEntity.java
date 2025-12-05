@@ -8,91 +8,107 @@ import java.io.Serializable;
 
 /**
  * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
- * @param url Optional. For “text_link” only, URL that will be opened after user taps on the text
- * @param language Optional. For “pre” only, the programming language of the entity text
- * @param offset Offset in UTF-16 code units to the start of the entity
- * @param length Length of the entity in UTF-16 code units
- * @param user Optional. For “text_mention” only, the mentioned user
- * @param customEmojiId Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use {@link BotContext#getCustomEmojiStickers} to get full information about the sticker
- * @param type Type of the entity.
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record MessageEntity(
-        String url,
-        String language,
-        Integer offset,
-        Integer length,
-        User user,
-        @SerializedName("custom_emoji_id") String customEmojiId,
-        EntityType type
-) implements Serializable {
+public class MessageEntity implements Serializable {
+    /**
+     * Optional. For “text_link” only, URL that will be opened after user taps on the text
+     */
+    private String url;
 
     /**
-     * Creates a new MessageEntity builder
+     * Optional. For “pre” only, the programming language of the entity text
      */
-    public static MessageEntityBuilder builder() {
-        return new MessageEntityBuilder();
+    private String language;
+
+    /**
+     * Offset in UTF-16 code units to the start of the entity
+     */
+    private Integer offset;
+
+    /**
+     * Length of the entity in UTF-16 code units
+     */
+    private Integer length;
+
+    /**
+     * Optional. For “text_mention” only, the mentioned user
+     */
+    private User user;
+
+    /**
+     * Optional. For “custom_emoji” only, unique identifier of the custom emoji. Use {@link BotContext#getCustomEmojiStickers} to get full information about the sticker
+     */
+    @SerializedName("custom_emoji_id")
+    private String customEmojiId;
+
+    /**
+     * Type of the entity.
+     */
+    private EntityType type;
+
+    public String getUrl() {
+        return url;
     }
 
-    /**
-     * Builder class for MessageEntity
-     */
-    public static class MessageEntityBuilder {
-        private String url;
-        private String language;
-        private Integer offset;
-        private Integer length;
-        private User user;
-        private String customEmojiId;
-        private EntityType type;
+    public MessageEntity setUrl(String url) {
+        this.url = url;
+        return this;
+    }
 
-        public MessageEntityBuilder type(EntityType type) {
-            this.type = type;
-            return this;
-        }
+    public String getLanguage() {
+        return language;
+    }
 
-        public MessageEntityBuilder offset(int offset) {
-            this.offset = offset;
-            return this;
-        }
+    public MessageEntity setLanguage(String language) {
+        this.language = language;
+        return this;
+    }
 
-        public MessageEntityBuilder length(int length) {
-            this.length = length;
-            return this;
-        }
+    public Integer getOffset() {
+        return offset;
+    }
 
-        public MessageEntityBuilder url(String url) {
-            this.url = url;
-            return this;
-        }
+    public MessageEntity setOffset(Integer offset) {
+        this.offset = offset;
+        return this;
+    }
 
-        public MessageEntityBuilder user(User user) {
-            this.user = user;
-            return this;
-        }
+    public Integer getLength() {
+        return length;
+    }
 
-        public MessageEntityBuilder language(String language) {
-            this.language = language;
-            return this;
-        }
+    public MessageEntity setLength(Integer length) {
+        this.length = length;
+        return this;
+    }
 
-        public MessageEntityBuilder customEmojiId(String customEmojiId) {
-            this.customEmojiId = customEmojiId;
-            return this;
-        }
+    public User getUser() {
+        return user;
+    }
 
-        public MessageEntity build() {
-            return new MessageEntity(
-                    url,
-                    language,
-                    offset,
-                    length,
-                    user,
-                    customEmojiId,
-                    type
-            );
-        }
+    public MessageEntity setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public String getCustomEmojiId() {
+        return customEmojiId;
+    }
+
+    public MessageEntity setCustomEmojiId(String customEmojiId) {
+        this.customEmojiId = customEmojiId;
+        return this;
+    }
+
+    public EntityType getType() {
+        return type;
+    }
+
+    public MessageEntity setType(EntityType type) {
+        this.type = type;
+        return this;
     }
 }
