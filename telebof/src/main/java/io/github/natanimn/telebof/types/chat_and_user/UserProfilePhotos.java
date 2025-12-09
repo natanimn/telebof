@@ -6,13 +6,27 @@ import java.util.List;
 
 /**
  * This object represent a user's profile pictures.
- * @param totalCount Total number of profile pictures the target user has
- * @param photos Requested profile pictures (in up to 4 sizes each)
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record UserProfilePhotos(
-        @SerializedName("total_count") Integer totalCount,
-        List<PhotoSize> photos
-) {}
+public class UserProfilePhotos {
+    /**
+     * Total number of profile pictures the target user has
+     */
+    @SerializedName("total_count")
+    private Integer totalCount;
+
+    /**
+     * Requested profile pictures (in up to 4 sizes each)
+     */
+    private List<PhotoSize> photos;
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public List<PhotoSize> getPhotos() {
+        return photos;
+    }
+}
