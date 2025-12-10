@@ -8,18 +8,18 @@ import io.github.natanimn.telebof.requests.Api;
  * AnswerCallbackQuery class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#answerCallbackQuery
  */
 public class AnswerCallbackQuery extends AbstractBaseRequest<AnswerCallbackQuery, Boolean> {
     /**
      * Required
-     * @param callback_query_id callback query id
+     * @param callbackQueryId callback query id
      * @param api api
      */
-    public AnswerCallbackQuery(String callback_query_id, Api api) {
+    public AnswerCallbackQuery(String callbackQueryId, Api api) {
         super(api, "answerCallbackQuery");
-        add("callback_query_id", callback_query_id);
+        add("callback_query_id", callbackQueryId);
     }
 
     /**
@@ -33,11 +33,11 @@ public class AnswerCallbackQuery extends AbstractBaseRequest<AnswerCallbackQuery
 
     /**
      * Optional
-     * @param show_alert If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
+     * @param showAlert If True, an alert will be shown by the client instead of a notification at the top of the chat screen. Defaults to false.
      * @return {@link AnswerCallbackQuery}
      */
-    public AnswerCallbackQuery showAlert(boolean show_alert){
-        return add("show_alert", show_alert);
+    public AnswerCallbackQuery showAlert(boolean showAlert){
+        return add("show_alert", showAlert);
     }
 
     /**
@@ -54,12 +54,12 @@ public class AnswerCallbackQuery extends AbstractBaseRequest<AnswerCallbackQuery
 
     /**
      * Optional
-     * @param cache_time The maximum amount of time in seconds that the result of the callback query may be cached client-side.
+     * @param cacheTime The maximum amount of time in seconds that the result of the callback query may be cached client-side.
      *                   Telegram apps will support caching starting in version 3.14. Defaults to 0.
      * @return {@link AnswerCallbackQuery}
      */
-    public AnswerCallbackQuery cacheTime(int cache_time){
-        return add("cache_time", cache_time);
+    public AnswerCallbackQuery cacheTime(int cacheTime){
+        return add("cache_time", cacheTime);
     }
 
 }
