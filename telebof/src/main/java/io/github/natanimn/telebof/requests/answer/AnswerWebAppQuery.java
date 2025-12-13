@@ -16,13 +16,13 @@ import io.github.natanimn.telebof.types.media_and_service.SentWebAppMessage;
 public class AnswerWebAppQuery extends AbstractBaseRequest<AnswerWebAppQuery, SentWebAppMessage> {
     /**
      * Required
-     * @param web_app_query_id web app query id
+     * @param webAppQueryId web app query id
      * @param result result
      * @param api api
      */
-    public AnswerWebAppQuery(String web_app_query_id, InlineQueryResult result, Api api) {
+    public AnswerWebAppQuery(String webAppQueryId, InlineQueryResult result, Api api) {
         super(api, "answerWebAppQuery", SentWebAppMessage.class);
-        add("web_app_query_id", web_app_query_id);
+        add("web_app_query_id", webAppQueryId);
         add("result", result);
     }
 
