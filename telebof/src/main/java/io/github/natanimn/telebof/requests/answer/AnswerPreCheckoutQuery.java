@@ -14,25 +14,25 @@ import io.github.natanimn.telebof.BotContext;
 public class AnswerPreCheckoutQuery extends AbstractBaseRequest<AnswerPreCheckoutQuery, Boolean> {
     /**
      * Required
-     * @param pre_checkout_query_id pre checkout query id
+     * @param preCheckoutQueryId pre checkout query id
      * @param ok ok
      * @param api api
      */
-    public AnswerPreCheckoutQuery(String pre_checkout_query_id, boolean ok, Api api) {
+    public AnswerPreCheckoutQuery(String preCheckoutQueryId, boolean ok, Api api) {
         super(api, "answerPreCheckoutQuery");
-        add("pre_checkout_query_id", pre_checkout_query_id);
+        add("pre_checkout_query_id", preCheckoutQueryId);
         add("ok", ok);
     }
 
     /**
      * Optional
-     * @param error_message <b>Required if ok is False.</b><br>
+     * @param errorMessage <b>Required if ok is False.</b><br>
      *                      Error message in human-readable form that explains the reason for failure to proceed with the checkout
      *                      (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details.
      *                      Please choose a different color or garment!"). Telegram will display this message to the user.
      * @return {@link AnswerPreCheckoutQuery}
      */
-    public AnswerPreCheckoutQuery errorMessage(String error_message) {
-        return add("error_message", error_message);
+    public AnswerPreCheckoutQuery errorMessage(String errorMessage) {
+        return add("error_message", errorMessage);
     }
 }
