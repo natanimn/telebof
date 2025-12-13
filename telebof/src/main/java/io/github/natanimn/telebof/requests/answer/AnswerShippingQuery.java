@@ -17,35 +17,35 @@ import java.util.List;
 public class AnswerShippingQuery extends AbstractBaseRequest<AnswerShippingQuery, Boolean> {
     /**
      * Required
-     * @param shipping_query_id shipping query id
+     * @param shippingQueryId shipping query id
      * @param ok ok
      * @param api api
      */
-    public AnswerShippingQuery(String shipping_query_id, boolean ok, Api api) {
+    public AnswerShippingQuery(String shippingQueryId, boolean ok, Api api) {
         super(api, "answerShippingQuery");
-        add("shipping_query_id", shipping_query_id);
+        add("shipping_query_id", shippingQueryId);
         add("ok", ok);
     }
 
     /**
      * Optional
-     * @param shipping_options <b>Required if ok is True.</b><br>
+     * @param shippingOptions <b>Required if ok is True.</b><br>
      *                        A JSON-serialized array of available shipping options.
      * @return {@link AnswerShippingQuery}
      */
-    public AnswerShippingQuery shippingOptions(ShippingOption[] shipping_options) {
-        return add("shipping_options", List.of(shipping_options));
+    public AnswerShippingQuery shippingOptions(ShippingOption[] shippingOptions) {
+        return add("shipping_options", shippingOptions);
     }
 
     /**
      * Optional
-     * @param error_message <b>Required if ok is False.</b><br>
+     * @param errorMessage <b>Required if ok is False.</b><br>
      *                      Error message in human-readable form that explains why it is impossible to complete the order (e.g. “Sorry, delivery to your desired address is unavailable”).
      *                      Telegram will display this message to the user.
      * @return {@link AnswerShippingQuery}
      */
-    public AnswerShippingQuery errorMessage(String error_message) {
-        return add("error_message", error_message);
+    public AnswerShippingQuery errorMessage(String errorMessage) {
+        return add("error_message", errorMessage);
     }
 
 }
