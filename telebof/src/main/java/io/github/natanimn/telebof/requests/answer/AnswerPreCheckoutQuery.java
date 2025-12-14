@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.BotContext;
  * AnswerPreCheckoutQuery class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#answerPreCheckoutQuery
  */
 public class AnswerPreCheckoutQuery extends AbstractBaseRequest<AnswerPreCheckoutQuery, Boolean> {
