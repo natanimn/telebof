@@ -10,7 +10,7 @@ import io.github.natanimn.telebof.types.media_and_service.SentWebAppMessage;
  * AnswerWebAppQuery class. Returns {@link SentWebAppMessage} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#answerWebAppQuery
  */
 public class AnswerWebAppQuery extends AbstractBaseRequest<AnswerWebAppQuery, SentWebAppMessage> {
