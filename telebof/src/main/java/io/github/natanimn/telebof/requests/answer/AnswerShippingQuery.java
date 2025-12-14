@@ -11,7 +11,7 @@ import java.util.List;
  * AnswerShippingQuery class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#answerShippingQuery
  */
 public class AnswerShippingQuery extends AbstractBaseRequest<AnswerShippingQuery, Boolean> {
