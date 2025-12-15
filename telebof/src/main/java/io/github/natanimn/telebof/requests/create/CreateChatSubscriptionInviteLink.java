@@ -8,23 +8,23 @@ import io.github.natanimn.telebof.requests.Api;
  * CreateChatSubscriptionInviteLink class
  * @author Natanim
  * @since 12 April 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#createChatSubscriptionInviteLink
  */
 
 public class CreateChatSubscriptionInviteLink extends AbstractBaseRequest<CreateChatSubscriptionInviteLink, CreateChatSubscriptionInviteLink> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param subscription_period period
-     * @param subscription_price price
+     * @param chatId chat id
+     * @param subscriptionPeriod period
+     * @param subscriptionPrice price
      * @param api api
      */
-    public CreateChatSubscriptionInviteLink(Object chat_id, int subscription_period, int subscription_price,
+    public CreateChatSubscriptionInviteLink(Object chatId, int subscriptionPeriod, int subscriptionPrice,
                                             Api api) {
-        super(chat_id, api, "createChatSubscriptionInviteLink", CreateChatSubscriptionInviteLink.class);
-        add("subscription_period", subscription_period);
-        add("subscription_price", subscription_price);
+        super(chatId, api, "createChatSubscriptionInviteLink", CreateChatSubscriptionInviteLink.class);
+        add("subscription_period", subscriptionPeriod);
+        add("subscription_price", subscriptionPrice);
     }
 
     /**
