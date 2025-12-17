@@ -7,7 +7,7 @@ import io.github.natanimn.telebof.requests.Api;
  * DeleteWebhook class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class DeleteWebhook extends AbstractBaseRequest<DeleteWebhook, Boolean> {
     public DeleteWebhook(Api api){
@@ -16,11 +16,11 @@ public class DeleteWebhook extends AbstractBaseRequest<DeleteWebhook, Boolean> {
 
     /**
      * Optional
-     * @param drop_pending_updates Pass True to drop all pending updates
+     * @param dropPendingUpdates Pass True to drop all pending updates
      * @return {@link DeleteWebhook}
      */
-    public DeleteWebhook dropPendingUpdates(boolean drop_pending_updates){
-        return add("drop_pending_updates", drop_pending_updates);
+    public DeleteWebhook dropPendingUpdates(boolean dropPendingUpdates){
+        return add("drop_pending_updates", dropPendingUpdates);
     }
 
 }
