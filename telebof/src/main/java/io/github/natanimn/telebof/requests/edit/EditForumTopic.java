@@ -8,19 +8,19 @@ import io.github.natanimn.telebof.BotContext;
  * EditForumTopic class. Returns True on sucsess.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#editForumTopic
  */
 public class EditForumTopic extends AbstractBaseRequest<EditForumTopic, Boolean> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param message_thread_id message thread id
+     * @param chatId chat id
+     * @param messageThreadId message thread id
      * @param api api
      */
-    public EditForumTopic(Object chat_id, int message_thread_id, Api api) {
-        super(chat_id, api, "editForumTopic", Boolean.class);
-        add("message_thread_id", message_thread_id);
+    public EditForumTopic(Object chatId, int messageThreadId, Api api) {
+        super(chatId, api, "editForumTopic", Boolean.class);
+        add("message_thread_id", messageThreadId);
     }
 
     /**
@@ -35,13 +35,13 @@ public class EditForumTopic extends AbstractBaseRequest<EditForumTopic, Boolean>
 
     /**
      * Optional
-     * @param icon_custom_emoji_id New unique identifier of the custom emoji shown as the topic icon.
+     * @param iconCustomEmojiId New unique identifier of the custom emoji shown as the topic icon.
      *                             Use {@link BotContext#getForumTopicIconStickers} to get all allowed custom emoji identifiers.
      *                             Pass an empty string to remove the icon. If not specified, the current icon will be kept
      * @return {@link EditForumTopic}
      */
-    public EditForumTopic iconCustomEmojiId(String icon_custom_emoji_id) {
-        return add("icon_custom_emoji_id", icon_custom_emoji_id);
+    public EditForumTopic iconCustomEmojiId(String iconCustomEmojiId) {
+        return add("icon_custom_emoji_id", iconCustomEmojiId);
     }
 
 }
