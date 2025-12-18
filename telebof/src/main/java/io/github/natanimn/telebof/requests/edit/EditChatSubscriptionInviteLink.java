@@ -7,20 +7,20 @@ import io.github.natanimn.telebof.BotContext;
 /**
  * @author Natanim
  * @since 12 April 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#editChatSubscriptionInviteLink
  */
 
 public class EditChatSubscriptionInviteLink extends AbstractBaseRequest<EditChatSubscriptionInviteLink, EditChatSubscriptionInviteLink> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param invite_link invite link
+     * @param chatId chat id
+     * @param inviteLink invite link
      * @param api api
      */
-    public EditChatSubscriptionInviteLink(Object chat_id, String invite_link, Api api) {
-        super(chat_id, api, "editChatSubscriptionInviteLink", EditChatSubscriptionInviteLink.class);
-        add("invite_link", invite_link);
+    public EditChatSubscriptionInviteLink(Object chatId, String inviteLink, Api api) {
+        super(chatId, api, "editChatSubscriptionInviteLink", EditChatSubscriptionInviteLink.class);
+        add("invite_link", inviteLink);
     }
 
     /**
