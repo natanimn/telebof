@@ -10,48 +10,48 @@ import io.github.natanimn.telebof.types.updates.Message;
  * EditMessageReplyMarkup class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class EditMessageReplyMarkup extends AbstractBaseRequest<EditMessageReplyMarkup, Object> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      * @see BotContext#editMessageReplyMarkup(Object, int)
      */
-    public EditMessageReplyMarkup(Object chat_id, int message_id, Api api) {
-        super(chat_id, api, "editMessageReplyMarkup", Message.class);
-        add("message_id", message_id);
+    public EditMessageReplyMarkup(Object chatId, int messageId, Api api) {
+        super(chatId, api, "editMessageReplyMarkup", Message.class);
+        add("message_id", messageId);
     }
 
     /**
      * Required
-     * @param inline_message_id inline message id
+     * @param inlineMessageId inline message id
      * @param api api
      * @see BotContext#editMessageReplyMarkup(String)
      */
-    public EditMessageReplyMarkup(String inline_message_id, Api api) {
+    public EditMessageReplyMarkup(String inlineMessageId, Api api) {
         super(api, "editMessageReplyMarkup", Boolean.class);
-        add("inline_message_id", inline_message_id);
+        add("inline_message_id", inlineMessageId);
     }
 
     /**
      * Optional
-     * @param reply_markup A JSON-serialized object for an inline keyboard.
+     * @param replyMarkup A JSON-serialized object for an inline keyboard.
      * @return {@link EditMessageReplyMarkup}
      */
-    public EditMessageReplyMarkup replyMarkup(InlineKeyboardMarkup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public EditMessageReplyMarkup replyMarkup(InlineKeyboardMarkup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message to be edited was sent
      * @return {@link EditMessageReplyMarkup}
      */
-    public EditMessageReplyMarkup businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public EditMessageReplyMarkup businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 
 }
