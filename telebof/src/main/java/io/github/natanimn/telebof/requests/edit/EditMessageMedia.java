@@ -11,55 +11,55 @@ import io.github.natanimn.telebof.types.updates.Message;
  * EditMessageMedia class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class EditMessageMedia extends AbstractBaseRequest<EditMessageMedia, Object> {
 
     /**
      * Required
      * @param media media
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      * @see BotContext#editMessageMedia(Object, InputMedia, int)
      */
-    public EditMessageMedia(InputMedia media, Object chat_id, int message_id, Api api) {
-        super(chat_id, api, "editMessageMedia", Message.class);
+    public EditMessageMedia(InputMedia media, Object chatId, int messageId, Api api) {
+        super(chatId, api, "editMessageMedia", Message.class);
         add("media", media);
-        add("message_id", message_id);
+        add("message_id", messageId);
         if (media.hasFile()) setHasMultipart(true);
     }
 
     /**
      * Required
      * @param media media
-     * @param inline_message_id inline message id
+     * @param inlineMessageId inline message id
      * @param api api
      * @see BotContext#editMessageMedia(String, InputMedia)
      */
-    public EditMessageMedia(InputMedia media, String inline_message_id, Api api) {
+    public EditMessageMedia(InputMedia media, String inlineMessageId, Api api) {
         super(api, "editMessageMedia", Boolean.class);
         add("media", media);
-        add("inline_message_id", inline_message_id);
+        add("inline_message_id", inlineMessageId);
         if (media.hasFile()) setHasMultipart(true);
 
     }
 
     /**
      * Optional
-     * @param reply_markup A JSON-serialized object for a new inline keyboard.
+     * @param replyMarkup A JSON-serialized object for a new inline keyboard.
      * @return {@link EditMessageMedia}
      */
-    public EditMessageMedia replyMarkup(InlineKeyboardMarkup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public EditMessageMedia replyMarkup(InlineKeyboardMarkup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message to be edited was sent
      * @return {@link EditMessageMedia}
      */
-    public EditMessageMedia businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public EditMessageMedia businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 }
