@@ -11,21 +11,21 @@ import io.github.natanimn.telebof.types.story.StoryArea;
  * EditStory class. Returns {@link Story} on success.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#editStory
  */
 public class EditStory extends AbstractBaseRequest<EditStory, Story> {
     /**
      * Required
-     * @param business_connection_id Unique identifier of the business connection
-     * @param story_id Unique identifier of the story to edit
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param storyId Unique identifier of the story to edit
      * @param content Content of the story
      * @param api api
      */
-    public EditStory(String business_connection_id, Integer story_id, InputStoryContent content, Api api) {
+    public EditStory(String businessConnectionId, int storyId, InputStoryContent content, Api api) {
         super(api, "editStory", Story.class);
-        add("business_connection_id", business_connection_id);
-        add("story_id", story_id);
+        add("business_connection_id", businessConnectionId);
+        add("story_id", storyId);
         add("content", content);
     }
 
@@ -40,20 +40,20 @@ public class EditStory extends AbstractBaseRequest<EditStory, Story> {
 
     /**
      * Optional
-     * @param parse_mode Mode for parsing entities in the story caption
+     * @param parseMode Mode for parsing entities in the story caption
      * @return {@link EditStory}
      */
-    public EditStory parseMode(String parse_mode) {
-        return add("parse_mode", parse_mode);
+    public EditStory parseMode(String parseMode) {
+        return add("parse_mode", parseMode);
     }
 
     /**
      * Optional
-     * @param caption_entities A JSON-serialized list of special entities that appear in the caption
+     * @param captionEntities A JSON-serialized list of special entities that appear in the caption
      * @return {@link EditStory}
      */
-    public EditStory captionEntities(MessageEntity[] caption_entities) {
-        return add("caption_entities", caption_entities);
+    public EditStory captionEntities(MessageEntity[] captionEntities) {
+        return add("caption_entities", captionEntities);
     }
 
     /**
