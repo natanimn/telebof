@@ -7,13 +7,14 @@ import io.github.natanimn.telebof.requests.Api;
  * A class for sending request of `editUserStarSubscription`
  * @author Natanim
  * @since July 25, 2025
+ * @version 1.3.0
  */
 public class EditUserStarSubscription extends AbstractBaseRequest<EditUserStarSubscription, Boolean> {
-    public EditUserStarSubscription(Long user_id, String telegram_charge_id, boolean is_canceled, Api rs){
+    public EditUserStarSubscription(long userId, String telegramChargeId, boolean isCanceled, Api rs){
         super(rs, "editUserStarSubscription");
-        add("user_id", user_id);
-        add("telegram_charge_id", telegram_charge_id);
-        add("is_canceled", is_canceled);
+        add("user_id", userId);
+        add("telegram_charge_id", telegramChargeId);
+        add("is_canceled", isCanceled);
     }
 
 }
