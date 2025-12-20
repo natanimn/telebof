@@ -8,72 +8,72 @@ import io.github.natanimn.telebof.types.gift_and_giveaway.OwnedGifts;
  * GetBusinessAccountGifts class. Returns {@link OwnedGifts} on success.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#getBusinessAccountGifts
  */
 public class GetBusinessAccountGifts extends AbstractBaseRequest<GetBusinessAccountGifts, OwnedGifts> {
     /**
      * Required
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @param api api
      */
-    public GetBusinessAccountGifts(String business_connection_id, Api api) {
+    public GetBusinessAccountGifts(String businessConnectionId, Api api) {
         super(api, "getBusinessAccountGifts", OwnedGifts.class);
-        add("business_connection_id", business_connection_id);
+        add("business_connection_id", businessConnectionId);
     }
 
     /**
      * Optional
-     * @param exclude_unsaved Pass True to exclude gifts that aren't saved to the account's profile page
+     * @param excludeUnsaved Pass True to exclude gifts that aren't saved to the account's profile page
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeUnsaved(Boolean exclude_unsaved) {
-        return add("exclude_unsaved", exclude_unsaved);
+    public GetBusinessAccountGifts excludeUnsaved(boolean excludeUnsaved) {
+        return add("exclude_unsaved", excludeUnsaved);
     }
 
     /**
      * Optional
-     * @param exclude_saved Pass True to exclude gifts that are saved to the account's profile page
+     * @param excludeSaved Pass True to exclude gifts that are saved to the account's profile page
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeSaved(Boolean exclude_saved) {
-        return add("exclude_saved", exclude_saved);
+    public GetBusinessAccountGifts excludeSaved(boolean excludeSaved) {
+        return add("exclude_saved", excludeSaved);
     }
 
     /**
      * Optional
-     * @param exclude_unlimited Pass True to exclude gifts that can be purchased an unlimited number of times
+     * @param excludeUnlimited Pass True to exclude gifts that can be purchased an unlimited number of times
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeUnlimited(Boolean exclude_unlimited) {
-        return add("exclude_unlimited", exclude_unlimited);
+    public GetBusinessAccountGifts excludeUnlimited(boolean excludeUnlimited) {
+        return add("exclude_unlimited", excludeUnlimited);
     }
 
     /**
      * Optional
-     * @param exclude_limited Pass True to exclude gifts that can be purchased a limited number of times
+     * @param excludeLimited Pass True to exclude gifts that can be purchased a limited number of times
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeLimited(Boolean exclude_limited) {
-        return add("exclude_limited", exclude_limited);
+    public GetBusinessAccountGifts excludeLimited(boolean excludeLimited) {
+        return add("exclude_limited", excludeLimited);
     }
 
     /**
      * Optional
-     * @param exclude_unique Pass True to exclude unique gifts
+     * @param excludeUnique Pass True to exclude unique gifts
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeUnique(Boolean exclude_unique) {
-        return add("exclude_unique", exclude_unique);
+    public GetBusinessAccountGifts excludeUnique(boolean excludeUnique) {
+        return add("exclude_unique", excludeUnique);
     }
 
     /**
      * Optional
-     * @param sort_by_price Pass True to sort results by gift price instead of send date
+     * @param sortByPrice Pass True to sort results by gift price instead of send date
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts sortByPrice(Boolean sort_by_price) {
-        return add("sort_by_price", sort_by_price);
+    public GetBusinessAccountGifts sortByPrice(boolean sortByPrice) {
+        return add("sort_by_price", sortByPrice);
     }
 
     /**
