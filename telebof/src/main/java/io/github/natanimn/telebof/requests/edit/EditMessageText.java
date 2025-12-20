@@ -15,45 +15,45 @@ import java.util.List;
  * EditMessageText class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#editMessageText
  */
 public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object> {
     /**
      * Required
      * @param text test
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      * @see BotContext#editMessageText(String, Object, int)
      */
-    public EditMessageText(String text, Object chat_id, int message_id, Api api) {
-        super(chat_id, api, "editMessageText", Message.class);
+    public EditMessageText(Object chatId, String text, int messageId, Api api) {
+        super(chatId, api, "editMessageText", Message.class);
         add("text", text);
-        add("message_id", message_id);
+        add("message_id", messageId);
     }
 
     /**
      * Required
      * @param text test
-     * @param inline_message_id inline message id
+     * @param inlineMessageId inline message id
      * @param api api
      * @see BotContext#editMessageText(String, String)
      */
-    public EditMessageText(String text, String inline_message_id, Api api) {
+    public EditMessageText(String inlineMessageId, String text, Api api) {
         super(api, "editMessageText", Boolean.class);
         add("text", text);
-        add("inline_message_id", inline_message_id);
+        add("inline_message_id", inlineMessageId);
     }
 
     /**
      * Optional
-     * @param parse_mode Mode for parsing entities in the message text.
+     * @param parseMode Mode for parsing entities in the message text.
      * @return {@link EditMessageText}
      *
      */
-    public EditMessageText parseMode(ParseMode parse_mode) {
-        return add("parse_mode",  parse_mode);
+    public EditMessageText parseMode(ParseMode parseMode) {
+        return add("parse_mode",  parseMode);
     }
 
     /**
@@ -67,23 +67,23 @@ public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object
 
     /**
      * Optional
-     * @param link_preview_options Link preview generation options for the message
+     * @param linkPreviewOption Link preview generation options for the message
      * @return {@link EditMessageText}
      */
-    public EditMessageText linkPreviewOption(LinkPreviewOptions link_preview_options) {
-        return add("disable_web_page_preview", link_preview_options);
+    public EditMessageText linkPreviewOption(LinkPreviewOptions linkPreviewOption) {
+        return add("disable_web_page_preview", linkPreviewOption);
     }
 
     /**
      * Optional
-     * @param reply_markup A JSON-serialized object for an inline keyboard.
+     * @param replyMarkup A JSON-serialized object for an inline keyboard.
      * @return {@link EditMessageText}
      */
-    public EditMessageText replyMarkup(InlineKeyboardMarkup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public EditMessageText replyMarkup(InlineKeyboardMarkup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
-    public EditMessageText businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public EditMessageText businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 }
