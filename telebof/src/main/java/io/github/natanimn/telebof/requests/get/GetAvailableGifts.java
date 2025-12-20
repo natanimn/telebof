@@ -9,15 +9,15 @@ import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
  * GetAvailableGifts class. Returns {@link Gifts} on success.
  * @author Natanim
  * @since July 25, 2025
- * @version 0.6
+ * @version 1.3.0
  * @see BotContext#getAvailableGifts
  */
 public class GetAvailableGifts extends AbstractBaseRequest<GetAvailableGifts, Gifts> {
     /**
-     * Requireed
-     * @param rs api
+     * Required
+     * @param api api
      */
-    public GetAvailableGifts(Api rs){
-        super(rs, "getAvailableGifts");
+    public GetAvailableGifts(Api api){
+        super(api, "getAvailableGifts");
     }
 }
