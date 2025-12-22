@@ -9,19 +9,19 @@ import io.github.natanimn.telebof.types.chat_and_user.ChatMember;
  * GetChatMember class. Returns {@link ChatMember} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getChatMember
  */
 public class GetChatMember extends AbstractBaseRequest<GetChatMember, ChatMember> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param user_id user id
+     * @param chatId chat id
+     * @param userId user id
      * @param api api
      */
-    public GetChatMember(Object chat_id, long user_id, Api api) {
-        super(chat_id, api, "getChatMember", ChatMember.class);
-        add("user_id", user_id);
+    public GetChatMember(Object chatId, long userId, Api api) {
+        super(chatId, api, "getChatMember", ChatMember.class);
+        add("user_id", userId);
     }
 
 }
