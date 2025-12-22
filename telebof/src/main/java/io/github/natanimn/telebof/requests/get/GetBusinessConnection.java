@@ -9,17 +9,18 @@ import io.github.natanimn.telebof.types.updates.BusinessConnection;
  * GetBusinessConnection class. Returns {@link BusinessConnection} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getBusinessConnection
  */
 public class GetBusinessConnection extends AbstractBaseRequest<GetBusinessConnection, BusinessConnection> {
     /**
      * Required
-     * @param business_connection_id business connection id
+     * @param businessConnectionId business connection id
      * @param api api
      */
-    public GetBusinessConnection(String business_connection_id, Api api){
+    public GetBusinessConnection(String businessConnectionId, Api api){
         super(api, "getBusinessConnection", BusinessConnection.class);
+        add("business_connection_id", businessConnectionId);
     }
 
 }
