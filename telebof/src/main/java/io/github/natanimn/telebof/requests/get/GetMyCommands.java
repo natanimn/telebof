@@ -14,6 +14,7 @@ import java.util.List;
  * @author Natanim
  * @since 3 March 2025
  * @see BotContext#getMyCommands
+ * @version 1.3.0
  */
 public class GetMyCommands extends AbstractBaseRequest<GetMyCommands, List<BotCommand> > {
 
@@ -29,20 +30,20 @@ public class GetMyCommands extends AbstractBaseRequest<GetMyCommands, List<BotCo
 
     /**
      * Optional
-     * @param bot_command_scope A JSON-serialized object, describing scope of users. Defaults to {@link io.github.natanimn.telebof.types.bot.BotCommandScopeDefault}.
+     * @param scope A JSON-serialized object, describing scope of users. Defaults to {@link io.github.natanimn.telebof.types.bot.BotCommandScopeDefault}.
      * @return {@link GetMyCommands}
      */
-    public GetMyCommands scope(BotCommandScope bot_command_scope) {
-        return add("scope", bot_command_scope);
+    public GetMyCommands scope(BotCommandScope scope) {
+        return add("scope", scope);
     }
 
     /**
      * Optional
-     * @param language_code A two-letter ISO 639-1 language code or an empty string
+     * @param languageCode A two-letter ISO 639-1 language code or an empty string
      * @return {@link GetMyCommands}
      */
-    public GetMyCommands languageCode(String language_code) {
-        return add("language_code", language_code);
+    public GetMyCommands languageCode(String languageCode) {
+        return add("language_code", languageCode);
     }
 
 }
