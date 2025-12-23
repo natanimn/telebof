@@ -9,7 +9,7 @@ import io.github.natanimn.telebof.types.bot.BotDescription;
  * GetMyDescription class. Returns {@link BotDescription} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getMyDescription()
  */
 public class GetMyDescription extends AbstractBaseRequest<GetMyDescription, BotDescription> {
@@ -19,10 +19,10 @@ public class GetMyDescription extends AbstractBaseRequest<GetMyDescription, BotD
 
     /**
      * Optional
-     * @param language_code language_code
+     * @param languageCode language_code
      * @return {@link GetMyDescription}
      */
-    public GetMyDescription languageCode(String language_code){
-        return add("language_code", language_code);
+    public GetMyDescription languageCode(String languageCode){
+        return add("language_code", languageCode);
     }
 }
