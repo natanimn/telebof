@@ -5,8 +5,9 @@ import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 
 /**
- * Natanim Negash 
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 1.3.0
  */
 public class GetMe extends AbstractBaseRequest<GetMe, User> {
     public GetMe(Api api) {
