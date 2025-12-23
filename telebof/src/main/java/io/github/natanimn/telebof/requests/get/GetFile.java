@@ -9,19 +9,19 @@ import io.github.natanimn.telebof.types.media_and_service.File;
  * GetFile class. Returns {@link File} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getFile
  */
 public class GetFile extends AbstractBaseRequest<GetFile, File> {
 
     /**
      * Required
-     * @param file_id file id
+     * @param fileId file id
      * @param api api
      */
-    public GetFile(String file_id, Api api) {
+    public GetFile(String fileId, Api api) {
         super(api, "getFile", File.class);
-        add("file_id", file_id);
+        add("file_id", fileId);
     }
 
 }
