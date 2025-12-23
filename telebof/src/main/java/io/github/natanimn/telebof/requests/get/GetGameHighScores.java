@@ -13,36 +13,36 @@ import java.util.List;
  * GetGameHighScores class. Returns a list of {@link GameHighScore}.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class GetGameHighScores extends AbstractBaseRequest<GetGameHighScores, List<GameHighScore>> {
     private static final Type responseType = TypeToken.getParameterized(List.class, GameHighScore.class).getType();
 
     /**
      * Required
-     * @param chat_id chat id
-     * @param user_id user id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param userId user id
+     * @param messageId message id
      * @param api api
      * @see BotContext#getGameHighScores(long, long, int)
      */
-    public GetGameHighScores(long chat_id, long user_id, int message_id, Api api) {
-        super(chat_id, api, "getGameHighScores", responseType);
-        add("user_id", user_id);
-        add("message_id", message_id);
+    public GetGameHighScores(Object chatId, long userId, int messageId, Api api) {
+        super(chatId, api, "getGameHighScores", responseType);
+        add("user_id", userId);
+        add("message_id", messageId);
     }
 
     /**
      * Required
-     * @param inline_message_id inline message id
-     * @param user_id user id
+     * @param inlineMessageId inline message id
+     * @param userId user id
      * @param api api
      * @see BotContext#getGameHighScores(String, long)
      */
-    public GetGameHighScores(String inline_message_id, long user_id, Api api) {
+    public GetGameHighScores(String inlineMessageId, long userId, Api api) {
         super(api, "getGameHighScores", responseType);
-        add("user_id", user_id);
-        add("inline_message_id", inline_message_id);
+        add("user_id", userId);
+        add("inline_message_id", inlineMessageId);
     }
 
 }
