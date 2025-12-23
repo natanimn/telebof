@@ -13,7 +13,7 @@ import java.util.List;
  * GetCustomEmojiStickers class. Returns a list of {@link Sticker}
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getCustomEmojiStickers
  */
 public class GetCustomEmojiStickers extends AbstractBaseRequest<GetCustomEmojiStickers, List<Sticker>> {
@@ -22,12 +22,12 @@ public class GetCustomEmojiStickers extends AbstractBaseRequest<GetCustomEmojiSt
 
     /**
      * Required
-     * @param custom_emoji_ids custom emoji ids
+     * @param customEmojiIds custom emoji ids
      * @param api api
      */
-    public GetCustomEmojiStickers(String[] custom_emoji_ids, Api api) {
+    public GetCustomEmojiStickers(String[] customEmojiIds, Api api) {
         super(api, "getCustomEmojiStickers", responseType);
-        add("custom_emoji_ids", List.of(custom_emoji_ids));
+        add("custom_emoji_ids", customEmojiIds);
     }
 
 }
