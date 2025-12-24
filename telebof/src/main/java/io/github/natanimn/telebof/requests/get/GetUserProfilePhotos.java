@@ -9,19 +9,19 @@ import io.github.natanimn.telebof.types.chat_and_user.UserProfilePhotos;
  * GetUserProfilePhotos class. Returns {@link UserProfilePhotos}
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getUserProfilePhotos
  */
 public class GetUserProfilePhotos extends AbstractBaseRequest<GetUserProfilePhotos, UserProfilePhotos> {
 
     /**
      * Required
-     * @param user_id user id
+     * @param userId user id
      * @param api api
      */
-    public GetUserProfilePhotos(long user_id, Api api) {
+    public GetUserProfilePhotos(long userId, Api api) {
         super(api, "getUserProfilePhotos", UserProfilePhotos.class);
-        add("user_id", user_id);
+        add("user_id", userId);
     }
 
     /**
