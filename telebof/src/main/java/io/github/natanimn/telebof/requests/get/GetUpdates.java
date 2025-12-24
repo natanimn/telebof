@@ -14,7 +14,7 @@ import java.util.List;
  * GetUpdates class. Returns list of {@link Update}
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#getUpdates()
  */
 public class GetUpdates extends AbstractBaseRequest<GetUpdates, List<Update>> {
@@ -54,13 +54,13 @@ public class GetUpdates extends AbstractBaseRequest<GetUpdates, List<Update>> {
 
     /**
      * Optional
-     * @param allowed_updates A JSON-serialized list of the update types you want your bot to receive.
+     * @param allowedUpdates A JSON-serialized list of the update types you want your bot to receive.
      *                        Specify an empty list to receive all update types except chat_member, message_reaction, and message_reaction_count (default).
      *                        If not specified, the previous setting will be used.
      * @return {@link GetUpdates}
      */
-    public GetUpdates allowedUpdates(Updates[] allowed_updates){
-        return add("allowed_updates", allowed_updates);
+    public GetUpdates allowedUpdates(Updates[] allowedUpdates){
+        return add("allowed_updates", allowedUpdates);
     }
 
     /**
