@@ -13,7 +13,7 @@ import java.lang.reflect.Type;
  * Common parameters builder for sendXyz methods
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.0
+ * @version 1.3.0
  */
 abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
 
@@ -100,7 +100,7 @@ abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
      * @return {@link T}
      */
     public T messageEffectId(String message_effect_id ){
-        return add("message_effect_id ", message_effect_id);
+        return add("message_effect_id", message_effect_id);
     }
 
     /**
