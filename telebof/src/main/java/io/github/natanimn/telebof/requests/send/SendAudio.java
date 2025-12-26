@@ -5,37 +5,35 @@ import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import java.io.File;
-import java.util.List;
-
 
 /**
  * SendAudio class. Returns {@link Message} on success
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendAudio extends SendBuilder<SendAudio, Message> {
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param audio file or url
      * @param api api
      * @see BotContext#sendAudio(Object, String)
      */
-    public SendAudio(Object chat_id, String audio, Api api) {
-        super(chat_id, api, "sendAudio");
+    public SendAudio(Object chatId, String audio, Api api) {
+        super(chatId, api, "sendAudio");
         add("audio", audio);
     }
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param audio File
      * @param api api
      * @see BotContext#sendAudio(Object, File)
      */
-    public SendAudio(Object chat_id, File audio, Api api) {
-        super(chat_id, api, "sendAudio");
+    public SendAudio(Object chatId, File audio, Api api) {
+        super(chatId, api, "sendAudio");
         add("audio", audio);
     }
 
@@ -50,11 +48,11 @@ public class SendAudio extends SendBuilder<SendAudio, Message> {
 
     /**
      * Optional
-     * @param caption_entities A list of special entities that appear in the caption, which can be specified instead of parse_mode
+     * @param captionEntities A list of special entities that appear in the caption, which can be specified instead of parse_mode
      * @return {@link SendAudio}
      */
-    public SendAudio captionEntities(MessageEntity[] caption_entities) {
-        return add("caption_entities", List.of(caption_entities));
+    public SendAudio captionEntities(MessageEntity[] captionEntities) {
+        return add("caption_entities", captionEntities);
     }
 
     /**
