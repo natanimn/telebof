@@ -9,30 +9,30 @@ import io.github.natanimn.telebof.types.updates.Message;
  * SendContact class. Returns sent {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendContact extends SendBuilder<SendContact, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
-     * @param phone_number phone number
-     * @param first_name first name
+     * @param chatId chat id
+     * @param phoneNumber phone number
+     * @param firstName first name
      * @param api api
      */
-    public SendContact(Object chat_id, String phone_number, String first_name, Api api) {
-        super(chat_id, api, "sendContact", Message.class);
-        add("phone_number", phone_number);
-        add("first_name", first_name);
+    public SendContact(Object chatId, String phoneNumber, String firstName, Api api) {
+        super(chatId, api, "sendContact", Message.class);
+        add("phone_number", phoneNumber);
+        add("first_name", firstName);
     }
 
     /**
      * Optional
-     * @param last_name Contact's last name
+     * @param lastName Contact's last name
      * @return {@link SendContact}
      */
-    public SendContact lastName(String last_name) {
-        return add("last_name", last_name);
+    public SendContact lastName(String lastName) {
+        return add("last_name", lastName);
     }
 
     /**
@@ -49,7 +49,7 @@ public class SendContact extends SendBuilder<SendContact, Message> {
      */
     @Override
     @Deprecated(forRemoval = true)
-    public SendContact parseMode(ParseMode parse_mode) {
+    public SendContact parseMode(ParseMode parseMode) {
         BotLog.warn("`sendContact` method doesn't support parse_mode");
         return this;
     }
@@ -59,7 +59,7 @@ public class SendContact extends SendBuilder<SendContact, Message> {
      */
     @Override
     @Deprecated(forRemoval = true)
-    public SendContact disableWebPagePreview(boolean disable_web_page_preview) {
+    public SendContact disableWebPagePreview(boolean disableWebPagePreview) {
         BotLog.warn("`sendContact` method doesn't support disable_web_page_preview");
         return this;
     }
