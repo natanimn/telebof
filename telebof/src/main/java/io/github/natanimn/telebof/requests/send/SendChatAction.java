@@ -9,38 +9,38 @@ import io.github.natanimn.telebof.BotContext;
  * SendChatAction class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#sendChatAction
  */
 public class SendChatAction extends AbstractBaseRequest<SendChatAction, Boolean> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param action action
      * @param api api
      */
-    public SendChatAction(Object chat_id, ChatAction action, Api api) {
-        super(chat_id, api, "sendChatAction", Boolean.class);
+    public SendChatAction(Object chatId, ChatAction action, Api api) {
+        super(chatId, api, "sendChatAction", Boolean.class);
         add("action", action);
     }
 
     /**
      * Optional
-     * @param message_thread_id Unique identifier for the target message thread; for supergroups only
+     * @param messageThreadId Unique identifier for the target message thread; for supergroups only
      * @return {@link SendChatAction}
      */
-    public SendChatAction messageThreadId(int message_thread_id) {
-        return add("message_thread_id", message_thread_id);
+    public SendChatAction messageThreadId(int messageThreadId) {
+        return add("message_thread_id", messageThreadId);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the action will be sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the action will be sent
      * @return {@link SendChatAction}
      */
-    public SendChatAction businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public SendChatAction businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 
 }
