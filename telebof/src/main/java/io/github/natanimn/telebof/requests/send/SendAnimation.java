@@ -109,7 +109,7 @@ public class SendAnimation extends SendBuilder<SendAnimation, Message> {
 
     /**
      * Optional
-     * @param duration duraion
+     * @param duration duration
      * @return {@link SendAnimation}
      */
     public SendAnimation duration(int  duration) {
