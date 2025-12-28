@@ -12,31 +12,31 @@ import java.util.List;
  * SendDocument class. Returns {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendDocument extends SendBuilder<SendDocument, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param document file id or url
      * @param api api
      * @see BotContext#sendDocument(Object, String)
      */
-    public SendDocument(Object chat_id, String document, Api api) {
-        super(chat_id, api, "sendDocument");
+    public SendDocument(Object chatId, String document, Api api) {
+        super(chatId, api, "sendDocument");
         add("document", document);
     }
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param document file id or url
      * @param api api
      * @see BotContext#sendDocument(Object, File)
      */
-    public SendDocument(Object chat_id, File document, Api api) {
-        super(chat_id, api, "sendDocument");
+    public SendDocument(Object chatId, File document, Api api) {
+        super(chatId, api, "sendDocument");
         add("document", document);
 
     }
@@ -52,11 +52,11 @@ public class SendDocument extends SendBuilder<SendDocument, Message> {
 
     /**
      * Optional
-     * @param caption_entities A list of special entities that appear in the caption, which can be specified instead of parse_mode
+     * @param captionEntities A list of special entities that appear in the caption, which can be specified instead of parse_mode
      * @return {@link SendDocument}
      */
-    public SendDocument captionEntities(MessageEntity[] caption_entities) {
-        return add("caption_entities", List.of(caption_entities));
+    public SendDocument captionEntities(MessageEntity[] captionEntities) {
+        return add("caption_entities", captionEntities);
     }
 
     /**
@@ -81,11 +81,11 @@ public class SendDocument extends SendBuilder<SendDocument, Message> {
 
     /**
      * Optional
-     * @param disable_content_type_detection Disables automatic server-side content type detection for files uploaded using multipart/form-data
+     * @param disableContentTypeDetection Disables automatic server-side content type detection for files uploaded using multipart/form-data
      * @return {@link SendDocument}
      */
-    public SendDocument disableContentTypeDetection(boolean disable_content_type_detection) {
-        return add("disable_content_type_detection", disable_content_type_detection);
+    public SendDocument disableContentTypeDetection(boolean disableContentTypeDetection) {
+        return add("disable_content_type_detection", disableContentTypeDetection);
     }
 
 }
