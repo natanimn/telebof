@@ -10,28 +10,28 @@ import java.util.List;
  * SendGift class for sending gifts
  * @author Natanim
  * @since July 25, 2025
- * @version 0.8
+ * @version 1.3.0
  */
 
 public class SendGift extends AbstractBaseRequest<SendGift, Boolean> {
-    public SendGift(Object chat_id, String gift_id,  Api rs){
-        super(chat_id, rs, "sendGift", Boolean.class);
-        add("gift_id", gift_id);
+    public SendGift(Object chatId, String giftId,  Api rs){
+        super(chatId, rs, "sendGift", Boolean.class);
+        add("gift_id", giftId);
     }
 
-    public SendGift(long user_id, String gift_id,  Api rs){
+    public SendGift(long userId, String giftId,  Api rs){
         super(rs, "sendGift");
-        add("user_id", user_id);
-        add("gift_id", gift_id);
+        add("user_id", userId);
+        add("gift_id", giftId);
     }
 
     /**
      * Optional
-     * @param pay_for_upgrade Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver.
+     * @param payForUpgrade Pass True to pay for the gift upgrade from the bot's balance, thereby making the upgrade free for the receiver.
      * @return {@link SendGift}
      */
-    public SendGift payForUpgrade(Boolean pay_for_upgrade){
-        return add("pay_for_upgrade", pay_for_upgrade);
+    public SendGift payForUpgrade(Boolean payForUpgrade){
+        return add("pay_for_upgrade", payForUpgrade);
     }
 
     /**
@@ -45,19 +45,19 @@ public class SendGift extends AbstractBaseRequest<SendGift, Boolean> {
 
     /**
      * Optional
-     * @param text_parse_mode Mode for parsing entities in the text.
+     * @param textParseMode Mode for parsing entities in the text.
      * @return {@link SendGift}
      */
-    public SendGift textParseMode(ParseMode text_parse_mode){
-        return add("text_parse_mode", text_parse_mode);
+    public SendGift textParseMode(ParseMode textParseMode){
+        return add("text_parse_mode", textParseMode);
     }
 
     /**
      * Optional
-     * @param text_entities A list of {@link MessageEntity}, special entities that appear in the gift text. It can be specified instead of text_parse_mode
+     * @param textEntities A list of {@link MessageEntity}, special entities that appear in the gift text. It can be specified instead of text_parse_mode
      * @return {@link SendGift}
      */
-    public SendGift textEntities(List<MessageEntity> text_entities){
-        return add("text_entities", text_entities);
+    public SendGift textEntities(MessageEntity[] textEntities){
+        return add("text_entities", textEntities);
     }
 }
