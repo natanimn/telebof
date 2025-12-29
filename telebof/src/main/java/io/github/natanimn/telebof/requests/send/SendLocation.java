@@ -11,40 +11,40 @@ import io.github.natanimn.telebof.types.ReplyParameters;
  * SendLocation class. Returns sent {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendLocation extends AbstractBaseRequest<SendLocation, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param latitude latitude
      * @param longitude longitude
      * @param api api
      */
-    public SendLocation(Object chat_id, double latitude, double longitude, Api api) {
-        super(chat_id, api, "sendLocation", Message.class);
+    public SendLocation(Object chatId, double latitude, double longitude, Api api) {
+        super(chatId, api, "sendLocation", Message.class);
         add("longitude", longitude);
         add("latitude", latitude);
     }
 
     /**
      * Optional
-     * @param horizontal_accuracy The radius of uncertainty for the location, measured in meters; 0-1500
+     * @param horizontalAccuracy The radius of uncertainty for the location, measured in meters; 0-1500
      * @return {@link SendLocation}
      */
-    public SendLocation horizontalAccuracy(double horizontal_accuracy) {
-        return add("horizontal_accuracy", horizontal_accuracy);
+    public SendLocation horizontalAccuracy(double horizontalAccuracy) {
+        return add("horizontal_accuracy", horizontalAccuracy);
     }
 
     /**
      * Optional
-     * @param live_period Period in seconds during which the location will be updated (should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
+     * @param livePeriod Period in seconds during which the location will be updated (should be between 60 and 86400, or 0x7FFFFFFF for live locations that can be edited indefinitely.
      * @see <a href="https://telegram.org/blog/live-locations">Live locations</a>
      * @return {@link SendLocation}
      */
-    public SendLocation livePeriod(int live_period){
-        return add("live_period", live_period);
+    public SendLocation livePeriod(int livePeriod){
+        return add("live_period", livePeriod);
     }
 
     /**
@@ -58,12 +58,12 @@ public class SendLocation extends AbstractBaseRequest<SendLocation, Message> {
 
     /**
      * Optional
-     * @param proximity_alert_radius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters.
+     * @param proximityAlertRadius For live locations, a maximum distance for proximity alerts about approaching another chat member, in meters.
      *                               Must be between 1 and 100000 if specified.
      * @return {@link SendLocation}
      */
-    public SendLocation proximityAlertRadius(int proximity_alert_radius){
-        return add("proximity_alert_radius", proximity_alert_radius);
+    public SendLocation proximityAlertRadius(int proximityAlertRadius){
+        return add("proximity_alert_radius", proximityAlertRadius);
     }
 
     /**
@@ -77,66 +77,66 @@ public class SendLocation extends AbstractBaseRequest<SendLocation, Message> {
 
     /**
      * Optional
-     * @param protect_content Protects the contents of the sent message from forwarding and saving
+     * @param protectContent Protects the contents of the sent message from forwarding and saving
      * @return {@link SendLocation}
      */
-    public SendLocation protectContent(boolean protect_content) {
-        return add("protect_content", protect_content);
+    public SendLocation protectContent(boolean protectContent) {
+        return add("protect_content", protectContent);
     }
 
     /**
      * Optional
-     * @param reply_parameters Description of the message to reply to
+     * @param replyParameters Description of the message to reply to
      * @return {@link SendLocation}
      */
-    public SendLocation replyParameters(ReplyParameters reply_parameters){
-        return add("reply_parameters", reply_parameters);
+    public SendLocation replyParameters(ReplyParameters replyParameters){
+        return add("reply_parameters", replyParameters);
     }
 
     /**
      * Optional
-     * @param reply_markup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard,
+     * @param replyMarkup Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard,
      *                     instructions to remove a reply keyboard or to force a reply from the user
      * @return {@link SendLocation}
      */
-    public SendLocation replyMarkup(Markup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public SendLocation replyMarkup(Markup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
      * @return {@link SendLocation}
      */
-    public SendLocation businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public SendLocation businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 
     /**
      * Optional
-     * @param message_effect_id Unique identifier of the message effect to be added to the message; for private chats only
+     * @param messageEffectId Unique identifier of the message effect to be added to the message; for private chats only
      * @return {@link SendLocation}
      */
-    public SendLocation messageEffectId(String message_effect_id ){
-        return add("message_effect_id ", message_effect_id);
+    public SendLocation messageEffectId(String messageEffectId){
+        return add("message_effect_id ", messageEffectId);
     }
 
     /***
      * Optional
-     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @param directMessagesTopicId Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
      * @return {@link SendLocation}
      */
-    public SendLocation directMessagesTopicId(int direct_messages_topic_id){
-        return add("direct_messages_topic_id", direct_messages_topic_id);
+    public SendLocation directMessagesTopicId(int directMessagesTopicId){
+        return add("direct_messages_topic_id", directMessagesTopicId);
     }
 
     /**
      * Optional
-     * @param suggested_post_parameters A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only.
+     * @param suggestedPostParameters A JSON-serialized object containing the parameters of the suggested post to send; for direct messages chats only.
      *                                  If the message is sent as a reply to another suggested post, then that suggested post is automatically declined.
      * @return {@link SendLocation}
      */
-    public SendLocation suggestedPostParameters(SuggestedPostParameters suggested_post_parameters){
-        return add("suggested_post_parameters", suggested_post_parameters);
+    public SendLocation suggestedPostParameters(SuggestedPostParameters suggestedPostParameters){
+        return add("suggested_post_parameters", suggestedPostParameters);
     }
 }
