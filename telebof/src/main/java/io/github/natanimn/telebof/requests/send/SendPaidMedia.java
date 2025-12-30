@@ -11,8 +11,6 @@ import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import io.github.natanimn.telebof.types.ReplyParameters;
 
-import java.util.List;
-
 /**
  * SendPaidMedia class. Returns {@link Message} on success.
  * @author Natanim
