@@ -10,31 +10,31 @@ import java.io.File;
  * SendPhoto class. Returns {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendPhoto extends SendBuilder<SendPhoto, Message> {
 
     /**
      * Required
-     * @param chat_id Chat id
+     * @param chatId Chat id
      * @param photo file id or url
      * @param api api
      * @see BotContext#sendPhoto(Object, String)
      */
-    public SendPhoto(Object chat_id, String photo, Api api) {
-        super(chat_id, api, "sendPhoto");
+    public SendPhoto(Object chatId, String photo, Api api) {
+        super(chatId, api, "sendPhoto");
         add("photo", photo);
     }
 
     /**
      * Required
-     * @param chat_id Chat id
+     * @param chatId Chat id
      * @param photo file id or url
      * @param api api
      * @see BotContext#sendPhoto(Object, File)
      */
-    public SendPhoto(Object chat_id, File photo, Api api) {
-        super(chat_id, api, "sendPhoto");
+    public SendPhoto(Object chatId, File photo, Api api) {
+        super(chatId, api, "sendPhoto");
         add("photo", photo);
     }
 
@@ -49,30 +49,30 @@ public class SendPhoto extends SendBuilder<SendPhoto, Message> {
 
     /**
      * Optional
-     * @param caption_entities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
+     * @param captionEntities A JSON-serialized list of special entities that appear in the caption, which can be specified instead of parse_mode
      * @return {@link SendPhoto}
      */
-    public SendPhoto captionEntities(MessageEntity[] caption_entities) {
-        return add("caption_entities", caption_entities);
+    public SendPhoto captionEntities(MessageEntity[] captionEntities) {
+        return add("caption_entities", captionEntities);
     }
 
     /**
      * Optional
-     * @param has_spoiler Pass True if the photo needs to be covered with a spoiler animation
+     * @param hasSpoiler Pass True if the photo needs to be covered with a spoiler animation
      * @return {@link SendPhoto}
      */
-    public SendPhoto hasSpoiler(boolean has_spoiler) {
-        add("has_spoiler", has_spoiler);
+    public SendPhoto hasSpoiler(boolean hasSpoiler) {
+        add("has_spoiler", hasSpoiler);
         return this;
     }
 
     /**
      * Optional
-     * @param show_caption_above_media Pass True, if the caption must be shown above the message media
+     * @param showCaptionAboveMedia Pass True, if the caption must be shown above the message media
      * @return {@link SendPhoto}
      */
-    public SendPhoto showCaptionAboveMedia(boolean show_caption_above_media){
-        return add("show_caption_above_media", show_caption_above_media);
+    public SendPhoto showCaptionAboveMedia(boolean showCaptionAboveMedia){
+        return add("show_caption_above_media", showCaptionAboveMedia);
     }
 
 }
