@@ -89,7 +89,7 @@ public class SendPaidMedia extends AbstractBaseRequest<SendPaidMedia, Message> {
      * @return {@link SendPaidMedia}
      */
     public SendPaidMedia replyParameters(ReplyParameters replyParameters){
-        return add("reply_parameters", reply_parameters);
+        return add("reply_parameters", replyParameters);
     }
 
     /**
