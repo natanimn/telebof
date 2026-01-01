@@ -5,37 +5,36 @@ import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import java.io.File;
-import java.util.List;
 
 /**
  * SendMessage class. Returns {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendVideo extends SendBuilder<SendVideo, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param video file id or url
      * @param api api
      * @see BotContext#sendVideo(Object, String)
      */
-    public SendVideo(Object chat_id, String video, Api api) {
-        super(chat_id, api, "sendVideo");
+    public SendVideo(Object chatId, String video, Api api) {
+        super(chatId, api, "sendVideo");
         add("video", video);
     }
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param video file id or url
      * @param api api
      * @see BotContext#sendVideo(Object, File)
      */
-    public SendVideo(Object chat_id, File video, Api api) {
-        super(chat_id, api, "sendVideo");
+    public SendVideo(Object chatId, File video, Api api) {
+        super(chatId, api, "sendVideo");
         add("video", video);
     }
 
@@ -50,29 +49,29 @@ public class SendVideo extends SendBuilder<SendVideo, Message> {
 
     /**
      * Optional
-     * @param caption_entities A list of special entities that appear in the caption, which can be specified instead of parse_mode
+     * @param captionEntities A list of special entities that appear in the caption, which can be specified instead of parse_mode
      * @return {@link SendVideo}
      */
-    public SendVideo captionEntities(MessageEntity[] caption_entities) {
-        return add("caption_entities", List.of(caption_entities));
+    public SendVideo captionEntities(MessageEntity[] captionEntities) {
+        return add("caption_entities", captionEntities);
     }
 
     /**
      * Optional
-     * @param has_spoiler Pass True if the video needs to be covered with a spoiler animation
+     * @param hasSpoiler Pass True if the video needs to be covered with a spoiler animation
      * @return {@link SendVideo}
      */
-    public SendVideo hasSpoiler(boolean has_spoiler) {
-        return add("has_spoiler", has_spoiler);
+    public SendVideo hasSpoiler(boolean hasSpoiler) {
+        return add("has_spoiler", hasSpoiler);
     }
 
     /**
      * Optional
-     * @param supports_streaming Pass True if the uploaded video is suitable for streaming
+     * @param supportsStreaming Pass True if the uploaded video is suitable for streaming
      * @return {@link SendVideo}
      */
-    public SendVideo supportsStreaming(boolean supports_streaming) {
-        return add("supports_streaming", supports_streaming);
+    public SendVideo supportsStreaming(boolean supportsStreaming) {
+        return add("supports_streaming", supportsStreaming);
     }
 
     /**
@@ -126,11 +125,11 @@ public class SendVideo extends SendBuilder<SendVideo, Message> {
 
     /**
      * Optional
-     * @param show_caption_above_media Pass True, if the caption must be shown above the message media
+     * @param showCaptionAboveMedia Pass True, if the caption must be shown above the message media
      * @return {@link SendVideo}
      */
-    public SendVideo showCaptionAboveMedia(boolean show_caption_above_media){
-        return add("show_caption_above_media", show_caption_above_media);
+    public SendVideo showCaptionAboveMedia(boolean showCaptionAboveMedia){
+        return add("show_caption_above_media", showCaptionAboveMedia);
     }
 
     /**
@@ -153,11 +152,11 @@ public class SendVideo extends SendBuilder<SendVideo, Message> {
 
     /**
      * Optional
-     * @param start_timestamp Start timestamp for the video in the message
+     * @param startTimestamp Start timestamp for the video in the message
      * @return {@link SendVideo}
      */
-    public SendVideo startTimestamp(int start_timestamp){
-        return add("start_timestamp", start_timestamp);
+    public SendVideo startTimestamp(int startTimestamp){
+        return add("start_timestamp", startTimestamp);
     }
 
 }
