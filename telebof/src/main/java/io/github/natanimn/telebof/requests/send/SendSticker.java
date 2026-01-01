@@ -13,32 +13,32 @@ import java.io.File;
  * SendSticker class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  *
  */
 public class SendSticker extends SendBuilder<SendSticker, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param sticker sticker
      * @param api api
      * @see BotContext#sendSticker(Object, File)
      */
-    public SendSticker(Object chat_id, File sticker, Api api) {
-        super(chat_id, api, "sendSticker");
+    public SendSticker(Object chatId, File sticker, Api api) {
+        super(chatId, api, "sendSticker");
         add("sticker", sticker);
     }
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param sticker sticker
      * @param api api
      * @see BotContext#sendSticker(Object, String)
      */
-    public SendSticker(Object chat_id, String sticker, Api api) {
-        super(chat_id, api, "sendSticker");
+    public SendSticker(Object chatId, String sticker, Api api) {
+        super(chatId, api, "sendSticker");
         add("sticker", sticker);
     }
 
