@@ -9,30 +9,30 @@ import java.io.File;
  * SendVideoNote class. Returns {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SendVideoNote extends SendBuilder<SendVideoNote, Message> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param video_note file id
      * @param api api
      * @see BotContext#sendVideoNote(Object, String)
      */
-    public SendVideoNote(Object chat_id, String video_note, Api api) {
-        super(chat_id, api, "sendVideoNote");
+    public SendVideoNote(Object chatId, String video_note, Api api) {
+        super(chatId, api, "sendVideoNote");
         add("video_note", video_note);
     }
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param video_note file
      * @param api api
      */
-    public SendVideoNote(Object chat_id, File video_note, Api api) {
-        super(chat_id, api, "sendVideoNote");
+    public SendVideoNote(Object chatId, File video_note, Api api) {
+        super(chatId, api, "sendVideoNote");
         add("video_note", video_note);
     }
 
