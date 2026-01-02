@@ -9,20 +9,20 @@ import io.github.natanimn.telebof.types.input.InputSticker;
  * AddStickerToSet class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#addStickerToSet
  */
 public class AddStickerToSet extends AbstractBaseRequest<AddStickerToSet, Boolean> {
     /**
      * Required
-     * @param user_id user id
+     * @param userId user id
      * @param name name
      * @param sticker sticker
      * @param api api
      */
-    public AddStickerToSet(long user_id, String name, InputSticker sticker, Api api){
+    public AddStickerToSet(long userId, String name, InputSticker sticker, Api api){
         super(api, "addStickerToSet");
-        add("user_id", user_id);
+        add("user_id", userId);
         add("name", name);
         add("sticker", sticker);
     }
