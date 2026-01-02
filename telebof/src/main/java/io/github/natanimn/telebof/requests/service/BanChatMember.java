@@ -8,42 +8,42 @@ import io.github.natanimn.telebof.requests.Api;
  * BanChatMember class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#banChatMember
  */
 public class BanChatMember extends AbstractBaseRequest<BanChatMember, Boolean> {
 
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param user_id user id
      * @param api api
      */
-    public BanChatMember(Object chat_id, long user_id, Api api){
-        super(chat_id, api, "banChatMember", Boolean.class);
-        add("user_id", user_id);
+    public BanChatMember(Object chatId, long userId, Api api){
+        super(chatId, api, "banChatMember", Boolean.class);
+        add("user_id", userId);
     }
 
     /**
      * Optional
-     * @param until_date Date when the user will be unbanned; Unix time.
+     * @param untilDate Date when the user will be unbanned; Unix time.
      *                   If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever.
      *                   Applied for supergroups and channels only.
      * @return {@link BanChatMember}
      */
-    public BanChatMember untilDate(int until_date) {
-        return add("until_date", until_date);
+    public BanChatMember untilDate(int untilDate) {
+        return add("until_date", untilDate);
     }
 
     /**
      * Optional
-     * @param revoke_messages Pass True to delete all messages from the chat for the user that is being removed.
+     * @param revokeMessages Pass True to delete all messages from the chat for the user that is being removed.
      *                        If False, the user will be able to see messages in the group that were sent before the user was removed.
      *                        Always True for supergroups and channels.
      * @return {@link BanChatMember}
      */
-    public BanChatMember revokeMessages(boolean revoke_messages){
-        return add("revoke_messages", revoke_messages);
+    public BanChatMember revokeMessages(boolean revokeMessages){
+        return add("revoke_messages", revokeMessages);
     }
 
 }
