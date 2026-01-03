@@ -8,20 +8,20 @@ import io.github.natanimn.telebof.requests.Api;
  * DeclineSuggestedPost class. Returns True on success.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.2.0
+ * @version 1.3.0
  * @see BotContext#declineSuggestedPost
  */
 public class DeclineSuggestedPost extends AbstractBaseRequest<DeclineSuggestedPost, Boolean> {
 
     /**
      * Required
-     * @param chat_id Unique identifier for the target direct messages chat
-     * @param message_id Identifier of a suggested post message to decline
+     * @param chatId Unique identifier for the target direct messages chat
+     * @param messageId Identifier of a suggested post message to decline
      * @param api api
      */
-    public DeclineSuggestedPost(Object chat_id, Integer message_id, Api api) {
-        super(chat_id, api, "declineSuggestedPost", Boolean.class);
-        add("message_id", message_id);
+    public DeclineSuggestedPost(Object chatId, Integer messageId, Api api) {
+        super(chatId, api, "declineSuggestedPost", Boolean.class);
+        add("message_id", messageId);
     }
 
     /**
