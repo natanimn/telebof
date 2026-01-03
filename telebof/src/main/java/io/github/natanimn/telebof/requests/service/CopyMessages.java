@@ -3,7 +3,6 @@ package io.github.natanimn.telebof.requests.service;
 import com.google.gson.reflect.TypeToken;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
-import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import io.github.natanimn.telebof.types.media_and_service.MessageId;
 
 import java.lang.reflect.Type;
@@ -13,7 +12,7 @@ import java.util.List;
  * CopyMessages class. Returns list of {@link MessageId} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#copyMessages(Object, Object, Integer[])
  */
 public class CopyMessages extends AbstractBaseRequest<CopyMessages, List<MessageId>> {
@@ -28,47 +27,47 @@ public class CopyMessages extends AbstractBaseRequest<CopyMessages, List<Message
 
     /**
      * Optional
-     * @param remove_caption Pass True to copy the messages without their captions
+     * @param removeCaption Pass True to copy the messages without their captions
      * @return {@link CopyMessages}
      */
-    public CopyMessages remove_caption(Boolean remove_caption) {
-        return add("remove_caption", remove_caption);
+    public CopyMessages removeCaption(Boolean removeCaption) {
+        return add("remove_caption", removeCaption);
     }
 
     /**
      * Optional
-     * @param protect_content Protects the contents of the sent messages from forwarding and saving
+     * @param protectContent Protects the contents of the sent messages from forwarding and saving
      * @return {@link CopyMessages}
      */
-    public CopyMessages protect_content(Boolean protect_content) {
-        return add("protect_content", protect_content);
+    public CopyMessages protectContent(Boolean protectContent) {
+        return add("protect_content", protectContent);
     }
 
     /**
      * Optional
-     * @param disable_notification Sends the messages silently. Users will receive a notification with no sound.
+     * @param disableNotification Sends the messages silently. Users will receive a notification with no sound.
      * @return {@link CopyMessages}
      */
-    public CopyMessages disable_notification(Boolean disable_notification) {
-        return add("disable_notification", disable_notification);
+    public CopyMessages disableNotification(Boolean disableNotification) {
+        return add("disable_notification", disableNotification);
     }
 
     /***
      * Optional
-     * @param message_thread_id Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @param messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @return {@link CopyMessages}
      */
-    public CopyMessages messageThreadId(Integer message_thread_id){
-        return add("message_thread_id", message_thread_id);
+    public CopyMessages messageThreadId(Integer messageThreadId){
+        return add("message_thread_id", messageThreadId);
     }
 
     /***
      * Optional
-     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @param directMessagesTopicId Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
      * @return {@link CopyMessages}
      */
-    public CopyMessages directMessagesTopicId(int direct_messages_topic_id){
-        return add("direct_messages_topic_id", direct_messages_topic_id);
+    public CopyMessages directMessagesTopicId(int directMessagesTopicId){
+        return add("direct_messages_topic_id", directMessagesTopicId);
     }
 
 }
