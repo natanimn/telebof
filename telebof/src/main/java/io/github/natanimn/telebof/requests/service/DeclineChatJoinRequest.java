@@ -8,19 +8,19 @@ import io.github.natanimn.telebof.BotContext;
  * DeclineChatJoinRequest class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#declineChatJoinRequest
  */
 public class DeclineChatJoinRequest extends AbstractBaseRequest<DeclineChatJoinRequest, Boolean> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param user_id user id
+     * @param chatId chat id
+     * @param userId user id
      * @param api api
      */
-    public DeclineChatJoinRequest(Object chat_id, long user_id, Api api) {
-        super(chat_id, api, "declineChatJoinRequest", Boolean.class);
-        add("user_id", user_id);
+    public DeclineChatJoinRequest(Object chatId, long userId, Api api) {
+        super(chatId, api, "declineChatJoinRequest", Boolean.class);
+        add("user_id", userId);
     }
 
 }
