@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
  * GiftPremiumSubscription class. Returns True on success.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#giftPremiumSubscription
  */
 public class GiftPremiumSubscription extends AbstractBaseRequest<GiftPremiumSubscription, Boolean> {
