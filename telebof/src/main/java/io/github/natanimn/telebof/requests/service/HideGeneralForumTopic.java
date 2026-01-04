@@ -7,17 +7,17 @@ import io.github.natanimn.telebof.requests.Api;
  * HideGeneralForumTopic class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see HideGeneralForumTopic
  */
 public class HideGeneralForumTopic extends AbstractBaseRequest<HideGeneralForumTopic, Boolean> {
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param api api
      */
-    public HideGeneralForumTopic(Object chat_id, Api api) {
-        super(chat_id, api, "hideGeneralForumTopic", Boolean.class);
+    public HideGeneralForumTopic(Object chatId, Api api) {
+        super(chatId, api, "hideGeneralForumTopic", Boolean.class);
     }
 
 }
