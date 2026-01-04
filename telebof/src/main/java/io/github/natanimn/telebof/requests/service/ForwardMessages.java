@@ -14,7 +14,7 @@ import java.util.List;
  * On success, an array of {@link MessageId} of the sent messages is returned.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#forwardMessages
  */
 public class ForwardMessages extends AbstractBaseRequest<ForwardMessages, List<MessageId>> {
@@ -29,38 +29,38 @@ public class ForwardMessages extends AbstractBaseRequest<ForwardMessages, List<M
 
     /**
      * Optional
-     * @param message_thread_id Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     * @param messageThreadId Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
      * @return {@link ForwardMessages}
      */
-    public ForwardMessages messageThreadId(int message_thread_id) {
-        return add("message_thread_id", message_thread_id);
+    public ForwardMessages messageThreadId(int messageThreadId) {
+        return add("message_thread_id", messageThreadId);
     }
 
     /**
      * Optional
-     * @param disable_notification Sends the messages silently. Users will receive a notification with no sound.
+     * @param disableNotification Sends the messages silently. Users will receive a notification with no sound.
      * @return {@link ForwardMessages}
      */
-    public ForwardMessages disableNotification(boolean disable_notification) {
-        return add("disable_notification", disable_notification);
+    public ForwardMessages disableNotification(boolean disableNotification) {
+        return add("disable_notification", disableNotification);
     }
 
     /**
      * Optional
-     * @param protect_content Protects the contents of the forwarded messages from forwarding and saving
+     * @param protectContent Protects the contents of the forwarded messages from forwarding and saving
      * @return {@link ForwardMessages}
      */
-    public ForwardMessages protectContent(boolean protect_content) {
-        return add("protect_content", protect_content);
+    public ForwardMessages protectContent(boolean protectContent) {
+        return add("protect_content", protectContent);
     }
 
     /***
      * Optional
-     * @param direct_messages_topic_id Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
+     * @param directMessagesTopicId Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat
      * @return {@link ForwardMessages}
      */
-    public ForwardMessages directMessagesTopicId(int direct_messages_topic_id){
-        return add("direct_messages_topic_id", direct_messages_topic_id);
+    public ForwardMessages directMessagesTopicId(int directMessagesTopicId){
+        return add("direct_messages_topic_id", directMessagesTopicId);
     }
 
 }
