@@ -5,21 +5,21 @@ import io.github.natanimn.telebof.requests.Api;
 
 /**
  * RefundStarPayment class. Returns True on success.
- * @author Natanim Negash
+ * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class RefundStarPayment extends AbstractBaseRequest<RefundStarPayment, Boolean> {
     /**
      * Required
-     * @param user_id user id
-     * @param telegram_payment_charge_id telegram payment charge id
+     * @param userId user id
+     * @param telegramPaymentChargeId telegram payment charge id
      * @param api api
      */
-    public RefundStarPayment(long user_id, String telegram_payment_charge_id, Api api){
+    public RefundStarPayment(long userId, String telegramPaymentChargeId, Api api){
         super(api, "refundStarPayment");
-        add("user_id", user_id);
-        add("telegram_payment_charge_id", telegram_payment_charge_id);
+        add("user_id", userId);
+        add("telegram_payment_charge_id", telegramPaymentChargeId);
     }
 
 }
