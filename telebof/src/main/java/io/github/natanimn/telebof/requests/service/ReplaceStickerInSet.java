@@ -9,23 +9,23 @@ import io.github.natanimn.telebof.types.input.InputSticker;
  * ReplaceStickerInSet class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#replaceStickerInSet
  */
 public class ReplaceStickerInSet extends AbstractBaseRequest<ReplaceStickerInSet, Boolean> {
     /**
      * Required
-     * @param user_id user id
+     * @param userId user id
      * @param name name
-     * @param old_sticker old sticker
+     * @param oldSticker old sticker
      * @param sticker sticker
      * @param api api
      */
-    public ReplaceStickerInSet(long user_id, String name, String old_sticker, InputSticker sticker, Api api){
+    public ReplaceStickerInSet(long userId, String name, String oldSticker, InputSticker sticker, Api api){
         super(api, "replaceStickerInSet");
-        add("user_id", user_id);
+        add("user_id", userId);
         add("name", name);
-        add("old_sticker", old_sticker);
+        add("old_sticker", oldSticker);
         add("sticker", sticker);
     }
 
