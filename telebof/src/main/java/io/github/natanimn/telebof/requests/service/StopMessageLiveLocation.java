@@ -10,46 +10,46 @@ import io.github.natanimn.telebof.types.updates.Message;
  * StopMessageLiveLocation class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class StopMessageLiveLocation extends AbstractBaseRequest<StopMessageLiveLocation, Object> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      * @see BotContext#stopMessageLiveLocation(Object, int)
      */
-    public StopMessageLiveLocation(Object chat_id, int message_id, Api api) {
-        super(chat_id, api, "stopMessageLiveLocation", Message.class);
-        add("message_id", message_id);
+    public StopMessageLiveLocation(Object chatId, int messageId, Api api) {
+        super(chatId, api, "stopMessageLiveLocation", Message.class);
+        add("message_id", messageId);
     }
 
     /**
      * Required
-     * @param inline_message_id inline message id
+     * @param inlineMessageId inline message id
      * @param api api
      */
-    public StopMessageLiveLocation(String inline_message_id, Api api) {
+    public StopMessageLiveLocation(String inlineMessageId, Api api) {
         super(api, "stopMessageLiveLocation", Boolean.class);
-        add("inline_message_id", inline_message_id);
+        add("inline_message_id", inlineMessageId);
     }
 
     /**
      * Optional
-     * @param reply_markup A JSON-serialized object for a new inline keyboard.
+     * @param replyMarkup A JSON-serialized object for a new inline keyboard.
      * @return {@link StopMessageLiveLocation}
      */
-    public StopMessageLiveLocation replyMarkup(InlineKeyboardMarkup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public StopMessageLiveLocation replyMarkup(InlineKeyboardMarkup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message to be edited was sent
      * @return {@link StopMessageLiveLocation}
      */
-    public StopMessageLiveLocation businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public StopMessageLiveLocation businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 }
