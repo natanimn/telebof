@@ -16,24 +16,24 @@ public class SendVideoNote extends SendBuilder<SendVideoNote, Message> {
     /**
      * Required
      * @param chatId chat id
-     * @param video_note file id
+     * @param videoNote file id
      * @param api api
      * @see BotContext#sendVideoNote(Object, String)
      */
-    public SendVideoNote(Object chatId, String video_note, Api api) {
+    public SendVideoNote(Object chatId, String videoNote, Api api) {
         super(chatId, api, "sendVideoNote");
-        add("video_note", video_note);
+        add("video_note", videoNote);
     }
 
     /**
      * Required
      * @param chatId chat id
-     * @param video_note file
+     * @param videoNote file
      * @param api api
      */
-    public SendVideoNote(Object chatId, File video_note, Api api) {
+    public SendVideoNote(Object chatId, File videoNote, Api api) {
         super(chatId, api, "sendVideoNote");
-        add("video_note", video_note);
+        add("video_note", videoNote);
     }
 
     /**
