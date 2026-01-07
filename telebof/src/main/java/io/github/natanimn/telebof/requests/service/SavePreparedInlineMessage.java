@@ -8,53 +8,53 @@ import io.github.natanimn.telebof.types.media_and_service.PreparedInlineMessage;
 /**
  * @author Natanim
  * @since July 25, 2025
- * @version 0.6
+ * @version 1.3.0
  */
 public class SavePreparedInlineMessage extends AbstractBaseRequest<SavePreparedInlineMessage, PreparedInlineMessage> {
     /**
-     * @param user_id Unique identifier of the target user that can use the prepared message
+     * @param userId Unique identifier of the target user that can use the prepared message
      * @param result A {@link InlineQueryResult} object describing the message to be sent
      * @param rs {@link Api} object
      */
-    public SavePreparedInlineMessage(long user_id, InlineQueryResult result, Api rs){
+    public SavePreparedInlineMessage(long userId, InlineQueryResult result, Api rs){
         super(rs, "savePreparedInlineMessage");
-        add("user_id", user_id);
+        add("user_id", userId);
         add("result", result);
     }
 
     /**
      * Optional
-     * @param allow_user_chats Pass True if the message can be sent to private chats with users
+     * @param allowUserChats Pass True if the message can be sent to private chats with users
      * @return {@link SavePreparedInlineMessage}
      */
-    public SavePreparedInlineMessage allowUserChats(boolean allow_user_chats){
-        return add("allow_user_chats", allow_user_chats);
+    public SavePreparedInlineMessage allowUserChats(boolean allowUserChats){
+        return add("allow_user_chats", allowUserChats);
     }
 
     /**
      * Optional
-     * @param allow_bot_chats Pass True if the message can be sent to private chats with bots.
+     * @param allowBotChats Pass True if the message can be sent to private chats with bots.
      * @return {@link SavePreparedInlineMessage}
      */
-    public SavePreparedInlineMessage allowBotChats(boolean allow_bot_chats){
-        return add("allow_bot_chats", allow_bot_chats);
+    public SavePreparedInlineMessage allowBotChats(boolean allowBotChats){
+        return add("allow_bot_chats", allowBotChats);
     }
 
     /**
      * Optional
-     * @param allow_group_chats Pass True if the message can be sent to group and supergroup chats
+     * @param allowGroupChats Pass True if the message can be sent to group and supergroup chats
      * @return {@link SavePreparedInlineMessage}
      */
-    public SavePreparedInlineMessage allowGroupChats(boolean allow_group_chats){
-        return add("allow_group_chats", allow_group_chats);
+    public SavePreparedInlineMessage allowGroupChats(boolean allowGroupChats){
+        return add("allow_group_chats", allowGroupChats);
     }
 
     /**
      * Optional
-     * @param allow_channel_chats Pass True if the message can be sent to channel chats
+     * @param allowChannelChats Pass True if the message can be sent to channel chats
      * @return {@link SavePreparedInlineMessage}
      */
-    public SavePreparedInlineMessage allowChannelChats(boolean allow_channel_chats){
-        return add("allow_channel_chats", allow_channel_chats);
+    public SavePreparedInlineMessage allowChannelChats(boolean allowChannelChats){
+        return add("allow_channel_chats", allowChannelChats);
     }
 }
