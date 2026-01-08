@@ -8,22 +8,22 @@ import io.github.natanimn.telebof.requests.Api;
  * SetChatAdministratorCustomTitle class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setChatAdministratorCustomTitle
  */
 public class SetChatAdministratorCustomTitle extends AbstractBaseRequest<SetChatAdministratorCustomTitle, Boolean> {
 
     /**
      * Required
-     * @param chat_id chat id
-     * @param user_id user id
-     * @param custom_title custom title
+     * @param chatId chat id
+     * @param userId user id
+     * @param customTitle custom title
      * @param api api
      */
-    public SetChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title, Api api) {
-        super(chat_id, api, "setChatAdministratorCustomTitle", Boolean.class);
-        add("user_id", user_id);
-        add("custom_title", custom_title);
+    public SetChatAdministratorCustomTitle(Object chatId, long userId, String customTitle, Api api) {
+        super(chatId, api, "setChatAdministratorCustomTitle", Boolean.class);
+        add("user_id", userId);
+        add("custom_title", customTitle);
     }
 
 }
