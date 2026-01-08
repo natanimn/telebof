@@ -7,39 +7,39 @@ import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.updates.Poll;
 
 /**
- * StopPoll class. Returns the stoped {@link Poll} on success.
+ * StopPoll class. Returns the stopped {@link Poll} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#stopPoll
  */
 public class StopPoll extends AbstractBaseRequest<StopPoll, Poll> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      */
-    public StopPoll(Object chat_id, int message_id, Api api) {
-        super(chat_id, api, "stopPoll", Poll.class);
-        add("message_id", message_id);
+    public StopPoll(Object chatId, int messageId, Api api) {
+        super(chatId, api, "stopPoll", Poll.class);
+        add("message_id", messageId);
     }
 
     /**
      * Optional
-     * @param reply_markup A JSON-serialized object for a new message inline keyboard.
+     * @param replyMarkup A JSON-serialized object for a new message inline keyboard.
      * @return {@link StopPoll}
      */
-    public StopPoll replyMarkup(InlineKeyboardMarkup reply_markup) {
-        return add("reply_markup", reply_markup);
+    public StopPoll replyMarkup(InlineKeyboardMarkup replyMarkup) {
+        return add("reply_markup", replyMarkup);
     }
 
     /**
      * Optional
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message to be edited was sent
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message to be edited was sent
      * @return {@link StopPoll}
      */
-    public StopPoll businessConnectionId(String business_connection_id){
-        return add("business_connection_id", business_connection_id);
+    public StopPoll businessConnectionId(String businessConnectionId){
+        return add("business_connection_id", businessConnectionId);
     }
 }
