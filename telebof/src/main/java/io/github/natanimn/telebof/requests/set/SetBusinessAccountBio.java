@@ -7,18 +7,18 @@ import io.github.natanimn.telebof.requests.Api;
  * SetBusinessAccountBio class. Returns True on success.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#setBusinessAccountBio
  */
 public class SetBusinessAccountBio extends AbstractBaseRequest<SetBusinessAccountBio, Boolean> {
     /**
      * Required
-     * @param business_connection_id business connection id
+     * @param businessConnectionId business connection id
      * @param api api
      */
-    public SetBusinessAccountBio(String business_connection_id, Api api){
+    public SetBusinessAccountBio(String businessConnectionId, Api api){
         super(api, "setBusinessAccountBio", Boolean.class);
-        add("business_connection_id", business_connection_id);
+        add("business_connection_id", businessConnectionId);
     }
 
     /**
