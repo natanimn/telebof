@@ -7,20 +7,20 @@ import io.github.natanimn.telebof.requests.Api;
  * TransferBusinessAccountStars class. Returns True on success.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.0.0
+ * @version 1.3.0
  * @see io.github.natanimn.telebof.BotContext#transferBusinessAccountStars
  */
 public class TransferBusinessAccountStars extends AbstractBaseRequest<TransferBusinessAccountStars, Boolean> {
     /**
      * Required
-     * @param business_connection_id business connection id
-     * @param star_count star count
+     * @param businessConnectionId business connection id
+     * @param starCount star count
      * @param api api
      */
-    public TransferBusinessAccountStars(String business_connection_id, short star_count, Api api){
+    public TransferBusinessAccountStars(String businessConnectionId, short starCount, Api api){
         super(api, "transferBusinessAccountStars", Boolean.class);
-        add("business_connection_id", business_connection_id);
-        add("star_count", star_count);
+        add("business_connection_id", businessConnectionId);
+        add("star_count", starCount);
 
     }
 }
