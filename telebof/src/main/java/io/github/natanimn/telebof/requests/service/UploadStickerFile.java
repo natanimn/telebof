@@ -10,22 +10,22 @@ import io.github.natanimn.telebof.types.media_and_service.File;
  * UploadStickerFile class. Returns {@link File} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#uploadStickerFile
  */
 public class UploadStickerFile extends AbstractBaseRequest<UploadStickerFile, File> {
     /**
      * Required
-     * @param user_id user id
+     * @param userId user id
      * @param sticker sticker
-     * @param sticker_format sticker format
+     * @param stickerFormat sticker format
      * @param api api
      */
-    public UploadStickerFile(long user_id, java.io.File sticker, StickerFormat sticker_format, Api api) {
+    public UploadStickerFile(long userId, java.io.File sticker, StickerFormat stickerFormat, Api api) {
         super(api, "uploadStickerFile", File.class);
-        add("user_id", user_id);
+        add("user_id", userId);
         add("sticker", sticker);
-        add("sticker_format", sticker_format);
+        add("sticker_format", stickerFormat);
     }
 
 }
