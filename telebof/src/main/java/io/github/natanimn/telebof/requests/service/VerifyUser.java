@@ -7,25 +7,25 @@ import io.github.natanimn.telebof.requests.Api;
  * Verifies a user on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
  * @author Natanim
  * @since 1 August 2025
- * @version 0.8
+ * @version 1.3.0
  */
 public class VerifyUser extends AbstractBaseRequest<VerifyUser, Boolean> {
     /**
-     * @param user_id Unique identifier of the target user
-     * @param rs Request
+     * @param userId Unique identifier of the target user
+     * @param api Request
      */
-    public VerifyUser(long user_id, Api rs){
-        super(rs, "verifyUser");
-        add("user_id", user_id);
+    public VerifyUser(long userId, Api api){
+        super(api, "verifyUser");
+        add("user_id", userId);
     }
 
     /**
      * Optional
-     * @param custom_description Custom description for the verification; 0-70 characters. Must be empty if the organization
+     * @param customDescription Custom description for the verification; 0-70 characters. Must be empty if the organization
      *                           isn't allowed to provide a custom verification description.
      * @return {@link #VerifyUser}
      */
-    public VerifyUser customDescription(String custom_description){
-        return add("custom_description", custom_description);
+    public VerifyUser customDescription(String customDescription){
+        return add("custom_description", customDescription);
     }
 }
