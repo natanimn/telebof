@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.requests.Api;
  * SetMyDescription class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setMyDescription()
  */
 public class SetMyDescription extends AbstractBaseRequest<SetMyDescription, Boolean> {
@@ -34,11 +34,11 @@ public class SetMyDescription extends AbstractBaseRequest<SetMyDescription, Bool
 
     /**
      * Optional
-     * @param language_code A two-letter ISO 639-1 language code.
+     * @param languageCode A two-letter ISO 639-1 language code.
      *                      If empty, the description will be applied to all users for whose language there is no dedicated description.
      * @return {@link SetMyDescription}
      */
-    public SetMyDescription languageCode(String language_code){
-        return add("language_code", language_code);
+    public SetMyDescription languageCode(String languageCode){
+        return add("language_code", languageCode);
     }
 }
