@@ -8,18 +8,18 @@ import io.github.natanimn.telebof.BotContext;
  * SetChatTitle class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setChatTitle
  */
 public class SetChatTitle extends AbstractBaseRequest<SetChatTitle, Boolean> {
     /**
      * Required
-     * @param chat_id chat id
+     * @param chatId chat id
      * @param title title
      * @param api api
      */
-    public SetChatTitle(Object chat_id, String title, Api api) {
-        super(chat_id, api, "setChatTitle", Boolean.class);
+    public SetChatTitle(Object chatId, String title, Api api) {
+        super(chatId, api, "setChatTitle", Boolean.class);
         add("title", title);
     }
 
