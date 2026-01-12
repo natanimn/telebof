@@ -9,37 +9,37 @@ import io.github.natanimn.telebof.types.updates.Message;
  * SetGameScore class.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SetGameScore extends AbstractBaseRequest<SetGameScore, Object> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param user_id user id
+     * @param chatId chat id
+     * @param userId user id
      * @param score score
-     * @param message_id message id
+     * @param messageId message id
      * @param api api
      * @see BotContext#setGameScore(long, long, int, int)
      */
-    public SetGameScore(long chat_id, long user_id, int score, int message_id, Api api) {
-        super(chat_id, api, "setGameScore", Message.class);
-        add("user_id", user_id);
-        add("message_id", message_id);
+    public SetGameScore(long chatId, long userId, int score, int messageId, Api api) {
+        super(chatId, api, "setGameScore", Message.class);
+        add("user_id", userId);
+        add("message_id", messageId);
         add("score", score);
     }
 
     /**
      * Required
-     * @param inline_message_id inline message id
-     * @param user_id user id
+     * @param inlineMessageId inline message id
+     * @param userId user id
      * @param score score
      * @param api api
      * @see BotContext#setGameScore(String, long, int)
      */
-    public SetGameScore(String inline_message_id, long user_id, int score, Api api) {
+    public SetGameScore(String inlineMessageId, long userId, int score, Api api) {
         super(api, "setGameScore", Boolean.class);
-        add("user_id", user_id);
-        add("inline_message_id", inline_message_id);
+        add("user_id", userId);
+        add("inline_message_id", inlineMessageId);
         add("score",score);
     }
 
@@ -54,11 +54,11 @@ public class SetGameScore extends AbstractBaseRequest<SetGameScore, Object> {
 
     /**
      * Optional
-     * @param disable_edit_message Pass True if the game message should not be automatically edited to include the current scoreboard
+     * @param disableEditMessage Pass True if the game message should not be automatically edited to include the current scoreboard
      * @return {@link SetGameScore}
      */
-    public SetGameScore disableEditMessage(boolean disable_edit_message) {
-        return add("disable_edit_message", disable_edit_message);
+    public SetGameScore disableEditMessage(boolean disableEditMessage) {
+        return add("disable_edit_message", disableEditMessage);
     }
 
 }
