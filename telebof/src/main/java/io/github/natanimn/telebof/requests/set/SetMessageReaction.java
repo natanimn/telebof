@@ -11,19 +11,19 @@ import java.util.List;
  * SetMessageReaction class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setMessageReaction
  */
 public class SetMessageReaction extends AbstractBaseRequest<SetMessageReaction, Boolean> {
     /**
      * Required
-     * @param chat_id chat id
-     * @param message_id message id
+     * @param chatId chat id
+     * @param messageId message id
      * @param api api
      */
-    public SetMessageReaction(Object chat_id, int message_id, Api api){
-        super(chat_id, api, "setMessageReaction", Boolean.class);
-        add("message_id", message_id);
+    public SetMessageReaction(Object chatId, int messageId, Api api){
+        super(chatId, api, "setMessageReaction", Boolean.class);
+        add("message_id", messageId);
     }
 
     /**
@@ -34,17 +34,17 @@ public class SetMessageReaction extends AbstractBaseRequest<SetMessageReaction, 
      *                 Paid reactions can't be used by bots.
      * @return {@link SetMessageReaction}
      */
-    public SetMessageReaction reaction(List<ReactionType> reaction){
+    public SetMessageReaction reaction(ReactionType[] reaction){
         return add("reaction", reaction);
     }
 
     /**
      * Optional
-     * @param is_big Pass True to set the reaction with a big animation
+     * @param isBig Pass True to set the reaction with a big animation
      * @return {@link SetMessageReaction}
      */
-    public SetMessageReaction isBig(boolean is_big){
-        return add("is_big", is_big);
+    public SetMessageReaction isBig(boolean isBig){
+        return add("is_big", isBig);
     }
 
 }
