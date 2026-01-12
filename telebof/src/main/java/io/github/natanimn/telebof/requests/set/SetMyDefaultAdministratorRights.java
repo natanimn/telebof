@@ -9,7 +9,7 @@ import io.github.natanimn.telebof.types.chat_and_user.ChatAdministratorRights;
  * SetMyDefaultAdministratorRights class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setMyDefaultAdministratorRights
  */
 public class SetMyDefaultAdministratorRights extends AbstractBaseRequest<SetMyDefaultAdministratorRights, Boolean> {
@@ -33,12 +33,12 @@ public class SetMyDefaultAdministratorRights extends AbstractBaseRequest<SetMyDe
 
     /**
      * Optional
-     * @param for_channel Pass True to change the default administrator rights of the bot in channels.
+     * @param forChannel Pass True to change the default administrator rights of the bot in channels.
      *                    Otherwise, the default administrator rights of the bot for groups and supergroups will be changed.
      * @return {@link SetMyDefaultAdministratorRights}
      */
-    public SetMyDefaultAdministratorRights forChannel(boolean for_channel) {
-        return add("for_channel", for_channel);
+    public SetMyDefaultAdministratorRights forChannel(Boolean forChannel) {
+        return add("for_channel", forChannel);
     }
 
 }
