@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.requests.Api;
  * SetCustomEmojiStickerSetThumbnail class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setCustomEmojiStickerSetThumbnail
  */
 public class SetCustomEmojiStickerSetThumbnail extends AbstractBaseRequest<SetCustomEmojiStickerSetThumbnail, Boolean> {
@@ -24,11 +24,11 @@ public class SetCustomEmojiStickerSetThumbnail extends AbstractBaseRequest<SetCu
 
     /**
      * Optional
-     * @param custom_emoji_id custom emoji id
+     * @param customEmojiId custom emoji id
      * @return {@link SetCustomEmojiStickerSetThumbnail}
      */
-    public SetCustomEmojiStickerSetThumbnail customEmojiId(String custom_emoji_id){
-        return add("custom_emoji_id", custom_emoji_id);
+    public SetCustomEmojiStickerSetThumbnail customEmojiId(String customEmojiId){
+        return add("custom_emoji_id", customEmojiId);
     }
 
 }
