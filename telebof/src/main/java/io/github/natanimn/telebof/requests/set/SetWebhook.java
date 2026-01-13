@@ -10,13 +10,13 @@ import java.io.File;
  * SetWebhook class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class SetWebhook extends AbstractBaseRequest<SetWebhook, Boolean> {
     /**
      * Required
      * @param url url
-     * @param api
+     * @param api api
      */
     public SetWebhook(String url, Api api){
         super(api, "setWebhook");
@@ -35,48 +35,48 @@ public class SetWebhook extends AbstractBaseRequest<SetWebhook, Boolean> {
 
     /**
      * Optional
-     * @param ip_address The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
+     * @param ipAddress The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
      * @return {@link SetWebhook}
      */
-    public SetWebhook ipAddress(String ip_address){
-        return add("ip_address", ip_address);
+    public SetWebhook ipAddress(String ipAddress){
+        return add("ip_address", ipAddress);
     }
 
     /**
      * Optional
-     * @param max_connections The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100.
+     * @param maxConnections The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100.
      *                        Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
      * @return {@link SetWebhook}
      */
-    public SetWebhook maxConnections(int max_connections){
-        return add("max_connections", max_connections);
+    public SetWebhook maxConnections(int maxConnections){
+        return add("max_connections", maxConnections);
     }
 
     /**
      * Optional
-     * @param allowed_updates A JSON-serialized list of the update types you want your bot to receive.
+     * @param allowedUpdates A JSON-serialized list of the update types you want your bot to receive.
      * @return {@link SetWebhook}
      */
-    public SetWebhook allowedUpdates(Updates[] allowed_updates){
-        return add("allowed_updates", allowed_updates);
+    public SetWebhook allowedUpdates(Updates[] allowedUpdates){
+        return add("allowed_updates", allowedUpdates);
     }
 
     /**
      * Optional
-     * @param drop_pending_updates Pass True to drop all pending updates
+     * @param dropPendingUpdates Pass True to drop all pending updates
      * @return {@link SetWebhook}
      */
-    public SetWebhook dropPendingUpdates(Boolean drop_pending_updates){
-        return add("drop_pending_updates", drop_pending_updates);
+    public SetWebhook dropPendingUpdates(Boolean dropPendingUpdates){
+        return add("drop_pending_updates", dropPendingUpdates);
     }
 
     /**
      * Optional
-     * @param secret_token A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters.
+     * @param secretToken A secret token to be sent in a header “X-Telegram-Bot-Api-Secret-Token” in every webhook request, 1-256 characters.
      *                    Only characters A-Z, a-z, 0-9, _ and - are allowed. The header is useful to ensure that the request comes from a webhook set by you.
      * @return {@link SetWebhook}
      */
-    public SetWebhook secretToken(String secret_token){
-        return add("secret_token", secret_token);
+    public SetWebhook secretToken(String secretToken){
+        return add("secret_token", secretToken);
     }
 }
