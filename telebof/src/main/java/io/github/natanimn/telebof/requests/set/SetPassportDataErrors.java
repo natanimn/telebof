@@ -9,19 +9,19 @@ import io.github.natanimn.telebof.types.passport.PassportElementError;
  * SetPassportDataErrors class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#setPassportDataErrors
  */
 public class SetPassportDataErrors extends AbstractBaseRequest<SetPassportDataErrors, Boolean> {
     /**
      * Required
-     * @param user_id user id
+     * @param userId user id
      * @param errors errors
      * @param api api
      */
-    public SetPassportDataErrors(long user_id, PassportElementError[] errors, Api api) {
+    public SetPassportDataErrors(long userId, PassportElementError[] errors, Api api) {
         super(api, "setPassportDataErrors");
-        add("user_id", user_id);
+        add("user_id", userId);
         add("errors", errors);
     }
 
