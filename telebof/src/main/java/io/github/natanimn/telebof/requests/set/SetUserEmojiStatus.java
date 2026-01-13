@@ -6,34 +6,33 @@ import io.github.natanimn.telebof.requests.Api;
 /**
  * @author Natanim
  * @since July 25, 2025
- * @version 0.6
+ * @version 1.3.0
  */
 public class SetUserEmojiStatus extends AbstractBaseRequest<SetUserEmojiStatus, Boolean> {
     /**
-     * @param user_id Unique identifier of the target user
-     * @param rs Api class
+     * @param userId Unique identifier of the target user
+     * @param api Api class
      */
-    public SetUserEmojiStatus(long user_id, Api rs){
-        super(rs, "setUserEmojiStatus");
-        add("user_id", user_id);
+    public SetUserEmojiStatus(long userId, Api api){
+        super(api, "setUserEmojiStatus");
+        add("user_id", api);
     }
 
     /**
      * Optional
-     * @param emoji_status_custom_emoji_id Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
+     * @param emojiStatusCustomEmojiId Custom emoji identifier of the emoji status to set. Pass an empty string to remove the status.
      * @return {@link SetUserEmojiStatus}
      */
-    public SetUserEmojiStatus emojiStatusCustomEmojiId(String emoji_status_custom_emoji_id){
-        return add("emoji_status_custom_emoji_id", emoji_status_custom_emoji_id);
+    public SetUserEmojiStatus emojiStatusCustomEmojiId(String emojiStatusCustomEmojiId){
+        return add("emoji_status_custom_emoji_id", emojiStatusCustomEmojiId);
     }
 
     /**
      * Optional
-     * @param emoji_status_expiration_date Expiration date of the emoji status, if any
+     * @param emojiStatusExpirationDate Expiration date of the emoji status, if any
      * @return {@link SetUserEmojiStatus}
      */
-    public SetUserEmojiStatus emojiStatusExpirationDate(Integer emoji_status_expiration_date){
-        return add("emoji_status_expiration_date", emoji_status_expiration_date);
+    public SetUserEmojiStatus emojiStatusExpirationDate(Integer emojiStatusExpirationDate){
+        return add("emoji_status_expiration_date", emojiStatusExpirationDate);
     }
-
 }
