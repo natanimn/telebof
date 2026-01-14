@@ -8,10 +8,10 @@ import io.github.natanimn.telebof.enums.PassportElementType;
  * The error is considered resolved when the file with the document scan changes.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
 public class PassportElementErrorFile extends PassportElementError {
-    public PassportElementErrorFile(PassportElementType type, String file_hash, String message) {
-        super(PassportElementErrorSource.FILE, type, file_hash, message);
+    public PassportElementErrorFile(PassportElementType type, String fileHash, String message) {
+        super(PassportElementErrorSource.FILE, type, fileHash, message);
     }
 }
