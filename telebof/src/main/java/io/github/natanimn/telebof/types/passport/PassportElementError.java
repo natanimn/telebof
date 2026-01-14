@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.passport;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.PassportElementErrorSource;
 import io.github.natanimn.telebof.enums.PassportElementType;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * This class represents an error in the Telegram Passport element which was submitted that should be resolved by the user.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
 public abstract class PassportElementError implements Serializable {
     /**
@@ -39,27 +40,32 @@ public abstract class PassportElementError implements Serializable {
     /**
      * Base64-encoded file hash
      */
-    private String file_hash;
+    @SerializedName("file_hash")
+    private String fileHash;
 
     /**
      * Base64-encoded element hash
      */
-    private String element_hash;
+    @SerializedName("element_hash")
+    private String elementHash;
 
     /**
      * List of base64-encoded file hashes
      */
-    private List<String> file_hashes;
+    @SerializedName("file_hashes")
+    private List<String> fileHashes;
 
     /**
      * Base64-encoded data hash
      */
-    private String data_hash;
+    @SerializedName("data_hash")
+    private String dataHash;
 
     /**
      * Name of the data field which has the error
      */
-    private String field_name;
+    @SerializedName("field_name")
+    private String fieldName;
 
     /**
      * @param source Error source
@@ -71,7 +77,7 @@ public abstract class PassportElementError implements Serializable {
         this.source = source;
         this.type = type;
         this.message = message;
-        this.file_hash = fileHash;
+        this.fileHash = fileHash;
     }
 
     /**
@@ -95,34 +101,34 @@ public abstract class PassportElementError implements Serializable {
         this.source = source;
         this.type = type;
         this.message = message;
-        this.file_hashes = List.of(fileHashes);
+        this.fileHashes = List.of(fileHashes);
     }
 
     /**
      * @param source Error source
      * @param type Type of element of the user's Telegram Passport which has the issue.
-     * @param element_hash Base64-encoded element hash
+     * @param elementHash Base64-encoded element hash
      * @param message error message
      */
-    public PassportElementError(PassportElementErrorSource source, String type, String element_hash, String message) {
+    public PassportElementError(PassportElementErrorSource source, String type, String elementHash, String message) {
         this.source = source;
         this.type = type;
-        this.element_hash = element_hash;
+        this.elementHash = elementHash;
         this.message = message;
     }
 
     /**
      * @param source Error source
      * @param type Type of element of the user's Telegram Passport which has the issue.
-     * @param data_hash Base64-encoded data hash
-     * @param field_name Name of the data field which has the error
+     * @param dataHash Base64-encoded data hash
+     * @param fieldName Name of the data field which has the error
      * @param message error message
      */
-    public PassportElementError(PassportElementErrorSource source, PassportElementType type, String field_name, String data_hash, String message) {
+    public PassportElementError(PassportElementErrorSource source, PassportElementType type, String fieldName, String dataHash, String message) {
         this.source = source;
         this.type = type;
-        this.field_name = field_name;
-        this.data_hash = data_hash;
+        this.fieldName = fieldName;
+        this.dataHash = dataHash;
         this.message = message;
     }
 
