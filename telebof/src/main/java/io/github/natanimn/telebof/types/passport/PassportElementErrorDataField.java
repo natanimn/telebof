@@ -8,10 +8,10 @@ import io.github.natanimn.telebof.enums.PassportElementType;
  * The error is considered resolved when the field's value changes.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.7
+ * @version 1.3.0
  */
 public class PassportElementErrorDataField extends PassportElementError {
-    public PassportElementErrorDataField(PassportElementType type, String field_name, String data_hash, String message) {
-        super(PassportElementErrorSource.DATA, type, field_name, data_hash, message);
+    public PassportElementErrorDataField(PassportElementType type, String fieldName, String dataHash, String message) {
+        super(PassportElementErrorSource.DATA, type, fieldName, dataHash, message);
     }
 }
