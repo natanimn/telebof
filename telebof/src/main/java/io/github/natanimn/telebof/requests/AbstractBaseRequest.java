@@ -11,7 +11,7 @@ import java.util.TreeMap;
  * Request builder class for Telegram methods
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9.4
+ * @version 1.3.0
  */
 @SuppressWarnings("unchecked")
 abstract public class AbstractBaseRequest<T, R>{
@@ -22,8 +22,8 @@ abstract public class AbstractBaseRequest<T, R>{
     protected Api api;
     private final Type responseType;
 
-    public AbstractBaseRequest(Object chat_id, Api api, String methodName, Type responseType) {
-        add("chat_id", chat_id);
+    public AbstractBaseRequest(Object chatId, Api api, String methodName, Type responseType) {
+        add("chat_id", chatId);
         this.api = api;
         this.methodName = methodName;
         this.responseType = responseType;
