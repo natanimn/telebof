@@ -13,71 +13,23 @@ import java.util.List;
  * @since 3 March 2025
  * @version 1.3.0
  */
-public class InputMediaAnimation implements InputMediaInt {
+public class InputMediaAnimation extends InputMediaBuilder<InputMediaAnimation> {
 
-    private String type;
-
-    /**
-     * File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet
-     */
-    private String media;
-
-    /**
-     * Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side.
-     */
     private String thumbnail;
-
-    /**
-     * Optional. Animation width
-     */
     private Integer width;
-
-    /**
-     * Optional. Animation height
-     */
     private Integer height;
-
-    /**
-     * Optional. Animation duration in seconds
-     */
     private Integer duration;
 
-    /**
-     * Optional. Pass True if the animation needs to be covered with a spoiler animation
-     */
     @SerializedName("has_spoiler")
     private Boolean hasSpoiler;
-
-    /**
-     * Optional. Caption of the animation to be sent, 0-1024 characters after entities parsing
-     */
-    private String caption;
-
-    /**
-     * Optional. Mode for parsing entities in the animation caption
-     */
-    @SerializedName("parse_mode")
-    private ParseMode parseMode;
-
-    /**
-     * Optional. List of special entities that appear in the caption
-     */
-    @SerializedName("caption_entities")
-    private List<MessageEntity> captionEntities;
-
-    /**
-     * List of files to be uploaded
-     */
-    transient private List<File> files;
 
     /**
      * Constructor for InputMediaAnimation with String media
      * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet
      */
     public InputMediaAnimation(String media) {
-        this.type = "animation";
+        super("animation", media);
         this.media = media;
-        this.files = new ArrayList<>();
     }
 
     /**
@@ -85,51 +37,51 @@ public class InputMediaAnimation implements InputMediaInt {
      * @param media File to send.
      */
     public InputMediaAnimation(File media) {
-        this.type = "animation";
-        this.media = "attach://" + media.getName();
-        this.files = new ArrayList<>();
-        this.files.add(media);
+        super("animation", media);
     }
 
-    public void setCaptionEntities(MessageEntity[] captionEntities) {
-        this.captionEntities = List.of(captionEntities);
-    }
-
-    public void setParseMode(ParseMode parseMode) {
-        this.parseMode = parseMode;
-    }
-
-    public void setCaption(String caption) {
-        this.caption = caption;
-    }
-
-    public void setHasSpoiler(Boolean hasSpoiler) {
+    /**
+     * @param hasSpoiler Pass True if the animation needs to be covered with a spoiler animation
+     * @return this
+     */
+    public InputMediaAnimation setHasSpoiler(Boolean hasSpoiler) {
         this.hasSpoiler = hasSpoiler;
+        return this;
     }
 
-    public void setDuration(Integer duration) {
+    /**
+     * @param duration Animation duration in seconds
+     * @return this
+     */
+    public InputMediaAnimation setDuration(Integer duration) {
         this.duration = duration;
+        return this;
     }
 
-    public void setHeight(Integer height) {
+    /**
+     * @param height Animation height
+     * @return this
+     */
+    public InputMediaAnimation setHeight(Integer height) {
         this.height = height;
+        return this;
     }
 
-    public void setWidth(Integer width) {
+    /**
+     * @param width Animation width
+     * @return this
+     */
+    public InputMediaAnimation setWidth(Integer width) {
         this.width = width;
+        return this;
     }
 
-    public void setThumbnail(String thumbnail) {
+    /**
+     * @param thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side.
+     * @return this
+     */
+    public InputMediaAnimation setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
-    }
-
-    @Override
-    public boolean hasFile() {
-        return files != null && !files.isEmpty();
-    }
-
-    @Override
-    public List<File> getFiles() {
-        return files;
+        return this;
     }
 }
