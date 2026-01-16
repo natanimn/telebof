@@ -11,118 +11,54 @@ import java.util.List;
  * @version 1.3.0
  */
 public class InputInvoiceMessageContent implements InputMessageContent {
-    /**
-     * Product name, 1-32 characters
-     */
     private final String title;
-
-    /**
-     * Product description, 1-255 characters
-     */
     private final String description;
-
-    /**
-     * Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
-     */
     private final String payload;
-
-    /**
-     * Three-letter ISO 4217 currency code, see more on currencies. Pass "XTR" for payments in Telegram Stars.
-     */
     private final String currency;
+    private final List<LabeledPrice> prices;
 
-    /**
-     * Price breakdown. Must contain exactly one item for payments in Telegram Stars.
-     */
-    private final LabeledPrice[] prices;
-
-    /**
-     * Optional. Payment provider token
-     */
     @SerializedName("provider_token")
     private String providerToken;
 
-    /**
-     * Optional. Data about the invoice, which will be shared with the payment provider.
-     */
     @SerializedName("provider_data")
     private String providerData;
 
-    /**
-     * Optional. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
-     */
     @SerializedName("photo_url")
     private String photoUrl;
 
-    /**
-     * Optional. Photo size in bytes
-     */
     @SerializedName("photo_size")
     private Integer photoSize;
 
-    /**
-     * Optional. Photo width
-     */
     @SerializedName("photo_width")
     private Integer photoWidth;
 
-    /**
-     * Optional. Photo height
-     */
     @SerializedName("photo_height")
     private Integer photoHeight;
 
-    /**
-     * Optional. The maximum accepted amount for tips in the smallest units of the currency. Defaults to 0. Not supported for payments in Telegram Stars.
-     */
     @SerializedName("max_tip_amount")
     private Integer maxTipAmount;
 
-    /**
-     * Optional. Array of suggested amounts of tip in the smallest units of the currency. At most 4 suggested tip amounts can be specified.
-     */
     @SerializedName("suggested_tip_amounts")
     private List<Integer> suggestedTipAmounts;
 
-    /**
-     * Optional. Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("need_name")
     private Boolean needName;
 
-    /**
-     * Optional. Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("need_phone_number")
     private Boolean needPhoneNumber;
 
-    /**
-     * Optional. Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("need_email")
     private Boolean needEmail;
 
-    /**
-     * Optional. Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("need_shipping_address")
     private Boolean needShippingAddress;
 
-    /**
-     * Optional. Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("send_phone_number_to_provider")
     private Boolean sendPhoneNumberToProvider;
 
-    /**
-     * Optional. Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("send_email_to_provider")
     private Boolean sendEmailToProvider;
 
-    /**
-     * Optional. Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
-     */
     @SerializedName("is_flexible")
     private Boolean isFlexible;
 
@@ -131,66 +67,141 @@ public class InputInvoiceMessageContent implements InputMessageContent {
         this.description = description;
         this.payload = payload;
         this.currency = currency;
-        this.prices = prices;
+        this.prices = List.of(prices);
     }
 
-    public void setProviderToken(String providerToken) {
+    /**
+     * @param providerToken Payment provider token
+     * @return this
+     */
+    public InputInvoiceMessageContent setProviderToken(String providerToken) {
         this.providerToken = providerToken;
+        return this;
     }
 
-    public void setProviderData(String providerData) {
+    /**
+     * @param providerData Data about the invoice, which will be shared with the payment provider.
+     * @return this
+     */
+    public InputInvoiceMessageContent setProviderData(String providerData) {
         this.providerData = providerData;
+        return this;
     }
 
-    public void setPhotoUrl(String photoUrl) {
+    /**
+     * @param photoUrl URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.
+     * @return this
+     */
+    public InputInvoiceMessageContent setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
+        return this;
     }
 
-    public void setPhotoSize(Integer photoSize) {
+    /**
+     * @param photoSize Photo size in bytes
+     * @return this
+     */
+    public InputInvoiceMessageContent setPhotoSize(Integer photoSize) {
         this.photoSize = photoSize;
+        return this;
     }
 
-    public void setPhotoWidth(Integer photoWidth) {
+    /**
+     * @param photoWidth Photo width
+     * @return this
+     */
+    public InputInvoiceMessageContent setPhotoWidth(Integer photoWidth) {
         this.photoWidth = photoWidth;
+        return this;
     }
 
-    public void setPhotoHeight(Integer photoHeight) {
+    /**
+     * @param photoHeight Photo height
+     * @return this
+     */
+    public InputInvoiceMessageContent setPhotoHeight(Integer photoHeight) {
         this.photoHeight = photoHeight;
+        return this;
     }
 
-    public void setMaxTipAmount(Integer maxTipAmount) {
+    /**
+     * @param maxTipAmount The maximum accepted amount for tips in the smallest units of the currency. Defaults to 0. Not supported for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setMaxTipAmount(Integer maxTipAmount) {
         this.maxTipAmount = maxTipAmount;
+        return this;
     }
 
-    public void setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
+    /**
+     * @param suggestedTipAmounts Array of suggested amounts of tip in the smallest units of the currency. At most 4 suggested tip amounts can be specified.
+     * @return this
+     */
+    public InputInvoiceMessageContent setSuggestedTipAmounts(List<Integer> suggestedTipAmounts) {
         this.suggestedTipAmounts = suggestedTipAmounts;
+        return this;
     }
 
-    public void setNeedName(Boolean needName) {
+    /**
+     * @param needName Pass True if you require the user's full name to complete the order. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setNeedName(Boolean needName) {
         this.needName = needName;
+        return this;
     }
 
-    public void setNeedPhoneNumber(Boolean needPhoneNumber) {
+    /**
+     * @param needPhoneNumber Pass True if you require the user's phone number to complete the order. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setNeedPhoneNumber(Boolean needPhoneNumber) {
         this.needPhoneNumber = needPhoneNumber;
+        return this;
     }
 
-    public void setNeedEmail(Boolean needEmail) {
+    /**
+     * @param needEmail Pass True if you require the user's email address to complete the order. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setNeedEmail(Boolean needEmail) {
         this.needEmail = needEmail;
+        return this;
     }
 
-    public void setNeedShippingAddress(Boolean needShippingAddress) {
+    /**
+     * @param needShippingAddress Pass True if you require the user's shipping address to complete the order. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setNeedShippingAddress(Boolean needShippingAddress) {
         this.needShippingAddress = needShippingAddress;
+        return this;
     }
 
-    public void setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
+    /**
+     * @param sendPhoneNumberToProvider Pass True if the user's phone number should be sent to the provider. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setSendPhoneNumberToProvider(Boolean sendPhoneNumberToProvider) {
         this.sendPhoneNumberToProvider = sendPhoneNumberToProvider;
+        return this;
     }
 
-    public void setSendEmailToProvider(Boolean sendEmailToProvider) {
+    /**
+     * @param sendEmailToProvider Pass True if the user's email address should be sent to the provider. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setSendEmailToProvider(Boolean sendEmailToProvider) {
         this.sendEmailToProvider = sendEmailToProvider;
+        return this;
     }
 
-    public void setFlexible(Boolean flexible) {
-        isFlexible = flexible;
+    /**
+     * @param flexible Pass True if the final price depends on the shipping method. Ignored for payments in Telegram Stars.
+     * @return this
+     */
+    public InputInvoiceMessageContent setFlexible(Boolean flexible) {
+        this.isFlexible = flexible;
+        return this;
     }
 }
