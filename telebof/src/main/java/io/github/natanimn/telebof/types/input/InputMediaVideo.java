@@ -1,176 +1,135 @@
 package io.github.natanimn.telebof.types.input;
 
-import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Represents a video to be sent.
- * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
- * @param thumbnail Optional. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side.
- * @param width Optional. Video width
- * @param height Optional. Video height
- * @param duration Optional. Video duration in seconds
- * @param hasSpoiler Optional. Pass True if the video needs to be covered with a spoiler animation
- * @param supportsStreaming Optional. Pass True if the uploaded video is suitable for streaming
- * @param cover Optional. Cover for the video in the message.
- * @param startTimestamp Optional. Start timestamp for the video in the message
- * @param caption Optional. Caption of the video to be sent, 0-1024 characters after entities parsing
- * @param parseMode Optional. Mode for parsing entities in the video caption
- * @param captionEntities Optional. List of special entities that appear in the caption
- * @param files List of files to be uploaded
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record InputMediaVideo(
-        String media,
-        String thumbnail,
-        Integer width,
-        Integer height,
-        Integer duration,
-        @SerializedName("has_spoiler") Boolean hasSpoiler,
-        @SerializedName("supports_streaming") Boolean supportsStreaming,
-        String cover,
-        @SerializedName("start_timestamp") Integer startTimestamp,
-        String caption,
-        @SerializedName("parse_mode") String parseMode,
-        @SerializedName("caption_entities") List<MessageEntity> captionEntities,
-        List<File> files
-) implements InputPaidMedia {
+public class InputMediaVideo extends InputMediaBuilder<InputMediaVideo> {
+    private String thumbnail;
+    private Integer width;
+    private Integer height;
+    private Integer duration;
 
-    @Override
-    public String type() {
-        return "video";
-    }
+    @SerializedName("has_spoiler")
+    private Boolean hasSpoiler;
 
-    @Override
-    public boolean hasFile() {
-        return files != null && !files.isEmpty();
-    }
+    @SerializedName("supports_streaming")
+    private Boolean supportsStreaming;
 
-    @Override
-    public List<File> getFiles() {
-        return files;
-    }
+    private String cover;
+
+    @SerializedName("start_timestamp")
+    private Integer startTimestamp;
 
     /**
-     * Creates a new InputMediaVideo builder
+     * Required
      * @param media File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), or pass an HTTP URL for Telegram to get a file from the Internet.
      */
-    public static InputMediaVideoBuilder builder(String media) {
-        return new InputMediaVideoBuilder(media);
+    public InputMediaVideo(String media) {
+        super("video", media);
     }
 
     /**
-     * Creates a new InputMediaVideo builder
+     * Required
      * @param media File to send. Pass an object of File to upload from your local machine.
      */
-    public static InputMediaVideoBuilder builder(File media) {
-        return new InputMediaVideoBuilder(media);
+    public InputMediaVideo(File media) {
+        super("video", media);
     }
 
     /**
-     * Builder class for InputMediaVideo
+     * Optional.
+     * @param thumbnail Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side.
      */
-    public static class InputMediaVideoBuilder {
-        private String media;
-        private String thumbnail;
-        private Integer width;
-        private Integer height;
-        private Integer duration;
-        private Boolean hasSpoiler;
-        private Boolean supportsStreaming;
-        private String cover;
-        private Integer startTimestamp;
-        private String caption;
-        private String parseMode;
-        private List<MessageEntity> captionEntities;
-        private List<File> files = new ArrayList<>();
+    public InputMediaVideo setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+        return this;
+    }
 
-        public InputMediaVideoBuilder(String media) {
-            this.media = media;
-        }
+    /**
+     * Optional.
+     * @param thumbnail Thumbnail file to upload from your local machine
+     */
+    public InputMediaVideo setThumbnail(File thumbnail) {
+        this.thumbnail = "attach://" + thumbnail.getName();
+        this.files.add(thumbnail);
+        return this;
+    }
 
-        public InputMediaVideoBuilder(File media) {
-            this.media = "attach://" + media.getName();
-            this.files.add(media);
-        }
+    /**
+     * Optional.
+     * @param width Video width
+     */
+    public InputMediaVideo setWidth(Integer width) {
+        this.width = width;
+        return this;
+    }
 
-        public InputMediaVideoBuilder thumbnail(File thumbnail) {
-            this.thumbnail = "attach://" + thumbnail.getName();
-            this.files.add(thumbnail);
-            return this;
-        }
+    /**
+     * Optional.
+     * @param height Video height
+     */
+    public InputMediaVideo setHeight(Integer height) {
+        this.height = height;
+        return this;
+    }
 
-        public InputMediaVideoBuilder thumbnail(String thumbnail) {
-            this.thumbnail = thumbnail;
-            return this;
-        }
+    /**
+     * Optional.
+     * @param duration Video duration in seconds
+     */
+    public InputMediaVideo setDuration(Integer duration) {
+        this.duration = duration;
+        return this;
+    }
 
-        public InputMediaVideoBuilder width(Integer width) {
-            this.width = width;
-            return this;
-        }
+    /**
+     * Optional.
+     * @param hasSpoiler Pass True if the video needs to be covered with a spoiler animation
+     */
+    public InputMediaVideo setHasSpoiler(Boolean hasSpoiler) {
+        this.hasSpoiler = hasSpoiler;
+        return this;
+    }
 
-        public InputMediaVideoBuilder height(Integer height) {
-            this.height = height;
-            return this;
-        }
+    /**
+     * Optional.
+     * @param supportsStreaming Pass True if the uploaded video is suitable for streaming
+     */
+    public InputMediaVideo setSupportsStreaming(Boolean supportsStreaming) {
+        this.supportsStreaming = supportsStreaming;
+        return this;
+    }
 
-        public InputMediaVideoBuilder duration(Integer duration) {
-            this.duration = duration;
-            return this;
-        }
+    /**
+     * Optional.
+     * @param cover Cover for the video in the message.
+     */
+    public InputMediaVideo setCover(String cover) {
+        this.cover = cover;
+        return this;
+    }
 
-        public InputMediaVideoBuilder hasSpoiler(Boolean hasSpoiler) {
-            this.hasSpoiler = hasSpoiler;
-            return this;
-        }
+    /**
+     * Optional.
+     * @param cover Cover file to upload from your local machine
+     */
+    public InputMediaVideo setCover(File cover) {
+        this.cover = "attach://" + cover.getName();
+        this.files.add(cover);
+        return this;
+    }
 
-        public InputMediaVideoBuilder supportsStreaming(Boolean supportsStreaming) {
-            this.supportsStreaming = supportsStreaming;
-            return this;
-        }
-
-        public InputMediaVideoBuilder cover(File cover) {
-            this.cover = "attach://" + cover.getName();
-            this.files.add(cover);
-            return this;
-        }
-
-        public InputMediaVideoBuilder cover(String cover) {
-            this.cover = cover;
-            return this;
-        }
-
-        public InputMediaVideoBuilder startTimestamp(Integer startTimestamp) {
-            this.startTimestamp = startTimestamp;
-            return this;
-        }
-
-        public InputMediaVideoBuilder caption(String caption) {
-            this.caption = caption;
-            return this;
-        }
-
-        public InputMediaVideoBuilder parseMode(String parseMode) {
-            this.parseMode = parseMode;
-            return this;
-        }
-
-        public InputMediaVideoBuilder captionEntities(List<MessageEntity> captionEntities) {
-            this.captionEntities = captionEntities;
-            return this;
-        }
-
-        public InputMediaVideo build() {
-            return new InputMediaVideo(
-                    media, thumbnail, width, height, duration, hasSpoiler, supportsStreaming,
-                    cover, startTimestamp, caption, parseMode, captionEntities, files
-            );
-        }
+    /**
+     * Optional.
+     * @param startTimestamp Start timestamp for the video in the message
+     */
+    public InputMediaVideo setStartTimestamp(Integer startTimestamp) {
+        this.startTimestamp = startTimestamp;
+        return this;
     }
 }
