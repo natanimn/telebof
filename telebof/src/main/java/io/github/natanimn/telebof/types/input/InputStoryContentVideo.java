@@ -6,26 +6,57 @@ import java.util.List;
 
 /**
  * Describes a video to post as a story.
- * @param video The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB.
- * @param duration Optional. Precise duration of the video in seconds; 0-60
- * @param coverFrameTimestamp Optional. Timestamp in seconds of the frame that will be used as the static cover for the story. Defaults to 0.0.
- * @param isAnimation Optional. Pass True if the video has no sound
- * @param file The file object for internal use
  * @author Natanim
  * @since 19 August 2025
  * @version 1.3.0
  */
-public record InputStoryContentVideo(
-        String video,
-        Double duration,
-        @SerializedName("cover_frame_timestamp") Double coverFrameTimestamp,
-        @SerializedName("is_animation") Boolean isAnimation,
-        File file
-) implements InputStoryContent {
+public class InputStoryContentVideo implements InputStoryContent {
+    private final String type = "video";
+    private String video;
+    private Double duration;
 
-    @Override
-    public String type() {
-        return "video";
+    @SerializedName("cover_frame_timestamp")
+    private Double coverFrameTimestamp;
+
+    @SerializedName("is_animation")
+    private Boolean isAnimation;
+
+    transient private File file;
+
+    /**
+     * Required
+     * @param video The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB.
+     */
+    public InputStoryContentVideo(File video) {
+        this.file = video;
+        this.video = "attach://" + video.getName();
+    }
+
+    /**
+     * @param duration Precise duration of the video in seconds; 0-60
+     * @return this
+     */
+    public InputStoryContentVideo setDuration(Double duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    /**
+     * @param coverFrameTimestamp Timestamp in seconds of the frame that will be used as the static cover for the story. Defaults to 0.0.
+     * @return this
+     */
+    public InputStoryContentVideo setCoverFrameTimestamp(Double coverFrameTimestamp) {
+        this.coverFrameTimestamp = coverFrameTimestamp;
+        return this;
+    }
+
+    /**
+     * @param isAnimation Pass True if the video has no sound
+     * @return this
+     */
+    public InputStoryContentVideo setIsAnimation(Boolean isAnimation) {
+        this.isAnimation = isAnimation;
+        return this;
     }
 
     @Override
@@ -36,52 +67,5 @@ public record InputStoryContentVideo(
     @Override
     public List<File> getFiles() {
         return List.of(file);
-    }
-
-    /**
-     * Creates a new InputStoryContentVideo builder
-     * @param video The video to post as a story. The video must be of the size 720x1280, streamable, encoded with H.265 codec, with key frames added each second in the MPEG4 format, and must not exceed 30 MB.
-     */
-    public static InputStoryContentVideoBuilder builder(File video) {
-        return new InputStoryContentVideoBuilder(video);
-    }
-
-    /**
-     * Builder class for InputStoryContentVideo
-     */
-    public static class InputStoryContentVideoBuilder {
-        private final File video;
-        private Double duration;
-        private Double coverFrameTimestamp;
-        private Boolean isAnimation;
-
-        public InputStoryContentVideoBuilder(File video) {
-            this.video = video;
-        }
-
-        public InputStoryContentVideoBuilder duration(Double duration) {
-            this.duration = duration;
-            return this;
-        }
-
-        public InputStoryContentVideoBuilder coverFrameTimestamp(Double coverFrameTimestamp) {
-            this.coverFrameTimestamp = coverFrameTimestamp;
-            return this;
-        }
-
-        public InputStoryContentVideoBuilder isAnimation(Boolean isAnimation) {
-            this.isAnimation = isAnimation;
-            return this;
-        }
-
-        public InputStoryContentVideo build() {
-            return new InputStoryContentVideo(
-                    "attach://" + video.getName(),
-                    duration,
-                    coverFrameTimestamp,
-                    isAnimation,
-                    video
-            );
-        }
     }
 }
