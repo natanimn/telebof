@@ -8,51 +8,42 @@ import java.util.List;
 
 /**
  * This object contains information about one answer option in a poll to be sent.
- * @param text Option text, 1-100 characters
- * @param textParseMode Optional. Mode for parsing entities in the text
- * @param textEntities Optional. A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of textParseMode
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record InputPollOption(
-        String text,
-        @SerializedName("text_parse_mode") ParseMode textParseMode,
-        @SerializedName("text_entities") MessageEntity[] textEntities
-) implements Serializable {
+public class InputPollOption implements Serializable {
+    private String text;
+
+    @SerializedName("text_parse_mode")
+    private ParseMode textParseMode;
+
+    @SerializedName("text_entities")
+    private List<MessageEntity> textEntities;
 
     /**
-     * Creates a new InputPollOption builder
+     * Required
      * @param text Option text, 1-100 characters
      */
-    public static InputPollOptionBuilder builder(String text) {
-        return new InputPollOptionBuilder(text);
+    public InputPollOption(String text) {
+        this.text = text;
     }
 
     /**
-     * Builder class for InputPollOption
+     * Optional.
+     * @param textParseMode Mode for parsing entities in the text
      */
-    public static class InputPollOptionBuilder {
-        private final String text;
-        private ParseMode textParseMode;
-        private MessageEntity[] textEntities;
+    public InputPollOption setTextParseMode(ParseMode textParseMode) {
+        this.textParseMode = textParseMode;
+        return this;
+    }
 
-        public InputPollOptionBuilder(String text) {
-            this.text = text;
-        }
-
-        public InputPollOptionBuilder textParseMode(ParseMode textParseMode) {
-            this.textParseMode = textParseMode;
-            return this;
-        }
-
-        public InputPollOptionBuilder textEntities(MessageEntity[] textEntities) {
-            this.textEntities = textEntities;
-            return this;
-        }
-
-        public InputPollOption build() {
-            return new InputPollOption(text, textParseMode, textEntities);
-        }
+    /**
+     * Optional.
+     * @param textEntities A JSON-serialized list of special entities that appear in the poll option text. It can be specified instead of textParseMode
+     */
+    public InputPollOption setTextEntities(MessageEntity[] textEntities) {
+        this.textEntities = List.of(textEntities);
+        return this;
     }
 }
