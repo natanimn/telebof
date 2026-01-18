@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.keyboard;
 
+import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 
@@ -8,30 +9,48 @@ import java.io.Serializable;
  * Information about the selected users will be shared with the bot when the corresponding button is pressed.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see <a href="https://core.telegram.org/bots/features#chat-and-user-selection">More about requesting users »</a>
  */
 public class KeyboardButtonRequestUsers implements Serializable {
-    private Long request_id;
-    private Boolean user_is_bot, user_is_premium, request_name, request_username, request_photo;
-    private Byte max_quantity;
+
+    @SerializedName("request_id")
+    private Long requestId;
+
+    @SerializedName("user_is_bot")
+    private Boolean userIsBot;
+
+    @SerializedName("user_is_premium")
+    private Boolean userIsPremium;
+
+    @SerializedName("request_name")
+    private Boolean requestName;
+
+    @SerializedName("request_username")
+    private Boolean requestUsername;
+
+    @SerializedName("request_photo")
+    private Boolean requestPhoto;
+
+    @SerializedName("max_quantity")
+    private Integer maxQuantity;
 
     /**
      * Required
-     * @param request_id Signed 32-bit identifier of the request that will be received back in the {@link io.github.natanimn.telebof.types.chat_and_user.UsersShared} object.
+     * @param requestId Signed 32-bit identifier of the request that will be received back in the {@link io.github.natanimn.telebof.types.chat_and_user.UsersShared} object.
      *                   Must be unique within the message
      */
-    public KeyboardButtonRequestUsers(long request_id) {
-        this.request_id = request_id;
+    public KeyboardButtonRequestUsers(long requestId) {
+        this.requestId = requestId;
     }
 
     /**
      * Optional
-     * @param user_is_bot Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.
+     * @param userIsBot Pass True to request bots, pass False to request regular users. If not specified, no additional restrictions are applied.
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public KeyboardButtonRequestUsers userIsBot(boolean user_is_bot) {
-        this.user_is_bot = user_is_bot;
+    public KeyboardButtonRequestUsers setUserIsBot(boolean userIsBot) {
+        this.userIsBot = userIsBot;
         return this;
     }
 
@@ -40,48 +59,48 @@ public class KeyboardButtonRequestUsers implements Serializable {
      * @param user_is_premium Pass True to request premium users, pass False to request non-premium users. If not specified, no additional restrictions are applied.
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public KeyboardButtonRequestUsers userIsPremium(boolean user_is_premium) {
-        this.user_is_premium = user_is_premium;
+    public KeyboardButtonRequestUsers setUserIsPremium(boolean userIsPremium) {
+        this.userIsPremium = userIsPremium;
         return this;
     }
 
     /**
      * Optional
-     * @param max_quantity The maximum number of users to be selected; 1-10. Defaults to 1
+     * @param maxQuantity The maximum number of users to be selected; 1-10. Defaults to 1
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public KeyboardButtonRequestUsers maxQuantity(byte max_quantity){
-        this.max_quantity = max_quantity;
+    public KeyboardButtonRequestUsers setMaxQuantity(int maxQuantity){
+        this.maxQuantity = maxQuantity;
         return this;
     }
 
     /**
      * Optional
-     * @param request_name Pass True to request the users' first and last names
+     * @param requestName Pass True to request the users' first and last names
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public KeyboardButtonRequestUsers requestName(boolean request_name){
-        this.request_name = request_name;
+    public KeyboardButtonRequestUsers setRequestName(boolean requestName){
+        this.requestName = requestName;
         return this;
     }
 
     /**
      * Optional
-     * @param request_username Pass True to request the users' usernames
+     * @param requestUsername Pass True to request the users' usernames
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public  KeyboardButtonRequestUsers requestUsername(boolean request_username){
-        this.request_username = request_username;
+    public  KeyboardButtonRequestUsers setRequestUsername(boolean requestUsername){
+        this.requestUsername = requestUsername;
         return this;
     }
 
     /**
      * Optional
-     * @param request_photo Pass True to request the users' photos
+     * @param requestPhoto Pass True to request the users' photos
      * @return {@link KeyboardButtonRequestUsers}
      */
-    public  KeyboardButtonRequestUsers requestPhoto(boolean request_photo){
-        this.request_photo = request_photo;
+    public  KeyboardButtonRequestUsers setRequestPhoto(boolean requestPhoto){
+        this.requestPhoto = requestPhoto;
         return this;
     }
 
