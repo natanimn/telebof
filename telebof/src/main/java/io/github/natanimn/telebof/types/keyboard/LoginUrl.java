@@ -1,5 +1,7 @@
 package io.github.natanimn.telebof.types.keyboard;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
@@ -11,8 +13,16 @@ import java.io.Serializable;
  * @version 0.9
  */
 public class LoginUrl implements Serializable {
-    public String url, forward_text, bot_username;
-    public Boolean request_write_access;
+    private String url;
+
+    @SerializedName("forward_text")
+    private String forwardText;
+
+    @SerializedName("bot_username")
+    private String botUsername;
+
+    @SerializedName("request_write_access")
+    private Boolean requestWriteAccess;
 
     /**
      * Required
@@ -28,35 +38,35 @@ public class LoginUrl implements Serializable {
 
     /**
      * Optional
-     * @param forward_text New text of the button in forwarded messages.
+     * @param forwardText New text of the button in forwarded messages.
      * @return {@link LoginUrl}
      */
-    public LoginUrl forwardText(String forward_text){
-        this.forward_text = forward_text;
+    public LoginUrl setForwardText(String forwardText){
+        this.forwardText = forwardText;
         return this;
     }
 
     /**
      * Optional
-     * @param bot_username Username of a bot, which will be used for user authorization.
+     * @param botUsername Username of a bot, which will be used for user authorization.
      *                     If not specified, the current bot's username will be assumed.
      *                     The url's domain must be the same as the domain linked with the bot.
      * @return {@link LoginUrl}
      * @see <a href="https://core.telegram.org/widgets/login#setting-up-a-bot">Setting up a bot for more details.</a>
      * @see <a href="https://core.telegram.org/widgets/login#linking-your-domain-to-the-bot">Linking your domain to the bot for more details.</a>
      */
-    public LoginUrl botUsername(String bot_username){
-        this.bot_username = bot_username;
+    public LoginUrl setBotUsername(String botUsername){
+        this.botUsername = botUsername;
         return this;
     }
 
     /**
      * Optional
-     * @param request_write_access Pass True to request the permission for your bot to send messages to the user.
+     * @param requestWriteAccess Pass True to request the permission for your bot to send messages to the user.
      * @return {@link LoginUrl}
      */
-    public LoginUrl requestWriteAccess(boolean request_write_access){
-        this.request_write_access = request_write_access;
+    public LoginUrl setRequestWriteAccess(Boolean requestWriteAccess){
+        this.requestWriteAccess = requestWriteAccess;
         return this;
     }
 
