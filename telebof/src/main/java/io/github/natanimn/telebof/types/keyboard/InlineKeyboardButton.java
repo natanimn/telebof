@@ -143,7 +143,12 @@ public class InlineKeyboardButton implements Serializable {
         return this;
     }
 
-    public InlineKeyboardButton copyText(CopyTextButton copyText){
+    /**
+     * Optional.
+     * @param copyText Description of the button that copies the specified text to the clipboard.
+     * @return {@link InlineKeyboardButton}
+     */
+    public InlineKeyboardButton setCopyText(CopyTextButton copyText){
         this.copyText = copyText;
         return this;
     }
