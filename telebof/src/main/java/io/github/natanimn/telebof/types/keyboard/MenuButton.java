@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.keyboard;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.MenuButtonType;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
@@ -14,9 +15,13 @@ import java.io.Serializable;
  * @version 0.9
  */
 public class MenuButton implements Serializable {
-    public MenuButtonType type;
-    public String text;
-    public WebAppInfo web_app;
+    private MenuButtonType type;
+    private String text;
+
+    @SerializedName("web_app")
+    private WebAppInfo webApp;
+
+    public MenuButton(){}
 
     /**
      * Required
@@ -31,22 +36,33 @@ public class MenuButton implements Serializable {
      * @param text Web app text on the button
      * @return {@link MenuButton}
      */
-    public MenuButton text(String text){
+    public MenuButton setText(String text){
         this.text = text;
         return this;
     }
 
     /**
      * Optional
-     * @param web_app Description of the Web App that will be launched when the user presses the button.
+     * @param webApp Description of the Web App that will be launched when the user presses the button.
      *                The Web App will be able to send an arbitrary message on behalf of the user using the method {@link BotContext#answerWebAppQuery(String, InlineQueryResult)}.
      *                Alternatively, a t.me link to a Web App of the bot can be specified in the object instead of the Web App's URL,
      *                in which case the Web App will be opened as if the user pressed the link.
      * @return {@link MenuButton}
      */
-    public MenuButton webApp(WebAppInfo web_app) {
-        this.web_app = web_app;
+    public MenuButton setWebApp(WebAppInfo webApp) {
+        this.webApp = webApp;
         return this;
     }
 
+    public MenuButtonType getType() {
+        return type;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public WebAppInfo getWebApp() {
+        return webApp;
+    }
 }
