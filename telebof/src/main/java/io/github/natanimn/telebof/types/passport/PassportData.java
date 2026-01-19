@@ -9,14 +9,27 @@ import java.util.List;
  * Please see the <a href="https://core.telegram.org/passport">manual</a> for details.
  * </p>
  * <br>
- *  This class describes Telegram Passport data shared with the bot by the user.
- * @param data Array with information about documents and other Telegram Passport elements that was shared with the bot
- * @param credentials Encrypted credentials required to decrypt the data
+ * This class describes Telegram Passport data shared with the bot by the user.
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record PassportData(
-        List<EncryptedPassportElement> data,
-        EncryptedCredentials credentials
-)  {}
+public class PassportData {
+    /**
+     * Array with information about documents and other Telegram Passport elements that was shared with the bot
+     */
+    private List<EncryptedPassportElement> data;
+
+    /**
+     * Encrypted credentials required to decrypt the data
+     */
+    private EncryptedCredentials credentials;
+
+    public List<EncryptedPassportElement> getData() {
+        return data;
+    }
+
+    public EncryptedCredentials getCredentials() {
+        return credentials;
+    }
+}
