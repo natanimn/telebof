@@ -4,13 +4,26 @@ import io.github.natanimn.telebof.types.chat_and_user.Chat;
 
 /**
  * This object represents a story.
- * @param chat Chat that posted the story
- * @param id Unique identifier for the story in the chat
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
  */
-public record Story(
-        Chat chat,
-        Integer id
-) {}
+public class Story {
+    /**
+     * Chat that posted the story
+     */
+    private Chat chat;
+
+    /**
+     * Unique identifier for the story in the chat
+     */
+    private Integer id;
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+}
