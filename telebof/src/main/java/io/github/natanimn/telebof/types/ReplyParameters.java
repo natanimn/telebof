@@ -3,10 +3,8 @@ package io.github.natanimn.telebof.types;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.List;
 
 /**
  * Describes reply parameters for the message that is being sent.
@@ -30,7 +28,7 @@ public class ReplyParameters implements Serializable {
     private ParseMode quoteParseMode;
 
     @SerializedName("quote_entities")
-    private MessageEntity[] quoteEntities;
+    private List<MessageEntity> quoteEntities;
 
     @SerializedName("quote_position")
     private Integer quotePosition;
@@ -97,7 +95,7 @@ public class ReplyParameters implements Serializable {
      * @return {@link ReplyParameters}
      */
     public ReplyParameters setQuoteEntities(MessageEntity[] quoteEntities) {
-        this.quoteEntities = quoteEntities;
+        this.quoteEntities = List.of(quoteEntities);
         return this;
     }
 
