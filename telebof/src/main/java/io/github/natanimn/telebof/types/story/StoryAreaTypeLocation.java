@@ -4,51 +4,59 @@ import io.github.natanimn.telebof.types.media_and_service.LocationAddress;
 
 /**
  * Describes a story area pointing to a location. Currently, a story can have up to 10 location areas.
- * @param latitude Location latitude in degrees
- * @param longitude Location longitude in degrees
- * @param address Optional. Address of the location
  * @author Natanim
  * @since 19 August 2025
  * @version 1.3.0
  */
-public record StoryAreaTypeLocation(
-        Double latitude,
-        Double longitude,
-        LocationAddress address
-) implements StoryAreaType {
-    public String type() {
-        return "location";
-    }
+public class StoryAreaTypeLocation implements StoryAreaType {
+    /**
+     * Location latitude in degrees
+     */
+    private Double latitude;
 
     /**
-     * Creates a new StoryAreaTypeLocation builder
+     * Location longitude in degrees
+     */
+    private Double longitude;
+
+    /**
+     * Optional. Address of the location
+     */
+    private LocationAddress address;
+
+    public StoryAreaTypeLocation(){}
+    /**
+     * Required
      * @param latitude Location latitude in degrees
      * @param longitude Location longitude in degrees
      */
-    public static StoryAreaTypeLocationBuilder builder(double latitude, double longitude) {
-        return new StoryAreaTypeLocationBuilder(latitude, longitude);
+    public StoryAreaTypeLocation(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     /**
-     * Builder class for StoryAreaTypeLocation
+     * @param address Address of the location
+     * @return this
      */
-    public static class StoryAreaTypeLocationBuilder {
-        private final double latitude;
-        private final double longitude;
-        private LocationAddress address;
+    public StoryAreaTypeLocation setAddress(LocationAddress address) {
+        this.address = address;
+        return this;
+    }
 
-        public StoryAreaTypeLocationBuilder(double latitude, double longitude) {
-            this.latitude = latitude;
-            this.longitude = longitude;
-        }
+    public Double getLatitude() {
+        return latitude;
+    }
 
-        public StoryAreaTypeLocationBuilder address(LocationAddress address) {
-            this.address = address;
-            return this;
-        }
+    public Double getLongitude() {
+        return longitude;
+    }
 
-        public StoryAreaTypeLocation build() {
-            return new StoryAreaTypeLocation(latitude, longitude, address);
-        }
+    public LocationAddress getAddress() {
+        return address;
+    }
+
+    public String type() {
+        return "location";
     }
 }
