@@ -5,55 +5,69 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Describes a story area pointing to a suggested reaction. Currently, a story can have up to 5 suggested reaction areas.
- * @param reactionType Type of the reaction
- * @param isDark Optional. Pass True if the reaction area has a dark background
- * @param isFlipped Optional. Pass True if reaction area corner is flipped
  * @author Natanim
  * @since 19 August 2025
  * @version 1.3.0
  */
-public record StoryAreaTypeSuggestedReaction(
-        @SerializedName("reaction_type") ReactionType reactionType,
-        @SerializedName("is_dark") Boolean isDark,
-        @SerializedName("is_flipped") Boolean isFlipped
-) implements StoryAreaType {
+public class StoryAreaTypeSuggestedReaction implements StoryAreaType {
+    /**
+     * Type of the reaction
+     */
+    @SerializedName("reaction_type")
+    private ReactionType reactionType;
 
-    public String type() {
-        return "suggested_reaction";
-    }
+    private final String type = "suggested_reaction";
+    /**
+     * Optional. Pass True if the reaction area has a dark background
+     */
+    @SerializedName("is_dark")
+    private Boolean isDark;
 
     /**
-     * Creates a new StoryAreaTypeSuggestedReaction builder
+     * Optional. Pass True if reaction area corner is flipped
+     */
+    @SerializedName("is_flipped")
+    private Boolean isFlipped;
+
+    /**
+     * Required
      * @param reactionType Type of the reaction
      */
-    public static StoryAreaTypeSuggestedReactionBuilder builder(ReactionType reactionType) {
-        return new StoryAreaTypeSuggestedReactionBuilder(reactionType);
+    public StoryAreaTypeSuggestedReaction(ReactionType reactionType) {
+        this.reactionType = reactionType;
     }
 
     /**
-     * Builder class for StoryAreaTypeSuggestedReaction
+     * @param isDark Pass True if the reaction area has a dark background
+     * @return this
      */
-    public static class StoryAreaTypeSuggestedReactionBuilder {
-        private final ReactionType reactionType;
-        private Boolean isDark;
-        private Boolean isFlipped;
+    public StoryAreaTypeSuggestedReaction setIsDark(Boolean isDark) {
+        this.isDark = isDark;
+        return this;
+    }
 
-        public StoryAreaTypeSuggestedReactionBuilder(ReactionType reactionType) {
-            this.reactionType = reactionType;
-        }
+    /**
+     * @param isFlipped Pass True if reaction area corner is flipped
+     * @return this
+     */
+    public StoryAreaTypeSuggestedReaction setIsFlipped(Boolean isFlipped) {
+        this.isFlipped = isFlipped;
+        return this;
+    }
 
-        public StoryAreaTypeSuggestedReactionBuilder isDark(Boolean isDark) {
-            this.isDark = isDark;
-            return this;
-        }
+    public String getType() {
+        return type;
+    }
 
-        public StoryAreaTypeSuggestedReactionBuilder isFlipped(Boolean isFlipped) {
-            this.isFlipped = isFlipped;
-            return this;
-        }
+    public ReactionType getReactionType() {
+        return reactionType;
+    }
 
-        public StoryAreaTypeSuggestedReaction build() {
-            return new StoryAreaTypeSuggestedReaction(reactionType, isDark, isFlipped);
-        }
+    public Boolean getIsDark() {
+        return isDark;
+    }
+
+    public Boolean getIsFlipped() {
+        return isFlipped;
     }
 }
