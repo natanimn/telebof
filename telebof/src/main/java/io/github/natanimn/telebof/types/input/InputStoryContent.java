@@ -6,6 +6,4 @@ package io.github.natanimn.telebof.types.input;
  * @since 19 August 2025
  * @version 1.3.0
  */
-public interface InputStoryContent extends InputMedia{
-    String type();
-}
+public interface InputStoryContent extends InputMedia{ }
