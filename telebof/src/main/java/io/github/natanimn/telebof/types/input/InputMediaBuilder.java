@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.input;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 
@@ -11,13 +12,18 @@ import java.util.List;
  * Input media builder class that contains default parameters
  * @author Natanim
  * @since 3 March 2025
- * @version 0.8
+ * @version 1.3.0
  */
 @SuppressWarnings("unchecked")
 abstract public class InputMediaBuilder<T> implements InputMedia{
     protected String type, caption, media;
-    protected ParseMode  parse_mode;
-    protected List<MessageEntity> caption_entities;
+
+    @SerializedName("parse_mode")
+    protected ParseMode  parseMode;
+
+    @SerializedName("caption_entities")
+    protected List<MessageEntity> captionEntities;
+
     transient List<File> files = new ArrayList<>();
     transient Boolean hasFile;
 
@@ -58,21 +64,21 @@ abstract public class InputMediaBuilder<T> implements InputMedia{
 
     /**
      * Optional
-     * @param parse_mode Mode for parsing entities in the media {@link #caption}
+     * @param parseMode Mode for parsing entities in the media {@link #caption}
      * @return {@link T}
      */
-    public T parseMode(ParseMode parse_mode) {
-        this.parse_mode = parse_mode;
+    public T parseMode(ParseMode parseMode) {
+        this.parseMode = parseMode;
         return thisT;
     }
 
     /**
      * Optional
-     * @param caption_entities List of special entities that appear in the caption, which can be specified instead of parse_mode
+     * @param captionEntities List of special entities that appear in the caption, which can be specified instead of parse_mode
      * @return {@link T}
      */
-    public T captionEntities(MessageEntity[] caption_entities) {
-        this.caption_entities = List.of(caption_entities);
+    public T captionEntities(MessageEntity[] captionEntities) {
+        this.captionEntities = List.of(captionEntities);
         return thisT;
     }
 
@@ -107,6 +113,6 @@ abstract public class InputMediaBuilder<T> implements InputMedia{
      */
     @Override
     public boolean hasFile() {
-        return hasFile;
+        return !files.isEmpty();
     }
 }
