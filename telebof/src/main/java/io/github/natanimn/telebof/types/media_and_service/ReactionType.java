@@ -46,5 +46,15 @@ public class ReactionType implements Serializable {
         return this;
     }
 
+    public TypeReaction getType() {
+        return type;
+    }
 
+    public String getEmoji() {
+        return emoji;
+    }
+
+    public String getCustomEmojiId() {
+        return customEmojiId;
+    }
 }
