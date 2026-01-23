@@ -7,7 +7,7 @@ import java.io.Serializable;
  * This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class KeyboardButtonPollType implements Serializable {
 
