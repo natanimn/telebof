@@ -27,10 +27,13 @@ public class InlineHandlerTest {
 
     @MessageHandler(commands = "start")
     void start(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "Press the button")
-                .replyMarkup(new InlineKeyboardMarkup(
-                        new InlineKeyboardButton[]{new InlineKeyboardButton("Click me")
-                                .switchInlineQueryCurrentChat("")}
+        context.sendMessage(message.getChat().getId(), "Press the button")
+                .replyMarkup(
+                        new InlineKeyboardMarkup(
+                                new InlineKeyboardButton[]{
+                                        new InlineKeyboardButton("Click me")
+                                                .setSwitchInlineQueryCurrentChat("")
+                                        }
                 ))
                 .exec();
     }
