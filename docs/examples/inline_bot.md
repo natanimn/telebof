@@ -98,7 +98,7 @@ When the user types `/start` in a private chat, the bot responds with a message 
         });
         
         // Send welcome message with the inline button
-        context.sendMessage(message.chat.id, "Hi! I am an inline bot. Press the button below to try inline mode")
+        context.sendMessage(message.chat().id(), "Hi! I am an inline bot. Press the button below to try inline mode")
                 .replyMarkup(keyboard) // Attach the inline keyboard
                 .exec();
     });
@@ -114,7 +114,7 @@ When the user types `/start` in a private chat, the bot responds with a message 
         });
 
         // Send welcome message with the inline button
-        context.sendMessage(message.chat.id, "Hi! I am an inline bot. Press the button below to try inline mode")
+        context.sendMessage(message.chat().id(), "Hi! I am an inline bot. Press the button below to try inline mode")
                 .replyMarkup(keyboard) // Attach the inline keyboard
                 .exec();
     }
@@ -149,7 +149,7 @@ This handler is triggered when a user types just the bot's username (`@botuserna
         );
         
         // Send the result to the user
-        context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
+        context.answerInlineQuery(query.id(), new InlineQueryResult[]{result}).exec();
     });
     ```
 
@@ -166,7 +166,7 @@ This handler is triggered when a user types just the bot's username (`@botuserna
     ```java
     @InlineHandler
     void inline(BotContext context, InlineQuery query){
-        if (query.query.equals("")){
+        if (query.query().equals("")){
             // Create a result for empty queries
             var result = new InlineQueryResultArticle(
                 "1", // Unique identifier for this result
@@ -175,7 +175,7 @@ This handler is triggered when a user types just the bot's username (`@botuserna
             );
     
             // Send the result to the user
-            context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
+            context.answerInlineQuery(query.id(), new InlineQueryResult[]{result}).exec();
         }
     }
     ```
@@ -202,14 +202,14 @@ This handler processes inline queries where the user provides text after the bot
     ```java
     bot.onInline(_ -> true, (context, query) -> {
         // Create a result that echoes the user's input
-        var result = new InlineQueryResultArticle(
+        var result = new InlineQueryResultArticle.builder(
                 "2", // Unique identifier
-                query.query, // Title shows the user's query
-                new InputTextMessageContent("<b>You said:</b> " + query.query).parseMode(ParseMode.HTML)
-        ).description("Click here"); // Optional description below the title
+                query.query(), // Title shows the user's query
+                new InputTextMessageContent.builder("<b>You said:</b> " + query.query()).parseMode(ParseMode.HTML).build()
+        ).description("Click here").build(); // Optional description below the title
         
         // Send the result
-        context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
+        context.answerInlineQuery(query.id(), new InlineQueryResult[]{result}).exec();
     });
     ```
 
@@ -225,7 +225,7 @@ This handler processes inline queries where the user provides text after the bot
     ```java
     @InlineHandler
     void inline(BotContext context, InlineQuery query){
-        if (query.query.equals("")){
+        if (query.query().equals("")){
             // Create a result for empty queries
             var result = new InlineQueryResultArticle(
                 "1", // Unique identifier for this result
@@ -236,14 +236,15 @@ This handler processes inline queries where the user provides text after the bot
             context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
         } else {
             // Create a result that echoes the user's input
-            var result = new InlineQueryResultArticle(
+            var result = new InlineQueryResultArticle.builder(
                 "2", // Unique identifier
-                query.query, // Title shows the user's query
-                new InputTextMessageContent("<b>You said:</b> " + query.query).parseMode(ParseMode.HTML)
-            ).description("Click here"); // Optional description below the title
-            
+                query.query(), // Title shows the user's query
+                new InputTextMessageContent.builder("<b>You said:</b> " + query.query()).parseMode(ParseMode.HTML).build()
+            ).description("Click here").build(); // Optional description below the title
+
             // Send the result
-            context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
+            context.answerInlineQuery(query.id(), new InlineQueryResult[]{result}).exec();
+         
         }
     }
     ```
@@ -277,7 +278,7 @@ When users type `@botusername some text`, they see a result that says "some text
                 var keyboard = new InlineKeyboardMarkup(new InlineKeyboardButton[]{
                         new InlineKeyboardButton("Try Inline Mode").switchInlineQueryCurrentChat("")
                 });
-                context.sendMessage(message.chat.id, "Hi! I am an inline bot. Press the button below to try inline mode")
+                context.sendMessage(message.chat().id(), "Hi! I am an inline bot. Press the button below to try inline mode")
                         .replyMarkup(keyboard)
                         .exec();
             });
@@ -289,7 +290,7 @@ When users type `@botusername some text`, they see a result that says "some text
                         "Write something",
                         new InputTextMessageContent("Write something")
                 );
-                context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
+                context.answerInlineQuery(query.id(), new InlineQueryResult[]{result}).exec();
             });
     
             // Handle inline queries with text (@botusername some text)
@@ -326,7 +327,7 @@ When users type `@botusername some text`, they see a result that says "some text
             });
 
             // Send welcome message with the inline button
-            context.sendMessage(message.chat.id, "Hi! I am an inline bot. Press the button below to try inline mode")
+            context.sendMessage(message.chat().id(), "Hi! I am an inline bot. Press the button below to try inline mode")
                     .replyMarkup(keyboard) // Attach the inline keyboard
                     .exec();
         }
