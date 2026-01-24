@@ -41,12 +41,12 @@ public class MyFirstBot {
    
     // Responding to /start command
     bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-        context.sendMessage(message.chat.id, "Welcome!").exec();
+        context.sendMessage(message.getChat().getId(), "Welcome!").exec();
     });
 
     // Echoing any incoming text
     bot.onMessage(filter -> filter.text(), (context, message) -> {
-        context.sendMessage(message.chat.id, message.text).exec();
+        context.sendMessage(message.getChat().getId(), message.getText()).exec();
     });
 
     bot.startPolling(); // Start the bot
@@ -68,7 +68,7 @@ public class MyFirstBot {
 import enums.
 io.github.natanimn.telebof.ParseMode;
 
-context.sendMessage(message.chat.id, "*Hello, World*")
+context.sendMessage(message.getChat().getId(), "*Hello, World*")
        .parseMode(ParseMode.MARKDOWN)
        .exec();
 
@@ -120,17 +120,17 @@ Telebof provides **22 handler methods** to process these updates easily.
 ```java
 // Handle text messages
 bot.onMessage(filter -> filter.text(), (context, message) -> {
-    context.sendMessage(message.chat.id, "You said: " + message.text).exec();
+    context.sendMessage(message.getChat().getId(), "You said: " + message.getText()).exec();
 });
 
 // Handle photo messages
 bot.onMessage(filter -> filter.photo(), (context, message) -> {
-    context.sendMessage(message.chat.id, "Nice photo!").exec();
+    context.sendMessage(message.getChat().getId(), "Nice photo!").exec();
 });
 
 // Handle document messages
 bot.onMessage(filter -> filter.document(), (context, message) -> {
-    context.sendMessage(message.chat.id, "File received").exec();
+    context.sendMessage(message.getChat().getId(), "File received").exec();
 });
 ```
 
@@ -138,11 +138,12 @@ bot.onMessage(filter -> filter.document(), (context, message) -> {
 
 ```java
 bot.onCallback(filter -> filter.calbackData("button_1"), (context, callback) -> {
-    context.answerCallbackQuery(callback.id, "Button 1 pressed!").exec();
+    context.answerCallbackQuery(callback.getId(), "Button 1 pressed!").exec();
 
-    context.editMessageText("You pressed Button 1", 
-                           callback.message.chat.id, 
-                           callback.message.message_id).exec();
+    context.editMessageText(
+            "You pressed Button 1", 
+            callback.getMessage().getChat().getId(), 
+            callback.getMessage().getMessageId()).exec();
 });
 ```
 
@@ -150,8 +151,11 @@ bot.onCallback(filter -> filter.calbackData("button_1"), (context, callback) -> 
 
 ```java
 bot.onInline(filter -> true, (context, inline) -> {
-    var result = new InlineQueryResultArticle("1", "Title", 
-                     new InputTextMessageContent("Hello from inline!"));
-    context.answerInlineQuery(inline.id, new InlineQueryResult[]{result}).exec();
+    var result = new InlineQueryResultArticle(
+            "1", 
+            "Title", 
+            new InputTextMessageContent("Hello from inline!")
+    );
+    context.answerInlineQuery(inline.getId(), new InlineQueryResult[]{result}).exec();
 });
 ```
