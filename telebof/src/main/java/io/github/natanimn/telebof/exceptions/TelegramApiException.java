@@ -7,7 +7,7 @@ import io.github.natanimn.telebof.types.media_and_service.ResponseParameters;
  * Describes Telegram error
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class TelegramApiException extends RuntimeException {
     public boolean ok;
@@ -52,9 +52,9 @@ public class TelegramApiException extends RuntimeException {
                 .trim();
 
         return switch (error_type) {
-            case "Bad Request" -> new BadRequest(error_message, "BAD_REQUEST");
-            case "Forbidden" -> new Forbidden(error_message, "FORBIDDEN");
-            case "Too Many Requests" -> new FloodError(response.description, "FLOOD_ERROR", response.parameters);
+            case "Bad Request" -> new BadRequest(error_message);
+            case "Forbidden" -> new Forbidden(error_message);
+            case "Too Many Requests" -> new FloodError(response.description, response.parameters);
             default -> new TelegramApiException(response);
         };
     }
