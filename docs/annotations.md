@@ -216,7 +216,7 @@ Handles business connection events for monitoring account connections and author
 ```java
 @MessageHandler(commands = "start", chatType = ChatType.PRIVATE)
 void handleStartCommand(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Welcome!").exec();
+    context.sendMessage(message.getChat().getId(), "Welcome!").exec();
 }
 ```
 
@@ -257,7 +257,7 @@ All handler annotations are `@Repeatable`, allowing multiple handlers on the sam
 @MessageHandler(commands = "start", type = ChatType.PRIVATE)
 @MessageHandler(commands = "help")
 void handleStartAndHelp(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Welcome to help!").exec();
+    context.sendMessage(message.getChat().getId(), "Welcome to help!").exec();
 }
 ```
 
@@ -266,7 +266,7 @@ void handleStartAndHelp(BotContext context, Message message) {
 public class PremiumUserFilter implements CustomFilter {
     @Override
     public boolean check(Update update) {
-        return update.message.from.is_premium != null;
+        return update.getMessage().getFrom().getIsPremium() != null;
     }
 }
 ```
@@ -316,17 +316,17 @@ This complete unpredictability makes handler execution order **random** without 
 ```java
 @MessageHandler(commands = "start")
 void start(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Welcome message!").exec();
+    context.sendMessage(message.getChat().getId(), "Welcome message!").exec();
 }
 
 @MessageHandler(commands = "help") 
 void help(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Detailed help content").exec();
+    context.sendMessage(message.getChat().getId(), "Detailed help content").exec();
 }
 
 @MessageHandler(regex = "(start|help)")
 void regex(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Generic help response").exec();
+    context.sendMessage(message.getChat().getId(), "Generic help response").exec();
 }
 ```
 
@@ -346,17 +346,17 @@ The regex handler might execute **first** and handle both `/start` and `/help` c
 ```java
 @MessageHandler(commands = "start") // priority = 0 (default)
 void start(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Welcome message!").exec();
+    context.sendMessage(message.getChat().getId(), "Welcome message!").exec();
 }
 
 @MessageHandler(commands = "help") // priority = 0 (default)
 void help(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Detailed help content").exec();
+    context.sendMessage(message.getChat().getId(), "Detailed help content").exec();
 }
 
 @MessageHandler(regex = "(start|help)", priority = 1) // Explicit higher priority
 void regex(BotContext context, Message message) {
-    context.sendMessage(message.chat.id, "Generic help response").exec();
+    context.sendMessage(message.getChat().getId(), "Generic help response").exec();
 }
 ```
 
