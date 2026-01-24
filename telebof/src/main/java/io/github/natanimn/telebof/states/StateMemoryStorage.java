@@ -4,8 +4,9 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * Natanim Negash
- *  3 March 2025
+ * @author Natanim
+ * @since 3 March 2025
+ * @version 1.3.0
  */
 public class StateMemoryStorage {
     private final Map<Long, Map<Long, Map<String, Object>>> chatStorage = new HashMap<>();
