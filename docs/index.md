@@ -15,11 +15,11 @@ public class MyFirstBot {
     final BotClient bot = new BotClient(TOKEN);
    
     bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-        context.sendMessage(message.chat.id, "Welcome!").exec();
+        context.sendMessage(message.getChat().getId(), "Welcome!").exec();
     });
 
     bot.onMessage(filter -> filter.text(), (context, message) -> {
-        context.sendMessage(message.chat.id, message.text).exec();
+        context.sendMessage(message.getChat().getId(), message.getText()).exec();
     });
 
     bot.startPolling();
