@@ -508,7 +508,7 @@ public class FilterBot {
         bot.onMessage(
             filter -> filter.text() && filter.customFilter(new PrefixFilter("!")),
             (context, message) -> {
-                context.sendMessage(message.chat.id, "Message starts with !").exec();
+                context.sendMessage(message.getChat().getId(), "Message starts with !").exec();
             }
         );
 
@@ -517,7 +517,7 @@ public class FilterBot {
         bot.onMessage(
             filter -> filter.text() && filter.customFilter(new PrefixFilter(".")),
             (context, message) -> {
-                context.sendMessage(message.chat.id, "Message starts with dot(.)").exec();
+                context.sendMessage(message.getChat().getId(), "Message starts with dot(.)").exec();
             }
         );
     }
@@ -534,12 +534,12 @@ class AdminKeywordFilter implements CustomFilter {
     
     @Override
     public boolean check(Update update) {
-        if (update.message == null || update.message.text == null) {
+        if (update.message == null || update.getMessage().getText() == null) {
             return false;
         }
         
-        boolean isAdmin = adminIds.contains(update.message.from.id);
-        boolean containsKeyword = keywords.stream().anyMatch(update.message.text::toLowerCase::contains);
+        boolean isAdmin = adminIds.contains(update.getMessage().getFrom().getId());
+        boolean containsKeyword = keywords.stream().anyMatch(update.getMessage().getText::toLowerCase::contains);
         
         return isAdmin && containsKeyword;
     }
@@ -547,7 +547,7 @@ class AdminKeywordFilter implements CustomFilter {
 
 // Usage
 bot.onMessage(filter -> filter.customFilter(new AdminKeywordFilter()), (context, message) -> {
-    context.sendMessage(message.chat.id, "Admin urgent message detected!").exec();
+    context.sendMessage(message.getChat().getId(), "Admin urgent message detected!").exec();
 });
 ```
 
@@ -561,7 +561,7 @@ bot.onMessage(filter -> filter.customFilter(new AdminKeywordFilter()), (context,
 
 // Handles inline button with callback data "a"
 bot.onCallback(filter -> filter.callbackData("a"), (context, callback) -> {
-    context.answerCallbackQuery(callback.id, "You pressed A button!").exec();
+    context.answerCallbackQuery(callback.getId(), "You pressed A button!").exec();
 
 });
 ```
@@ -581,14 +581,14 @@ State filters are useful for creating conversational flows with the bot.
 ```java
 // Set state when /start command is received
 bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-    context.sendMessage(message.chat.id, "What is your name?").exec();
-    bot.setState(message.from.id, "name"); // Set state to 'name'
+    context.sendMessage(message.getChat().getId(), "What is your name?").exec();
+    bot.setState(message.getFrom().getId(), "name"); // Set state to 'name'
 });
 
 // Handle response when in 'name' state
 bot.onMessage(filter -> filter.state("name") && filter.text(), (context, message) -> {     
-    context.sendMessage(message.chat.id, String.format("Your name is %s", message.text)).exec();
-    context.clearState(message.from.id); // Clear the state
+    context.sendMessage(message.getChat().getId(), String.format("Your name is %s", message.getText())).exec();
+    context.clearState(message.getFrom().getId()); // Clear the state
 });
 ```
 
