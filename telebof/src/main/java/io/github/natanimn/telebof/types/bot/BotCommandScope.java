@@ -23,7 +23,7 @@ abstract public class BotCommandScope implements Serializable  {
      * Scope type
      * @return Scope type
      */
-    public String type() {
+    public String getType() {
         return type;
     }
 }
