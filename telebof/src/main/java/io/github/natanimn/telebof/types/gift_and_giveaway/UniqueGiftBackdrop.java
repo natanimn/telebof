@@ -27,6 +27,8 @@ public class UniqueGiftBackdrop implements Serializable {
     @SerializedName("rarity_per_mille")
     private Integer rarityPerMille;
 
+    public UniqueGiftBackdrop(){}
+
     public UniqueGiftBackdrop(String name, UniqueGiftBackdropColors colors, Integer rarityPerMille) {
         this.name = name;
         this.colors = colors;
