@@ -9,9 +9,15 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
+/**
+ * ChatMemberHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class ChosenInlineHandlerMeta {
     final MethodHandle method;
-    final String[] resultId; // precompiled regex
+    final String[] resultId;
     final String[] query;
     final CustomFilter customFilter;
 
@@ -32,7 +38,7 @@ public class ChosenInlineHandlerMeta {
         if (query.length > 0 && !filter.inlineQuery(query)) return false;
         if (resultId.length > 0 && !filter.customFilter(
                 update ->
-                        Arrays.asList(resultId).contains(update.chosenInlineResult().resultId()))) return false;
+                        Arrays.asList(resultId).contains(update.getChosenInlineResult().getResultId()))) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }
 }
