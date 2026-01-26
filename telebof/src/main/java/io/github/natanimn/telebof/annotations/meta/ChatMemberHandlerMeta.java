@@ -10,6 +10,12 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+/**
+ * ChatMemberHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class ChatMemberHandlerMeta {
     final MethodHandle method;
     final CustomFilter customFilter;
@@ -28,7 +34,7 @@ public class ChatMemberHandlerMeta {
     }
 
     public boolean matches(Filter filter) {
-        if (!status.isEmpty() && !filter.customFilter(update -> status.contains(update.chatMember().newChatMember().status()))) return false;
+        if (!status.isEmpty() && !filter.customFilter(update -> status.contains(update.getChatMember().getNewChatMember().getStatus()))) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }
 }
