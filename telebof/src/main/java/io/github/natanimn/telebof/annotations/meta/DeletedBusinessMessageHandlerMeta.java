@@ -8,6 +8,12 @@ import io.github.natanimn.telebof.filters.Filter;
 import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 
+/**
+ * DeletedBusinessMessageHandlerMeta class
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class DeletedBusinessMessageHandlerMeta {
     final MethodHandle method;
     final CustomFilter customFilter;
