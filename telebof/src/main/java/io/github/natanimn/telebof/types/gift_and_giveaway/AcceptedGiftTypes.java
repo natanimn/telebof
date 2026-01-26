@@ -33,39 +33,39 @@ public class AcceptedGiftTypes implements Serializable {
     @SerializedName("premium_subscription")
     private Boolean premiumSubscription;
 
-    public Boolean getUnlimitedGifts() {
-        return unlimitedGifts;
+    /**
+     * True, if transfers of unique gifts from channels are accepted
+     */
+    @SerializedName("gifts_from_channels")
+    private Boolean giftsFromChannels;
+
+    public AcceptedGiftTypes(){}
+
+    public AcceptedGiftTypes(Boolean unlimitedGifts, Boolean limitedGifts, Boolean uniqueGifts, Boolean premiumSubscription, Boolean giftsFromChannels) {
+        this.unlimitedGifts = unlimitedGifts;
+        this.limitedGifts = limitedGifts;
+        this.uniqueGifts = uniqueGifts;
+        this.premiumSubscription = premiumSubscription;
+        this.giftsFromChannels = giftsFromChannels;
     }
 
-    public AcceptedGiftTypes setUnlimitedGifts(Boolean unlimitedGifts) {
-        this.unlimitedGifts = unlimitedGifts;
-        return this;
+    public Boolean getUnlimitedGifts() {
+        return unlimitedGifts;
     }
 
     public Boolean getLimitedGifts() {
         return limitedGifts;
     }
 
-    public AcceptedGiftTypes setLimitedGifts(Boolean limitedGifts) {
-        this.limitedGifts = limitedGifts;
-        return this;
-    }
-
     public Boolean getUniqueGifts() {
         return uniqueGifts;
-    }
-
-    public AcceptedGiftTypes setUniqueGifts(Boolean uniqueGifts) {
-        this.uniqueGifts = uniqueGifts;
-        return this;
     }
 
     public Boolean getPremiumSubscription() {
         return premiumSubscription;
     }
 
-    public AcceptedGiftTypes setPremiumSubscription(Boolean premiumSubscription) {
-        this.premiumSubscription = premiumSubscription;
-        return this;
+    public Boolean getGiftsFromChannels() {
+        return giftsFromChannels;
     }
 }
