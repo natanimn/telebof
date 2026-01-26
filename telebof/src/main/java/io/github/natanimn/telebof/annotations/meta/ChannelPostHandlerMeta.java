@@ -13,9 +13,15 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Predicate;
 
+/**
+ * ChannelPostHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class ChannelPostHandlerMeta {
     final MethodHandle method;
-    final String regex; // precompiled regex
+    final String regex;
     final Predicate<Filter> messageTypeCheck;
     final String[] commands;
     final String[] texts;
