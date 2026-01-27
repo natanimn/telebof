@@ -26,30 +26,30 @@ public class EditedMessageHandlerTest {
 
     @EditedMessageHandler(type = MessageType.TEXT, priority = 1)
     public void text(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "Edited with text")
-                .replyParameters(new ReplyParameters(message.messageId()))
+        context.sendMessage(message.getChat().getId(), "Edited with text")
+                .replyParameters(new ReplyParameters(message.getMessageId()))
                 .exec();
     }
 
     @EditedMessageHandler(type = MessageType.PHOTO)
     public void photo(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "Replaced with photo")
-                .replyParameters(new ReplyParameters(message.messageId()))
+        context.sendMessage(message.getChat().getId(), "Replaced with photo")
+                .replyParameters(new ReplyParameters(message.getMessageId()))
                 .exec();
     }
 
 
     @EditedMessageHandler(type = MessageType.ENTITIES)
     public void entity(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "New edited message contained entity")
-                .replyParameters(new ReplyParameters(message.messageId()))
+        context.sendMessage(message.getChat().getId(), "New edited message contained entity")
+                .replyParameters(new ReplyParameters(message.getMessageId()))
                 .exec();
     }
 
     @EditedMessageHandler(type = MessageType.QUOTE)
     public void quote(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "New edited message contained a quote")
-                .replyParameters(new ReplyParameters(message.messageId()))
+        context.sendMessage(message.getChat().getId(), "New edited message contained a quote")
+                .replyParameters(new ReplyParameters(message.getMessageId()))
                 .exec();
     }
 
