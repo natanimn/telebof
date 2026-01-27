@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.types.media_and_service.ResponseParameters;
 
 import java.util.Objects;
@@ -8,28 +9,36 @@ import java.util.Objects;
  * ApiResponse class. Telegram response
  * @author Natanim
  * @since 3 March 2025
+ * @version 1.3.0
  */
 public class ApiResponse<T> {
-    public boolean ok;
-    public String description;
-    public int error_code;
-    public T result;
-    public ResponseParameters parameters;
+    private boolean ok;
+    private String description;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ApiResponse<?> that = (ApiResponse<?>) object;
-        return ok == that.ok && error_code == that.error_code &&
-                Objects.equals(description, that.description) &&
-                Objects.equals(result, that.result) &&
-                Objects.equals(parameters, that.parameters);
+    @SerializedName("error_code")
+    private Integer errorCode;
+
+    private T result;
+    private ResponseParameters parameters;
+
+    public boolean isOk() {
+        return ok;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(ok, description, error_code, result, parameters);
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public T getResult() {
+        return result;
+    }
+
+    public ResponseParameters getParameters() {
+        return parameters;
     }
 
     @Override
@@ -37,7 +46,7 @@ public class ApiResponse<T> {
         return "ApiResponse{" +
                 "ok=" + ok +
                 ", description='" + description + '\'' +
-                ", error_code=" + error_code +
+                ", errorCode=" + errorCode +
                 ", result=" + result +
                 ", parameters=" + parameters +
                 '}';
