@@ -27,7 +27,7 @@ public class CallbackHandlerTest {
 
     @MessageHandler(commands = "start")
     void start(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "Press the button")
+        context.sendMessage(message.getChat().getId(), "Press the button")
                 .replyMarkup(new InlineKeyboardMarkup(
                         new InlineKeyboardButton[]{new InlineKeyboardButton("Click me", "click me")}
                 ))
@@ -36,6 +36,6 @@ public class CallbackHandlerTest {
 
     @CallbackHandler(data = "click me")
     void button(BotContext context, CallbackQuery query){
-        context.answerCallbackQuery(query.id(), "Button pressed").exec();
+        context.answerCallbackQuery(query.getId(), "Button pressed").exec();
     }
 }
