@@ -14,7 +14,7 @@ public class ChannelPostHandlerTest {
     @BeforeEach
     void setUp(){
         this.client = new BotClient(System.getenv("TOKEN"));
-        System.out.println(client.context.getMe().exec().id());
+        System.out.println(client.context.getMe().exec().getId());
         client.addHandler(this);
 
     }
@@ -26,31 +26,31 @@ public class ChannelPostHandlerTest {
 
     @ChannelPostHandler(commands = {"news", "update", "info"})
     public void command(BotContext context, Message message){
-        context.deleteMessage(message.chat().id(), message.messageId()).exec();
-        context.sendMessage(message.chat().id(), "News message is arriving..").exec();
+        context.deleteMessage(message.getChat().getId(),message.getMessageId()).exec();
+        context.sendMessage(message.getChat().getId(), "News message is arriving..").exec();
     }
 
     @ChannelPostHandler(texts = {"hi", "hello", "hey"})
     public void texts(BotContext context, Message message){
-        context.deleteMessage(message.chat().id(), message.messageId()).exec();
-        context.sendMessage(message.chat().id(), "Hello, everyone!").exec();
+        context.deleteMessage(message.getChat().getId(),message.getMessageId()).exec();
+        context.sendMessage(message.getChat().getId(), "Hello, everyone!").exec();
     }
 
     @ChannelPostHandler(regex = "(?i)(hello|hey|hi)", priority = 1)
     public void regex(BotContext context, Message message){
-        context.deleteMessage(message.chat().id(), message.messageId()).exec();
-        context.sendMessage(message.chat().id(), "What's up guys!").exec();
+        context.deleteMessage(message.getChat().getId(),message.getMessageId()).exec();
+        context.sendMessage(message.getChat().getId(), "What's up guys!").exec();
     }
 
     @ChannelPostHandler(type = MessageType.TEXT, priority = 2)
     public void echo(BotContext context, Message message){
-        context.sendMessage(message.chat().id(), "Bot said: " + message.text()).exec();
+        context.sendMessage(message.getChat().getId(), "Bot said: " + message.getText()).exec();
     }
 
     @ChannelPostHandler(type = MessageType.PHOTO)
     public void photo(BotContext context, Message message){
-        context.deleteMessage(message.chat().id(), message.messageId()).exec();
-        context.sendPhoto(message.chat().id(), message.photo().get(2).fileId())
+        context.deleteMessage(message.getChat().getId(),message.getMessageId()).exec();
+        context.sendPhoto(message.getChat().getId(), message.getPhoto().get(2).getFileId())
                 .caption("Nice photo")
                 .exec();
     }
