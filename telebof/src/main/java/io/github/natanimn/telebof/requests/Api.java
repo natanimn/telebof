@@ -2,7 +2,7 @@ package io.github.natanimn.telebof.requests;
 
 import com.google.gson.Gson;
 import io.github.natanimn.telebof.ApiResponse;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.Util;
 import io.github.natanimn.telebof.exceptions.TelegramApiException;
 import io.github.natanimn.telebof.enums.ParseMode;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * A class to interact with telegram server
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.1
+ * @version 1.3.0
  */
 public class Api {
 
@@ -170,11 +170,11 @@ public class Api {
         if (botToken == null || botToken.isEmpty()) throw new TelegramError("Undefined botToken");
         BotLog.debug(String.format("Request: method=%s, url=%s", abstractBase.methodName, getUrl(abstractBase)));
         ApiResponse<R> response = postRequest(abstractBase);
-        BotLog.debug(String.format("The server returned: %s", response.result));
-        if (!response.ok) {
+        BotLog.debug(String.format("The server returned: %s", response.getResult()));
+        if (!response.isOk()) {
             throw TelegramApiException.throwIt(response);
         }
-        else return response.result;
+        else return response.getResult();
     }
 
     public byte[] downloadFile(String filePath) {
