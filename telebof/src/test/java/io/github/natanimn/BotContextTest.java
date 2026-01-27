@@ -3,6 +3,7 @@ package io.github.natanimn;
 import io.github.natanimn.telebof.enums.ChatAction;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.types.inline.InlineQueryResultArticle;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import io.github.natanimn.telebof.types.input.InputMediaPhoto;
 import io.github.natanimn.telebof.types.media_and_service.Video;
@@ -40,16 +41,16 @@ class BotContextTest {
     @Test
     void sendMessage() {
         Message message1 = bot.context.sendMessage(CHAT_ID, "HELLO, WORLD").exec();
-        assertEquals(message1.chat().id(), CHAT_ID);
-        assertNull(message1.audio());
+        assertEquals(message1.getChat().getId(), CHAT_ID);
+        assertNull(message1.getAudio());
     }
 
     @Test
     void sendPhoto() {
         Message message1 = bot.context.sendPhoto(CHAT_ID, new File("src/test/resources/telegram.png")).exec();
-        assertEquals(message1.chat().isForum(), CHAT_ID);
-        assertNull(message1.audio());
-        assertNotNull(message1.photo());
+        assertNull(message1.getChat().getIsForum());
+        assertNull(message1.getAudio());
+        assertNotNull(message1.getPhoto());
         Video video = null;
 //        video.fileUniqueId();
     }
@@ -72,7 +73,7 @@ class BotContextTest {
     void testSendMediaGroup(){
         InputMedia[] inputMedia = new InputMedia[5];
         File pic = new File("src/test/resources/telegram.png");
-        for (int i=0; i < 5; i++) inputMedia[i] =  InputMediaPhoto.builder(pic).build();
+        for (int i=0; i < 5; i++) inputMedia[i] =  new InputMediaPhoto(pic);
         List<Message> messages = bot.context.sendMediaGroup(CHAT_ID, inputMedia).exec();
         for (Message msg: messages) assertNotNull(msg);
     }
@@ -88,7 +89,8 @@ class BotContextTest {
                 .cover(thumb)
                 .exec();
 
+        var result = new InlineQueryResultArticle("", "", null);
         assertNotNull(message);
-        assertNotNull(message.chat());
+        assertNotNull(message.getChat());
     }
 }
