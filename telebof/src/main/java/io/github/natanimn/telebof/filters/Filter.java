@@ -580,6 +580,14 @@ public class Filter{
     }
 
     /**
+     * Filter service messages for gift upgrade sent
+     * @return {@link Boolean}
+     */
+    public Boolean giftUpgradeSent(){
+        return (update.getMessage() != null && update.getMessage().getGiftUpgradeSent() != null);
+
+    }
+    /**
      * Filter commands
      * @param commands The command or array of commands as string
      * @return {@link Boolean}
