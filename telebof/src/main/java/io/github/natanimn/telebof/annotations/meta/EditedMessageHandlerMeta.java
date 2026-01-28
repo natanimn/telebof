@@ -16,11 +16,11 @@ import java.util.function.Predicate;
  * Metadata to store handler info and precomputed checks
  * @author Natanim
  * @since 4 September 2025
- * @version 1.2.0
+ * @version 1.3.0
  */
 public class EditedMessageHandlerMeta {
     final MethodHandle method;
-    final String regex; // precompiled regex
+    final String regex;
     final Predicate<Filter> chatTypeCheck;
     final Predicate<Filter> messageTypeCheck;
     final String[] commands;
