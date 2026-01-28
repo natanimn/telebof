@@ -26,6 +26,12 @@ public class ForumTopicCreated {
     @SerializedName("icon_color")
     private Integer iconColor;
 
+    /**
+     * Optional. True, if the name of the topic wasn't specified explicitly by its creator and likely needs to be changed by the bot
+     */
+    @SerializedName("is_name_implicit")
+    private Boolean isNameImplicit;
+
     public String getName() {
         return name;
     }
@@ -36,5 +42,9 @@ public class ForumTopicCreated {
 
     public Integer getIconColor() {
         return iconColor;
+    }
+
+    public Boolean getIsNameImplicit() {
+        return isNameImplicit;
     }
 }
