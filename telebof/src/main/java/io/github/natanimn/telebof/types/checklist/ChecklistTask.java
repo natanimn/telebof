@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.checklist;
 
+import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import com.google.gson.annotations.SerializedName;
@@ -40,6 +41,12 @@ public class ChecklistTask {
     @SerializedName("completion_date")
     private Integer completionDate;
 
+    /**
+     * Optional. Chat that completed the task; omitted if the task wasn't completed by a chat
+     */
+    @SerializedName("completed_by_chat")
+    private Chat completedByChat;
+
     public Integer getId() {
         return id;
     }
@@ -58,5 +65,9 @@ public class ChecklistTask {
 
     public Integer getCompletionDate() {
         return completionDate;
+    }
+
+    public Chat getCompletedByChat() {
+        return completedByChat;
     }
 }
