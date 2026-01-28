@@ -83,5 +83,15 @@ public class ForwardMessage extends AbstractBaseRequest<ForwardMessage, Message>
     public ForwardMessage suggestedPostParameters(SuggestedPostParameters suggestedPostParameters){
         return add("suggested_post_parameters", suggestedPostParameters);
     }
+
+    /**
+     * Optional
+     * @param messageEffectId Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only
+     * @return {@link ForwardMessage}
+     */
+    public ForwardMessage messageEffectId(String messageEffectId){
+        return add("message_effect_id", messageEffectId);
+    }
+
 }
 
