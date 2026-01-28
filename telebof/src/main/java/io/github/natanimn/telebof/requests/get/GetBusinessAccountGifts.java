@@ -51,11 +51,29 @@ public class GetBusinessAccountGifts extends AbstractBaseRequest<GetBusinessAcco
 
     /**
      * Optional
-     * @param excludeLimited Pass True to exclude gifts that can be purchased a limited number of times
+     * @param excludeLimitedUpgradable Pass True to exclude gifts that can be purchased a limited number of times and can be upgraded to unique
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts excludeLimited(boolean excludeLimited) {
-        return add("exclude_limited", excludeLimited);
+    public GetBusinessAccountGifts excludeLimitedUpgradable(Boolean excludeLimitedUpgradable){
+        return add("exclude_limited_upgradable", excludeLimitedUpgradable);
+    }
+
+    /**
+     * Optional
+     * @param excludeLimitedNonUpgradable Pass True to exclude gifts that can be purchased a limited number of times and can't be upgraded to unique
+     * @return {@link GetBusinessAccountGifts}
+     */
+    public GetBusinessAccountGifts excludeLimitedNonUpgradable(Boolean excludeLimitedNonUpgradable){
+        return add("exclude_limited_non_upgradable", excludeLimitedNonUpgradable);
+    }
+
+    /**
+     * Optional
+     * @param excludeFromBlockchain Pass True to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram
+     * @return {@link GetBusinessAccountGifts}
+     */
+    public GetBusinessAccountGifts excludeFromBlockchain(Boolean excludeFromBlockchain){
+        return add("exclude_from_blockchain", excludeFromBlockchain);
     }
 
     /**
