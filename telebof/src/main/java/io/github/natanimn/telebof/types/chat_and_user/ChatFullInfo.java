@@ -6,6 +6,7 @@ import io.github.natanimn.telebof.types.business.BusinessIntro;
 import io.github.natanimn.telebof.types.business.BusinessLocation;
 import io.github.natanimn.telebof.types.business.BusinessOpeningHours;
 import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
+import io.github.natanimn.telebof.types.gift_and_giveaway.UniqueGiftColors;
 import io.github.natanimn.telebof.types.media_and_service.Birthdate;
 import io.github.natanimn.telebof.types.media_and_service.Location;
 import io.github.natanimn.telebof.types.media_and_service.ReactionType;
@@ -291,6 +292,23 @@ public class ChatFullInfo {
     @SerializedName("parent_chat")
     private Boolean parentChat;
 
+    /**
+     * Optional. For private chats, the rating of the user if any
+     */
+    private UserRating rating;
+
+    /**
+     * Optional. The number of Telegram Stars a general user have to pay to send a message to the chat
+     */
+    @SerializedName("paid_message_star_count")
+    private Integer paidMessageStarCount;
+
+    /**
+     * Optional. The color scheme based on a unique gift that must be used for the chat's name, message replies and link previews
+     */
+    @SerializedName("unique_gift_colors")
+    private UniqueGiftColors uniqueGiftColors;
+
     public long getId() {
         return id;
     }
@@ -477,5 +495,17 @@ public class ChatFullInfo {
 
     public Boolean getParentChat() {
         return parentChat;
+    }
+
+    public UserRating getRating() {
+        return rating;
+    }
+
+    public Integer getPaidMessageStarCount() {
+        return paidMessageStarCount;
+    }
+
+    public UniqueGiftColors getUniqueGiftColors() {
+        return uniqueGiftColors;
     }
 }
