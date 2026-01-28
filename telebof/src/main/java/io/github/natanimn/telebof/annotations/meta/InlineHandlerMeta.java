@@ -10,9 +10,15 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Predicate;
 
+/**
+ * InlineHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class InlineHandlerMeta {
     final MethodHandle method;
-    final String regex; // precompiled regex
+    final String regex;
     final Predicate<Filter> chatTypeCheck;
     final String[] query;
     final CustomFilter customFilter;
