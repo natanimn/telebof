@@ -20,7 +20,7 @@ import java.util.function.Predicate;
  */
 public class MessageHandlerMeta {
     final MethodHandle method;
-    final String regex; // precompiled regex
+    final String regex;
     final Predicate<Filter> chatTypeCheck;
     final Predicate<Filter> messageTypeCheck;
     final String state;
