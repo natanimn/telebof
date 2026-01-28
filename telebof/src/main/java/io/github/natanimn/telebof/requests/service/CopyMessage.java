@@ -135,4 +135,13 @@ public class CopyMessage extends AbstractBaseRequest<CopyMessage, MessageId> {
     public CopyMessage suggestedPostParameters(SuggestedPostParameters suggestedPostParameters){
         return add("suggested_post_parameters", suggestedPostParameters);
     }
+
+    /**
+     * Optional
+     * @param messageEffectId Unique identifier of the message effect to be added to the message; only available when copying to private chats
+     * @return {@link CopyMessage}
+     */
+    public CopyMessage messageEffectId(String messageEffectId){
+        return add("message_effect_id", messageEffectId);
+    }
 }
