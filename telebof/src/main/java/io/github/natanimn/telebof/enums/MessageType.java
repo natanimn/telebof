@@ -1,12 +1,14 @@
 package io.github.natanimn.telebof.enums;
 
+import io.github.natanimn.telebof.filters.Filter;
+
 /**
  * Enum representing different types of messages that can be received from Telegram.
  * These types correspond to the filtering methods available in the {@link io.github.natanimn.telebof.filters.Filter} class
  * and represent various message content types, service messages, and update types supported by the Telegram Bot API.
- *
  * @author Natanim
  * @since 1.2.0
+ * @version 1.3.0
  */
 public enum MessageType {
     /**
@@ -317,5 +319,10 @@ public enum MessageType {
     /**
      * Service messages for refunded suggested posts, filtered by {@link io.github.natanimn.telebof.filters.Filter#suggestedPostRefunded()}
      */
-    SUGGESTED_POST_REFUNDED
+    SUGGESTED_POST_REFUNDED,
+
+    /**
+     * Service messages for sent upgraded gift, filtered by {@link Filter#giftUpgradeSent()}
+     */
+    GIFT_UPGRADE_SENT;
 }
