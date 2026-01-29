@@ -19,7 +19,6 @@ import io.github.natanimn.telebof.types.web.WebAppData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This object represents a message.
@@ -609,6 +608,12 @@ public class Message implements TelegramUpdate {
     @SerializedName("suggested_post_refunded")
     private SuggestedPostRefunded suggestedPostRefunded;
 
+    /**
+     * Optional. Service message: upgrade of a gift was purchased after the gift was sent
+     */
+    @SerializedName("gift_upgrade_sent")
+    private GiftInfo giftUpgradeSent;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1013,6 +1018,10 @@ public class Message implements TelegramUpdate {
         return suggestedPostRefunded;
     }
 
+    public GiftInfo getGiftUpgradeSent() {
+        return giftUpgradeSent;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -1117,6 +1126,7 @@ public class Message implements TelegramUpdate {
                 ", suggestedPostDeclined=" + suggestedPostDeclined +
                 ", suggestedPostPaid=" + suggestedPostPaid +
                 ", suggestedPostRefunded=" + suggestedPostRefunded +
+                ", giftUpgradeSent=" + giftUpgradeSent +
                 '}';
     }
 }
