@@ -56,6 +56,18 @@ public class GiftInfo {
     @SerializedName("is_private")
     private Boolean isPrivate;
 
+    /**
+     * Optional. True, if the gift's upgrade was purchased after the gift was sent
+     */
+    @SerializedName("is_upgrade_separate")
+    private Boolean isUpgradeSeparate;
+
+    /**
+     * Optional. Unique number reserved for this gift when upgraded.
+     */
+    @SerializedName("unique_gift_number")
+    private Integer uniqueGiftNumber;
+
     public Gift getGift() {
         return gift;
     }
@@ -86,5 +98,13 @@ public class GiftInfo {
 
     public Boolean getIsPrivate() {
         return isPrivate;
+    }
+
+    public Boolean getIsUpgradeSeparate() {
+        return isUpgradeSeparate;
+    }
+
+    public Integer getUniqueGiftNumber() {
+        return uniqueGiftNumber;
     }
 }
