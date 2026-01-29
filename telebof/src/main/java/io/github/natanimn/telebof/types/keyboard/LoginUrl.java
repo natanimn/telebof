@@ -10,7 +10,7 @@ import java.io.Serializable;
  * All the user needs to do is tap/click a button and confirm that they want to log in:
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class LoginUrl implements Serializable {
     private String url;
