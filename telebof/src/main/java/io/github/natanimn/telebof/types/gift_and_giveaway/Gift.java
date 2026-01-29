@@ -51,6 +51,41 @@ public class Gift {
     @SerializedName("publisher_chat")
     private Chat publisherChat;
 
+    /**
+     * Optional. True, if the gift can only be purchased by Telegram Premium subscribers
+     */
+    @SerializedName("is_premium")
+    private Boolean isPremium;
+
+    /**
+     * Optional. True, if the gift can be used (after being upgraded) to customize a user's appearance
+     */
+    @SerializedName("has_colors")
+    private Boolean hasColors;
+
+    /**
+     * Optional. The total number of gifts of this type that can be sent by the bot; for limited gifts only
+     */
+    @SerializedName("personal_total_count")
+    private Integer personalTotalCount;
+
+    /**
+     * Optional. The number of remaining gifts of this type that can be sent by the bot; for limited gifts only
+     */
+    @SerializedName("personal_remaining_count")
+    private Integer personalRemainingCount;
+
+    /**
+     * Optional. Background of the gift
+     */
+    private GiftBackground background;
+
+    /**
+     * Optional. The total number of different unique gifts that can be obtained by upgrading the gift
+     */
+    @SerializedName("unique_gift_variant_count")
+    private Integer uniqueGiftVariantCount;
+
     public String getId() {
         return id;
     }
@@ -71,11 +106,35 @@ public class Gift {
         return totalCount;
     }
 
+    public Boolean getHasColors() {
+        return hasColors;
+    }
+
+    public Boolean getIsPremium() {
+        return isPremium;
+    }
+
     public Integer getRemainingCount() {
         return remainingCount;
     }
 
     public Chat getPublisherChat() {
         return publisherChat;
+    }
+
+    public Integer getPersonalTotalCount() {
+        return personalTotalCount;
+    }
+
+    public Integer getPersonalRemainingCount() {
+        return personalRemainingCount;
+    }
+
+    public GiftBackground getBackground() {
+        return background;
+    }
+
+    public Integer getUniqueGiftVariantCount() {
+        return uniqueGiftVariantCount;
     }
 }
