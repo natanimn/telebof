@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.types.keyboard;
 
 import com.google.gson.annotations.SerializedName;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
