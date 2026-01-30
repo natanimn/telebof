@@ -110,6 +110,18 @@ public class OwnedGift {
     @SerializedName("next_transfer_date")
     private Integer nextTransferDate;
 
+    /**
+     * Optional. True, if the gift's upgrade was purchased after the gift was sent; for gifts received on behalf of business accounts only (for regular gifts)
+     */
+    @SerializedName("is_upgrade_separate")
+    private Boolean isUpgradeSeparate;
+
+    /**
+     * Optional. Unique number reserved for this gift when upgraded. (for regular gifts)
+     */
+    @SerializedName("unique_gift_number")
+    private Integer uniqueGiftNumber;
+
     public String getType() {
         return type;
     }
@@ -176,5 +188,13 @@ public class OwnedGift {
 
     public Integer getNextTransferDate() {
         return nextTransferDate;
+    }
+
+    public Boolean getIsUpgradeSeparate() {
+        return isUpgradeSeparate;
+    }
+
+    public Integer getUniqueGiftNumber() {
+        return uniqueGiftNumber;
     }
 }
