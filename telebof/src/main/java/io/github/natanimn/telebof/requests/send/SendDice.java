@@ -1,13 +1,9 @@
 package io.github.natanimn.telebof.requests.send;
 
 import io.github.natanimn.telebof.BotContext;
-import io.github.natanimn.telebof.BotLog;
-import io.github.natanimn.telebof.requests.AbstractBaseRequest;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.requests.Api;
-import io.github.natanimn.telebof.types.keyboard.Markup;
-import io.github.natanimn.telebof.types.suggested.SuggestedPostParameters;
 import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.ReplyParameters;
 
 /**
  * SendDice class. Returns {@link Message} on success.
