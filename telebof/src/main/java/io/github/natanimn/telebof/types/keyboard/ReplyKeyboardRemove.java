@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.keyboard;
 
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
@@ -8,19 +9,21 @@ package io.github.natanimn.telebof.types.keyboard;
  * Not supported in channels and for messages sent on behalf of a Telegram Business account.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class ReplyKeyboardRemove implements Markup {
     /**
      * Requests clients to remove the custom keyboard (user will not be able to summon this keyboard;
      * if you want to hide the keyboard from sight but keep it accessible, use {@link ReplyKeyboardMarkup#oneTimeKeyboard(boolean)} in {@link ReplyKeyboardMarkup})
      */
-    private final boolean remove_keyboard;
+    @SerializedName("remove_keyboard")
+    private final boolean removeKeyboard;
+
     private boolean selective;
 
 
     public ReplyKeyboardRemove() {
-        this.remove_keyboard = true;
+        this.removeKeyboard = true;
         this.selective = false;
     }
 
@@ -33,7 +36,7 @@ public class ReplyKeyboardRemove implements Markup {
      * Example: A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.
      * @return {@link ReplyKeyboardRemove}
      */
-    public ReplyKeyboardRemove selective(boolean selective) {
+    public ReplyKeyboardRemove setSelective(boolean selective) {
         this.selective = selective;
         return this;
     }
