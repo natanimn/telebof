@@ -10,6 +10,12 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+/**
+ * PreCheckoutHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0
+ */
 public class PreCheckoutHandlerMeta {
     final MethodHandle method;
     final List<String> payload;
@@ -31,7 +37,7 @@ public class PreCheckoutHandlerMeta {
     }
 
     public boolean matches(Filter filter) {
-        if (!payload.isEmpty() && !filter.customFilter(update -> payload.contains(update.preCheckoutQuery().invoicePayload()))) return false;
+        if (!payload.isEmpty() && !filter.customFilter(update -> payload.contains(update.getPreCheckoutQuery().getInvoicePayload()))) return false;
         if (!regex.isEmpty() && !filter.regex(regex)) return false;
         return customFilter instanceof DefaultCustomFilter || filter.customFilter(customFilter);
     }
