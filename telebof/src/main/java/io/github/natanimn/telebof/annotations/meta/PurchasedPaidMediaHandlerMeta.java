@@ -10,6 +10,12 @@ import java.lang.invoke.MethodHandle;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+/**
+ * PurchasedPaidMediaHandlerMeta class.
+ * @author Natanim
+ * @since 1.2.0
+ * @version 1.3.0-
+ */
 public class PurchasedPaidMediaHandlerMeta {
     final MethodHandle method;
     final List<String> payload;
@@ -29,6 +35,6 @@ public class PurchasedPaidMediaHandlerMeta {
 
     public boolean matches(Filter filter) {
         if (!(customFilter instanceof DefaultCustomFilter) && !(filter.customFilter(customFilter))) return false;
-        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.purchasedPaidMedia().paidMediaPayload()));
+        return payload.isEmpty() || filter.customFilter(update -> payload.contains(update.getPurchasedPaidMedia().getPaidMediaPayload()));
     }
 }
