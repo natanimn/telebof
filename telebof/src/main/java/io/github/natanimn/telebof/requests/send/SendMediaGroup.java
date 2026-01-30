@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.requests.send;
 
 import com.google.gson.reflect.TypeToken;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputMedia;
@@ -16,7 +16,7 @@ import java.util.List;
  * SendMediaGroup class. Returns sent array of {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see BotContext#sendMediaGroup
  */
 public class SendMediaGroup extends SendBuilder<SendMediaGroup, List<Message>> {
