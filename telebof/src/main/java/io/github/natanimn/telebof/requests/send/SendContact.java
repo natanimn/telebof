@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.types.updates.Message;
