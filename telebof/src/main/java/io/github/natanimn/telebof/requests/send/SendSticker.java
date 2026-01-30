@@ -1,6 +1,6 @@
 package io.github.natanimn.telebof.requests.send;
 
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.requests.Api;
@@ -14,7 +14,6 @@ import java.io.File;
  * @author Natanim
  * @since 3 March 2025
  * @version 1.3.0
- *
  */
 public class SendSticker extends SendBuilder<SendSticker, Message> {
 
