@@ -1,9 +1,9 @@
 package io.github.natanimn.telebof.types.keyboard;
 
-import io.github.natanimn.telebof.BotLog;
+import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.types.updates.Message;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,25 @@ import java.util.stream.Collectors;
  * Not supported in channels and for messages sent on behalf of a Telegram Business account.
  * @author Natanim
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  * @see <a href="https://core.telegram.org/bots/features#keyboards">Introduction to bots for details and examples</a>
  */
-public class ReplyKeyboardMarkup implements Markup, Serializable {
-    private Boolean is_persistent, resize_keyboard, one_time_keyboard, selective;
-    private String input_field_placeholder;
+public class ReplyKeyboardMarkup implements Markup {
+    @SerializedName("is_persistent")
+    private Boolean isPersistent;
 
-    private List<List<KeyboardButton>> keyboard;
+    @SerializedName("resize_keyboard")
+    private Boolean resizeKeyboard;
+
+    @SerializedName("one_time_keyboard")
+    private Boolean oneTimeKeyboard;
+
+    private Boolean selective;
+
+    @SerializedName("input_field_placeholder")
+    private String inputFieldPlaceholder;
+
+    private final List<List<KeyboardButton>> keyboard;
     transient protected final int MAX_ROW_WIDTH = 12;
     transient private int rowWidth = 3;
 
@@ -56,45 +67,45 @@ public class ReplyKeyboardMarkup implements Markup, Serializable {
 
     /**
      * Optional
-     * @param is_persistent Requests clients to always show the keyboard when the regular keyboard is hidden.
+     * @param isPersistent Requests clients to always show the keyboard when the regular keyboard is hidden.
      *                      Defaults to false, in which case the custom keyboard can be hidden and opened with a keyboard icon.
      * @return {@link ReplyKeyboardMarkup}
      */
-    public ReplyKeyboardMarkup isPersistent(boolean is_persistent) {
-        this.is_persistent = is_persistent;
+    public ReplyKeyboardMarkup setIsPersistent(boolean isPersistent) {
+        this.isPersistent = isPersistent;
         return this;
     }
 
     /**
      * Optional
-     * @param resize_keyboard Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons).
+     * @param resizeKeyboard Requests clients to resize the keyboard vertically for optimal fit (e.g., make the keyboard smaller if there are just two rows of buttons).
      *                        Defaults to false, in which case the custom keyboard is always of the same height as the app's standard keyboard.
      * @return {@link ReplyKeyboardMarkup}
      */
-    public ReplyKeyboardMarkup resizeKeyboard(boolean resize_keyboard){
-        this.resize_keyboard = resize_keyboard;
+    public ReplyKeyboardMarkup setResizeKeyboard(boolean resizeKeyboard){
+        this.resizeKeyboard = resizeKeyboard;
         return this;
     }
 
     /**
      * Optional
-     * @param one_time_keyboard Requests clients to hide the keyboard as soon as it's been used.
+     * @param oneTimeKeyboard Requests clients to hide the keyboard as soon as it's been used.
      *                          The keyboard will still be available, but clients will automatically display the usual
      *                          letter-keyboard in the chat - the user can press a special button in the input field to see the custom keyboard again. Defaults to false.
      * @return {@link ReplyKeyboardMarkup}
      */
-    public ReplyKeyboardMarkup oneTimeKeyboard(boolean one_time_keyboard){
-        this.one_time_keyboard = one_time_keyboard;
+    public ReplyKeyboardMarkup oneTimeKeyboard(boolean oneTimeKeyboard){
+        this.oneTimeKeyboard = oneTimeKeyboard;
         return this;
     }
 
     /**
      * Optional
-     * @param input_field_placeholder The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
+     * @param inputFieldPlaceholder The placeholder to be shown in the input field when the keyboard is active; 1-64 characters
      * @return {@link ReplyKeyboardMarkup}
      */
-    public ReplyKeyboardMarkup inputFieldPlaceholder(String input_field_placeholder){
-        this.input_field_placeholder = input_field_placeholder;
+    public ReplyKeyboardMarkup setInputFieldPlaceholder(String inputFieldPlaceholder){
+        this.inputFieldPlaceholder = inputFieldPlaceholder;
         return this;
     }
 
@@ -107,7 +118,7 @@ public class ReplyKeyboardMarkup implements Markup, Serializable {
      * Example: A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.
      * @return {@link ReplyKeyboardMarkup}
      */
-    public ReplyKeyboardMarkup selective(boolean selective){
+    public ReplyKeyboardMarkup setSelective(boolean selective){
         this.selective = selective;
         return this;
     }
