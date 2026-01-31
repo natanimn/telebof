@@ -10,6 +10,13 @@ import com.google.gson.annotations.SerializedName;
  * @version 1.3.0
  */
 public class UniqueGift {
+
+    /**
+     * Identifier of the regular gift from which the gift was upgraded
+     */
+    @SerializedName("gift_id")
+    private String giftId;
+
     /**
      * Human-readable name of the regular gift from which this unique gift was upgraded
      */
@@ -47,6 +54,28 @@ public class UniqueGift {
     @SerializedName("publisher_chat")
     private Chat publisherChat;
 
+    /**
+     * Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
+     */
+    @SerializedName("is_from_blockchain")
+    private Boolean isFromBlockchain;
+
+    /**
+     * Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
+     */
+    @SerializedName("is_premium")
+    private Boolean isPremium;
+
+    /**
+     * Optional. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews;
+     * for business account gifts and gifts that are currently on sale only
+     */
+    private UniqueGiftColors colors;
+
+    public String getGiftId() {
+        return giftId;
+    }
+
     public String getBaseName() {
         return baseName;
     }
@@ -73,5 +102,17 @@ public class UniqueGift {
 
     public Chat getPublisherChat() {
         return publisherChat;
+    }
+
+    public Boolean getIsFromBlockchain() {
+        return isFromBlockchain;
+    }
+
+    public Boolean getIsPremium() {
+        return isPremium;
+    }
+
+    public UniqueGiftColors getColors() {
+        return colors;
     }
 }
