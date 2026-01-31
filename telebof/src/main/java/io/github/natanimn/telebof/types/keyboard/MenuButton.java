@@ -12,7 +12,7 @@ import java.io.Serializable;
  * This object describes the bot's menu button in a private chat.
  * @author Natanim 
  * @since 3 March 2025
- * @version 0.9
+ * @version 1.3.0
  */
 public class MenuButton implements Serializable {
     private MenuButtonType type;
