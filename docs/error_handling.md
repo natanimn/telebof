@@ -27,8 +27,8 @@ import io.github.natanimn.telebof.exceptions.TelegramApiException;
 try {     
     context.sendMessage(message.chat.id, "Hello, World").exec();    
 } catch(TelegramApiException apiException){
-    System.out.println("Error: " + apiException.description);
-    System.out.println("Error code: " + apiException.error_code);
+    System.out.println("Error: " + apiException.getDescription());
+    System.out.println("Error code: " + apiException.getErrorCode());
 }
 ```
 
@@ -52,10 +52,10 @@ try {
     context.sendMessage(chat_id, "Hello!").exec();
 } catch (Forbidden e) {
     // Bot was blocked by user or doesn't have chat permissions
-    System.out.println("Cannot send message: " + e.description);
+    System.out.println("Cannot send message: " + e.getDescription());
     // Example: "Forbidden: bot was blocked by the user"
 } catch (TelegramApiException e) {
-    System.out.println("Other API error: " + e.description);
+    System.out.println("Other API error: " + e.getDescription());
 }
 ```
 
@@ -78,10 +78,10 @@ try {
     context.sendMessage(invalidChatId, "Test message").exec();
 } catch (BadRequest e) {
     // Invalid parameters or malformed request
-    System.out.println("Bad request: " + e.description);
+    System.out.println("Bad request: " + e.getDescription());
     // Example: "Bad Request: chat not found"
 } catch (TelegramApiException e) {
-    System.out.println("Other API error: " + e.description);
+    System.out.println("Other API error: " + e.getDescription());
 }
 ```
 
@@ -105,15 +105,15 @@ try {
     context.sendMessage(chatId, "Message").exec();
 } catch (FloodError e) {
     // Rate limited - wait before retrying
-    System.out.println("Flood control: " + e.description);
-    System.out.println("Retry after: " + e.parameters.retry_after + " seconds");
+    System.out.println("Flood control: " + e.getDescription());
+    System.out.println("Retry after: " + e.getParameters.getRetryAfter() + " seconds");
     
     // Implement retry logic with delay
     Thread.sleep(e.retryAfter * 1000);
     // Retry the operation here
     
 } catch (TelegramApiException e) {
-    System.out.println("Other API error: " + e.description);
+    System.out.println("Other API error: " + e.getDescription());
 }
 ```
 
@@ -143,19 +143,19 @@ public class ErrorHandlingExample {
             context.sendMessage(chatId, text).exec();
             
         } catch (Forbidden e) {
-            System.out.println("Permission denied: " + e.description);
+            System.out.println("Permission denied: " + e.getDescription());
             // Handle blocked bot scenario - maybe remove user from database
             
         } catch (FloodError e) {
-            System.out.println("Rate limited. Retrying in " + e.parameters.retry_after + " seconds");
+            System.out.println("Rate limited. Retrying in " + e.getParameters().getRetryAfter() + " seconds");
             // Implement retry logic with exponential backoff
             
         } catch (BadRequest e) {
-            System.out.println("Invalid request: " + e.description);
+            System.out.println("Invalid request: " + e.getDescription());
     
             
         } catch (TelegramApiException e) {
-            System.out.println("Unexpected API error (" + e.error_code + "): " + e.description);
+            System.out.println("Unexpected API error (" + e.getErrorCode() + "): " + e.getDescription());
             // Handle other unexpected errors
             
         } catch (Exception e) {
