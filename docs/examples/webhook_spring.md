@@ -58,7 +58,7 @@ public class WebhookBot {
 package io.github.natanimn;
 
 import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.filters.Filter;
 import io.github.natanimn.telebof.types.updates.Update;
 import org.springframework.boot.SpringApplication;
@@ -92,11 +92,11 @@ class WebhookController {
 
         // Add message handlers
         bot.onMessage(filter -> filter.commands("start"), (ctx, message) -> {
-            ctx.sendMessage(message.chat.id, "Hello, I am Spring Boot echo bot").exec();
+            ctx.sendMessage(message.getChat().getId(), "Hello, I am Spring Boot echo bot").exec();
         });
 
         bot.onMessage(Filter::text, (ctx, message) -> {
-            ctx.sendMessage(message.chat.id, message.text).exec();
+            ctx.sendMessage(message.getChat().getId(), message.getText()).exec();
         });
     }
 
@@ -161,11 +161,11 @@ class WebhookController {
 ### 4. Bot Handlers
 ```java
 bot.onMessage(filter -> filter.commands("start"), (ctx, message) -> {
-    ctx.sendMessage(message.chat.id, "Hello, I am Spring Boot echo bot").exec();
+    ctx.sendMessage(message.getChat().getId(), "Hello, I am Spring Boot echo bot").exec();
 });
 
 bot.onMessage(Filter::text, (ctx, message) -> {
-    ctx.sendMessage(message.chat.id, message.text).exec();
+    ctx.sendMessage(message.getChat().getId(), message.getText()).exec();
 });
 ```
 
