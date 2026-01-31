@@ -48,7 +48,7 @@ Telebof uses Java's built-in logging framework, allowing you to control log leve
 
 ```java
 import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import java.util.logging.Level;
 
 public class LoggingExample {
@@ -99,7 +99,7 @@ Here's how to use all advanced features together in a single configuration:
 
 ```java
 import io.github.natanimn.telebof.BotClient;
-import io.github.natanimn.telebof.BotLog;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.enums.Updates;
 import java.net.InetSocketAddress;
