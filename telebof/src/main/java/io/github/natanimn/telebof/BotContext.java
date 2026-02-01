@@ -18,20 +18,25 @@ import io.github.natanimn.telebof.types.chat_and_user.ChatPermissions;
 import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
-import io.github.natanimn.telebof.types.input.*;
+import io.github.natanimn.telebof.types.input.InputProfilePhoto;
+import io.github.natanimn.telebof.types.input.InputMedia;
+import io.github.natanimn.telebof.types.input.InputPaidMedia;
+import io.github.natanimn.telebof.types.input.InputPollOption;
+import io.github.natanimn.telebof.types.input.InputStoryContent;
+import io.github.natanimn.telebof.types.input.InputChecklist;
+import io.github.natanimn.telebof.types.input.InputSticker;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.passport.PassportElementError;
 import io.github.natanimn.telebof.types.web.WebhookInfo;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 1.1.0
+ * @version 1.3.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
@@ -58,7 +63,7 @@ public class BotContext {
      * <p>3. Ports currently supported for webhooks: 443, 80, 88, 8443.</p>
      * If you're having any trouble setting up webhooks, please check out this <a href="https://core.telegram.org/bots/webhooks">amazing guide to  webhooks.</a>
      * @param url holds parameters for webhook.
-     * @see <a href="https://core.telegram.org/bots/api#setwebhook">Telegram Documetation</a>
+     * @see <a href="https://core.telegram.org/bots/api#setwebhook">Telegram Documentation</a>
      */
     public SetWebhook setWebhook(String url){
         return new SetWebhook(url, api);
@@ -106,47 +111,47 @@ public class BotContext {
 
     /**
      * Use this method to send text messages.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param text Text of the message to be sent, 1-4096 characters after entities parsing
      * @return {@link io.github.natanimn.telebof.requests.send.SendMessage}
      */
-    public SendMessage sendMessage(Object chat_id, String text) {
-        return new SendMessage(chat_id, text, this.api);
+    public SendMessage sendMessage(Object chatId, String text) {
+        return new SendMessage(chatId, text, this.api);
     }
 
     /**
      * Use this method to download files up to 20MB in size. On success, a {@link io.github.natanimn.telebof.types.media_and_service.File}  object is returned.
-     * @param file_path taken from {@link io.github.natanimn.telebof.requests.get.GetFile} response.
+     * @param filePath taken from {@link io.github.natanimn.telebof.requests.get.GetFile} response.
      *                  It is guaranteed that the link will be valid for at least 1 hour.
      *                  When the link expires, a new one can be requested by calling {@link #getFile(String)} again
      * @return array of byte
      */
-    public byte[] downloadFile(String file_path) {
-        return api.downloadFile(file_path);
+    public byte[] downloadFile(String filePath) {
+        return api.downloadFile(filePath);
     }
 
     /**
      * Use this method to forward messages of any kind. Service messages and messages with protected content can't be forwarded.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-     * @param message_id Message identifier in the chat specified in from_chat_id
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+     * @param messageId Message identifier in the chat specified in fromChatId
      * @return {@link io.github.natanimn.telebof.requests.service.ForwardMessage}
      */
-    public ForwardMessage forward(Object chat_id, Object from_chat_id, int message_id) {
-        return new ForwardMessage(chat_id, from_chat_id, message_id, this.api);
+    public ForwardMessage forward(Object chatId, Object fromChatId, int messageId) {
+        return new ForwardMessage(chatId, fromChatId, messageId, this.api);
     }
 
     /**
      * Use this method to copy messages of any kind. Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
      * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot.
      * The method is analogous to the method forwardMessage, but the copied message doesn't have a link to the original message.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-     * @param message_id  Message identifier in the chat specified in from_chat_id
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+     * @param messageId  Message identifier in the chat specified in fromChatId
      * @return {@link io.github.natanimn.telebof.requests.service.CopyMessage}
      */
-    public CopyMessage copy(Object chat_id, Object from_chat_id, int message_id) {
-        return new CopyMessage(chat_id, from_chat_id, message_id, this.api);
+    public CopyMessage copy(Object chatId, Object fromChatId, int messageId) {
+        return new CopyMessage(chatId, fromChatId, messageId, this.api);
     }
 
     /**
@@ -154,359 +159,370 @@ public class BotContext {
      * Service messages, paid media messages, giveaway messages, giveaway winners messages, and invoice messages can't be copied.
      * A quiz poll can be copied only if the value of the field correct_option_id is known to the bot. The method is analogous to the method forwardMessages,
      * but the copied messages don't have a link to the original message. Album grouping is kept for copied messages.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param from_chat_id Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
-     * @param message_ids  A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to copy. The identifiers must be specified in a strictly increasing order.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param fromChatId Unique identifier for the chat where the original message was sent (or channel username in the format @channelusername)
+     * @param messageIds  A JSON-serialized list of 1-100 identifiers of messages in the chat fromChatId to copy. The identifiers must be specified in a strictly increasing order.
      * @return {@link io.github.natanimn.telebof.requests.service.CopyMessage}
      */
-    public CopyMessages copyMessages(Object chat_id, Object from_chat_id, Integer[] message_ids) {
-        return new CopyMessages(chat_id, from_chat_id, message_ids, this.api);
+    public CopyMessages copyMessages(Object chatId, Object fromChatId, Integer[] messageIds) {
+        return new CopyMessages(chatId, fromChatId, messageIds, this.api);
     }
 
     /**
      * Use this method to forward multiple messages of any kind. If some of the specified messages can't be found or forwarded, they are skipped.
      * Service messages and messages with protected content can't be forwarded. Album grouping is kept for forwarded messages.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param from_chat_id Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
-     * @param message_id A JSON-serialized list of 1-100 identifiers of messages in the chat from_chat_id to forward. The identifiers must be specified in a strictly increasing order.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param fromChatId Unique identifier for the chat where the original messages were sent (or channel username in the format @channelusername)
+     * @param messageId A JSON-serialized list of 1-100 identifiers of messages in the chat fromChatId to forward. The identifiers must be specified in a strictly increasing order.
      * @return {@link io.github.natanimn.telebof.requests.service.ForwardMessages}
      */
-    public ForwardMessages forwardMessages(Object chat_id, Object from_chat_id, Integer[] message_id) {
-        return new ForwardMessages(chat_id, from_chat_id, message_id, this.api);
+    public ForwardMessages forwardMessages(Object chatId, Object fromChatId, Integer[] messageId) {
+        return new ForwardMessages(chatId, fromChatId, messageId, this.api);
     }
 
     /**
      * Use this method to send photos.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param photo Photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended),
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param photo Photo to send. Pass a fileId as String to send a photo that exists on the Telegram servers (recommended),
      *              pass an HTTP URL as a String for Telegram to get a photo from the Internet
      * @return {@link io.github.natanimn.telebof.requests.send.SendPhoto}
      */
-    public SendPhoto sendPhoto(Object chat_id, String photo) {
-        return new SendPhoto(chat_id, photo, this.api);
+    public SendPhoto sendPhoto(Object chatId, String photo) {
+        return new SendPhoto(chatId, photo, this.api);
     }
 
     /**
      * Use this method to send photos.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param photo Photo to send. Upload new photo using {@link File}.
      *              The photo must be at most 10 MB in size. The photo's width and height must not exceed 10000 in total.
      *              Width and height ratio must be at most 20
      * @return {@link io.github.natanimn.telebof.requests.send.SendPhoto}
      */
-    public SendPhoto sendPhoto(Object chat_id, File photo) {
-        return new SendPhoto(chat_id, photo, this.api);
+    public SendPhoto sendPhoto(Object chatId, File photo) {
+        return new SendPhoto(chatId, photo, this.api);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player.
      * Your audio must be in the .MP3 or .M4A format. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param audio Audio file to send. Pass a file_id as String to send an audio file that exists on the Telegram servers (recommended), or
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param audio Audio file to send. Pass a fileId as String to send an audio file that exists on the Telegram servers (recommended), or
      *              pass an HTTP URL as a String for Telegram to get an audio file from the Internet.
      * @return {@link io.github.natanimn.telebof.requests.send.SendAudio}
      */
-    public SendAudio sendAudio(Object chat_id, String audio) {
-        return new SendAudio(chat_id, audio, this.api);
+    public SendAudio sendAudio(Object chatId, String audio) {
+        return new SendAudio(chatId, audio, this.api);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display them in the music player.
      * Your audio must be in the .MP3 or .M4A format. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param audio Audio file to send. Upload using {@link File}.
      * @return {@link io.github.natanimn.telebof.requests.send.SendAudio}
      */
-    public SendAudio sendAudio(Object chat_id, File audio) {
-        return new SendAudio(chat_id, audio, this.api);
+    public SendAudio sendAudio(Object chatId, File audio) {
+        return new SendAudio(chatId, audio, this.api);
     }
 
     /**
      * Use this method to send general files.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param document File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), or
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param document File to send. Pass a fileId as String to send a file that exists on the Telegram servers (recommended), or
      *                 pass an HTTP URL as a String for Telegram to get a file from the Internet.
      * @return {@link io.github.natanimn.telebof.requests.send.SendDocument}
      */
-    public SendDocument sendDocument(Object chat_id, String document) {
-        return new SendDocument(chat_id, document, this.api);
+    public SendDocument sendDocument(Object chatId, String document) {
+        return new SendDocument(chatId, document, this.api);
     }
 
     /**
      * Use this method to send general files.
      * Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param document File to send. Upload using {@link File}
      * @return {@link io.github.natanimn.telebof.requests.send.SendDocument}
      */
-    public SendDocument sendDocument(Object chat_id, File document) {
-        return new SendDocument(chat_id, document, this.api);
+    public SendDocument sendDocument(Object chatId, File document) {
+        return new SendDocument(chatId, document, this.api);
     }
 
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document).
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param video Video to send. Pass a file_id as String to send a video that exists on the Telegram servers (recommended), or
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param video Video to send. Pass a fileId as String to send a video that exists on the Telegram servers (recommended), or
      *             pass an HTTP URL as a String for Telegram to get a video from the Internet
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideo}
      */
-    public SendVideo sendVideo(Object chat_id, String video) {
-        return new SendVideo(chat_id, video, this.api);
+    public SendVideo sendVideo(Object chatId, String video) {
+        return new SendVideo(chatId, video, this.api);
     }
 
     /**
      * Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document).
      * Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param video Video to send. Upload using {@link File}
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideo}
      */
-    public SendVideo sendVideo(Object chat_id, File video) {
-        return new SendVideo(chat_id, video, this.api);
+    public SendVideo sendVideo(Object chatId, File video) {
+        return new SendVideo(chatId, video, this.api);
     }
 
     /**
      * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param animation Animation to send. Pass a file_id as String to send an animation that exists on the Telegram servers (recommended), or
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param animation Animation to send. Pass a fileId as String to send an animation that exists on the Telegram servers (recommended), or
      *                 pass an HTTP URL as a String for Telegram to get an animation from the Internet.
      * @return {@link io.github.natanimn.telebof.requests.send.SendAnimation}
      */
-    public SendAnimation sendAnimation(Object chat_id, String animation) {
-        return new SendAnimation(chat_id, animation, this.api);
+    public SendAnimation sendAnimation(Object chatId, String animation) {
+        return new SendAnimation(chatId, animation, this.api);
     }
 
     /**
      * Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound).
      * Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param animation Animation to send. Upload using {@link File}.
      * @return {@link io.github.natanimn.telebof.requests.send.SendAnimation}
      */
-    public SendAnimation sendAnimation(Object chat_id, File animation) {
-        return new SendAnimation(chat_id, animation, this.api);
+    public SendAnimation sendAnimation(Object chatId, File animation) {
+        return new SendAnimation(chatId, animation, this.api);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message.
      * For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as Audio or Document).
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param voice Audio file to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), or
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param voice Audio file to send. Pass a fileId as String to send a file that exists on the Telegram servers (recommended), or
      *              pass an HTTP URL as a String for Telegram to get a file from the Internet.
      * @return {@link io.github.natanimn.telebof.requests.send.SendVoice}
      */
-    public SendVoice sendVoice(Object chat_id, String voice) {
-        return new SendVoice(chat_id, voice, this.api);
+    public SendVoice sendVoice(Object chatId, String voice) {
+        return new SendVoice(chatId, voice, this.api);
     }
 
     /**
      * Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message.
      * For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as Audio or Document).
      * Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param voice Audio file to send. Upload using {@link File}
      * @return {@link io.github.natanimn.telebof.requests.send.SendVoice}
      */
-    public SendVoice sendVoice(Object chat_id, File voice) {
-        return new SendVoice(chat_id, voice, this.api);
+    public SendVoice sendVoice(Object chatId, File voice) {
+        return new SendVoice(chatId, voice, this.api);
     }
 
     /**
      * As of <a href="https://telegram.org/blog/video-messages-and-telescope">v.4.0</a>, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. <br>
      * Use this method to send video messages.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param video_note Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param videoNote Video note to send. Pass a fileId as String to send a video note that exists on the Telegram servers (recommended)
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideoNote}
      */
-    public SendVideoNote sendVideoNote(Object chat_id, String video_note) {
-        return new SendVideoNote(chat_id, video_note, this.api);
+    public SendVideoNote sendVideoNote(Object chatId, String videoNote) {
+        return new SendVideoNote(chatId, videoNote, this.api);
     }
 
     /**
      * As of <a href="https://telegram.org/blog/video-messages-and-telescope">v.4.0</a>, Telegram clients support rounded square MPEG4 videos of up to 1 minute long. <br>
      * Use this method to send video messages.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param video_note Video note to send. Upload using {@link File}
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param videoNote Video note to send. Upload using {@link File}
      * @return {@link io.github.natanimn.telebof.requests.send.SendVideoNote}
      */
-    public SendVideoNote sendVideoNote(Object chat_id, File video_note) {
-        return new SendVideoNote(chat_id, video_note, this.api);
+    public SendVideoNote sendVideoNote(Object chatId, File videoNote) {
+        return new SendVideoNote(chatId, videoNote, this.api);
     }
 
     /**
      * Use this method to send a group of photos, videos, documents or audios as an album.
      * Documents and audio files can be only grouped in an album with messages of the same type.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param media An array of {@link io.github.natanimn.telebof.types.input.InputMediaVideo}, {@link io.github.natanimn.telebof.types.input.InputMediaAudio},
      *              {@link io.github.natanimn.telebof.types.input.InputMediaPhoto}, or {@link io.github.natanimn.telebof.types.input.InputMediaDocument}
      *               describing messages to be sent, must include 2-10 items.
      * @return {@link io.github.natanimn.telebof.requests.send.SendMediaGroup}
      */
-    public SendMediaGroup sendMediaGroup(Object chat_id, InputMedia[] media) {
-        return new SendMediaGroup(chat_id, media, this.api);
+    public SendMediaGroup sendMediaGroup(Object chatId, InputMedia[] media) {
+        return new SendMediaGroup(chatId, media, this.api);
     }
 
     /**
      * Use this method to send paid media.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername).
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername).
      *                If the chat is a channel, all Telegram Star proceeds from this media will be credited to the chat's balance.
      *                Otherwise, they will be credited to the bot's balance.
-     * @param star_count The number of Telegram Stars that must be paid to buy access to the media; 1-10000
+     * @param starCount The number of Telegram Stars that must be paid to buy access to the media; 1-10000
      * @param media A JSON-serialized array describing the media to be sent; up to 10 items
      * @return {@link io.github.natanimn.telebof.requests.send.SendPaidMedia}
      */
-    public SendPaidMedia sendPaidMedia(Object chat_id, short star_count, InputPaidMedia[] media){
-        return new SendPaidMedia(chat_id, star_count, media, api);
+    public SendPaidMedia sendPaidMedia(Object chatId, int starCount, InputPaidMedia[] media){
+        return new SendPaidMedia(chatId, starCount, media, api);
     }
 
     /**
      * Use this method to send point on the map.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param latitude Latitude of the location
      * @param longitude Longitude of the location
      * @return {@link io.github.natanimn.telebof.requests.send.SendLocation}
      */
-    public SendLocation sendLocation(Object chat_id, double latitude, double longitude) {
-        return new SendLocation(chat_id, latitude, longitude, this.api);
+    public SendLocation sendLocation(Object chatId, double latitude, double longitude) {
+        return new SendLocation(chatId, latitude, longitude, this.api);
     }
 
     /**
      * Use this method to edit live location messages.
      * A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation.
      * On success, the edited Message is returned.
-     * @param chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Required if inlineMessageId is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param latitude Latitude of new location
      * @param longitude Longitude of new location
-     * @param message_id Required if inline_message_id is not specified. Identifier of the message to edit
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageLiveLocation}
      */
-    public EditMessageLiveLocation editMessageLiveLocation(Object chat_id, double latitude, double longitude, int message_id) {
-        return new EditMessageLiveLocation(chat_id, latitude, longitude, message_id, this.api);
+    public EditMessageLiveLocation editMessageLiveLocation(Object chatId, double latitude, double longitude, int messageId) {
+        return new EditMessageLiveLocation(chatId, latitude, longitude, messageId, this.api);
     }
 
     /**
      * Use this method to edit live location messages.
      * A location can be edited until its live_period expires or editing is explicitly disabled by a call to stopMessageLiveLocation.
      * On success, True is returned.
-     * @param inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @param inlineMessageId Required if chatId and messageId are not specified. Identifier of the inline message
      * @param latitude Latitude of new location
      * @param longitude Longitude of new location
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageLiveLocation}
      */
-    public EditMessageLiveLocation editMessageLiveLocation(String inline_message_id, double latitude, double longitude) {
-        return new EditMessageLiveLocation(inline_message_id, latitude, longitude, this.api);
+    public EditMessageLiveLocation editMessageLiveLocation(String inlineMessageId, double latitude, double longitude) {
+        return new EditMessageLiveLocation(inlineMessageId, latitude, longitude, this.api);
     }
 
     /**
      * This a method that allows the bot to cancel or re-enable extension of a subscription paid in Telegram Stars.
-     * @param user_id Identifier of the user whose subscription will be edited
-     * @param telegram_charge_id Telegram payment identifier for the subscription
-     * @param is_cancelled Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period.
+     * @param userId Identifier of the user whose subscription will be edited
+     * @param telegramChargeId Telegram payment identifier for the subscription
+     * @param isCancelled Pass True to cancel extension of the user subscription; the subscription must be active up to the end of the current subscription period.
      *                     Pass False to allow the user to re-enable a subscription that was previously canceled by the bot.
      * @return {@link io.github.natanimn.telebof.requests.edit.EditUserStarSubscription}
      */
-    public EditUserStarSubscription editUserStarSubscription(long user_id, String telegram_charge_id, boolean is_cancelled){
-        return new EditUserStarSubscription(user_id, telegram_charge_id, is_cancelled, api);
+    public EditUserStarSubscription editUserStarSubscription(long userId, String telegramChargeId, boolean isCancelled){
+        return new EditUserStarSubscription(userId, telegramChargeId, isCancelled, api);
     }
 
     /**
      * Use this method to stop updating a live location message before live_period expires.
      * On success, the edited Message is returned.
-     * @param chat_id Required if inline_message_id is not specified.
+     * @param chatId Required if inlineMessageId is not specified.
      *                Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Required if inline_message_id is not specified. Identifier of the message with live location to stop
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the message with live location to stop
      * @return {@link io.github.natanimn.telebof.requests.service.StopMessageLiveLocation}
      */
-    public StopMessageLiveLocation stopMessageLiveLocation(Object chat_id, int message_id) {
-        return new StopMessageLiveLocation(chat_id, message_id, this.api);
+    public StopMessageLiveLocation stopMessageLiveLocation(Object chatId, int messageId) {
+        return new StopMessageLiveLocation(chatId, messageId, this.api);
     }
 
     /**
      * Use this method to stop updating a live location message before live_period expires.
      * On success, True is returned.
-     * @param inline_message_id <b>Required if chat_id and message_id are not specified.</b><br>
+     * @param inlineMessageId <b>Required if chatId and messageId are not specified.</b><br>
      *                         Identifier of the inline message
      * @return {@link io.github.natanimn.telebof.requests.service.StopMessageLiveLocation}
      */
-    public StopMessageLiveLocation stopMessageLiveLocation(String inline_message_id) {
-        return new StopMessageLiveLocation(inline_message_id, this.api);
+    public StopMessageLiveLocation stopMessageLiveLocation(String inlineMessageId) {
+        return new StopMessageLiveLocation(inlineMessageId, this.api);
     }
 
     /**
      * Use this method to edit a checklist on behalf of a connected business account.
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
-     * @param chat_id Unique identifier for the target chat
-     * @param message_id Unique identifier for the target message
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
+     * @param chatId Unique identifier for the target chat
+     * @param messageId Unique identifier for the target message
      * @param checklist A JSON-serialized object for the new checklist
      * @return {@link EditMessageChecklist}
      */
-    public EditMessageChecklist editMessageChecklist(String business_connection_id, Object chat_id, Integer message_id, InputChecklist checklist){
-        return new EditMessageChecklist(business_connection_id, chat_id, message_id, checklist, api);
+    public EditMessageChecklist editMessageChecklist(String businessConnectionId, Object chatId, Integer messageId, InputChecklist checklist){
+        return new EditMessageChecklist(businessConnectionId, chatId, messageId, checklist, api);
     }
 
     /**
      * Use this method to send information about a venue.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param latitude Latitude of the venue
      * @param longitude Longitude of the venue
      * @param title Name of the venue
      * @param address Address of the venue
      * @return {@link io.github.natanimn.telebof.requests.send.SendVenue}
      */
-    public SendVenue sendVenue(Object chat_id, double latitude, double longitude, String title, String address) {
-        return new SendVenue(chat_id, latitude, longitude, title, address, this.api);
+    public SendVenue sendVenue(Object chatId, double latitude, double longitude, String title, String address) {
+        return new SendVenue(chatId, latitude, longitude, title, address, this.api);
     }
 
     /**
      * Use this method to send phone contacts.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param phone_number Contact's phone number
-     * @param first_name Contact's first name
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param phoneNumber Contact's phone number
+     * @param firstName Contact's first name
      * @return {@link io.github.natanimn.telebof.requests.send.SendContact}
      */
-    public SendContact sendContact(Object chat_id, String phone_number, String first_name) {
-        return new SendContact(chat_id, phone_number, first_name, this.api);
+    public SendContact sendContact(Object chatId, String phoneNumber, String firstName) {
+        return new SendContact(chatId, phoneNumber, firstName, this.api);
     }
 
     /**
      * Use this method to send a native poll.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param question Poll question, 1-300 characters
      * @param options A JSON-serialized list of 2-12 answer options
      * @return {@link io.github.natanimn.telebof.requests.send.SendPoll}
      */
-    public SendPoll sendPoll(Object chat_id, String question, InputPollOption[] options) {
-        return new SendPoll(chat_id, question, options, this.api);
+    public SendPoll sendPoll(Object chatId, String question, InputPollOption[] options) {
+        return new SendPoll(chatId, question, options, this.api);
     }
 
     /**
      * Use this method to send a checklist on behalf of a connected business account.
-     * @param business_connection_id Unique identifier of the business connection on behalf of which the message will be sent
-     * @param chat_id Unique identifier for the target chat
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which the message will be sent
+     * @param chatId Unique identifier for the target chat
      * @param checklist A JSON-serialized object for the checklist to send
      * @return {@link SendChecklist}
      */
-    public SendChecklist sendChecklist(String business_connection_id, Object chat_id, InputChecklist checklist){
-        return new SendChecklist(business_connection_id, chat_id, checklist, api);
+    public SendChecklist sendChecklist(String businessConnectionId, Object chatId, InputChecklist checklist){
+        return new SendChecklist(businessConnectionId, chatId, checklist, api);
     }
 
     /**
      * Use this method to send an animated emoji that will display a random value.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.send.SendDice}
      */
-    public SendDice sendDice(Object chat_id) {
-        return new SendDice(chat_id, this.api);
+    public SendDice sendDice(Object chatId) {
+        return new SendDice(chatId, this.api);
+    }
+
+    /**
+     * Use this method to stream a partial message to a user while the message is being generated; supported only for bots with forum topic mode enabled.
+     * @param chatId Unique identifier for the target private chat
+     * @param text Text of the message to be sent, 1-4096 characters after entities parsing
+     * @param draftId Unique identifier of the message draft; must be non-zero. Changes of drafts with the same identifier are animated
+     * @return {@link SendMessageDraft}
+     */
+    public SendMessageDraft sendMessageDraft(long chatId, String text, int draftId){
+        return new SendMessageDraft(chatId, text, draftId, api);
     }
 
     /**
      * Use this method when you need to tell the user that something is happening on the bot's side.
      * The status is set for 5 seconds or less (when a message arrives from your bot, Telegram clients clear its typing status).
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param action Type of action to broadcast. Choose one, depending on what the user is about to receive:
      *               {@link ChatAction#TYPING} for text messages, {@link ChatAction#UPLOAD_PHOTO} for photos,
      *               {@link ChatAction#RECORD_VIDEO} or {@link ChatAction#UPLOAD_VIDEO} for videos,
@@ -515,318 +531,350 @@ public class BotContext {
      *               {@link ChatAction#FIND_LOCATION} for location data, {@link ChatAction#RECORD_VIDEO_NOTE} or {@link ChatAction#UPLOAD_VIDEO_NOTE} for video notes.
      * @return {@link io.github.natanimn.telebof.requests.send.SendChatAction}
      */
-    public SendChatAction sendChatAction(Object chat_id, ChatAction action) {
-        return new SendChatAction(chat_id, action, this.api);
+    public SendChatAction sendChatAction(Object chatId, ChatAction action) {
+        return new SendChatAction(chatId, action, this.api);
     }
 
     /**
      * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver
-     * @param user_id Unique identifier of the target user who will receive the gift.
-     * @param gift_id Identifier of the gift
+     * @param userId Unique identifier of the target user who will receive the gift.
+     * @param giftId Identifier of the gift
      * @return {@link io.github.natanimn.telebof.requests.send.SendGift}
      */
-    public SendGift sendGift(long user_id, String gift_id){
-        return new SendGift(user_id, gift_id, api);
+    public SendGift sendGift(long userId, String giftId){
+        return new SendGift(userId, giftId, api);
     }
 
     /**
      * Sends a gift to the given user or channel chat. The gift can't be converted to Telegram Stars by the receiver
-     * @param chat_id Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
-     * @param gift_id Identifier of the gift
+     * @param chatId Unique identifier for the chat or username of the channel (in the format @channelusername) that will receive the gift.
+     * @param giftId Identifier of the gift
      * @return {@link io.github.natanimn.telebof.requests.send.SendGift}
      */
-    public SendGift sendGift(Object chat_id, String gift_id){
-        return new SendGift(chat_id, gift_id, api);
+    public SendGift sendGift(Object chatId, String giftId){
+        return new SendGift(chatId, giftId, api);
     }
 
     /**
      * Gifts a Telegram Premium subscription to the given user.
-     * @param user_id Unique identifier of the target user who will receive a Telegram Premium subscription
-     * @param month_count Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
-     * @param star_count Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
+     * @param userId Unique identifier of the target user who will receive a Telegram Premium subscription
+     * @param monthCount Number of months the Telegram Premium subscription will be active for the user; must be one of 3, 6, or 12
+     * @param starCount Number of Telegram Stars to pay for the Telegram Premium subscription; must be 1000 for 3 months, 1500 for 6 months, and 2500 for 12 months
      * @return {@link GiftPremiumSubscription}
      */
-    public GiftPremiumSubscription giftPremiumSubscription(long user_id, Integer month_count, Integer star_count){
-        return new GiftPremiumSubscription(user_id, month_count, star_count, api);
+    public GiftPremiumSubscription giftPremiumSubscription(long userId, Integer monthCount, Integer starCount){
+        return new GiftPremiumSubscription(userId, monthCount, starCount, api);
     }
 
     /**
      * Use this method to get a list of profile pictures for a user.
-     * @param user_id Unique identifier of the target user
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.get.GetUserProfilePhotos}
      */
-    public GetUserProfilePhotos getUserProfilePhotos(long user_id) {
-        return new GetUserProfilePhotos(user_id, this.api);
+    public GetUserProfilePhotos getUserProfilePhotos(long userId) {
+        return new GetUserProfilePhotos(userId, this.api);
     }
 
     /**
      * Refunds a successful payment in Telegram Stars.
-     * @param user_id Identifier of the user whose payment will be refunded
-     * @param telegram_payment_change_id Telegram payment identifier
+     * @param userId Identifier of the user whose payment will be refunded
+     * @param telegramPaymentChangeId Telegram payment identifier
      * @return {@link io.github.natanimn.telebof.requests.service.RefundStarPayment}
      */
-    public RefundStarPayment refundStarPayment(long user_id, String telegram_payment_change_id) {
-        return new RefundStarPayment(user_id, telegram_payment_change_id, api);
+    public RefundStarPayment refundStarPayment(long userId, String telegramPaymentChangeId) {
+        return new RefundStarPayment(userId, telegramPaymentChangeId, api);
     }
 
     /**
      * Verifies a user on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
-     * @param user_id Unique identifier of the target user
+     * @param userId Unique identifier of the target user
      * @return {@link VerifyUser}
      */
-    public VerifyUser verifyUser(long user_id){
-        return new VerifyUser(user_id, api);
+    public VerifyUser verifyUser(long userId){
+        return new VerifyUser(userId, api);
     }
 
     /**
      * Verifies a c chat on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> which is represented by the bot.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link VerifyUser}
      */
-    public VerifyChat verifyUChat(Object chat_id){
-        return new VerifyChat(chat_id, api);
+    public VerifyChat verifyUChat(Object chatId){
+        return new VerifyChat(chatId, api);
     }
 
     /**
      * Removes verification from a user who is currently verified on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> represented by the bot.
-     * @param user_id Unique identifier of the target user
+     * @param userId Unique identifier of the target user
      * @return {@link RemoveUserVerification}
      */
-    public RemoveUserVerification removeUserVerification(long user_id){
-        return new RemoveUserVerification(user_id, api);
+    public RemoveUserVerification removeUserVerification(long userId){
+        return new RemoveUserVerification(userId, api);
     }
 
     /**
      * Removes verification from a chat that is currently verified on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> represented by the bot.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link RemoveUserVerification}
      */
-    public RemoveChatVerification removeChatVerification(Object chat_id){
-        return new RemoveChatVerification(chat_id, api);
+    public RemoveChatVerification removeChatVerification(Object chatId){
+        return new RemoveChatVerification(chatId, api);
     }
 
     /**
      * Marks incoming message as read on behalf of a business account. Requires the can_read_messages business bot right.
-     * @param chat_id Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
-     * @param business_connection_id Unique identifier of the business connection on behalf of which to read the message
-     * @param message_id Unique identifier of the message to mark as read
+     * @param chatId Unique identifier of the chat in which the message was received. The chat must have been active in the last 24 hours.
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which to read the message
+     * @param messageId Unique identifier of the message to mark as read
      * @return {@link ReadBusinessMessage}
      */
-    public ReadBusinessMessage readBusinessMessage(long chat_id, String business_connection_id, int message_id){
-        return new ReadBusinessMessage(chat_id, business_connection_id, message_id, api);
+    public ReadBusinessMessage readBusinessMessage(long chatId, String businessConnectionId, int messageId){
+        return new ReadBusinessMessage(chatId, businessConnectionId, messageId, api);
     }
 
     /**
      * Use this method to approve a suggested post in a direct messages chat.
      * The bot must have the 'can_post_messages' administrator right in the corresponding channel chat.
-     * @param chat_id Unique identifier for the target direct messages chat
-     * @param message_id Identifier of a suggested post message to approve
+     * @param chatId Unique identifier for the target direct messages chat
+     * @param messageId Identifier of a suggested post message to approve
      * @return {@link ApproveSuggestedPost}
      */
-    public ApproveSuggestedPost approveSuggestedPost(long chat_id, int message_id){
-        return new ApproveSuggestedPost(chat_id, message_id, api);
+    public ApproveSuggestedPost approveSuggestedPost(long chatId, int messageId){
+        return new ApproveSuggestedPost(chatId, messageId, api);
     }
 
 
     /**
      * Use this method to decline a suggested post in a direct messages chat.
      * The bot must have the 'can_manage_direct_messages' administrator right in the corresponding channel chat.
-     * @param chat_id Unique identifier for the target direct messages chat
-     * @param message_id Identifier of a suggested post message to approve
+     * @param chatId Unique identifier for the target direct messages chat
+     * @param messageId Identifier of a suggested post message to approve
      * @return {@link ApproveSuggestedPost}
      */
-    public DeclineSuggestedPost declineSuggestedPost(long chat_id, int message_id){
-        return new DeclineSuggestedPost(chat_id, message_id, api);
+    public DeclineSuggestedPost declineSuggestedPost(long chatId, int messageId){
+        return new DeclineSuggestedPost(chatId, messageId, api);
     }
 
     /**
      * Delete messages on behalf of a business account.
      * Requires the can_delete_sent_messages business bot right to delete messages sent by the bot itself, or the can_delete_all_messages business bot right to delete any message.
-     * @param business_connection_id Unique identifier of the business connection on behalf of which to delete the messages
-     * @param message_ids A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat<br>
+     * @param businessConnectionId Unique identifier of the business connection on behalf of which to delete the messages
+     * @param messageIds A JSON-serialized list of 1-100 identifiers of messages to delete. All messages must be from the same chat<br>
      *                     See {@link #deleteMessage} for limitations on which messages can be deleted
      *
      * @return {@link DeleteBusinessMessages}
      */
-    public DeleteBusinessMessages deleteBusinessMessages(String business_connection_id, Integer[] message_ids){
-        return new DeleteBusinessMessages(business_connection_id, message_ids, api);
+    public DeleteBusinessMessages deleteBusinessMessages(String businessConnectionId, Integer[] messageIds){
+        return new DeleteBusinessMessages(businessConnectionId, messageIds, api);
     }
 
     /**
      * Changes the first and last name of a managed business account. Requires the can_change_name business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param first_name The new value of the first name for the business account; 1-64 characters
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param firstName The new value of the first name for the business account; 1-64 characters
      * @return {@link SetBusinessAccountName}
      */
-    public SetBusinessAccountName setBusinessAccountName(String business_connection_id, String first_name){
-        return new SetBusinessAccountName(business_connection_id, first_name, api);
+    public SetBusinessAccountName setBusinessAccountName(String businessConnectionId, String firstName){
+        return new SetBusinessAccountName(businessConnectionId, firstName, api);
     }
 
     /**
      * Changes the username of a managed business account. Requires the can_change_username business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link SetBusinessAccountUsername}
      */
-    public SetBusinessAccountUsername setBusinessAccountUsername(String business_connection_id){
-        return new SetBusinessAccountUsername(business_connection_id, api);
+    public SetBusinessAccountUsername setBusinessAccountUsername(String businessConnectionId){
+        return new SetBusinessAccountUsername(businessConnectionId, api);
     }
 
     /**
      * Changes the bio of a managed business account. Requires the can_change_bio business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link SetBusinessAccountBio}
      */
-    public SetBusinessAccountBio setBusinessAccountBio(String business_connection_id){
-        return new SetBusinessAccountBio(business_connection_id, api);
+    public SetBusinessAccountBio setBusinessAccountBio(String businessConnectionId){
+        return new SetBusinessAccountBio(businessConnectionId, api);
     }
 
     /**
      * Changes the profile photo of a managed business account. Requires the can_edit_profile_photo business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @param photo The new profile photo to set
      * @return {@link SetBusinessAccountProfilePhoto}
      */
-    public SetBusinessAccountProfilePhoto setBusinessAccountProfilePhoto(String business_connection_id, InputProfilePhoto photo){
-        return new SetBusinessAccountProfilePhoto(business_connection_id, photo, api);
+    public SetBusinessAccountProfilePhoto setBusinessAccountProfilePhoto(String businessConnectionId, InputProfilePhoto photo){
+        return new SetBusinessAccountProfilePhoto(businessConnectionId, photo, api);
     }
 
     /**
      * Removes the current profile photo of a managed business account. Requires the can_edit_profile_photo business bot right
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link RemoveBusinessAccountProfilePhoto}
      */
-    public RemoveBusinessAccountProfilePhoto removeBusinessAccountProfilePhoto(String business_connection_id){
-        return new RemoveBusinessAccountProfilePhoto(business_connection_id, api);
+    public RemoveBusinessAccountProfilePhoto removeBusinessAccountProfilePhoto(String businessConnectionId){
+        return new RemoveBusinessAccountProfilePhoto(businessConnectionId, api);
     }
 
     /**
      * Changes the privacy settings pertaining to incoming gifts in a managed business account.
      * Requires the can_change_gift_settings business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param show_gift_button Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
-     * @param accepted_gift_types Types of gifts accepted by the business account
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param showGiftButton Pass True, if a button for sending a gift to the user or by the business account must always be shown in the input field
+     * @param acceptedGiftTypes Types of gifts accepted by the business account
      * @return {@link SetBusinessAccountGiftSettings}
      */
-    public SetBusinessAccountGiftSettings setBusinessAccountGiftSettings(String business_connection_id, boolean show_gift_button,
-                                                                         AcceptedGiftTypes accepted_gift_types){
-        return new SetBusinessAccountGiftSettings(business_connection_id, show_gift_button, accepted_gift_types, api);
+    public SetBusinessAccountGiftSettings setBusinessAccountGiftSettings(String businessConnectionId, boolean showGiftButton,
+                                                                         AcceptedGiftTypes acceptedGiftTypes){
+        return new SetBusinessAccountGiftSettings(businessConnectionId, showGiftButton, acceptedGiftTypes, api);
     }
 
     /**
      * Returns the amount of Telegram Stars owned by a managed business account. Requires the can_view_gifts_and_stars business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link GetBusinessAccountStarBalance}
      */
-    public GetBusinessAccountStarBalance getBusinessAccountStarBalance(String business_connection_id){
-        return new GetBusinessAccountStarBalance(business_connection_id, api);
+    public GetBusinessAccountStarBalance getBusinessAccountStarBalance(String businessConnectionId){
+        return new GetBusinessAccountStarBalance(businessConnectionId, api);
     }
 
     /**
      * Transfers Telegram Stars from the business account balance to the bot's balance. Requires the can_transfer_stars business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param star_count Number of Telegram Stars to transfer; 1-10000
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param starCount Number of Telegram Stars to transfer; 1-10000
      * @return {@link TransferBusinessAccountStars}
      */
-    public TransferBusinessAccountStars transferBusinessAccountStars(String business_connection_id, short star_count){
-        return new TransferBusinessAccountStars(business_connection_id, star_count, api);
+    public TransferBusinessAccountStars transferBusinessAccountStars(String businessConnectionId, short starCount){
+        return new TransferBusinessAccountStars(businessConnectionId, starCount, api);
     }
 
     /**
      * Returns the gifts received and owned by a managed business account. Requires the can_view_gifts_and_stars business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link GetBusinessAccountGifts}
      */
-    public GetBusinessAccountGifts getBusinessAccountGifts(String business_connection_id){
-        return new GetBusinessAccountGifts(business_connection_id, api);
+    public GetBusinessAccountGifts getBusinessAccountGifts(String businessConnectionId){
+        return new GetBusinessAccountGifts(businessConnectionId, api);
+    }
+
+    /**
+     * Returns the gifts owned and hosted by a user.
+     * @param userId Unique identifier of the user
+     * @return {@link GetUserGifts}
+     */
+    public GetUserGifts getUserGifts(long userId){
+        return new GetUserGifts(userId, api);
+    }
+
+    /**
+     * Returns the gifts owned by a chat.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @return {@link GetChatGifts}
+     */
+    public GetChatGifts getChatGifts(Object chatId){
+        return new GetChatGifts(chatId, api);
     }
 
     /**
      * Converts a given regular gift to Telegram Stars. Requires the can_convert_gifts_to_stars business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param owned_gift_id Unique identifier of the regular gift that should be converted to Telegram Stars
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param ownedGiftId Unique identifier of the regular gift that should be converted to Telegram Stars
      * @return {@link ConvertGiftToStars}
      */
-    public ConvertGiftToStars convertGiftToStars(String business_connection_id, String owned_gift_id){
-        return new ConvertGiftToStars(business_connection_id, owned_gift_id, api);
+    public ConvertGiftToStars convertGiftToStars(String businessConnectionId, String ownedGiftId){
+        return new ConvertGiftToStars(businessConnectionId, ownedGiftId, api);
     }
 
     /**
      * Upgrades a given regular gift to a unique gift. Requires the can_transfer_and_upgrade_gifts business bot right.
      * Additionally, requires the can_transfer_stars business bot right if the upgrade is paid.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param owned_gift_id Unique identifier of the regular gift that should be upgraded to a unique one
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param ownedGiftId Unique identifier of the regular gift that should be upgraded to a unique one
      * @return {@link UpgradeGift}
      */
-    public UpgradeGift upgradeGift(String business_connection_id, String owned_gift_id){
-        return new UpgradeGift(business_connection_id, owned_gift_id, api);
+    public UpgradeGift upgradeGift(String businessConnectionId, String ownedGiftId){
+        return new UpgradeGift(businessConnectionId, ownedGiftId, api);
     }
 
     /**
      * Transfers an owned unique gift to another user. Requires the can_transfer_and_upgrade_gifts business bot right.
      * Requires can_transfer_stars business bot right if the transfer is paid.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param owned_gift_id Unique identifier of the regular gift that should be transferred
-     * @param new_owner_chat_id Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param ownedGiftId Unique identifier of the regular gift that should be transferred
+     * @param newOwnerChatId Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.
      * @return {@link TransferGift}
      */
-    public TransferGift transferGift(String business_connection_id, String owned_gift_id, long new_owner_chat_id){
-        return new TransferGift(business_connection_id, owned_gift_id, new_owner_chat_id, api);
+    public TransferGift transferGift(String businessConnectionId, String ownedGiftId, long newOwnerChatId){
+        return new TransferGift(businessConnectionId, ownedGiftId, newOwnerChatId, api);
     }
 
     /**
      * Posts a story on behalf of a managed business account. Requires the can_manage_stories business bot right.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @param content Content of the story
-     * @param active_period Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400
+     * @param activePeriod Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400
      * @return {@link PostStory}
      */
-    public PostStory postStory(String business_connection_id, InputStoryContent content, Integer active_period){
-        return new PostStory(business_connection_id, content, active_period, api);
+    public PostStory postStory(String businessConnectionId, InputStoryContent content, Integer activePeriod){
+        return new PostStory(businessConnectionId, content, activePeriod, api);
+    }
+
+    /**
+     * Reposts a story on behalf of a business account from another business account.
+     * Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot.
+     * Requires the can_manage_stories business bot right for both business accounts.
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param fromChatId Unique identifier of the chat which posted the story that should be reposted
+     * @param fromStoryId Unique identifier of the story that should be reposted
+     * @param activePeriod Period after which the story is moved to the archive, in seconds; must be one of 6 * 3600, 12 * 3600, 86400, or 2 * 86400
+     * @return {@link RepostStory}
+     */
+    public RepostStory repostStory(String businessConnectionId, long fromChatId, int fromStoryId, int activePeriod){
+        return new RepostStory(businessConnectionId, fromChatId, fromStoryId, activePeriod, api);
     }
 
     /**
      * Edits a story previously posted by the bot on behalf of a managed business account. Requires the can_manage_stories business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param story_id Unique identifier of the story to edit
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param storyId Unique identifier of the story to edit
      * @param content Content of the story
      * @return {@link EditStory}
      */
-    public EditStory editStory(String business_connection_id, Integer story_id, InputStoryContent content){
-        return new EditStory(business_connection_id, story_id, content, api);
+    public EditStory editStory(String businessConnectionId, Integer storyId, InputStoryContent content){
+        return new EditStory(businessConnectionId, storyId, content, api);
     }
 
     /**
      * Deletes a story previously posted by the bot on behalf of a managed business account.
      * Requires the can_manage_stories business bot right.
-     * @param business_connection_id Unique identifier of the business connection
-     * @param story_id Unique identifier of the story to delete
+     * @param businessConnectionId Unique identifier of the business connection
+     * @param storyId Unique identifier of the story to delete
      * @return {@link DeleteStory}
      */
-    public DeleteStory deleteStory(String business_connection_id, Integer story_id){
-        return new DeleteStory(business_connection_id, story_id, api);
+    public DeleteStory deleteStory(String businessConnectionId, Integer storyId){
+        return new DeleteStory(businessConnectionId, storyId, api);
     }
 
     /**
      * Use this method to get basic information about a file and prepare it for downloading. 
-     * For the moment, bots can download files of up to 20MB in size. The file can then be downloaded via {@link #downloadFile(String)} where field file_path is taken from the response.
+     * For the moment, bots can download files of up to 20MB in size. The file can then be downloaded via {@link #downloadFile(String)} where field filePath is taken from the response.
      * It is guaranteed that the link will be valid for at least 1 hour. When the link expires, a new one can be requested by calling getFile again.
-     * @param file_id File identifier to get information about
+     * @param fileId File identifier to get information about
      * @return {@link io.github.natanimn.telebof.requests.get.GetFile}
      */
-    public GetFile getFile(String file_id) {
-        return new GetFile(file_id, this.api);
+    public GetFile getFile(String fileId) {
+        return new GetFile(fileId, this.api);
     }
 
     /**
      * Use this method to ban a user in a group, a supergroup or a channel.
      * In the case of supergroups and channels, the user will not be able to return to the chat on their own using invite links, etc., unless unbanned first.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.service.BanChatMember}
      */
-    public BanChatMember banChatMember(Object chat_id, long user_id) {
-        return new BanChatMember(chat_id, user_id, this.api);
+    public BanChatMember banChatMember(Object chatId, long userId) {
+        return new BanChatMember(chatId, userId, this.api);
     }
 
     /**
@@ -834,93 +882,93 @@ public class BotContext {
      * The user will not return to the group or channel automatically, but will be able to join via link, etc.
      * The bot must be an administrator for this to work. By default, this method guarantees that after the call the user is not a member of the chat, but will be able to join it.
      * So if the user is a member of the chat they will also be removed from the chat. If you don't want this, use the parameter only_if_banned.
-     * @param chat_id Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.service.UnbanChatMember}
      */
-    public UnbanChatMember unbanChatMember(Object chat_id, long user_id) {
-        return new UnbanChatMember(chat_id, user_id, this.api);
+    public UnbanChatMember unbanChatMember(Object chatId, long userId) {
+        return new UnbanChatMember(chatId, userId, this.api);
     }
 
     /**
      * Use this method to unban a previously banned channel chat in a supergroup or channel.
      * The bot must be an administrator for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param sender_chat_id Unique identifier of the target sender chat
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param senderChatId Unique identifier of the target sender chat
      * @return {@link io.github.natanimn.telebof.requests.service.UnbanChatSenderChat}
      */
-    public UnbanChatSenderChat unbanChatSenderChat(Object chat_id, long sender_chat_id){
-        return new UnbanChatSenderChat(chat_id, sender_chat_id, api);
+    public UnbanChatSenderChat unbanChatSenderChat(Object chatId, long senderChatId){
+        return new UnbanChatSenderChat(chatId, senderChatId, api);
     }
 
     /**
      * Use this method to restrict a user in a supergroup.
      * The bot must be an administrator in the supergroup for this to work and must have the appropriate administrator rights.
      * Pass True for all permissions to lift restrictions from a user.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param userId Unique identifier of the target user
      * @param permissions A JSON-serialized object for new user permissions
      * @return {@link io.github.natanimn.telebof.requests.service.RestrictChatMember}
      */
-    public RestrictChatMember restrictChatMember(Object chat_id, long user_id, ChatPermissions permissions) {
-        return new RestrictChatMember(chat_id, user_id, permissions, this.api);
+    public RestrictChatMember restrictChatMember(Object chatId, long userId, ChatPermissions permissions) {
+        return new RestrictChatMember(chatId, userId, permissions, this.api);
     }
 
     /**
      * Use this method to promote or demote a user in a supergroup or a channel.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Pass False for all boolean parameters to demote a user
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.service.PromoteChatMember}
      */
-    public PromoteChatMember promoteChatMember(Object chat_id, long user_id) {
-        return new PromoteChatMember(chat_id, user_id, this.api);
+    public PromoteChatMember promoteChatMember(Object chatId, long userId) {
+        return new PromoteChatMember(chatId, userId, this.api);
     }
 
     /**
      * Use this method to set a custom title for an administrator in a supergroup promoted by the bot. Returns True on success.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param user_id Unique identifier of the target user
-     * @param custom_title New custom title for the administrator; 0-16 characters, emoji are not allowed
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param userId Unique identifier of the target user
+     * @param customTitle New custom title for the administrator; 0-16 characters, emoji are not allowed
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatAdministratorCustomTitle}
      */
-    public SetChatAdministratorCustomTitle setChatAdministratorCustomTitle(Object chat_id, long user_id, String custom_title) {
-        return new SetChatAdministratorCustomTitle(chat_id, user_id, custom_title, this.api);
+    public SetChatAdministratorCustomTitle setChatAdministratorCustomTitle(Object chatId, long userId, String customTitle) {
+        return new SetChatAdministratorCustomTitle(chatId, userId, customTitle, this.api);
     }
 
     /**
      * This method Changes the emoji status for a given user that previously allowed the bot to manage their emoji status
      * via the Mini App method <a href="https://core.telegram.org/bots/webapps#initializing-mini-apps">requestEmojiStatusAccess</a>.
      * Return True on success
-     * @param user_id Unique identifier of the target user
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.set.SetUserEmojiStatus}
      */
-    public SetUserEmojiStatus setUserEmojiStatus(long user_id){
-        return new SetUserEmojiStatus(user_id, api);
+    public SetUserEmojiStatus setUserEmojiStatus(long userId){
+        return new SetUserEmojiStatus(userId, api);
     }
 
     /**
      * Use this method to ban a channel chat in a supergroup or a channel.
      * Until the chat is unbanned, the owner of the banned chat won't be able to send messages on behalf of any of their channels.
      * The bot must be an administrator in the supergroup or channel for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param sender_chat_id Unique identifier of the target sender chat
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param senderChatId Unique identifier of the target sender chat
      * @return {@link io.github.natanimn.telebof.requests.service.BanChatSenderChat}
      */
-    public BanChatSenderChat banChatSenderChat(Object chat_id, long sender_chat_id) {
-        return new BanChatSenderChat(chat_id, sender_chat_id, this.api);
+    public BanChatSenderChat banChatSenderChat(Object chatId, long senderChatId) {
+        return new BanChatSenderChat(chatId, senderChatId, this.api);
     }
 
     /**
      * Use this method to set default chat permissions for all members.
      * The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @param permissions A JSON-serialized object for new default chat permissions
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatPermissions}
      */
-    public SetChatPermissions setChatPermissions(Object chat_id, ChatPermissions permissions) {
-        return new SetChatPermissions(chat_id, permissions, this.api);
+    public SetChatPermissions setChatPermissions(Object chatId, ChatPermissions permissions) {
+        return new SetChatPermissions(chatId, permissions, this.api);
     }
 
     /**
@@ -930,168 +978,168 @@ public class BotContext {
      * Bots can't use invite links generated by other administrators. If you want your bot to work with invite links,
      * it will need to generate its own link using {@link #exportChatInviteLink} or by calling the {@link #getChat} method.
      * If your bot needs to generate a new primary invite link replacing its previous one, use  {@link #exportChatInviteLink} again.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.service.ExportChatInviteLink}
      */
-    public ExportChatInviteLink exportChatInviteLink(Object chat_id) {
-        return new ExportChatInviteLink(chat_id, this.api);
+    public ExportChatInviteLink exportChatInviteLink(Object chatId) {
+        return new ExportChatInviteLink(chatId, this.api);
     }
 
     /**
      * Use this method to create an additional invite link for a chat.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * The link can be revoked using the method {@link #revokeChatInviteLink}.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.create.CreateChatInviteLink}
      */
-    public CreateChatInviteLink createChatInviteLink(Object chat_id) {
-        return new CreateChatInviteLink(chat_id, this.api);
+    public CreateChatInviteLink createChatInviteLink(Object chatId) {
+        return new CreateChatInviteLink(chatId, this.api);
     }
 
     /**
      * Use this method to create a subscription invite link for a channel chat.
      * The bot must have the can_invite_users administrator rights.
      * The link can be edited using the method {@link #editChatSubscriptionInviteLink}  or revoked using the method {@link #revokeChatInviteLink}.
-     * @param chat_id Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)
-     * @param subscription_period The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
-     * @param subscription_price The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
+     * @param chatId Unique identifier for the target channel chat or username of the target channel (in the format @channelusername)
+     * @param subscriptionPeriod The number of seconds the subscription will be active for before the next payment. Currently, it must always be 2592000 (30 days).
+     * @param subscriptionPrice The amount of Telegram Stars a user must pay initially and after each subsequent subscription period to be a member of the chat; 1-10000
      * @return {@link io.github.natanimn.telebof.requests.create.CreateChatSubscriptionInviteLink}
      */
-    public CreateChatSubscriptionInviteLink createChatSubscriptionInviteLink(Object chat_id, int subscription_period,
-                                                                             int subscription_price) {
-        return new CreateChatSubscriptionInviteLink(chat_id, subscription_period, subscription_price, this.api);
+    public CreateChatSubscriptionInviteLink createChatSubscriptionInviteLink(Object chatId, int subscriptionPeriod,
+                                                                             int subscriptionPrice) {
+        return new CreateChatSubscriptionInviteLink(chatId, subscriptionPeriod, subscriptionPrice, this.api);
     }
 
     /**
      * Use this method to edit a non-primary invite link created by the bot.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param invite_link The invite link to edit
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param inviteLink The invite link to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditChatInviteLink}
      */
-    public EditChatInviteLink editChatInviteLink(Object chat_id, String invite_link) {
-        return new EditChatInviteLink(chat_id, invite_link, this.api);
+    public EditChatInviteLink editChatInviteLink(Object chatId, String inviteLink) {
+        return new EditChatInviteLink(chatId, inviteLink, this.api);
     }
 
     /**
      * Use this method to edit a subscription invite link created by the bot. The bot must have the can_invite_users administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param invite_link The invite link to edit
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param inviteLink The invite link to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditChatSubscriptionInviteLink}
      */
-    public EditChatSubscriptionInviteLink editChatSubscriptionInviteLink(Object chat_id, String invite_link) {
-        return new EditChatSubscriptionInviteLink(chat_id, invite_link, this.api);
+    public EditChatSubscriptionInviteLink editChatSubscriptionInviteLink(Object chatId, String inviteLink) {
+        return new EditChatSubscriptionInviteLink(chatId, inviteLink, this.api);
     }
 
     /**
      * Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier of the target chat or username of the target channel (in the format @channelusername)
-     * @param invite_link The invite link to revoke
+     * @param chatId Unique identifier of the target chat or username of the target channel (in the format @channelusername)
+     * @param inviteLink The invite link to revoke
      * @return {@link io.github.natanimn.telebof.requests.service.RevokeChatInviteLink}
      */
-    public RevokeChatInviteLink revokeChatInviteLink(Object chat_id, String invite_link) {
-        return new RevokeChatInviteLink(chat_id, invite_link, this.api);
+    public RevokeChatInviteLink revokeChatInviteLink(Object chatId, String inviteLink) {
+        return new RevokeChatInviteLink(chatId, inviteLink, this.api);
     }
 
     /**
      * Use this method to approve a chat join request.
      * The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.service.ApproveChatJoinRequest}
      */
-    public ApproveChatJoinRequest approveChatJoinRequest(Object chat_id, long user_id) {
-        return new ApproveChatJoinRequest(chat_id, user_id, this.api);
+    public ApproveChatJoinRequest approveChatJoinRequest(Object chatId, long userId) {
+        return new ApproveChatJoinRequest(chatId, userId, this.api);
     }
 
     /**
      * Use this method to decline a chat join request.
      * The bot must be an administrator in the chat for this to work and must have the can_invite_users administrator right.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.service.DeclineChatJoinRequest}
      */
-    public DeclineChatJoinRequest declineChatJoinRequest(Object chat_id, long user_id) {
-        return new DeclineChatJoinRequest(chat_id, user_id, this.api);
+    public DeclineChatJoinRequest declineChatJoinRequest(Object chatId, long userId) {
+        return new DeclineChatJoinRequest(chatId, userId, this.api);
     }
 
     /**
      * Use this method to set a new profile photo for the chat. Photos can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param photo New chat photo, uploaded using {@link File}
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatPhoto}
      */
-    public SetChatPhoto setChatPhoto(Object chat_id, File photo) {
-        return new SetChatPhoto(chat_id, photo, this.api);
+    public SetChatPhoto setChatPhoto(Object chatId, File photo) {
+        return new SetChatPhoto(chatId, photo, this.api);
     }
 
     /**
      * Use this method to delete a chat photo. Photos can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteChatPhoto}
      */
-    public DeleteChatPhoto deleteChatPhoto(Object chat_id) {
-        return new DeleteChatPhoto(chat_id, this.api);
+    public DeleteChatPhoto deleteChatPhoto(Object chatId) {
+        return new DeleteChatPhoto(chatId, this.api);
     }
 
     /**
      * Use this method to change the title of a chat. Titles can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param title New chat title, 1-128 characters
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatTitle}
      */
-    public SetChatTitle setChatTitle(Object chat_id, String title) {
-        return new SetChatTitle(chat_id, title, this.api);
+    public SetChatTitle setChatTitle(Object chatId, String title) {
+        return new SetChatTitle(chatId, title, this.api);
     }
 
 
     /**
      * Use this method to change the description of a group, a supergroup or a channel.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param description New chat description, 0-255 characters
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatDescription}
      */
-    public SetChatDescription setChatDescription(Object chat_id, String description) {
-        return new SetChatDescription(chat_id, description, this.api);
+    public SetChatDescription setChatDescription(Object chatId, String description) {
+        return new SetChatDescription(chatId, description, this.api);
     }
 
     /**
      * Use this method to add a message to the list of pinned messages in a chat.
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of a message to pin
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of a message to pin
      * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.PinChatMessage}
      */
-    public PinChatMessage pinChatMessage(Object chat_id, int message_id) {
-        return new PinChatMessage(chat_id, message_id, this.api);
+    public PinChatMessage pinChatMessage(Object chatId, int messageId) {
+        return new PinChatMessage(chatId, messageId, this.api);
     }
 
     /**
      * Use this method to remove a message from the list of pinned messages in a chat.
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinChatMessage}
      */
-    public UnpinChatMessage unpinChatMessage(Object chat_id) {
-        return new UnpinChatMessage(chat_id, this.api);
+    public UnpinChatMessage unpinChatMessage(Object chatId) {
+        return new UnpinChatMessage(chatId, this.api);
     }
 
     /**
      * Use this method to clear the list of pinned messages in a chat.
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
      * administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllChatMessages}
      */
-    public UnpinAllChatMessages unpinAllChatMessages(Object chat_id) {
-        return new UnpinAllChatMessages(chat_id, this.api);
+    public UnpinAllChatMessages unpinAllChatMessages(Object chatId) {
+        return new UnpinAllChatMessages(chatId, this.api);
     }
 
     /**
@@ -1112,94 +1160,94 @@ public class BotContext {
 
     /**
      * Use this method for your bot to leave a group, supergroup or channel.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.service.LeaveChat}
      */
-    public LeaveChat leaveChat(Object chat_id) {
-        return new LeaveChat(chat_id, this.api);
+    public LeaveChat leaveChat(Object chatId) {
+        return new LeaveChat(chatId, this.api);
     }
 
     /**
      * Use this method to get up-to-date information about the chat.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.get.GetChat}
      */
-    public GetChat getChat(Object chat_id) {
-        return new GetChat(chat_id, this.api);
+    public GetChat getChat(Object chatId) {
+        return new GetChat(chatId, this.api);
     }
 
     /**
      * Use this method to get the list of boosts added to a chat by a user. Requires administrator rights in the chat.
-     * @param chat_id Unique identifier for the chat or username of the channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the chat or username of the channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.get.GetUserChatBoosts}
      */
-    public GetUserChatBoosts getUserChatBoosts(Object chat_id, long user_id){
-        return new GetUserChatBoosts(chat_id, user_id, api);
+    public GetUserChatBoosts getUserChatBoosts(Object chatId, long userId){
+        return new GetUserChatBoosts(chatId, userId, api);
     }
 
     /**
      * Use this method to get a list of administrators in a chat, which aren't bots.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatAdministrators}
      */
-    public GetChatAdministrators getChatAdministrators(Object chat_id) {
-        return new GetChatAdministrators(chat_id, this.api);
+    public GetChatAdministrators getChatAdministrators(Object chatId) {
+        return new GetChatAdministrators(chatId, this.api);
     }
 
     /**
      * Use this method to get the number of members in a chat.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatMemberCount}
      */
-    public GetChatMemberCount getChatMemberCount(Object chat_id) {
-        return new GetChatMemberCount(chat_id, this.api);
+    public GetChatMemberCount getChatMemberCount(Object chatId) {
+        return new GetChatMemberCount(chatId, this.api);
     }
 
     /**
      * Use this method to get information about a member of a chat.
      * The method is only guaranteed to work for other users if the bot is an administrator in the chat
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
-     * @param user_id Unique identifier of the target user
+     * @param chatId Unique identifier for the target chat or username of the target supergroup or channel (in the format @channelusername)
+     * @param userId Unique identifier of the target user
      * @return {@link io.github.natanimn.telebof.requests.get.GetChatMember}
      */
-    public GetChatMember getChatMember(Object chat_id, long user_id) {
-        return new GetChatMember(chat_id, user_id, this.api);
+    public GetChatMember getChatMember(Object chatId, long userId) {
+        return new GetChatMember(chatId, userId, this.api);
     }
 
     /**
      * Use this method to change the chosen reactions on a message. Service messages of some types can't be reacted to.
      * Automatically forwarded messages from a channel to its discussion group have the same available reactions as messages in the channel.
      * Bots can't use paid reactions.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
      * @return {@link io.github.natanimn.telebof.requests.set.SetMessageReaction}
      */
-    public SetMessageReaction setMessageReaction(Object chat_id, int message_id){
-        return new SetMessageReaction(chat_id, message_id, api);
+    public SetMessageReaction setMessageReaction(Object chatId, int messageId){
+        return new SetMessageReaction(chatId, messageId, api);
     }
 
     /**
      * Use this method to set a new group sticker set for a supergroup.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Use the field can_set_sticker_set optionally returned in {@link #getChat} requests to check if the bot can use this method.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param sticker_set_name Name of the sticker set to be set as the group sticker set
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param stickerSetName Name of the sticker set to be set as the group sticker set
      * @return {@link io.github.natanimn.telebof.requests.set.SetChatStickerSet}
      */
-    public SetChatStickerSet setChatStickerSet(Object chat_id, String sticker_set_name) {
-        return new SetChatStickerSet(chat_id, sticker_set_name, this.api);
+    public SetChatStickerSet setChatStickerSet(Object chatId, String stickerSetName) {
+        return new SetChatStickerSet(chatId, stickerSetName, this.api);
     }
 
     /**
      * Use this method to delete a group sticker set from a supergroup.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * Use the field can_set_sticker_set optionally returned in {@link #getChat} requests to check if the bot can use this method.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteChatStickerSet}
      */
-    public DeleteChatStickerSet deleteChatStickerSet(Object chat_id) {
-        return new DeleteChatStickerSet(chat_id, this.api);
+    public DeleteChatStickerSet deleteChatStickerSet(Object chatId) {
+        return new DeleteChatStickerSet(chatId, this.api);
     }
 
     /**
@@ -1213,151 +1261,151 @@ public class BotContext {
     /**
      * Use this method to create a topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @param name Topic name, 1-128 characters
      * @return {@link io.github.natanimn.telebof.requests.create.CreateForumTopic}
      */
-    public CreateForumTopic createForumTopic(Object chat_id, String name) {
-        return new CreateForumTopic(chat_id, name, this.api);
+    public CreateForumTopic createForumTopic(Object chatId, String name) {
+        return new CreateForumTopic(chatId, name, this.api);
     }
 
     /**
      * Use this method to edit name and icon of a topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param message_thread_id Unique identifier for the target message thread of the forum topic
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param messageThreadId Unique identifier for the target message thread of the forum topic
      * @return {@link io.github.natanimn.telebof.requests.edit.EditForumTopic}
      */
-    public EditForumTopic editForumTopic(Object chat_id, int message_thread_id) {
-        return new EditForumTopic(chat_id, message_thread_id, this.api);
+    public EditForumTopic editForumTopic(Object chatId, int messageThreadId) {
+        return new EditForumTopic(chatId, messageThreadId, this.api);
     }
 
     /**
      * Use this method to close an open topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param message_thread_id Unique identifier for the target message thread of the forum topic
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param messageThreadId Unique identifier for the target message thread of the forum topic
      * @return {@link io.github.natanimn.telebof.requests.service.CloseForumTopic}
      */
-    public CloseForumTopic closeForumTopic(Object chat_id, int message_thread_id){
-        return new CloseForumTopic(chat_id, message_thread_id, api);
+    public CloseForumTopic closeForumTopic(Object chatId, int messageThreadId){
+        return new CloseForumTopic(chatId, messageThreadId, api);
     }
 
     /**
      * Use this method to reopen a closed topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights, unless it is the creator of the topic.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param message_thread_id Unique identifier for the target message thread of the forum topic
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param messageThreadId Unique identifier for the target message thread of the forum topic
      * @return {@link io.github.natanimn.telebof.requests.service.ReopenForumTopic}
      */
-    public ReopenForumTopic reopenForumTopic(Object chat_id, int message_thread_id) {
-        return new ReopenForumTopic(chat_id, message_thread_id, this.api);
+    public ReopenForumTopic reopenForumTopic(Object chatId, int messageThreadId) {
+        return new ReopenForumTopic(chatId, messageThreadId, this.api);
     }
 
     /**
      * Use this method to delete a forum topic along with all its messages in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_delete_messages administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param message_thread_id Unique identifier for the target message thread of the forum topic
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param messageThreadId Unique identifier for the target message thread of the forum topic
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteForumTopic}
      */
-    public DeleteForumTopic deleteForumTopic(Object chat_id, int message_thread_id) {
-        return new DeleteForumTopic(chat_id, message_thread_id, this.api);
+    public DeleteForumTopic deleteForumTopic(Object chatId, int messageThreadId) {
+        return new DeleteForumTopic(chatId, messageThreadId, this.api);
     }
 
     /**
      * Use this method to clear the list of pinned messages in a forum topic.
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @param message_thread_id Unique identifier for the target message thread of the forum topic
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param messageThreadId Unique identifier for the target message thread of the forum topic
      * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllForumTopicMessages}
      */
-    public UnpinAllForumTopicMessages unpinAllForumTopicMessages(Object chat_id, int message_thread_id) {
-        return new UnpinAllForumTopicMessages(chat_id, message_thread_id, this.api);
+    public UnpinAllForumTopicMessages unpinAllForumTopicMessages(Object chatId, int messageThreadId) {
+        return new UnpinAllForumTopicMessages(chatId, messageThreadId, this.api);
     }
 
     /**
      * Use this method to edit the name of the 'General' topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @param name New topic name, 1-128 characters
      * @return {@link io.github.natanimn.telebof.requests.edit.EditGeneralForumTopic}
      */
-    public EditGeneralForumTopic editGeneralForumTopic(Object chat_id, String name) {
-        return new EditGeneralForumTopic(chat_id, name, this.api);
+    public EditGeneralForumTopic editGeneralForumTopic(Object chatId, String name) {
+        return new EditGeneralForumTopic(chatId, name, this.api);
     }
 
     /**
      * Use this method to close an open 'General' topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.service.CloseForumTopic}
      */
-    public CloseGeneralForumTopic closeGeneralForumTopic(Object chat_id) {
-        return new CloseGeneralForumTopic(chat_id, this.api);
+    public CloseGeneralForumTopic closeGeneralForumTopic(Object chatId) {
+        return new CloseGeneralForumTopic(chatId, this.api);
     }
 
     /**
      * Use this method to reopen a closed 'General' topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * The topic will be automatically unhidden if it was hidden.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.service.ReopenGeneralForumTopic}
      */
-    public ReopenGeneralForumTopic reopenGeneralForumTopic(Object chat_id) {
-        return new ReopenGeneralForumTopic(chat_id, this.api);
+    public ReopenGeneralForumTopic reopenGeneralForumTopic(Object chatId) {
+        return new ReopenGeneralForumTopic(chatId, this.api);
     }
 
     /**
      * Use this method to hide the 'General' topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
      * The topic will be automatically closed if it was open.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.service.HideGeneralForumTopic}
      */
-    public HideGeneralForumTopic hideGeneralForumTopic(Object chat_id) {
-        return new HideGeneralForumTopic(chat_id, this.api);
+    public HideGeneralForumTopic hideGeneralForumTopic(Object chatId) {
+        return new HideGeneralForumTopic(chatId, this.api);
     }
 
     /**
      * Use this method to unhide the 'General' topic in a forum supergroup chat.
      * The bot must be an administrator in the chat for this to work and must have the can_manage_topics administrator rights.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.service.UnHideGeneralForumTopic}
      */
-    public UnHideGeneralForumTopic unHideGeneralForumTopic(Object chat_id) {
-        return new UnHideGeneralForumTopic(chat_id, this.api);
+    public UnHideGeneralForumTopic unHideGeneralForumTopic(Object chatId) {
+        return new UnHideGeneralForumTopic(chatId, this.api);
     }
 
     /**
      * Use this method to clear the list of pinned messages in a General forum topic.
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
-     * @param chat_id Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
+     * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllGeneralForumTopicMessages}
      */
-    public UnpinAllGeneralForumTopicMessages unpinAllGeneralForumTopicMessages(Object chat_id){
-        return new UnpinAllGeneralForumTopicMessages(chat_id, this.api);
+    public UnpinAllGeneralForumTopicMessages unpinAllGeneralForumTopicMessages(Object chatId){
+        return new UnpinAllGeneralForumTopicMessages(chatId, this.api);
     }
 
 
     /**
      * Use this method to send answers to callback queries sent from inline keyboards.
      * The answer will be displayed to the user as a notification at the top of the chat screen or as an alert.
-     * @param callback_query_id Unique identifier for the query to be answered
+     * @param callbackQueryId Unique identifier for the query to be answered
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery}
      */
-    public AnswerCallbackQuery answerCallbackQuery(String callback_query_id) {
-        return new AnswerCallbackQuery(callback_query_id, this.api);
+    public AnswerCallbackQuery answerCallbackQuery(String callbackQueryId) {
+        return new AnswerCallbackQuery(callbackQueryId, this.api);
     }
 
     /**
      * {@link #answerCallbackQuery} with text parameter
-     * @param callback_query_id Unique identifier for the query to be answered
+     * @param callbackQueryId Unique identifier for the query to be answered
      * @param text text Text of the notification.
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery}
      */
-    public AnswerCallbackQuery answerCallbackQuery(String callback_query_id, String text) {
-        return new AnswerCallbackQuery(callback_query_id, this.api).text(text);
+    public AnswerCallbackQuery answerCallbackQuery(String callbackQueryId, String text) {
+        return new AnswerCallbackQuery(callbackQueryId, this.api).text(text);
     }
 
     /**
@@ -1385,6 +1433,7 @@ public class BotContext {
      */
     public GetMyCommands getMyCommands() {
         return new GetMyCommands(this.api);
+
     }
 
     /**
@@ -1425,105 +1474,105 @@ public class BotContext {
      * On success,  the edited Message is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param text New text of the message, 1-4096 characters after entities parsing
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of the message to edit
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
      */
-    public EditMessageText editMessageText(String text, Object chat_id, int message_id) {
-        return new EditMessageText(text, chat_id, message_id, this.api);
+    public EditMessageText editMessageText(Object chatId, String text, int messageId) {
+        return new EditMessageText(chatId, text,  messageId, this.api);
     }
 
     /**
      * Use this method to edit text and game messages.
      * On success, True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param text ew text of the message, 1-4096 characters after entities parsing
-     * @param inline_message_id Identifier of the inline message
+     * @param inlineMessageId Identifier of the inline message
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
      */
-    public EditMessageText editMessageText(String text, String inline_message_id) {
-        return new EditMessageText(text, inline_message_id, this.api);
+    public EditMessageText editMessageText(String text, String inlineMessageId) {
+        return new EditMessageText(text, inlineMessageId, this.api);
     }
 
     /**
      * Use this method to edit captions of messages. On success, the edited Message is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of the message to edit
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageCaption}
      */
-    public EditMessageCaption editMessageCaption(Object chat_id, int message_id) {
-        return new EditMessageCaption(chat_id, message_id, this.api);
+    public EditMessageCaption editMessageCaption(Object chatId, int messageId) {
+        return new EditMessageCaption(chatId, messageId, this.api);
     }
 
     /**
      * Use this method to edit captions of messages.
      * On success, True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param inline_message_id Identifier of the inline message
+     * @param inlineMessageId Identifier of the inline message
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageCaption}
      */
-    public EditMessageCaption editMessageCaption(String inline_message_id) {
-        return new EditMessageCaption(inline_message_id, this.api);
+    public EditMessageCaption editMessageCaption(String inlineMessageId) {
+        return new EditMessageCaption(inlineMessageId, this.api);
     }
 
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages.
      * If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise.
-     * When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.
+     * When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its fileId or specify a URL.
      * On success, the edited Message is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Required if inlineMessageId is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param media A JSON-serialized object for a new media content of the message
-     * @param message_id Required if inline_message_id is not specified. Identifier of the message to edit
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageMedia}
      */
-    public EditMessageMedia editMessageMedia(Object chat_id, InputMedia media, int message_id) {
-        return new EditMessageMedia(media, chat_id, message_id, this.api);
+    public EditMessageMedia editMessageMedia(Object chatId, InputMedia media, int messageId) {
+        return new EditMessageMedia(media, chatId, messageId, this.api);
     }
 
     /**
      * Use this method to edit animation, audio, document, photo, or video messages, or to add media to text messages.
      * If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo or a video otherwise.
-     * When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.
+     * When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its fileId or specify a URL.
      * On success, True is returned.
-     * @param inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @param inlineMessageId Required if chatId and messageId are not specified. Identifier of the inline message
      * @param media A JSON-serialized object for a new media content of the message
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageMedia}
      */
-    public EditMessageMedia editMessageMedia(String inline_message_id, InputMedia media) {
-        return new EditMessageMedia(media, inline_message_id, this.api);
+    public EditMessageMedia editMessageMedia(String inlineMessageId, InputMedia media) {
+        return new EditMessageMedia(media, inlineMessageId, this.api);
     }
 
     /**
      * Use this method to edit only the reply markup of messages.
      * On success, the edited Message is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param chat_id Required if inline_message_id is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Required if inline_message_id is not specified. Identifier of the message to edit
+     * @param chatId Required if inlineMessageId is not specified. Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageReplyMarkup}
      */
-    public EditMessageReplyMarkup editMessageReplyMarkup(Object chat_id, int message_id) {
-        return new EditMessageReplyMarkup(chat_id, message_id, this.api);
+    public EditMessageReplyMarkup editMessageReplyMarkup(Object chatId, int messageId) {
+        return new EditMessageReplyMarkup(chatId, messageId, this.api);
     }
 
     /**
      * Use this method to edit only the reply markup of messages.
      * On success, True is returned.
      * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
-     * @param inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
+     * @param inlineMessageId Required if chatId and messageId are not specified. Identifier of the inline message
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageReplyMarkup}
      */
-    public EditMessageReplyMarkup editMessageReplyMarkup(String inline_message_id) {
-        return new EditMessageReplyMarkup(inline_message_id, this.api);
+    public EditMessageReplyMarkup editMessageReplyMarkup(String inlineMessageId) {
+        return new EditMessageReplyMarkup(inlineMessageId, this.api);
     }
 
     /**
      * Use this method to stop a poll which was sent by the bot.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of the original message with the poll
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the original message with the poll
      * @return {@link io.github.natanimn.telebof.requests.service.StopPoll}
      */
-    public StopPoll stopPoll(Object chat_id, int message_id) {
-        return new StopPoll(chat_id, message_id, this.api);
+    public StopPoll stopPoll(Object chatId, int messageId) {
+        return new StopPoll(chatId, messageId, this.api);
     }
 
     /**
@@ -1538,44 +1587,44 @@ public class BotContext {
      * - If the bot is an administrator of a group, it can delete any message there.
      * - If the bot has can_delete_messages permission in a supergroup or a channel, it can delete any message there.
      * </pre>
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_id Identifier of the message to delete
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the message to delete
      * @return {@link io.github.natanimn.telebof.requests.delete.DeleteMessage}
      */
-    public DeleteMessage deleteMessage(Object chat_id, int message_id) {
-        return new DeleteMessage(chat_id, message_id, this.api);
+    public DeleteMessage deleteMessage(Object chatId, int messageId) {
+        return new DeleteMessage(chatId, messageId, this.api);
     }
 
     /**
      * Use this method to delete multiple messages simultaneously. If some of the specified messages can't be found, they are skipped.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param message_ids A JSON-serialized list of 1-100 identifiers of messages to delete.
-     * @return
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageIds A JSON-serialized list of 1-100 identifiers of messages to delete.
+     * @return {@link DeleteMessages}
      */
-    public DeleteMessages deleteMessages(Object chat_id, Integer[] message_ids) {
-        return new DeleteMessages(chat_id, message_ids, this.api);
+    public DeleteMessages deleteMessages(Object chatId, Integer[] messageIds) {
+        return new DeleteMessages(chatId, messageIds, this.api);
     }
 
     /**
      * Use this method to send static .WEBP, <a href="https://telegram.org/blog/animated-stickers">animated</a> .TGS, or <a href="https://telegram.org/blog/video-stickers-better-reactions">video</a> .WEBM stickers.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param sticker Sticker to send. Pass .WEBM file
      * @return {@link io.github.natanimn.telebof.requests.send.SendSticker}
      */
-    public SendSticker sendSticker(Object chat_id, File sticker) {
-        return new SendSticker(chat_id, sticker, this.api);
+    public SendSticker sendSticker(Object chatId, File sticker) {
+        return new SendSticker(chatId, sticker, this.api);
     }
 
     /**
      * Use this method to send static .WEBP, <a href="https://telegram.org/blog/animated-stickers">animated</a> .TGS, or <a href="https://telegram.org/blog/video-stickers-better-reactions">video</a> .WEBM stickers.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @param sticker Sticker to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended),
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param sticker Sticker to send. Pass a fileId as String to send a file that exists on the Telegram servers (recommended),
      *                pass an HTTP URL as a String for Telegram to get a .WEBP sticker from the Internet, or upload a new .WEBP, .TGS,
      *                Video and animated stickers can't be sent via an HTTP URL.
      * @return {@link io.github.natanimn.telebof.requests.send.SendSticker}
      */
-    public SendSticker sendSticker(Object chat_id, String sticker) {
-        return new SendSticker(chat_id, sticker, this.api);
+    public SendSticker sendSticker(Object chatId, String sticker) {
+        return new SendSticker(chatId, sticker, this.api);
     }
 
     /**
@@ -1589,27 +1638,27 @@ public class BotContext {
 
     /**
      * Use this method to get information about custom emoji stickers by their identifiers.
-     * @param custom_emoji_ids A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
+     * @param customEmojiIds A JSON-serialized list of custom emoji identifiers. At most 200 custom emoji identifiers can be specified.
      * @return {@link io.github.natanimn.telebof.requests.get.GetCustomEmojiStickers}
      */
-    public GetCustomEmojiStickers getCustomEmojiStickers(String[] custom_emoji_ids) {
-        return new GetCustomEmojiStickers(custom_emoji_ids, this.api);
+    public GetCustomEmojiStickers getCustomEmojiStickers(String[] customEmojiIds) {
+        return new GetCustomEmojiStickers(customEmojiIds, this.api);
     }
 
     /**
      * Use this method to upload a file with a sticker for later use in the {@link #createNewStickerSet}, {@link #addStickerToSet}, or {@link #replaceStickerInSet} methods (the file can be used multiple times).
-     * @param user_id User identifier of sticker file owner
+     * @param userId User identifier of sticker file owner
      * @param sticker A file with the sticker in .WEBP, .PNG, .TGS, or .WEBM format.
      * @param sticker_format Format of the sticker
      * @return {@link io.github.natanimn.telebof.requests.service.UploadStickerFile}
      */
-    public UploadStickerFile uploadStickerFile(long user_id, File sticker, StickerFormat sticker_format) {
-        return new UploadStickerFile(user_id, sticker, sticker_format, this.api);
+    public UploadStickerFile uploadStickerFile(long userId, File sticker, StickerFormat sticker_format) {
+        return new UploadStickerFile(userId, sticker, sticker_format, this.api);
     }
 
     /**
      * Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created.
-     * @param user_id User identifier of created sticker set owner
+     * @param userId User identifier of created sticker set owner
      * @param name Short name of sticker set, to be used in t.me/addstickers/ URLs (e.g., animals).
      *             Can contain only English letters, digits and underscores. Must begin with a letter, can't contain consecutive underscores and must end in "_by_<bot_username>".
      *             <bot_username> is case-insensitive. 1-64 characters.
@@ -1617,21 +1666,21 @@ public class BotContext {
      * @param stickers A JSON-serialized list of 1-50 initial stickers to be added to the sticker set
      * @return {@link io.github.natanimn.telebof.requests.create.CreateNewStickerSet}
      */
-    public CreateNewStickerSet createNewStickerSet(long user_id, String name, String title, InputSticker[] stickers) {
-        return new CreateNewStickerSet(user_id, name, title, stickers, this.api);
+    public CreateNewStickerSet createNewStickerSet(long userId, String name, String title, InputSticker[] stickers) {
+        return new CreateNewStickerSet(userId, name, title, stickers, this.api);
     }
 
     /**
      * Use this method to add a new sticker to a set created by the bot.
      * Emoji sticker sets can have up to 200 stickers. Other sticker sets can have up to 120 stickers.
-     * @param user_id User identifier of sticker set owner
+     * @param userId User identifier of sticker set owner
      * @param name Sticker set name
      * @param sticker A JSON-serialized object with information about the added sticker.
      *                If exactly the same sticker had already been added to the set, then the set isn't changed.
      * @return {@link io.github.natanimn.telebof.requests.service.AddStickerToSet}
      */
-    public AddStickerToSet addStickerToSet(long user_id, String name, InputSticker sticker) {
-        return new AddStickerToSet(user_id, name, sticker, this.api);
+    public AddStickerToSet addStickerToSet(long userId, String name, InputSticker sticker) {
+        return new AddStickerToSet(userId, name, sticker, this.api);
     }
 
     /**
@@ -1657,11 +1706,11 @@ public class BotContext {
      * Use this method to change the list of emoji assigned to a regular or custom emoji sticker.
      * The sticker must belong to a sticker set created by the bot.
      * @param sticker File identifier of the sticker
-     * @param emoji_list A JSON-serialized list of 1-20 emoji associated with the sticker
+     * @param emojiList A JSON-serialized list of 1-20 emoji associated with the sticker
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerEmojiList}
      */
-    public SetStickerEmojiList setStickerEmojiList(String sticker, String[] emoji_list) {
-        return new SetStickerEmojiList(sticker, emoji_list, this.api);
+    public SetStickerEmojiList setStickerEmojiList(String sticker, String[] emojiList) {
+        return new SetStickerEmojiList(sticker, emojiList, this.api);
     }
 
     /**
@@ -1698,39 +1747,39 @@ public class BotContext {
     /**
      * Use this method to replace an existing sticker in a sticker set with a new one.
      * The method is equivalent to calling {@link #deleteStickerFromSet}, then {@link #addStickerToSet}, then {@link #setStickerPositionInSet}.
-     * @param user_id User identifier of the sticker set owner
+     * @param userId User identifier of the sticker set owner
      * @param name Sticker set name
-     * @param old_sticker File identifier of the replaced sticker
+     * @param oldSticker File identifier of the replaced sticker
      * @param sticker A JSON-serialized object with information about the added sticker. If exactly the same sticker had already been added to the set, then the set remains unchanged.
      * @return {@link io.github.natanimn.telebof.requests.service.ReplaceStickerInSet}
      */
-    public ReplaceStickerInSet replaceStickerInSet(long user_id, String name, String  old_sticker, InputSticker sticker){
-        return new ReplaceStickerInSet(user_id, name, old_sticker, sticker, api);
+    public ReplaceStickerInSet replaceStickerInSet(long userId, String name, String  oldSticker, InputSticker sticker){
+        return new ReplaceStickerInSet(userId, name, oldSticker, sticker, api);
     }
 
     /**
      * Use this method to set the thumbnail of a regular or mask sticker set.
      * The format of the thumbnail file must match the format of the stickers in the set.
      * @param name Sticker set name
-     * @param user_id User identifier of the sticker set owner
+     * @param userId User identifier of the sticker set owner
      * @param thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size.
      *                  <a href="https://core.telegram.org/stickers#animation-requirements">animation-requirements</a> for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size;
      *                  <a href="https://core.telegram.org/stickers#video-requirements">see</a> for video sticker technical requirements.
-     *                  Pass a file_id as a String to send a file that already exists on the Telegram servers, or
+     *                  Pass a fileId as a String to send a file that already exists on the Telegram servers, or
      *                  pass an HTTP URL as a String for Telegram to get a file from the Internet
      * @param format Format of the thumbnail, must be one of {@link StickerFormat#STATIC} for a .WEBP or .PNG image,
      *               {@link StickerFormat#ANIMATED} for a .TGS animation, or {@link StickerFormat#VIDEO} for a .WEBM video
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerSetThumbnail}
      */
-    public SetStickerSetThumbnail setStickerSetThumbnail(String name, long user_id, File thumbnail, StickerFormat format) {
-        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.api);
+    public SetStickerSetThumbnail setStickerSetThumbnail(String name, long userId, File thumbnail, StickerFormat format) {
+        return new SetStickerSetThumbnail(name, userId, thumbnail, format, this.api);
     }
 
     /**
      * Use this method to set the thumbnail of a regular or mask sticker set.
      * The format of the thumbnail file must match the format of the stickers in the set.
      * @param name Sticker set name
-     * @param user_id User identifier of the sticker set owner
+     * @param userId User identifier of the sticker set owner
      * @param thumbnail A .WEBP or .PNG image with the thumbnail, must be up to 128 kilobytes in size and have a width and height of exactly 100px, or a .TGS animation with a thumbnail up to 32 kilobytes in size.
      *                  <a href="https://core.telegram.org/stickers#animation-requirements">animation-requirements</a> for animated sticker technical requirements), or a .WEBM video with the thumbnail up to 32 kilobytes in size;
      *                  <a href="https://core.telegram.org/stickers#video-requirements">see</a> for video sticker technical requirements.
@@ -1739,8 +1788,8 @@ public class BotContext {
      *               {@link StickerFormat#ANIMATED} for a .TGS animation, or {@link StickerFormat#VIDEO} for a .WEBM video
      * @return {@link io.github.natanimn.telebof.requests.set.SetStickerSetThumbnail}
      */
-    public SetStickerSetThumbnail setStickerSetThumbnail(String name, long user_id, String thumbnail, StickerFormat format) {
-        return new SetStickerSetThumbnail(name, user_id, thumbnail, format, this.api);
+    public SetStickerSetThumbnail setStickerSetThumbnail(String name, long userId, String thumbnail, StickerFormat format) {
+        return new SetStickerSetThumbnail(name, userId, thumbnail, format, this.api);
     }
 
     /**
@@ -1763,32 +1812,32 @@ public class BotContext {
 
     /**
      * Use this method to get information about the connection of the bot with a business account.
-     * @param business_connection_id Unique identifier of the business connection
+     * @param businessConnectionId Unique identifier of the business connection
      * @return {@link io.github.natanimn.telebof.requests.get.GetBusinessConnection}
      */
-    public GetBusinessConnection getBusinessConnection(String business_connection_id){
-        return new GetBusinessConnection(business_connection_id, api);
+    public GetBusinessConnection getBusinessConnection(String businessConnectionId){
+        return new GetBusinessConnection(businessConnectionId, api);
     }
 
     /**
      * Use this method to send answers to an inline query.
      * No more than 50 results per query are allowed.
-     * @param inline_query_id Unique identifier for the answered query
+     * @param inlineQueryId Unique identifier for the answered query
      * @param results A JSON-serialized array of results for the inline query
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerInlineQuery}
      */
-    public AnswerInlineQuery answerInlineQuery(String inline_query_id, InlineQueryResult[] results) {
-        return new AnswerInlineQuery(inline_query_id, results, this.api);
+    public AnswerInlineQuery answerInlineQuery(String inlineQueryId, InlineQueryResult[] results) {
+        return new AnswerInlineQuery(inlineQueryId, results, this.api);
     }
 
     /**
      * Stores a message that can be sent by a user of a Mini App. Returns a {@link io.github.natanimn.telebof.types.media_and_service.PreparedInlineMessage} object.
-     * @param user_id Unique identifier of the target user that can use the prepared message
+     * @param userId Unique identifier of the target user that can use the prepared message
      * @param result {@link InlineQueryResult} object describing the message to be sent
      * @return {@link io.github.natanimn.telebof.requests.service.SavePreparedInlineMessage}
      */
-    public SavePreparedInlineMessage savePreparedInlineMessage(long user_id, InlineQueryResult result){
-        return new SavePreparedInlineMessage(user_id, result, api);
+    public SavePreparedInlineMessage savePreparedInlineMessage(long userId, InlineQueryResult result){
+        return new SavePreparedInlineMessage(userId, result, api);
     }
 
     /**
@@ -1803,7 +1852,7 @@ public class BotContext {
 
     /**
      * Use this method to send invoices.
-     * @param chat_id Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param title Product name, 1-32 characters
      * @param description Product description, 1-255 characters
      * @param payload Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.
@@ -1813,9 +1862,9 @@ public class BotContext {
      *              Must contain exactly one item for payments in Telegram Stars.
      * @return {@link io.github.natanimn.telebof.requests.send.SendInvoice}
      */
-    public SendInvoice sendInvoice(Object chat_id, String title, String description, String payload, String currency,
+    public SendInvoice sendInvoice(Object chatId, String title, String description, String payload, String currency,
                                    LabeledPrice[] prices) {
-        return new SendInvoice(chat_id, title, description, payload, currency, prices, this.api)
+        return new SendInvoice(chatId, title, description, payload, currency, prices, this.api)
                 ;
     }
 
@@ -1863,47 +1912,47 @@ public class BotContext {
      * Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason.
      * For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc.
      * Supply some details in the error message to make sure the user knows how to correct the issues.
-     * @param user_id User identifier
+     * @param userId User identifier
      * @param errors A JSON-serialized array describing the errors
      * @return {@link io.github.natanimn.telebof.requests.set.SetPassportDataErrors}
      */
-    public SetPassportDataErrors setPassportDataErrors(long user_id, PassportElementError[] errors) {
-        return new SetPassportDataErrors(user_id, errors, this.api);
+    public SetPassportDataErrors setPassportDataErrors(long userId, PassportElementError[] errors) {
+        return new SetPassportDataErrors(userId, errors, this.api);
     }
 
     /**
      * Use this method to send a game
-     * @param chat_id Unique identifier for the target chat
+     * @param chatId Unique identifier for the target chat
      * @param game_short_name Short name of the game, serves as the unique identifier for the game. Set up your games via @BotFather.
      * @return {@link io.github.natanimn.telebof.requests.send.SendGame}
      */
-    public SendGame sendGame(long chat_id, String game_short_name) {
-        return new SendGame(chat_id, game_short_name, this.api);
+    public SendGame sendGame(long chatId, String game_short_name) {
+        return new SendGame(chatId, game_short_name, this.api);
     }
 
     /**
      * Use this method to set the score of the specified user in a game message.
      * On success, the Message is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
-     * @param chat_id Required if inline_message_id is not specified. Unique identifier for the target chat
-     * @param user_id User identifier
+     * @param chatId Required if inlineMessageId is not specified. Unique identifier for the target chat
+     * @param userId User identifier
      * @param score New score, must be non-negative
-     * @param message_id Required if inline_message_id is not specified. Identifier of the sent message
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the sent message
      * @return {@link io.github.natanimn.telebof.requests.set.SetGameScore}
      */
-    public SetGameScore setGameScore(long chat_id, long user_id, int score, int message_id) {
-        return new SetGameScore(chat_id, user_id, score, message_id, this.api);
+    public SetGameScore setGameScore(long chatId, long userId, int score, int messageId) {
+        return new SetGameScore(chatId, userId, score, messageId, this.api);
     }
 
     /**
      * Use this method to set the score of the specified user in a game message.
      * On success, True is returned. Returns an error, if the new score is not greater than the user's current score in the chat and force is False.
-     * @param inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
-     * @param user_id User identifier
+     * @param inlineMessageId Required if chatId and messageId are not specified. Identifier of the inline message
+     * @param userId User identifier
      * @param score New score, must be non-negative
      * @return {@link io.github.natanimn.telebof.requests.set.SetGameScore}
      */
-    public SetGameScore setGameScore(String inline_message_id, long user_id, int score) {
-        return new SetGameScore(inline_message_id, user_id, score, this.api);
+    public SetGameScore setGameScore(String inlineMessageId, long userId, int score) {
+        return new SetGameScore(inlineMessageId, userId, score, this.api);
     }
 
     /**
@@ -1952,13 +2001,13 @@ public class BotContext {
      * <br>
      * This method will currently return scores for the target user, plus two of their closest neighbors on each side.
      * Will also return the top three users if the user and their neighbors are not among them. Please note that this behavior is subject to change.
-     * @param chat_id Required if inline_message_id is not specified. Unique identifier for the target chat
-     * @param user_id Target user id
-     * @param message_id Required if inline_message_id is not specified. Identifier of the sent message
+     * @param chatId Required if inlineMessageId is not specified. Unique identifier for the target chat
+     * @param userId Target user id
+     * @param messageId Required if inlineMessageId is not specified. Identifier of the sent message
      * @return {@link io.github.natanimn.telebof.requests.get.GetGameHighScores}
      */
-    public GetGameHighScores getGameHighScores(long chat_id, long user_id, int message_id) {
-        return new GetGameHighScores(chat_id, user_id, message_id, this.api);
+    public GetGameHighScores getGameHighScores(long chatId, long userId, int messageId) {
+        return new GetGameHighScores(chatId, userId, messageId, this.api);
     }
 
     /**
@@ -1966,67 +2015,67 @@ public class BotContext {
      * <br>
      * This method will currently return scores for the target user, plus two of their closest neighbors on each side.
      * Will also return the top three users if the user and their neighbors are not among them. Please note that this behavior is subject to change.
-     * @param inline_message_id Required if chat_id and message_id are not specified. Identifier of the inline message
-     * @param user_id Target user id
+     * @param inlineMessageId Required if chatId and messageId are not specified. Identifier of the inline message
+     * @param userId Target user id
      * @return {@link io.github.natanimn.telebof.requests.get.GetGameHighScores}
      */
-    public GetGameHighScores getGameHighScores(String inline_message_id, long user_id) {
-        return new GetGameHighScores(inline_message_id, user_id, this.api);
+    public GetGameHighScores getGameHighScores(String inlineMessageId, long userId) {
+        return new GetGameHighScores(inlineMessageId, userId, this.api);
     }
 
     /**
      * Use this method to set new state in group/supergroup chat for a user
-     * @param chat_id Unique identifier for the target chat
-     * @param user_id Target user id
+     * @param chatId Unique identifier for the target chat
+     * @param userId Target user id
      * @param name state name
      */
-    public void setState(long chat_id, long user_id, String name){
-        storage.save(chat_id, user_id, name);
+    public void setState(long chatId, long userId, String name){
+        storage.save(chatId, userId, name);
     }
 
     /**
      * Use this method to set new state in private chat for a user
-     * @param user_id Target user id
+     * @param userId Target user id
      * @param name state name
      */
-    public void setState(long user_id, String name){
-        storage.save(user_id, name);
+    public void setState(long userId, String name){
+        storage.save(userId, name);
     }
 
     /**
      * Use this method to clear an existing state when it is no longer needed in a group/supergroup chat for a user.
-     * @param chat_id Unique identifier for the target chat
-     * @param user_id Target user id
+     * @param chatId Unique identifier for the target chat
+     * @param userId Target user id
      */
-    public void clearState(long chat_id, long user_id){
-        storage.clear(chat_id, user_id);
+    public void clearState(long chatId, long userId){
+        storage.clear(chatId, userId);
     }
 
     /**
      * Use this method to clear an existing state when it is no longer needed in a private chat for a user.
-     * @param user_id Target user id
+     * @param userId Target user id
      */
-    public void clearState(long user_id){
-        storage.clear(user_id);
+    public void clearState(long userId){
+        storage.clear(userId);
     }
 
     /**
      * Use this method to retrieve saved state data in a group/supergroup chat for a user
-     * @param chat_id Unique identifier for the target chat
-     * @param user_id Target user id
+     * @param chatId Unique identifier for the target chat
+     * @param userId Target user id
      * @return {@link Map}
      */
-    public Map<String, Object> getStateData(long chat_id, long user_id){
-        return storage.getData(chat_id, user_id);
+    public Map<String, Object> getStateData(long chatId, long userId){
+        return storage.getData(chatId, userId);
     }
 
     /**
      * Use this method to retrieve saved state data in a private chat for a user
-     * @param user_id Target user id
+     * @param userId Target user id
      * @return {@link Map}
      */
-    public Map<String, Object> getStateData(long user_id){
-        return storage.getData(user_id);
+    public Map<String, Object> getStateData(long userId){
+        return storage.getData(userId);
     }
 
     /**
