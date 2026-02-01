@@ -30,7 +30,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>1.2.3</version>
+    <version>1.3.0</version>
 </dependency>
 ```
 
@@ -38,7 +38,7 @@ Add the following dependency to your `pom.xml`:
 Add the following to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.natanimn:telebof:1.2.3'
+implementation 'io.github.natanimn:telebof:1.3.0'
 ```
 
 ---
@@ -56,12 +56,12 @@ public class MyFirstEchoBot {
        
         // Handle /start command
         bot.onMessage(filter -> filter.commands("start"), (context, message) -> {
-            context.sendMessage(message.chat.id, "Welcome to my echo bot! 👋").exec();
+            context.sendMessage(message.getChat().getId(), "Welcome to my echo bot! 👋").exec();
         });
 
         // Echo any text message
         bot.onMessage(filter -> filter.text(), (context, message) -> {
-            context.sendMessage(message.chat.id, "You said: " + message.text).exec();
+            context.sendMessage(message.getChat().getId(), "You said: " + message.getText()).exec();
         });
 
         bot.startPolling(); // Start the bot
@@ -89,12 +89,12 @@ public class MyFirstEchoBot {
 
     @MessageHandler(commands = "start")
     void start(BotContext context, Message message){
-        context.sendMessage(message.chat.id, "Welcome to my echo bot! 👋").exec();
+        context.sendMessage(message.getChat().getId(), "Welcome to my echo bot! 👋").exec();
     }
 
     @MessageHandler(type = MessageType.TEXT, priority = 1)
     void echo(BotContext context, Message message){
-        context.sendMessage(message.chat.id, "You said: " + message.text).exec();
+        context.sendMessage(message.getChat().getId(), "You said: " + message.getText()).exec();
     }
 } 
 ```
@@ -134,13 +134,13 @@ public class AdvancedBot {
             keyboard.addKeyboard(new InlineKeyboardButton("Option 1", "opt1"));
             keyboard.addKeyboard(new InlineKeyboardButton("Option 2", "opt2"));
             
-            context.sendMessage(message.chat.id, "Choose an option:")
+            context.sendMessage(message.getChat().getId(), "Choose an option:")
                    .replyMarkup(keyboard)
                    .exec();
         });
 
         bot.onCallback(filter -> filter.callbackData("opt1", "opt2"), (context, callback) -> {
-            context.answerCallbackQuery(callback.id, "Option selected!").exec();
+            context.answerCallbackQuery(callback.getId(), "Option selected!").exec();
         });
 
         bot.startPolling();
