@@ -21,17 +21,19 @@ public class MessageHandlerTest {
 
     BotClient client;
 
+    void setClient(){
+        this.client = new BotClient(System.getenv("TOKEN"));
+        client.addHandler(new MessageHandlerTest());
+    }
     @BeforeEach
     void setUp(){
-        this.client = new BotClient(System.getenv("TOKEN"));
-        System.out.println(client.context.getMe().exec().getId());
-        client.addHandler(new MessageHandlerTest());
-
+        setClient();
     }
 
     @Test
-    public void start(){
+    public void start() throws InterruptedException {
         client.startPolling();
+        Thread.currentThread().join();
     }
 
     @MessageHandler(commands = {"start", "help", "info"})
@@ -44,6 +46,11 @@ public class MessageHandlerTest {
         context.sendMessage(message.getChat().getId(), "Hey").exec();
     }
 
+    @MessageHandler(commands = "stop")
+    public void stop(BotContext context, Message message){
+        context.sendMessage(message.getChat().getId(), "Bot never gonna send message again").exec();
+        client.stop();
+    }
     @MessageHandler(regex = "(?i)(hello|hey|hi)", priority = 1)
     public void regex(BotContext context, Message message){
         context.sendMessage(message.getChat().getId(), "What's up!").exec();
