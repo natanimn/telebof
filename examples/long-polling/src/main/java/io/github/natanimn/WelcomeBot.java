@@ -42,7 +42,7 @@ public class WelcomeBot {
         bot.onMessage(filter -> filter.commands("start") && filter.Private(), this::startPrivate);
         bot.onMessage(filter -> filter.newChatMember() && filter.customFilter(botIsAdmin), this::sendWelcomeMessage);
         bot.onMessage(filter -> filter.leftChatMember() && filter.customFilter(botIsAdmin), this::deleteLeftMessage);
-        bot.onMyChatMember(_ -> true, this::botPromoted);
+        bot.onMyChatMember(f -> true, this::botPromoted);
 
     }
 
