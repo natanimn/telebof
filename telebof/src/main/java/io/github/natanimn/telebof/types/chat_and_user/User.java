@@ -87,6 +87,12 @@ public class User {
     @SerializedName("has_main_web_app")
     private Boolean hasMainWebApp;
 
+    /**
+     * Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in {@link BotContext#getMe()}.
+     */
+    @SerializedName("has_topics_enabled")
+    private Boolean hasTopicsEnabled;
+
     public Long getId() {
         return id;
     }
@@ -137,6 +143,10 @@ public class User {
 
     public Boolean getHasMainWebApp() {
         return hasMainWebApp;
+    }
+
+    public Boolean getHasTopicsEnabled() {
+        return hasTopicsEnabled;
     }
 
     public String mention() {
