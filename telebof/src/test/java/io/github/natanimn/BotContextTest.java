@@ -93,4 +93,10 @@ class BotContextTest {
         assertNotNull(message);
         assertNotNull(message.getChat());
     }
+
+    @Test
+    void testBotCommand(){
+        var commands = bot.context.getMyCommands().exec();
+        assertTrue(commands.isEmpty());
+    }
 }
