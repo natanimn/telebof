@@ -6,13 +6,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
 
-import java.net.SocketTimeoutException;
 import java.util.*;
 
 import io.github.natanimn.telebof.annotations.*;
 import io.github.natanimn.telebof.annotations.meta.*;
 import io.github.natanimn.telebof.exceptions.*;
 import io.github.natanimn.telebof.enums.Updates;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.requests.get.GetUpdates;
 import io.github.natanimn.telebof.states.StateMemoryStorage;
@@ -25,57 +25,59 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
-record UpdateInfo(TelegramUpdate update, Updates uname){}
-
-record RequestInfo(String token, boolean test, Proxy proxy, String localApi){}
-
-record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
 
 /**
  * Main class of Telebof library
  * @author Natanim
  * @since 3 March 2025
- * @version 1.2.0
+ * @version 1.3.0
  */
 final public class BotClient {
+    record UpdateInfo(TelegramUpdate update, Updates uname){}
+
+    record RequestInfo(String token, boolean test, Proxy proxy, String localApi){}
+
+    record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
+
     private Integer offset;
     private final AtomicBoolean stopPolling = new AtomicBoolean(false);
     private boolean skipOldUpdates;
-    private ExecutorService executor;
+    private final ExecutorService executor;
     private User bot;
     private final StateMemoryStorage storage;
-    private Dispatcher dispatcher;
-    private RequestInfo requestInfo;
-    private GetUpdateInfo getUpdateInfo;
+    private final Dispatcher dispatcher;
+    private final RequestInfo requestInfo;
+    private final GetUpdateInfo getUpdateInfo;
     public BotContext context;
     private Boolean isConnected;
+    private ExecutorService pollingExecutor;
     private GetUpdates getUpdates;
     private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
 
     static {
-        updateMap.put(Update::message, Updates.MESSAGE);
-        updateMap.put(Update::callbackQuery, Updates.CALLBACK_QUERY);
-        updateMap.put(Update::inlineQuery, Updates.INLINE_QUERY);
-        updateMap.put(Update::channelPost, Updates.CHANNEL_POST);
-        updateMap.put(Update::chatMember, Updates.MY_CHAT_MEMBER);
-        updateMap.put(Update::editedMessage, Updates.EDITED_MESSAGE);
-        updateMap.put(Update::editedChannelPost, Updates.EDITED_CHANNEL_POST);
-        updateMap.put(Update::poll, Updates.POLL);
-        updateMap.put(Update::chatMember, Updates.CHAT_MEMBER);
-        updateMap.put(Update::messageReaction, Updates.MESSAGE_REACTION);
-        updateMap.put(Update::messageReactionCount, Updates.MESSAGE_REACTION_COUNT);
-        updateMap.put(Update::chatBoost, Updates.CHAT_BOOST);
-        updateMap.put(Update::removedChatBoost, Updates.REMOVED_CHAT_BOOST);
-        updateMap.put(Update::preCheckoutQuery, Updates.PRE_CHECKOUT_QUERY);
-        updateMap.put(Update::shippingQuery, Updates.SHIPPING_QUERY);
-        updateMap.put(Update::chatJoinRequest, Updates.CHAT_JOIN_REQUEST);
-        updateMap.put(Update::chosenInlineResult, Updates.CHOSEN_INLINE_RESULT);
-        updateMap.put(Update::pollAnswer, Updates.POLL_ANSWER);
-        updateMap.put(Update::businessConnection, Updates.BUSINESS_CONNECTION);
-        updateMap.put(Update::businessMessage, Updates.BUSINESS_MESSAGE);
-        updateMap.put(Update::editedBusinessMessage, Updates.EDITED_BUSINESS_MESSAGE);
-        updateMap.put(Update::deletedBusinessMessages, Updates.DELETED_BUSINESS_MESSAGES);
-        updateMap.put(Update::purchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
+        updateMap.put(Update::getMessage, Updates.MESSAGE);
+        updateMap.put(Update::getCallbackQuery, Updates.CALLBACK_QUERY);
+        updateMap.put(Update::getInlineQuery, Updates.INLINE_QUERY);
+        updateMap.put(Update::getChannelPost, Updates.CHANNEL_POST);
+        updateMap.put(Update::getChatMember, Updates.MY_CHAT_MEMBER);
+        updateMap.put(Update::getEditedMessage, Updates.EDITED_MESSAGE);
+        updateMap.put(Update::getEditedChannelPost, Updates.EDITED_CHANNEL_POST);
+        updateMap.put(Update::getPoll, Updates.POLL);
+        updateMap.put(Update::getChatMember, Updates.CHAT_MEMBER);
+        updateMap.put(Update::getMessageReaction, Updates.MESSAGE_REACTION);
+        updateMap.put(Update::getMessageReactionCount, Updates.MESSAGE_REACTION_COUNT);
+        updateMap.put(Update::getChatBoost, Updates.CHAT_BOOST);
+        updateMap.put(Update::getRemovedChatBoost, Updates.REMOVED_CHAT_BOOST);
+        updateMap.put(Update::getPreCheckoutQuery, Updates.PRE_CHECKOUT_QUERY);
+        updateMap.put(Update::getShippingQuery, Updates.SHIPPING_QUERY);
+        updateMap.put(Update::getChatJoinRequest, Updates.CHAT_JOIN_REQUEST);
+        updateMap.put(Update::getChosenInlineResult, Updates.CHOSEN_INLINE_RESULT);
+        updateMap.put(Update::getPollAnswer, Updates.POLL_ANSWER);
+        updateMap.put(Update::getBusinessConnection, Updates.BUSINESS_CONNECTION);
+        updateMap.put(Update::getBusinessMessage, Updates.BUSINESS_MESSAGE);
+        updateMap.put(Update::getEditedBusinessMessage, Updates.EDITED_BUSINESS_MESSAGE);
+        updateMap.put(Update::getDeletedBusinessMessages, Updates.DELETED_BUSINESS_MESSAGES);
+        updateMap.put(Update::getPurchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
     }
 
 
@@ -110,17 +112,8 @@ final public class BotClient {
         this.requestInfo = new RequestInfo(botToken, useTestServer, proxy, localBotApiUrl);
         this.storage = new StateMemoryStorage();
         this.executor  = Executors.newFixedThreadPool(numThreads);
-        this.dispatcher = new Dispatcher();
+        this.dispatcher = new Dispatcher<>();
         this.isConnected = false;
-
-        BotLog.info("BotClient initialized");
-
-        var request = new Api(
-                requestInfo.token(),
-                requestInfo.test(),
-                requestInfo.proxy(),
-                requestInfo.localApi()
-        );
 
         var getUpdatesApi = new Api(
                 requestInfo.token(),
@@ -129,15 +122,17 @@ final public class BotClient {
                 requestInfo.localApi()
         );
 
-        this.getUpdates = new GetUpdates(getUpdatesApi)
+        getUpdates = new GetUpdates(getUpdatesApi)
                 .allowedUpdates(getUpdateInfo.allowed())
                 .limit(getUpdateInfo.limit())
                 .timeout(getUpdateInfo.timeout());
 
-        this.context = new BotContext(
-                request,
-                storage
-        );
+        this.pollingExecutor = Executors.newSingleThreadExecutor();
+
+        Api api = new Api(botToken, useTestServer, proxy, localBotApiUrl);
+
+        this.context = new BotContext(api, storage);
+        BotLog.info("BotClient initialized");
     }
 
     public BotClient(String botToken){
@@ -256,13 +251,13 @@ final public class BotClient {
 
         /**
          * Optional
-         * @param allowed_updates A JSON-serialized list of the update types you want your bot to receive.
-         *                         Specify an empty list to receive all update types except {@link Update#chat_member}, {@link Update#message_reaction},
-         *                         and {@link Update#message_reaction_count} (default). If not specified, the previous setting will be used.
+         * @param allowedUpdates A JSON-serialized list of the update types you want your bot to receive.
+         *                         Specify an empty list to receive all update types except {@link Update#getChatMember()}, {@link Update#getMessageReaction()},
+         *                         and {@link Update#getMessageReactionCount()} (default). If not specified, the previous setting will be used.
          * @return {@link Builder}
          */
-        public Builder allowedUpdates(Updates[] allowed_updates) {
-            this.allowedUpdates = allowed_updates;
+        public Builder allowedUpdates(Updates[] allowedUpdates) {
+            this.allowedUpdates = allowedUpdates;
             return this;
         }
 
@@ -294,7 +289,7 @@ final public class BotClient {
     }
 
     /**
-     * Use this method to register new handler for incoming {@link Update#message} update.
+     * Use this method to register new handler for incoming {@link Update#getMessage()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -307,7 +302,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#callback_query} update.
+     * Use this method to register new handler for incoming {@link Update#getCallbackQuery()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -320,7 +315,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#inline_query} update.
+     * Use this method to register new handler for incoming {@link Update#getInlineQuery()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -334,7 +329,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#poll} update.
+     * Use this method to register new handler for incoming {@link Update#getPoll()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -348,7 +343,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#my_chat_member} update.
+     * Use this method to register new handler for incoming {@link Update#getMyChatMember()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -361,7 +356,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#poll_answer} update.
+     * Use this method to register new handler for incoming {@link Update#getPollAnswer()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -374,7 +369,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#pre_checkout_query} update.
+     * Use this method to register new handler for incoming {@link Update#getPreCheckoutQuery()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -387,7 +382,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#chat_member} update.
+     * Use this method to register new handler for incoming {@link Update#getChatMember()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -400,7 +395,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#edited_message} update.
+     * Use this method to register new handler for incoming {@link Update#getEditedMessage()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -413,7 +408,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#channel_post} update.
+     * Use this method to register new handler for incoming {@link Update#getChannelPost()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -426,7 +421,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#edited_channel_post} update.
+     * Use this method to register new handler for incoming {@link Update#getEditedChannelPost()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -439,7 +434,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#chat_join_request} update.
+     * Use this method to register new handler for incoming {@link Update#getChatJoinRequest()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -452,7 +447,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#chosen_inline_result} update.
+     * Use this method to register new handler for incoming {@link Update#getChosenInlineResult()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -465,7 +460,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#shipping_query} update.
+     * Use this method to register new handler for incoming {@link Update#getShippingQuery()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -478,7 +473,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#message_reaction} update.
+     * Use this method to register new handler for incoming {@link Update#getMessageReaction()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -491,7 +486,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#message_reaction_count} update.
+     * Use this method to register new handler for incoming {@link Update#getMessageReactionCount()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -504,7 +499,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#chat_boost} update.
+     * Use this method to register new handler for incoming {@link Update#getChatBoost()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -517,7 +512,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#removed_chat_boost} update.
+     * Use this method to register new handler for incoming {@link Update#getRemovedChatBoost()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -530,7 +525,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#business_connection} update.
+     * Use this method to register new handler for incoming {@link Update#getBusinessConnection()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -543,7 +538,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#business_message} update.
+     * Use this method to register new handler for incoming {@link Update#getBusinessMessage()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -556,7 +551,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#edited_business_message} update.
+     * Use this method to register new handler for incoming {@link Update#getEditedBusinessMessage()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -569,7 +564,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#deleted_business_messages} update.
+     * Use this method to register new handler for incoming {@link Update#getDeletedBusinessMessages()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -582,7 +577,7 @@ final public class BotClient {
 
 
     /**
-     * Use this method to register new handler for incoming {@link Update#purchased_paid_media} update.
+     * Use this method to register new handler for incoming {@link Update#getPurchasedPaidMedia()} update.
      * @param executor pre-defined or user-defined filter
      * @param handler a handler to be executed
      */
@@ -711,7 +706,6 @@ final public class BotClient {
 
     private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
 
-        // Collect all MessageHandler annotations
         for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(CallbackHandler.class))
@@ -775,10 +769,8 @@ final public class BotClient {
                 addToList(handle, method, annotatedMethods);
             }
 
-            // Sort all collected methods by their order value
             annotatedMethods.sort(Comparator.comparingInt(AnnotatedHandler::getOrder));
 
-            // Register handlers in sorted order
             for (AnnotatedHandler handler : annotatedMethods) {
                 if (handler.getAnnotation() instanceof MessageHandler mh)
                     addMessageHandler(mh, handler.getMethodHandle());
@@ -865,7 +857,7 @@ final public class BotClient {
     /**
      * Stop the bot
      */
-    public void stop(){
+    synchronized public void stop(){
         stopPolling.set(true);
     }
 
@@ -915,9 +907,46 @@ final public class BotClient {
         int count = updates.size();
         BotLog.info(String.format("Received %d updates", count));
         if (!updates.isEmpty()){
-           setOffset(updates.get(count - 1).updateId() + 1);
+           setOffset(updates.get(count - 1).getUpdateId() + 1);
            processUpdates(updates);
         }
+    }
+
+    private void shutDown(){
+        executor.shutdownNow();
+        pollingExecutor.shutdownNow();
+        System.exit(1);
+    }
+
+    private void runOnNewThread(){
+        while (!stopPolling.get()){
+            try{
+                retrieveUpdates();
+            } catch (TelegramError | InterruptedException err) {
+                stop();
+                err.printStackTrace();
+                shutDown();
+                BotLog.info("Polling stopped");
+            } catch (FloodError error){
+                int delay = error.parameters.getRetryAfter();
+                BotLog.error(error.description);
+                error.printStackTrace();
+                BotClient.this.sleep(delay);
+            } catch (TelegramApiException apiException){
+                BotLog.error(apiException.description);
+                apiException.printStackTrace();
+            } catch (TimeoutException e) {
+                sleep(1);
+            } catch (ConnectionError connectionError){
+                BotLog.error(connectionError.getMessage());
+                System.err.println("Connection error. Trying after 5 seconds");
+                this.sleep(5);
+            } catch (RuntimeException exception ) {
+                BotLog.error(exception.getMessage());
+                exception.printStackTrace();
+            }
+        }
+        shutDown();
     }
 
     /**
@@ -925,41 +954,13 @@ final public class BotClient {
      */
     public void startPolling(){
         BotLog.info("Bot started running via longPolling");
-        byte maxRetry    = 10, tried = 0;
-        this.bot         = this.context.getMe().exec();
-        this.isConnected = true;
-        while (!stopPolling.get()){
-            try{
-                retrieveUpdates();
-            } catch (TelegramError var1) {
-                throw var1;
-            } catch (FloodError error){
-                int delay = error.parameters.retryAfter();
-                BotLog.error(error.description);
-                error.printStackTrace();
-                BotClient.this.sleep(delay);
-            } catch (TelegramApiException apiException){
-                    BotLog.error(apiException.description);
-                    apiException.printStackTrace();
-            } catch (TimeoutException e) {
-                continue;
-            } catch (ConnectionError connectionError){
-                if (tried == maxRetry) break;
-                BotLog.error(connectionError.getMessage());
-                System.err.println("Connection error. Trying after 5 seconds");
-                this.sleep(5);
-                tried += 1;
+//        this.bot         = this.context.getMe().exec();
+        pollingExecutor.submit(() -> {
+            this.isConnected = true;
+            runOnNewThread();
 
-            } catch (RuntimeException exception ) {
-              BotLog.error(exception.getMessage());
-              exception.printStackTrace();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        executor.shutdown();
-        Thread.currentThread().interrupt();
-        BotLog.info("Polling stopped");
+        });
+
     }
 
     private synchronized void setOffset(int offset){
