@@ -20,10 +20,17 @@ public class UniqueGiftInfo {
     private String origin;
 
     /**
-     * Optional. For gifts bought from other users, the price paid for the gift
+     * Optional. For gifts bought from other users, the currency in which the payment for the gift was done.
+     * Currently, one of “XTR” for Telegram Stars or “TON” for toncoins.
      */
-    @SerializedName("last_resale_star_count")
-    private Integer lastResaleStarCount;
+    @SerializedName("last_resale_currency")
+    private String lastResaleCurrency;
+
+    /**
+     * Optional. For gifts bought from other users, the price paid for the gift in either Telegram Stars or nanotoncoins
+     */
+    @SerializedName("last_resale_amount")
+    private Integer lastResaleAmount;
 
     /**
      * Optional. Unique identifier of the received gift for the bot; only present for gifts received on behalf of business accounts
@@ -51,8 +58,12 @@ public class UniqueGiftInfo {
         return origin;
     }
 
-    public Integer getLastResaleStarCount() {
-        return lastResaleStarCount;
+    public String getLastResaleCurrency() {
+        return lastResaleCurrency;
+    }
+
+    public Integer getLastResaleAmount() {
+        return lastResaleAmount;
     }
 
     public String getOwnedGiftId() {
