@@ -32,7 +32,7 @@ public class InlineBot {
             context.answerInlineQuery(query.id, new InlineQueryResult[]{result}).exec();
         });
 
-        bot.onInline(_ -> true, (context, query) -> {
+        bot.onInline(f -> true, (context, query) -> {
             var result = new InlineQueryResultArticle(
                     "2",
                     query.query,
