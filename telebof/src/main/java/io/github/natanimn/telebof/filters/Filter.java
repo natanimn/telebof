@@ -587,6 +587,23 @@ public class Filter{
         return (update.getMessage() != null && update.getMessage().getGiftUpgradeSent() != null);
 
     }
+
+    /**
+     * Filter service message for chat owner left
+     * @return {@link Boolean}
+     */
+    public Boolean chatOwnerLeft(){
+        return (update.getMessage() != null && update.getMessage().getChatOwnerLeft() != null);
+    }
+
+    /**
+     * Filter service message for chat owner changed
+     * @return {@link Boolean}
+     */
+    public Boolean chatOwnerChanged(){
+        return (update.getMessage() != null && update.getMessage().getChatOwnerChanged() != null);
+    }
+
     /**
      * Filter commands
      * @param commands The command or array of commands as string
