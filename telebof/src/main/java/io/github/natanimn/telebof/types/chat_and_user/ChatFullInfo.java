@@ -7,6 +7,7 @@ import io.github.natanimn.telebof.types.business.BusinessLocation;
 import io.github.natanimn.telebof.types.business.BusinessOpeningHours;
 import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
 import io.github.natanimn.telebof.types.gift_and_giveaway.UniqueGiftColors;
+import io.github.natanimn.telebof.types.media_and_service.Audio;
 import io.github.natanimn.telebof.types.media_and_service.Birthdate;
 import io.github.natanimn.telebof.types.media_and_service.Location;
 import io.github.natanimn.telebof.types.media_and_service.ReactionType;
@@ -17,7 +18,7 @@ import java.util.List;
  * This object contains full information about a chat.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class ChatFullInfo {
     /**
@@ -309,6 +310,12 @@ public class ChatFullInfo {
     @SerializedName("unique_gift_colors")
     private UniqueGiftColors uniqueGiftColors;
 
+    /**
+     * Optional. For private chats, the first audio added to the profile of the user
+     */
+    @SerializedName("first_profile_audio")
+    private Audio firstProfileAudio;
+
     public long getId() {
         return id;
     }
@@ -507,5 +514,9 @@ public class ChatFullInfo {
 
     public UniqueGiftColors getUniqueGiftColors() {
         return uniqueGiftColors;
+    }
+
+    public Audio getFirstProfileAudio(){
+        return firstProfileAudio;
     }
 }
