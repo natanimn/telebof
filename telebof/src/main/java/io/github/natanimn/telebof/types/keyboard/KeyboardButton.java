@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.keyboard;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.enums.ButtonStyle;
 import io.github.natanimn.telebof.types.web.WebAppInfo;
 
 import java.io.Serializable;
@@ -11,11 +12,11 @@ import java.io.Serializable;
  * For simple text buttons, String can be used instead of this object to specify the button text.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class KeyboardButton implements Serializable {
 
-    private String text;
+    private final String text;
 
     @SerializedName("request_users")
     private KeyboardButtonRequestUsers requestUsers;
@@ -35,6 +36,10 @@ public class KeyboardButton implements Serializable {
     @SerializedName("web_app")
     private WebAppInfo wepApp;
 
+    @SerializedName("icon_custom_emoji_id")
+    private String iconCustomEmojiId;
+
+    private ButtonStyle style;
 
     /**
      * Required
@@ -92,7 +97,7 @@ public class KeyboardButton implements Serializable {
 
     /**
      * Optional
-     * @param requestPoll
+     * @param requestPoll Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only.
      * @return {@link KeyboardButton}
      */
     public KeyboardButton setRequestPoll(KeyboardButtonPollType requestPoll) {
@@ -111,4 +116,24 @@ public class KeyboardButton implements Serializable {
         return this;
     }
 
+    /**
+     * Optional
+     * @param iconCustomEmojiId Optional. Unique identifier of the custom emoji shown before the text of the button.
+     *                          Can only be used by bots that purchased additional usernames on <a href="https://fragment.com">Fragment</a> or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+     * @return {@link KeyboardButton}
+     */
+    public KeyboardButton setIconCustomEmojiId(String iconCustomEmojiId) {
+        this.iconCustomEmojiId = iconCustomEmojiId;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param style Style of the button. If omitted, then an app-specific style is used.
+     * @return {@link KeyboardButton}
+     */
+    public KeyboardButton setStyle(ButtonStyle style) {
+        this.style = style;
+        return this;
+    }
 }
