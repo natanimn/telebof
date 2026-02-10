@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * This class represents a gift that can be sent by the bot.
  * @author Natnim
  * @since July 25, 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class Gift {
     /**
@@ -86,6 +86,12 @@ public class Gift {
     @SerializedName("unique_gift_variant_count")
     private Integer uniqueGiftVariantCount;
 
+    /**
+     * Optional. True, if the gift was used to craft another gift and isn't available anymore
+     */
+    @SerializedName("is_burned")
+    private Boolean isBurned;
+
     public String getId() {
         return id;
     }
@@ -136,5 +142,9 @@ public class Gift {
 
     public Integer getUniqueGiftVariantCount() {
         return uniqueGiftVariantCount;
+    }
+
+    public Boolean getIsBurned() {
+        return isBurned;
     }
 }
