@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.keyboard;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.enums.ButtonStyle;
 import io.github.natanimn.telebof.types.media_and_service.CallbackGame;
 import io.github.natanimn.telebof.types.media_and_service.CopyTextButton;
 import io.github.natanimn.telebof.types.media_and_service.SwitchInlineQueryChosenChat;
@@ -13,7 +14,7 @@ import java.io.Serializable;
  * Exactly one of the optional fields must be used to specify type of the button.
  * @author Natanim 
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class InlineKeyboardButton implements Serializable {
     private final String text;
@@ -41,6 +42,11 @@ public class InlineKeyboardButton implements Serializable {
 
     @SerializedName("copy_text")
     private CopyTextButton copyText;
+
+    @SerializedName("icon_custom_emoji_id")
+    private String iconCustomEmojiId;
+
+    private ButtonStyle style;
 
     /**
      * Required
@@ -153,6 +159,27 @@ public class InlineKeyboardButton implements Serializable {
         return this;
     }
 
+    /**
+     * Optional
+     * @param iconCustomEmojiId Optional. Unique identifier of the custom emoji shown before the text of the button.
+     *                          Can only be used by bots that purchased additional usernames on <a href="https://fragment.com">Fragment</a> or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+     * @return {@link KeyboardButton}
+     */
+    public InlineKeyboardButton setIconCustomEmojiId(String iconCustomEmojiId) {
+        this.iconCustomEmojiId = iconCustomEmojiId;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param style Style of the button. If omitted, then an app-specific style is used.
+     * @return {@link KeyboardButton}
+     */
+    public InlineKeyboardButton setStyle(ButtonStyle style) {
+        this.style = style;
+        return this;
+    }
+
     public String getText() {
         return text;
     }
@@ -191,5 +218,13 @@ public class InlineKeyboardButton implements Serializable {
 
     public CopyTextButton getCopyText() {
         return copyText;
+    }
+
+    public String getIconCustomEmojiId() {
+        return iconCustomEmojiId;
+    }
+
+    public ButtonStyle getStyle(){
+        return style;
     }
 }
