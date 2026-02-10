@@ -36,7 +36,7 @@ import java.util.Map;
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
@@ -935,6 +935,15 @@ public class BotContext {
      */
     public SetChatAdministratorCustomTitle setChatAdministratorCustomTitle(Object chatId, long userId, String customTitle) {
         return new SetChatAdministratorCustomTitle(chatId, userId, customTitle, this.api);
+    }
+
+    /**
+     *
+     * @param userId Unique identifier of the target user
+     * @return {@link GetUserProfileAudios}
+     */
+    public GetUserProfileAudios getUserProfileAudios(long userId){
+        return new GetUserProfileAudios(userId, api);
     }
 
     /**
@@ -1994,6 +2003,39 @@ public class BotContext {
      */
     public SetMyDescription setMyDescription(){
         return new SetMyDescription(api);
+    }
+
+    /**
+     * Use this method to change the bot's short description, which is shown on the bot's profile page and is sent together with the link when users share the bot.
+     * @return {@link SetMyShortDescription}
+     */
+    public SetMyShortDescription setMyShortDescription(){
+        return new SetMyShortDescription(api);
+    }
+
+    /**
+     * Use this method to get the current bot short description for the given user language.
+     * @return {@link GetMyShortDescription}
+     */
+    public GetMyShortDescription getMyShortDescription(){
+        return new GetMyShortDescription(api);
+    }
+
+    /**
+     * Changes the profile photo of the bot.
+     * @param photo The new profile photo to set
+     * @return {@link SetMyProfilePhoto}
+     */
+    public SetMyProfilePhoto setMyProfilePhoto(InputProfilePhoto photo){
+        return new SetMyProfilePhoto(photo, api);
+    }
+
+    /**
+     * Removes the profile photo of the bot. Requires no parameters.
+     * @return {@link RemoveMyProfilePhoto}
+     */
+    public RemoveMyProfilePhoto removeMyProfilePhoto(){
+        return new RemoveMyProfilePhoto(api);
     }
 
     /**
