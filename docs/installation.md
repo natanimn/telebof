@@ -10,7 +10,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>1.2.3</version>
+    <version>1.4.0</version>
 </dependency>
 ```
 
@@ -20,5 +20,5 @@ Add the following dependency to your `pom.xml`:
 Add this line to your `build.gradle` dependencies:
 
 ```groovy
-implementation 'io.github.natanimn:telebof:1.2.2'
+implementation 'io.github.natanimn:telebof:1.4.0'
 ```
