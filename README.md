@@ -15,7 +15,7 @@
   </a>
 </p>
 
-### <p align='center'>Supported 9.3 BotAPI</b>
+### <p align='center'>Supported 9.4 BotAPI</b>
 
 ## Overview
 
