@@ -24,7 +24,7 @@ import java.util.List;
  * This object represents a message.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class Message implements TelegramUpdate {
     /**
@@ -614,6 +614,18 @@ public class Message implements TelegramUpdate {
     @SerializedName("gift_upgrade_sent")
     private GiftInfo giftUpgradeSent;
 
+    /**
+     * Optional. Service message: chat owner has left
+     */
+    @SerializedName("chat_owner_left")
+    private ChatOwnerLeft chatOwnerLeft;
+
+    /**
+     * Optional. Service message: chat owner has changed
+     */
+    @SerializedName("chat_owner_changed")
+    private ChatOwnerChanged chatOwnerChanged;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1022,6 +1034,14 @@ public class Message implements TelegramUpdate {
         return giftUpgradeSent;
     }
 
+    public ChatOwnerLeft getChatOwnerLeft(){
+        return chatOwnerLeft;
+    }
+
+    public ChatOwnerChanged getChatOwnerChanged(){
+        return chatOwnerChanged;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -1127,6 +1147,8 @@ public class Message implements TelegramUpdate {
                 ", suggestedPostPaid=" + suggestedPostPaid +
                 ", suggestedPostRefunded=" + suggestedPostRefunded +
                 ", giftUpgradeSent=" + giftUpgradeSent +
+                ", chatOwnerLeft=" + chatOwnerLeft +
+                ", chatOwnerChanged=" + chatOwnerChanged +
                 '}';
     }
 }
