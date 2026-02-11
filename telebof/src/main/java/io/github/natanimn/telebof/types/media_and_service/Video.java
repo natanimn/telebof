@@ -7,7 +7,7 @@ import java.util.List;
  * This object represents a video file.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class Video {
     /**
@@ -71,6 +71,11 @@ public class Video {
      */
     private List<PhotoSize> cover;
 
+    /**
+     * Optional. List of available qualities of the video
+     */
+    private List<VideoQuality> qualities;
+
     public String getFileId() {
         return fileId;
     }
@@ -113,5 +118,9 @@ public class Video {
 
     public List<PhotoSize> getCover() {
         return cover;
+    }
+
+    public List<VideoQuality> getQualities() {
+        return qualities;
     }
 }
