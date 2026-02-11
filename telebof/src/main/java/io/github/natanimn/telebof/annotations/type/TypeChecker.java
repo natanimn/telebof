@@ -10,7 +10,7 @@ import java.util.function.Predicate;
  * TypeChecker class.
  * @author Natanim
  * @since 1.2.0
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class TypeChecker {
     public static final Map<MessageType, Predicate<Filter>> field = Map.<MessageType, Predicate<Filter>>ofEntries(
@@ -76,7 +76,9 @@ public class TypeChecker {
             Map.entry(MessageType.SUGGESTED_POST_DECLINED, Filter::suggestedPostDeclined),
             Map.entry(MessageType.SUGGESTED_POST_PAID, Filter::suggestedPostPaid),
             Map.entry(MessageType.SUGGESTED_POST_REFUNDED, Filter::suggestedPostRefunded),
-            Map.entry(MessageType.GIFT_UPGRADE_SENT, Filter::giftUpgradeSent)
+            Map.entry(MessageType.GIFT_UPGRADE_SENT, Filter::giftUpgradeSent),
+            Map.entry(MessageType.CHAT_OWNER_LEFT, Filter::chatOwnerChanged),
+            Map.entry(MessageType.CHAT_OWNER_CHANGED, Filter::chatOwnerChanged)
     );
 
 }
