@@ -1,0 +1,3671 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../annotations/">
+      
+      
+        <link rel="next" href="../states/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Filters - Telebof</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#filtering-updates" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Telebof" class="md-header__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Telebof
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Filters
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Telebof" class="md-nav__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Telebof
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../annotations/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#predefined-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predefined Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Predefined Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#message-content-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message Content Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Content Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtertext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.text()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterphoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.photo()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.video()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.voice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteraudio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.audio()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteranimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.animation()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdocument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.document()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideonote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoNote()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercontact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.contact()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterlocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.location()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.game()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervenue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.venue()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.sticker()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.dice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterinvoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.invoice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermedia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.media()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterpassportdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.passportData()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterusersshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.usersShared()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatShared()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklist()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-event-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat Event Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat Event Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filternewchatmember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatMember()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterleftchatmember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.leftChatMember()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filternewchatphoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatPhoto()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filternewchattitle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatTitle()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergroupcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.groupCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersupergroupcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.supergroupCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchannelcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.channelCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermessageautodeletetimerchanged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.messageAutoDeleteTimerChanged()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermigrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.migrated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatbackgroundset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatBackgroundSet()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterpinnedmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.pinnedMessage()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersuccessfulpayment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.successfulPayment()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterrefundedpayment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.refundedPayment()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterproximityalerttriggered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.proximityAlertTriggered()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterboostadded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.boostAdded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveaway()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveawaycreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveawayCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveawaycompleted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveawayCompleted()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forum-topic-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forum Topic Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forum Topic Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopiccreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicclosed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicClosed()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicedited" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicEdited()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicreopened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicReopened()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklisttasksadded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklistTasksAdded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklisttasksdone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklistTasksDone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdirectmessagepricechanged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.directMessagePriceChanged
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-chat-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Video Chat Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Video Chat Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterwebappdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.webAppData()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatstarted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatStarted()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatEnded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatparticipantsinvited" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatParticipantsInvited()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatscheduled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatScheduled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-context-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message Context Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Context Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterforwarded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forwarded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterreplied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.replied()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterrepliedtostory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.repliedToStory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.entities()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.quote()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-and-chat-type-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User and Chat Type Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User and Chat Type Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.bot()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteremptyquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.emptyQuery()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterprivate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.Private()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.group()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersupergroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.supergroup()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.channel()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-filtering-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filtering Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Filtering Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtercommandsstring-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.commands(String... commands)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercallbackdatastring-datas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.callbackData(String... datas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterinlinequerystring-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.inlineQuery(String... queries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercustomfiltercustomfilter-cf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.customFilter(CustomFilter cf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterstatestring-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.state(String state)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtertextsstring-texts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.texts(String... texts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatidslong-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatIds(Long... ids)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterfromidslong-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.fromIds(Long... ids)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="filter.fromIds(Long... ids)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterchatusernamesstring-usernames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatUsernames(String... usernames)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterusernamesstring-usernames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.usernames(String... usernames)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterregexstring-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.regex(String pattern)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterreactionstring-reactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.reaction(String... reactions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-message-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Message Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-and-username-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID and Username Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-message-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering Message Text
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering Message Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regular-expression-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regular Expression Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining Filters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-custom-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Custom Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing Custom Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-custom-text-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Custom Text Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-complex-custom-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Complex Custom Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#callback-data-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callback Data Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inline-query-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inline Query Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-filter-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Filter Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../states/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inline Keyboard Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inline Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/payment_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Payment Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/state_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/welcome_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/media_downloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Media Downloader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/webhook_spring" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot Webhook Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#predefined-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Predefined Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Predefined Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#message-content-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message Content Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Content Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtertext" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.text()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterphoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.photo()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.video()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.voice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteraudio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.audio()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteranimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.animation()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdocument" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.document()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideonote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoNote()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercontact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.contact()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterlocation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.location()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergame" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.game()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervenue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.venue()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.sticker()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.dice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterinvoice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.invoice()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermedia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.media()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterpassportdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.passportData()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterusersshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.usersShared()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatshared" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatShared()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklist()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-event-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chat Event Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Chat Event Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filternewchatmember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatMember()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterleftchatmember" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.leftChatMember()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filternewchatphoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatPhoto()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filternewchattitle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.newChatTitle()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergroupcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.groupCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersupergroupcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.supergroupCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchannelcreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.channelCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermessageautodeletetimerchanged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.messageAutoDeleteTimerChanged()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtermigrated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.migrated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatbackgroundset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatBackgroundSet()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterpinnedmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.pinnedMessage()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersuccessfulpayment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.successfulPayment()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterrefundedpayment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.refundedPayment()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterproximityalerttriggered" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.proximityAlertTriggered()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterboostadded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.boostAdded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveaway" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveaway()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveawaycreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveawayCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergiveawaycompleted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.giveawayCompleted()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forum-topic-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forum Topic Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forum Topic Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopiccreated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicCreated()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicclosed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicClosed()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicedited" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicEdited()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterforumtopicreopened" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forumTopicReopened()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklisttasksadded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklistTasksAdded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchecklisttasksdone" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.checklistTasksDone
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterdirectmessagepricechanged" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.directMessagePriceChanged
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#video-chat-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Video Chat Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Video Chat Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterwebappdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.webAppData()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatstarted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatStarted()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatEnded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatparticipantsinvited" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatParticipantsInvited()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtervideochatscheduled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.videoChatScheduled()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#message-context-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Message Context Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Context Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterforwarded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.forwarded()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterreplied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.replied()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterrepliedtostory" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.repliedToStory()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterentities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.entities()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterquote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.quote()
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-and-chat-type-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        User and Chat Type Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User and Chat Type Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterbot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.bot()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filteremptyquery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.emptyQuery()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterprivate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.Private()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtergroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.group()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtersupergroup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.supergroup()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchannel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.channel()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-filtering-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filtering Methods
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Filtering Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filtercommandsstring-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.commands(String... commands)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercallbackdatastring-datas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.callbackData(String... datas)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterinlinequerystring-queries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.inlineQuery(String... queries)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtercustomfiltercustomfilter-cf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.customFilter(CustomFilter cf)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterstatestring-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.state(String state)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filtertextsstring-texts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.texts(String... texts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterchatidslong-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatIds(Long... ids)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterfromidslong-ids" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.fromIds(Long... ids)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="filter.fromIds(Long... ids)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#filterchatusernamesstring-usernames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.chatUsernames(String... usernames)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterusernamesstring-usernames" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.usernames(String... usernames)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterregexstring-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.regex(String pattern)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filterreactionstring-reactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        filter.reaction(String... reactions)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-message-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Message Handling
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-and-username-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ID and Username Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#filtering-message-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filtering Message Text
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Filtering Message Text">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#command-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Command Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Text Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regular-expression-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regular Expression Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#combining-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Combining Filters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#writing-custom-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Writing Custom Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Writing Custom Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-custom-text-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Custom Text Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-complex-custom-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example: Complex Custom Filter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced Filters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#callback-data-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callback Data Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inline-query-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inline Query Filtering
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-filter-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Filter Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="filtering-updates">Filtering Updates</h1>
+<p>In the previous topic, we learned how to create handlers and how they work. This section will explain how filters work and how to use them.</p>
+<p>As previously discussed, all handlers take two parameters: a filter class and a callback class.</p>
+<p>The filter class is used for filtering the content of updates and separating updates based on the content they contain.</p>
+<h2 id="predefined-filters">Predefined Filters</h2>
+<h3 id="message-content-filters">Message Content Filters</h3>
+<h4 id="filtertext">filter.text()</h4>
+<p>Filters text messages</p>
+<hr />
+<h4 id="filterphoto">filter.photo()</h4>
+<p>Filters photo messages</p>
+<hr />
+<h4 id="filtervideo">filter.video()</h4>
+<p>Filters video messages</p>
+<hr />
+<h4 id="filtervoice">filter.voice()</h4>
+<p>Filters voice messages</p>
+<hr />
+<h4 id="filteraudio">filter.audio()</h4>
+<p>Filters audio messages</p>
+<hr />
+<h4 id="filteranimation">filter.animation()</h4>
+<p>Filters animation messages</p>
+<hr />
+<h4 id="filterdocument">filter.document()</h4>
+<p>Filters document messages</p>
+<hr />
+<h4 id="filtervideonote">filter.videoNote()</h4>
+<p>Filters video note messages</p>
+<hr />
+<h4 id="filtercontact">filter.contact()</h4>
+<p>Filters contact messages</p>
+<hr />
+<h4 id="filterlocation">filter.location()</h4>
+<p>Filters location messages</p>
+<hr />
+<h4 id="filtergame">filter.game()</h4>
+<p>Filters game messages</p>
+<hr />
+<h4 id="filtervenue">filter.venue()</h4>
+<p>Filters venue messages</p>
+<hr />
+<h4 id="filtersticker">filter.sticker()</h4>
+<p>Filters sticker messages</p>
+<hr />
+<h4 id="filterdice">filter.dice()</h4>
+<p>Filters dice messages</p>
+<hr />
+<h4 id="filterinvoice">filter.invoice()</h4>
+<p>Filters payment invoice messages</p>
+<hr />
+<h4 id="filtermedia">filter.media()</h4>
+<p>Filters media messages (photo, video, audio, sticker, video_note, voice, animation, document)</p>
+<hr />
+<h4 id="filterpassportdata">filter.passportData()</h4>
+<p>Filters Telegram passport data messages</p>
+<hr />
+<h4 id="filterusersshared">filter.usersShared()</h4>
+<p>Filters when users are shared with the bot</p>
+<hr />
+<h4 id="filterchatshared">filter.chatShared()</h4>
+<p>Filters when a chat is shared with the bot</p>
+<hr />
+<h4 id="filterchecklist">filter.checklist()</h4>
+<p>Filters checklist messages</p>
+<hr />
+<h3 id="chat-event-filters">Chat Event Filters</h3>
+<h4 id="filternewchatmember">filter.newChatMember()</h4>
+<p>Filters when new members join or are added to the group</p>
+<hr />
+<h4 id="filterleftchatmember">filter.leftChatMember()</h4>
+<p>Filters when a member leaves the group</p>
+<hr />
+<h4 id="filternewchatphoto">filter.newChatPhoto()</h4>
+<p>Filters when a chat photo is changed</p>
+<hr />
+<h4 id="filternewchattitle">filter.newChatTitle()</h4>
+<p>Filters when a chat title is changed</p>
+<hr />
+<h4 id="filtergroupcreated">filter.groupCreated()</h4>
+<p>Filters when a group chat is created</p>
+<hr />
+<h4 id="filtersupergroupcreated">filter.supergroupCreated()</h4>
+<p>Filters when a supergroup chat is created</p>
+<hr />
+<h4 id="filterchannelcreated">filter.channelCreated()</h4>
+<p>Filters when a channel is created</p>
+<hr />
+<h4 id="filtermessageautodeletetimerchanged">filter.messageAutoDeleteTimerChanged()</h4>
+<p>Filters when auto-delete timer settings change in the chat</p>
+<hr />
+<h4 id="filtermigrated">filter.migrated()</h4>
+<p>Filters when a group/supergroup is migrated to/from a supergroup/group</p>
+<hr />
+<h4 id="filterchatbackgroundset">filter.chatBackgroundSet()</h4>
+<p>Filters when a chat background is set</p>
+<hr />
+<h4 id="filterpinnedmessage">filter.pinnedMessage()</h4>
+<p>Filters when a message is pinned</p>
+<hr />
+<h4 id="filtersuccessfulpayment">filter.successfulPayment()</h4>
+<p>Filters successful payment messages</p>
+<hr />
+<h4 id="filterrefundedpayment">filter.refundedPayment()</h4>
+<p>Filters refunded payment messages</p>
+<hr />
+<h4 id="filterproximityalerttriggered">filter.proximityAlertTriggered()</h4>
+<p>Filters when a user triggers another user's proximity alert</p>
+<hr />
+<h4 id="filterboostadded">filter.boostAdded()</h4>
+<p>Filters when a user boosts the chat</p>
+<hr />
+<h4 id="filtergiveaway">filter.giveaway()</h4>
+<p>Filters scheduled giveaway messages</p>
+<hr />
+<h4 id="filtergiveawaycreated">filter.giveawayCreated()</h4>
+<p>Filters when a scheduled giveaway is created</p>
+<hr />
+<h4 id="filtergiveawaycompleted">filter.giveawayCompleted()</h4>
+<p>Filters when a giveaway without public winners is completed</p>
+<hr />
+<h3 id="forum-topic-filters">Forum Topic Filters</h3>
+<h4 id="filterforumtopiccreated">filter.forumTopicCreated()</h4>
+<p>Filters when a forum topic is created</p>
+<hr />
+<h4 id="filterforumtopicclosed">filter.forumTopicClosed()</h4>
+<p>Filters when a forum topic is closed</p>
+<hr />
+<h4 id="filterforumtopicedited">filter.forumTopicEdited()</h4>
+<p>Filters when a forum topic is edited</p>
+<hr />
+<h4 id="filterforumtopicreopened">filter.forumTopicReopened()</h4>
+<p>Filters when a forum topic is reopened</p>
+<hr />
+<h4 id="filterchecklisttasksadded">filter.checklistTasksAdded</h4>
+<p>Filters when checklist task is added</p>
+<hr />
+<h4 id="filterchecklisttasksdone">filter.checklistTasksDone</h4>
+<p>Filters when checklist task is added</p>
+<hr />
+<h4 id="filterdirectmessagepricechanged">filter.directMessagePriceChanged</h4>
+<p>Filters when direct message price is changed</p>
+<hr />
+<h3 id="video-chat-filters">Video Chat Filters</h3>
+<h4 id="filterwebappdata">filter.webAppData()</h4>
+<p>Filters data sent by a Web App</p>
+<hr />
+<h4 id="filtervideochatstarted">filter.videoChatStarted()</h4>
+<p>Filters when a video chat starts in the chat</p>
+<hr />
+<h4 id="filtervideochatended">filter.videoChatEnded()</h4>
+<p>Filters when a video chat ends in the chat</p>
+<hr />
+<h4 id="filtervideochatparticipantsinvited">filter.videoChatParticipantsInvited()</h4>
+<p>Filters when new participants are invited to a video chat</p>
+<hr />
+<h4 id="filtervideochatscheduled">filter.videoChatScheduled()</h4>
+<p>Filters when a video chat is scheduled</p>
+<hr />
+<h3 id="message-context-filters">Message Context Filters</h3>
+<h4 id="filterforwarded">filter.forwarded()</h4>
+<p>Filters forwarded messages</p>
+<hr />
+<h4 id="filterreplied">filter.replied()</h4>
+<p>Filters messages that are replies to another message</p>
+<hr />
+<h4 id="filterrepliedtostory">filter.repliedToStory()</h4>
+<p>Filters messages that are replies to a chat story</p>
+<hr />
+<h4 id="filterentities">filter.entities()</h4>
+<p>Filters messages containing entities (bold, italic, underline, mention, url, hashtag)</p>
+<hr />
+<h4 id="filterquote">filter.quote()</h4>
+<p>Filters messages containing quotes</p>
+<hr />
+<h2 id="user-and-chat-type-filters">User and Chat Type Filters</h2>
+<h4 id="filterbot">filter.bot()</h4>
+<p>Filters when the user is a bot</p>
+<hr />
+<h4 id="filteremptyquery">filter.emptyQuery()</h4>
+<p>Filters empty queries<br />
+Used with <code>bot.onInline</code> handler</p>
+<hr />
+<h4 id="filterprivate">filter.Private()</h4>
+<p>Filters private chats</p>
+<hr />
+<h4 id="filtergroup">filter.group()</h4>
+<p>Filters group chats</p>
+<hr />
+<h4 id="filtersupergroup">filter.supergroup()</h4>
+<p>Filters supergroup chats</p>
+<hr />
+<h4 id="filterchannel">filter.channel()</h4>
+<p>Filters channel chats</p>
+<hr />
+<h3 id="advanced-filtering-methods">Advanced Filtering Methods</h3>
+<h4 id="filtercommandsstring-commands">filter.commands(String... commands)</h4>
+<p>Filters specific commands<br></p>
+<ul>
+<li>Used with handles that recieves <code>Message</code> update</li>
+</ul>
+<hr />
+<h4 id="filtercallbackdatastring-datas">filter.callbackData(String... datas)</h4>
+<p>Filters specific callback data from buttons<br></p>
+<ul>
+<li>Used with <code>bot.onCallback</code> handler</li>
+</ul>
+<hr />
+<h4 id="filterinlinequerystring-queries">filter.inlineQuery(String... queries)</h4>
+<p>Filters specific inline queries<br></p>
+<ul>
+<li>Used with <code>bot.onInline</code> handler</li>
+</ul>
+<hr />
+<h4 id="filtercustomfiltercustomfilter-cf">filter.customFilter(CustomFilter cf)</h4>
+<p>Applies a custom filter</p>
+<hr />
+<h4 id="filterstatestring-state">filter.state(String state)</h4>
+<p>Filters by current state (use <code>*</code> for any state)</p>
+<hr />
+<h4 id="filtertextsstring-texts">filter.texts(String... texts)</h4>
+<p>Filters specific text messages</p>
+<hr />
+<h4 id="filterchatidslong-ids">filter.chatIds(Long... ids)</h4>
+<p>Filters by chat ID</p>
+<hr />
+<h3 id="filterfromidslong-ids">filter.fromIds(Long... ids)</h3>
+<p>Filters by user ID</p>
+<hr />
+<h4 id="filterchatusernamesstring-usernames">filter.chatUsernames(String... usernames)</h4>
+<p>Filters by chat username</p>
+<hr />
+<h4 id="filterusernamesstring-usernames">filter.usernames(String... usernames)</h4>
+<p>Filters by user username</p>
+<hr />
+<h4 id="filterregexstring-pattern">filter.regex(String pattern)</h4>
+<p>Filter updates that match a given regular expression pattern.<br>
+<strong>Used with handlers that receive one of the following updates:</strong></p>
+<ul>
+<li><a href="https://natanimn.github.io/telebof-api/io/github/natanimn/telebof/types/updates/Message.html">Message</a> - The filter will match text</li>
+<li><a href="https://natanimn.github.io/telebof-api/io/github/natanimn/telebof/types/updates/CallbackQuery.html">CallbackData</a> - The filter will match data.</li>
+<li><a href="https://natanimn.github.io/telebof-api/io/github/natanimn/telebof/types/updates/InlineQuery.html">InlineQuery</a> - The filter will match query.</li>
+<li><a href="https://natanimn.github.io/telebof-api/io/github/natanimn/telebof/types/updates/PreCheckoutQuery.html">PreCheckoutQuery</a>: The filter will match payload</li>
+</ul>
+<hr />
+<h4 id="filterreactionstring-reactions">filter.reaction(String... reactions)</h4>
+<p>Filters emoji reactions<br></p>
+<ul>
+<li>Used with <code>bot.OnReaction</code> handler</li>
+</ul>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="basic-message-handling">Basic Message Handling</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">// Handles incoming texts</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">// Handles incoming photos</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">photo</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1">// Handles incoming videos</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">video</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h3 id="id-and-username-filtering">ID and Username Filtering</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Handles messages in chat with chat_id of 123456789</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">chatIds</span><span class="p">(</span><span class="mi">123456789L</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// Handles messages from user with ID 123456789</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">fromIds</span><span class="p">(</span><span class="mi">123456789L</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// Handles messages in chat with username @this_chat</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">chatUsernames</span><span class="p">(</span><span class="s">&quot;this_chat&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">// Handles messages from user with username @this_user</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">usernames</span><span class="p">(</span><span class="s">&quot;this_user&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h2 id="filtering-message-text">Filtering Message Text</h2>
+<h3 id="command-filtering">Command Filtering</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Handles /start command</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">commands</span><span class="p">(</span><span class="s">&quot;start&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">// Handles /help command</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">commands</span><span class="p">(</span><span class="s">&quot;help&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h3 id="text-filtering">Text Filtering</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Handles &quot;hi&quot; text</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">texts</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1">// Handles &quot;hello&quot; text</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">texts</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h3 id="regular-expression-filtering">Regular Expression Filtering</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Handles any text starting with &quot;hi&quot;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">regex</span><span class="p">(</span><span class="s">&quot;^hi&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">// Handles any text ending with &quot;bye&quot;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">regex</span><span class="p">(</span><span class="s">&quot;bye$&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h2 id="combining-filters">Combining Filters</h2>
+<p>You can combine filters using logical operators (&amp;&amp;, ||, !) to create more complex filtering conditions.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">// Handles incoming text in private chat</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">Private</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">// Handles incoming text or photo</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">photo</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1">// Handles incoming text in supergroup chat</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">supergroup</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="c1">// Handles incoming audio or video in private chat</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">Private</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">filter</span><span class="p">.</span><span class="na">audio</span><span class="p">()</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">video</span><span class="p">()),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h2 id="writing-custom-filters">Writing Custom Filters</h2>
+<p>You can create custom filters using <code>filter.customFilter()</code> with a <code>CustomFilter</code> implementation.</p>
+<h3 id="example-custom-text-filter">Example: Custom Text Filter</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.github.natanimn.telebof.BotContext</span><span class="p">;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.github.natanimn.telebof.filters.CustomFilter</span><span class="p">;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.github.natanimn.telebof.types.updates.Message</span><span class="p">;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.github.natanimn.telebof.types.updates.Update</span><span class="p">;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1">// Filter to check if incoming message text starts with a given prefix</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kd">class</span> <span class="nc">PrefixFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CustomFilter</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">;</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">StartsWithFilter</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">prefix</span><span class="p">){</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">prefix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prefix</span><span class="p">;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">Update</span><span class="w"> </span><span class="n">update</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">update</span><span class="p">.</span><span class="na">message</span><span class="p">.</span><span class="na">text</span><span class="p">.</span><span class="na">startsWith</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="na">prefix</span><span class="p">);</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="p">}</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">FilterBot</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">        </span><span class="c1">// ...</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">        </span><span class="c1">// Handles any message/command starts with &quot;!&quot;(i.e !start, !hello world)</span>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">        </span><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">            </span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">customFilter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PrefixFilter</span><span class="p">(</span><span class="s">&quot;!&quot;</span><span class="p">)),</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">            </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Message starts with !&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="w">        </span><span class="c1">// Handles any message/command starts with dot(.)(i.e .start, .hello world)</span>
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">        </span><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span>
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="w">            </span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">customFilter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">PrefixFilter</span><span class="p">(</span><span class="s">&quot;.&quot;</span><span class="p">)),</span>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">            </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">                </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Message starts with dot(.)&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">        </span><span class="p">);</span>
+</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="example-complex-custom-filter">Example: Complex Custom Filter</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">// Filter for messages containing specific keywords from admin users</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kd">class</span> <span class="nc">AdminKeywordFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CustomFilter</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Long</span><span class="o">&gt;</span><span class="w"> </span><span class="n">adminIds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">12345L</span><span class="p">,</span><span class="w"> </span><span class="mi">67890L</span><span class="p">);</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;urgent&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;important&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;emergency&quot;</span><span class="p">);</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">Update</span><span class="w"> </span><span class="n">update</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">update</span><span class="p">.</span><span class="na">message</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">update</span><span class="p">.</span><span class="na">getMessage</span><span class="p">().</span><span class="na">getText</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isAdmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adminIds</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">update</span><span class="p">.</span><span class="na">getMessage</span><span class="p">().</span><span class="na">getFrom</span><span class="p">().</span><span class="na">getId</span><span class="p">());</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">        </span><span class="kt">boolean</span><span class="w"> </span><span class="n">containsKeyword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">keywords</span><span class="p">.</span><span class="na">stream</span><span class="p">().</span><span class="na">anyMatch</span><span class="p">(</span><span class="n">update</span><span class="p">.</span><span class="na">getMessage</span><span class="p">().</span><span class="na">getText</span><span class="p">::</span><span class="n">toLowerCase</span><span class="p">::</span><span class="n">contains</span><span class="p">);</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">isAdmin</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">containsKeyword</span><span class="p">;</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="p">}</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="c1">// Usage</span>
+</span><span id="__span-7-20"><a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">customFilter</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">AdminKeywordFilter</span><span class="p">()),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-21"><a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Admin urgent message detected!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-7-22"><a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="p">});</span>
+</span></code></pre></div>
+<h2 id="advanced-filters">Advanced Filters</h2>
+<h3 id="callback-data-filtering">Callback Data Filtering</h3>
+<ul>
+<li>Used with <code>bot.onCallback</code>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Handles inline button with callback data &quot;a&quot;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onCallback</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">callbackData</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">callback</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">answerCallbackQuery</span><span class="p">(</span><span class="n">callback</span><span class="p">.</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;You pressed A button!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">});</span>
+</span></code></pre></div></li>
+</ul>
+<h3 id="inline-query-filtering">Inline Query Filtering</h3>
+<ul>
+<li>Used with <code>bot.onInline</code></li>
+</ul>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// Handles inline query with the word &quot;hello&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onInline</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">inlineQuery</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">query</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{});</span>
+</span></code></pre></div>
+<h2 id="state-filter-example">State Filter Example</h2>
+<p>State filters are useful for creating conversational flows with the bot.</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// Set state when /start command is received</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">commands</span><span class="p">(</span><span class="s">&quot;start&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;What is your name?&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">bot</span><span class="p">.</span><span class="na">setState</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getFrom</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Set state to &#39;name&#39;</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">});</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="c1">// Handle response when in &#39;name&#39; state</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">bot</span><span class="p">.</span><span class="na">onMessage</span><span class="p">(</span><span class="n">filter</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">state</span><span class="p">(</span><span class="s">&quot;name&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">filter</span><span class="p">.</span><span class="na">text</span><span class="p">(),</span><span class="w"> </span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">     </span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">format</span><span class="p">(</span><span class="s">&quot;Your name is %s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">message</span><span class="p">.</span><span class="na">getText</span><span class="p">())).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">clearState</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getFrom</span><span class="p">().</span><span class="na">getId</span><span class="p">());</span><span class="w"> </span><span class="c1">// Clear the state</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">});</span>
+</span></code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../annotations/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Annotations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Annotations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../states/" class="md-footer__link md-footer__link--next" aria-label="Next: Using states">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Using states
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Natanim
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/natanimn/telebof" target="_blank" rel="noopener" title="Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/telebof" target="_blank" rel="noopener" title="Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mvnrepository.com/artifact/io.github.natanimn/telebof" target="_blank" rel="noopener" title="mvnrepository.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "content.code.copy", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

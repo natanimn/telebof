@@ -1,0 +1,2391 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../handling-updates/">
+      
+      
+        <link rel="next" href="../filters/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Annotations - Telebof</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#annotations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Telebof" class="md-header__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Telebof
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Annotations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Telebof" class="md-nav__button md-logo" aria-label="Telebof" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Telebof
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/natanimn/telebof" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../handling-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handling Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotations
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#annotation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotation Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annotation Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @MessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#channelposthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChannelPostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedchannelposthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedChannelPostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @BusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedbusinessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedBusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletedbusinessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @DeletedBusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callbackhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @CallbackHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inlinehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @InlineHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choseninlinehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChosenInlineHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatmemberhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatMemberHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mychatmemberhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @MyChatMemberHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatjoinrequesthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatJoinRequestHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precheckouthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PreCheckoutHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shippinghandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ShippingHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchasedpaidmediahandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PurchasedPaidMediaHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reaction-and-engagement-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaction and Engagement Annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reaction and Engagement Annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reactionhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ReactionHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactioncounthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ReactionCountHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boost-and-community-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boost and Community Annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boost and Community Annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chatboosthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatBoostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removedchatboosthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @RemovedChatBoostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pollhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PollHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pollanswerhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PollAnswerHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessconnectionhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @BusinessConnectionHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-message-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Message Handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-filtering-with-custom-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filtering with Custom Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-handlers-with-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Handlers with Priorities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repeatable-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeatable Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-filter-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Filter Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority System
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-critical-importance-of-priority-in-handler-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Critical Importance of Priority in Handler Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Critical Importance of Priority in Handler Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fundamental-problem-jvm-method-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fundamental Problem: JVM Method Ordering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dangerous-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Dangerous Reality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Dangerous Reality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problematic-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problematic Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-could-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Could Happen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-catastrophic-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The catastrophic result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-priority-is-the-only-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Priority is the Only Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Priority is the Only Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-working-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Working Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-priority-guarantees-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Priority Guarantees Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Characteristics:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-non-negotiable-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Non-Negotiable Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../filters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../states/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using states
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../advance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Features
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../error_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keyboard Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_keyboard_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inline Keyboard Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/inline_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inline Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/payment_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Payment Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/state_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/welcome_bot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Welcome Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/media_downloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Media Downloader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/webhook_spring" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot Webhook Bot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#annotation-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotation Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annotation Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @MessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#channelposthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChannelPostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedchannelposthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedChannelPostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @BusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editedbusinessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @EditedBusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deletedbusinessmessagehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @DeletedBusinessMessageHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callbackhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @CallbackHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inlinehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @InlineHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choseninlinehandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChosenInlineHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatmemberhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatMemberHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mychatmemberhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @MyChatMemberHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chatjoinrequesthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatJoinRequestHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precheckouthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PreCheckoutHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shippinghandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ShippingHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#purchasedpaidmediahandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PurchasedPaidMediaHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reaction-and-engagement-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaction and Engagement Annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Reaction and Engagement Annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reactionhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ReactionHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reactioncounthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ReactionCountHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boost-and-community-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Boost and Community Annotations
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Boost and Community Annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chatboosthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @ChatBoostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#removedchatboosthandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @RemovedChatBoostHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pollhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PollHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pollanswerhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @PollAnswerHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessconnectionhandler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        @BusinessConnectionHandler
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Examples
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-message-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Message Handler
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-filtering-with-custom-logic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Filtering with Custom Logic
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiple-handlers-with-priorities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Multiple Handlers with Priorities
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#repeatable-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Repeatable Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-filter-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Filter Implementation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priority-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Priority System
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-critical-importance-of-priority-in-handler-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Critical Importance of Priority in Handler Execution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Critical Importance of Priority in Handler Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-fundamental-problem-jvm-method-ordering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Fundamental Problem: JVM Method Ordering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-dangerous-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Dangerous Reality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Dangerous Reality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problematic-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Problematic Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-could-happen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Could Happen
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-catastrophic-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The catastrophic result:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-priority-is-the-only-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Priority is the Only Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Why Priority is the Only Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-working-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Working Solution
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-priority-guarantees-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Priority Guarantees Order
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-characteristics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Characteristics:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-non-negotiable-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The Non-Negotiable Rule
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="annotations">Annotations</h1>
+<p>Telebof provides a comprehensive set of annotations for declarative handling of Telegram Bot API updates. 
+These annotations offer a clean, type-safe alternative to programmatic handler registration, making your bot code more maintainable and readable.</p>
+<h2 id="annotation-types">Annotation Types</h2>
+<p>All annotations are defined in <code>io.github.natanimn.telebof.annotations</code></p>
+<h4 id="messagehandler">@MessageHandler</h4>
+<p>Handles incoming messages from users or groups with comprehensive filtering options.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>commands()</code> - Array of bot commands to match</li>
+<li><code>texts()</code> - Array of exact text content to match</li>
+<li><code>chatType()</code> - Array of chat types to filter by</li>
+<li><code>regex()</code> - Regular expression pattern for text matching</li>
+<li><code>type()</code> - Array of message types to filter by</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>state()</code> - Required conversation state</li>
+<li><code>priority()</code> - Execution priority (lower = earlier)</li>
+</ul>
+<h4 id="editedmessagehandler">@EditedMessageHandler</h4>
+<p>Handles edited messages across various chat types with the same filtering capabilities as @MessageHandler.</p>
+<p><strong>Parameters:</strong> Same as @MessageHandler</p>
+<h4 id="channelposthandler">@ChannelPostHandler</h4>
+<p>Handles incoming channel posts with filtering options tailored for channel content.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>commands()</code> - Array of bot commands to match</li>
+<li><code>texts()</code> - Array of exact text content to match</li>
+<li><code>regex()</code> - Regular expression pattern for text matching</li>
+<li><code>type()</code> - Array of message types to filter by</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="editedchannelposthandler">@EditedChannelPostHandler</h4>
+<p>Handles edited channel posts with comprehensive filtering options.</p>
+<p><strong>Parameters:</strong> Same as @ChannelPostHandler</p>
+<h4 id="businessmessagehandler">@BusinessMessageHandler</h4>
+<p>Handles business message events with comprehensive filtering options tailored for Telegram Business accounts.</p>
+<p><strong>Parameters:</strong> Same as @MessageHandler</p>
+<h4 id="editedbusinessmessagehandler">@EditedBusinessMessageHandler</h4>
+<p>Handles edited business message events with the same comprehensive filtering capabilities.</p>
+<p><strong>Parameters:</strong> Same as @MessageHandler</p>
+<h4 id="deletedbusinessmessagehandler">@DeletedBusinessMessageHandler</h4>
+<p>Handles deleted business message events, particularly useful for audit logging and compliance.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="callbackhandler">@CallbackHandler</h4>
+<p>Handles incoming callback queries from inline keyboards.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>data()</code> - Array of callback data values to match</li>
+<li><code>chatType()</code> - Array of chat types to filter by</li>
+<li><code>regex()</code> - Regular expression pattern for callback data</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>state()</code> - Required conversation state</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="inlinehandler">@InlineHandler</h4>
+<p>Handles inline query events with filtering options for query content and chat types.</p>
+<p><strong>Parameters:</strong></p>
+<p>-<code>query()</code> - Array of query text to match
+- <code>chatType()</code> - Array of chat types to filter by
+- <code>regex()</code> - Regular expression pattern for query matching
+- <code>filter()</code> - Custom filter class for advanced logic
+- <code>priority()</code> - Execution priority</p>
+<h4 id="choseninlinehandler">@ChosenInlineHandler</h4>
+<p>Handles chosen inline result events when users select results from inline queries.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>resultId()</code> - Array of result IDs to match</li>
+<li><code>query()</code> - Array of original query text to match</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="chatmemberhandler">@ChatMemberHandler</h4>
+<p>Handles chat member status updates for user role changes.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>status()</code> - Array of chat member status changes to match</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="mychatmemberhandler">@MyChatMemberHandler</h4>
+<p>Handles the bot's own chat member status updates.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>status()</code> - Array of status changes to match for the bot</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="chatjoinrequesthandler">@ChatJoinRequestHandler</h4>
+<p>Handles chat join request events for private groups or channels requiring approval.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="precheckouthandler">@PreCheckoutHandler</h4>
+<p>Handles pre-checkout query events for payment validation.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>payload()</code> - Array of payment payload identifiers to match</li>
+<li><code>regex()</code> - Regular expression pattern for payload matching</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="shippinghandler">@ShippingHandler</h4>
+<p>Handles shipping query events during checkout processes.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>payload()</code> - Array of shipping query payload identifiers to match</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="purchasedpaidmediahandler">@PurchasedPaidMediaHandler</h4>
+<p>Handles purchased paid media events for content delivery.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>payload()</code> - Array of media purchase payload identifiers to match</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h3 id="reaction-and-engagement-annotations">Reaction and Engagement Annotations</h3>
+<h4 id="reactionhandler">@ReactionHandler</h4>
+<p>Handles message reaction events when users add or remove reactions.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>reaction()</code> - Specific reaction emoji to match</li>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="reactioncounthandler">@ReactionCountHandler</h4>
+<p>Handles reaction count update events for monitoring engagement.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h3 id="boost-and-community-annotations">Boost and Community Annotations</h3>
+<h4 id="chatboosthandler">@ChatBoostHandler</h4>
+<p>Handles chat boost events for supergroup upgrades and premium features.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="removedchatboosthandler">@RemovedChatBoostHandler</h4>
+<p>Handles removed chat boost events for monitoring community support patterns.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="pollhandler">@PollHandler</h4>
+<p>Handles poll state update events for monitoring poll lifecycle and results.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="pollanswerhandler">@PollAnswerHandler</h4>
+<p>Handles poll answer events for processing user responses and voting patterns.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h4 id="businessconnectionhandler">@BusinessConnectionHandler</h4>
+<p>Handles business connection events for monitoring account connections and authorization.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>filter()</code> - Custom filter class for advanced logic</li>
+<li><code>priority()</code> - Execution priority</li>
+</ul>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="basic-message-handler">Basic Message Handler</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;start&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">chatType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChatType</span><span class="p">.</span><span class="na">PRIVATE</span><span class="p">)</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">handleStartCommand</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Welcome!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="advanced-filtering-with-custom-logic">Advanced Filtering with Custom Logic</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;help&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;support&quot;</span><span class="p">},</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">chatType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChatType</span><span class="p">.</span><span class="na">PRIVATE</span><span class="p">,</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">filter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PremiumUserFilter</span><span class="p">.</span><span class="na">class</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;awaiting_support&quot;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">premiumSupport</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="c1">// Handle premium support requests</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="multiple-handlers-with-priorities">Multiple Handlers with Priorities</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;stats&quot;</span><span class="p">)</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">showStats</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="c1">// handle stats command</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">logMessage</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="c1">// Log all messages except /stats command</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="common-patterns">Common Patterns</h2>
+<h3 id="repeatable-annotations">Repeatable Annotations</h3>
+<p>All handler annotations are <code>@Repeatable</code>, allowing multiple handlers on the same method:</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;start&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ChatType</span><span class="p">.</span><span class="na">PRIVATE</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">handleStartAndHelp</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Welcome to help!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="custom-filter-implementation">Custom Filter Implementation</h3>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">PremiumUserFilter</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CustomFilter</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nd">@Override</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">Update</span><span class="w"> </span><span class="n">update</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">update</span><span class="p">.</span><span class="na">getMessage</span><span class="p">().</span><span class="na">getFrom</span><span class="p">().</span><span class="na">getIsPremium</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Finally, you must add the class you registered handler in by using <code>addHandler</code> method</strong>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">bot</span><span class="p">.</span><span class="na">addHandler</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">MyHandler</span><span class="p">())</span>
+</span></code></pre></div></p>
+<h2 id="priority-system">Priority System</h2>
+<ul>
+<li><strong>Lower priority numbers</strong> execute before higher numbers</li>
+<li><strong>Negative values</strong> are allowed and execute even earlier</li>
+<li><strong>Default priority</strong> is 0</li>
+<li>Useful for controlling execution order when multiple handlers match the same update with the same content</li>
+</ul>
+<h2 id="the-critical-importance-of-priority-in-handler-execution">The Critical Importance of Priority in Handler Execution</h2>
+<h3 id="the-fundamental-problem-jvm-method-ordering">The Fundamental Problem: JVM Method Ordering</h3>
+<p>Java's <code>getDeclaredMethods()</code> returns methods in an <strong>unspecified, non-deterministic order</strong> that can vary across:</p>
+<ul>
+<li>Different JVM implementations (OpenJDK vs Oracle JDK)</li>
+<li>Different versions of the same JVM</li>
+<li>Different runs of the same application</li>
+<li>Different class loading scenarios</li>
+<li>Code changes and recompilations</li>
+</ul>
+<p>This complete unpredictability makes handler execution order <strong>random</strong> without explicit priority control.</p>
+<h3 id="the-dangerous-reality">The Dangerous Reality</h3>
+<h4 id="the-problematic-code">The Problematic Code</h4>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;start&quot;</span><span class="p">)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Welcome message!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">}</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">help</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Detailed help content&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">}</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">regex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(start|help)&quot;</span><span class="p">)</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="kt">void</span><span class="w"> </span><span class="nf">regex</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Generic help response&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<h4 id="what-could-happen">What Could Happen</h4>
+<ol>
+<li><strong>Development environment</strong>: <code>start</code> → <code>help</code> → <code>regex</code> (as declared)</li>
+<li><strong>Production environment</strong>: <code>regex</code> → <code>start</code> → <code>help</code> (JVM reordering)</li>
+<li><strong>After hot reload</strong>: <code>help</code> → <code>regex</code> → <code>start</code> (complete reshuffle)</li>
+<li><strong>Different server</strong>: <code>regex</code> executes first and claims all <code>/start</code> and <code>/help</code> commands</li>
+</ol>
+<h4 id="the-catastrophic-result">The catastrophic result:</h4>
+<p>The regex handler might execute <strong>first</strong> and handle both <code>/start</code> and <code>/help</code> commands, completely blocking the specific handlers from ever running!</p>
+<h3 id="why-priority-is-the-only-solution">Why Priority is the Only Solution</h3>
+<h4 id="the-working-solution">The Working Solution</h4>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;start&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// priority = 0 (default)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kt">void</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Welcome message!&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">}</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">commands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;help&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// priority = 0 (default)</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="kt">void</span><span class="w"> </span><span class="nf">help</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Detailed help content&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">}</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nd">@MessageHandler</span><span class="p">(</span><span class="n">regex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;(start|help)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// Explicit higher priority</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="kt">void</span><span class="w"> </span><span class="nf">regex</span><span class="p">(</span><span class="n">BotContext</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="n">context</span><span class="p">.</span><span class="na">sendMessage</span><span class="p">(</span><span class="n">message</span><span class="p">.</span><span class="na">getChat</span><span class="p">().</span><span class="na">getId</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;Generic help response&quot;</span><span class="p">).</span><span class="na">exec</span><span class="p">();</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="how-priority-guarantees-order">How Priority Guarantees Order</h3>
+<p><strong>Execution is sorted by priority in ascending order:</strong></p>
+<ol>
+<li>All priority = 0 handlers (<code>start</code> and <code>help</code>)</li>
+<li>All priority = 1 handlers (<code>regex</code>)</li>
+</ol>
+<p><strong>Within same priority</strong> (like <code>start</code> and <code>help</code> both at priority=0), the order is still unpredictable, but this is <strong>acceptable</strong> because:</p>
+<ul>
+<li>They handle different commands (<code>/start</code> vs <code>/help</code>)</li>
+<li>They are mutually exclusive (no overlap)</li>
+<li>No risk of one blocking the other</li>
+</ul>
+<h3 id="key-characteristics">Key Characteristics:</h3>
+<ol>
+<li><strong>Lower numbers execute first</strong> (-100 before 0 before 1 before 100)</li>
+<li><strong>Same priority order is unpredictable</strong> but safe for non-conflicting handlers</li>
+<li><strong>Small differences work</strong> (priority=1 always executes after priority=0)</li>
+<li><strong>Complete control</strong> over which handler "wins" for overlapping filters</li>
+</ol>
+<h2 id="the-non-negotiable-rule">The Non-Negotiable Rule</h2>
+<p><strong>Always use explicit priorities when handlers might match the same update with the same content.</strong></p>
+<p>The only safe time to rely on default priority=0 is when:</p>
+<ol>
+<li>Handlers are completely mutually exclusive, AND</li>
+<li>There's no risk of one handler blocking another, AND</li>
+<li>You're willing to accept unpredictable order among them</li>
+</ol>
+<p>For any potential overlap or conflict, <strong>explicit priority control is mandatory</strong>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../handling-updates/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Handling Updates">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Handling Updates
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../filters/" class="md-footer__link md-footer__link--next" aria-label="Next: Filters">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Filters
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Natanim
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/natanimn/telebof" target="_blank" rel="noopener" title="Github" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://t.me/telebof" target="_blank" rel="noopener" title="Telegram" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://mvnrepository.com/artifact/io.github.natanimn/telebof" target="_blank" rel="noopener" title="mvnrepository.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M277.8 312.9c9.8-6.7 23.4-12.5 23.4-12.5s-38.7 7-77.2 10.2c-47.1 3.9-97.7 4.7-123.1 1.3-60.1-8 33-30.1 33-30.1s-36.1-2.4-80.6 19c-52.5 25.4 130 37 224.5 12.1m-85.4-32.1c-19-42.7-83.1-80.2 0-145.8C296.1 53.2 242.9 0 242.9 0c21.5 84.5-75.6 110.1-110.7 162.6-23.9 35.9 11.7 74.4 60.2 118.2M307 104.6c.1 0-175.2 43.8-91.5 140.2 24.7 28.4-6.5 54-6.5 54s62.7-32.4 33.9-72.9c-26.9-37.8-47.5-56.6 64.1-121.3m-6.1 270.5c-.5 1-1.2 1.8-2 2.6 128.3-33.7 81.1-118.9 19.8-97.3-3.3 1.2-6.2 3.4-8.2 6.3 3.6-1.3 7.3-2.3 11-3 31-6.5 75.5 41.5-20.6 91.4m47.1 62.3s14.5 11.9-15.9 21.2c-57.9 17.5-240.8 22.8-291.6.7-18.3-7.9 16-19 26.8-21.3 11.2-2.4 17.7-2 17.7-2-20.3-14.3-131.3 28.1-56.4 40.2C232.8 509.4 401 461.3 348 437.4M124.5 396c-78.7 22 47.9 67.4 148.1 24.5q-14.7-5.7-28.2-13.8c-44.7 8.5-65.4 9.1-106 4.5-33.5-3.8-13.9-15.2-13.9-15.2m179.8 97.2C225.6 508 128.5 506.3 71 496.8c0-.1 11.8 9.7 72.4 13.6 92.2 5.9 233.8-3.3 237.1-46.9 0 0-6.4 16.5-76.2 29.7M260.7 353c-59.2 11.4-93.5 11.1-136.8 6.6-33.5-3.5-11.6-19.7-11.6-19.7-86.8 28.8 48.2 61.4 169.5 25.9-7.8-2.8-15-7.1-21.1-12.8"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.top", "content.code.copy", "navigation.footer"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
