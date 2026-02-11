@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.filters.Filter;
  * and represent various message content types, service messages, and update types supported by the Telegram Bot API.
  * @author Natanim
  * @since 1.2.0
- * @version 1.3.0
+ * @version 1.4.0
  */
 public enum MessageType {
     /**
@@ -324,5 +324,15 @@ public enum MessageType {
     /**
      * Service messages for sent upgraded gift, filtered by {@link Filter#giftUpgradeSent()}
      */
-    GIFT_UPGRADE_SENT;
+    GIFT_UPGRADE_SENT,
+
+    /**
+     * Service message for chat owner left, filtered by {@link Filter#chatOwnerLeft()}
+     */
+    CHAT_OWNER_LEFT,
+
+    /**
+     * Service message for chat owner changed, filtered by {@link Filter#chatOwnerChanged()}
+     */
+    CHAT_OWNER_CHANGED
 }
