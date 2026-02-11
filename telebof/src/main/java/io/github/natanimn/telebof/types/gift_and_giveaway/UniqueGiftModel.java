@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
+import io.github.natanimn.telebof.enums.ModelRarity;
 import io.github.natanimn.telebof.types.media_and_service.Sticker;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * This object describes the model of a unique gift.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
+ * @version 1.4.0
  */
 public class UniqueGiftModel {
     /**
@@ -26,6 +27,11 @@ public class UniqueGiftModel {
     @SerializedName("rarity_per_mille")
     private Integer rarityPerMille;
 
+    /**
+     * Optional. Rarity of the model if it is a crafted model.
+     */
+    private ModelRarity rarity;
+
     public String getName() {
         return name;
     }
@@ -36,5 +42,9 @@ public class UniqueGiftModel {
 
     public Integer getRarityPerMille() {
         return rarityPerMille;
+    }
+
+    public ModelRarity getRarity() {
+        return rarity;
     }
 }
