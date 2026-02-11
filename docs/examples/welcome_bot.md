@@ -92,9 +92,9 @@ When the user types `/start` in a private chat, the bot responds with an inline 
     ```java
     private void startPrivate(BotContext context, Message message){
         var keyboard     = new InlineKeyboardMarkup();
-        var bot_username = bot.me().username;
+        var botUsername  = bot.context.getMe().exec().getUsername();
     
-        var url = String.format("https://t.me/%s?startgroup&admin=delete_messages", bot_username);
+        var url = String.format("https://t.me/%s?startgroup&admin=delete_messages", botUsername);
     
         keyboard.addKeyboard(new InlineKeyboardButton("Add me to your group").url(url));
         var text = """
@@ -102,7 +102,7 @@ When the user types `/start` in a private chat, the bot responds with an inline 
                     
                     Add me to your group, and I will send welcome message to new members""";
     
-        context.sendMessage(message.chat.id, text)
+        context.sendMessage(message.getChat().getId(), text)
                 .parseMode(ParseMode.HTML)
                 .replyMarkup(keyboard)
                 .exec();
@@ -119,9 +119,9 @@ When the user types `/start` in a private chat, the bot responds with an inline 
     @MessageHandler(commands = "start", chatType = ChatType.PRIVATE)
     private void startPrivate(BotContext context, Message message){
         var keyboard     = new InlineKeyboardMarkup();
-        var bot_username = bot.me().username;
+        var botUsername  = bot.context.getMe().exec().getUsername();
     
-        var url = String.format("https://t.me/%s?startgroup&admin=delete_messages", bot_username);
+        var url = String.format("https://t.me/%s?startgroup&admin=delete_messages", botUsername);
     
         keyboard.addKeyboard(new InlineKeyboardButton("Add me to your group").url(url));
         var text = """
@@ -129,7 +129,7 @@ When the user types `/start` in a private chat, the bot responds with an inline 
                     
                     Add me to your group, and I will send welcome message to new members""";
     
-        context.sendMessage(message.chat.id, text)
+        context.sendMessage(message.getChat().getId(), text)
                 .parseMode(ParseMode.HTML)
                 .replyMarkup(keyboard)
                 .exec();
@@ -152,7 +152,7 @@ Sometimes the bot is promoted to **admin** in group, removed from group, left fr
     ```java
     private void botPromoted(BotContext context, ChatMemberUpdated member){
         // 1. Get the new status of the bot
-        ChatMemberStatus newStatus = member.new_chat_member.status;
+        ChatMemberStatus newStatus = member.getNewChatMember().getStatus();
     
         // 2. Ignore updates where the bot is leaving or being kicked/banned.
         // Handling those would cause errors as the bot can't send messages or leave a chat it's already been removed from.
@@ -162,23 +162,23 @@ Sometimes the bot is promoted to **admin** in group, removed from group, left fr
     
         // 3. Check if the bot is NOT an admin OR is an admin but CANNOT delete messages
         boolean isAdminWithDeletePerms = (newStatus == ChatMemberStatus.ADMINISTRATOR 
-                                          && member.new_chat_member.can_delete_messages == true);
+                                          && member.getNewChatMember().getCanDeleteMessages() == true);
     
         if (!isAdminWithDeletePerms) {
             try {
                 context.sendMessage(
-                    member.chat.id,
+                    member.getChat().getId(),
                     "<b>Sorry, I cannot stay in this group without having <i>Delete message</i> permission.</b>")
                     .parseMode(ParseMode.HTML)
                     .exec();
             } catch (Exception e) {
                 // Ignore errors if sending the message fails (e.g., in restricted groups)
             } finally {
-                context.leaveChat(member.chat.id).exec();
+                context.leaveChat(member.getChat().getId()).exec();
             }
         } else {
             // The bot was promoted to admin WITH delete permissions
-            context.sendMessage(member.chat.id, "Thank you for promoting me in this group!").exec();
+            context.sendMessage(member.getChat().getId(), "Thank you for promoting me in this group!").exec();
         }
         
     }
@@ -193,20 +193,20 @@ Sometimes the bot is promoted to **admin** in group, removed from group, left fr
     ```java
     @MyChatMemberHandler(status = ChatMemberStatus.ADMINISTRATOR)
     void botPromoted(BotContext context, ChatMemberUpdated member){
-        if (member.new_chat_member.can_delete_messages == true)
-            context.sendMessage(memberUpdate.chat.id, "Thank you for promoting me in this group!").exec();
+        if (member.getNewChatMember().getCanDeleteMessages() == true)
+            context.sendMessage(memberUpdated.getChat().getId(), "Thank you for promoting me in this group!").exec();
         else {
             context.sendMessage(
-                    memberUpdate.chat.id,
+                    memberUpdated.getChat().getId(),
                     "<b>Sorry, I cannot stay in this group without having <i>Delete message</i> permission.</b>"
             ).parseMode(ParseMode.HTML).exec();
-            context.leaveChat(member.chat.id).exec();
+            context.leaveChat(member.getChat().getId()).exec();
         }
     }
     
     @MyChatMemberHandler(status = ChatMemberStatus.MEMBER)
     void botDemoted(BotContext context, ChatMemberUpdated member){
-        context.leaveChat(member.chat.id).exec();
+        context.leaveChat(member.getChat().getId()).exec();
     }
     ```
 
@@ -225,16 +225,16 @@ This handler checks when a new member joins the group:
 === "Method"
     ```java
     private void sendWelcomeMessage(BotContext context, Message message){
-        context.deleteMessage(chat_id, message.message_id).exec();
+        context.deleteMessage(chatId, message.getMessageId()).exec();
         
-        var chat_id = message.chat.id;
-        var bot_id  = bot.me().id;
+        var chatId = message.getChat().getId();
+        var botId  = bot.context.getMe().exec().getId();
     
-        for (var member: message.new_chat_members){
-            if (Objects.equals(bot_id, member.id)) continue;
+        for (var member: message.getNewChatMembers()){
+            if (Objects.equals(botId, member.getId())) continue;
             
             else {
-                context.sendMessage(message.chat.id, String.format("🌼 <b>Hey %s!</b>\n\n<b>Welcome to this group.</b>", member.mention()))
+                context.sendMessage(message.getChat().getId(), String.format("🌼 <b>Hey %s!</b>\n\n<b>Welcome to this group.</b>", member.mention()))
                     .parseMode(ParseMode.HTML)
                     .exec();
             }
@@ -246,15 +246,15 @@ This handler checks when a new member joins the group:
     ```java
     @MessageHandler(type = MessageType.NEW_CHAT_MEMBER)
     private void sendWelcomeMessage(BotContext context, Message message){
-        context.deleteMessage(chat_id, message.message_id).exec();
+        context.deleteMessage(chatId, message.getMessageId()).exec();
     
-        var chat_id = message.chat.id;
-        var bot_id  = bot.me().id;
+        var chatId = message.getChat().getId();
+        var botId  = bot.context.getMe().exec().getId();
     
-        for (var member: message.new_chat_members){
-            if (Objects.equals(bot_id, member.id)) continue;
+        for (var member: message.getNewChatMembers()){
+            if (Objects.equals(botId, member.getId())) continue;
             else {
-                context.sendMessage(message.chat.id, String.format("🌼 <b>Hey %s!</b>\n\n<b>Welcome to this group.</b>", member.mention()))
+                context.sendMessage(message.getChat().getId(), String.format("🌼 <b>Hey %s!</b>\n\n<b>Welcome to this group.</b>", member.mention()))
                         .parseMode(ParseMode.HTML)
                         .exec();
             }
@@ -268,7 +268,7 @@ This handler simply deletes the service message that is generated when a member 
 === "Method"
     ```java
     private void deleteLeftMessage(BotContext context, Message message){
-        context.deleteMessage(chat_id, message.message_id).exec();
+        context.deleteMessage(chatId, message.getMessageId()).exec();
     }
     ```
 
@@ -276,7 +276,7 @@ This handler simply deletes the service message that is generated when a member 
     ```java
     @MessageHandler(type = MessageType.LEFT_CHAT_MEMBER)
     private void deleteLeftMessage(BotContext context, Message message){
-        context.deleteMessage(chat_id, message.message_id).exec();
+        context.deleteMessage(chatId, message.getMessageId()).exec();
     }
     ```
 
@@ -303,13 +303,13 @@ class BotIsAdmin implements CustomFilter{
 
     @Override
     public boolean check(Update update) {
-        var bot_id = client.me().id;
+        var botId  = bot.context.getMe().exec().getId();
         try {
             // Get the bot's chat member information
-            var member = client.context.getChatMember(update.message.chat.id, bot_id).exec();
+            var member = client.context.getChatMember(update.message.getChat().getId(), botId).exec();
             // Check if the bot is an administrator and has the 'can_delete_messages' right
-            return (member.status == ChatMemberStatus.ADMINISTRATOR 
-                    && member.can_delete_messages == true);
+            return (member.getStatus() == ChatMemberStatus.ADMINISTRATOR 
+                    && member.getCanDeleteMessages() == true);
         } catch (Exception e) {
             // If an error occurs (e.g., bot is not in chat, API error), return false
             return false;
