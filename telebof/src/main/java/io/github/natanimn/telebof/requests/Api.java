@@ -151,7 +151,7 @@ public class Api {
         Request request = builder.url(getUrl(baseRequest))
                 .post(requestBody).build();
 
-        String jsonString = "";
+        String jsonString;
         try (Response response = client.newCall(request).execute()) {
             ResponseBody responseBody = response.body();
             jsonString = responseBody.string();
@@ -168,9 +168,9 @@ public class Api {
 
     public <T, R> R makeRequest(AbstractBaseRequest<T, R> abstractBase) {
         if (botToken == null || botToken.isEmpty()) throw new TelegramError("Undefined botToken");
-        BotLog.debug(String.format("Request: method=%s, url=%s", abstractBase.methodName, getUrl(abstractBase)));
+        BotLog.debug("Request: method={0}, url={1}", abstractBase.methodName, getUrl(abstractBase));
         ApiResponse<R> response = postRequest(abstractBase);
-        BotLog.debug(String.format("The server returned: %s", response.getResult()));
+        BotLog.debug("The server returned: {0}", response.getResult());
         if (!response.isOk()) {
             throw TelegramApiException.throwIt(response);
         }
@@ -179,11 +179,11 @@ public class Api {
 
     public byte[] downloadFile(String filePath) {
         Request request = new Request.Builder().url(String.format(FILE_URL, botToken, filePath)).build();
-        BotLog.debug(String.format("Request: file=%s, url=%s", filePath, request.url()));
+        BotLog.debug("Request: file={0}, url={1}", filePath, request.url());
         try (Response response = client.newCall(request).execute()){
             if (response.code() != 200)
                 throw new IOException(String.format("Error %d! Unable to download file. %s", response.code(), response.body().string()));
-            BotLog.debug("The server returned status code: " + response.code());
+            BotLog.debug("The server returned status code: {0}", response.code());
             return response.body().bytes();
         } catch (AssertionError e){
             throw new RuntimeException("Server send back empty response");

@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.log;
 
+import java.text.MessageFormat;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -44,19 +45,23 @@ public class BotLog {
         }
     }
 
-    public static void info(String msg) {
-        logger.log(Level.INFO, msg);
+    public static void info(String msg, Object... args) {
+        if (logger.isLoggable(Level.INFO))
+            logger.log(Level.INFO, MessageFormat.format(msg, args));
     }
 
-    public static void warn(String msg) {
-        logger.log(Level.WARNING, msg);
+    public static void warn(String msg, Object...args) {
+        if (logger.isLoggable(Level.WARNING))
+            logger.log(Level.WARNING, MessageFormat.format(msg, args));
     }
 
-    public static void error(String msg) {
-        logger.log(Level.SEVERE, msg);
+    public static void error(String msg, Object... args) {
+        if (logger.isLoggable(Level.SEVERE))
+            logger.log(Level.SEVERE, MessageFormat.format(msg, args));
     }
 
-    public static void debug(String msg) {
-        logger.log(Level.CONFIG, msg);
+    public static void debug(String msg, Object... args) {
+        if (logger.isLoggable(Level.CONFIG))
+            logger.log(Level.CONFIG, MessageFormat.format(msg, args));
     }
 }

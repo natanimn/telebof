@@ -10,10 +10,10 @@ import io.github.natanimn.telebof.types.media_and_service.ResponseParameters;
  * @version 1.3.0
  */
 public class TelegramApiException extends RuntimeException {
-    public boolean ok;
-    public String description;
-    public Integer errorCode;
-    public ResponseParameters parameters;
+    private boolean ok;
+    private final String description;
+    private final Integer errorCode;
+    private ResponseParameters parameters;
     private String name;
 
     public TelegramApiException(ApiResponse<?> response) {
@@ -57,5 +57,21 @@ public class TelegramApiException extends RuntimeException {
             case "Too Many Requests" -> new FloodError(response.getDescription(), response.getParameters());
             default -> new TelegramApiException(response);
         };
+    }
+
+    public boolean isOk() {
+        return ok;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public ResponseParameters getParameters() {
+        return parameters;
     }
 }

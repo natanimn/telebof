@@ -175,14 +175,14 @@ The user sees a message with three colorful buttons below it that they can inter
 === "Annotation"
       ```java
       @CallbackHandler(regex = "color-")
-      void button(BotContext context, Message message){
+      void button(BotContext context, CallbackQuery callback){
          // Immediately acknowledge the callback query
          // This removes the loading indicator from the button
-         context.answerCallbackQuery(callback.id).exec();
+         context.answerCallbackQuery(callback.getId()).exec();
       
          // Extract the color name from the callback data
          // Example: "color-green" → "green"
-         var color = callback.data.split("-")[1];
+         var color = callback.getData().split("-")[1];
       
          // Create an appropriate response message based on the button pressed
          String response = switch (color) {
@@ -193,7 +193,7 @@ The user sees a message with three colorful buttons below it that they can inter
          };
       
          // Edit the original message to show which button was pressed
-         context.editMessageText(response, callback.message.chat.id, callback.message.message_id)
+         context.editMessageText(response, callback.getMessage().getChat().getId(), callback.getMessage().getMessageId())
                  .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
                  .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
                  .exec();

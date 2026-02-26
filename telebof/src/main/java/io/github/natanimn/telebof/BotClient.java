@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof;
 
+import java.lang.annotation.Annotation;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
@@ -25,7 +26,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
-
 /**
  * Main class of Telebof library
  * @author Natanim
@@ -35,10 +35,6 @@ import java.util.function.Function;
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
 
-    record RequestInfo(String token, boolean test, Proxy proxy, String localApi){}
-
-    record GetUpdateInfo(int limit, int timeout, Updates[] allowed){}
-
     private Integer offset;
     private final AtomicBoolean stopPolling = new AtomicBoolean(false);
     private boolean skipOldUpdates;
@@ -46,12 +42,10 @@ final public class BotClient {
     private User bot;
     private final StateMemoryStorage storage;
     private final Dispatcher dispatcher;
-    private final RequestInfo requestInfo;
-    private final GetUpdateInfo getUpdateInfo;
-    public BotContext context;
+    public final BotContext context;
     private Boolean isConnected;
-    private ExecutorService pollingExecutor;
-    private GetUpdates getUpdates;
+    private final ExecutorService pollingExecutor;
+    private final GetUpdates getUpdates;
     private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
 
     static {
@@ -107,25 +101,18 @@ final public class BotClient {
     ) {
 
         this.skipOldUpdates = skipOldUpdates;
-        this.getUpdateInfo = new GetUpdateInfo(limit, timeout, allowedUpdates);
         this.offset = offset;
-        this.requestInfo = new RequestInfo(botToken, useTestServer, proxy, localBotApiUrl);
         this.storage = new StateMemoryStorage();
         this.executor  = Executors.newFixedThreadPool(numThreads);
         this.dispatcher = new Dispatcher<>();
         this.isConnected = false;
 
-        var getUpdatesApi = new Api(
-                requestInfo.token(),
-                requestInfo.test(),
-                requestInfo.proxy(),
-                requestInfo.localApi()
-        );
+        var getUpdatesApi = new Api(botToken, useTestServer, proxy, localBotApiUrl);
 
         getUpdates = new GetUpdates(getUpdatesApi)
-                .allowedUpdates(getUpdateInfo.allowed())
-                .limit(getUpdateInfo.limit())
-                .timeout(getUpdateInfo.timeout());
+                .allowedUpdates(allowedUpdates)
+                .limit(limit)
+                .timeout(timeout);
 
         this.pollingExecutor = Executors.newSingleThreadExecutor();
 
@@ -758,73 +745,78 @@ final public class BotClient {
 
     public void addHandler(Object object) {
         try {
-            var clazz = object.getClass();
-            var lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
+            Class<?> clazz = object.getClass();
+            MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
             List<AnnotatedHandler> annotatedMethods = new ArrayList<>();
 
-            for (var method : clazz.getDeclaredMethods()) {
-                var handle = lookup.unreflect(method);
-
+            for (Method method : clazz.getDeclaredMethods()) {
+                MethodHandle handle = lookup.unreflect(method);
                 if (!Modifier.isStatic(method.getModifiers())) handle = handle.bindTo(object);
-                addToList(handle, method, annotatedMethods);
+
+                for (Annotation anno : method.getDeclaredAnnotations()) {
+                    if (anno instanceof MessageHandler mh) annotatedMethods.add(new AnnotatedHandler(handle, mh, mh.priority()));
+                    else if (anno instanceof EditedMessageHandler emh) annotatedMethods.add(new AnnotatedHandler(handle, emh, emh.priority()));
+                    else if (anno instanceof CallbackHandler ch) annotatedMethods.add(new AnnotatedHandler(handle, ch, ch.priority()));
+                    else if (anno instanceof ChannelPostHandler cph) annotatedMethods.add(new AnnotatedHandler(handle, cph, cph.priority()));
+                    else if (anno instanceof EditedChannelPostHandler ecph) annotatedMethods.add(new AnnotatedHandler(handle, ecph, ecph.priority()));
+                    else if (anno instanceof InlineHandler ih) annotatedMethods.add(new AnnotatedHandler(handle, ih, ih.priority()));
+                    else if (anno instanceof PollHandler ph) annotatedMethods.add(new AnnotatedHandler(handle, ph, ph.priority()));
+                    else if (anno instanceof PollAnswerHandler pah) annotatedMethods.add(new AnnotatedHandler(handle, pah, pah.priority()));
+                    else if (anno instanceof ReactionHandler rh) annotatedMethods.add(new AnnotatedHandler(handle, rh, rh.priority()));
+                    else if (anno instanceof ReactionCountHandler rch) annotatedMethods.add(new AnnotatedHandler(handle, rch, rch.priority()));
+                    else if (anno instanceof ChatJoinRequestHandler cjrh) annotatedMethods.add(new AnnotatedHandler(handle, cjrh, cjrh.priority()));
+                    else if (anno instanceof PurchasedPaidMediaHandler ppmh) annotatedMethods.add(new AnnotatedHandler(handle, ppmh, ppmh.priority()));
+                    else if (anno instanceof PreCheckoutHandler pch) annotatedMethods.add(new AnnotatedHandler(handle, pch, pch.priority()));
+                    else if (anno instanceof ShippingHandler sh) annotatedMethods.add(new AnnotatedHandler(handle, sh, sh.priority()));
+                    else if (anno instanceof ChatBoostHandler cbh) annotatedMethods.add(new AnnotatedHandler(handle, cbh, cbh.priority()));
+                    else if (anno instanceof ChatMemberHandler cmh) annotatedMethods.add(new AnnotatedHandler(handle, cmh, cmh.priority()));
+                    else if (anno instanceof MyChatMemberHandler mcmh) annotatedMethods.add(new AnnotatedHandler(handle, mcmh, mcmh.priority()));
+                    else if (anno instanceof RemovedChatBoostHandler rcbh) annotatedMethods.add(new AnnotatedHandler(handle, rcbh, rcbh.priority()));
+                    else if (anno instanceof BusinessMessageHandler bmh) annotatedMethods.add(new AnnotatedHandler(handle, bmh, bmh.priority()));
+                    else if (anno instanceof BusinessConnectionHandler bch) annotatedMethods.add(new AnnotatedHandler(handle, bch, bch.priority()));
+                    else if (anno instanceof DeletedBusinessMessageHandler dbmh) annotatedMethods.add(new AnnotatedHandler(handle, dbmh, dbmh.priority()));
+                    else if (anno instanceof EditedBusinessMessageHandler ebmh) annotatedMethods.add(new AnnotatedHandler(handle, ebmh, ebmh.priority()));
+                    else if (anno instanceof ChosenInlineHandler cih) annotatedMethods.add(new AnnotatedHandler(handle, cih, cih.priority()));
+                }
             }
 
+            // Sort once by priority
             annotatedMethods.sort(Comparator.comparingInt(AnnotatedHandler::getOrder));
 
+            // Register handlers
             for (AnnotatedHandler handler : annotatedMethods) {
-                if (handler.getAnnotation() instanceof MessageHandler mh)
-                    addMessageHandler(mh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof EditedMessageHandler emh)
-                    addEditedMessageHandler(emh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof CallbackHandler ch)
-                    addCallbackHandler(ch, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ChannelPostHandler cph)
-                    addChannelPostHandler(cph, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof EditedChannelPostHandler ecph)
-                    addEditedChannelPostHandler(ecph, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof InlineHandler ih)
-                    addInlineHandler(ih, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof PollHandler ph)
-                    addPollHandler(ph, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof PollAnswerHandler pah)
-                    addPollAnswerHandler(pah, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ReactionHandler rh)
-                    addReactionHandler(rh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ReactionCountHandler rch)
-                    addReactionCountHandler(rch, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ChatJoinRequestHandler cjrh)
-                    addChatJoinRequestHandler(cjrh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof PurchasedPaidMediaHandler ppmh)
-                    addPurchasedPaidMediaHandler(ppmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof PreCheckoutHandler pch)
-                    addPreCheckoutHandler(pch, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ShippingHandler sh)
-                    addShippingHandler(sh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ChatBoostHandler cbh)
-                    addChatBoostHandler(cbh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ChatMemberHandler cmh)
-                    addChatMemberHandler(cmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof MyChatMemberHandler mcmh)
-                    addMyChatMemberHandler(mcmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof RemovedChatBoostHandler rcbh)
-                    addRemovedChatBoostHandler(rcbh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof BusinessMessageHandler bmh)
-                    addBusinessMessageHandler(bmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof BusinessConnectionHandler bch)
-                    addBusinessConnectionHandler(bch, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof DeletedBusinessMessageHandler dbmh)
-                    addDeletedBusinessMessageHandler(dbmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof EditedBusinessMessageHandler ebmh)
-                    addEditedBusinessMessageHandler(ebmh, handler.getMethodHandle());
-                else if (handler.getAnnotation() instanceof ChosenInlineHandler cih)
-                    addChosenInlineHandler(cih, handler.getMethodHandle());
+                Annotation anno = (Annotation) handler.getAnnotation();
+                MethodHandle mh = handler.getMethodHandle();
+
+                if (anno instanceof MessageHandler) addMessageHandler((MessageHandler) anno, mh);
+                else if (anno instanceof EditedMessageHandler) addEditedMessageHandler((EditedMessageHandler) anno, mh);
+                else if (anno instanceof CallbackHandler) addCallbackHandler((CallbackHandler) anno, mh);
+                else if (anno instanceof ChannelPostHandler) addChannelPostHandler((ChannelPostHandler) anno, mh);
+                else if (anno instanceof EditedChannelPostHandler) addEditedChannelPostHandler((EditedChannelPostHandler) anno, mh);
+                else if (anno instanceof InlineHandler) addInlineHandler((InlineHandler) anno, mh);
+                else if (anno instanceof PollHandler) addPollHandler((PollHandler) anno, mh);
+                else if (anno instanceof PollAnswerHandler) addPollAnswerHandler((PollAnswerHandler) anno, mh);
+                else if (anno instanceof ReactionHandler) addReactionHandler((ReactionHandler) anno, mh);
+                else if (anno instanceof ReactionCountHandler) addReactionCountHandler((ReactionCountHandler) anno, mh);
+                else if (anno instanceof ChatJoinRequestHandler) addChatJoinRequestHandler((ChatJoinRequestHandler) anno, mh);
+                else if (anno instanceof PurchasedPaidMediaHandler) addPurchasedPaidMediaHandler((PurchasedPaidMediaHandler) anno, mh);
+                else if (anno instanceof PreCheckoutHandler) addPreCheckoutHandler((PreCheckoutHandler) anno, mh);
+                else if (anno instanceof ShippingHandler) addShippingHandler((ShippingHandler) anno, mh);
+                else if (anno instanceof ChatBoostHandler) addChatBoostHandler((ChatBoostHandler) anno, mh);
+                else if (anno instanceof ChatMemberHandler) addChatMemberHandler((ChatMemberHandler) anno, mh);
+                else if (anno instanceof MyChatMemberHandler) addMyChatMemberHandler((MyChatMemberHandler) anno, mh);
+                else if (anno instanceof RemovedChatBoostHandler) addRemovedChatBoostHandler((RemovedChatBoostHandler) anno, mh);
+                else if (anno instanceof BusinessMessageHandler) addBusinessMessageHandler((BusinessMessageHandler) anno, mh);
+                else if (anno instanceof BusinessConnectionHandler) addBusinessConnectionHandler((BusinessConnectionHandler) anno, mh);
+                else if (anno instanceof DeletedBusinessMessageHandler) addDeletedBusinessMessageHandler((DeletedBusinessMessageHandler) anno, mh);
+                else if (anno instanceof EditedBusinessMessageHandler) addEditedBusinessMessageHandler((EditedBusinessMessageHandler) anno, mh);
+                else if (anno instanceof ChosenInlineHandler) addChosenInlineHandler((ChosenInlineHandler) anno, mh);
             }
 
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
-
     @SuppressWarnings("unchecked")
     private <T extends TelegramUpdate> void executeUpdate(
             Updates updateName,
@@ -905,7 +897,7 @@ final public class BotClient {
         List<Update> updates = getUpdates.offset(this.offset).exec();
 
         int count = updates.size();
-        BotLog.info(String.format("Received %d updates", count));
+        BotLog.info("Received {0} updates", count);
         if (!updates.isEmpty()){
            setOffset(updates.get(count - 1).getUpdateId() + 1);
            processUpdates(updates);
@@ -928,12 +920,12 @@ final public class BotClient {
                 shutDown();
                 BotLog.info("Polling stopped");
             } catch (FloodError error){
-                int delay = error.parameters.getRetryAfter();
-                BotLog.error(error.description);
+                int delay = error.getParameters().getRetryAfter();
+                BotLog.error(error.getDescription());
                 error.printStackTrace();
-                BotClient.this.sleep(delay);
+                sleep(delay);
             } catch (TelegramApiException apiException){
-                BotLog.error(apiException.description);
+                BotLog.error(apiException.getDescription());
                 apiException.printStackTrace();
             } catch (TimeoutException e) {
                 sleep(1);
@@ -953,8 +945,8 @@ final public class BotClient {
      * Use this method to run the bot using long polling
      */
     public void startPolling(){
-        BotLog.info("Bot started running via longPolling");
-//        this.bot         = this.context.getMe().exec();
+        this.bot         = this.context.getMe().exec();
+        BotLog.info("@{0} started running via longPolling", bot.getUsername());
         pollingExecutor.submit(() -> {
             this.isConnected = true;
             runOnNewThread();

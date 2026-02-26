@@ -690,7 +690,7 @@ public class Filter{
 
         else return false;
 
-        String chatStateName = storage.getName(message.getFrom().getId(), user.getId());
+        String chatStateName = storage.getName(message.getChat().getId(), user.getId());
         String userStateName = storage.getName(user.getId());
 
         if (name.equals("*") && (chatStateName != null || userStateName != null)) return true;

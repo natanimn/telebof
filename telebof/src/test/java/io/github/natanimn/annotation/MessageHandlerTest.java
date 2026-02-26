@@ -4,11 +4,15 @@ import io.github.natanimn.telebof.BotClient;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.annotations.MessageHandler;
 import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.filters.CustomFilter;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.updates.Update;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.logging.Level;
 
 public class MessageHandlerTest {
 
@@ -41,6 +45,15 @@ public class MessageHandlerTest {
         context.sendMessage(message.getChat().getId(), "Hello, World").exec();
     }
 
+    @MessageHandler(commands = "ping")
+    public void ping(BotContext context, Message message){
+        long start = System.currentTimeMillis();
+        var msg = context.sendMessage(message.getChat().getId(), "...").exec();
+        long end = System.currentTimeMillis();
+        context.editMessageText(message.getChat().getId(), "<code>Pong... %dms</code>".formatted(end - start), msg.getMessageId())
+                .parseMode(ParseMode.HTML)
+                .exec();
+    }
     @MessageHandler(texts = {"hi", "hello", "hey"})
     public void texts(BotContext context, Message message){
         context.sendMessage(message.getChat().getId(), "Hey").exec();
