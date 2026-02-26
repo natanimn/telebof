@@ -94,7 +94,7 @@ We will use two types of handlers:<br>
           keyboard.addKeyboard(new InlineKeyboardButton("🟥 Red", "color-red"));
       
           // Send message with inline keyboard attached
-          context.sendMessage(message.chat.id, "Press one of the following inline buttons: ")
+          context.sendMessage(message.getChat().getId(), "Press one of the following inline buttons: ")
                   .replyMarkup(keyboard) // Attach the inline keyboard to the message
                   .exec();
       });
@@ -113,7 +113,7 @@ We will use two types of handlers:<br>
            keyboard.addKeyboard(new InlineKeyboardButton("🟥 Red", "color-red"));
    
            // Send message with inline keyboard attached
-           context.sendMessage(message.chat.id, "Press one of the following inline buttons: ")
+           context.sendMessage(message.getChat().getId(), "Press one of the following inline buttons: ")
                    .replyMarkup(keyboard) // Attach the inline keyboard to the message
                    .exec();
        }
@@ -150,11 +150,11 @@ The user sees a message with three colorful buttons below it that they can inter
       bot.onCallback(filter -> filter.regex("color-"), (context, callback) -> {
           // Immediately acknowledge the callback query
           // This removes the loading indicator from the button
-          context.answerCallbackQuery(callback.id).exec();
+          context.answerCallbackQuery(callback.getId()).exec();
       
           // Extract the color name from the callback data
           // Example: "color-green" → "green"
-          var color = callback.data.split("-")[1];
+          var color = callback.getData().split("-")[1];
       
           // Create an appropriate response message based on the button pressed
           String response = switch (color) {
@@ -165,10 +165,10 @@ The user sees a message with three colorful buttons below it that they can inter
           };
       
           // Edit the original message to show which button was pressed
-          context.editMessageText(response, callback.message.chat.id, callback.message.message_id)
-                  .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
-                  .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
-                  .exec();
+          context.editMessageText(callback.getMessage().getChat().getId(), response, callback.getMessage().getMessageId())
+                 .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
+                 .replyMarkup(callback.getMessage().getReplyMarkup()) // Keep the same keyboard
+                 .exec();
       });
       ```
 
@@ -193,9 +193,9 @@ The user sees a message with three colorful buttons below it that they can inter
          };
       
          // Edit the original message to show which button was pressed
-         context.editMessageText(response, callback.getMessage().getChat().getId(), callback.getMessage().getMessageId())
+         context.editMessageText(callback.getMessage().getChat().getId(), response, callback.getMessage().getMessageId())
                  .parseMode(ParseMode.HTML) // Use HTML formatting for bold text
-                 .replyMarkup(callback.message.reply_markup) // Keep the same keyboard
+                 .replyMarkup(callback.getMessage().getReplyMarkup()) // Keep the same keyboard
                  .exec();
       }
       ```
@@ -205,7 +205,7 @@ The user sees a message with three colorful buttons below it that they can inter
 
 *Callback Query Acknowledgment*:<br>
 
-   - `answerCallbackQuery(callback.id).exec()` is required to tell Telegram the button press was received
+   - `answerCallbackQuery(callback.getId()).exec()` is required to tell Telegram the button press was received
    - This removes the loading animation from the pressed button
 
 ---
@@ -221,7 +221,7 @@ The user sees a message with three colorful buttons below it that they can inter
 
    - `editMessageText()` modifies the existing message instead of sending a new one
    - This provides a cleaner user experience by updating the original message
-   - `replyMarkup(callback.message.reply_markup)` preserves the original keyboard layout
+   - `replyMarkup(callback.getMessage().getReplyMarkup())` preserves the original keyboard layout
 
 ---
 *User Feedback*:
