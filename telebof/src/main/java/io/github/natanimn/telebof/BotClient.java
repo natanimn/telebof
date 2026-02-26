@@ -745,78 +745,73 @@ final public class BotClient {
 
     public void addHandler(Object object) {
         try {
-            Class<?> clazz = object.getClass();
-            MethodHandles.Lookup lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
+            var clazz = object.getClass();
+            var lookup = MethodHandles.privateLookupIn(clazz, MethodHandles.lookup());
             List<AnnotatedHandler> annotatedMethods = new ArrayList<>();
 
-            for (Method method : clazz.getDeclaredMethods()) {
-                MethodHandle handle = lookup.unreflect(method);
-                if (!Modifier.isStatic(method.getModifiers())) handle = handle.bindTo(object);
+            for (var method : clazz.getDeclaredMethods()) {
+                var handle = lookup.unreflect(method);
 
-                for (Annotation anno : method.getDeclaredAnnotations()) {
-                    if (anno instanceof MessageHandler mh) annotatedMethods.add(new AnnotatedHandler(handle, mh, mh.priority()));
-                    else if (anno instanceof EditedMessageHandler emh) annotatedMethods.add(new AnnotatedHandler(handle, emh, emh.priority()));
-                    else if (anno instanceof CallbackHandler ch) annotatedMethods.add(new AnnotatedHandler(handle, ch, ch.priority()));
-                    else if (anno instanceof ChannelPostHandler cph) annotatedMethods.add(new AnnotatedHandler(handle, cph, cph.priority()));
-                    else if (anno instanceof EditedChannelPostHandler ecph) annotatedMethods.add(new AnnotatedHandler(handle, ecph, ecph.priority()));
-                    else if (anno instanceof InlineHandler ih) annotatedMethods.add(new AnnotatedHandler(handle, ih, ih.priority()));
-                    else if (anno instanceof PollHandler ph) annotatedMethods.add(new AnnotatedHandler(handle, ph, ph.priority()));
-                    else if (anno instanceof PollAnswerHandler pah) annotatedMethods.add(new AnnotatedHandler(handle, pah, pah.priority()));
-                    else if (anno instanceof ReactionHandler rh) annotatedMethods.add(new AnnotatedHandler(handle, rh, rh.priority()));
-                    else if (anno instanceof ReactionCountHandler rch) annotatedMethods.add(new AnnotatedHandler(handle, rch, rch.priority()));
-                    else if (anno instanceof ChatJoinRequestHandler cjrh) annotatedMethods.add(new AnnotatedHandler(handle, cjrh, cjrh.priority()));
-                    else if (anno instanceof PurchasedPaidMediaHandler ppmh) annotatedMethods.add(new AnnotatedHandler(handle, ppmh, ppmh.priority()));
-                    else if (anno instanceof PreCheckoutHandler pch) annotatedMethods.add(new AnnotatedHandler(handle, pch, pch.priority()));
-                    else if (anno instanceof ShippingHandler sh) annotatedMethods.add(new AnnotatedHandler(handle, sh, sh.priority()));
-                    else if (anno instanceof ChatBoostHandler cbh) annotatedMethods.add(new AnnotatedHandler(handle, cbh, cbh.priority()));
-                    else if (anno instanceof ChatMemberHandler cmh) annotatedMethods.add(new AnnotatedHandler(handle, cmh, cmh.priority()));
-                    else if (anno instanceof MyChatMemberHandler mcmh) annotatedMethods.add(new AnnotatedHandler(handle, mcmh, mcmh.priority()));
-                    else if (anno instanceof RemovedChatBoostHandler rcbh) annotatedMethods.add(new AnnotatedHandler(handle, rcbh, rcbh.priority()));
-                    else if (anno instanceof BusinessMessageHandler bmh) annotatedMethods.add(new AnnotatedHandler(handle, bmh, bmh.priority()));
-                    else if (anno instanceof BusinessConnectionHandler bch) annotatedMethods.add(new AnnotatedHandler(handle, bch, bch.priority()));
-                    else if (anno instanceof DeletedBusinessMessageHandler dbmh) annotatedMethods.add(new AnnotatedHandler(handle, dbmh, dbmh.priority()));
-                    else if (anno instanceof EditedBusinessMessageHandler ebmh) annotatedMethods.add(new AnnotatedHandler(handle, ebmh, ebmh.priority()));
-                    else if (anno instanceof ChosenInlineHandler cih) annotatedMethods.add(new AnnotatedHandler(handle, cih, cih.priority()));
-                }
+                if (!Modifier.isStatic(method.getModifiers())) handle = handle.bindTo(object);
+                addToList(handle, method, annotatedMethods);
             }
 
-            // Sort once by priority
             annotatedMethods.sort(Comparator.comparingInt(AnnotatedHandler::getOrder));
 
-            // Register handlers
             for (AnnotatedHandler handler : annotatedMethods) {
-                Annotation anno = (Annotation) handler.getAnnotation();
-                MethodHandle mh = handler.getMethodHandle();
-
-                if (anno instanceof MessageHandler) addMessageHandler((MessageHandler) anno, mh);
-                else if (anno instanceof EditedMessageHandler) addEditedMessageHandler((EditedMessageHandler) anno, mh);
-                else if (anno instanceof CallbackHandler) addCallbackHandler((CallbackHandler) anno, mh);
-                else if (anno instanceof ChannelPostHandler) addChannelPostHandler((ChannelPostHandler) anno, mh);
-                else if (anno instanceof EditedChannelPostHandler) addEditedChannelPostHandler((EditedChannelPostHandler) anno, mh);
-                else if (anno instanceof InlineHandler) addInlineHandler((InlineHandler) anno, mh);
-                else if (anno instanceof PollHandler) addPollHandler((PollHandler) anno, mh);
-                else if (anno instanceof PollAnswerHandler) addPollAnswerHandler((PollAnswerHandler) anno, mh);
-                else if (anno instanceof ReactionHandler) addReactionHandler((ReactionHandler) anno, mh);
-                else if (anno instanceof ReactionCountHandler) addReactionCountHandler((ReactionCountHandler) anno, mh);
-                else if (anno instanceof ChatJoinRequestHandler) addChatJoinRequestHandler((ChatJoinRequestHandler) anno, mh);
-                else if (anno instanceof PurchasedPaidMediaHandler) addPurchasedPaidMediaHandler((PurchasedPaidMediaHandler) anno, mh);
-                else if (anno instanceof PreCheckoutHandler) addPreCheckoutHandler((PreCheckoutHandler) anno, mh);
-                else if (anno instanceof ShippingHandler) addShippingHandler((ShippingHandler) anno, mh);
-                else if (anno instanceof ChatBoostHandler) addChatBoostHandler((ChatBoostHandler) anno, mh);
-                else if (anno instanceof ChatMemberHandler) addChatMemberHandler((ChatMemberHandler) anno, mh);
-                else if (anno instanceof MyChatMemberHandler) addMyChatMemberHandler((MyChatMemberHandler) anno, mh);
-                else if (anno instanceof RemovedChatBoostHandler) addRemovedChatBoostHandler((RemovedChatBoostHandler) anno, mh);
-                else if (anno instanceof BusinessMessageHandler) addBusinessMessageHandler((BusinessMessageHandler) anno, mh);
-                else if (anno instanceof BusinessConnectionHandler) addBusinessConnectionHandler((BusinessConnectionHandler) anno, mh);
-                else if (anno instanceof DeletedBusinessMessageHandler) addDeletedBusinessMessageHandler((DeletedBusinessMessageHandler) anno, mh);
-                else if (anno instanceof EditedBusinessMessageHandler) addEditedBusinessMessageHandler((EditedBusinessMessageHandler) anno, mh);
-                else if (anno instanceof ChosenInlineHandler) addChosenInlineHandler((ChosenInlineHandler) anno, mh);
+                if (handler.getAnnotation() instanceof MessageHandler mh)
+                    addMessageHandler(mh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedMessageHandler emh)
+                    addEditedMessageHandler(emh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof CallbackHandler ch)
+                    addCallbackHandler(ch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChannelPostHandler cph)
+                    addChannelPostHandler(cph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedChannelPostHandler ecph)
+                    addEditedChannelPostHandler(ecph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof InlineHandler ih)
+                    addInlineHandler(ih, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PollHandler ph)
+                    addPollHandler(ph, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PollAnswerHandler pah)
+                    addPollAnswerHandler(pah, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ReactionHandler rh)
+                    addReactionHandler(rh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ReactionCountHandler rch)
+                    addReactionCountHandler(rch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatJoinRequestHandler cjrh)
+                    addChatJoinRequestHandler(cjrh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PurchasedPaidMediaHandler ppmh)
+                    addPurchasedPaidMediaHandler(ppmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof PreCheckoutHandler pch)
+                    addPreCheckoutHandler(pch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ShippingHandler sh)
+                    addShippingHandler(sh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatBoostHandler cbh)
+                    addChatBoostHandler(cbh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChatMemberHandler cmh)
+                    addChatMemberHandler(cmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof MyChatMemberHandler mcmh)
+                    addMyChatMemberHandler(mcmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof RemovedChatBoostHandler rcbh)
+                    addRemovedChatBoostHandler(rcbh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof BusinessMessageHandler bmh)
+                    addBusinessMessageHandler(bmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof BusinessConnectionHandler bch)
+                    addBusinessConnectionHandler(bch, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof DeletedBusinessMessageHandler dbmh)
+                    addDeletedBusinessMessageHandler(dbmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof EditedBusinessMessageHandler ebmh)
+                    addEditedBusinessMessageHandler(ebmh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ChosenInlineHandler cih)
+                    addChosenInlineHandler(cih, handler.getMethodHandle());
             }
 
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
+
     @SuppressWarnings("unchecked")
     private <T extends TelegramUpdate> void executeUpdate(
             Updates updateName,
