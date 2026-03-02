@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.requests.Api;
  * PromoteChatMember class. Returns True on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.5.0
  * @see BotContext#promoteChatMember
  */
 public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Boolean> {
@@ -169,5 +169,14 @@ public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Bo
      */
     public PromoteChatMember canManageDirectMessages(boolean canManageDirectMessages){
         return add("can_manage_direct_messages", canManageDirectMessages);
+    }
+
+    /**
+     * Optional
+     * @param canManageTags Pass True if the administrator can edit the tags of regular members; for groups and supergroups only
+     * @return {@link PromoteChatMember}
+     */
+    public PromoteChatMember canManageTags(Boolean canManageTags){
+        return add("can_manage_tags", canManageTags);
     }
 }
