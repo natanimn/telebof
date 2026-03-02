@@ -5,10 +5,10 @@ import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import java.io.Serializable;
 
 /**
- * Describes {@link MessageEntity#type}
+ * Describes {@link MessageEntity#getType()}
  * @author Natanim
  * @since 3 March, 2025
- * @version 0.7
+ * @version 1.5.0
  */
 
 public enum EntityType implements Serializable {
@@ -61,5 +61,8 @@ public enum EntityType implements Serializable {
     TEXT_MENTION,
 
     @SerializedName("custom_emoji")
-    CUSTOM_EMOJI
+    CUSTOM_EMOJI,
+
+    @SerializedName("date_time")
+    DATE_TIME
 }
