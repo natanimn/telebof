@@ -970,6 +970,17 @@ public class BotContext {
     }
 
     /**
+     * Use this method to set a tag for a regular member in a group or a supergroup.
+     * The bot must be an administrator in the chat for this to work and must have the can_manage_tags administrator right.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param userId Unique identifier of the target sender chat
+     * @return {@link SetChatMemberTag}
+     */
+    public SetChatMemberTag setChatMemberTag(Object chatId, long userId){
+        return new SetChatMemberTag(chatId, userId, this.api);
+    }
+
+    /**
      * Use this method to set default chat permissions for all members.
      * The bot must be an administrator in the group or a supergroup for this to work and must have the can_restrict_members administrator rights.
      * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
