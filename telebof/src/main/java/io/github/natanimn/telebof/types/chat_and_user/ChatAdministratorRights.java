@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Represents the rights of an administrator in a chat.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.5.0
  */
 public class ChatAdministratorRights implements Serializable {
     /**
@@ -105,6 +105,13 @@ public class ChatAdministratorRights implements Serializable {
      */
     @SerializedName("can_manage_direct_messages")
     private Boolean canManageDirectMessages;
+
+    /**
+     * Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only.
+     * If omitted defaults to the value of can_pin_messages.
+     */
+    @SerializedName("can_manage_tags")
+    private Boolean canManageTags;
 
     public Boolean getIsAnonymous() {
         return isAnonymous;
@@ -247,6 +254,15 @@ public class ChatAdministratorRights implements Serializable {
 
     public ChatAdministratorRights setCanManageDirectMessages(Boolean canManageDirectMessages) {
         this.canManageDirectMessages = canManageDirectMessages;
+        return this;
+    }
+
+    public Boolean getCanManageTags() {
+        return canManageTags;
+    }
+
+    public ChatAdministratorRights setCanManageTags(Boolean canManageTags) {
+        this.canManageTags = canManageTags;
         return this;
     }
 }
