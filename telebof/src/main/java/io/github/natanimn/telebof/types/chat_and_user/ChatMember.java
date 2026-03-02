@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * This object contains information about one member of a chat.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.5.0
  */
 public class ChatMember {
     /**
@@ -194,282 +194,157 @@ public class ChatMember {
     @SerializedName("until_date")
     private Integer untilDate;
 
+    /**
+     * Optional. Tag of the member
+     */
+    private String tag;
+
+    /**
+     * True, if the user is allowed to edit their own tag
+     */
+    @SerializedName("can_edit_tag")
+    private Boolean canEditTag;
+
+    /**
+     * Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only.
+     * If omitted defaults to the value of can_pin_messages.
+     */
+    @SerializedName("can_manage_tags")
+    private Boolean canManageTags;
+
     public ChatMemberStatus getStatus() {
         return status;
-    }
-
-    public ChatMember setStatus(ChatMemberStatus status) {
-        this.status = status;
-        return this;
     }
 
     public String getCustomTitle() {
         return customTitle;
     }
 
-    public ChatMember setCustomTitle(String customTitle) {
-        this.customTitle = customTitle;
-        return this;
-    }
-
     public User getUser() {
         return user;
-    }
-
-    public ChatMember setUser(User user) {
-        this.user = user;
-        return this;
     }
 
     public Boolean getCanBeEdited() {
         return canBeEdited;
     }
 
-    public ChatMember setCanBeEdited(Boolean canBeEdited) {
-        this.canBeEdited = canBeEdited;
-        return this;
-    }
-
-    public Boolean getIsAnonymous() {
+    public Boolean getAnonymous() {
         return isAnonymous;
-    }
-
-    public ChatMember setIsAnonymous(Boolean isAnonymous) {
-        this.isAnonymous = isAnonymous;
-        return this;
     }
 
     public Boolean getCanManageChat() {
         return canManageChat;
     }
 
-    public ChatMember setCanManageChat(Boolean canManageChat) {
-        this.canManageChat = canManageChat;
-        return this;
-    }
-
     public Boolean getCanDeleteMessages() {
         return canDeleteMessages;
-    }
-
-    public ChatMember setCanDeleteMessages(Boolean canDeleteMessages) {
-        this.canDeleteMessages = canDeleteMessages;
-        return this;
     }
 
     public Boolean getCanManageVideoChats() {
         return canManageVideoChats;
     }
 
-    public ChatMember setCanManageVideoChats(Boolean canManageVideoChats) {
-        this.canManageVideoChats = canManageVideoChats;
-        return this;
-    }
-
     public Boolean getCanRestrictMembers() {
         return canRestrictMembers;
-    }
-
-    public ChatMember setCanRestrictMembers(Boolean canRestrictMembers) {
-        this.canRestrictMembers = canRestrictMembers;
-        return this;
     }
 
     public Boolean getCanPromoteMembers() {
         return canPromoteMembers;
     }
 
-    public ChatMember setCanPromoteMembers(Boolean canPromoteMembers) {
-        this.canPromoteMembers = canPromoteMembers;
-        return this;
-    }
-
     public Boolean getCanChangeInfo() {
         return canChangeInfo;
-    }
-
-    public ChatMember setCanChangeInfo(Boolean canChangeInfo) {
-        this.canChangeInfo = canChangeInfo;
-        return this;
     }
 
     public Boolean getCanInviteUsers() {
         return canInviteUsers;
     }
 
-    public ChatMember setCanInviteUsers(Boolean canInviteUsers) {
-        this.canInviteUsers = canInviteUsers;
-        return this;
-    }
-
     public Boolean getCanPostMessages() {
         return canPostMessages;
-    }
-
-    public ChatMember setCanPostMessages(Boolean canPostMessages) {
-        this.canPostMessages = canPostMessages;
-        return this;
     }
 
     public Boolean getCanEditMessages() {
         return canEditMessages;
     }
 
-    public ChatMember setCanEditMessages(Boolean canEditMessages) {
-        this.canEditMessages = canEditMessages;
-        return this;
-    }
-
     public Boolean getCanPinMessages() {
         return canPinMessages;
-    }
-
-    public ChatMember setCanPinMessages(Boolean canPinMessages) {
-        this.canPinMessages = canPinMessages;
-        return this;
     }
 
     public Boolean getCanManageTopics() {
         return canManageTopics;
     }
 
-    public ChatMember setCanManageTopics(Boolean canManageTopics) {
-        this.canManageTopics = canManageTopics;
-        return this;
-    }
-
-    public Boolean getIsMember() {
+    public Boolean getMember() {
         return isMember;
-    }
-
-    public ChatMember setIsMember(Boolean isMember) {
-        this.isMember = isMember;
-        return this;
     }
 
     public Boolean getCanSendMessages() {
         return canSendMessages;
     }
 
-    public ChatMember setCanSendMessages(Boolean canSendMessages) {
-        this.canSendMessages = canSendMessages;
-        return this;
-    }
-
     public Boolean getCanSendAudios() {
         return canSendAudios;
-    }
-
-    public ChatMember setCanSendAudios(Boolean canSendAudios) {
-        this.canSendAudios = canSendAudios;
-        return this;
     }
 
     public Boolean getCanSendDocuments() {
         return canSendDocuments;
     }
 
-    public ChatMember setCanSendDocuments(Boolean canSendDocuments) {
-        this.canSendDocuments = canSendDocuments;
-        return this;
-    }
-
     public Boolean getCanSendPhotos() {
         return canSendPhotos;
-    }
-
-    public ChatMember setCanSendPhotos(Boolean canSendPhotos) {
-        this.canSendPhotos = canSendPhotos;
-        return this;
     }
 
     public Boolean getCanSendVideos() {
         return canSendVideos;
     }
 
-    public ChatMember setCanSendVideos(Boolean canSendVideos) {
-        this.canSendVideos = canSendVideos;
-        return this;
-    }
-
     public Boolean getCanSendVideoNotes() {
         return canSendVideoNotes;
-    }
-
-    public ChatMember setCanSendVideoNotes(Boolean canSendVideoNotes) {
-        this.canSendVideoNotes = canSendVideoNotes;
-        return this;
     }
 
     public Boolean getCanSendVoiceVotes() {
         return canSendVoiceVotes;
     }
 
-    public ChatMember setCanSendVoiceVotes(Boolean canSendVoiceVotes) {
-        this.canSendVoiceVotes = canSendVoiceVotes;
-        return this;
-    }
-
     public Boolean getCanSendPolls() {
         return canSendPolls;
-    }
-
-    public ChatMember setCanSendPolls(Boolean canSendPolls) {
-        this.canSendPolls = canSendPolls;
-        return this;
     }
 
     public Boolean getCanSendOtherMessages() {
         return canSendOtherMessages;
     }
 
-    public ChatMember setCanSendOtherMessages(Boolean canSendOtherMessages) {
-        this.canSendOtherMessages = canSendOtherMessages;
-        return this;
-    }
-
     public Boolean getCanAddWebPagePreviews() {
         return canAddWebPagePreviews;
-    }
-
-    public ChatMember setCanAddWebPagePreviews(Boolean canAddWebPagePreviews) {
-        this.canAddWebPagePreviews = canAddWebPagePreviews;
-        return this;
     }
 
     public Boolean getCanPostStories() {
         return canPostStories;
     }
 
-    public ChatMember setCanPostStories(Boolean canPostStories) {
-        this.canPostStories = canPostStories;
-        return this;
-    }
-
     public Boolean getCanEditStories() {
         return canEditStories;
-    }
-
-    public ChatMember setCanEditStories(Boolean canEditStories) {
-        this.canEditStories = canEditStories;
-        return this;
     }
 
     public Boolean getCanDeleteStories() {
         return canDeleteStories;
     }
 
-    public ChatMember setCanDeleteStories(Boolean canDeleteStories) {
-        this.canDeleteStories = canDeleteStories;
-        return this;
-    }
-
     public Integer getUntilDate() {
         return untilDate;
     }
 
-    public ChatMember setUntilDate(Integer untilDate) {
-        this.untilDate = untilDate;
-        return this;
+    public String getTag() {
+        return tag;
+    }
+
+    public Boolean getCanEditTag() {
+        return canEditTag;
+    }
+
+    public Boolean getCanManageTags() {
+        return canManageTags;
     }
 }
