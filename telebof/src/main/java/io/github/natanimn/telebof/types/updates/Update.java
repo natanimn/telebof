@@ -2,7 +2,6 @@ package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.enums.Updates;
 import com.google.gson.annotations.SerializedName;
-import java.util.Objects;
 
 /**
  * This class represents an incoming update.
@@ -10,7 +9,7 @@ import java.util.Objects;
  *
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  */
 public class Update implements TelegramUpdate {
     /**
@@ -166,6 +165,12 @@ public class Update implements TelegramUpdate {
     @SerializedName("purchased_paid_media")
     private PaidMediaPurchased purchasedPaidMedia;
 
+    /**
+     * Optional. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed
+     */
+    @SerializedName("managed_bot")
+    private ManagedBotUpdated managedBot;
+
     public int getUpdateId() {
         return updateId;
     }
@@ -260,5 +265,9 @@ public class Update implements TelegramUpdate {
 
     public PaidMediaPurchased getPurchasedPaidMedia() {
         return purchasedPaidMedia;
+    }
+
+    public ManagedBotUpdated getManagedBot() {
+        return managedBot;
     }
 }
