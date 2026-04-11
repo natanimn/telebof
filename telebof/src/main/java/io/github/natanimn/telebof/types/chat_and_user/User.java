@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * This object represents a Telegram user or bot.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.4.0
+ * @version 1.5.0
  */
 public class User {
     /**
@@ -99,6 +99,12 @@ public class User {
     @SerializedName("allows_users_to_create_topics")
     private Boolean allowsUsersToCreateTopics;
 
+    /**
+     * Optional. True, if other bots can be created to be controlled by the bot. Returned only in getMe.
+     */
+    @SerializedName("can_manage_bots")
+    private Boolean canManageBots;
+
     public Long getId() {
         return id;
     }
@@ -157,6 +163,10 @@ public class User {
 
     public Boolean getAllowsUsersToCreateTopics() {
         return allowsUsersToCreateTopics;
+    }
+
+    public Boolean getCanManageBots() {
+        return canManageBots;
     }
 
     public String mention() {
