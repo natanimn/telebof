@@ -12,7 +12,7 @@ import java.io.Serializable;
  * For simple text buttons, String can be used instead of this object to specify the button text.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.4.0
+ * @version 1.6.0
  */
 public class KeyboardButton implements Serializable {
 
@@ -41,6 +41,8 @@ public class KeyboardButton implements Serializable {
 
     private ButtonStyle style;
 
+    @SerializedName("request_managed_bot")
+    private KeyboardButtonRequestManagedBot requestManagedBot;
     /**
      * Required
      * @param text Text of the button. If none of the optional fields are used, it will be sent as a message when the button is pressed
@@ -135,5 +137,14 @@ public class KeyboardButton implements Serializable {
     public KeyboardButton setStyle(ButtonStyle style) {
         this.style = style;
         return this;
+    }
+
+    /**
+     * Optional
+     * @param requestManagedBot  specified, pressing the button will ask the user to create and share a bot that will be managed by the current bot.
+     *                           Available for bots that enabled management of other bots in the @BotFather Mini App. Available in private chats only.
+     */
+    public void setRequestManagedBot(KeyboardButtonRequestManagedBot requestManagedBot) {
+        this.requestManagedBot = requestManagedBot;
     }
 }
