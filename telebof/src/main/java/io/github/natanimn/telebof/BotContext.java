@@ -25,6 +25,7 @@ import io.github.natanimn.telebof.types.input.InputPollOption;
 import io.github.natanimn.telebof.types.input.InputStoryContent;
 import io.github.natanimn.telebof.types.input.InputChecklist;
 import io.github.natanimn.telebof.types.input.InputSticker;
+import io.github.natanimn.telebof.types.keyboard.KeyboardButton;
 import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.passport.PassportElementError;
 import io.github.natanimn.telebof.types.web.WebhookInfo;
@@ -36,7 +37,7 @@ import java.util.Map;
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 1.5.0
+ * @version 1.6.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
@@ -1429,6 +1430,24 @@ public class BotContext {
     }
 
     /**
+     * Use this method to get the token of a managed bot.
+     * @param userId User identifier of the managed bot whose token will be returned
+     * @return {@link GetManagedBotToken}
+     */
+    public GetManagedBotToken getManagedBotToken(long userId){
+        return new GetManagedBotToken(userId, api);
+    }
+
+    /**
+     * Use this method to revoke the current token of a managed bot and generate a new one.
+     * @param userId User identifier of the managed bot whose token will be replaced
+     * @return {@link ReplaceManagedBotToken}
+     */
+    public ReplaceManagedBotToken replaceManagedBotToken(long userId){
+        return new ReplaceManagedBotToken(userId, api);
+    }
+
+    /**
      * Use this method to change the list of the bot's commands.
      * @see <a href="https://core.telegram.org/bots/features#commands">this manual</a> for more details about bot commands.
      * @param commands A JSON-serialized list of bot commands to be set as the list of the bot's commands. At most 100 commands can be specified.
@@ -1858,6 +1877,16 @@ public class BotContext {
      */
     public SavePreparedInlineMessage savePreparedInlineMessage(long userId, InlineQueryResult result){
         return new SavePreparedInlineMessage(userId, result, api);
+    }
+
+    /**
+     * Stores a keyboard button that can be used by a user within a Mini App.
+     * @param userId Unique identifier of the target user that can use the button
+     * @param button A JSON-serialized object describing the button to be saved. The button must be of the type request_users, request_chat, or request_managed_bot
+     * @return {@link SavePreparedKeyboardButton}
+     */
+    public SavePreparedKeyboardButton savePreparedKeyboardButton(long userId, KeyboardButton button){
+        return new SavePreparedKeyboardButton(userId, button, api);
     }
 
     /**
