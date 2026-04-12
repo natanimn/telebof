@@ -24,7 +24,7 @@ import java.util.List;
  * This object represents a message.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.5.0
+ * @version 1.6.0
  */
 public class Message implements TelegramUpdate {
     /**
@@ -629,6 +629,30 @@ public class Message implements TelegramUpdate {
     @SerializedName("sender_tag")
     private String senderTag;
 
+    /**
+     * Optional. Service message: user created a bot that will be managed by the current bot
+     */
+    @SerializedName("managed_bot_created")
+    private ManagedBotCreated managedBotCreated;
+
+    /**
+     * Optional. Service message: answer option was added to a poll
+     */
+    @SerializedName("poll_option_added")
+    private PollOptionAdded pollOptionAdded;
+
+    /**
+     * Optional. Service message: answer option was deleted from a poll
+     */
+    @SerializedName("poll_option_deleted")
+    private PollOptionDeleted pollOptionDeleted;
+
+    /**
+     * Optional. Persistent identifier of the specific poll option that is being replied to
+     */
+    @SerializedName("reply_to_poll_option_id")
+    private String replyToPollOptionId;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1049,6 +1073,22 @@ public class Message implements TelegramUpdate {
         return senderTag;
     }
 
+    public ManagedBotCreated getManagedBotCreated() {
+        return managedBotCreated;
+    }
+
+    public PollOptionAdded getPollOptionAdded() {
+        return pollOptionAdded;
+    }
+
+    public PollOptionDeleted getPollOptionDeleted() {
+        return pollOptionDeleted;
+    }
+
+    public String getReplyToPollOptionId() {
+        return replyToPollOptionId;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -1157,6 +1197,10 @@ public class Message implements TelegramUpdate {
                 ", chatOwnerLeft=" + chatOwnerLeft +
                 ", chatOwnerChanged=" + chatOwnerChanged +
                 ", senderTag='" + senderTag + '\'' +
+                ", managedBotCreated=" + managedBotCreated +
+                ", pollOptionAdded=" + pollOptionAdded +
+                ", pollOptionDeleted=" + pollOptionDeleted +
+                ", replyToPollOptionId='" + replyToPollOptionId + '\'' +
                 '}';
     }
 }
