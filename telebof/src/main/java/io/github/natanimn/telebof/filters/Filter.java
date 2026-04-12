@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
  * A class for filtering updates
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  */
 public class Filter{
     private final Update update;
@@ -602,6 +602,30 @@ public class Filter{
      */
     public Boolean chatOwnerChanged(){
         return (update.getMessage() != null && update.getMessage().getChatOwnerChanged() != null);
+    }
+
+    /**
+     * Filter service message for manged bot created
+     * @return {@link  Boolean}
+     */
+    public boolean managedBotCreated(){
+        return (update.getMessage() != null && update.getMessage().getManagedBotCreated() != null);
+    }
+
+    /**
+     * Filter service message for added poll option
+     * @return {@link Boolean}
+     */
+    public boolean pollOptionAdded(){
+        return (update.getMessage() != null && update.getMessage().getPollOptionAdded() != null);
+    }
+
+    /**
+     * Filter service message for deleted poll option
+     * @return {@link Boolean}
+     */
+    public boolean pollOptionDeleted(){
+        return (update.getMessage() != null && update.getMessage().getPollOptionDeleted() != null);
     }
 
     /**
