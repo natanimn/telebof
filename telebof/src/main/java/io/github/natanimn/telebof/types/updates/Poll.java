@@ -10,7 +10,7 @@ import java.util.Objects;
  * This class contains information about a poll.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  */
 public class Poll implements TelegramUpdate {
     /**
@@ -45,10 +45,10 @@ public class Poll implements TelegramUpdate {
     private Integer totalVoterCount;
 
     /**
-     * 0-based identifier of the correct answer option. Available only for polls in the quiz mode, which are closed, or was sent (not forwarded) by the bot or to the private chat with the bot.
+     * Optional. Array of 0-based identifiers of the correct answer options. Available only for polls in quiz mode which are closed or were sent (not forwarded) by the bot or to the private chat with the bot.
      */
-    @SerializedName("correct_option_id")
-    private Integer correctOptionId;
+    @SerializedName("correct_option_ids")
+    private List<Integer> correctOptionIds;
 
     /**
      * Amount of time in seconds the poll will be active after creation
@@ -92,6 +92,15 @@ public class Poll implements TelegramUpdate {
     @SerializedName("question_entities")
     private List<MessageEntity> questionEntities;
 
+    /**
+     * True, if the poll allows to change the chosen answer options
+     */
+    @SerializedName("allows_revoting")
+    private Boolean allowsRevoting;
+
+    @SerializedName("description_entities")
+    private List<MessageEntity> descriptionEntities;
+
     public String getId() {
         return id;
     }
@@ -116,8 +125,8 @@ public class Poll implements TelegramUpdate {
         return totalVoterCount;
     }
 
-    public Integer getCorrectOptionId() {
-        return correctOptionId;
+    public List<Integer> getCorrectOptionIds() {
+        return correctOptionIds;
     }
 
     public Integer getOpenPeriod() {
@@ -148,6 +157,14 @@ public class Poll implements TelegramUpdate {
         return questionEntities;
     }
 
+    public Boolean getAllowsRevoting() {
+        return allowsRevoting;
+    }
+
+    public List<MessageEntity> getDescriptionEntities() {
+        return descriptionEntities;
+    }
+
     @Override
     public String toString() {
         return "Poll{" +
@@ -157,7 +174,7 @@ public class Poll implements TelegramUpdate {
                 ", explanation='" + explanation + '\'' +
                 ", options=" + options +
                 ", totalVoterCount=" + totalVoterCount +
-                ", correctOptionId=" + correctOptionId +
+                ", correctOptionIds=" + correctOptionIds +
                 ", openPeriod=" + openPeriod +
                 ", closeDate=" + closeDate +
                 ", isClosed=" + isClosed +
@@ -165,6 +182,8 @@ public class Poll implements TelegramUpdate {
                 ", allowsMultipleAnswers=" + allowsMultipleAnswers +
                 ", explanationEntities=" + explanationEntities +
                 ", questionEntities=" + questionEntities +
+                ", allowsRevoting=" + allowsRevoting +
+                ", descriptionEntities=" + descriptionEntities +
                 '}';
     }
 }
