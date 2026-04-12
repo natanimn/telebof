@@ -15,7 +15,7 @@ import io.github.natanimn.telebof.types.ReplyParameters;
  * SendPoll class. Returns sent {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  * @see BotContext#sendPoll
  */
 public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
@@ -62,11 +62,11 @@ public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
 
     /**
      * Optional
-     * @param correctOptionId 0-based identifier of the correct answer option, required for polls in quiz mode
+     * @param correctOptionIds A JSON-serialized list of monotonically increasing 0-based identifiers of the correct answer options, required for polls in quiz mode
      * @return {@link SendPoll}
      */
-    public SendPoll correctOptionId(int correctOptionId){
-        return add("correct_option_id", correctOptionId);
+    public SendPoll correctOptionIds(int[] correctOptionIds){
+        return add("correct_option_ids", correctOptionIds);
     }
 
     /**
@@ -210,4 +210,66 @@ public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
         return add("message_effect_id ", messageEffectId);
     }
 
+    /**
+     * Optional
+     * @param allowsRevoting Pass True, if the poll allows to change chosen answer options, defaults to False for quizzes and to True for regular polls
+     * @return {@link SendPoll}
+     */
+    public SendPoll allowsRevoting(Boolean allowsRevoting){
+        return add("allows_revoting", allowsRevoting);
+    }
+
+    /**
+     * Optional
+     * @param shuffleOptions Pass True, if the poll options must be shown in random order
+     * @return {@link SendPoll}
+     */
+    public SendPoll shuffleOptions(Boolean shuffleOptions){
+        return add("shuffle_options", shuffleOptions);
+    }
+
+    /**
+     * Optional
+     * @param allowAddingOptions Pass True, if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes
+     * @return {@link SendPoll}
+     */
+    public SendPoll allowAddingOptions(Boolean allowAddingOptions){
+        return add("allow_adding_options", allowAddingOptions);
+    }
+
+    /**
+     * Optional
+     * @param hideResultsUntilCloses Pass True, if poll results must be shown only after the poll closes
+     * @return {@link SendPoll}
+     */
+    public SendPoll hideResultsUntilCloses(Boolean hideResultsUntilCloses){
+        return add("hide_results_until_closes", hideResultsUntilCloses);
+    }
+
+    /**
+     * Optional
+     * @param description Description of the poll to be sent, 0-1024 characters after entities parsing
+     * @return {@link SendPoll}
+     */
+    public SendPoll description(String description){
+        return add("description", description);
+    }
+
+    /**
+     * Optional
+     * @param descriptionParseMode Mode for parsing entities in the poll description.
+     * @return {@link SendPoll}
+     */
+    public SendPoll descriptionParseMode(ParseMode descriptionParseMode){
+        return add("description_parse_mode", descriptionParseMode);
+    }
+
+    /**
+     * Optional
+     * @param descriptionEntities A JSON-serialized list of special entities that appear in the poll description, which can be specified instead of {@link #descriptionParseMode(ParseMode)}
+     * @return {@link SendPoll}
+     */
+    public SendPoll descriptionEntities(MessageEntity[] descriptionEntities){
+        return add("description_entities", descriptionEntities);
+    }
 }
