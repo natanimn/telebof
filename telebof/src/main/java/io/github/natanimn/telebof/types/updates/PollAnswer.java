@@ -10,7 +10,7 @@ import java.util.Objects;
  * This object represents an answer of a user in a non-anonymous poll.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  */
 public class PollAnswer implements TelegramUpdate {
     /**
@@ -36,6 +36,13 @@ public class PollAnswer implements TelegramUpdate {
     @SerializedName("voter_chat")
     private Chat voterChat;
 
+    /**
+     * Persistent identifiers of the chosen answer options. May be empty if the vote was retracted.
+     */
+    @SerializedName("option_persistent_ids")
+    private List<String> optionPersistentIds;
+
+
     public String getPollId() {
         return pollId;
     }
@@ -52,6 +59,10 @@ public class PollAnswer implements TelegramUpdate {
         return voterChat;
     }
 
+    public List<String> getOptionPersistentIds() {
+        return optionPersistentIds;
+    }
+
     @Override
     public String toString() {
         return "PollAnswer{" +
@@ -59,6 +70,7 @@ public class PollAnswer implements TelegramUpdate {
                 ", user=" + user +
                 ", optionIds=" + optionIds +
                 ", voterChat=" + voterChat +
+                ", optionPersistentIds=" + optionPersistentIds +
                 '}';
     }
 }
