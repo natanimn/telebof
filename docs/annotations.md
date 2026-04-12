@@ -210,6 +210,14 @@ Handles business connection events for monitoring account connections and author
 - `filter()` - Custom filter class for advanced logic
 - `priority()` - Execution priority
 
+#### @ManagedBotHandler
+Handles managed bot updates.
+
+**Parameters:**
+
+- `filter()` - Custom filter class for advanced logic
+- `priority()` - Execution priority
+
 ## Usage Examples
 
 ### Basic Message Handler
