@@ -36,6 +36,9 @@ public class ReplyParameters implements Serializable {
     @SerializedName("checklist_task_id")
     private Integer checklistTaskId;
 
+    @SerializedName("poll_option_id")
+    private String pollOptionId;
+
     /**
      * Required
      * @param messageId Identifier of the message that will be replied to in the current chat, or in the chat chatId if it is specified
@@ -116,6 +119,16 @@ public class ReplyParameters implements Serializable {
      */
     public ReplyParameters setChecklistTaskId(Integer checklistTaskId) {
         this.checklistTaskId = checklistTaskId;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param pollOptionId Persistent identifier of the specific poll option to be replied to
+     * @return {@link ReplyParameters}
+     */
+    public ReplyParameters setPollOptionId(String pollOptionId) {
+        this.pollOptionId = pollOptionId;
         return this;
     }
 }
