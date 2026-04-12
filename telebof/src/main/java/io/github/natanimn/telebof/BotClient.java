@@ -1,6 +1,5 @@
 package io.github.natanimn.telebof;
 
-import java.lang.annotation.Annotation;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
@@ -30,7 +29,7 @@ import java.util.function.Function;
  * Main class of Telebof library
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 1.6.0
  */
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
@@ -72,8 +71,8 @@ final public class BotClient {
         updateMap.put(Update::getEditedBusinessMessage, Updates.EDITED_BUSINESS_MESSAGE);
         updateMap.put(Update::getDeletedBusinessMessages, Updates.DELETED_BUSINESS_MESSAGES);
         updateMap.put(Update::getPurchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
+        updateMap.put(Update::getManagedBot, Updates.MANAGED_BOT);
     }
-
 
     /**
      * @param botToken bot token obtained from @BotFather
@@ -575,6 +574,18 @@ final public class BotClient {
         this.dispatcher.add(Updates.PURCHASED_PAID_MEDIA, map);
     }
 
+    /**
+     * Use this method to register new handler for incoming {@link Update#getManagedBot()} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onManagedBotUpdated(FilterExecutor executor, UpdateHandler<ManagedBotUpdated> handler){
+        LinkedHashMap<FilterExecutor, UpdateHandler<ManagedBotUpdated>> map = new LinkedHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.MANAGED_BOT, map);
+    }
+
     private void addMessageHandler(MessageHandler handler, MethodHandle method){
         MessageHandlerMeta meta = new MessageHandlerMeta(handler, method);
         onMessage(meta::matches, method::invoke);
@@ -691,8 +702,12 @@ final public class BotClient {
         onChosenInlineResult(meta::matches, method::invoke);
     }
 
-    private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
+    private void addManagedBotHandler(ManagedBotHandler handler, MethodHandle method) {
+        var meta = new ManagedBotHandlerMeta(handler, method);
+        onManagedBotUpdated(meta::matches, method::invoke);
+    }
 
+    private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
         for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(CallbackHandler.class))
@@ -740,6 +755,8 @@ final public class BotClient {
         for (var anno : method.getDeclaredAnnotationsByType(EditedBusinessMessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(ChosenInlineHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(ManagedBotHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
     }
 
@@ -805,6 +822,8 @@ final public class BotClient {
                     addEditedBusinessMessageHandler(ebmh, handler.getMethodHandle());
                 else if (handler.getAnnotation() instanceof ChosenInlineHandler cih)
                     addChosenInlineHandler(cih, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof ManagedBotHandler mbh)
+                    addManagedBotHandler(mbh, handler.getMethodHandle());
             }
 
         } catch (IllegalAccessException e) {
