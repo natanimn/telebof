@@ -8,7 +8,7 @@ import io.github.natanimn.telebof.types.chat_and_user.User;
  * @since 1.6.0
  * @version 1.6.0
  */
-public class ManagedBotUpdated {
+public class ManagedBotUpdated implements TelegramUpdate{
     /**
      * User that created the bot
      */
