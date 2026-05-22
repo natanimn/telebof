@@ -16,6 +16,7 @@ import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
 import io.github.natanimn.telebof.types.story.Story;
 import io.github.natanimn.telebof.types.suggested.*;
 import io.github.natanimn.telebof.types.web.WebAppData;
+import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
  * This object represents a message.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.6.0
+ * @version 2.0.0
  */
 public class Message implements TelegramUpdate {
     /**
@@ -653,6 +654,25 @@ public class Message implements TelegramUpdate {
     @SerializedName("reply_to_poll_option_id")
     private String replyToPollOptionId;
 
+    /**
+     * Optional. The unique identifier for the guest query. Use this identifier with the method {@link BotContext#answerGuestQuery} to send a response message.
+     * If non-empty, the message belongs to the chat where the guest bot was summoned, which may not coincide with other existing bot chats sharing the same identifier.
+     */
+    @SerializedName("guest_query_id")
+    private String guestQueryId;
+
+    /**
+     * Optional. For a message sent by a guest bot, this is the user whose original message triggered the bot's response
+     */
+    @SerializedName("guest_bot_caller_user")
+    private User guestBotCallerUser;
+
+    /**
+     * Optional. For a message sent by a guest bot, this is the chat whose original message triggered the bot's response
+     */
+    @SerializedName("guest_bot_caller_chat")
+    private Chat guestBotCallerChat;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1089,6 +1109,18 @@ public class Message implements TelegramUpdate {
         return replyToPollOptionId;
     }
 
+    public String getGuestQueryId() {
+        return guestQueryId;
+    }
+
+    public User getGuestBotCallerUser() {
+        return guestBotCallerUser;
+    }
+
+    public Chat getGuestBotCallerChat() {
+        return guestBotCallerChat;
+    }
+
     @Override
     public String toString() {
         return "Message{" +
@@ -1201,6 +1233,9 @@ public class Message implements TelegramUpdate {
                 ", pollOptionAdded=" + pollOptionAdded +
                 ", pollOptionDeleted=" + pollOptionDeleted +
                 ", replyToPollOptionId='" + replyToPollOptionId + '\'' +
+                ", guestQueryId='" + guestQueryId + '\'' +
+                ", guestBotCallerUser=" + guestBotCallerUser +
+                ", guestBotCallerChat=" + guestBotCallerChat +
                 '}';
     }
 }
