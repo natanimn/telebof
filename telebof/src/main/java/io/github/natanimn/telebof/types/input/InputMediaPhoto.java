@@ -7,12 +7,14 @@ import java.io.File;
  * Represents a photo to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
-public class InputMediaPhoto extends InputMediaBuilder<InputMediaPhoto> {
-
+public class InputMediaPhoto extends InputMediaBuilder<InputMediaPhoto> implements InputPollMedia, InputPollOptionMedia{
     @SerializedName("has_spoiler")
     private Boolean hasSpoiler;
+
+    @SerializedName("show_caption_above_media")
+    private Boolean showCaptionAboveMedia;
 
     /**
      * Required
@@ -36,6 +38,16 @@ public class InputMediaPhoto extends InputMediaBuilder<InputMediaPhoto> {
      */
     public InputMediaPhoto setHasSpoiler(Boolean hasSpoiler) {
         this.hasSpoiler = hasSpoiler;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param showCaptionAboveMedia Optional. Pass True, if the caption must be shown above the message media
+     * @return {@link InputMediaPhoto}
+     */
+    public InputMediaPhoto setShowCaptionAboveMedia(Boolean showCaptionAboveMedia){
+        this.showCaptionAboveMedia = showCaptionAboveMedia;
         return this;
     }
 }
