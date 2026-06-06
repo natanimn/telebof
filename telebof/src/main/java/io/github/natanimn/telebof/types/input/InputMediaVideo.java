@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.input;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
+
 /**
  * Represents a video to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
-public class InputMediaVideo extends InputMediaBuilder<InputMediaVideo> {
+public class InputMediaVideo extends InputMediaBuilder<InputMediaVideo> implements InputPollMedia, InputPollOptionMedia {
     private String thumbnail;
     private Integer width;
     private Integer height;
@@ -24,6 +25,9 @@ public class InputMediaVideo extends InputMediaBuilder<InputMediaVideo> {
 
     @SerializedName("start_timestamp")
     private Integer startTimestamp;
+
+    @SerializedName("show_caption_above_media")
+    private Boolean showCaptionAboveMedia;
 
     /**
      * Required
@@ -130,6 +134,16 @@ public class InputMediaVideo extends InputMediaBuilder<InputMediaVideo> {
      */
     public InputMediaVideo setStartTimestamp(Integer startTimestamp) {
         this.startTimestamp = startTimestamp;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param showCaptionAboveMedia Optional. Pass True, if the caption must be shown above the message media
+     * @return {@link InputMediaVideo}
+     */
+    public InputMediaVideo setShowCaptionAboveMedia(Boolean showCaptionAboveMedia){
+        this.showCaptionAboveMedia = showCaptionAboveMedia;
         return this;
     }
 }
