@@ -2,6 +2,7 @@ package io.github.natanimn.telebof.requests;
 
 import com.google.gson.Gson;
 import io.github.natanimn.telebof.ApiResponse;
+import io.github.natanimn.telebof.async.AsyncCallback;
 import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.Util;
 import io.github.natanimn.telebof.exceptions.TelegramApiException;
@@ -11,6 +12,7 @@ import io.github.natanimn.telebof.exceptions.TelegramError;
 import io.github.natanimn.telebof.exceptions.TimeoutException;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -26,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * A class to interact with telegram server
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
 public class Api {
 
@@ -166,6 +168,33 @@ public class Api {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public <T> void postAsyncRequest(AbstractBaseRequest<?, ?> baseRequest, AsyncCallback<T> callback) {
+        RequestBody requestBody = prepareRequest(baseRequest);
+        Request request = builder.url(getUrl(baseRequest)).post(requestBody).build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                BotLog.error("Error: {0}", e.getMessage());
+                callback.onFailure(e);
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                ResponseBody responseBody = response.body();
+                String jsonString = responseBody.string();
+                var result = Util.parseApiResponse(jsonString, baseRequest.getResponseType());
+                if (!result.isOk()) {
+                    callback.onFailure(TelegramApiException.throwIt(result));
+                    return;
+                }
+                callback.onSuccess((T) result.getResult());
+                BotLog.debug("The server returned: {0}", result.getResult());
+            }
+        });
+    }
+
     public <T, R> R makeRequest(AbstractBaseRequest<T, R> abstractBase) {
         if (botToken == null || botToken.isEmpty()) throw new TelegramError("Undefined botToken");
         BotLog.debug("Request: method={0}, url={1}", abstractBase.methodName, getUrl(abstractBase));
@@ -175,6 +204,15 @@ public class Api {
             throw TelegramApiException.throwIt(response);
         }
         else return response.getResult();
+    }
+
+    public <T, R> void  makeAsyncRequest(AbstractBaseRequest<T, R> abstractBase, AsyncCallback<R> callback){
+        if (botToken == null || botToken.isEmpty()) {
+            System.err.println("Undefined botToken");
+            System.exit(1);
+        }
+        BotLog.debug("AsyncRequest: method={0}, url={1}", abstractBase.methodName, getUrl(abstractBase));
+        postAsyncRequest(abstractBase, callback);
     }
 
     public byte[] downloadFile(String filePath) {
