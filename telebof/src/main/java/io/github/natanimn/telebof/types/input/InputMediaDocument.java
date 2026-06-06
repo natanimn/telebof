@@ -7,9 +7,9 @@ import java.io.File;
  * Represents a general file to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
-public class InputMediaDocument extends InputMediaBuilder<InputMediaDocument> {
+public class InputMediaDocument extends InputMediaBuilder<InputMediaDocument> implements InputPollMedia {
     private String thumbnail;
 
     @SerializedName("disable_content_type_detection")
