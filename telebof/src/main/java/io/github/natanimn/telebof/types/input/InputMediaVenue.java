@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @since 2.0.0
  * @version 2.0.0
  */
-public class InputMediaVenue implements Serializable {
+public class InputMediaVenue implements Serializable, InputPollMedia, InputPollOptionMedia {
     public final String type = "venue";
 
     private final double latitude;
