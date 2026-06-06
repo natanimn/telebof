@@ -1,4 +1,4 @@
-package io.github.natanimn.annotation;
+package io.github.natanimn.telebof.annotation;
 
 import io.github.natanimn.telebof.BotClient;
 import io.github.natanimn.telebof.BotContext;
@@ -6,13 +6,10 @@ import io.github.natanimn.telebof.annotations.MessageHandler;
 import io.github.natanimn.telebof.enums.MessageType;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.filters.CustomFilter;
-import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.updates.Update;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.logging.Level;
 
 public class MessageHandlerTest {
 

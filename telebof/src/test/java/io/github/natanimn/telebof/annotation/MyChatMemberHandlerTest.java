@@ -1,4 +1,4 @@
-package io.github.natanimn.annotation;
+package io.github.natanimn.telebof.annotation;
 
 import io.github.natanimn.telebof.BotClient;
 import io.github.natanimn.telebof.BotContext;

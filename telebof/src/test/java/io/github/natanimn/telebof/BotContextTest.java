@@ -1,8 +1,7 @@
-package io.github.natanimn;
+package io.github.natanimn.telebof;
 
 import io.github.natanimn.telebof.enums.ChatAction;
 import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.BotClient;
 import io.github.natanimn.telebof.types.inline.InlineQueryResultArticle;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import io.github.natanimn.telebof.types.input.InputMediaPhoto;

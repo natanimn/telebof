@@ -1,4 +1,4 @@
-package io.github.natanimn;
+package io.github.natanimn.telebof;
 
 import com.google.gson.Gson;
 
