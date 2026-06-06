@@ -1,19 +1,15 @@
 package io.github.natanimn.telebof.types.input;
 
-import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents an audio file to be treated as music to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
-public class InputMediaAudio extends InputMediaBuilder<InputMediaAudio>{
+public class InputMediaAudio extends InputMediaBuilder<InputMediaAudio> implements InputPollMedia {
     private String thumbnail;
     private String performer;
     private String title;
@@ -21,8 +17,6 @@ public class InputMediaAudio extends InputMediaBuilder<InputMediaAudio>{
 
     @SerializedName("has_spoiler")
     private Boolean hasSpoiler;
-
-    private final List<File> files = new ArrayList<>();
 
     /**
      * Required
@@ -60,7 +54,7 @@ public class InputMediaAudio extends InputMediaBuilder<InputMediaAudio>{
 
     /**
      * Optional.
-     * @param title  Title of the audio
+     * @param title Title of the audio
      */
     public InputMediaAudio setTitle(String title) {
         this.title = title;
