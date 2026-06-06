@@ -10,7 +10,7 @@ import java.util.List;
  * @since 2.0.0
  * @version 2.0.0
  */
-public class InputMediaSticker implements InputMedia{
+public class InputMediaSticker implements InputMedia, InputPollOptionMedia{
     private final String type = "sticker";
     private String media;
     private transient final List<File> files = new ArrayList<>();
