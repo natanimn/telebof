@@ -1,20 +1,16 @@
 package io.github.natanimn.telebof.types.input;
 
-import io.github.natanimn.telebof.enums.ParseMode;
-import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
-public class InputMediaAnimation extends InputMediaBuilder<InputMediaAnimation> {
-
+public class InputMediaAnimation extends InputMediaBuilder<InputMediaAnimation> implements InputPollMedia, InputPollOptionMedia {
     private String thumbnail;
     private Integer width;
     private Integer height;
