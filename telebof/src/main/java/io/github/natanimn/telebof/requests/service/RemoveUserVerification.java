@@ -4,7 +4,7 @@ import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
 
 /**
- * Removes verification from a user who is currently verified on <a hre="https://telegram.org/verify#third-party-verification">behalf of the organization</a> represented by the bot.
+ * Removes verification from a user who is currently verified on <a href="https://telegram.org/verify#third-party-verification">behalf of the organization</a> represented by the bot.
  * @author Natanim
  * @since 1 August 2025
  * @version 1.3.0
