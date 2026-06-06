@@ -1,5 +1,6 @@
 package io.github.natanimn.telebof.requests;
 
+import io.github.natanimn.telebof.async.AsyncCallback;
 import io.github.natanimn.telebof.requests.service.MediaContentType;
 
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.TreeMap;
  * Request builder class for Telegram methods
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
 @SuppressWarnings("unchecked")
 abstract public class AbstractBaseRequest<T, R>{
@@ -27,6 +28,13 @@ abstract public class AbstractBaseRequest<T, R>{
         this.api = api;
         this.methodName = methodName;
         this.responseType = responseType;
+    }
+
+    public AbstractBaseRequest(Object chatId, Api api, String methodName) {
+        add("chat_id", chatId);
+        this.api = api;
+        this.methodName = methodName;
+        this.responseType = Boolean.class;
     }
 
     public AbstractBaseRequest(Api api, String methodName, Type responseType) {
@@ -73,11 +81,25 @@ abstract public class AbstractBaseRequest<T, R>{
     }
 
     /**
-     * executes the request to Telegram.
+     * Executes the request to Telegram synchronously.
      * @return {@link R}
      */
     public final R exec(){
         return api.makeRequest(this);
+    }
+
+    /**
+     * Executes the request to Telegram asynchronously.
+     */
+    public final void await(){
+        api.makeAsyncRequest(this, r -> {});
+    }
+
+    /**
+     * Executes the request to Telegram asynchronously.
+     */
+    public void await(AsyncCallback<R> callback){
+        api.makeAsyncRequest(this, callback);
     }
 
 }
