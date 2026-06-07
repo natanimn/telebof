@@ -6,4 +6,4 @@ package io.github.natanimn.telebof.types.input;
  * @since 2.0.0
  * @version 2.0.0
  */
-public interface InputPollOptionMedia {}
+public interface InputPollOptionMedia extends InputMedia {}
