@@ -10,7 +10,7 @@ import java.util.List;
  * This object contains information about one answer option in a poll to be sent.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
+ * @version 2.0.0
  */
 public class InputPollOption implements Serializable {
     private String text;
@@ -20,6 +20,8 @@ public class InputPollOption implements Serializable {
 
     @SerializedName("text_entities")
     private List<MessageEntity> textEntities;
+
+    private InputPollOptionMedia media;
 
     /**
      * Required
@@ -44,6 +46,11 @@ public class InputPollOption implements Serializable {
      */
     public InputPollOption setTextEntities(MessageEntity[] textEntities) {
         this.textEntities = List.of(textEntities);
+        return this;
+    }
+
+    public InputPollOption setMedia(InputPollOptionMedia media){
+        this.media = media;
         return this;
     }
 }
