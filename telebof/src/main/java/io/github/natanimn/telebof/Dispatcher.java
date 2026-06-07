@@ -3,11 +3,10 @@ package io.github.natanimn.telebof;
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.filters.FilterExecutor;
 import io.github.natanimn.telebof.types.updates.TelegramUpdate;
-import java.util.LinkedHashMap;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A dispatcher class for updates
@@ -15,13 +14,13 @@ import java.util.Map;
  * @param <T>
  */
 public class Dispatcher<T extends TelegramUpdate> {
-    private final Map<Updates, List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>>> handlers;
+    private final ConcurrentMap<Updates, List<ConcurrentHashMap<FilterExecutor, UpdateHandler<T>>>> handlers;
 
     public Dispatcher(){
-        handlers = new HashMap<>();
+        handlers = new ConcurrentHashMap<>();
     }
 
-    public boolean add(Updates obj, LinkedHashMap<FilterExecutor, UpdateHandler<T>> handler){
+    public boolean add(Updates obj, ConcurrentHashMap<FilterExecutor, UpdateHandler<T>> handler){
         if (handlers.containsKey(obj)){
             if (handlers.get(obj).contains(handler)) return false;
             else handlers.get(obj).add(handler);
@@ -31,7 +30,7 @@ public class Dispatcher<T extends TelegramUpdate> {
         return true;
     }
 
-    public List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> get(Updates updates){
+    public List<ConcurrentHashMap<FilterExecutor, UpdateHandler<T>>> get(Updates updates){
         return handlers.get(updates);
     }
 
