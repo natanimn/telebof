@@ -2,7 +2,8 @@ package io.github.natanimn.telebof.types.input;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
+import java.io.File;
+import java.util.List;
 
 /**
  * Represents a location to be sent.
@@ -10,7 +11,7 @@ import java.io.Serializable;
  * @since 2.0.0
  * @version 2.0.0
  */
-public class InputMediaLocation implements Serializable, InputPollMedia, InputPollOptionMedia {
+public class InputMediaLocation implements InputPollMedia, InputPollOptionMedia {
     private final String type = "location";
 
     private double latitude;
@@ -37,5 +38,15 @@ public class InputMediaLocation implements Serializable, InputPollMedia, InputPo
     public InputMediaLocation setHorizontalAccuracy(Double horizontalAccuracy) {
         this.horizontalAccuracy = horizontalAccuracy;
         return this;
+    }
+
+    @Override
+    public boolean hasFile() {
+        return false;
+    }
+
+    @Override
+    public List<File> getFiles() {
+        return List.of();
     }
 }
