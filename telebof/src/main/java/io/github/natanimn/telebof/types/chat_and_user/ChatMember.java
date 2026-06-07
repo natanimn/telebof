@@ -212,6 +212,12 @@ public class ChatMember {
     @SerializedName("can_manage_tags")
     private Boolean canManageTags;
 
+    /**
+     * True, if the user is allowed to react to messages
+     */
+    @SerializedName("can_react_to_messages")
+    private Boolean canReactToMessages;
+
     public ChatMemberStatus getStatus() {
         return status;
     }
@@ -346,5 +352,9 @@ public class ChatMember {
 
     public Boolean getCanManageTags() {
         return canManageTags;
+    }
+
+    public Boolean getCanReactToMessages() {
+        return canReactToMessages;
     }
 }
