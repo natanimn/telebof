@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
  * This object represents a Telegram user or bot.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.5.0
+ * @version 2.0.0
  */
 public class User {
     /**
@@ -104,6 +104,12 @@ public class User {
      */
     @SerializedName("can_manage_bots")
     private Boolean canManageBots;
+
+    /**
+     * Optional. True, if the bot supports guest queries from chats it is not a member of. Returned only in {@link BotContext#getMe()}.
+     */
+    @SerializedName("supports_guest_queries")
+    private Boolean supportsGuestQueries;
 
     public Long getId() {
         return id;
