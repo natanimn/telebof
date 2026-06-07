@@ -6,6 +6,7 @@ import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.input.InputPollOption;
+import io.github.natanimn.telebof.types.input.InputPollMedia;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.updates.Message;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -15,7 +16,7 @@ import io.github.natanimn.telebof.types.ReplyParameters;
  * SendPoll class. Returns sent {@link Message} on success.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.6.0
+ * @version 2.0.0
  * @see BotContext#sendPoll
  */
 public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
@@ -271,5 +272,42 @@ public class SendPoll extends AbstractBaseRequest<SendPoll, Message> {
      */
     public SendPoll descriptionEntities(MessageEntity[] descriptionEntities){
         return add("description_entities", descriptionEntities);
+    }
+
+    /**
+     * Optional
+     * @param media Media added to the poll description
+     * @return {@link SendPoll}
+     */
+    public SendPoll media(InputPollMedia media){
+        return add("media", media);
+    }
+
+    /**
+     * Optional
+     * @param explanationMedia Media added to the quiz explanation
+     * @return {@link SendPoll}
+     */
+    public SendPoll explanationMedia(InputPollMedia explanationMedia){
+        return add("explanation_media", explanationMedia);
+    }
+
+    /**
+     * Optional
+     * @param membersOnly Pass True, if voting is limited to users who have been members of the chat where the poll is being sent for more than 24 hours; for channel chats only
+     * @return {@link SendPoll}
+     */
+    public SendPoll membersOnly(Boolean membersOnly){
+        return add("members_only", membersOnly);
+    }
+
+    /**
+     * Optional
+     * @param countryCodes A JSON-serialized list of 0-12 two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> country codes indicating the countries from which users can vote in the poll;
+     *                     for channel chats only. Use “FT” as a country code to allow users with anonymous numbers to vote. If omitted or empty, then users from any country can participate in the poll.
+     * @return {@link SendPoll}
+     */
+    public SendPoll countryCodes(String[] countryCodes){
+        return add("country_code", countryCodes);
     }
 }
