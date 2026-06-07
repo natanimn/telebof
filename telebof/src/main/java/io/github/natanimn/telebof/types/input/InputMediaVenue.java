@@ -2,7 +2,9 @@ package io.github.natanimn.telebof.types.input;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Represents a venue to be sent.
@@ -46,5 +48,16 @@ public class InputMediaVenue implements Serializable, InputPollMedia, InputPollO
     public InputMediaVenue setFoursquareType(String foursquareType) {
         this.foursquareType = foursquareType;
         return this;
+    }
+
+
+    @Override
+    public boolean hasFile() {
+        return false;
+    }
+
+    @Override
+    public List<File> getFiles() {
+        return List.of();
     }
 }
