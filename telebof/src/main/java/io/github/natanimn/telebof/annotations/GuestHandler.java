@@ -7,8 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Repeatable;
 
 import io.github.natanimn.telebof.annotations.container.GuestHandlers;
-import io.github.natanimn.telebof.enums.ChatType;
-import io.github.natanimn.telebof.enums.MessageType;
 import io.github.natanimn.telebof.filters.CustomFilter;
 import io.github.natanimn.telebof.filters.DefaultCustomFilter;
 
@@ -43,16 +41,6 @@ public @interface GuestHandler {
     String[] texts() default {};
 
     /**
-     * Specifies the chat types where this message handler should be active.
-     * Multiple chat types are combined using OR logic - the handler will trigger
-     * if the chat type matches any of the specified types.
-     *
-     * @return array of {@link ChatType} enum values to filter by
-     * @implNote Empty array matches all chat types
-     */
-    ChatType[] chatType() default {};
-
-    /**
      * Regular expression pattern to match against message text content.
      * The handler will trigger if the message text matches the specified regex pattern.
      *
@@ -60,16 +48,6 @@ public @interface GuestHandler {
      * @implNote Empty string disables regex matching
      */
     String regex() default "";
-
-    /**
-     * Specifies the message types to match (text, photo, video, etc.).
-     * Multiple message types are combined using OR logic - the handler will trigger
-     * if the message type matches any of the specified types.
-     *
-     * @return array of {@link MessageType} enum values to filter by
-     * @implNote Empty array matches all message types
-     */
-    MessageType[] type() default {};
 
     /**
      * Custom filter class for advanced filtering logic beyond the built-in options.
