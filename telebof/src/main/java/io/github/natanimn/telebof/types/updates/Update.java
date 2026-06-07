@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.enums.Updates;
+import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -9,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  *
  * @author Natanim
  * @since 3 March 2025
- * @version 1.6.0
+ * @version 2.0.0
  */
 public class Update implements TelegramUpdate {
     /**
@@ -171,6 +172,12 @@ public class Update implements TelegramUpdate {
     @SerializedName("managed_bot")
     private ManagedBotUpdated managedBot;
 
+    /**
+     * Optional. New guest message. The bot can use the field {@link Message#getGuestQueryId()} and the method {@link BotContext#answerGuestQuery()} to send a message in response.
+     */
+    @SerializedName("guest_message")
+    private Message guestMessage;
+
     public int getUpdateId() {
         return updateId;
     }
@@ -269,5 +276,9 @@ public class Update implements TelegramUpdate {
 
     public ManagedBotUpdated getManagedBot() {
         return managedBot;
+    }
+
+    public Message getGuestMessage() {
+        return guestMessage;
     }
 }
