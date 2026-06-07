@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Describes actions that a non-administrator user is allowed to take in a chat.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.5.0
+ * @version 2.0.0
  */
 public class ChatPermissions implements Serializable {
     /**
@@ -99,6 +99,12 @@ public class ChatPermissions implements Serializable {
      */
     @SerializedName("can_edit_tag")
     private Boolean canEditTag;
+
+    /**
+     * Optional. True, if the user is allowed to react to messages. If omitted, defaults to the value of can_send_messages.
+     */
+    @SerializedName("can_react_to_messages")
+    private Boolean canReactToMessages;
 
     public Boolean getCanSendMessages() {
         return canSendMessages;
@@ -230,7 +236,17 @@ public class ChatPermissions implements Serializable {
         return canEditTag;
     }
 
-    public void setCanEditTag(Boolean canEditTag) {
+    public ChatPermissions setCanEditTag(Boolean canEditTag) {
         this.canEditTag = canEditTag;
+        return this;
+    }
+
+    public Boolean getCanReactToMessages() {
+        return canReactToMessages;
+    }
+
+    public ChatPermissions  setCanReactToMessages(Boolean canReactToMessages) {
+        this.canReactToMessages = canReactToMessages;
+        return this;
     }
 }
