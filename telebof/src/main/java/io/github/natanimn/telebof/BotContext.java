@@ -8,7 +8,6 @@ import io.github.natanimn.telebof.requests.create.*;
 import io.github.natanimn.telebof.requests.delete.*;
 import io.github.natanimn.telebof.requests.edit.*;
 import io.github.natanimn.telebof.requests.get.*;
-import io.github.natanimn.telebof.requests.pin_and_unpin.*;
 import io.github.natanimn.telebof.requests.send.*;
 import io.github.natanimn.telebof.requests.service.*;
 import io.github.natanimn.telebof.requests.set.*;
@@ -37,7 +36,7 @@ import java.util.Map;
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 1.6.0
+ * @version 2.0.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
@@ -202,6 +201,52 @@ public class BotContext {
      */
     public SendPhoto sendPhoto(Object chatId, File photo) {
         return new SendPhoto(chatId, photo, this.api);
+    }
+
+    /**
+     * Use this method to send live photos.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param livePhoto Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size.
+     *                  Pass a file_id as String to send a photo that exists on the Telegram servers
+     * @param photo The static photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers
+     * @return {@link SendLivePhoto}
+     */
+    public SendLivePhoto sendLivePhoto(Object chatId, String livePhoto, String photo){
+        return new SendLivePhoto(chatId, livePhoto, photo, api);
+    }
+
+    /**
+     * Use this method to send live photos.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param livePhoto Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size.
+     * @param photo The static photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers
+     * @return {@link SendLivePhoto}
+     */
+    public SendLivePhoto sendLivePhoto(Object chatId, File livePhoto, String photo){
+        return new SendLivePhoto(chatId, livePhoto, photo, api);
+    }
+
+    /**
+     * Use this method to send live photos.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param livePhoto Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size.
+     *                  Pass a file_id as String to send a photo that exists on the Telegram servers
+     * @param photo The static photo to send.
+     * @return {@link SendLivePhoto}
+     */
+    public SendLivePhoto sendLivePhoto(Object chatId, String livePhoto, File photo){
+        return new SendLivePhoto(chatId, livePhoto, photo, api);
+    }
+
+    /**
+     * Use this method to send live photos.
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param livePhoto Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size.
+     * @param photo The static photo to send.
+     * @return {@link SendLivePhoto}
+     */
+    public SendLivePhoto sendLivePhoto(Object chatId, File livePhoto, File photo){
+        return new SendLivePhoto(chatId, livePhoto, photo, api);
     }
 
     /**
@@ -1135,7 +1180,7 @@ public class BotContext {
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param messageId Identifier of a message to pin
-     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.PinChatMessage}
+     * @return {@link PinChatMessage}
      */
     public PinChatMessage pinChatMessage(Object chatId, int messageId) {
         return new PinChatMessage(chatId, messageId, this.api);
@@ -1146,7 +1191,7 @@ public class BotContext {
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the
      * 'can_pin_messages' administrator right in a supergroup or 'can_edit_messages' administrator right in a channel.
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinChatMessage}
+     * @return {@link UnpinChatMessage}
      */
     public UnpinChatMessage unpinChatMessage(Object chatId) {
         return new UnpinChatMessage(chatId, this.api);
@@ -1157,7 +1202,7 @@ public class BotContext {
      * If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages'
      * administrator right in a supergroup or 'can_edit_messages' administrator right in a channel
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
-     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllChatMessages}
+     * @return {@link UnpinAllChatMessages}
      */
     public UnpinAllChatMessages unpinAllChatMessages(Object chatId) {
         return new UnpinAllChatMessages(chatId, this.api);
@@ -1246,6 +1291,16 @@ public class BotContext {
      */
     public SetMessageReaction setMessageReaction(Object chatId, int messageId){
         return new SetMessageReaction(chatId, messageId, api);
+    }
+
+    /**
+     * Use this method to get the last messages from the personal chat (i.e., the chat currently added to their profile) of a given user.
+     * @param userId Unique identifier for the target user
+     * @param limit The maximum number of messages to return; 1-20
+     * @return {@link GetUserPersonalChatMessages}
+     */
+    public GetUserPersonalChatMessages getUserPersonalChatMessages(long userId, int limit){
+        return new GetUserPersonalChatMessages(userId, limit, api);
     }
 
     /**
@@ -1339,7 +1394,7 @@ public class BotContext {
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
      * @param messageThreadId Unique identifier for the target message thread of the forum topic
-     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllForumTopicMessages}
+     * @return {@link UnpinAllForumTopicMessages}
      */
     public UnpinAllForumTopicMessages unpinAllForumTopicMessages(Object chatId, int messageThreadId) {
         return new UnpinAllForumTopicMessages(chatId, messageThreadId, this.api);
@@ -1402,12 +1457,11 @@ public class BotContext {
      * Use this method to clear the list of pinned messages in a General forum topic.
      * The bot must be an administrator in the chat for this to work and must have the can_pin_messages administrator right in the supergroup.
      * @param chatId Unique identifier for the target chat or username of the target supergroup (in the format @supergroupusername)
-     * @return {@link io.github.natanimn.telebof.requests.pin_and_unpin.UnpinAllGeneralForumTopicMessages}
+     * @return {@link UnpinAllGeneralForumTopicMessages}
      */
     public UnpinAllGeneralForumTopicMessages unpinAllGeneralForumTopicMessages(Object chatId){
         return new UnpinAllGeneralForumTopicMessages(chatId, this.api);
     }
-
 
     /**
      * Use this method to send answers to callback queries sent from inline keyboards.
@@ -1422,11 +1476,21 @@ public class BotContext {
     /**
      * {@link #answerCallbackQuery} with text parameter
      * @param callbackQueryId Unique identifier for the query to be answered
-     * @param text text Text of the notification.
+     * @param text Text of the notification.
      * @return {@link io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery}
      */
     public AnswerCallbackQuery answerCallbackQuery(String callbackQueryId, String text) {
         return new AnswerCallbackQuery(callbackQueryId, this.api).text(text);
+    }
+
+    /**
+     * Use this method to reply to a received guest message.
+     * @param guestQueryId Unique identifier for the query to be answered
+     * @param result A JSON-serialized object describing the message to be sent
+     * @return {@link AnswerGuestQuery}
+     */
+    public AnswerGuestQuery answerGuestQuery(String guestQueryId, InlineQueryResult result){
+        return new AnswerGuestQuery(guestQueryId, result, api);
     }
 
     /**
@@ -1445,6 +1509,25 @@ public class BotContext {
      */
     public ReplaceManagedBotToken replaceManagedBotToken(long userId){
         return new ReplaceManagedBotToken(userId, api);
+    }
+
+    /**
+     * Use this method to get the access settings of a managed bot.
+     * @param userId User identifier of the managed bot whose access settings will be returned
+     * @return {@link GetManagedBotAccessSettings}
+     */
+    public GetManagedBotAccessSettings getManagedBotAccessSettings(long userId){
+        return new GetManagedBotAccessSettings(userId, api);
+    }
+
+    /**
+     * Use this method to change the access settings of a managed bot.
+     * @param userId User identifier of the managed bot whose access settings will be changed
+     * @param isAccessRestricted Pass True, if only selected users can access the bot. The bot's owner can always access it.
+     * @return {@link SetManagedBotAccessSettings}
+     */
+    public SetManagedBotAccessSettings setManagedBotAccessSettings(long userId, boolean isAccessRestricted){
+        return new SetManagedBotAccessSettings(userId, isAccessRestricted, api);
     }
 
     /**
@@ -1642,6 +1725,25 @@ public class BotContext {
      */
     public DeleteMessages deleteMessages(Object chatId, Integer[] messageIds) {
         return new DeleteMessages(chatId, messageIds, this.api);
+    }
+
+    /**
+     * Use this method to remove a reaction from a message in a group or a supergroup chat. The bot must have the 'can_delete_messages' administrator right in the chat.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param messageId Identifier of the target message
+     * @return {@link DeleteMessageReaction}
+     */
+    public DeleteMessageReaction deleteMessageReaction(Object chatId, int messageId){
+        return new DeleteMessageReaction(chatId, messageId, api);
+    }
+
+    /**
+     * Use this method to remove up to 10000 recent reactions in a group or a supergroup chat added by a given user or chat. The bot must have the 'can_delete_messages' administrator right in the chat.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @return {@link DeleteAllMessageReactions}
+     */
+    public DeleteAllMessageReactions deleteAllMessageReactions(Object chatId){
+        return new DeleteAllMessageReactions(chatId, api);
     }
 
     /**
