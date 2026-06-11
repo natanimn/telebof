@@ -1,8 +1,29 @@
 # Advanced Features in Telebof
 
-Telebof provides several advanced configuration options to customize your bot's behavior, including proxy support, logging control, multi-threading, and update management.
+Telebof provides several advanced configuration options to customize your bot's behavior, including asynchronous request, proxy support, logging control, multi-threading, virtual thread, and update management.
 
 ---
+
+## Asynchronous Request
+Instead of using traditional `exec()` method to execute requests synchronously, you can execute non-blocking asynchronous request by using `await()` method.
+
+```java
+context.sendMessage(chatId, "Hello, World").await();
+
+context.sendPhoto(chatId, photoId).await(
+    new AsyncCallback<>(){
+        @Override
+        public void onSuccess(Message message){
+            System.out.println("Photo sent");
+        }
+
+        @Override
+        public void onFailure(Exception ex){
+            System.err.println("Unable to send photo: " + ex.getMessage());
+        }
+    }     
+);
+```
 
 ## Custom Proxy Configuration
 
@@ -120,6 +141,7 @@ public class AdvancedConfigurationExample {
                 .skipOldUpdates(false)       // Receive updates from last 24 hours
                 .limit(10)                   // Maximum 10 updates per request
                 .useTestServer(false)        // Use production Telegram server
+                .useVirtualThread(false)     // Use actual thread
                 .timeout(30)                 // 30-second timeout for requests
                 .offset(-1)                  // Start from most recent update
                 .allowedUpdates(Updates.ALL) // Receive all update types
@@ -152,6 +174,12 @@ public class AdvancedConfigurationExample {
 - **Purpose**: Switch between production and test environments
 - **`false`**: Use official Telegram Bot API (production)
 - **`true`**: Use test environment (Requires speciail bot token. Sign in using <a href="https://web.telegram.org?test=1">Telegram Web</a>)
+
+### useVirtualThread(false)
+
+- **Purpose**: Enables executing handlers on virtual thread
+- **`false`**: Use actual machine thread using thread executors
+- **`true`**: execute updates on virtual thread
 
 ### `timeout(30)`
 
