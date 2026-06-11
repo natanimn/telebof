@@ -54,6 +54,24 @@ Handles edited business message events with the same comprehensive filtering cap
 
 **Parameters:** Same as @MessageHandler
 
+
+#### @GuesttHandler
+Handles guest message events.
+
+**Parameters:**
+
+- `commands()` - Array of bot commands to match
+- `texts()` - Array of exact text content to match
+- `regex()` - Regular expression pattern for text matching
+- `filter()` - Custom filter class for advanced logic
+- `priority()` - Execution priority
+
+**Parameters:**
+
+- `filter()` - Custom filter class for advanced logic
+- `priority()` - Execution priority
+
+
 #### @DeletedBusinessMessageHandler
 Handles deleted business message events, particularly useful for audit logging and compliance.
 
