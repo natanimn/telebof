@@ -2,15 +2,15 @@ package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.enums.PollType;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
+import io.github.natanimn.telebof.types.media_and_service.PollMedia;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This class contains information about a poll.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.6.0
+ * @version 2.0.0
  */
 public class Poll implements TelegramUpdate {
     /**
@@ -101,6 +101,30 @@ public class Poll implements TelegramUpdate {
     @SerializedName("description_entities")
     private List<MessageEntity> descriptionEntities;
 
+    /**
+     * Optional. Media added to the poll description; for polls inside the Message object only
+     */
+    private PollMedia media;
+
+    /**
+     * Optional. Media added to the quiz explanation
+     */
+    @SerializedName("explanation_media")
+    private PollMedia explanationMedia;
+
+    /**
+     * True if voting is limited to users who have been members of the chat where the poll was originally sent for more than 24 hours
+     */
+    @SerializedName("members_only")
+    private Boolean membersOnly;
+
+    /**
+     * Optional. A list of two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> country codes indicating the countries from which users can vote in the poll.
+     * The country code “FT” is used for users with anonymous numbers. If omitted, then users from any country can participate in the poll.
+     */
+    @SerializedName("country_codes")
+    private List<String> countryCodes;
+
     public String getId() {
         return id;
     }
@@ -165,6 +189,30 @@ public class Poll implements TelegramUpdate {
         return descriptionEntities;
     }
 
+    public Boolean getClosed() {
+        return isClosed;
+    }
+
+    public Boolean getAnonymous() {
+        return isAnonymous;
+    }
+
+    public PollMedia getMedia() {
+        return media;
+    }
+
+    public PollMedia getExplanationMedia() {
+        return explanationMedia;
+    }
+
+    public Boolean getMembersOnly() {
+        return membersOnly;
+    }
+
+    public List<String> getCountryCodes() {
+        return countryCodes;
+    }
+
     @Override
     public String toString() {
         return "Poll{" +
@@ -184,6 +232,10 @@ public class Poll implements TelegramUpdate {
                 ", questionEntities=" + questionEntities +
                 ", allowsRevoting=" + allowsRevoting +
                 ", descriptionEntities=" + descriptionEntities +
+                ", media=" + media +
+                ", explanationMedia=" + explanationMedia +
+                ", membersOnly=" + membersOnly +
+                ", countryCodes=" + countryCodes +
                 '}';
     }
 }
