@@ -8,19 +8,15 @@
         <artifactId>telebof-parent</artifactId>
         <version>0.1.0</version>
     </parent>
-    <version>0.1.0</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+<!--    <modules>-->
+<!--        <module>long-polling</module>-->
+<!--        <module>spring-example</module>-->
+<!--    </modules>-->
     <artifactId>examples</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>io.github.natanimn</groupId>
-            <artifactId>telebof</artifactId>
-            <version>0.9.3</version>
-        </dependency>
-    </dependencies>
     <properties>
-        <maven.compiler.source>20</maven.compiler.source>
-        <maven.compiler.target>20</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <build>
