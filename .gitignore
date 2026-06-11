@@ -5,3 +5,4 @@ telebof/target
 /out
 /examples/webhook/spring/target
 /examples/long-polling/target
+**/target
