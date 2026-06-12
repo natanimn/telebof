@@ -39,7 +39,7 @@ public class MyFirstBot {
 
 Before diving in, make sure you have:  
 
-- Java 20 or above.  
+- Java 21 or above.  
 - Basic understanding of Java.
 - Knowledge of [Telegram Bot API](https://telegram.org/bots/api)  
 
