@@ -1,13 +1,17 @@
 package io.github.natanimn.telebof;
 
+
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
 
-import java.util.*;
-
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
 import io.github.natanimn.telebof.annotations.*;
 import io.github.natanimn.telebof.annotations.meta.*;
 import io.github.natanimn.telebof.exceptions.*;
@@ -29,7 +33,7 @@ import java.util.function.Function;
  * Main class of Telebof library
  * @author Natanim
  * @since 3 March 2025
- * @version 1.6.0
+ * @version 2.0.0
  */
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
@@ -45,8 +49,7 @@ final public class BotClient {
     private Boolean isConnected;
     private final ExecutorService pollingExecutor;
     private final GetUpdates getUpdates;
-    private static final Map<Function<Update, TelegramUpdate>, Updates> updateMap = new LinkedHashMap<>();
-
+    private static final ConcurrentMap<Function<Update, TelegramUpdate>, Updates> updateMap = new ConcurrentHashMap<>();
     static {
         updateMap.put(Update::getMessage, Updates.MESSAGE);
         updateMap.put(Update::getCallbackQuery, Updates.CALLBACK_QUERY);
@@ -72,6 +75,7 @@ final public class BotClient {
         updateMap.put(Update::getDeletedBusinessMessages, Updates.DELETED_BUSINESS_MESSAGES);
         updateMap.put(Update::getPurchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
         updateMap.put(Update::getManagedBot, Updates.MANAGED_BOT);
+        updateMap.put(Update::getGuestMessage, Updates.GUEST_MESSAGE);
     }
 
     /**
@@ -85,6 +89,7 @@ final public class BotClient {
      * @param localBotApiUrl local bot api url
      * @param useTestServer test server
      * @param numThreads number of threads to run handlers parallel
+     * @param useVirtualThread allow using virtual thread to process handlers
      */
     private BotClient(
             String botToken,
@@ -96,16 +101,15 @@ final public class BotClient {
             Proxy proxy,
             String localBotApiUrl,
             boolean useTestServer,
-            int numThreads
+            int numThreads,
+            boolean useVirtualThread
     ) {
 
         this.skipOldUpdates = skipOldUpdates;
         this.offset = offset;
         this.storage = new StateMemoryStorage();
-        this.executor  = Executors.newFixedThreadPool(numThreads);
+        this.executor  = !useVirtualThread? Executors.newFixedThreadPool(numThreads): null;
         this.dispatcher = new Dispatcher<>();
-        this.isConnected = false;
-
         var getUpdatesApi = new Api(botToken, useTestServer, proxy, localBotApiUrl);
 
         getUpdates = new GetUpdates(getUpdatesApi)
@@ -132,7 +136,8 @@ final public class BotClient {
                 null,
                 null,
                 false,
-                2
+                2,
+                false
         );
     }
 
@@ -151,6 +156,7 @@ final public class BotClient {
         private Updates[] allowedUpdates;
         private boolean useTestServer;
         private int numThreads;
+        private boolean useVirtualThread;
         public Builder(String botToken){
             this.botToken = botToken;
             this.timeout = 20;
@@ -162,6 +168,7 @@ final public class BotClient {
             this.proxy = null;
             this.useTestServer = false;
             this.numThreads = 2;
+            this.useVirtualThread = false;
         }
 
         /**
@@ -257,6 +264,16 @@ final public class BotClient {
             return this;
         }
 
+        /**
+         * Optional
+         * @param useVirtualThread enable processing handlers on virtual thread
+         * @return {@link Builder}
+         */
+        public Builder useVirtualThread(boolean useVirtualThread){
+            this.useVirtualThread = useVirtualThread;
+            return this;
+        }
+
         public BotClient build(){
             return new BotClient(
                     botToken,
@@ -268,7 +285,8 @@ final public class BotClient {
                     proxy,
                     localBotApiUrl,
                     useTestServer,
-                    numThreads
+                    numThreads,
+                    useVirtualThread
             );
         }
 
@@ -281,7 +299,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onMessage(FilterExecutor executor, UpdateHandler<Message> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.MESSAGE, map);
     }
@@ -294,7 +312,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onCallback(FilterExecutor executor, UpdateHandler<CallbackQuery> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<CallbackQuery>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<CallbackQuery>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CALLBACK_QUERY, map);
     }
@@ -307,7 +325,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onInline(FilterExecutor executor, UpdateHandler<InlineQuery> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<InlineQuery>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<InlineQuery>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.INLINE_QUERY, map);
 
@@ -321,7 +339,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onPoll(FilterExecutor executor, UpdateHandler<Poll> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Poll>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Poll>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.POLL, map);
 
@@ -335,7 +353,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onMyChatMember(FilterExecutor executor, UpdateHandler<ChatMemberUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.MY_CHAT_MEMBER, map);
     }
@@ -348,7 +366,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onPollAnswer(FilterExecutor executor, UpdateHandler<PollAnswer> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<PollAnswer>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<PollAnswer>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.POLL_ANSWER, map);
     }
@@ -361,7 +379,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onPreCheckout(FilterExecutor executor, UpdateHandler<PreCheckoutQuery> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<PreCheckoutQuery>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<PreCheckoutQuery>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.PRE_CHECKOUT_QUERY, map);
     }
@@ -374,7 +392,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onChatMember(FilterExecutor executor, UpdateHandler<ChatMemberUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChatMemberUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CHAT_MEMBER, map);
     }
@@ -387,7 +405,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onEditedMessage(FilterExecutor executor, UpdateHandler<Message> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.EDITED_MESSAGE, map);
     }
@@ -400,7 +418,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onChannelPost(FilterExecutor executor, UpdateHandler<Message> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CHANNEL_POST, map);
     }
@@ -413,7 +431,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onEditedChannelPost(FilterExecutor executor, UpdateHandler<Message> handler) {
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.EDITED_CHANNEL_POST, map);
     }
@@ -426,7 +444,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onChatJoinRequest(FilterExecutor executor, UpdateHandler<ChatJoinRequest> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChatJoinRequest>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChatJoinRequest>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CHAT_JOIN_REQUEST, map);
     }
@@ -439,7 +457,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onChosenInlineResult(FilterExecutor executor, UpdateHandler<ChosenInlineResult> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChosenInlineResult>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChosenInlineResult>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CHOSEN_INLINE_RESULT, map);
     }
@@ -452,7 +470,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onShipping(FilterExecutor executor, UpdateHandler<ShippingQuery> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ShippingQuery>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ShippingQuery>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.SHIPPING_QUERY, map);
     }
@@ -465,7 +483,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onReaction(FilterExecutor executor, UpdateHandler<MessageReactionUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<MessageReactionUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<MessageReactionUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.MESSAGE_REACTION, map);
     }
@@ -478,7 +496,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onReactionCount(FilterExecutor executor, UpdateHandler<MessageReactionCountUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<MessageReactionCountUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<MessageReactionCountUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.MESSAGE_REACTION_COUNT, map);
     }
@@ -491,7 +509,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onChatBoost(FilterExecutor executor, UpdateHandler<ChatBoostUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChatBoostUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChatBoostUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.CHAT_BOOST, map);
     }
@@ -504,7 +522,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onRemovedChatBoost(FilterExecutor executor, UpdateHandler<ChatBoostRemoved> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ChatBoostRemoved>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ChatBoostRemoved>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.REMOVED_CHAT_BOOST, map);
     }
@@ -517,7 +535,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onBusinessConnection(FilterExecutor executor, UpdateHandler<BusinessConnection> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<BusinessConnection>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<BusinessConnection>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.BUSINESS_CONNECTION, map);
     }
@@ -530,7 +548,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onBusinessMessage(FilterExecutor executor, UpdateHandler<Message> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.BUSINESS_MESSAGE, map);
     }
@@ -543,7 +561,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onEditedBusinessMessage(FilterExecutor executor, UpdateHandler<Message> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<Message>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.EDITED_BUSINESS_MESSAGE, map);
     }
@@ -556,7 +574,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onDeletedBusinessMessage(FilterExecutor executor, UpdateHandler<BusinessMessagesDeleted> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<BusinessMessagesDeleted>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<BusinessMessagesDeleted>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.DELETED_BUSINESS_MESSAGES, map);
     }
@@ -569,7 +587,7 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onPurchasedPaidMedia(FilterExecutor executor, UpdateHandler<PaidMediaPurchased> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<PaidMediaPurchased>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<PaidMediaPurchased>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.PURCHASED_PAID_MEDIA, map);
     }
@@ -581,15 +599,26 @@ final public class BotClient {
      */
     @SuppressWarnings("unchecked")
     public void onManagedBotUpdated(FilterExecutor executor, UpdateHandler<ManagedBotUpdated> handler){
-        LinkedHashMap<FilterExecutor, UpdateHandler<ManagedBotUpdated>> map = new LinkedHashMap<>();
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<ManagedBotUpdated>> map = new ConcurrentHashMap<>();
         map.put(executor, handler);
         this.dispatcher.add(Updates.MANAGED_BOT, map);
+    }
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#getGuestMessage()} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onGuest(FilterExecutor executor, UpdateHandler<Message> handler){
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<Message>> map = new ConcurrentHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.GUEST_MESSAGE, map);
     }
 
     private void addMessageHandler(MessageHandler handler, MethodHandle method){
         MessageHandlerMeta meta = new MessageHandlerMeta(handler, method);
         onMessage(meta::matches, method::invoke);
-
     }
 
     private void addEditedMessageHandler(EditedMessageHandler handler, MethodHandle method) {
@@ -707,6 +736,11 @@ final public class BotClient {
         onManagedBotUpdated(meta::matches, method::invoke);
     }
 
+    private void addGuestHandler(GuestHandler handler, MethodHandle method){
+        var meta = new GuestHandlerMeta(handler, method);
+        onGuest(meta::matches, method::invoke);
+    }
+
     private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
         for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
@@ -758,6 +792,17 @@ final public class BotClient {
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(ManagedBotHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(GuestHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+    }
+
+    public void addHandlers(List<Handler> handlers){
+        BotLog.info("Adding {0} handlers class", handlers.size());
+        List<Handler> newHandlers = new ArrayList<>(handlers.size());
+        newHandlers.addAll(handlers);
+        newHandlers.sort(Comparator.comparingInt(Handler::priority));
+        newHandlers.forEach(handler -> addHandler(handler.clazz()));
+
     }
 
     public void addHandler(Object object) {
@@ -824,6 +869,8 @@ final public class BotClient {
                     addChosenInlineHandler(cih, handler.getMethodHandle());
                 else if (handler.getAnnotation() instanceof ManagedBotHandler mbh)
                     addManagedBotHandler(mbh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof GuestHandler gh)
+                    addGuestHandler(gh, handler.getMethodHandle());
             }
 
         } catch (IllegalAccessException e) {
@@ -837,14 +884,14 @@ final public class BotClient {
             Filter filter,
             TelegramUpdate update
     ){
-        List<LinkedHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
+        List<ConcurrentHashMap<FilterExecutor, UpdateHandler<T>>> execs = dispatcher.get(updateName);
         if (execs != null) {
-            for (LinkedHashMap<FilterExecutor, UpdateHandler<T>> exec : execs) {
-                for (Map.Entry<FilterExecutor, UpdateHandler<T>> entry : exec.entrySet()) {
-                    FilterExecutor _filter = entry.getKey();
+            for (var exec : execs) {
+                for (var entry : exec.entrySet()) {
+                    FilterExecutor filterExecutor = entry.getKey();
                     UpdateHandler<T> handler = entry.getValue();
-                    if (_filter.execute(filter)) {
-                        executor.execute(() -> {
+                    if (filterExecutor.execute(filter)) {
+                        Runnable function = () -> {
                             try {
                                 handler.invoke(context, (T) update);
                             } catch (Throwable e) {
@@ -852,7 +899,12 @@ final public class BotClient {
                             } finally {
                                 BotLog.info("Task executed");
                             }
-                        });
+                        };
+
+                        if (executor == null)
+                            Thread.ofVirtual().start(function);
+                        else
+                            executor.execute(function);
                         return;
                     }
                 }
@@ -874,7 +926,7 @@ final public class BotClient {
     }
 
     private UpdateInfo getInfoFromUpdate(Update update) {
-        for (Map.Entry<Function<Update, TelegramUpdate>, Updates> entry : updateMap.entrySet()) {
+        for (var entry : updateMap.entrySet()) {
             TelegramUpdate val = entry.getKey().apply(update);
             if (val != null) {
                 return new UpdateInfo(val, entry.getValue());
@@ -890,10 +942,11 @@ final public class BotClient {
     public void processUpdates(List<Update> updates){
         BotLog.info("Processing updates");
         for (Update update: updates) {
-            UpdateInfo info = getInfoFromUpdate(update);
+            UpdateInfo info = getInfoFromUpdate(update);;
             var filter      = new Filter(update, storage);
             if (info != null)
                 executeUpdate(info.uname(), filter, info.update());
+
         }
     }
 
