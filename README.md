@@ -15,11 +15,12 @@
   </a>
 </p>
 
-### <p align='center'>Supported 9.6 BotAPI</b>
+### <p align='center'>Supported 10.0 BotAPI</b>
 
 ## Overview
 
 Telebof is easy and modern Java library for building Telegram bots using the Telegram Bot API. 
+Supports integrating with SpringBoot through `telebof-spring` module, and both synchronous and asynchronous request. 
 
 ## Installation
 
@@ -30,7 +31,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>1.6.0</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
@@ -38,7 +39,7 @@ Add the following dependency to your `pom.xml`:
 Add the following to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.natanimn:telebof:1.6.0'
+implementation 'io.github.natanimn:telebof:2.0.0'
 ```
 
 ---
@@ -99,12 +100,102 @@ public class MyFirstEchoBot {
 } 
 ```
 
+## Asynchronous 
+
+Using `.await()` method
+
+```java
+import io.github.natanimn.telebof.annotations.MessageHandler;
+import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.types.Message;
+import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.BotClient;
+import io.github.natanimn.telebof.async.AsyncCallback;
+
+public class MyFirstEchoBot {
+    static final String TOKEN = "YOUR_BOT_TOKEN_HERE"; // Get from @BotFather
+
+    public static void main(String[] args) {
+        final BotClient bot = new BotClient(TOKEN);
+        bot.addHandler(new MyFirstEchoBot());
+        bot.startPolling();
+    }
+
+    @MessageHandler(commands = "start")
+    void start(BotContext context, Message message){
+        context.sendMessage(message.getChat().getId(), "Welcome to my echo bot! 👋").await();
+    }
+
+    @MessageHandler(type = MessageType.TEXT, priority = 1)
+    void echo(BotContext context, Message message){
+        context.sendMessage(message.getChat().getId(), "You said: " + message.getText())
+                .await(
+                        new AsyncCallback<>(){
+                            public void onSuccess(Message msg){
+                                System.out.println("Echoed successfully");
+                            }
+                            
+                            public void onFailure(Exception e){
+                                System.err.println("Failed to echo due to: " + e.getMessage());
+                            }
+                        }
+                );
+    }
+} 
+```
+
 **To get started:**
 1. Create a bot with [@BotFather](https://t.me/BotFather) on Telegram
 2. Replace `YOUR_BOT_TOKEN_HERE` with your actual bot token
 3. Run the code and send a message to your bot!
 
 ---
+
+### Easy SpringBoot Integration
+No manual or complex configuration needed. Just install additional module `telebof-spring` and pass `bot.token` inside `application.properties` 
+
+**Maven**
+```xml
+<dependency>
+    <groupId>io.github.natanimn</groupId>
+    <artifactId>telebof-spring</artifactId>
+    <version>2.0.0</version>
+</dependency>
+```
+
+**Gradle**
+```groovy
+implementation 'io.github.natanimn:telebof-spring:2.0.0'
+```
+
+```java
+import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.spring.Bot;
+import io.github.natanimn.telebof.annotations.MessageHandler;
+import io.github.natanimn.telebof.enums.MessageType;
+import io.github.natanimn.telebof.types.updates.Message;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@Bot
+public class SpringExampleApplication {
+    
+    @MessageHandler(commands = "start")
+    public void start(BotContext context, Message message){
+        context.sendMessage(message.getChat().getId(), "Hello, I am echo bot").exec();
+    }
+    
+    @MessageHandler(type = MessageType.TEXT, priority = 1)
+    public void echo(BotContext context, Message message){
+        context.sendMessage(message.getChat().getId(), message.getText()).exec();
+    }
+    
+    public static void main(String[] args){
+        SpringApplication.run(SpringExampleApplication.class, args);
+    }
+}
+```
 
 ## Documentation
 
@@ -161,8 +252,8 @@ public class AdvancedBot {
 3. **Issue Tracker**: [Report bugs](https://github.com/natanimn/telebof/issues) or request features
 
 ## Share Your Bot
-Want your bot to be featured in our examples?  
-**Requirements**: Public source code<br>
+Want your bot to be listed here?  
+**Requirements**: Public source code
 **How to submit**: Make a pull request with your bot implementation!
 
 ---
