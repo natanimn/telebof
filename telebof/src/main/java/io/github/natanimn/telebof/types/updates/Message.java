@@ -13,6 +13,7 @@ import io.github.natanimn.telebof.types.passport.PassportData;
 import io.github.natanimn.telebof.types.payments.PaidMediaInfo;
 import io.github.natanimn.telebof.types.payments.RefundedPayment;
 import io.github.natanimn.telebof.types.payments.SuccessfulPayment;
+import io.github.natanimn.telebof.types.rich.RichMessage;
 import io.github.natanimn.telebof.types.story.Story;
 import io.github.natanimn.telebof.types.suggested.*;
 import io.github.natanimn.telebof.types.web.WebAppData;
@@ -25,7 +26,6 @@ import java.util.List;
  * This object represents a message.
  * @author Natanim
  * @since 3 March 2025
- * @version 2.0.0
  */
 public class Message implements TelegramUpdate {
     /**
@@ -673,6 +673,9 @@ public class Message implements TelegramUpdate {
     @SerializedName("guest_bot_caller_chat")
     private Chat guestBotCallerChat;
 
+    @SerializedName("rich_message")
+    private RichMessage richMessage;
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1121,121 +1124,8 @@ public class Message implements TelegramUpdate {
         return guestBotCallerChat;
     }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "messageId=" + messageId +
-                ", messageThreadId=" + messageThreadId +
-                ", date=" + date +
-                ", editDate=" + editDate +
-                ", migrateToChatId=" + migrateToChatId +
-                ", migrateFromChatId=" + migrateFromChatId +
-                ", authorSignature='" + authorSignature + '\'' +
-                ", text='" + text + '\'' +
-                ", caption='" + caption + '\'' +
-                ", newChatTitle='" + newChatTitle + '\'' +
-                ", connectedWebsite='" + connectedWebsite + '\'' +
-                ", mediaGroupId='" + mediaGroupId + '\'' +
-                ", businessConnectionId='" + businessConnectionId + '\'' +
-                ", from=" + from +
-                ", viaBot=" + viaBot +
-                ", leftChatMember=" + leftChatMember +
-                ", senderBusinessBot=" + senderBusinessBot +
-                ", newChatMembers=" + newChatMembers +
-                ", senderChat=" + senderChat +
-                ", chat=" + chat +
-                ", isTopicMessage=" + isTopicMessage +
-                ", isAutomaticForward=" + isAutomaticForward +
-                ", hasProtectedContent=" + hasProtectedContent +
-                ", isFromOnline=" + isFromOnline +
-                ", hasMediaSpoiler=" + hasMediaSpoiler +
-                ", deleteChatPhoto=" + deleteChatPhoto +
-                ", groupChatCreated=" + groupChatCreated +
-                ", supergroupChatCreated=" + supergroupChatCreated +
-                ", channelChatCreated=" + channelChatCreated +
-                ", replyToMessage=" + replyToMessage +
-                ", pinnedMessage=" + pinnedMessage +
-                ", entities=" + entities +
-                ", captionEntities=" + captionEntities +
-                ", animation=" + animation +
-                ", audio=" + audio +
-                ", document=" + document +
-                ", photo=" + photo +
-                ", newChatPhoto=" + newChatPhoto +
-                ", sticker=" + sticker +
-                ", video=" + video +
-                ", videoNote=" + videoNote +
-                ", voice=" + voice +
-                ", contact=" + contact +
-                ", dice=" + dice +
-                ", game=" + game +
-                ", poll=" + poll +
-                ", story=" + story +
-                ", venue=" + venue +
-                ", location=" + location +
-                ", messageAutoDeleteTimerChanged=" + messageAutoDeleteTimerChanged +
-                ", invoice=" + invoice +
-                ", successfulPayment=" + successfulPayment +
-                ", usersShared=" + usersShared +
-                ", chatShared=" + chatShared +
-                ", writeAccessAllowed=" + writeAccessAllowed +
-                ", passportData=" + passportData +
-                ", proximityAlertTriggered=" + proximityAlertTriggered +
-                ", forumTopicCreated=" + forumTopicCreated +
-                ", forumTopicEdited=" + forumTopicEdited +
-                ", forumTopicClosed=" + forumTopicClosed +
-                ", forumTopicReopened=" + forumTopicReopened +
-                ", generalForumTopicHidden=" + generalForumTopicHidden +
-                ", generalForumTopicUnhidden=" + generalForumTopicUnhidden +
-                ", videoChatScheduled=" + videoChatScheduled +
-                ", videoChatStarted=" + videoChatStarted +
-                ", videoChatEnded=" + videoChatEnded +
-                ", videoChatParticipantsInvited=" + videoChatParticipantsInvited +
-                ", webAppData=" + webAppData +
-                ", replyMarkup=" + replyMarkup +
-                ", externalReply=" + externalReply +
-                ", quote=" + quote +
-                ", linkPreviewOptions=" + linkPreviewOptions +
-                ", giveaway=" + giveaway +
-                ", giveawayCreated=" + giveawayCreated +
-                ", giveawayWinners=" + giveawayWinners +
-                ", giveawayCompleted=" + giveawayCompleted +
-                ", forwardOrigin=" + forwardOrigin +
-                ", boostAdded=" + boostAdded +
-                ", senderBoostCount=" + senderBoostCount +
-                ", replyToStory=" + replyToStory +
-                ", chatBackgroundSet=" + chatBackgroundSet +
-                ", effectId='" + effectId + '\'' +
-                ", showCaptionAboveMedia=" + showCaptionAboveMedia +
-                ", paidMedia=" + paidMedia +
-                ", refundedPayment=" + refundedPayment +
-                ", gift=" + gift +
-                ", uniqueGift=" + uniqueGift +
-                ", paidMessagePriceChanged=" + paidMessagePriceChanged +
-                ", paidStarCount=" + paidStarCount +
-                ", checklist=" + checklist +
-                ", checklistTasksDone=" + checklistTasksDone +
-                ", checklistTasksAdded=" + checklistTasksAdded +
-                ", directMessagePriceChanged=" + directMessagePriceChanged +
-                ", replyToChecklistTaskId=" + replyToChecklistTaskId +
-                ", directMessagesTopic=" + directMessagesTopic +
-                ", isPaidPost=" + isPaidPost +
-                ", suggestedPostApproved=" + suggestedPostApproved +
-                ", suggestedPostApprovalFailed=" + suggestedPostApprovalFailed +
-                ", suggestedPostDeclined=" + suggestedPostDeclined +
-                ", suggestedPostPaid=" + suggestedPostPaid +
-                ", suggestedPostRefunded=" + suggestedPostRefunded +
-                ", giftUpgradeSent=" + giftUpgradeSent +
-                ", chatOwnerLeft=" + chatOwnerLeft +
-                ", chatOwnerChanged=" + chatOwnerChanged +
-                ", senderTag='" + senderTag + '\'' +
-                ", managedBotCreated=" + managedBotCreated +
-                ", pollOptionAdded=" + pollOptionAdded +
-                ", pollOptionDeleted=" + pollOptionDeleted +
-                ", replyToPollOptionId='" + replyToPollOptionId + '\'' +
-                ", guestQueryId='" + guestQueryId + '\'' +
-                ", guestBotCallerUser=" + guestBotCallerUser +
-                ", guestBotCallerChat=" + guestBotCallerChat +
-                '}';
+    public RichMessage getRichMessage() {
+        return richMessage;
     }
+
 }
