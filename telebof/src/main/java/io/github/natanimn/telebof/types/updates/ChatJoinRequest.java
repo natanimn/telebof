@@ -1,17 +1,14 @@
 package io.github.natanimn.telebof.types.updates;
 
+import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.ChatInviteLink;
 import io.github.natanimn.telebof.types.chat_and_user.User;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Objects;
 
 /**
  * Represents a join request sent to a chat.
  * @author Natanim
- * @since  3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
 public class ChatJoinRequest implements TelegramUpdate {
     /**
@@ -46,6 +43,13 @@ public class ChatJoinRequest implements TelegramUpdate {
     @SerializedName("invite_link")
     private ChatInviteLink inviteLink;
 
+    /**
+     * Optional. Identifier of the join request query; for bots assigned to process join request only.
+     * If present, then the bot must call sendChatJoinRequestWebApp or directly call answerChatJoinRequestQuery within 10 seconds.
+     */
+    @SerializedName("query_id")
+    private String queryId;
+
     public Chat getChat() {
         return chat;
     }
@@ -70,33 +74,7 @@ public class ChatJoinRequest implements TelegramUpdate {
         return inviteLink;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatJoinRequest that = (ChatJoinRequest) object;
-        return Objects.equals(chat, that.chat) &&
-                Objects.equals(from, that.from) &&
-                Objects.equals(userChatId, that.userChatId) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(bio, that.bio) &&
-                Objects.equals(inviteLink, that.inviteLink);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(chat, from, userChatId, date, bio, inviteLink);
-    }
-
-    @Override
-    public String toString() {
-        return "ChatJoinRequest{" +
-                "chat=" + chat +
-                ", from=" + from +
-                ", userChatId=" + userChatId +
-                ", date=" + date +
-                ", bio='" + bio + '\'' +
-                ", inviteLink=" + inviteLink +
-                '}';
+    public String getQueryId() {
+        return queryId;
     }
 }
