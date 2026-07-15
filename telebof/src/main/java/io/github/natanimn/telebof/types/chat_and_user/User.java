@@ -7,8 +7,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * This object represents a Telegram user or bot.
  * @author Natanim
- * @since 3 March 2025
- * @version 2.0.0
+ * @since 0.1
  */
 public class User {
     /**
@@ -111,6 +110,12 @@ public class User {
     @SerializedName("supports_guest_queries")
     private Boolean supportsGuestQueries;
 
+    /**
+     * Optional. True, if the bot supports join request queries and can be assigned to process them. Returned only in getMe.
+     */
+    @SerializedName("supports_join_request_queries")
+    private Boolean supportsJoinRequestQueries;
+
     public Long getId() {
         return id;
     }
@@ -173,6 +178,14 @@ public class User {
 
     public Boolean getCanManageBots() {
         return canManageBots;
+    }
+
+    public Boolean getSupportsGuestQueries() {
+        return supportsGuestQueries;
+    }
+
+    public Boolean getSupportsJoinRequestQueries() {
+        return supportsJoinRequestQueries;
     }
 
     public String mention() {
