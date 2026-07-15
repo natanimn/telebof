@@ -4,6 +4,7 @@ import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.types.input.InputRichMessage;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.media_and_service.LinkPreviewOptions;
 import io.github.natanimn.telebof.types.updates.Message;
@@ -15,34 +16,31 @@ import java.util.List;
  * EditMessageText class.
  * @author Natanim
  * @since 3 March 2025
- * @version 1.3.0
  * @see BotContext#editMessageText
  */
 public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object> {
-    /**
-     * Required
-     * @param text test
-     * @param chatId chat id
-     * @param messageId message id
-     * @param api api
-     * @see BotContext#editMessageText(String, Object, int)
-     */
+
     public EditMessageText(Object chatId, String text, int messageId, Api api) {
         super(chatId, api, "editMessageText", Message.class);
         add("text", text);
         add("message_id", messageId);
     }
 
-    /**
-     * Required
-     * @param text test
-     * @param inlineMessageId inline message id
-     * @param api api
-     * @see BotContext#editMessageText(String, String)
-     */
+    public EditMessageText(Object chatId, InputRichMessage richMessage, int messageId, Api api) {
+        super(chatId, api, "editMessageText", Message.class);
+        add("rich_message", richMessage);
+        add("message_id", messageId);
+    }
+
     public EditMessageText(String inlineMessageId, String text, Api api) {
         super(api, "editMessageText", Boolean.class);
         add("text", text);
+        add("inline_message_id", inlineMessageId);
+    }
+
+    public EditMessageText(String inlineMessageId, InputRichMessage richMessage, Api api) {
+        super(api, "editMessageText", Boolean.class);
+        add("rich_message", richMessage);
         add("inline_message_id", inlineMessageId);
     }
 
