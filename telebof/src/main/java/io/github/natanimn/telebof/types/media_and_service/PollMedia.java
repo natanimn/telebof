@@ -1,7 +1,9 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.Link;
+
+import java.util.List;
 
 /**
  * At most one of the optional fields can be present in any given object.
@@ -53,6 +55,10 @@ public class PollMedia {
      */
     private Video video;
 
+    /**
+     * Optional. The HTTP link attached to the poll option
+     */
+    private Link link;
 
     public Animation getAnimation() {
         return animation;
@@ -88,5 +94,9 @@ public class PollMedia {
 
     public Video getVideo() {
         return video;
+    }
+
+    public Link getLink() {
+        return link;
     }
 }
