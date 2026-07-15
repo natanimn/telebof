@@ -17,8 +17,7 @@ import java.util.List;
 /**
  * This object contains full information about a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.4.0
+ * @since 0.1
  */
 public class ChatFullInfo {
     /**
@@ -316,6 +315,12 @@ public class ChatFullInfo {
     @SerializedName("first_profile_audio")
     private Audio firstProfileAudio;
 
+    /**
+     * Optional. The bot that processes join request queries in the chat. The field is only available to chat administrators.
+     */
+    @SerializedName("guard_bot")
+    private User guardBot;
+
     public long getId() {
         return id;
     }
@@ -516,7 +521,11 @@ public class ChatFullInfo {
         return uniqueGiftColors;
     }
 
-    public Audio getFirstProfileAudio(){
+    public Audio getFirstProfileAudio() {
         return firstProfileAudio;
+    }
+
+    public User getGuardBot() {
+        return guardBot;
     }
 }
