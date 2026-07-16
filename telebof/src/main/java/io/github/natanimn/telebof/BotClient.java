@@ -1,31 +1,102 @@
 package io.github.natanimn.telebof;
 
+import io.github.natanimn.telebof.annotations.AnnotatedHandler;
+import io.github.natanimn.telebof.annotations.BusinessConnectionHandler;
+import io.github.natanimn.telebof.annotations.BusinessMessageHandler;
+import io.github.natanimn.telebof.annotations.CallbackHandler;
+import io.github.natanimn.telebof.annotations.ChannelPostHandler;
+import io.github.natanimn.telebof.annotations.ChatBoostHandler;
+import io.github.natanimn.telebof.annotations.ChatJoinRequestHandler;
+import io.github.natanimn.telebof.annotations.ChatMemberHandler;
+import io.github.natanimn.telebof.annotations.ChosenInlineHandler;
+import io.github.natanimn.telebof.annotations.DeletedBusinessMessageHandler;
+import io.github.natanimn.telebof.annotations.EditedBusinessMessageHandler;
+import io.github.natanimn.telebof.annotations.EditedChannelPostHandler;
+import io.github.natanimn.telebof.annotations.EditedMessageHandler;
+import io.github.natanimn.telebof.annotations.GuestHandler;
+import io.github.natanimn.telebof.annotations.InlineHandler;
+import io.github.natanimn.telebof.annotations.ManagedBotHandler;
+import io.github.natanimn.telebof.annotations.MessageHandler;
+import io.github.natanimn.telebof.annotations.MyChatMemberHandler;
+import io.github.natanimn.telebof.annotations.PollAnswerHandler;
+import io.github.natanimn.telebof.annotations.PollHandler;
+import io.github.natanimn.telebof.annotations.PreCheckoutHandler;
+import io.github.natanimn.telebof.annotations.PurchasedPaidMediaHandler;
+import io.github.natanimn.telebof.annotations.ReactionCountHandler;
+import io.github.natanimn.telebof.annotations.ReactionHandler;
+import io.github.natanimn.telebof.annotations.RemovedChatBoostHandler;
+import io.github.natanimn.telebof.annotations.ShippingHandler;
+import io.github.natanimn.telebof.annotations.meta.BusinessConnectionHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.BusinessMessageHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.CallbackHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ChannelPostHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ChatBoostHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ChatJoinRequestHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ChatMemberHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ChosenInlineHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.DeletedBusinessMessageHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.EditedBusinessMessageHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.EditedChannelPostHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.EditedMessageHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.GuestHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.InlineHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ManagedBotHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.MessageHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.MyChatMemberHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.PollAnswerHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.PollHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.PreCheckoutHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.PurchasedPaidMediaHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ReactionCountHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ReactionHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.RemovedChatBoostHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.ShippingHandlerMeta;
+import io.github.natanimn.telebof.enums.Updates;
+import io.github.natanimn.telebof.exceptions.ConnectionError;
+import io.github.natanimn.telebof.exceptions.FloodError;
+import io.github.natanimn.telebof.exceptions.TelegramApiException;
+import io.github.natanimn.telebof.exceptions.TelegramError;
+import io.github.natanimn.telebof.exceptions.TimeoutException;
+import io.github.natanimn.telebof.filters.Filter;
+import io.github.natanimn.telebof.filters.FilterExecutor;
+import io.github.natanimn.telebof.log.BotLog;
+import io.github.natanimn.telebof.requests.Api;
+import io.github.natanimn.telebof.requests.get.GetUpdates;
+import io.github.natanimn.telebof.states.StateMemoryStorage;
+import io.github.natanimn.telebof.types.chat_and_user.User;
+import io.github.natanimn.telebof.types.updates.BusinessConnection;
+import io.github.natanimn.telebof.types.updates.BusinessMessagesDeleted;
+import io.github.natanimn.telebof.types.updates.CallbackQuery;
+import io.github.natanimn.telebof.types.updates.ChatBoostRemoved;
+import io.github.natanimn.telebof.types.updates.ChatBoostUpdated;
+import io.github.natanimn.telebof.types.updates.ChatJoinRequest;
+import io.github.natanimn.telebof.types.updates.ChatMemberUpdated;
+import io.github.natanimn.telebof.types.updates.ChosenInlineResult;
+import io.github.natanimn.telebof.types.updates.InlineQuery;
+import io.github.natanimn.telebof.types.updates.ManagedBotUpdated;
+import io.github.natanimn.telebof.types.updates.Message;
+import io.github.natanimn.telebof.types.updates.MessageReactionCountUpdated;
+import io.github.natanimn.telebof.types.updates.MessageReactionUpdated;
+import io.github.natanimn.telebof.types.updates.PaidMediaPurchased;
+import io.github.natanimn.telebof.types.updates.Poll;
+import io.github.natanimn.telebof.types.updates.PollAnswer;
+import io.github.natanimn.telebof.types.updates.PreCheckoutQuery;
+import io.github.natanimn.telebof.types.updates.ShippingQuery;
+import io.github.natanimn.telebof.types.updates.TelegramUpdate;
+import io.github.natanimn.telebof.types.updates.Update;
 
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.Proxy;
-
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Comparator;
-import io.github.natanimn.telebof.annotations.*;
-import io.github.natanimn.telebof.annotations.meta.*;
-import io.github.natanimn.telebof.exceptions.*;
-import io.github.natanimn.telebof.enums.Updates;
-import io.github.natanimn.telebof.log.BotLog;
-import io.github.natanimn.telebof.requests.Api;
-import io.github.natanimn.telebof.requests.get.GetUpdates;
-import io.github.natanimn.telebof.states.StateMemoryStorage;
-import io.github.natanimn.telebof.types.updates.*;
-import io.github.natanimn.telebof.types.chat_and_user.User;
-import io.github.natanimn.telebof.filters.Filter;
-import io.github.natanimn.telebof.filters.FilterExecutor;
-import java.util.concurrent.Executors;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 
@@ -33,7 +104,6 @@ import java.util.function.Function;
  * Main class of Telebof library
  * @author Natanim
  * @since 3 March 2025
- * @version 2.0.0
  */
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
@@ -108,7 +178,7 @@ final public class BotClient {
         this.skipOldUpdates = skipOldUpdates;
         this.offset = offset;
         this.storage = new StateMemoryStorage();
-        this.executor  = !useVirtualThread? Executors.newFixedThreadPool(numThreads): null;
+        this.executor  = useVirtualThread? Executors.newVirtualThreadPerTaskExecutor(): Executors.newFixedThreadPool(numThreads);
         this.dispatcher = new Dispatcher<>();
         var getUpdatesApi = new Api(botToken, useTestServer, proxy, localBotApiUrl);
 
@@ -901,10 +971,7 @@ final public class BotClient {
                             }
                         };
 
-                        if (executor == null)
-                            Thread.ofVirtual().start(function);
-                        else
-                            executor.execute(function);
+                        executor.execute(function);
                         return;
                     }
                 }
