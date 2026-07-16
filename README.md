@@ -31,7 +31,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
@@ -39,7 +39,7 @@ Add the following dependency to your `pom.xml`:
 Add the following to your `build.gradle`:
 
 ```groovy
-implementation 'io.github.natanimn:telebof:2.0.0'
+implementation 'io.github.natanimn:telebof:2.1.0'
 ```
 
 ---
@@ -159,13 +159,13 @@ No manual or complex configuration needed. Just install additional module `teleb
 <dependency>
     <groupId>io.github.natanimn</groupId>
     <artifactId>telebof-spring</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
 **Gradle**
 ```groovy
-implementation 'io.github.natanimn:telebof-spring:2.0.0'
+implementation 'io.github.natanimn:telebof-spring:2.1.0'
 ```
 
 ```java
