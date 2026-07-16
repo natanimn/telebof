@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.natanimn</groupId>
 	<artifactId>telebof-spring</artifactId>
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 	<name>Telebof Spring</name>
 	<description>Integrate Telebof easily with SpringBoot applications</description>
 	<packaging>jar</packaging>
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>io.github.natanimn</groupId>
 			<artifactId>telebof</artifactId>
-			<version>2.0.0</version>
+			<version>2.1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
