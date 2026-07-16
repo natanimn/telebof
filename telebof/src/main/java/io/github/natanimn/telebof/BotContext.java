@@ -1,32 +1,206 @@
 package io.github.natanimn.telebof;
 
 import io.github.natanimn.telebof.enums.ChatAction;
+import io.github.natanimn.telebof.enums.ChatJoinRequestResult;
 import io.github.natanimn.telebof.enums.StickerFormat;
-import io.github.natanimn.telebof.requests.*;
-import io.github.natanimn.telebof.requests.answer.*;
-import io.github.natanimn.telebof.requests.create.*;
-import io.github.natanimn.telebof.requests.delete.*;
-import io.github.natanimn.telebof.requests.edit.*;
-import io.github.natanimn.telebof.requests.get.*;
-import io.github.natanimn.telebof.requests.send.*;
-import io.github.natanimn.telebof.requests.service.*;
-import io.github.natanimn.telebof.requests.set.*;
+import io.github.natanimn.telebof.requests.Api;
+import io.github.natanimn.telebof.requests.answer.AnswerCallbackQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerChatJoinRequestQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerGuestQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerInlineQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerPreCheckoutQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerShippingQuery;
+import io.github.natanimn.telebof.requests.answer.AnswerWebAppQuery;
+import io.github.natanimn.telebof.requests.create.CreateChatInviteLink;
+import io.github.natanimn.telebof.requests.create.CreateChatSubscriptionInviteLink;
+import io.github.natanimn.telebof.requests.create.CreateForumTopic;
+import io.github.natanimn.telebof.requests.create.CreateInvoiceLink;
+import io.github.natanimn.telebof.requests.create.CreateNewStickerSet;
+import io.github.natanimn.telebof.requests.delete.DeleteAllMessageReactions;
+import io.github.natanimn.telebof.requests.delete.DeleteBusinessMessages;
+import io.github.natanimn.telebof.requests.delete.DeleteChatPhoto;
+import io.github.natanimn.telebof.requests.delete.DeleteChatStickerSet;
+import io.github.natanimn.telebof.requests.delete.DeleteForumTopic;
+import io.github.natanimn.telebof.requests.delete.DeleteMessage;
+import io.github.natanimn.telebof.requests.delete.DeleteMessageReaction;
+import io.github.natanimn.telebof.requests.delete.DeleteMessages;
+import io.github.natanimn.telebof.requests.delete.DeleteMyCommands;
+import io.github.natanimn.telebof.requests.delete.DeleteStickerFromSet;
+import io.github.natanimn.telebof.requests.delete.DeleteStickerSet;
+import io.github.natanimn.telebof.requests.delete.DeleteStory;
+import io.github.natanimn.telebof.requests.delete.DeleteWebhook;
+import io.github.natanimn.telebof.requests.edit.EditChatInviteLink;
+import io.github.natanimn.telebof.requests.edit.EditChatSubscriptionInviteLink;
+import io.github.natanimn.telebof.requests.edit.EditForumTopic;
+import io.github.natanimn.telebof.requests.edit.EditGeneralForumTopic;
+import io.github.natanimn.telebof.requests.edit.EditMessageCaption;
+import io.github.natanimn.telebof.requests.edit.EditMessageChecklist;
+import io.github.natanimn.telebof.requests.edit.EditMessageLiveLocation;
+import io.github.natanimn.telebof.requests.edit.EditMessageMedia;
+import io.github.natanimn.telebof.requests.edit.EditMessageReplyMarkup;
+import io.github.natanimn.telebof.requests.edit.EditMessageText;
+import io.github.natanimn.telebof.requests.edit.EditStory;
+import io.github.natanimn.telebof.requests.edit.EditUserStarSubscription;
+import io.github.natanimn.telebof.requests.get.GetAvailableGifts;
+import io.github.natanimn.telebof.requests.get.GetBusinessAccountGifts;
+import io.github.natanimn.telebof.requests.get.GetBusinessAccountStarBalance;
+import io.github.natanimn.telebof.requests.get.GetBusinessConnection;
+import io.github.natanimn.telebof.requests.get.GetChat;
+import io.github.natanimn.telebof.requests.get.GetChatAdministrators;
+import io.github.natanimn.telebof.requests.get.GetChatGifts;
+import io.github.natanimn.telebof.requests.get.GetChatMember;
+import io.github.natanimn.telebof.requests.get.GetChatMemberCount;
+import io.github.natanimn.telebof.requests.get.GetChatMenuButton;
+import io.github.natanimn.telebof.requests.get.GetCustomEmojiStickers;
+import io.github.natanimn.telebof.requests.get.GetFile;
+import io.github.natanimn.telebof.requests.get.GetForumTopicIconStickers;
+import io.github.natanimn.telebof.requests.get.GetGameHighScores;
+import io.github.natanimn.telebof.requests.get.GetManagedBotAccessSettings;
+import io.github.natanimn.telebof.requests.get.GetManagedBotToken;
+import io.github.natanimn.telebof.requests.get.GetMe;
+import io.github.natanimn.telebof.requests.get.GetMyCommands;
+import io.github.natanimn.telebof.requests.get.GetMyDefaultAdministratorRights;
+import io.github.natanimn.telebof.requests.get.GetMyDescription;
+import io.github.natanimn.telebof.requests.get.GetMyName;
+import io.github.natanimn.telebof.requests.get.GetMyStarBalance;
+import io.github.natanimn.telebof.requests.get.GetStarTransactions;
+import io.github.natanimn.telebof.requests.get.GetStickerSet;
+import io.github.natanimn.telebof.requests.get.GetUpdates;
+import io.github.natanimn.telebof.requests.get.GetUserChatBoosts;
+import io.github.natanimn.telebof.requests.get.GetUserGifts;
+import io.github.natanimn.telebof.requests.get.GetUserPersonalChatMessages;
+import io.github.natanimn.telebof.requests.get.GetUserProfileAudios;
+import io.github.natanimn.telebof.requests.get.GetUserProfilePhotos;
+import io.github.natanimn.telebof.requests.get.GetWebhookInfo;
+import io.github.natanimn.telebof.requests.send.SendAnimation;
+import io.github.natanimn.telebof.requests.send.SendAudio;
+import io.github.natanimn.telebof.requests.send.SendChatAction;
+import io.github.natanimn.telebof.requests.send.SendChatJoinRequestWebApp;
+import io.github.natanimn.telebof.requests.send.SendChecklist;
+import io.github.natanimn.telebof.requests.send.SendContact;
+import io.github.natanimn.telebof.requests.send.SendDice;
+import io.github.natanimn.telebof.requests.send.SendDocument;
+import io.github.natanimn.telebof.requests.send.SendGame;
+import io.github.natanimn.telebof.requests.send.SendGift;
+import io.github.natanimn.telebof.requests.send.SendInvoice;
+import io.github.natanimn.telebof.requests.send.SendLivePhoto;
+import io.github.natanimn.telebof.requests.send.SendLocation;
+import io.github.natanimn.telebof.requests.send.SendMediaGroup;
+import io.github.natanimn.telebof.requests.send.SendMessage;
+import io.github.natanimn.telebof.requests.send.SendMessageDraft;
+import io.github.natanimn.telebof.requests.send.SendPaidMedia;
+import io.github.natanimn.telebof.requests.send.SendPhoto;
+import io.github.natanimn.telebof.requests.send.SendPoll;
+import io.github.natanimn.telebof.requests.send.SendRichMessage;
+import io.github.natanimn.telebof.requests.send.SendRichMessageDraft;
+import io.github.natanimn.telebof.requests.send.SendSticker;
+import io.github.natanimn.telebof.requests.send.SendVenue;
+import io.github.natanimn.telebof.requests.send.SendVideo;
+import io.github.natanimn.telebof.requests.send.SendVideoNote;
+import io.github.natanimn.telebof.requests.send.SendVoice;
+import io.github.natanimn.telebof.requests.service.AddStickerToSet;
+import io.github.natanimn.telebof.requests.service.ApproveChatJoinRequest;
+import io.github.natanimn.telebof.requests.service.ApproveSuggestedPost;
+import io.github.natanimn.telebof.requests.service.BanChatMember;
+import io.github.natanimn.telebof.requests.service.BanChatSenderChat;
+import io.github.natanimn.telebof.requests.service.Close;
+import io.github.natanimn.telebof.requests.service.CloseForumTopic;
+import io.github.natanimn.telebof.requests.service.CloseGeneralForumTopic;
+import io.github.natanimn.telebof.requests.service.ConvertGiftToStars;
+import io.github.natanimn.telebof.requests.service.CopyMessage;
+import io.github.natanimn.telebof.requests.service.CopyMessages;
+import io.github.natanimn.telebof.requests.service.DeclineChatJoinRequest;
+import io.github.natanimn.telebof.requests.service.DeclineSuggestedPost;
+import io.github.natanimn.telebof.requests.service.ExportChatInviteLink;
+import io.github.natanimn.telebof.requests.service.ForwardMessage;
+import io.github.natanimn.telebof.requests.service.ForwardMessages;
+import io.github.natanimn.telebof.requests.service.GiftPremiumSubscription;
+import io.github.natanimn.telebof.requests.service.HideGeneralForumTopic;
+import io.github.natanimn.telebof.requests.service.LeaveChat;
+import io.github.natanimn.telebof.requests.service.LogOut;
+import io.github.natanimn.telebof.requests.service.PinChatMessage;
+import io.github.natanimn.telebof.requests.service.PostStory;
+import io.github.natanimn.telebof.requests.service.PromoteChatMember;
+import io.github.natanimn.telebof.requests.service.ReadBusinessMessage;
+import io.github.natanimn.telebof.requests.service.RefundStarPayment;
+import io.github.natanimn.telebof.requests.service.RemoveBusinessAccountProfilePhoto;
+import io.github.natanimn.telebof.requests.service.RemoveChatVerification;
+import io.github.natanimn.telebof.requests.service.RemoveMyProfilePhoto;
+import io.github.natanimn.telebof.requests.service.RemoveUserVerification;
+import io.github.natanimn.telebof.requests.service.ReopenForumTopic;
+import io.github.natanimn.telebof.requests.service.ReopenGeneralForumTopic;
+import io.github.natanimn.telebof.requests.service.ReplaceManagedBotToken;
+import io.github.natanimn.telebof.requests.service.ReplaceStickerInSet;
+import io.github.natanimn.telebof.requests.service.RepostStory;
+import io.github.natanimn.telebof.requests.service.RestrictChatMember;
+import io.github.natanimn.telebof.requests.service.RevokeChatInviteLink;
+import io.github.natanimn.telebof.requests.service.SavePreparedInlineMessage;
+import io.github.natanimn.telebof.requests.service.SavePreparedKeyboardButton;
+import io.github.natanimn.telebof.requests.service.StopMessageLiveLocation;
+import io.github.natanimn.telebof.requests.service.StopPoll;
+import io.github.natanimn.telebof.requests.service.TransferBusinessAccountStars;
+import io.github.natanimn.telebof.requests.service.TransferGift;
+import io.github.natanimn.telebof.requests.service.UnHideGeneralForumTopic;
+import io.github.natanimn.telebof.requests.service.UnbanChatMember;
+import io.github.natanimn.telebof.requests.service.UnbanChatSenderChat;
+import io.github.natanimn.telebof.requests.service.UnpinAllChatMessages;
+import io.github.natanimn.telebof.requests.service.UnpinAllForumTopicMessages;
+import io.github.natanimn.telebof.requests.service.UnpinAllGeneralForumTopicMessages;
+import io.github.natanimn.telebof.requests.service.UnpinChatMessage;
+import io.github.natanimn.telebof.requests.service.UpgradeGift;
+import io.github.natanimn.telebof.requests.service.UploadStickerFile;
+import io.github.natanimn.telebof.requests.service.VerifyChat;
+import io.github.natanimn.telebof.requests.service.VerifyUser;
+import io.github.natanimn.telebof.requests.set.GetMyShortDescription;
+import io.github.natanimn.telebof.requests.set.SetBusinessAccountBio;
+import io.github.natanimn.telebof.requests.set.SetBusinessAccountGiftSettings;
+import io.github.natanimn.telebof.requests.set.SetBusinessAccountName;
+import io.github.natanimn.telebof.requests.set.SetBusinessAccountProfilePhoto;
+import io.github.natanimn.telebof.requests.set.SetBusinessAccountUsername;
+import io.github.natanimn.telebof.requests.set.SetChatAdministratorCustomTitle;
+import io.github.natanimn.telebof.requests.set.SetChatDescription;
+import io.github.natanimn.telebof.requests.set.SetChatMemberTag;
+import io.github.natanimn.telebof.requests.set.SetChatMenuButton;
+import io.github.natanimn.telebof.requests.set.SetChatPermissions;
+import io.github.natanimn.telebof.requests.set.SetChatPhoto;
+import io.github.natanimn.telebof.requests.set.SetChatStickerSet;
+import io.github.natanimn.telebof.requests.set.SetChatTitle;
+import io.github.natanimn.telebof.requests.set.SetCustomEmojiStickerSetThumbnail;
+import io.github.natanimn.telebof.requests.set.SetGameScore;
+import io.github.natanimn.telebof.requests.set.SetManagedBotAccessSettings;
+import io.github.natanimn.telebof.requests.set.SetMessageReaction;
+import io.github.natanimn.telebof.requests.set.SetMyCommands;
+import io.github.natanimn.telebof.requests.set.SetMyDefaultAdministratorRights;
+import io.github.natanimn.telebof.requests.set.SetMyDescription;
+import io.github.natanimn.telebof.requests.set.SetMyName;
+import io.github.natanimn.telebof.requests.set.SetMyProfilePhoto;
+import io.github.natanimn.telebof.requests.set.SetMyShortDescription;
+import io.github.natanimn.telebof.requests.set.SetPassportDataErrors;
+import io.github.natanimn.telebof.requests.set.SetStickerEmojiList;
+import io.github.natanimn.telebof.requests.set.SetStickerKeywords;
+import io.github.natanimn.telebof.requests.set.SetStickerMaskPosition;
+import io.github.natanimn.telebof.requests.set.SetStickerPositionInSet;
+import io.github.natanimn.telebof.requests.set.SetStickerSetThumbnail;
+import io.github.natanimn.telebof.requests.set.SetStickerSetTitle;
+import io.github.natanimn.telebof.requests.set.SetUserEmojiStatus;
+import io.github.natanimn.telebof.requests.set.SetWebhook;
 import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.bot.BotCommand;
 import io.github.natanimn.telebof.types.chat_and_user.ChatPermissions;
 import io.github.natanimn.telebof.types.gift_and_giveaway.AcceptedGiftTypes;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Gifts;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
-import io.github.natanimn.telebof.types.input.InputProfilePhoto;
+import io.github.natanimn.telebof.types.input.InputChecklist;
 import io.github.natanimn.telebof.types.input.InputMedia;
 import io.github.natanimn.telebof.types.input.InputPaidMedia;
 import io.github.natanimn.telebof.types.input.InputPollOption;
-import io.github.natanimn.telebof.types.input.InputStoryContent;
-import io.github.natanimn.telebof.types.input.InputChecklist;
+import io.github.natanimn.telebof.types.input.InputProfilePhoto;
+import io.github.natanimn.telebof.types.input.InputRichMessage;
 import io.github.natanimn.telebof.types.input.InputSticker;
+import io.github.natanimn.telebof.types.input.InputStoryContent;
 import io.github.natanimn.telebof.types.keyboard.KeyboardButton;
-import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.passport.PassportElementError;
+import io.github.natanimn.telebof.types.payments.LabeledPrice;
 import io.github.natanimn.telebof.types.web.WebhookInfo;
 
 import java.io.File;
@@ -36,7 +210,6 @@ import java.util.Map;
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
  * @since March 3, 2025
- * @version 2.0.0
  */
 @SuppressWarnings("unused")
 public class BotContext {
@@ -564,6 +737,30 @@ public class BotContext {
     public SendMessageDraft sendMessageDraft(long chatId, String text, int draftId){
         return new SendMessageDraft(chatId, text, draftId, api);
     }
+
+    /**
+     * Use this method to send rich messages. If the message contains a block with a media element, then the bot must have the right to send the media to the chat.
+     * @param chatId Unique identifier for the target chat or username of the target bot, supergroup or channel in the format @username
+     * @param richMessage The message to be sent
+     * @return {@link SendRichMessage}
+     */
+    public SendRichMessage sendRichMessage(Object chatId, InputRichMessage richMessage){
+        return new SendRichMessage(chatId, richMessage, api);
+    }
+
+    /**
+     * Use this method to stream a partial rich message to a user while the message is being generated.
+     * @apiNote Note that the streamed draft is ephemeral and acts as a temporary 30-second preview - once the output is finalized,
+     * you must call {@link #sendRichMessage} with the complete message to persist it in the user's chat.
+     * @param chatId Unique identifier for the target private chat
+     * @param richMessage The partial message to be streamed
+     * @param draftId Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated.
+     * @return {@link SendRichMessageDraft}
+     */
+    public SendRichMessageDraft sendRichMessageDraft(long chatId, InputRichMessage richMessage, int draftId){
+        return new SendRichMessageDraft(chatId, richMessage, draftId, api);
+    }
+
 
     /**
      * Use this method when you need to tell the user that something is happening on the bot's side.
@@ -1131,6 +1328,27 @@ public class BotContext {
     }
 
     /**
+     * Use this method to process a received chat join request query.
+     * @param chatJoinRequestQueryId Unique identifier of the join request query
+     * @param result Result of the query.
+     * @return {@link AnswerChatJoinRequestQuery}
+     */
+    public AnswerChatJoinRequestQuery answerChatJoinRequestQuery(String chatJoinRequestQueryId, ChatJoinRequestResult result){
+        return new AnswerChatJoinRequestQuery(chatJoinRequestQueryId, result, api);
+    }
+
+    /**
+     * Use this method to process a received chat join request query by showing a Mini App to the user before deciding the outcome.
+     * Call {@link #answerChatJoinRequestQuery} to resolve the join request query based on the user interaction with the Mini App.
+     * @param chatJoinRequestQueryId Unique identifier of the join request query
+     * @param webAppUrl The URL of the Mini App to be opened
+     * @return {@link SendChatJoinRequestWebApp}
+     */
+    public SendChatJoinRequestWebApp sendChatJoinRequestWebApp(String chatJoinRequestQueryId, String webAppUrl){
+        return new SendChatJoinRequestWebApp(chatJoinRequestQueryId, webAppUrl, api);
+    }
+
+    /**
      * Use this method to set a new profile photo for the chat. Photos can't be changed for private chats.
      * The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights.
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
@@ -1593,8 +1811,7 @@ public class BotContext {
 
     /**
      * Use this method to edit text and game messages.
-     * On success,  the edited Message is returned.
-     * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @apiNote Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param text New text of the message, 1-4096 characters after entities parsing
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param messageId Identifier of the message to edit
@@ -1606,18 +1823,42 @@ public class BotContext {
 
     /**
      * Use this method to edit text and game messages.
-     * On success, True is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @apiNote Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param richMessage New rich content of the message
+     * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+     * @param messageId Identifier of the message to edit
+     * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
+     */
+    public EditMessageText editMessageText(Object chatId, InputRichMessage richMessage, int messageId) {
+        return new EditMessageText(chatId, richMessage,  messageId, this.api);
+    }
+
+    /**
+     * Use this method to edit text and game messages.
+     * @apiNote Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param text ew text of the message, 1-4096 characters after entities parsing
      * @param inlineMessageId Identifier of the inline message
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
      */
-    public EditMessageText editMessageText(String text, String inlineMessageId) {
-        return new EditMessageText(text, inlineMessageId, this.api);
+    public EditMessageText editMessageText(String inlineMessageId, String text) {
+        return new EditMessageText(inlineMessageId, text, this.api);
     }
 
     /**
+     * Use this method to edit text and game messages.
+     * @apiNote Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @param richMessage New rich content of the message
+     * @param inlineMessageId Identifier of the inline message
+     * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageText}
+     */
+    public EditMessageText editMessageText(String inlineMessageId,  InputRichMessage richMessage) {
+        return new EditMessageText(inlineMessageId, richMessage, this.api);
+    }
+
+
+    /**
      * Use this method to edit captions of messages. On success, the edited Message is returned.
-     * Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
+     * @apiNote Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within 48 hours from the time they were sent.
      * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
      * @param messageId Identifier of the message to edit
      * @return {@link io.github.natanimn.telebof.requests.edit.EditMessageCaption}
