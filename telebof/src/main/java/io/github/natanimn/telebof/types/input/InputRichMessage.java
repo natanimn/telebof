@@ -1,8 +1,8 @@
 package io.github.natanimn.telebof.types.input;
 
-import java.io.Serializable;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Describes a rich message to be sent. Exactly one of the fields html or markdown must be used.
@@ -18,6 +18,8 @@ public class InputRichMessage implements Serializable {
 
     @SerializedName("skip_entity_detection")
     private Boolean skipEntityDetection;
+
+    private InputRichMessageMedia[] media;
 
     private InputRichMessage(String text, boolean isHtml){
         if (isHtml)
@@ -62,6 +64,16 @@ public class InputRichMessage implements Serializable {
      */
     public InputRichMessage setSkipEntityDetection(Boolean skipEntityDetection){
         this.skipEntityDetection = skipEntityDetection;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param media List of media that are specified in the markdown or html fields using tg://photo?id=, tg://video?id=, and tg://audio?id= links
+     * @return {@link InputRichMessage}
+     */
+    public InputRichMessage setMedia(InputRichMessageMedia[] media){
+        this.media = media;
         return this;
     }
 
