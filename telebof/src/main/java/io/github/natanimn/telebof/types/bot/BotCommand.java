@@ -1,12 +1,13 @@
 package io.github.natanimn.telebof.types.bot;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * This object represents a bot command.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
 public class BotCommand implements Serializable {
     /**
@@ -18,6 +19,9 @@ public class BotCommand implements Serializable {
      * Description of the command; 1-256 characters.
      */
     private String description;
+
+    @SerializedName("is_ephemeral")
+    private Boolean isEphemeral;
 
     public BotCommand(String command, String description) {
         this.command = command;
@@ -32,5 +36,16 @@ public class BotCommand implements Serializable {
         return description;
     }
 
+    public Boolean getIsEphemeral() {
+        return isEphemeral;
+    }
 
+    /**
+     * Optional
+     * @param ephemeral True, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot
+     */
+    public BotCommand setIsEphemeral(Boolean ephemeral) {
+        isEphemeral = ephemeral;
+        return this;
+    }
 }
