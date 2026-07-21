@@ -39,14 +39,38 @@ public class ReplyParameters implements Serializable {
     @SerializedName("poll_option_id")
     private String pollOptionId;
 
-    /**
-     * Required
-     * @param messageId Identifier of the message that will be replied to in the current chat, or in the chat chatId if it is specified
-     */
+    @SerializedName("ephemeral_message_id")
+    private Integer ephemeralMessageId;
+
+    @Deprecated(since = "2.2", forRemoval = true)
     public ReplyParameters(int messageId) {
         this.messageId = messageId;
     }
 
+    private ReplyParameters(int id, boolean isEphemeral){
+        if (isEphemeral)
+            this.ephemeralMessageId = id;
+        else
+            this.messageId = id;
+    }
+    /**
+     * Required
+     * @param messageId identifier of the message that will be replied to in the current chat, or in the chat chatId if it is specified
+     * @return {@link ReplyParameters}
+     */
+    public static ReplyParameters ofRegular(int messageId){
+        return new ReplyParameters(messageId, false);
+    }
+
+    /**
+     * Required
+     * @param ephemeralMessageId Identifier of the incoming ephemeral message that will be replied to in the current chat.
+     *                          A reply to an ephemeral message must itself be an ephemeral message. An ephemeral message may only be replied to within 15 seconds of being sent.
+     * @return {@link ReplyParameters}
+     */
+    public static ReplyParameters ofEphemeral(int ephemeralMessageId){
+        return new ReplyParameters(ephemeralMessageId, true);
+    }
     /**
      * Optional
      * @param chatId If the message to be replied to is from a different chat, unique identifier for the chat or username of the channel (in the format @channelusername).
