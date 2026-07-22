@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * This object represents a message.
  * @author Natanim
- * @since 3 March 2025
+ * @since 0.1
  */
 public class Message implements TelegramUpdate {
     /**
@@ -676,6 +676,32 @@ public class Message implements TelegramUpdate {
     @SerializedName("rich_message")
     private RichMessage richMessage;
 
+    /**
+     * Optional. For ephemeral messages, the user who received the message
+     */
+    @SerializedName("receiver_user")
+    private User receiverUser;
+
+    /**
+     * Optional. For ephemeral messages, identifier of the ephemeral message inside this chat.
+     * The identifier may be reused for another ephemeral message after the message is deleted or expires.
+     */
+    @SerializedName("ephemeral_message_id")
+    private Integer ephemeralMessageId;
+
+    /**
+     * Optional. Service message: chat added to a Community
+     */
+    @SerializedName("community_chat_added")
+    private CommunityChatAdded communityChatAdded;
+
+    /**
+     * Optional. Service message: chat removed from a Community
+     */
+    @SerializedName("community_chat_removed")
+    private CommunityChatRemoved communityChatRemoved;
+
+
     public Integer getMessageId() {
         return messageId;
     }
@@ -1128,4 +1154,19 @@ public class Message implements TelegramUpdate {
         return richMessage;
     }
 
+    public User getReceiverUser() {
+        return receiverUser;
+    }
+
+    public Integer getEphemeralMessageId() {
+        return ephemeralMessageId;
+    }
+
+    public CommunityChatAdded getCommunityChatAdded() {
+        return communityChatAdded;
+    }
+
+    public CommunityChatRemoved getCommunityChatRemoved() {
+        return communityChatRemoved;
+    }
 }
