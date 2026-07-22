@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.input;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.input.rich_block.InputRichBlock;
 
 import java.io.Serializable;
 
@@ -20,6 +21,8 @@ public class InputRichMessage implements Serializable {
     private Boolean skipEntityDetection;
 
     private InputRichMessageMedia[] media;
+
+    private InputRichBlock[] blocks;
 
     private InputRichMessage(String text, boolean isHtml){
         if (isHtml)
@@ -77,4 +80,13 @@ public class InputRichMessage implements Serializable {
         return this;
     }
 
+    /**
+     * Optional
+     * @param blocks Content of the rich message to send described as a list of blocks
+     * @return {@link InputRichMessage}
+     */
+    public InputRichMessage setBlocks(InputRichBlock[] blocks) {
+        this.blocks = blocks;
+        return this;
+    }
 }
