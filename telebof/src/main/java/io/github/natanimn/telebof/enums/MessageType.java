@@ -5,10 +5,9 @@ import io.github.natanimn.telebof.filters.Filter;
 /**
  * Enum representing different types of messages that can be received from Telegram.
  * These types correspond to the filtering methods available in the {@link io.github.natanimn.telebof.filters.Filter} class
- * and represent various message content types, service messages, and update types supported by the Telegram Bot API.
+ * and represent various message content types and service messages supported by the Telegram Bot API.
  * @author Natanim
  * @since 1.2.0
- * @version 1.6.0
  */
 public enum MessageType {
     /**
@@ -342,12 +341,22 @@ public enum MessageType {
     MANAGED_BOT_CREATED,
 
     /**
-     * Service message for poll option added, filtered by {@link Filter#pollOptionAdded()} ()}
+     * Service message for poll option added, filtered by {@link Filter#pollOptionAdded()} }
      */
     POLL_OPTION_ADDED,
 
     /**
-     * Service message for poll option deleted, filtered by {@link Filter#pollOptionDeleted()} ()} ()}
+     * Service message for poll option deleted, filtered by {@link Filter#pollOptionDeleted()}
      */
-    POLL_OPTION_DELETED
+    POLL_OPTION_DELETED,
+
+    /**
+     * Service message for community chat added, filtered by {@link Filter#communityChatAdded()}
+     */
+    COMMUNITY_CHAT_ADDED,
+
+    /**
+     * Service message for community chat removed, filtered by {@link Filter#communityChatRemoved()}
+     */
+    COMMUNITY_CHAT_REMOVED
 }
