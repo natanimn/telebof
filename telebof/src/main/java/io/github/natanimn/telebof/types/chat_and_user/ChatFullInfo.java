@@ -2,6 +2,7 @@ package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.ChatType;
+import io.github.natanimn.telebof.types.Community;
 import io.github.natanimn.telebof.types.business.BusinessIntro;
 import io.github.natanimn.telebof.types.business.BusinessLocation;
 import io.github.natanimn.telebof.types.business.BusinessOpeningHours;
@@ -321,6 +322,11 @@ public class ChatFullInfo {
     @SerializedName("guard_bot")
     private User guardBot;
 
+    /**
+     * Optional. The Community to which the chat belongs
+     */
+    private Community community;
+
     public long getId() {
         return id;
     }
@@ -527,5 +533,9 @@ public class ChatFullInfo {
 
     public User getGuardBot() {
         return guardBot;
+    }
+
+    public Community getCommunity() {
+        return community;
     }
 }
