@@ -629,6 +629,22 @@ public class Filter{
     }
 
     /**
+     * Filter service message for added community chat
+     * @return {@link Boolean}
+     */
+    public boolean communityChatAdded(){
+        return (update.getMessage() != null && update.getMessage().getCommunityChatAdded() != null);
+    }
+
+    /**
+     * Filter service message for removed community chat
+     * @return {@link Boolean}
+     */
+    public boolean communityChatRemoved(){
+        return (update.getMessage() != null && update.getMessage().getCommunityChatRemoved() != null);
+    }
+
+    /**
      * Filter commands
      * @param commands The command or array of commands as string
      * @return {@link Boolean}
