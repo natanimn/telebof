@@ -12,8 +12,7 @@ import java.lang.reflect.Type;
 /**
  * Common parameters builder for sendXyz methods
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
 abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
 
@@ -130,5 +129,25 @@ abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
      */
     public T suggestedPostParameters(SuggestedPostParameters suggestedPostParameters){
         return add("suggested_post_parameters", suggestedPostParameters);
+    }
+
+    /**
+     * Optional
+     * @param callbackQueryId For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
+     * @return {@link T}
+     */
+    public T callbackQueryId(String callbackQueryId){
+        return add("callback_query_id", callbackQueryId);
+    }
+
+    /**
+     * Optional
+     * @param receiverUserId For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only.
+     *                      It is not guaranteed that the user will receive the message, especially if they are offline.
+     *                      See <a href='https://core.telegram.org/bots/api#ephemeral-messages-and-commands'>ephemeral message sending</a> for more details.
+     * @return {@link T}
+     */
+    public T receiverUserId(long receiverUserId){
+        return add("receiver_user_id", receiverUserId);
     }
 }
