@@ -2,18 +2,40 @@ package io.github.natanimn.telebof.filters;
 
 import io.github.natanimn.telebof.Util;
 import io.github.natanimn.telebof.enums.ChatType;
-import io.github.natanimn.telebof.types.media_and_service.*;
+import io.github.natanimn.telebof.enums.SubscriptionState;
+import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.chat_and_user.ChatBackground;
 import io.github.natanimn.telebof.types.chat_and_user.ChatBoostAdded;
+import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Giveaway;
 import io.github.natanimn.telebof.types.gift_and_giveaway.GiveawayCompleted;
 import io.github.natanimn.telebof.types.gift_and_giveaway.GiveawayCreated;
+import io.github.natanimn.telebof.types.media_and_service.Animation;
+import io.github.natanimn.telebof.types.media_and_service.Audio;
+import io.github.natanimn.telebof.types.media_and_service.Contact;
+import io.github.natanimn.telebof.types.media_and_service.Dice;
+import io.github.natanimn.telebof.types.media_and_service.Document;
+import io.github.natanimn.telebof.types.media_and_service.Game;
+import io.github.natanimn.telebof.types.media_and_service.Invoice;
+import io.github.natanimn.telebof.types.media_and_service.Location;
+import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
+import io.github.natanimn.telebof.types.media_and_service.MessageOrigin;
+import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
+import io.github.natanimn.telebof.types.media_and_service.ReactionType;
+import io.github.natanimn.telebof.types.media_and_service.Sticker;
+import io.github.natanimn.telebof.types.media_and_service.TextQuote;
+import io.github.natanimn.telebof.types.media_and_service.Venue;
+import io.github.natanimn.telebof.types.media_and_service.Video;
+import io.github.natanimn.telebof.types.media_and_service.VideoChatEnded;
+import io.github.natanimn.telebof.types.media_and_service.VideoChatParticipantsInvited;
+import io.github.natanimn.telebof.types.media_and_service.VideoChatScheduled;
+import io.github.natanimn.telebof.types.media_and_service.VideoChatStarted;
+import io.github.natanimn.telebof.types.media_and_service.VideoNote;
+import io.github.natanimn.telebof.types.media_and_service.Voice;
 import io.github.natanimn.telebof.types.passport.PassportData;
 import io.github.natanimn.telebof.types.payments.RefundedPayment;
-import io.github.natanimn.telebof.types.updates.Update;
-import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.updates.Message;
-import io.github.natanimn.telebof.types.chat_and_user.User;
+import io.github.natanimn.telebof.types.updates.Update;
 import io.github.natanimn.telebof.types.web.WebAppData;
 
 import java.util.List;
@@ -22,8 +44,7 @@ import java.util.regex.Pattern;
 /**
  * A class for filtering updates
  * @author Natanim
- * @since 3 March 2025
- * @version 1.6.0
+ * @since 0.1
  */
 public class Filter{
     private final Update update;
@@ -769,12 +790,27 @@ public class Filter{
             } else if (update.getPreCheckoutQuery() != null){
               String payload = update.getPreCheckoutQuery().getInvoicePayload();
               return instance.matcher(payload).find();
+            } else if (update.getSubscription() != null){
+              String payload = update.getSubscription().getInvoicePayload();
+              return instance.matcher(payload).find();
             } else {
                 return false;
             }
         }
 
         return instance.matcher(text).find();
+    }
+
+    public boolean subscriptionCancelled(){
+        return update.getSubscription() != null && update.getSubscription().getState() == SubscriptionState.CANCELLED;
+    }
+
+    public boolean subscriptionActivate(){
+        return update.getSubscription() != null && update.getSubscription().getState() == SubscriptionState.ACTIVE;
+    }
+
+    public boolean subscriptionFailed(){
+        return update.getSubscription() != null && update.getSubscription().getState() == SubscriptionState.FAILED;
     }
 
     /**
@@ -866,6 +902,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getText();
         else if (update.getChannelPost() != null) return update.getChannelPost().getText();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getText();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getText();
         else return null;
     }
 
@@ -876,6 +913,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getPhoto();
         else if (update.getChannelPost() != null) return update.getChannelPost().getPhoto();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getPhoto();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getPhoto();
         else return null;
     }
 
@@ -886,6 +924,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getVideo();
         else if (update.getChannelPost() != null) return update.getChannelPost().getVideo();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getVideo();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getVideo();
         else return null;
     }
 
@@ -896,6 +935,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getDocument();
         else if (update.getChannelPost() != null) return update.getChannelPost().getDocument();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getDocument();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getDocument();
         else return null;
     }
 
@@ -906,6 +946,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getAnimation();
         else if (update.getChannelPost() != null) return update.getChannelPost().getAnimation();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getAnimation();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getAnimation();
         else return null;
     }
 
@@ -916,6 +957,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getAudio();
         else if (update.getChannelPost() != null) return update.getChannelPost().getAudio();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getAudio();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getAudio();
         else return null;
     }
 
@@ -926,6 +968,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getVoice();
         else if (update.getChannelPost() != null) return update.getChannelPost().getVoice();
         else if (update.getBusinessMessage() != null) return update.getBusinessMessage().getVoice();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getVoice();
         else return null;
     }
 
@@ -936,6 +979,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getVideoNote();
         else if (update.getChannelPost() != null) return update.getChannelPost().getVideoNote();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getVideoNote();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getVideoNote();
         else return null;
     }
 
@@ -946,6 +990,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getContact();
         else if (update.getChannelPost() != null) return update.getChannelPost().getContact();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getContact();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getContact();
         else return null;
     }
 
@@ -956,6 +1001,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getEntities();
         else if (update.getChannelPost() != null) return update.getChannelPost().getEntities();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getEntities();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getEntities();
         else return null;
     }
 
@@ -986,6 +1032,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getReplyToMessage();
         else if (update.getChannelPost() != null) return update.getChannelPost().getReplyToMessage();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getReplyToMessage();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getReplyToMessage();
         else return null;
     }
 
@@ -1006,6 +1053,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getSticker();
         else if (update.getChannelPost() != null) return update.getChannelPost().getSticker();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getSticker();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getSticker();
         else return null;
     }
 
@@ -1016,6 +1064,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getLocation();
         else if (update.getChannelPost() != null) return update.getChannelPost().getLocation();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getLocation();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getLocation();
         else return null;
     }
 
@@ -1027,6 +1076,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getVenue();
         else if (update.getChannelPost() != null) return update.getChannelPost().getVenue();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getVenue();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getVenue();
         else return null;
     }
 
@@ -1037,6 +1087,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getGame();
         else if (update.getChannelPost() != null) return update.getChannelPost().getGame();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getGame();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getGame();
         else return null;
     }
 
@@ -1047,6 +1098,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getDice();
         else if (update.getChannelPost() != null) return update.getChannelPost().getDice();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getDice();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getDice();
         else return null;
     }
 
@@ -1057,6 +1109,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getQuote();
         else if (update.getChannelPost() != null) return update.getChannelPost().getQuote();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getQuote();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getQuote();
         else return null;
     }
 
@@ -1067,6 +1120,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getGiveaway();
         else if (update.getChannelPost() != null) return update.getChannelPost().getGiveaway();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getGiveaway();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getGiveaway();
         else return null;
     }
 
@@ -1097,6 +1151,7 @@ public class Filter{
         else if (update.getEditedChannelPost() != null) return update.getEditedChannelPost().getPinnedMessage();
         else if (update.getChannelPost() != null) return update.getChannelPost().getPinnedMessage();
         else if (update.getBusinessMessage()  != null) return update.getBusinessMessage().getPinnedMessage();
+        else if (update.getGuestMessage() != null) return update.getGuestMessage().getPinnedMessage();
         else return null;
     }
 
