@@ -9,8 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * At most one of the optional parameters can be present in any given update.
  *
  * @author Natanim
- * @since 3 March 2025
- * @version 2.0.0
+ * @since 0.1
  */
 public class Update implements TelegramUpdate {
     /**
@@ -173,10 +172,15 @@ public class Update implements TelegramUpdate {
     private ManagedBotUpdated managedBot;
 
     /**
-     * Optional. New guest message. The bot can use the field {@link Message#getGuestQueryId()} and the method {@link BotContext#answerGuestQuery()} to send a message in response.
+     * Optional. New guest message. The bot can use the field {@link Message#getGuestQueryId()} and the method {@link BotContext#answerGuestQuery} to send a message in response.
      */
     @SerializedName("guest_message")
     private Message guestMessage;
+
+    /**
+     * Optional. User payment subscription has changed
+     */
+    private BotSubscriptionUpdated subscription;
 
     public int getUpdateId() {
         return updateId;
@@ -280,5 +284,9 @@ public class Update implements TelegramUpdate {
 
     public Message getGuestMessage() {
         return guestMessage;
+    }
+
+    public BotSubscriptionUpdated getSubscription() {
+        return subscription;
     }
 }
