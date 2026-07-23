@@ -76,7 +76,10 @@ public enum Updates{
     MANAGED_BOT,
 
     @SerializedName("guest_message")
-    GUEST_MESSAGE;
+    GUEST_MESSAGE,
+
+    @SerializedName("subscription")
+    SUBSCRIPTION;
 
     public static final Updates[] ALL = {
             MESSAGE,
@@ -103,6 +106,7 @@ public enum Updates{
             DELETED_BUSINESS_MESSAGES,
             PURCHASED_PAID_MEDIA,
             MANAGED_BOT,
-            GUEST_MESSAGE
+            GUEST_MESSAGE,
+            SUBSCRIPTION
     };
 }
