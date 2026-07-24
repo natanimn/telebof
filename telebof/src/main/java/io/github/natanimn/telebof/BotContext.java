@@ -20,6 +20,7 @@ import io.github.natanimn.telebof.requests.delete.DeleteAllMessageReactions;
 import io.github.natanimn.telebof.requests.delete.DeleteBusinessMessages;
 import io.github.natanimn.telebof.requests.delete.DeleteChatPhoto;
 import io.github.natanimn.telebof.requests.delete.DeleteChatStickerSet;
+import io.github.natanimn.telebof.requests.delete.DeleteEphemeralMessage;
 import io.github.natanimn.telebof.requests.delete.DeleteForumTopic;
 import io.github.natanimn.telebof.requests.delete.DeleteMessage;
 import io.github.natanimn.telebof.requests.delete.DeleteMessageReaction;
@@ -31,6 +32,10 @@ import io.github.natanimn.telebof.requests.delete.DeleteStory;
 import io.github.natanimn.telebof.requests.delete.DeleteWebhook;
 import io.github.natanimn.telebof.requests.edit.EditChatInviteLink;
 import io.github.natanimn.telebof.requests.edit.EditChatSubscriptionInviteLink;
+import io.github.natanimn.telebof.requests.edit.EditEphemeralMessageCaption;
+import io.github.natanimn.telebof.requests.edit.EditEphemeralMessageMedia;
+import io.github.natanimn.telebof.requests.edit.EditEphemeralMessageReplyMarkup;
+import io.github.natanimn.telebof.requests.edit.EditEphemeralMessageText;
 import io.github.natanimn.telebof.requests.edit.EditForumTopic;
 import io.github.natanimn.telebof.requests.edit.EditGeneralForumTopic;
 import io.github.natanimn.telebof.requests.edit.EditMessageCaption;
@@ -209,12 +214,12 @@ import java.util.Map;
 /**
  * This class implemented all classes defined in <i>io.github.natanimn.telebof.requests</i> as directly usable methods.
  * @author Natanim
- * @since March 3, 2025
+ * @since 0.1
  */
 @SuppressWarnings("unused")
 public class BotContext {
     private final Api api;
-    private StateMemoryStorage storage;
+    private final StateMemoryStorage storage;
 
     public BotContext(Api api, StateMemoryStorage storage){
         this.api = api;
@@ -1939,6 +1944,53 @@ public class BotContext {
     }
 
     /**
+     * Use this method to edit an ephemeral text message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param text New text of the message, 1-4096 characters after entity parsing
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @return {@link EditEphemeralMessageText}
+     */
+    public EditEphemeralMessageText editEphemeralMessageText(Object chatId, long receiverUserId, String text, int ephemeralMessageId){
+        return new EditEphemeralMessageText(chatId, receiverUserId, text, ephemeralMessageId, api);
+    }
+
+    /**
+     * Use this method to edit the media of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param media A JSON-serialized object for the new media content of the message. A new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL.
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @return {@link EditEphemeralMessageMedia}
+     */
+    public EditEphemeralMessageMedia editEphemeralMessageMedia(Object chatId, long receiverUserId, InputMedia media, int ephemeralMessageId){
+        return new EditEphemeralMessageMedia(chatId, receiverUserId, media, ephemeralMessageId, api);
+    }
+
+    /**
+     * Use this method to edit the caption of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @return {@link EditEphemeralMessageCaption}
+     */
+    public EditEphemeralMessageCaption editEphemeralMessageCaption(Object chatId, long receiverUserId, int ephemeralMessageId){
+        return new EditEphemeralMessageCaption(chatId, receiverUserId, ephemeralMessageId, api);
+
+    }
+
+    /**
+     * Use this method to edit only the reply markup of an ephemeral message. Note that it is not guaranteed that the user will receive the message edit event, especially if they are offline.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @return {@link EditEphemeralMessageReplyMarkup}
+     */
+    public EditEphemeralMessageReplyMarkup editEphemeralMessageReplyMarkup(Object chatId, long receiverUserId, int ephemeralMessageId){
+        return new EditEphemeralMessageReplyMarkup(chatId, receiverUserId, ephemeralMessageId, api);
+    }
+
+    /**
      * Use this method to delete a message, including service messages, with the following limitations:
      * <pre>
      * - A message can only be deleted if it was sent less than 48 hours ago.
@@ -1966,6 +2018,17 @@ public class BotContext {
      */
     public DeleteMessages deleteMessages(Object chatId, Integer[] messageIds) {
         return new DeleteMessages(chatId, messageIds, this.api);
+    }
+
+    /**
+     * Use this method to delete an ephemeral message. Note that it is not guaranteed that the user will receive the message deletion event, especially if they are offline.
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param ephemeralMessageId Identifier of the ephemeral message to delete
+     * @return {@link DeleteEphemeralMessage}
+     */
+    public DeleteEphemeralMessage deleteEphemeralMessage(Object chatId, long receiverUserId, int ephemeralMessageId){
+        return new DeleteEphemeralMessage(chatId, receiverUserId, ephemeralMessageId, api);
     }
 
     /**
