@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof;
 
 import io.github.natanimn.telebof.annotations.AnnotatedHandler;
+import io.github.natanimn.telebof.annotations.BotSubscriptionHandler;
 import io.github.natanimn.telebof.annotations.BusinessConnectionHandler;
 import io.github.natanimn.telebof.annotations.BusinessMessageHandler;
 import io.github.natanimn.telebof.annotations.CallbackHandler;
@@ -26,6 +27,7 @@ import io.github.natanimn.telebof.annotations.ReactionCountHandler;
 import io.github.natanimn.telebof.annotations.ReactionHandler;
 import io.github.natanimn.telebof.annotations.RemovedChatBoostHandler;
 import io.github.natanimn.telebof.annotations.ShippingHandler;
+import io.github.natanimn.telebof.annotations.meta.BotSubscriptionHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.BusinessConnectionHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.BusinessMessageHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.CallbackHandlerMeta;
@@ -64,6 +66,7 @@ import io.github.natanimn.telebof.requests.Api;
 import io.github.natanimn.telebof.requests.get.GetUpdates;
 import io.github.natanimn.telebof.states.StateMemoryStorage;
 import io.github.natanimn.telebof.types.chat_and_user.User;
+import io.github.natanimn.telebof.types.updates.BotSubscriptionUpdated;
 import io.github.natanimn.telebof.types.updates.BusinessConnection;
 import io.github.natanimn.telebof.types.updates.BusinessMessagesDeleted;
 import io.github.natanimn.telebof.types.updates.CallbackQuery;
@@ -103,7 +106,7 @@ import java.util.function.Function;
 /**
  * Main class of Telebof library
  * @author Natanim
- * @since 3 March 2025
+ * @since 0.1
  */
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
@@ -146,6 +149,7 @@ final public class BotClient {
         updateMap.put(Update::getPurchasedPaidMedia, Updates.PURCHASED_PAID_MEDIA);
         updateMap.put(Update::getManagedBot, Updates.MANAGED_BOT);
         updateMap.put(Update::getGuestMessage, Updates.GUEST_MESSAGE);
+        updateMap.put(Update::getSubscription, Updates.SUBSCRIPTION);
     }
 
     /**
@@ -686,6 +690,18 @@ final public class BotClient {
         this.dispatcher.add(Updates.GUEST_MESSAGE, map);
     }
 
+    /**
+     * Use this method to register new handler for incoming {@link Update#getSubscription()} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onBotSubscription(FilterExecutor executor, UpdateHandler<BotSubscriptionUpdated> handler){
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<BotSubscriptionUpdated>> map = new ConcurrentHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.SUBSCRIPTION, map);
+    }
+
     private void addMessageHandler(MessageHandler handler, MethodHandle method){
         MessageHandlerMeta meta = new MessageHandlerMeta(handler, method);
         onMessage(meta::matches, method::invoke);
@@ -811,6 +827,11 @@ final public class BotClient {
         onGuest(meta::matches, method::invoke);
     }
 
+    private void addBotSubscriptionHandler(BotSubscriptionHandler handler, MethodHandle method){
+        var meta = new BotSubscriptionHandlerMeta(handler, method);
+        onBotSubscription(meta::matches, method::invoke);
+    }
+
     private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
         for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
@@ -863,6 +884,8 @@ final public class BotClient {
         for (var anno : method.getDeclaredAnnotationsByType(ManagedBotHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(GuestHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(BotSubscriptionHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
     }
 
@@ -941,6 +964,8 @@ final public class BotClient {
                     addManagedBotHandler(mbh, handler.getMethodHandle());
                 else if (handler.getAnnotation() instanceof GuestHandler gh)
                     addGuestHandler(gh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof BotSubscriptionHandler bsh)
+                    addBotSubscriptionHandler(bsh, handler.getMethodHandle());
             }
 
         } catch (IllegalAccessException e) {
