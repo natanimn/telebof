@@ -236,6 +236,23 @@ Handles managed bot updates.
 - `filter()` - Custom filter class for advanced logic
 - `priority()` - Execution priority
 
+#### @GuestHandler
+Handles guest bot.
+
+**Parameters**:
+The same as @MessageHandler
+
+#### @BotSubscriptionHandler
+Handles bot subscription update.
+
+**Parameters:**
+
+- `state()` - Payment state
+- `regex()` - Regular Expression for invoice payload
+- `filter()` - Custom filter class for advanced logic
+- `priority()` - Execution priority
+
+
 ## Usage Examples
 
 ### Basic Message Handler
