@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.ChatType;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * Represents a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Chat {
+@Getter
+public class Chat implements JsonFormatter {
     /**
      * Unique identifier for this chat.
      */
@@ -54,35 +56,4 @@ public class Chat {
     @SerializedName("is_direct_messages")
     private Boolean isDirectMessages;
 
-    public long getId() {
-        return id;
-    }
-
-    public ChatType getType() {
-        return type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Boolean getIsForum() {
-        return isForum;
-    }
-
-    public Boolean getIsDirectMessages() {
-        return isDirectMessages;
-    }
 }
