@@ -1,14 +1,20 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * This object represents a point on the map.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Location {
+@Getter
+@Setter
+@Accessors(chain = true)
+public class Location implements JsonFormatter {
     /**
      * Longitude as defined by the sender
      */
@@ -42,57 +48,4 @@ public class Location {
     @SerializedName("proximity_alert_radius")
     private Integer proximityAlertRadius;
 
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public Location setLongitude(Double longitude) {
-        this.longitude = longitude;
-        return this;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Location setLatitude(Double latitude) {
-        this.latitude = latitude;
-        return this;
-    }
-
-    public Double getHorizontalAccuracy() {
-        return horizontalAccuracy;
-    }
-
-    public Location setHorizontalAccuracy(Double horizontalAccuracy) {
-        this.horizontalAccuracy = horizontalAccuracy;
-        return this;
-    }
-
-    public Integer getLivePeriod() {
-        return livePeriod;
-    }
-
-    public Location setLivePeriod(Integer livePeriod) {
-        this.livePeriod = livePeriod;
-        return this;
-    }
-
-    public Integer getHeading() {
-        return heading;
-    }
-
-    public Location setHeading(Integer heading) {
-        this.heading = heading;
-        return this;
-    }
-
-    public Integer getProximityAlertRadius() {
-        return proximityAlertRadius;
-    }
-
-    public Location setProximityAlertRadius(Integer proximityAlertRadius) {
-        this.proximityAlertRadius = proximityAlertRadius;
-        return this;
-    }
 }
