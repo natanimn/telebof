@@ -1,16 +1,18 @@
 package io.github.natanimn.telebof.types.payments;
 
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class Contains information about the affiliate that received a commission via this transaction.
  * @author Natanim
- * @since July 3, 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class AffiliateInfo {
+@Getter
+public class AffiliateInfo implements JsonFormatter {
     /**
      * The bot or the user that received an affiliate commission if it was received by a bot or a user
      */
@@ -40,23 +42,4 @@ public class AffiliateInfo {
     @SerializedName("nanostar_amount")
     private Integer nanostarAmount;
 
-    public User getAffiliateUser() {
-        return affiliateUser;
-    }
-
-    public Chat getAffiliateChat() {
-        return affiliateChat;
-    }
-
-    public Integer getCommissionPerMille() {
-        return commissionPerMille;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Integer getNanostarAmount() {
-        return nanostarAmount;
-    }
 }
