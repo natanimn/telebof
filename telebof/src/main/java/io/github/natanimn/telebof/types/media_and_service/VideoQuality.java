@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents a video file of a specific quality.
  * @author Natanim
- * @version 1.4.0
  * @since 1.4.0
  */
-public class VideoQuality {
+@Getter
+public class VideoQuality implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -42,27 +44,4 @@ public class VideoQuality {
     @SerializedName("file_size")
     private Long fileSize;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public String getCodec() {
-        return codec;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
 }
