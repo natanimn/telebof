@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents an audio file to be treated as music by the Telegram clients.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Audio {
+@Getter
+public class Audio implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -59,39 +61,4 @@ public class Audio {
      */
     private PhotoSize thumbnail;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public String getPerformer() {
-        return performer;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
 }
