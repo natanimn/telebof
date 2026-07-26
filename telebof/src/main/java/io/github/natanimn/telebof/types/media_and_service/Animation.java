@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents an animation file (GIF or H.264/MPEG-4 AVC video without sound).
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Animation {
+@Getter
+public class Animation implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -59,39 +61,4 @@ public class Animation {
      */
     private PhotoSize thumbnail;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
 }
