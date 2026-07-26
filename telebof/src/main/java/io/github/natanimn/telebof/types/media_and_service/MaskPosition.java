@@ -1,14 +1,20 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * This object describes the position on faces where a mask should be placed by default.
  * @author Natanim Negash
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class MaskPosition implements Serializable {
     /**
      * The part of the face relative to which the mask should be placed. One of “forehead”, “eyes”, “mouth”, or “chin”.
@@ -31,40 +37,4 @@ public class MaskPosition implements Serializable {
      * Mask scaling coefficient. For example, 2.0 means double size.
      */
     private Double scale;
-
-    public String getPoint() {
-        return point;
-    }
-
-    public MaskPosition setPoint(String point) {
-        this.point = point;
-        return this;
-    }
-
-    public Double getXShift() {
-        return xShift;
-    }
-
-    public MaskPosition setXShift(Double xShift) {
-        this.xShift = xShift;
-        return this;
-    }
-
-    public Double getYShift() {
-        return yShift;
-    }
-
-    public MaskPosition setYShift(Double yShift) {
-        this.yShift = yShift;
-        return this;
-    }
-
-    public Double getScale() {
-        return scale;
-    }
-
-    public MaskPosition setScale(Double scale) {
-        this.scale = scale;
-        return this;
-    }
 }
