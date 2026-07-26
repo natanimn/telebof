@@ -1,9 +1,9 @@
 package io.github.natanimn.telebof.types.updates;
 
-import io.github.natanimn.telebof.types.chat_and_user.User;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.Objects;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import io.github.natanimn.telebof.types.chat_and_user.User;
+import lombok.Getter;
 
 /**
  * This object represents an incoming callback query from a callback button in an inline keyboard.
@@ -11,10 +11,10 @@ import java.util.Objects;
  * If the button was attached to a message sent via the bot (in inline mode), the field inline_message_id will be present.
  * Exactly one of the fields data or game_short_name will be present.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class CallbackQuery implements TelegramUpdate {
+@Getter
+public class CallbackQuery implements TelegramUpdate, JsonFormatter {
     /**
      * Unique identifier for this query
      */
@@ -55,63 +55,4 @@ public class CallbackQuery implements TelegramUpdate {
      */
     private Message message;
 
-    public String getId() {
-        return id;
-    }
-
-    public String getInlineMessageId() {
-        return inlineMessageId;
-    }
-
-    public String getChatInstance() {
-        return chatInstance;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public String getGameShortName() {
-        return gameShortName;
-    }
-
-    public User getFrom() {
-        return from;
-    }
-
-    public Message getMessage() {
-        return message;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        CallbackQuery that = (CallbackQuery) object;
-        return  Objects.equals(id, that.id) &&
-                Objects.equals(inlineMessageId, that.inlineMessageId) &&
-                Objects.equals(chatInstance, that.chatInstance) &&
-                Objects.equals(data, that.data) &&
-                Objects.equals(gameShortName, that.gameShortName) &&
-                Objects.equals(from, that.from) &&
-                Objects.equals(message, that.message);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, inlineMessageId, chatInstance, data, gameShortName, from, message);
-    }
-
-    @Override
-    public String toString() {
-        return "CallbackQuery{" +
-                "id='" + id + '\'' +
-                ", inlineMessageId='" + inlineMessageId + '\'' +
-                ", chatInstance='" + chatInstance + '\'' +
-                ", data='" + data + '\'' +
-                ", gameShortName='" + gameShortName + '\'' +
-                ", from=" + from +
-                ", message=" + message +
-                '}';
-    }
 }
