@@ -1,15 +1,18 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
+
+import java.util.List;
 
 /**
  * This object represents a live photo.
  * @author Natanim
  * @since 2.0.0
- * @version 2.0.0
  */
-public class LivePhoto {
+@Getter
+public class LivePhoto implements JsonFormatter {
     /**
      * Optional. Available sizes of the corresponding static photo
      */
@@ -54,35 +57,4 @@ public class LivePhoto {
     @SerializedName("file_size")
     private Long fileSize;
 
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
 }
