@@ -1,17 +1,17 @@
 package io.github.natanimn.telebof.types;
 
+import lombok.Getter;
+
 /**
  * Represents an HTTP link.
  * @author Natanim
  * @since 2.1
  */
-public class Link {
+@Getter
+public class Link implements JsonFormatter{
     /**
      * URL of the link
      */
     private String url;
 
-    public String getUrl(){
-        return url;
-    }
 }
