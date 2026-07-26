@@ -2,6 +2,8 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents a file ready to be downloaded.
@@ -10,10 +12,10 @@ import com.google.gson.annotations.SerializedName;
  * <br><br>
  * <i>The maximum file size to download is 20 MB</i>
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class File {
+@Getter
+public class File implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -38,19 +40,4 @@ public class File {
     @SerializedName("file_size")
     private Long fileSize;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
 }
