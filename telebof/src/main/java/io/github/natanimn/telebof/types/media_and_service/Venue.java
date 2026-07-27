@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents a venue.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Venue {
+@Getter
+public class Venue implements JsonFormatter {
     /**
      * Name of the venue
      */
@@ -48,31 +50,4 @@ public class Venue {
      */
     private Location location;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getFoursquareId() {
-        return foursquareId;
-    }
-
-    public String getFoursquareType() {
-        return foursquareType;
-    }
-
-    public String getGooglePlaceId() {
-        return googlePlaceId;
-    }
-
-    public String getGooglePlaceType() {
-        return googlePlaceType;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
 }
