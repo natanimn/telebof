@@ -1,18 +1,20 @@
 package io.github.natanimn.telebof.types.updates;
 
+import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.User;
-import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This object represents an answer of a user in a non-anonymous poll.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.6.0
+ * @since 0.1
  */
-public class PollAnswer implements TelegramUpdate {
+@Getter
+public class PollAnswer implements TelegramUpdate, JsonFormatter {
     /**
      * Unique poll identifier
      */
@@ -42,35 +44,4 @@ public class PollAnswer implements TelegramUpdate {
     @SerializedName("option_persistent_ids")
     private List<String> optionPersistentIds;
 
-
-    public String getPollId() {
-        return pollId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public List<Integer> getOptionIds() {
-        return optionIds;
-    }
-
-    public Chat getVoterChat() {
-        return voterChat;
-    }
-
-    public List<String> getOptionPersistentIds() {
-        return optionPersistentIds;
-    }
-
-    @Override
-    public String toString() {
-        return "PollAnswer{" +
-                "pollId='" + pollId + '\'' +
-                ", user=" + user +
-                ", optionIds=" + optionIds +
-                ", voterChat=" + voterChat +
-                ", optionPersistentIds=" + optionPersistentIds +
-                '}';
-    }
 }
