@@ -1,18 +1,21 @@
 package io.github.natanimn.telebof.types.updates;
 
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This class contains information about one answer option in a poll.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.6.0
+ * @since 0.1
  */
-public class PollOption implements TelegramUpdate {
+@Getter
+public class PollOption implements TelegramUpdate, JsonFormatter {
     /**
      * Unique identifier of the option, persistent on option addition and deletion
      */
@@ -54,44 +57,4 @@ public class PollOption implements TelegramUpdate {
     @SerializedName("addition_date")
     private Long additionDate;
 
-    public String getPersistentId() {
-        return persistentId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public List<MessageEntity> getTextEntities() {
-        return textEntities;
-    }
-
-    public Integer getVoterCount() {
-        return voterCount;
-    }
-
-    public User getAddedByUser() {
-        return addedByUser;
-    }
-
-    public Chat getAddedByChat() {
-        return addedByChat;
-    }
-
-    public Long getAdditionDate() {
-        return additionDate;
-    }
-
-    @Override
-    public String toString() {
-        return "PollOption{" +
-                "persistentId='" + persistentId + '\'' +
-                ", text='" + text + '\'' +
-                ", textEntities=" + textEntities +
-                ", voterCount=" + voterCount +
-                ", addedByUser=" + addedByUser +
-                ", addedByChat=" + addedByChat +
-                ", additionDate=" + additionDate +
-                '}';
-    }
 }
