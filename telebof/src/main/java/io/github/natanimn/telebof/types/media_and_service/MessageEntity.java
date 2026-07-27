@@ -2,17 +2,24 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.enums.EntityType;
 import io.github.natanimn.telebof.BotContext;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * This object represents one special entity in a text message. For example, hashtags, usernames, URLs, etc.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class MessageEntity implements Serializable {
+@Getter
+@Setter
+@Accessors(chain = true)
+public class MessageEntity implements Serializable, JsonFormatter {
     /**
      * Optional. For “text_link” only, URL that will be opened after user taps on the text
      */
@@ -49,66 +56,4 @@ public class MessageEntity implements Serializable {
      */
     private EntityType type;
 
-    public String getUrl() {
-        return url;
-    }
-
-    public MessageEntity setUrl(String url) {
-        this.url = url;
-        return this;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public MessageEntity setLanguage(String language) {
-        this.language = language;
-        return this;
-    }
-
-    public Integer getOffset() {
-        return offset;
-    }
-
-    public MessageEntity setOffset(Integer offset) {
-        this.offset = offset;
-        return this;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public MessageEntity setLength(Integer length) {
-        this.length = length;
-        return this;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public MessageEntity setUser(User user) {
-        this.user = user;
-        return this;
-    }
-
-    public String getCustomEmojiId() {
-        return customEmojiId;
-    }
-
-    public MessageEntity setCustomEmojiId(String customEmojiId) {
-        this.customEmojiId = customEmojiId;
-        return this;
-    }
-
-    public EntityType getType() {
-        return type;
-    }
-
-    public MessageEntity setType(EntityType type) {
-        this.type = type;
-        return this;
-    }
 }
