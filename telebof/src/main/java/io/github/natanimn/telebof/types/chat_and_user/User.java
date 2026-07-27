@@ -3,13 +3,16 @@ package io.github.natanimn.telebof.types.chat_and_user;
 import io.github.natanimn.telebof.Util;
 import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This object represents a Telegram user or bot.
  * @author Natanim
  * @since 0.1
  */
-public class User {
+@Getter
+public class User implements JsonFormatter {
     /**
      * Unique identifier for this user or bot.
      */
@@ -115,78 +118,6 @@ public class User {
      */
     @SerializedName("supports_join_request_queries")
     private Boolean supportsJoinRequestQueries;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Boolean getIsBot() {
-        return isBot;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getLanguageCode() {
-        return languageCode;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public Boolean getIsPremium() {
-        return isPremium;
-    }
-
-    public Boolean getAddedToAttachmentMenu() {
-        return addedToAttachmentMenu;
-    }
-
-    public Boolean getCanJoinGroups() {
-        return canJoinGroups;
-    }
-
-    public Boolean getCanReadAllGroupMessages() {
-        return canReadAllGroupMessages;
-    }
-
-    public Boolean getSupportsInlineQueries() {
-        return supportsInlineQueries;
-    }
-
-    public Boolean getCanConnectToBusiness() {
-        return canConnectToBusiness;
-    }
-
-    public Boolean getHasMainWebApp() {
-        return hasMainWebApp;
-    }
-
-    public Boolean getHasTopicsEnabled() {
-        return hasTopicsEnabled;
-    }
-
-    public Boolean getAllowsUsersToCreateTopics() {
-        return allowsUsersToCreateTopics;
-    }
-
-    public Boolean getCanManageBots() {
-        return canManageBots;
-    }
-
-    public Boolean getSupportsGuestQueries() {
-        return supportsGuestQueries;
-    }
-
-    public Boolean getSupportsJoinRequestQueries() {
-        return supportsJoinRequestQueries;
-    }
 
     public String mention() {
         // Do not forget to set parseMode to ParseMode.HTML
