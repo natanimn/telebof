@@ -2,6 +2,7 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.types.Link;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ import java.util.List;
  * At most one of the optional fields can be present in any given object.
  * @author Natanim
  * @since 2.0.0
- * @version 2.0.0
  */
+@Getter
 public class PollMedia {
     /**
      * Optional. Media is an animation, information about the animation
@@ -60,43 +61,4 @@ public class PollMedia {
      */
     private Link link;
 
-    public Animation getAnimation() {
-        return animation;
-    }
-
-    public Audio getAudio() {
-        return audio;
-    }
-
-    public Document getDocument() {
-        return document;
-    }
-
-    public LivePhoto getLivePhoto() {
-        return livePhoto;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public Sticker getSticker() {
-        return sticker;
-    }
-
-    public Venue getVenue() {
-        return venue;
-    }
-
-    public Video getVideo() {
-        return video;
-    }
-
-    public Link getLink() {
-        return link;
-    }
 }
