@@ -3,6 +3,8 @@ package io.github.natanimn.telebof.types.updates;
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This class represents an incoming update.
@@ -11,7 +13,8 @@ import com.google.gson.annotations.SerializedName;
  * @author Natanim
  * @since 0.1
  */
-public class Update implements TelegramUpdate {
+@Getter
+public class Update implements TelegramUpdate, JsonFormatter {
     /**
      * The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially.
      * This identifier becomes especially handy if you're using webhook since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order.
@@ -182,111 +185,4 @@ public class Update implements TelegramUpdate {
      */
     private BotSubscriptionUpdated subscription;
 
-    public int getUpdateId() {
-        return updateId;
-    }
-
-    public Message getMessage() {
-        return message;
-    }
-
-    public Message getEditedMessage() {
-        return editedMessage;
-    }
-
-    public Message getChannelPost() {
-        return channelPost;
-    }
-
-    public Message getEditedChannelPost() {
-        return editedChannelPost;
-    }
-
-    public Message getBusinessMessage() {
-        return businessMessage;
-    }
-
-    public Message getEditedBusinessMessage() {
-        return editedBusinessMessage;
-    }
-
-    public CallbackQuery getCallbackQuery() {
-        return callbackQuery;
-    }
-
-    public InlineQuery getInlineQuery() {
-        return inlineQuery;
-    }
-
-    public ChosenInlineResult getChosenInlineResult() {
-        return chosenInlineResult;
-    }
-
-    public Poll getPoll() {
-        return poll;
-    }
-
-    public PollAnswer getPollAnswer() {
-        return pollAnswer;
-    }
-
-    public PreCheckoutQuery getPreCheckoutQuery() {
-        return preCheckoutQuery;
-    }
-
-    public ShippingQuery getShippingQuery() {
-        return shippingQuery;
-    }
-
-    public ChatMemberUpdated getMyChatMember() {
-        return myChatMember;
-    }
-
-    public ChatMemberUpdated getChatMember() {
-        return chatMember;
-    }
-
-    public ChatJoinRequest getChatJoinRequest() {
-        return chatJoinRequest;
-    }
-
-    public MessageReactionUpdated getMessageReaction() {
-        return messageReaction;
-    }
-
-    public MessageReactionCountUpdated getMessageReactionCount() {
-        return messageReactionCount;
-    }
-
-    public ChatBoostUpdated getChatBoost() {
-        return chatBoost;
-    }
-
-    public ChatBoostRemoved getRemovedChatBoost() {
-        return removedChatBoost;
-    }
-
-    public BusinessConnection getBusinessConnection() {
-        return businessConnection;
-    }
-
-    public BusinessMessagesDeleted getDeletedBusinessMessages() {
-        return deletedBusinessMessages;
-    }
-
-    public PaidMediaPurchased getPurchasedPaidMedia() {
-        return purchasedPaidMedia;
-    }
-
-    public ManagedBotUpdated getManagedBot() {
-        return managedBot;
-    }
-
-    public Message getGuestMessage() {
-        return guestMessage;
-    }
-
-    public BotSubscriptionUpdated getSubscription() {
-        return subscription;
-    }
 }
