@@ -1,15 +1,18 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a video file.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.4.0
+ * @since 0.1
  */
-public class Video {
+@Getter
+public class Video implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -76,51 +79,4 @@ public class Video {
      */
     private List<VideoQuality> qualities;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Integer getFileSize() {
-        return fileSize;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
-
-    public Integer getStartTimestamp() {
-        return startTimestamp;
-    }
-
-    public List<PhotoSize> getCover() {
-        return cover;
-    }
-
-    public List<VideoQuality> getQualities() {
-        return qualities;
-    }
 }
