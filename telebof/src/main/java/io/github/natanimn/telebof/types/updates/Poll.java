@@ -1,18 +1,21 @@
 package io.github.natanimn.telebof.types.updates;
 
 import io.github.natanimn.telebof.enums.PollType;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import io.github.natanimn.telebof.types.media_and_service.PollMedia;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This class contains information about a poll.
  * @author Natanim
- * @since 3 March 2025
- * @version 2.0.0
+ * @since 0.1
  */
-public class Poll implements TelegramUpdate {
+@Getter
+public class Poll implements TelegramUpdate, JsonFormatter {
     /**
      * Unique poll identifier
      */
@@ -125,117 +128,4 @@ public class Poll implements TelegramUpdate {
     @SerializedName("country_codes")
     private List<String> countryCodes;
 
-    public String getId() {
-        return id;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public PollType getType() {
-        return type;
-    }
-
-    public String getExplanation() {
-        return explanation;
-    }
-
-    public List<PollOption> getOptions() {
-        return options;
-    }
-
-    public Integer getTotalVoterCount() {
-        return totalVoterCount;
-    }
-
-    public List<Integer> getCorrectOptionIds() {
-        return correctOptionIds;
-    }
-
-    public Integer getOpenPeriod() {
-        return openPeriod;
-    }
-
-    public Integer getCloseDate() {
-        return closeDate;
-    }
-
-    public Boolean getIsClosed() {
-        return isClosed;
-    }
-
-    public Boolean getIsAnonymous() {
-        return isAnonymous;
-    }
-
-    public Boolean getAllowsMultipleAnswers() {
-        return allowsMultipleAnswers;
-    }
-
-    public List<MessageEntity> getExplanationEntities() {
-        return explanationEntities;
-    }
-
-    public List<MessageEntity> getQuestionEntities() {
-        return questionEntities;
-    }
-
-    public Boolean getAllowsRevoting() {
-        return allowsRevoting;
-    }
-
-    public List<MessageEntity> getDescriptionEntities() {
-        return descriptionEntities;
-    }
-
-    public Boolean getClosed() {
-        return isClosed;
-    }
-
-    public Boolean getAnonymous() {
-        return isAnonymous;
-    }
-
-    public PollMedia getMedia() {
-        return media;
-    }
-
-    public PollMedia getExplanationMedia() {
-        return explanationMedia;
-    }
-
-    public Boolean getMembersOnly() {
-        return membersOnly;
-    }
-
-    public List<String> getCountryCodes() {
-        return countryCodes;
-    }
-
-    @Override
-    public String toString() {
-        return "Poll{" +
-                "id='" + id + '\'' +
-                ", question='" + question + '\'' +
-                ", type=" + type +
-                ", explanation='" + explanation + '\'' +
-                ", options=" + options +
-                ", totalVoterCount=" + totalVoterCount +
-                ", correctOptionIds=" + correctOptionIds +
-                ", openPeriod=" + openPeriod +
-                ", closeDate=" + closeDate +
-                ", isClosed=" + isClosed +
-                ", isAnonymous=" + isAnonymous +
-                ", allowsMultipleAnswers=" + allowsMultipleAnswers +
-                ", explanationEntities=" + explanationEntities +
-                ", questionEntities=" + questionEntities +
-                ", allowsRevoting=" + allowsRevoting +
-                ", descriptionEntities=" + descriptionEntities +
-                ", media=" + media +
-                ", explanationMedia=" + explanationMedia +
-                ", membersOnly=" + membersOnly +
-                ", countryCodes=" + countryCodes +
-                '}';
-    }
 }
