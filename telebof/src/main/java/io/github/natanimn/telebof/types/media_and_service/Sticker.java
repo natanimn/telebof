@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.enums.StickerType;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
 
 /**
  * This class represents a sticker.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class Sticker {
+@Getter
+public class Sticker implements JsonFormatter {
     /**
      * Identifier for this file, which can be used to download or reuse the file
      */
@@ -95,63 +97,4 @@ public class Sticker {
     @SerializedName("file_size")
     private Integer fileSize;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public StickerType getType() {
-        return type;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Boolean getIsAnimated() {
-        return isAnimated;
-    }
-
-    public Boolean getIsVideo() {
-        return isVideo;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
-
-    public String getEmoji() {
-        return emoji;
-    }
-
-    public String getSetName() {
-        return setName;
-    }
-
-    public File getPremiumAnimation() {
-        return premiumAnimation;
-    }
-
-    public MaskPosition getMaskPosition() {
-        return maskPosition;
-    }
-
-    public String getCustomEmojiId() {
-        return customEmojiId;
-    }
-
-    public Boolean getNeedsRepainting() {
-        return needsRepainting;
-    }
-
-    public Integer getFileSize() {
-        return fileSize;
-    }
 }
