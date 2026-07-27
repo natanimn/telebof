@@ -1,15 +1,18 @@
 package io.github.natanimn.telebof.types.payments;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * This class represents a shipping address.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class ShippingAddress implements Serializable {
+@Getter
+public class ShippingAddress implements Serializable, JsonFormatter {
     /**
      * Two-letter ISO 3166-1 alpha-2 country code
      */
@@ -55,27 +58,4 @@ public class ShippingAddress implements Serializable {
         this.postCode = postCode;
     }
 
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getStreetLine1() {
-        return streetLine1;
-    }
-
-    public String getStreetLine2() {
-        return streetLine2;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
 }
