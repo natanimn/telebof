@@ -1,17 +1,18 @@
 package io.github.natanimn.telebof.types.updates;
 
+import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.payments.OrderInfo;
-import com.google.gson.annotations.SerializedName;
-import java.util.Objects;
+import lombok.Getter;
 
 /**
  * This class contains information about an incoming pre-checkout query.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class PreCheckoutQuery implements TelegramUpdate {
+@Getter
+public class PreCheckoutQuery implements TelegramUpdate, JsonFormatter {
     /**
      * Unique query identifier
      */
@@ -50,45 +51,4 @@ public class PreCheckoutQuery implements TelegramUpdate {
      */
     @SerializedName("order_info")
     private OrderInfo orderInfo;
-
-    public String getId() {
-        return id;
-    }
-
-    public User getFrom() {
-        return from;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public Integer getTotalAmount() {
-        return totalAmount;
-    }
-
-    public String getInvoicePayload() {
-        return invoicePayload;
-    }
-
-    public String getShippingOptionId() {
-        return shippingOptionId;
-    }
-
-    public OrderInfo getOrderInfo() {
-        return orderInfo;
-    }
-
-    @Override
-    public String toString() {
-        return "PreCheckoutQuery{" +
-                "id='" + id + '\'' +
-                ", from=" + from +
-                ", currency='" + currency + '\'' +
-                ", totalAmount=" + totalAmount +
-                ", invoicePayload='" + invoicePayload + '\'' +
-                ", shippingOptionId='" + shippingOptionId + '\'' +
-                ", orderInfo=" + orderInfo +
-                '}';
-    }
 }
