@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object describes the source of a chat boost.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatBoostSource {
     /**
      * Source of the boost, one of “premium”, "gift_code", "giveaway"
@@ -38,23 +39,4 @@ public class ChatBoostSource {
     @SerializedName("is_unclaimed")
     private Boolean isUnclaimed;
 
-    public String getSource() {
-        return source;
-    }
-
-    public Integer getGiveawayMessageId() {
-        return giveawayMessageId;
-    }
-
-    public Integer getPrizeStarCount() {
-        return prizeStarCount;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Boolean getIsUnclaimed() {
-        return isUnclaimed;
-    }
 }
