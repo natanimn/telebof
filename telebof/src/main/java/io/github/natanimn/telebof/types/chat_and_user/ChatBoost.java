@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object contains information about a chat boost.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatBoost {
     /**
      * Unique identifier of the boost
@@ -32,19 +33,4 @@ public class ChatBoost {
      */
     private ChatBoostSource source;
 
-    public String getBoostId() {
-        return boostId;
-    }
-
-    public Integer getAddDate() {
-        return addDate;
-    }
-
-    public Integer getExpirationData() {
-        return expirationData;
-    }
-
-    public ChatBoostSource getSource() {
-        return source;
-    }
 }
