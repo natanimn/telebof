@@ -1,18 +1,19 @@
 package io.github.natanimn.telebof.types.updates;
 
-import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import io.github.natanimn.telebof.types.chat_and_user.Chat;
+import lombok.Getter;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This object is received when messages are deleted from a connected business account.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class BusinessMessagesDeleted implements TelegramUpdate {
+@Getter
+public class BusinessMessagesDeleted implements TelegramUpdate, JsonFormatter {
     /**
      * Unique identifier of the business connection
      */
@@ -29,40 +30,4 @@ public class BusinessMessagesDeleted implements TelegramUpdate {
      */
     @SerializedName("message_ids")
     private List<Integer> messageIds;
-
-    public String getBusinessConnectionId() {
-        return businessConnectionId;
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public List<Integer> getMessageIds() {
-        return messageIds;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        BusinessMessagesDeleted that = (BusinessMessagesDeleted) object;
-        return Objects.equals(businessConnectionId, that.businessConnectionId) &&
-                Objects.equals(chat, that.chat) &&
-                Objects.equals(messageIds, that.messageIds);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(businessConnectionId, chat, messageIds);
-    }
-
-    @Override
-    public String toString() {
-        return "BusinessMessagesDeleted{" +
-                "businessConnectionId='" + businessConnectionId + '\'' +
-                ", chat=" + chat +
-                ", messageIds=" + messageIds +
-                '}';
-    }
 }
