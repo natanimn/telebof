@@ -1,18 +1,18 @@
 package io.github.natanimn.telebof.types.updates;
 
+import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.business.BusinessBotRights;
 import io.github.natanimn.telebof.types.chat_and_user.User;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Objects;
+import lombok.Getter;
 
 /**
  * Describes the connection of the bot with a business account.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class BusinessConnection implements TelegramUpdate {
+@Getter
+public class BusinessConnection implements TelegramUpdate, JsonFormatter {
     /**
      * Unique identifier of the business connection
      */
@@ -45,57 +45,4 @@ public class BusinessConnection implements TelegramUpdate {
     @SerializedName("is_enabled")
     private Boolean isEnabled;
 
-    public String getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Long getUserChatId() {
-        return userChatId;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public BusinessBotRights getRights() {
-        return rights;
-    }
-
-    public Boolean getIsEnabled() {
-        return isEnabled;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        BusinessConnection that = (BusinessConnection) object;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(user, that.user) &&
-                Objects.equals(userChatId, that.userChatId) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(rights, that.rights) &&
-                Objects.equals(isEnabled, that.isEnabled);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, user, userChatId, date, rights, isEnabled);
-    }
-
-    @Override
-    public String toString() {
-        return "BusinessConnection{" +
-                "id='" + id + '\'' +
-                ", user=" + user +
-                ", userChatId=" + userChatId +
-                ", date=" + date +
-                ", rights=" + rights +
-                ", isEnabled=" + isEnabled +
-                '}';
-    }
 }
