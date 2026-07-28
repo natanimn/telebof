@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.BotContext;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Game {
     /**
      * Title of the game
@@ -42,27 +44,4 @@ public class Game {
      */
     private Animation animation;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public List<MessageEntity> getTextEntities() {
-        return textEntities;
-    }
-
-    public Animation getAnimation() {
-        return animation;
-    }
 }
