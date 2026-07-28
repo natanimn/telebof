@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a phone contact.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Contact {
     /**
      * Contact's phone number
@@ -38,23 +39,4 @@ public class Contact {
     @SerializedName("user_id")
     private Long userId;
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getVcard() {
-        return vcard;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
 }
