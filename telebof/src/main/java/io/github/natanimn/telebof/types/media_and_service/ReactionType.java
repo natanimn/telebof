@@ -1,18 +1,37 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
-import io.github.natanimn.telebof.enums.TypeReaction;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.enums.TypeReaction;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * This object describes the type of a reaction.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class ReactionType implements Serializable {
+@Getter
+@Setter
+@Accessors(chain = true)
+public class ReactionType implements Serializable, JsonFormatter {
     private TypeReaction type;
+
+    /**Reaction emoji. Currently, it can be one of
+     *              "❤", "👍", "👎", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊",
+     *              "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋",
+     *              "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃",
+     *              "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
+     *
+     */
     private String emoji;
+
+    /**
+     * Custom emoji identifier
+     */
     @SerializedName("custom_emoji_id")
     private String customEmojiId;
 
@@ -24,37 +43,4 @@ public class ReactionType implements Serializable {
         this.type = type;
     }
 
-    /**
-     * Optional.
-     * @param emoji Reaction emoji. Currently, it can be one of
-     *              "❤", "👍", "👎", "🔥", "🥰", "👏", "😁", "🤔", "🤯", "😱", "🤬", "😢", "🎉", "🤩", "🤮", "💩", "🙏", "👌", "🕊",
-     *              "🤡", "🥱", "🥴", "😍", "🐳", "❤‍🔥", "🌚", "🌭", "💯", "🤣", "⚡", "🍌", "🏆", "💔", "🤨", "😐", "🍓", "🍾", "💋",
-     *              "🖕", "😈", "😴", "😭", "🤓", "👻", "👨‍💻", "👀", "🎃", "🙈", "😇", "😨", "🤝", "✍", "🤗", "🫡", "🎅", "🎄", "☃",
-     *              "💅", "🤪", "🗿", "🆒", "💘", "🙉", "🦄", "😘", "💊", "🙊", "😎", "👾", "🤷‍♂", "🤷", "🤷‍♀", "😡"
-     */
-    public ReactionType setEmoji(String emoji) {
-        this.emoji = emoji;
-        return this;
-    }
-
-    /**
-     * Optional.
-     * @param customEmojiId Custom emoji identifier
-     */
-    public ReactionType setCustomEmojiId(String customEmojiId) {
-        this.customEmojiId = customEmojiId;
-        return this;
-    }
-
-    public TypeReaction getType() {
-        return type;
-    }
-
-    public String getEmoji() {
-        return emoji;
-    }
-
-    public String getCustomEmojiId() {
-        return customEmojiId;
-    }
 }
