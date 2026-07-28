@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.business;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Represents the rights of a business bot.
  * @author Natanim
- * @since 19 August 20025
- * @version 1.3.0
+ * @since 19 August 2025
  */
+@Getter
 public class BusinessBotRights {
     /**
      * Optional. True, if the bot can send and edit messages in the  chats that had incoming messages in the last 24 hours
@@ -93,59 +94,4 @@ public class BusinessBotRights {
     @SerializedName("can_manage_stories")
     private Boolean canManageStories;
 
-    public Boolean getCanReply() {
-        return canReply;
-    }
-
-    public Boolean getCanReadMessages() {
-        return canReadMessages;
-    }
-
-    public Boolean getCanDeleteSentMessages() {
-        return canDeleteSentMessages;
-    }
-
-    public Boolean getCanDeleteAllMessages() {
-        return canDeleteAllMessages;
-    }
-
-    public Boolean getCanEditName() {
-        return canEditName;
-    }
-
-    public Boolean getCanEditBio() {
-        return canEditBio;
-    }
-
-    public Boolean getCanEditProfilePhoto() {
-        return canEditProfilePhoto;
-    }
-
-    public Boolean getCanEditUsername() {
-        return canEditUsername;
-    }
-
-    public Boolean getCanChangeGiftSettings() {
-        return canChangeGiftSettings;
-    }
-
-    public Boolean getCanViewGiftsAndStars() {
-        return canViewGiftsAndStars;
-    }
-
-    public Boolean getCanConvertGiftsToStars() {
-        return canConvertGiftsToStars;
-    }
-
-    public Boolean getCanTransferAndUpgradeGifts() {
-        return canTransferAndUpgradeGifts;
-    }
-
-    public Boolean getCanTransferStars() {
-        return canTransferStars;
-    }
-
-    public Boolean getCanManageStories() {
-        return canManageStories;
-    }
 }
