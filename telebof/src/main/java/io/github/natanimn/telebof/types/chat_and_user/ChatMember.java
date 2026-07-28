@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.chat_and_user;
 
 import io.github.natanimn.telebof.enums.ChatMemberStatus;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object contains information about one member of a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.5.0
+ * @since 0.1
  */
+@Getter
 public class ChatMember {
     /**
      * The member's status in the chat.
@@ -218,143 +219,4 @@ public class ChatMember {
     @SerializedName("can_react_to_messages")
     private Boolean canReactToMessages;
 
-    public ChatMemberStatus getStatus() {
-        return status;
-    }
-
-    public String getCustomTitle() {
-        return customTitle;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Boolean getCanBeEdited() {
-        return canBeEdited;
-    }
-
-    public Boolean getAnonymous() {
-        return isAnonymous;
-    }
-
-    public Boolean getCanManageChat() {
-        return canManageChat;
-    }
-
-    public Boolean getCanDeleteMessages() {
-        return canDeleteMessages;
-    }
-
-    public Boolean getCanManageVideoChats() {
-        return canManageVideoChats;
-    }
-
-    public Boolean getCanRestrictMembers() {
-        return canRestrictMembers;
-    }
-
-    public Boolean getCanPromoteMembers() {
-        return canPromoteMembers;
-    }
-
-    public Boolean getCanChangeInfo() {
-        return canChangeInfo;
-    }
-
-    public Boolean getCanInviteUsers() {
-        return canInviteUsers;
-    }
-
-    public Boolean getCanPostMessages() {
-        return canPostMessages;
-    }
-
-    public Boolean getCanEditMessages() {
-        return canEditMessages;
-    }
-
-    public Boolean getCanPinMessages() {
-        return canPinMessages;
-    }
-
-    public Boolean getCanManageTopics() {
-        return canManageTopics;
-    }
-
-    public Boolean getMember() {
-        return isMember;
-    }
-
-    public Boolean getCanSendMessages() {
-        return canSendMessages;
-    }
-
-    public Boolean getCanSendAudios() {
-        return canSendAudios;
-    }
-
-    public Boolean getCanSendDocuments() {
-        return canSendDocuments;
-    }
-
-    public Boolean getCanSendPhotos() {
-        return canSendPhotos;
-    }
-
-    public Boolean getCanSendVideos() {
-        return canSendVideos;
-    }
-
-    public Boolean getCanSendVideoNotes() {
-        return canSendVideoNotes;
-    }
-
-    public Boolean getCanSendVoiceVotes() {
-        return canSendVoiceVotes;
-    }
-
-    public Boolean getCanSendPolls() {
-        return canSendPolls;
-    }
-
-    public Boolean getCanSendOtherMessages() {
-        return canSendOtherMessages;
-    }
-
-    public Boolean getCanAddWebPagePreviews() {
-        return canAddWebPagePreviews;
-    }
-
-    public Boolean getCanPostStories() {
-        return canPostStories;
-    }
-
-    public Boolean getCanEditStories() {
-        return canEditStories;
-    }
-
-    public Boolean getCanDeleteStories() {
-        return canDeleteStories;
-    }
-
-    public Integer getUntilDate() {
-        return untilDate;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public Boolean getCanEditTag() {
-        return canEditTag;
-    }
-
-    public Boolean getCanManageTags() {
-        return canManageTags;
-    }
-
-    public Boolean getCanReactToMessages() {
-        return canReactToMessages;
-    }
 }
