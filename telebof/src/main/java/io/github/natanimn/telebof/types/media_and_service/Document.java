@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a general file (as opposed to {@link PhotoSize}, {@link Voice} and {@link Audio}).
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Document {
     /**
      * Identifier for this file, which can be used to download or reuse the file
@@ -44,27 +45,4 @@ public class Document {
      */
     private PhotoSize thumbnail;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
 }
