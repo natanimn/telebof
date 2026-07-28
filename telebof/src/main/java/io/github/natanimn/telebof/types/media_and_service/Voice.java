@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a voice note.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Voice {
     /**
      * Identifier for this file, which can be used to download or reuse the file
@@ -38,23 +39,4 @@ public class Voice {
     @SerializedName("file_size")
     private Long fileSize;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public Long getFileSize() {
-        return fileSize;
-    }
 }
