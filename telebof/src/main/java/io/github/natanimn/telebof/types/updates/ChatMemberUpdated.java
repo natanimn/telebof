@@ -1,20 +1,20 @@
 package io.github.natanimn.telebof.types.updates;
 
+import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.ChatInviteLink;
 import io.github.natanimn.telebof.types.chat_and_user.ChatMember;
 import io.github.natanimn.telebof.types.chat_and_user.User;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.Objects;
+import lombok.Getter;
 
 /**
  * This object represents changes in the status of a chat member.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class ChatMemberUpdated implements TelegramUpdate {
+@Getter
+public class ChatMemberUpdated implements TelegramUpdate, JsonFormatter {
     /**
      * Chat the user belongs to
      */
@@ -60,69 +60,4 @@ public class ChatMemberUpdated implements TelegramUpdate {
     @SerializedName("via_join_request")
     private Boolean viaJoinRequest;
 
-    public Chat getChat() {
-        return chat;
-    }
-
-    public User getFrom() {
-        return from;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public ChatMember getOldChatMember() {
-        return oldChatMember;
-    }
-
-    public ChatMember getNewChatMember() {
-        return newChatMember;
-    }
-
-    public ChatInviteLink getInviteLink() {
-        return inviteLink;
-    }
-
-    public Boolean getViaChatFolderInviteLink() {
-        return viaChatFolderInviteLink;
-    }
-
-    public Boolean getViaJoinRequest() {
-        return viaJoinRequest;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        ChatMemberUpdated that = (ChatMemberUpdated) object;
-        return Objects.equals(chat, that.chat) &&
-                Objects.equals(from, that.from) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(oldChatMember, that.oldChatMember) &&
-                Objects.equals(newChatMember, that.newChatMember) &&
-                Objects.equals(inviteLink, that.inviteLink) &&
-                Objects.equals(viaChatFolderInviteLink, that.viaChatFolderInviteLink) &&
-                Objects.equals(viaJoinRequest, that.viaJoinRequest);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(chat, from, date, oldChatMember, newChatMember, inviteLink, viaChatFolderInviteLink, viaJoinRequest);
-    }
-
-    @Override
-    public String toString() {
-        return "ChatMemberUpdated{" +
-                "chat=" + chat +
-                ", from=" + from +
-                ", date=" + date +
-                ", oldChatMember=" + oldChatMember +
-                ", newChatMember=" + newChatMember +
-                ", inviteLink=" + inviteLink +
-                ", viaChatFolderInviteLink=" + viaChatFolderInviteLink +
-                ", viaJoinRequest=" + viaJoinRequest +
-                '}';
-    }
 }
