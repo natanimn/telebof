@@ -1,19 +1,21 @@
 package io.github.natanimn.telebof.types.updates;
 
-import io.github.natanimn.telebof.types.chat_and_user.User;
-import io.github.natanimn.telebof.types.chat_and_user.Chat;
-import io.github.natanimn.telebof.types.media_and_service.ReactionType;
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
+import io.github.natanimn.telebof.types.chat_and_user.Chat;
+import io.github.natanimn.telebof.types.chat_and_user.User;
+import io.github.natanimn.telebof.types.media_and_service.ReactionType;
+import lombok.Getter;
+
 import java.util.List;
-import java.util.Objects;
 
 /**
  * This object represents a change of a reaction on a message performed by a user.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
-public class MessageReactionUpdated implements TelegramUpdate {
+@Getter
+public class MessageReactionUpdated implements TelegramUpdate, JsonFormatter {
     /**
      * The chat containing the message the user reacted to
      */
@@ -52,45 +54,4 @@ public class MessageReactionUpdated implements TelegramUpdate {
      */
     @SerializedName("new_reaction")
     private List<ReactionType> newReaction;
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public Integer getMessageId() {
-        return messageId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Chat getActorChat() {
-        return actorChat;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public List<ReactionType> getOldReaction() {
-        return oldReaction;
-    }
-
-    public List<ReactionType> getNewReaction() {
-        return newReaction;
-    }
-
-    @Override
-    public String toString() {
-        return "MessageReactionUpdated{" +
-                "chat=" + chat +
-                ", messageId=" + messageId +
-                ", user=" + user +
-                ", actorChat=" + actorChat +
-                ", date=" + date +
-                ", oldReaction=" + oldReaction +
-                ", newReaction=" + newReaction +
-                '}';
-    }
 }
