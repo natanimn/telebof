@@ -1,14 +1,15 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a video message
  * (available in Telegram apps as of v.4.0).
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class VideoNote {
     /**
      * Identifier for this file, which can be used to download or reuse the file
@@ -43,27 +44,4 @@ public class VideoNote {
      */
     private PhotoSize thumbnail;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public Integer getLength() {
-        return length;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public Integer getFileSize() {
-        return fileSize;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
 }
