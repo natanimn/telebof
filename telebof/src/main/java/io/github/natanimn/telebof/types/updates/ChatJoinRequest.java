@@ -1,16 +1,19 @@
 package io.github.natanimn.telebof.types.updates;
 
 import com.google.gson.annotations.SerializedName;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.ChatInviteLink;
 import io.github.natanimn.telebof.types.chat_and_user.User;
+import lombok.Getter;
 
 /**
  * Represents a join request sent to a chat.
  * @author Natanim
  * @since 0.1
  */
-public class ChatJoinRequest implements TelegramUpdate {
+@Getter
+public class ChatJoinRequest implements TelegramUpdate, JsonFormatter {
     /**
      * Chat to which the request was sent
      */
@@ -50,31 +53,4 @@ public class ChatJoinRequest implements TelegramUpdate {
     @SerializedName("query_id")
     private String queryId;
 
-    public Chat getChat() {
-        return chat;
-    }
-
-    public User getFrom() {
-        return from;
-    }
-
-    public Long getUserChatId() {
-        return userChatId;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public ChatInviteLink getInviteLink() {
-        return inviteLink;
-    }
-
-    public String getQueryId() {
-        return queryId;
-    }
 }
