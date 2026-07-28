@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Represents an invite link for a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatInviteLink {
     /**
      * The invite link. If the link was created by another chat administrator, then the second part of the link will be replaced with "...".
@@ -73,47 +74,4 @@ public class ChatInviteLink {
     @SerializedName("creates_join_request")
     private Boolean createsJoinRequest;
 
-    public String getInviteLink() {
-        return inviteLink;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public User getCreator() {
-        return creator;
-    }
-
-    public Integer getExpireDate() {
-        return expireDate;
-    }
-
-    public Integer getMemberLimit() {
-        return memberLimit;
-    }
-
-    public Integer getPendingJoinRequestCount() {
-        return pendingJoinRequestCount;
-    }
-
-    public Integer getSubscriptionPeriod() {
-        return subscriptionPeriod;
-    }
-
-    public Integer getSubscriptionPrice() {
-        return subscriptionPrice;
-    }
-
-    public Boolean getIsPrimary() {
-        return isPrimary;
-    }
-
-    public Boolean getIsRevoked() {
-        return isRevoked;
-    }
-
-    public Boolean getCreatesJoinRequest() {
-        return createsJoinRequest;
-    }
 }
