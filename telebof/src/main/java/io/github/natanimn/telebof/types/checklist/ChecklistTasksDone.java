@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.checklist;
 
 import io.github.natanimn.telebof.types.updates.Message;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a service message about checklist tasks marked as done or not done.
  * @author Natanim
  * @since 1 September 2025
- * @version 1.3.0
  */
+@Getter
 public class ChecklistTasksDone {
     /**
      * Optional. Message containing the checklist whose tasks were marked as done or not done. Note that the Message object in this field will not contain the reply_to_message field even if it itself is a reply.
@@ -29,15 +31,4 @@ public class ChecklistTasksDone {
     @SerializedName("marked_as_not_done_task_ids")
     private List<Integer> markedAsNotDoneTaskIds;
 
-    public Message getChecklistMessage() {
-        return checklistMessage;
-    }
-
-    public List<Integer> getMarkedAsDoneTaskIds() {
-        return markedAsDoneTaskIds;
-    }
-
-    public List<Integer> getMarkedAsNotDoneTaskIds() {
-        return markedAsNotDoneTaskIds;
-    }
 }
