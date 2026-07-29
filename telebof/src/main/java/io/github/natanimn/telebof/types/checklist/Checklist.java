@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.checklist;
 
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a checklist.
  * @author Natanim
  * @since 1 September 2025
- * @version 1.3.0
  */
+@Getter
 public class Checklist {
     /**
      * Title of the checklist
@@ -39,23 +41,4 @@ public class Checklist {
     @SerializedName("others_can_mark_tasks_as_done")
     private Boolean othersCanMarkTasksAsDone;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public List<MessageEntity> getTitleEntities() {
-        return titleEntities;
-    }
-
-    public List<ChecklistTask> getTasks() {
-        return tasks;
-    }
-
-    public Boolean getOthersCanAddTasks() {
-        return othersCanAddTasks;
-    }
-
-    public Boolean getOthersCanMarkTasksAsDone() {
-        return othersCanMarkTasksAsDone;
-    }
 }
