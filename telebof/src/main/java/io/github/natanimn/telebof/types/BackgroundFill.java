@@ -2,15 +2,16 @@ package io.github.natanimn.telebof.types;
 
 import io.github.natanimn.telebof.enums.BackgroundFillType;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
 /**
  * This object describes the way a background is filled based on the selected colors
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class BackgroundFill {
     /**
      * Type of the background fill
@@ -45,27 +46,4 @@ public class BackgroundFill {
      */
     private List<Integer> colors;
 
-    public BackgroundFillType getType() {
-        return type;
-    }
-
-    public Integer getColor() {
-        return color;
-    }
-
-    public Integer getTopColor() {
-        return topColor;
-    }
-
-    public Integer getBottomColor() {
-        return bottomColor;
-    }
-
-    public Integer getRotationAngle() {
-        return rotationAngle;
-    }
-
-    public List<Integer> getColors() {
-        return colors;
-    }
 }
