@@ -1,5 +1,7 @@
 package io.github.natanimn.telebof.types.passport;
 
+import lombok.Getter;
+
 /**
  * <p>
  * <strong>Telegram Passport</strong> is a unified authorization method for services that require personal identification.
@@ -10,9 +12,9 @@ package io.github.natanimn.telebof.types.passport;
  * This class describes data required for decrypting and authenticating <a href="https://core.telegram.org/bots/api#encryptedpassportelement">EncryptedPassportElement.</a>
  * @see <a href="https://core.telegram.org/passport#receiving-information">The Telegram Passport Documentation</a> for a complete description of the data decryption and authentication processes.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class EncryptedCredentials {
     /**
      * Base64-encoded encrypted JSON-serialized data with unique user's payload, data hashes and secrets required for EncryptedPassportElement decryption and authentication
@@ -29,15 +31,4 @@ public class EncryptedCredentials {
      */
     private String secret;
 
-    public String getData() {
-        return data;
-    }
-
-    public String getHash() {
-        return hash;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
 }
