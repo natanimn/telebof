@@ -3,13 +3,14 @@ package io.github.natanimn.telebof.types;
 import io.github.natanimn.telebof.enums.BackgroundTypeType;
 import io.github.natanimn.telebof.types.media_and_service.Document;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object describes the type of background.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class BackgroundType {
     /**
      * Type of the background
@@ -61,39 +62,4 @@ public class BackgroundType {
     @SerializedName("is_inverted")
     private Boolean isInverted;
 
-    public BackgroundTypeType getType() {
-        return type;
-    }
-
-    public String getThemeName() {
-        return themeName;
-    }
-
-    public BackgroundFill getFill() {
-        return fill;
-    }
-
-    public Integer getDarkThemeDimming() {
-        return darkThemeDimming;
-    }
-
-    public Integer getIntensity() {
-        return intensity;
-    }
-
-    public Document getDocument() {
-        return document;
-    }
-
-    public Boolean getIsBlurred() {
-        return isBlurred;
-    }
-
-    public Boolean getIsMoving() {
-        return isMoving;
-    }
-
-    public Boolean getIsInverted() {
-        return isInverted;
-    }
 }
