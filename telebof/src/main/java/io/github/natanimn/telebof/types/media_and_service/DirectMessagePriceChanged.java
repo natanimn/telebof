@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about a change in the price of direct messages sent to a channel chat.
  * @author Natanim
  * @since 1 September 2025
- * @version 1.3.0
  */
+@Getter
 public class DirectMessagePriceChanged {
     /**
      * True, if direct messages are enabled for the channel chat; false otherwise
@@ -22,11 +23,4 @@ public class DirectMessagePriceChanged {
     @SerializedName("direct_message_star_count")
     private Integer directMessageStarCount;
 
-    public Boolean getAreDirectMessagesEnabled() {
-        return areDirectMessagesEnabled;
-    }
-
-    public Integer getDirectMessageStarCount() {
-        return directMessageStarCount;
-    }
 }
