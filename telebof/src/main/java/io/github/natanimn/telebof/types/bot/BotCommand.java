@@ -1,6 +1,10 @@
 package io.github.natanimn.telebof.types.bot;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -9,43 +13,26 @@ import java.io.Serializable;
  * @author Natanim
  * @since 0.1
  */
+@Getter
+@RequiredArgsConstructor
+@Setter
+@Accessors(chain = true)
 public class BotCommand implements Serializable {
     /**
      * Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.
      */
-    private String command;
+    private final String command;
 
     /**
      * Description of the command; 1-256 characters.
      */
-    private String description;
-
-    @SerializedName("is_ephemeral")
-    private Boolean isEphemeral;
-
-    public BotCommand(String command, String description) {
-        this.command = command;
-        this.description = description;
-    }
-
-    public String getCommand() {
-        return command;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Boolean getIsEphemeral() {
-        return isEphemeral;
-    }
+    private final String description;
 
     /**
      * Optional
-     * @param ephemeral True, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot
+     * True, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot
      */
-    public BotCommand setIsEphemeral(Boolean ephemeral) {
-        isEphemeral = ephemeral;
-        return this;
-    }
+    @SerializedName("is_ephemeral")
+    private Boolean isEphemeral;
+
 }
