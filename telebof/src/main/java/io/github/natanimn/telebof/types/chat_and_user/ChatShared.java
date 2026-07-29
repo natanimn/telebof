@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.chat_and_user;
 
 import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object contains information about a chat that was shared with the bot using a {@link io.github.natanimn.telebof.types.keyboard.KeyboardButtonRequestChat} button.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatShared {
     /**
      * Identifier of the request
@@ -38,23 +40,4 @@ public class ChatShared {
      */
     private List<PhotoSize> photo;
 
-    public Integer getRequestId() {
-        return requestId;
-    }
-
-    public Long getChatId() {
-        return chatId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
 }
