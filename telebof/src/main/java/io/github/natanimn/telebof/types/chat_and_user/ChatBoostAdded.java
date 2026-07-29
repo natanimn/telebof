@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about a user boosting a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatBoostAdded {
     /**
      * Number of boosts added by the user
@@ -15,7 +16,4 @@ public class ChatBoostAdded {
     @SerializedName("boost_count")
     private Integer boostCount;
 
-    public Integer getBoostCount() {
-        return boostCount;
-    }
 }
