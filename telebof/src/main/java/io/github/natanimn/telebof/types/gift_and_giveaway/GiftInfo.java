@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * Describes a service message about a regular gift that was sent or received.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class GiftInfo {
     /**
      * Information about the gift
@@ -68,43 +70,4 @@ public class GiftInfo {
     @SerializedName("unique_gift_number")
     private Integer uniqueGiftNumber;
 
-    public Gift getGift() {
-        return gift;
-    }
-
-    public String getOwnedGiftId() {
-        return ownedGiftId;
-    }
-
-    public Integer getConvertStarCount() {
-        return convertStarCount;
-    }
-
-    public Integer getPrepaidUpgradeStarCount() {
-        return prepaidUpgradeStarCount;
-    }
-
-    public Boolean getCanBeUpgraded() {
-        return canBeUpgraded;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public List<MessageEntity> getEntities() {
-        return entities;
-    }
-
-    public Boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public Boolean getIsUpgradeSeparate() {
-        return isUpgradeSeparate;
-    }
-
-    public Integer getUniqueGiftNumber() {
-        return uniqueGiftNumber;
-    }
 }
