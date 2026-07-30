@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.payments;
 
 import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
 import io.github.natanimn.telebof.types.media_and_service.Video;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This class describes paid media.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class PaidMedia {
     /**
      * Type of media
@@ -41,27 +43,4 @@ public class PaidMedia {
      */
     private Video video;
 
-    public String getType() {
-        return type;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public Video getVideo() {
-        return video;
-    }
 }
