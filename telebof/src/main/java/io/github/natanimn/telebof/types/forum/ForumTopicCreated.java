@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.forum;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about a new forum topic created in the chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ForumTopicCreated {
     /**
      * Name of the topic
@@ -32,19 +33,4 @@ public class ForumTopicCreated {
     @SerializedName("is_name_implicit")
     private Boolean isNameImplicit;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getIconCustomEmojiId() {
-        return iconCustomEmojiId;
-    }
-
-    public Integer getIconColor() {
-        return iconColor;
-    }
-
-    public Boolean getIsNameImplicit() {
-        return isNameImplicit;
-    }
 }
