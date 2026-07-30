@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.forum;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about an edited forum topic.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ForumTopicEdited {
     /**
      * Optional. New name of the topic, if it was edited
@@ -20,11 +21,4 @@ public class ForumTopicEdited {
     @SerializedName("icon_custom_emoji_id")
     private String iconCustomEmojiId;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getIconCustomEmojiId() {
-        return iconCustomEmojiId;
-    }
 }
