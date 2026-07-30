@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a message about a scheduled giveaway.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Giveaway {
     /**
      * The list of chats which the user must join to participate in the giveaway
@@ -64,39 +66,4 @@ public class Giveaway {
     @SerializedName("prize_star_count")
     private Integer prizeStarCount;
 
-    public List<Chat> getChats() {
-        return chats;
-    }
-
-    public Integer getWinnersSelectionDate() {
-        return winnersSelectionDate;
-    }
-
-    public Integer getWinnerCount() {
-        return winnerCount;
-    }
-
-    public Boolean getOnlyNewMembers() {
-        return onlyNewMembers;
-    }
-
-    public Boolean getHasPublicWinners() {
-        return hasPublicWinners;
-    }
-
-    public String getPrizeDescription() {
-        return prizeDescription;
-    }
-
-    public List<String> getCountryCodes() {
-        return countryCodes;
-    }
-
-    public Integer getPremiumSubscriptionMonthCount() {
-        return premiumSubscriptionMonthCount;
-    }
-
-    public Integer getPrizeStarCount() {
-        return prizeStarCount;
-    }
 }
