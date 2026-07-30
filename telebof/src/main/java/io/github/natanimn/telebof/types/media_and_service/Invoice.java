@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object contains basic information about an invoice.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Invoice {
     /**
      * Product name
@@ -36,23 +37,4 @@ public class Invoice {
     @SerializedName("total_amount")
     private Integer totalAmount;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getStartParameter() {
-        return startParameter;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public Integer getTotalAmount() {
-        return totalAmount;
-    }
 }
