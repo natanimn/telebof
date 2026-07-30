@@ -1,5 +1,7 @@
 package io.github.natanimn.telebof.types.passport;
 
+import lombok.Getter;
+
 import java.util.List;
 
 /**
@@ -11,9 +13,9 @@ import java.util.List;
  * <br>
  * This class describes Telegram Passport data shared with the bot by the user.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class PassportData {
     /**
      * Array with information about documents and other Telegram Passport elements that was shared with the bot
@@ -25,11 +27,4 @@ public class PassportData {
      */
     private EncryptedCredentials credentials;
 
-    public List<EncryptedPassportElement> getData() {
-        return data;
-    }
-
-    public EncryptedCredentials getCredentials() {
-        return credentials;
-    }
 }
