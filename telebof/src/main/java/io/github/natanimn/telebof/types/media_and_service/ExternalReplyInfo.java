@@ -6,14 +6,16 @@ import io.github.natanimn.telebof.types.updates.Poll;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.payments.PaidMediaInfo;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object contains information about a message that is being replied to, which may come from another chat or forum topic.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ExternalReplyInfo {
     /**
      * Origin of the message replied to by the given message
@@ -135,95 +137,4 @@ public class ExternalReplyInfo {
      */
     private Checklist checklist;
 
-    public MessageOrigin getOrigin() {
-        return origin;
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public Integer getMessageId() {
-        return messageId;
-    }
-
-    public LinkPreviewOptions getLinkPreviewOptions() {
-        return linkPreviewOptions;
-    }
-
-    public Animation getAnimation() {
-        return animation;
-    }
-
-    public Audio getAudio() {
-        return audio;
-    }
-
-    public Document getDocument() {
-        return document;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public Sticker getSticker() {
-        return sticker;
-    }
-
-    public Story getStory() {
-        return story;
-    }
-
-    public Video getVideo() {
-        return video;
-    }
-
-    public VideoNote getVideoNote() {
-        return videoNote;
-    }
-
-    public Voice getVoice() {
-        return voice;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public Dice getDice() {
-        return dice;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public Poll getPoll() {
-        return poll;
-    }
-
-    public Venue getVenue() {
-        return venue;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Invoice getInvoice() {
-        return invoice;
-    }
-
-    public Boolean getHasMediaSpoiler() {
-        return hasMediaSpoiler;
-    }
-
-    public PaidMediaInfo getPaidMedia() {
-        return paidMedia;
-    }
-
-    public Checklist getChecklist() {
-        return checklist;
-    }
 }
