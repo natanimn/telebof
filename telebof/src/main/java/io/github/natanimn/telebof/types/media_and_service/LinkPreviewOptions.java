@@ -1,13 +1,18 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 /**
  * Describes the options used for link preview generation.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class LinkPreviewOptions {
     /**
      * Optional. True, if the link preview is disabled
@@ -37,49 +42,4 @@ public class LinkPreviewOptions {
      * Optional. URL to use for the link preview. If empty, then the first URL found in the message text will be used
      */
     private String url;
-
-    public Boolean getIsDisabled() {
-        return isDisabled;
-    }
-
-    public LinkPreviewOptions setIsDisabled(Boolean isDisabled) {
-        this.isDisabled = isDisabled;
-        return this;
-    }
-
-    public Boolean getPreferSmallMedia() {
-        return preferSmallMedia;
-    }
-
-    public LinkPreviewOptions setPreferSmallMedia(Boolean preferSmallMedia) {
-        this.preferSmallMedia = preferSmallMedia;
-        return this;
-    }
-
-    public Boolean getPreferLargeMedia() {
-        return preferLargeMedia;
-    }
-
-    public LinkPreviewOptions setPreferLargeMedia(Boolean preferLargeMedia) {
-        this.preferLargeMedia = preferLargeMedia;
-        return this;
-    }
-
-    public Boolean getShowAboveText() {
-        return showAboveText;
-    }
-
-    public LinkPreviewOptions setShowAboveText(Boolean showAboveText) {
-        this.showAboveText = showAboveText;
-        return this;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public LinkPreviewOptions setUrl(String url) {
-        this.url = url;
-        return this;
-    }
 }
