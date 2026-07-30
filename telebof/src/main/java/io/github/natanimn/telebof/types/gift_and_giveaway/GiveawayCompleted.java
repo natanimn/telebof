@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import io.github.natanimn.telebof.types.updates.Message;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about the completion of a giveaway without public winners.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class GiveawayCompleted {
     /**
      * Number of winners in the giveaway
@@ -34,19 +35,4 @@ public class GiveawayCompleted {
     @SerializedName("is_star_giveaway")
     private Boolean isStarGiveaway;
 
-    public Integer getWinnerCount() {
-        return winnerCount;
-    }
-
-    public Integer getUnclaimedPrizeCount() {
-        return unclaimedPrizeCount;
-    }
-
-    public Message getGiveawayMessage() {
-        return giveawayMessage;
-    }
-
-    public Boolean getIsStarGiveaway() {
-        return isStarGiveaway;
-    }
 }
