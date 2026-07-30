@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.passport;
 
 import io.github.natanimn.telebof.enums.PassportElementType;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * Describes documents or other Telegram Passport elements shared with the bot by the user.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class EncryptedPassportElement {
     /**
      * Passport element type
@@ -64,43 +66,4 @@ public class EncryptedPassportElement {
      */
     private String hash;
 
-    public PassportElementType getType() {
-        return type;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public List<PassportFile> getFiles() {
-        return files;
-    }
-
-    public PassportFile getFrontSide() {
-        return frontSide;
-    }
-
-    public PassportFile getReverseSide() {
-        return reverseSide;
-    }
-
-    public List<PassportFile> getTranslation() {
-        return translation;
-    }
-
-    public PassportFile getSelfie() {
-        return selfie;
-    }
-
-    public String getHash() {
-        return hash;
-    }
 }
