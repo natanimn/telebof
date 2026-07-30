@@ -2,6 +2,9 @@ package io.github.natanimn.telebof.types.keyboard;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.log.BotLog;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
@@ -10,16 +13,17 @@ import java.util.ArrayList;
 /**
  * This object represents an inline keyboard that appears right next to the message it belongs to.
  * @author Natanim 
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
 public class InlineKeyboardMarkup implements Markup {
     /**
      * Array of button rows, each represented by an Array of {@link InlineKeyboardButton} objects
      */
     @SerializedName("inline_keyboard")
+    @Getter
     private List<List<InlineKeyboardButton>> inlineKeyboard;
 
+    @Setter
     transient private int rowWidth = 3;
 
     public InlineKeyboardMarkup(){
@@ -64,11 +68,4 @@ public class InlineKeyboardMarkup implements Markup {
         }
     }
 
-    public List<List<InlineKeyboardButton>> getInlineKeyboard() {
-        return inlineKeyboard;
-    }
-
-    public void setRowWidth(int rowWidth) {
-        this.rowWidth = rowWidth;
-    }
 }
