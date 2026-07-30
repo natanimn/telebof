@@ -6,6 +6,7 @@ import io.github.natanimn.telebof.types.media_and_service.CallbackGame;
 import io.github.natanimn.telebof.types.media_and_service.CopyTextButton;
 import io.github.natanimn.telebof.types.media_and_service.SwitchInlineQueryChosenChat;
 import io.github.natanimn.telebof.types.web.WebAppInfo;
+import lombok.Getter;
 
 import java.io.Serializable;
 
@@ -13,9 +14,9 @@ import java.io.Serializable;
  * This object represents one button of an inline keyboard.
  * Exactly one of the optional fields must be used to specify type of the button.
  * @author Natanim 
- * @since 3 March 2025
- * @version 1.4.0
+ * @since 0.1
  */
+@Getter
 public class InlineKeyboardButton implements Serializable {
     private final String text;
     private String url;
@@ -180,51 +181,4 @@ public class InlineKeyboardButton implements Serializable {
         return this;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getCallbackData() {
-        return callbackData;
-    }
-
-    public String getSwitchInlineQueryCurrentChat() {
-        return switchInlineQueryCurrentChat;
-    }
-
-    public WebAppInfo getWepApp() {
-        return wepApp;
-    }
-
-    public LoginUrl getLoginUrl() {
-        return loginUrl;
-    }
-
-    public Boolean getPay() {
-        return pay;
-    }
-
-    public CallbackGame getCallbackGame() {
-        return callbackGame;
-    }
-
-    public SwitchInlineQueryChosenChat getSwitchInlineQueryChosenChat() {
-        return switchInlineQueryChosenChat;
-    }
-
-    public CopyTextButton getCopyText() {
-        return copyText;
-    }
-
-    public String getIconCustomEmojiId() {
-        return iconCustomEmojiId;
-    }
-
-    public ButtonStyle getStyle(){
-        return style;
-    }
 }
