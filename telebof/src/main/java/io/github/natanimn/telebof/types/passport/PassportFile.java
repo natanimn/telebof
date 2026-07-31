@@ -1,7 +1,7 @@
 package io.github.natanimn.telebof.types.passport;
 
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
+import lombok.Getter;
 
 /**
  * <p>
@@ -13,9 +13,9 @@ import java.io.Serializable;
  * This class represents a file uploaded to Telegram Passport.
  * Currently, all Telegram Passport files are in JPEG format when decrypted and don't exceed 10MB.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class PassportFile{
     /**
      * Identifier for this file, which can be used to download or reuse the file
@@ -42,19 +42,4 @@ public class PassportFile{
     @SerializedName("file_date")
     private Integer fileDate;
 
-    public String getFileId() {
-        return fileId;
-    }
-
-    public String getFileUniqueId() {
-        return fileUniqueId;
-    }
-
-    public Integer getFileSize() {
-        return fileSize;
-    }
-
-    public Integer getFileDate() {
-        return fileDate;
-    }
 }
