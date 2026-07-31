@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.payments;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes an amount of Telegram Stars.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class StarAmount {
     /**
      * Integer amount of Telegram Stars, rounded to 0; can be negative
@@ -20,11 +21,4 @@ public class StarAmount {
     @SerializedName("nanostar_amount")
     private Integer nanostarAmount;
 
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Integer getNanostarAmount() {
-        return nanostarAmount;
-    }
 }
