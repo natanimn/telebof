@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.story;
 
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
+import lombok.Getter;
 
 /**
  * This object represents a story.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Story {
     /**
      * Chat that posted the story
@@ -19,11 +20,4 @@ public class Story {
      */
     private Integer id;
 
-    public Chat getChat() {
-        return chat;
-    }
-
-    public Integer getId() {
-        return id;
-    }
 }
