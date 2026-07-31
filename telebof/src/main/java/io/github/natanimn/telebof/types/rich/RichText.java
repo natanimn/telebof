@@ -2,14 +2,17 @@ package io.github.natanimn.telebof.types.rich;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.RichTextType;
+import io.github.natanimn.telebof.types.JsonFormatter;
 import io.github.natanimn.telebof.types.chat_and_user.User;
+import lombok.Getter;
 
 /**
  * This object represents a rich formatted text.
  * @author Natanim
  * @since 2.1
  */
-public class RichText {
+@Getter
+public class RichText implements JsonFormatter {
     /**
      * Type of the rich text
      */
@@ -121,83 +124,4 @@ public class RichText {
     @SerializedName("reference_name")
     private String referenceName;
 
-    public RichTextType getType() {
-        return type;
-    }
-
-    public RichText getText() {
-        return text;
-    }
-
-    public Integer getUnixTime() {
-        return unixTime;
-    }
-
-    public String getDateTimeFormat() {
-        return dateTimeFormat;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getCustomEmojiId() {
-        return customEmojiId;
-    }
-
-    public String getAlternativeText() {
-        return alternativeText;
-    }
-
-    public String getExpression() {
-        return expression;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getEmailAddress() {
-        return emailAddress;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getBankCardNumber() {
-        return bankCardNumber;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getHashtag() {
-        return hashtag;
-    }
-
-    public String getCashtag() {
-        return cashtag;
-    }
-
-    public String getBotCommand() {
-        return botCommand;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAnchorName() {
-        return anchorName;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public String getReferenceName() {
-        return referenceName;
-    }
 }
