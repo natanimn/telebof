@@ -8,6 +8,7 @@ import io.github.natanimn.telebof.types.media_and_service.Location;
 import io.github.natanimn.telebof.types.media_and_service.PhotoSize;
 import io.github.natanimn.telebof.types.media_and_service.Video;
 import io.github.natanimn.telebof.types.media_and_service.Voice;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @author Natanim
  * @since 2.1
  */
+@Getter
 public class RichBlock {
     /**
      * Type of the block.
@@ -147,103 +149,4 @@ public class RichBlock {
     @SerializedName("voice_name")
     private Voice voiceNote;
 
-    public RichBlockType getType() {
-        return type;
-    }
-
-    public RichText getText() {
-        return text;
-    }
-
-    public Integer getSize() {
-        return size;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public String getExpression() {
-        return expression;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<RichBlockListItem> getItems() {
-        return items;
-    }
-
-    public List<RichBlock> getBlocks() {
-        return blocks;
-    }
-
-    public RichText getCredit() {
-        return credit;
-    }
-
-    public List<List<RichBlockTableCell>> getCells() {
-        return cells;
-    }
-
-    public Boolean getIsBordered() {
-        return isBordered;
-    }
-
-    public Boolean getIsStripped() {
-        return isStripped;
-    }
-
-    public RichText getSummary() {
-        return summary;
-    }
-
-    public Boolean getIsOpen() {
-        return isOpen;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public Integer getZoom() {
-        return zoom;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public RichBlockCaption getCaption() {
-        return caption;
-    }
-
-    public Animation getAnimation() {
-        return animation;
-    }
-
-    public Boolean getHasSpoiler() {
-        return hasSpoiler;
-    }
-
-    public Audio getAudio() {
-        return audio;
-    }
-
-    public List<PhotoSize> getPhoto() {
-        return photo;
-    }
-
-    public Video getVideo() {
-        return video;
-    }
-
-    public Voice getVoiceNote() {
-        return voiceNote;
-    }
 }
