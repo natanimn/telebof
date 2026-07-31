@@ -2,6 +2,7 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.types.updates.Message;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ import java.util.List;
  * Describes a service message about an option deleted from a poll.
  * @author Natanim
  * @since 1.6.0
- * @version 1.6.0
  */
+@Getter
 public class PollOptionDeleted {
     /**
      * Optional. Message containing the poll to which the option was added, if known.
