@@ -1,15 +1,16 @@
 package io.github.natanimn.telebof.types.payments;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class contains basic information about a successful payment.
  * Note that if the buyer initiates a chargeback with the relevant payment provider following this transaction, the funds may be debited from your balance.
  * This is outside of Telegram's control.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class SuccessfulPayment {
     /**
      * Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars
@@ -70,43 +71,4 @@ public class SuccessfulPayment {
     @SerializedName("is_first_recurring")
     private Boolean isFirstRecurring;
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public Integer getTotalAmount() {
-        return totalAmount;
-    }
-
-    public Integer getSubscriptionExpirationDate() {
-        return subscriptionExpirationDate;
-    }
-
-    public String getInvoicePayload() {
-        return invoicePayload;
-    }
-
-    public String getShippingOptionId() {
-        return shippingOptionId;
-    }
-
-    public OrderInfo getOrderInfo() {
-        return orderInfo;
-    }
-
-    public String getTelegramPaymentChargeId() {
-        return telegramPaymentChargeId;
-    }
-
-    public String getProviderPaymentChargeId() {
-        return providerPaymentChargeId;
-    }
-
-    public Boolean getIsRecurring() {
-        return isRecurring;
-    }
-
-    public Boolean getIsFirstRecurring() {
-        return isFirstRecurring;
-    }
 }
