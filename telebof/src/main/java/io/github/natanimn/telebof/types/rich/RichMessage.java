@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.rich;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author Natanim
  * @since 2.1
  */
+@Getter
 public class RichMessage {
     /**
      * Content of the message
@@ -21,11 +23,4 @@ public class RichMessage {
     @SerializedName("is_rtl")
     private Boolean isRtl;
 
-    public List<RichBlock> getBlocks() {
-        return blocks;
-    }
-
-    public Boolean getIsRtl() {
-        return isRtl;
-    }
 }
