@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.payments;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class contains basic information about a refunded payment.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class RefundedPayment {
     /**
      * Three-letter ISO 4217 currency code, or “XTR” for payments in Telegram Stars. Currently, always “XTR”
@@ -38,23 +39,4 @@ public class RefundedPayment {
     @SerializedName("provider_payment_charge_id")
     private String providerPaymentChargeId;
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public Integer getTotalAmount() {
-        return totalAmount;
-    }
-
-    public String getInvoicePayload() {
-        return invoicePayload;
-    }
-
-    public String getTelegramPaymentChargeId() {
-        return telegramPaymentChargeId;
-    }
-
-    public String getProviderPaymentChargeId() {
-        return providerPaymentChargeId;
-    }
 }
