@@ -1,13 +1,15 @@
 package io.github.natanimn.telebof.types.suggested;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * Describes the price of a suggested post.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.3.0
  */
+@Getter
 public class SuggestedPostPrice implements Serializable {
     /**
      * Currency in which the post will be paid. Currently, must be one of "XTR" for Telegram Stars or "TON" for toncoins
