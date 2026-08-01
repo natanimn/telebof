@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.suggested;
 
 import io.github.natanimn.telebof.types.updates.Message;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about the approval of a suggested post.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.3.0
  */
+@Getter
 public class SuggestedPostApproved {
     /**
      * Optional.
@@ -29,15 +30,4 @@ public class SuggestedPostApproved {
     @SerializedName("send_date")
     private Integer sendDate;
 
-    public Message getSuggestedPostMessage() {
-        return suggestedPostMessage;
-    }
-
-    public SuggestedPostPrice getPrice() {
-        return price;
-    }
-
-    public Integer getSendDate() {
-        return sendDate;
-    }
 }
