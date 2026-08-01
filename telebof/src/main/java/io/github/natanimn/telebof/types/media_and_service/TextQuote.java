@@ -1,14 +1,17 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object contains information about the quoted part of a message that is replied to by the given message.
  * @author Natanim
- * @since 3 March 2025
+ * @since 0.1
  * @version 1.3.0
  */
+@Getter
 public class TextQuote {
     /**
      * Text of the quoted part of a message that is replied to by the given message
@@ -32,19 +35,4 @@ public class TextQuote {
     @SerializedName("is_manual")
     private Boolean isManual;
 
-    public String getText() {
-        return text;
-    }
-
-    public List<MessageEntity> getEntities() {
-        return entities;
-    }
-
-    public Integer getPosition() {
-        return position;
-    }
-
-    public Boolean getIsManual() {
-        return isManual;
-    }
 }
