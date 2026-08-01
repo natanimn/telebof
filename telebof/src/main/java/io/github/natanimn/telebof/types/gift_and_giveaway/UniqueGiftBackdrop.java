@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.io.Serializable;
 
@@ -8,8 +9,8 @@ import java.io.Serializable;
  * This object describes the backdrop of a unique gift.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class UniqueGiftBackdrop implements Serializable {
     /**
      * Name of the backdrop
@@ -35,15 +36,4 @@ public class UniqueGiftBackdrop implements Serializable {
         this.rarityPerMille = rarityPerMille;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public UniqueGiftBackdropColors getColors() {
-        return colors;
-    }
-
-    public Integer getRarityPerMille() {
-        return rarityPerMille;
-    }
 }
