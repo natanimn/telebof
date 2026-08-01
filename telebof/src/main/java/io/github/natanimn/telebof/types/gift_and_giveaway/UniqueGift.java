@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object describes a unique gift that was upgraded from a regular gift.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class UniqueGift {
 
     /**
@@ -72,47 +73,4 @@ public class UniqueGift {
      */
     private UniqueGiftColors colors;
 
-    public String getGiftId() {
-        return giftId;
-    }
-
-    public String getBaseName() {
-        return baseName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public UniqueGiftModel getModel() {
-        return model;
-    }
-
-    public UniqueGiftSymbol getSymbol() {
-        return symbol;
-    }
-
-    public UniqueGiftBackdrop getBackdrop() {
-        return backdrop;
-    }
-
-    public Chat getPublisherChat() {
-        return publisherChat;
-    }
-
-    public Boolean getIsFromBlockchain() {
-        return isFromBlockchain;
-    }
-
-    public Boolean getIsPremium() {
-        return isPremium;
-    }
-
-    public UniqueGiftColors getColors() {
-        return colors;
-    }
 }
