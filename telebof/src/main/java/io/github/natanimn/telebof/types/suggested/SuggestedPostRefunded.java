@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.suggested;
 
 import io.github.natanimn.telebof.types.updates.Message;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a service message about a payment refund for a suggested post.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.3.0
  */
+@Getter
 public class SuggestedPostRefunded {
     /**
      * Optional.
@@ -22,11 +23,4 @@ public class SuggestedPostRefunded {
      */
     private String reason;
 
-    public Message getSuggestedPostMessage() {
-        return suggestedPostMessage;
-    }
-
-    public String getReason() {
-        return reason;
-    }
 }
