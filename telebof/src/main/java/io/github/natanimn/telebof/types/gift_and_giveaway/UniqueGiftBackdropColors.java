@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * This object describes the colors of the backdrop of a unique gift.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class UniqueGiftBackdropColors implements Serializable {
     /**
      * The color in the center of the backdrop in RGB format
@@ -43,19 +45,4 @@ public class UniqueGiftBackdropColors implements Serializable {
         this.textColor = textColor;
     }
 
-    public Integer getCenterColor() {
-        return centerColor;
-    }
-
-    public Integer getEdgeColor() {
-        return edgeColor;
-    }
-
-    public Integer getSymbolColor() {
-        return symbolColor;
-    }
-
-    public Integer getTextColor() {
-        return textColor;
-    }
 }
