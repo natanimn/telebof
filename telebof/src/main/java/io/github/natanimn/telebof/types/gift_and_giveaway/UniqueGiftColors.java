@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object contains information about the color scheme for a user's name, message replies and link previews based on a unique gift.
  * @author Natanim
  * @since 1.3.0
- * @version 1.3.0
  */
+@Getter
 public class UniqueGiftColors {
 
     /**
@@ -47,27 +49,4 @@ public class UniqueGiftColors {
     @SerializedName("dark_theme_other_colors")
     private List<Integer> darkThemeOtherColors;
 
-    public String getModelCustomEmojiId() {
-        return modelCustomEmojiId;
-    }
-
-    public String getSymbolCustomEmojiId() {
-        return symbolCustomEmojiId;
-    }
-
-    public Integer getLightThemeMainColor() {
-        return lightThemeMainColor;
-    }
-
-    public List<Integer> getLightThemeOtherColors() {
-        return lightThemeOtherColors;
-    }
-
-    public Integer getDarkThemeMainColor() {
-        return darkThemeMainColor;
-    }
-
-    public List<Integer> getDarkThemeOtherColors() {
-        return darkThemeOtherColors;
-    }
 }
