@@ -1,18 +1,17 @@
 package io.github.natanimn.telebof.types.bot;
 
+import lombok.Getter;
+
 /**
  * This object represents the bot's name.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class BotName {
     /**
      * The bot's name
      */
     private String name;
 
-    public String getName() {
-        return name;
-    }
 }
