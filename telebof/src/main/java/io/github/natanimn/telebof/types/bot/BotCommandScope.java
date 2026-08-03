@@ -1,15 +1,22 @@
 package io.github.natanimn.telebof.types.bot;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * This object represents the scope to which bot commands are applied.
  * @author Natanim
- * @since 3 March 2025
- * @version 0.8
+ * @since 0.1
  */
+@Getter
 abstract public class BotCommandScope implements Serializable  {
-    private String type;
+    /**
+     *  Scope type
+     *
+     * @return Scope type
+     */
+    private final String type;
 
     /**
      * Initialize command scope
@@ -19,11 +26,4 @@ abstract public class BotCommandScope implements Serializable  {
         this.type = type;
     }
 
-    /**
-     * Scope type
-     * @return Scope type
-     */
-    public String getType() {
-        return type;
-    }
 }
