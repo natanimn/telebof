@@ -1,13 +1,15 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * This object describes the types of gifts that can be gifted to a user or a chat.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class AcceptedGiftTypes implements Serializable {
     /**
      * True, if unlimited regular gifts are accepted
@@ -49,23 +51,4 @@ public class AcceptedGiftTypes implements Serializable {
         this.giftsFromChannels = giftsFromChannels;
     }
 
-    public Boolean getUnlimitedGifts() {
-        return unlimitedGifts;
-    }
-
-    public Boolean getLimitedGifts() {
-        return limitedGifts;
-    }
-
-    public Boolean getUniqueGifts() {
-        return uniqueGifts;
-    }
-
-    public Boolean getPremiumSubscription() {
-        return premiumSubscription;
-    }
-
-    public Boolean getGiftsFromChannels() {
-        return giftsFromChannels;
-    }
 }
