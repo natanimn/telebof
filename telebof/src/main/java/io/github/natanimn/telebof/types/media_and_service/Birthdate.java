@@ -1,11 +1,13 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
+import lombok.Getter;
+
 /**
  * Describes the birthdate of a user.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class Birthdate {
     /**
      * Day of the user's birth; 1-31
@@ -22,15 +24,4 @@ public class Birthdate {
      */
     private Integer year;
 
-    public Byte getDay() {
-        return day;
-    }
-
-    public Byte getMonth() {
-        return month;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
 }
