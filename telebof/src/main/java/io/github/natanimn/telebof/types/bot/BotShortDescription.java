@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.bot;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents the bot's short description.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class BotShortDescription {
     /**
      * The bot's short description
@@ -15,7 +16,4 @@ public class BotShortDescription {
     @SerializedName("short_description")
     private String shortDescription;
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
 }
