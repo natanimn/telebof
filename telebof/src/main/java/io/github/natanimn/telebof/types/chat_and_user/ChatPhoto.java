@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a chat photo.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatPhoto {
     /**
      * File identifier of small (160x160) chat photo. This file_id can be used only for photo download and only for as long as the photo is not changed.
@@ -33,19 +34,4 @@ public class ChatPhoto {
     @SerializedName("big_file_unique_id")
     private String bigFileUniqueId;
 
-    public String getSmallFileId() {
-        return smallFileId;
-    }
-
-    public String getSmallFileUniqueId() {
-        return smallFileUniqueId;
-    }
-
-    public String getBigFileId() {
-        return bigFileId;
-    }
-
-    public String getBigFileUniqueId() {
-        return bigFileUniqueId;
-    }
 }
