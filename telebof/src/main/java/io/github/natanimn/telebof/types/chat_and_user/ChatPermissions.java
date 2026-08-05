@@ -1,14 +1,20 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * Describes actions that a non-administrator user is allowed to take in a chat.
  * @author Natanim
- * @since 3 March 2025
- * @version 2.0.0
+ * @since 0.1
  */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class ChatPermissions implements Serializable {
     /**
      * Optional. True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
@@ -105,148 +111,4 @@ public class ChatPermissions implements Serializable {
      */
     @SerializedName("can_react_to_messages")
     private Boolean canReactToMessages;
-
-    public Boolean getCanSendMessages() {
-        return canSendMessages;
-    }
-
-    public ChatPermissions setCanSendMessages(Boolean canSendMessages) {
-        this.canSendMessages = canSendMessages;
-        return this;
-    }
-
-    public Boolean getCanSendAudios() {
-        return canSendAudios;
-    }
-
-    public ChatPermissions setCanSendAudios(Boolean canSendAudios) {
-        this.canSendAudios = canSendAudios;
-        return this;
-    }
-
-    public Boolean getCanSendDocuments() {
-        return canSendDocuments;
-    }
-
-    public ChatPermissions setCanSendDocuments(Boolean canSendDocuments) {
-        this.canSendDocuments = canSendDocuments;
-        return this;
-    }
-
-    public Boolean getCanSendPhotos() {
-        return canSendPhotos;
-    }
-
-    public ChatPermissions setCanSendPhotos(Boolean canSendPhotos) {
-        this.canSendPhotos = canSendPhotos;
-        return this;
-    }
-
-    public Boolean getCanSendVideos() {
-        return canSendVideos;
-    }
-
-    public ChatPermissions setCanSendVideos(Boolean canSendVideos) {
-        this.canSendVideos = canSendVideos;
-        return this;
-    }
-
-    public Boolean getCanSendVideoNotes() {
-        return canSendVideoNotes;
-    }
-
-    public ChatPermissions setCanSendVideoNotes(Boolean canSendVideoNotes) {
-        this.canSendVideoNotes = canSendVideoNotes;
-        return this;
-    }
-
-    public Boolean getCanSendVoiceNotes() {
-        return canSendVoiceNotes;
-    }
-
-    public ChatPermissions setCanSendVoiceNotes(Boolean canSendVoiceNotes) {
-        this.canSendVoiceNotes = canSendVoiceNotes;
-        return this;
-    }
-
-    public Boolean getCanSendPolls() {
-        return canSendPolls;
-    }
-
-    public ChatPermissions setCanSendPolls(Boolean canSendPolls) {
-        this.canSendPolls = canSendPolls;
-        return this;
-    }
-
-    public Boolean getCanSendOtherMessages() {
-        return canSendOtherMessages;
-    }
-
-    public ChatPermissions setCanSendOtherMessages(Boolean canSendOtherMessages) {
-        this.canSendOtherMessages = canSendOtherMessages;
-        return this;
-    }
-
-    public Boolean getCanAddWebPagePreviews() {
-        return canAddWebPagePreviews;
-    }
-
-    public ChatPermissions setCanAddWebPagePreviews(Boolean canAddWebPagePreviews) {
-        this.canAddWebPagePreviews = canAddWebPagePreviews;
-        return this;
-    }
-
-    public Boolean getCanChangeInfo() {
-        return canChangeInfo;
-    }
-
-    public ChatPermissions setCanChangeInfo(Boolean canChangeInfo) {
-        this.canChangeInfo = canChangeInfo;
-        return this;
-    }
-
-    public Boolean getCanInviteUsers() {
-        return canInviteUsers;
-    }
-
-    public ChatPermissions setCanInviteUsers(Boolean canInviteUsers) {
-        this.canInviteUsers = canInviteUsers;
-        return this;
-    }
-
-    public Boolean getCanPinMessages() {
-        return canPinMessages;
-    }
-
-    public ChatPermissions setCanPinMessages(Boolean canPinMessages) {
-        this.canPinMessages = canPinMessages;
-        return this;
-    }
-
-    public Boolean getCanManageTopics() {
-        return canManageTopics;
-    }
-
-    public ChatPermissions setCanManageTopics(Boolean canManageTopics) {
-        this.canManageTopics = canManageTopics;
-        return this;
-    }
-
-    public Boolean getCanEditTag() {
-        return canEditTag;
-    }
-
-    public ChatPermissions setCanEditTag(Boolean canEditTag) {
-        this.canEditTag = canEditTag;
-        return this;
-    }
-
-    public Boolean getCanReactToMessages() {
-        return canReactToMessages;
-    }
-
-    public ChatPermissions  setCanReactToMessages(Boolean canReactToMessages) {
-        this.canReactToMessages = canReactToMessages;
-        return this;
-    }
 }
