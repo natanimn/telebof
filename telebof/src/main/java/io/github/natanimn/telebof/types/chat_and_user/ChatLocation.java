@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import io.github.natanimn.telebof.types.media_and_service.Location;
+import lombok.Getter;
 
 /**
  * Represents a location to which a chat is connected.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ChatLocation {
     /**
      * The location to which the supergroup is connected. Can't be a live location.
@@ -19,11 +20,4 @@ public class ChatLocation {
      */
     private String address;
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public String getAddress() {
-        return address;
-    }
 }
