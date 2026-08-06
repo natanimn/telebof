@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.types.chat_and_user.User;
+import lombok.Getter;
 
 /**
  * This object represents one row of the high scores table for a game.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class GameHighScore {
     /**
      * Position in high score table for the game
@@ -24,16 +25,4 @@ public class GameHighScore {
      */
     private User user;
 
-
-    public Integer getPosition() {
-        return position;
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public User getUser() {
-        return user;
-    }
 }
