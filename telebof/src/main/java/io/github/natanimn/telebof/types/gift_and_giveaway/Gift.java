@@ -3,13 +3,14 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.media_and_service.Sticker;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class represents a gift that can be sent by the bot.
  * @author Natnim
  * @since July 25, 2025
- * @version 1.4.0
  */
+@Getter
 public class Gift {
     /**
      * Unique identifier of the gift
@@ -92,59 +93,4 @@ public class Gift {
     @SerializedName("is_burned")
     private Boolean isBurned;
 
-    public String getId() {
-        return id;
-    }
-
-    public Sticker getSticker() {
-        return sticker;
-    }
-
-    public Integer getStarCount() {
-        return starCount;
-    }
-
-    public Integer getUpgradeStarCount() {
-        return upgradeStarCount;
-    }
-
-    public Integer getTotalCount() {
-        return totalCount;
-    }
-
-    public Boolean getHasColors() {
-        return hasColors;
-    }
-
-    public Boolean getIsPremium() {
-        return isPremium;
-    }
-
-    public Integer getRemainingCount() {
-        return remainingCount;
-    }
-
-    public Chat getPublisherChat() {
-        return publisherChat;
-    }
-
-    public Integer getPersonalTotalCount() {
-        return personalTotalCount;
-    }
-
-    public Integer getPersonalRemainingCount() {
-        return personalRemainingCount;
-    }
-
-    public GiftBackground getBackground() {
-        return background;
-    }
-
-    public Integer getUniqueGiftVariantCount() {
-        return uniqueGiftVariantCount;
-    }
-
-    public Boolean getIsBurned() {
-        return isBurned;
-    }
 }
