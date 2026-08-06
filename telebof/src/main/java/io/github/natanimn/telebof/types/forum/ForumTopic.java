@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.forum;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object represents a forum topic.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ForumTopic {
     /**
      * Unique identifier of the forum topic
@@ -38,23 +39,4 @@ public class ForumTopic {
     @SerializedName("is_name_implicit")
     private Boolean isNameImplicit;
 
-    public Integer getMessageThreadId() {
-        return messageThreadId;
-    }
-
-    public Integer getIconColor() {
-        return iconColor;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getIconCustomEmojiId() {
-        return iconCustomEmojiId;
-    }
-
-    public Boolean getIsNameImplicit() {
-        return isNameImplicit;
-    }
 }
