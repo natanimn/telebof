@@ -3,14 +3,16 @@ package io.github.natanimn.telebof.types.gift_and_giveaway;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object describes a gift received and owned by a user or a chat.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class OwnedGift {
     /**
      * Type of the gift, always "regular" or "unique"
@@ -122,79 +124,4 @@ public class OwnedGift {
     @SerializedName("unique_gift_number")
     private Integer uniqueGiftNumber;
 
-    public String getType() {
-        return type;
-    }
-
-    public Gift getGift() {
-        return gift;
-    }
-
-    public UniqueGift getUniqueGift() {
-        return uniqueGift;
-    }
-
-    public String getOwnedGiftId() {
-        return ownedGiftId;
-    }
-
-    public User getSenderUser() {
-        return senderUser;
-    }
-
-    public Integer getSendDate() {
-        return sendDate;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public List<MessageEntity> getEntities() {
-        return entities;
-    }
-
-    public Boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public Boolean getIsSaved() {
-        return isSaved;
-    }
-
-    public Boolean getCanBeUpgraded() {
-        return canBeUpgraded;
-    }
-
-    public Boolean getCanBeTransferred() {
-        return canBeTransferred;
-    }
-
-    public Boolean getWasRefunded() {
-        return wasRefunded;
-    }
-
-    public Integer getConvertStarCount() {
-        return convertStarCount;
-    }
-
-    public Integer getPrepaidUpgradeStarCount() {
-        return prepaidUpgradeStarCount;
-    }
-
-    public Integer getTransferStarCount() {
-        return transferStarCount;
-    }
-
-    public Integer getNextTransferDate() {
-        return nextTransferDate;
-    }
-
-    public Boolean getIsUpgradeSeparate() {
-        return isUpgradeSeparate;
-    }
-
-    public Integer getUniqueGiftNumber() {
-        return uniqueGiftNumber;
-    }
 }
