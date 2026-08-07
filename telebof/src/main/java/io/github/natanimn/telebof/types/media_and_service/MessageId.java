@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class represents a unique message identifier.
  * @author Natanim
- * @since 3 March, 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class MessageId {
     /**
      * Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately.
@@ -16,7 +17,4 @@ public class MessageId {
     @SerializedName("message_id")
     private Integer messageId;
 
-    public Integer getMessageId() {
-        return messageId;
-    }
 }
