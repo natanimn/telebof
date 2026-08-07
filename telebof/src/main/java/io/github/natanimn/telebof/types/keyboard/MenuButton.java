@@ -5,15 +5,16 @@ import io.github.natanimn.telebof.enums.MenuButtonType;
 import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.types.inline.InlineQueryResult;
 import io.github.natanimn.telebof.types.web.WebAppInfo;
+import lombok.Getter;
 
 import java.io.Serializable;
 
 /**
  * This object describes the bot's menu button in a private chat.
  * @author Natanim 
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class MenuButton implements Serializable {
     private MenuButtonType type;
     private String text;
@@ -54,15 +55,4 @@ public class MenuButton implements Serializable {
         return this;
     }
 
-    public MenuButtonType getType() {
-        return type;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public WebAppInfo getWebApp() {
-        return webApp;
-    }
 }
