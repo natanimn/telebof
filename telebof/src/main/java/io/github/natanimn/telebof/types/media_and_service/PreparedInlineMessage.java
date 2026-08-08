@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This class represents an inline message to be sent by a user of a Mini App.
  * @author Natanim
  * @since July 25, 2025
- * @version 1.3.0
  */
+@Getter
 public class PreparedInlineMessage {
     /**
      * Unique identifier of the prepared message
@@ -20,11 +21,4 @@ public class PreparedInlineMessage {
     @SerializedName("expiration_date")
     private Integer expirationDate;
 
-    public String getId() {
-        return id;
-    }
-
-    public Integer getExpirationDate() {
-        return expirationDate;
-    }
 }
