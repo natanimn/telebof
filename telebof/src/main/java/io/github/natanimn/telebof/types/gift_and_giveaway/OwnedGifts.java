@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * Contains the list of gifts received and owned by a user or a chat.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class OwnedGifts {
     /**
      * The total number of gifts owned by the user or the chat
@@ -27,15 +29,4 @@ public class OwnedGifts {
     @SerializedName("next_offset")
     private String nextOffset;
 
-    public Integer getTotalCount() {
-        return totalCount;
-    }
-
-    public List<OwnedGift> getGifts() {
-        return gifts;
-    }
-
-    public String getNextOffset() {
-        return nextOffset;
-    }
 }
