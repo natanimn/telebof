@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes why a request was unsuccessful.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ResponseParameters {
     /**
      * Optional.
@@ -23,11 +24,4 @@ public class ResponseParameters {
     @SerializedName("retry_after")
     private Integer retryAfter;
 
-    public Integer getRetryAfter() {
-        return retryAfter;
-    }
-
-    public Long getMigrateToChatId() {
-        return migrateToChatId;
-    }
 }
