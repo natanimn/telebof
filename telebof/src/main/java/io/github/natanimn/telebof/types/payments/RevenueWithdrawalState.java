@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.payments;
 
 import io.github.natanimn.telebof.enums.RevenueWithdrawalStateType;
+import lombok.Getter;
 
 /**
  * This class describes the state of a revenue withdrawal operation
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class RevenueWithdrawalState {
     /**
      * Type of the state
@@ -24,15 +25,4 @@ public class RevenueWithdrawalState {
      */
     private String url;
 
-    public RevenueWithdrawalStateType getType() {
-        return type;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public String getUrl() {
-        return url;
-    }
 }
