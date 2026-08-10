@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.rich;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author Natanim
  * @since 2.1
  */
+@Getter
 public class RichBlockListItem {
     /**
      * Label of the item
@@ -43,27 +45,5 @@ public class RichBlockListItem {
      */
     private String type;
 
-    public String getLabel() {
-        return label;
-    }
 
-    public List<RichBlock> getBlocks() {
-        return blocks;
-    }
-
-    public Boolean getHasCheckbox() {
-        return hasCheckbox;
-    }
-
-    public Boolean getChecked() {
-        return isChecked;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
-
-    public String getType() {
-        return type;
-    }
 }
