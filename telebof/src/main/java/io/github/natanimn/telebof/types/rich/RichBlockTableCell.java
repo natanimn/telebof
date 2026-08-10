@@ -3,12 +3,14 @@ package io.github.natanimn.telebof.types.rich;
 import com.google.gson.annotations.SerializedName;
 import io.github.natanimn.telebof.enums.TableCellAlign;
 import io.github.natanimn.telebof.enums.TableCellValign;
+import lombok.Getter;
 
 /**
  * Cell in a table.
  * @author Natanim
  * @since 2.1
  */
+@Getter
 public class RichBlockTableCell {
     /**
      * Optional. Text in the cell. If omitted, then the cell is invisible.
@@ -41,27 +43,4 @@ public class RichBlockTableCell {
      */
     private TableCellValign valign;
 
-    public RichText getText() {
-        return text;
-    }
-
-    public Boolean getHeader() {
-        return isHeader;
-    }
-
-    public Integer getColspan() {
-        return colspan;
-    }
-
-    public Integer getRowspan() {
-        return rowspan;
-    }
-
-    public TableCellAlign getAlign() {
-        return align;
-    }
-
-    public TableCellValign getValign() {
-        return valign;
-    }
 }
