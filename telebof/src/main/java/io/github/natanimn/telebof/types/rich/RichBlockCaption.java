@@ -1,10 +1,13 @@
 package io.github.natanimn.telebof.types.rich;
 
+import lombok.Getter;
+
 /**
  * Caption of a rich formatted block.
  * @author Natanim
  * @since 2.1
  */
+@Getter
 public class RichBlockCaption {
     /**
      * Block caption
@@ -16,11 +19,4 @@ public class RichBlockCaption {
      */
     private RichText credit;
 
-    public RichText getText() {
-        return text;
-    }
-
-    public RichText getCredit() {
-        return credit;
-    }
 }
