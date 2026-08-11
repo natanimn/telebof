@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.payments;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes a Telegram Star transaction.
@@ -8,9 +9,9 @@ import com.google.gson.annotations.SerializedName;
  * following this transaction, the refunded Stars will be deducted from the bot's balance.
  * This is outside of Telegram's control.
  * @author Natanim
- * @since March 3, 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class StarTransaction {
     /**
      * Unique identifier of the transaction. Coincides with the identifier of the original transaction for refund transactions. Coincides with SuccessfulPayment.telegram_payment_charge_id for successful incoming payments from users.
@@ -43,27 +44,4 @@ public class StarTransaction {
     @SerializedName("nanostar_amount")
     private Integer nanostarAmount;
 
-    public String getId() {
-        return id;
-    }
-
-    public Integer getAmount() {
-        return amount;
-    }
-
-    public Integer getDate() {
-        return date;
-    }
-
-    public TransactionPartner getSource() {
-        return source;
-    }
-
-    public TransactionPartner getReceiver() {
-        return receiver;
-    }
-
-    public Integer getNanostarAmount() {
-        return nanostarAmount;
-    }
 }
