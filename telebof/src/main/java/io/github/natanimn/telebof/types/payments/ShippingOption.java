@@ -1,14 +1,16 @@
 package io.github.natanimn.telebof.types.payments;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 import java.util.List;
 
 /**
  * This object represents one shipping option.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class ShippingOption implements Serializable {
     /**
      * Shipping option identifier
@@ -33,15 +35,4 @@ public class ShippingOption implements Serializable {
         this.prices = prices;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public List<LabeledPrice> getPrices() {
-        return prices;
-    }
 }
