@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes an inline message sent by a Web App on behalf of a user.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class SentWebAppMessage {
     /**
      * Optional.
@@ -16,7 +17,4 @@ public class SentWebAppMessage {
     @SerializedName("inline_message_id")
     private String inlineMessageId;
 
-    public String getInlineMessageId() {
-        return inlineMessageId;
-    }
 }
