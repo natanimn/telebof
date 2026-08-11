@@ -2,14 +2,16 @@ package io.github.natanimn.telebof.types.media_and_service;
 
 import io.github.natanimn.telebof.enums.StickerType;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This object represents a sticker set.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class StickerSet {
     /**
      * Sticker set name
@@ -37,23 +39,4 @@ public class StickerSet {
      */
     private PhotoSize thumbnail;
 
-    public String getName() {
-        return name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public StickerType getStickerType() {
-        return stickerType;
-    }
-
-    public List<Sticker> getStickers() {
-        return stickers;
-    }
-
-    public PhotoSize getThumbnail() {
-        return thumbnail;
-    }
 }
