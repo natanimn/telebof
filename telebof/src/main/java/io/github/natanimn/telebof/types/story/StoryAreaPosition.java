@@ -1,6 +1,7 @@
 package io.github.natanimn.telebof.types.story;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes the position of a clickable area within a story.
@@ -8,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * @since 19 August 2025
  * @version 1.3.0
  */
+@Getter
 public class StoryAreaPosition {
     /**
      * The abscissa of the area's center, as a percentage of the media width
@@ -45,27 +47,4 @@ public class StoryAreaPosition {
     @SerializedName("corner_radius_percentage")
     private Double cornerRadiusPercentage;
 
-    public Double getXPercentage() {
-        return xPercentage;
-    }
-
-    public Double getYPercentage() {
-        return yPercentage;
-    }
-
-    public Double getWidthPercentage() {
-        return widthPercentage;
-    }
-
-    public Double getHeightPercentage() {
-        return heightPercentage;
-    }
-
-    public Double getRotationAngle() {
-        return rotationAngle;
-    }
-
-    public Double getCornerRadiusPercentage() {
-        return cornerRadiusPercentage;
-    }
 }
