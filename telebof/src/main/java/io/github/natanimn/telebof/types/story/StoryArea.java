@@ -1,13 +1,15 @@
 package io.github.natanimn.telebof.types.story;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * Describes a clickable area on a story media.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class StoryArea implements Serializable {
     /**
      * Position of the area
@@ -26,11 +28,4 @@ public class StoryArea implements Serializable {
         this.type = type;
     }
 
-    public StoryAreaPosition getPosition() {
-        return position;
-    }
-
-    public StoryAreaType getType() {
-        return type;
-    }
 }
