@@ -2,13 +2,14 @@ package io.github.natanimn.telebof.types.story;
 
 import io.github.natanimn.telebof.types.media_and_service.ReactionType;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes a story area pointing to a suggested reaction. Currently, a story can have up to 5 suggested reaction areas.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class StoryAreaTypeSuggestedReaction implements StoryAreaType {
     /**
      * Type of the reaction
@@ -55,19 +56,4 @@ public class StoryAreaTypeSuggestedReaction implements StoryAreaType {
         return this;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public ReactionType getReactionType() {
-        return reactionType;
-    }
-
-    public Boolean getIsDark() {
-        return isDark;
-    }
-
-    public Boolean getIsFlipped() {
-        return isFlipped;
-    }
 }
