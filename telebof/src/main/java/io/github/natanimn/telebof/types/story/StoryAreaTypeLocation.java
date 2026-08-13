@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.story;
 
 import io.github.natanimn.telebof.types.media_and_service.LocationAddress;
+import lombok.Getter;
 
 /**
  * Describes a story area pointing to a location. Currently, a story can have up to 10 location areas.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class StoryAreaTypeLocation implements StoryAreaType {
     /**
      * Location latitude in degrees
@@ -25,6 +26,7 @@ public class StoryAreaTypeLocation implements StoryAreaType {
     private LocationAddress address;
 
     public StoryAreaTypeLocation(){}
+
     /**
      * Required
      * @param latitude Location latitude in degrees
@@ -44,19 +46,4 @@ public class StoryAreaTypeLocation implements StoryAreaType {
         return this;
     }
 
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public LocationAddress getAddress() {
-        return address;
-    }
-
-    public String type() {
-        return "location";
-    }
 }
