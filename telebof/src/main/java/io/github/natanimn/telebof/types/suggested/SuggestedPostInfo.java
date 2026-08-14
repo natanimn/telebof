@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.suggested;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Contains information about a suggested post.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.3.0
  */
+@Getter
 public class SuggestedPostInfo {
     /**
      * State of the suggested post. Currently, it can be one of "pending", "approved", "declined".
@@ -27,15 +28,4 @@ public class SuggestedPostInfo {
     @SerializedName("send_date")
     private Integer sendDate;
 
-    public String getState() {
-        return state;
-    }
-
-    public SuggestedPostPrice getPrice() {
-        return price;
-    }
-
-    public Integer getSendDate() {
-        return sendDate;
-    }
 }
