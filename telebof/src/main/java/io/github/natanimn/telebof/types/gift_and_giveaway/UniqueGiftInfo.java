@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.gift_and_giveaway;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * Describes a service message about a unique gift that was sent or received.
  * @author Natanim
  * @since 19 August 2025
- * @version 1.3.0
  */
+@Getter
 public class UniqueGiftInfo {
     /**
      * Information about the gift
@@ -49,32 +50,4 @@ public class UniqueGiftInfo {
      */
     @SerializedName("next_transfer_date")
     private Integer nextTransferDate;
-
-    public UniqueGift getGift() {
-        return gift;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public String getLastResaleCurrency() {
-        return lastResaleCurrency;
-    }
-
-    public Integer getLastResaleAmount() {
-        return lastResaleAmount;
-    }
-
-    public String getOwnedGiftId() {
-        return ownedGiftId;
-    }
-
-    public Integer getTransferStarCount() {
-        return transferStarCount;
-    }
-
-    public Integer getNextTransferDate() {
-        return nextTransferDate;
-    }
 }
