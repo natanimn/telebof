@@ -5,14 +5,16 @@ import io.github.natanimn.telebof.types.chat_and_user.Chat;
 import io.github.natanimn.telebof.types.chat_and_user.User;
 import io.github.natanimn.telebof.types.gift_and_giveaway.Gift;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+
 import java.util.List;
 
 /**
  * This class describes the source of a transaction, or its recipient for outgoing transactions.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class TransactionPartner {
     /**
      * Type of the transaction partner
@@ -93,59 +95,4 @@ public class TransactionPartner {
     @SerializedName("premium_subscription_duration")
     private Integer premiumSubscriptionDuration;
 
-    public TransactionPartnerType getType() {
-        return type;
-    }
-
-    public String getTransactionType() {
-        return transactionType;
-    }
-
-    public String getInvoicePayload() {
-        return invoicePayload;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public RevenueWithdrawalState getWithdrawalState() {
-        return withdrawalState;
-    }
-
-    public List<PaidMedia> getPaidMedia() {
-        return paidMedia;
-    }
-
-    public Integer getRequestCount() {
-        return requestCount;
-    }
-
-    public Integer getSubscriptionPeriod() {
-        return subscriptionPeriod;
-    }
-
-    public Gift getGift() {
-        return gift;
-    }
-
-    public AffiliateInfo getAffiliate() {
-        return affiliate;
-    }
-
-    public User getSponsorUser() {
-        return sponsorUser;
-    }
-
-    public Integer getCommissionPerMille() {
-        return commissionPerMille;
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public Integer getPremiumSubscriptionDuration() {
-        return premiumSubscriptionDuration;
-    }
 }
