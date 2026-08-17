@@ -1,13 +1,14 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 /**
  * This object describes the rating of a user based on their Telegram Star spendings.
  * @author Natnim
  * @since 1.3.0
- * @version 1.3.0
  */
+@Getter
 public class UserRating {
     /**
      * Current level of the user, indicating their reliability when purchasing digital goods and services.
@@ -32,19 +33,4 @@ public class UserRating {
     @SerializedName("next_level_rating")
     private Integer nextLevelRating;
 
-    public Integer getLevel() {
-        return level;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public Integer getCurrentLevelRating() {
-        return currentLevelRating;
-    }
-
-    public Integer getNextLevelRating() {
-        return nextLevelRating;
-    }
 }
