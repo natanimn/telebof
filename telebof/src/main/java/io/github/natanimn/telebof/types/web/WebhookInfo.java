@@ -2,6 +2,7 @@ package io.github.natanimn.telebof.types.web;
 
 import io.github.natanimn.telebof.enums.Updates;
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @since 3 March 2025
  * @version 1.3.0
  */
+@Getter
 public class WebhookInfo {
     /**
      * Webhook URL, may be empty if webhook is not set up
@@ -64,35 +66,4 @@ public class WebhookInfo {
     @SerializedName("allowed_updates")
     private List<Updates> allowedUpdates;
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getIpAddress() {
-        return ipAddress;
-    }
-
-    public String getLastErrorMessage() {
-        return lastErrorMessage;
-    }
-
-    public Integer getPendingUpdateCount() {
-        return pendingUpdateCount;
-    }
-
-    public Integer getLastSynchronizationErrorDate() {
-        return lastSynchronizationErrorDate;
-    }
-
-    public Integer getMaxConnections() {
-        return maxConnections;
-    }
-
-    public Boolean getHasCustomCertificate() {
-        return hasCustomCertificate;
-    }
-
-    public List<Updates> getAllowedUpdates() {
-        return allowedUpdates;
-    }
 }
