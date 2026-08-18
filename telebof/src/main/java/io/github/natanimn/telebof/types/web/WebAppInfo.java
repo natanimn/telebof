@@ -1,13 +1,15 @@
 package io.github.natanimn.telebof.types.web;
 
+import lombok.Getter;
+
 import java.io.Serializable;
 
 /**
  * Describes a <a href="https://core.telegram.org/bots/webapps">Web App.</a>
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
 public class WebAppInfo implements Serializable {
     /**
      * An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
@@ -20,7 +22,4 @@ public class WebAppInfo implements Serializable {
         this.url = url;
     }
 
-    public String getUrl() {
-        return url;
-    }
 }
