@@ -1,14 +1,21 @@
 package io.github.natanimn.telebof.types.chat_and_user;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * Represents the rights of an administrator in a chat.
  * @author Natanim
- * @since 3 March 2025
+ * @since 0.1
  * @version 1.5.0
  */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class ChatAdministratorRights implements Serializable {
     /**
      * True, if the user's presence in the chat is hidden
@@ -112,157 +119,4 @@ public class ChatAdministratorRights implements Serializable {
      */
     @SerializedName("can_manage_tags")
     private Boolean canManageTags;
-
-    public Boolean getIsAnonymous() {
-        return isAnonymous;
-    }
-
-    public ChatAdministratorRights setIsAnonymous(Boolean isAnonymous) {
-        this.isAnonymous = isAnonymous;
-        return this;
-    }
-
-    public Boolean getCanManageChat() {
-        return canManageChat;
-    }
-
-    public ChatAdministratorRights setCanManageChat(Boolean canManageChat) {
-        this.canManageChat = canManageChat;
-        return this;
-    }
-
-    public Boolean getCanDeleteMessages() {
-        return canDeleteMessages;
-    }
-
-    public ChatAdministratorRights setCanDeleteMessages(Boolean canDeleteMessages) {
-        this.canDeleteMessages = canDeleteMessages;
-        return this;
-    }
-
-    public Boolean getCanManageVideoChats() {
-        return canManageVideoChats;
-    }
-
-    public ChatAdministratorRights setCanManageVideoChats(Boolean canManageVideoChats) {
-        this.canManageVideoChats = canManageVideoChats;
-        return this;
-    }
-
-    public Boolean getCanRestrictMembers() {
-        return canRestrictMembers;
-    }
-
-    public ChatAdministratorRights setCanRestrictMembers(Boolean canRestrictMembers) {
-        this.canRestrictMembers = canRestrictMembers;
-        return this;
-    }
-
-    public Boolean getCanPromoteMembers() {
-        return canPromoteMembers;
-    }
-
-    public ChatAdministratorRights setCanPromoteMembers(Boolean canPromoteMembers) {
-        this.canPromoteMembers = canPromoteMembers;
-        return this;
-    }
-
-    public Boolean getCanChangeInfo() {
-        return canChangeInfo;
-    }
-
-    public ChatAdministratorRights setCanChangeInfo(Boolean canChangeInfo) {
-        this.canChangeInfo = canChangeInfo;
-        return this;
-    }
-
-    public Boolean getCanInviteUsers() {
-        return canInviteUsers;
-    }
-
-    public ChatAdministratorRights setCanInviteUsers(Boolean canInviteUsers) {
-        this.canInviteUsers = canInviteUsers;
-        return this;
-    }
-
-    public Boolean getCanPostMessages() {
-        return canPostMessages;
-    }
-
-    public ChatAdministratorRights setCanPostMessages(Boolean canPostMessages) {
-        this.canPostMessages = canPostMessages;
-        return this;
-    }
-
-    public Boolean getCanEditMessages() {
-        return canEditMessages;
-    }
-
-    public ChatAdministratorRights setCanEditMessages(Boolean canEditMessages) {
-        this.canEditMessages = canEditMessages;
-        return this;
-    }
-
-    public Boolean getCanPinMessages() {
-        return canPinMessages;
-    }
-
-    public ChatAdministratorRights setCanPinMessages(Boolean canPinMessages) {
-        this.canPinMessages = canPinMessages;
-        return this;
-    }
-
-    public Boolean getCanManageTopics() {
-        return canManageTopics;
-    }
-
-    public ChatAdministratorRights setCanManageTopics(Boolean canManageTopics) {
-        this.canManageTopics = canManageTopics;
-        return this;
-    }
-
-    public Boolean getCanPostStories() {
-        return canPostStories;
-    }
-
-    public ChatAdministratorRights setCanPostStories(Boolean canPostStories) {
-        this.canPostStories = canPostStories;
-        return this;
-    }
-
-    public Boolean getCanEditStories() {
-        return canEditStories;
-    }
-
-    public ChatAdministratorRights setCanEditStories(Boolean canEditStories) {
-        this.canEditStories = canEditStories;
-        return this;
-    }
-
-    public Boolean getCanDeleteStories() {
-        return canDeleteStories;
-    }
-
-    public ChatAdministratorRights setCanDeleteStories(Boolean canDeleteStories) {
-        this.canDeleteStories = canDeleteStories;
-        return this;
-    }
-
-    public Boolean getCanManageDirectMessages() {
-        return canManageDirectMessages;
-    }
-
-    public ChatAdministratorRights setCanManageDirectMessages(Boolean canManageDirectMessages) {
-        this.canManageDirectMessages = canManageDirectMessages;
-        return this;
-    }
-
-    public Boolean getCanManageTags() {
-        return canManageTags;
-    }
-
-    public ChatAdministratorRights setCanManageTags(Boolean canManageTags) {
-        this.canManageTags = canManageTags;
-        return this;
-    }
 }
