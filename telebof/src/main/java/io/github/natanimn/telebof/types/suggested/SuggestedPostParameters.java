@@ -1,13 +1,17 @@
 package io.github.natanimn.telebof.types.suggested;
 
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * Contains parameters of a post that is being suggested by the bot.
  * @author Natanim
  * @since 3 September 2025
- * @version 1.3.0
  */
+@Setter
+@Accessors(chain = true)
 public class SuggestedPostParameters implements Serializable{
     /**
      * Optional.
@@ -22,19 +26,4 @@ public class SuggestedPostParameters implements Serializable{
      */
     private Long date;
 
-    public SuggestedPostPrice getPrice() {
-        return price;
-    }
-
-    public Long getDate() {
-        return date;
-    }
-
-    public void setDate(Long date) {
-        this.date = date;
-    }
-
-    public void setPrice(SuggestedPostPrice price) {
-        this.price = price;
-    }
 }
