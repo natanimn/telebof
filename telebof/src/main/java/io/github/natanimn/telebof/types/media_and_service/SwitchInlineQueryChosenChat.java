@@ -1,14 +1,20 @@
 package io.github.natanimn.telebof.types.media_and_service;
 
 import com.google.gson.annotations.SerializedName;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+
 import java.io.Serializable;
 
 /**
  * This object represents an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
+@Getter
+@Setter
+@Accessors(chain = true)
 public class SwitchInlineQueryChosenChat implements Serializable {
     /**
      * Optional. The default inline query to be inserted in the input field. If left empty, only the bot's username will be inserted
@@ -39,48 +45,4 @@ public class SwitchInlineQueryChosenChat implements Serializable {
     @SerializedName("allow_channel_chats")
     private Boolean allowChannelChats;
 
-    public String getQuery() {
-        return query;
-    }
-
-    public SwitchInlineQueryChosenChat setQuery(String query) {
-        this.query = query;
-        return this;
-    }
-
-    public Boolean getAllowUserChats() {
-        return allowUserChats;
-    }
-
-    public SwitchInlineQueryChosenChat setAllowUserChats(Boolean allowUserChats) {
-        this.allowUserChats = allowUserChats;
-        return this;
-    }
-
-    public Boolean getAllowBotChats() {
-        return allowBotChats;
-    }
-
-    public SwitchInlineQueryChosenChat setAllowBotChats(Boolean allowBotChats) {
-        this.allowBotChats = allowBotChats;
-        return this;
-    }
-
-    public Boolean getAllowGroupChats() {
-        return allowGroupChats;
-    }
-
-    public SwitchInlineQueryChosenChat setAllowGroupChats(Boolean allowGroupChats) {
-        this.allowGroupChats = allowGroupChats;
-        return this;
-    }
-
-    public Boolean getAllowChannelChats() {
-        return allowChannelChats;
-    }
-
-    public SwitchInlineQueryChosenChat setAllowChannelChats(Boolean allowChannelChats) {
-        this.allowChannelChats = allowChannelChats;
-        return this;
-    }
 }
