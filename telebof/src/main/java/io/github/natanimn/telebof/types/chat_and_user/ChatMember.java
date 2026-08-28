@@ -31,163 +31,163 @@ public class ChatMember {
      * True, if the bot is allowed to edit administrator privileges of that user
      */
     @SerializedName("can_be_edited")
-    private Boolean canBeEdited;
+    private boolean canBeEdited;
 
     /**
      * True, if the user's presence in the chat is hidden
      */
     @SerializedName("is_anonymous")
-    private Boolean isAnonymous;
+    private boolean isAnonymous;
 
     /**
      * True, if the administrator can access the chat event log, get boost list, see hidden supergroup and channel members, report spam messages, ignore slow mode, and send messages to the chat without paying Telegram Stars. Implied by any other administrator privilege.
      */
     @SerializedName("can_manage_chat")
-    private Boolean canManageChat;
+    private boolean canManageChat;
 
     /**
      * True, if the administrator can delete messages of other users
      */
     @SerializedName("can_delete_messages")
-    private Boolean canDeleteMessages;
+    private boolean canDeleteMessages;
 
     /**
      * True, if the administrator can manage video chats
      */
     @SerializedName("can_manage_video_chats")
-    private Boolean canManageVideoChats;
+    private boolean canManageVideoChats;
 
     /**
      * True, if the administrator can restrict, ban or unban chat members, or access supergroup statistics
      */
     @SerializedName("can_restrict_members")
-    private Boolean canRestrictMembers;
+    private boolean canRestrictMembers;
 
     /**
      * True, if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by the user)
      */
     @SerializedName("can_promote_members")
-    private Boolean canPromoteMembers;
+    private boolean canPromoteMembers;
 
     /**
      * True, if the user is allowed to change the chat title, photo and other settings
      */
     @SerializedName("can_change_info")
-    private Boolean canChangeInfo;
+    private boolean canChangeInfo;
 
     /**
      * True, if the user is allowed to invite new users to the chat
      */
     @SerializedName("can_invite_users")
-    private Boolean canInviteUsers;
+    private boolean canInviteUsers;
 
     /**
      * Optional. True, if the administrator can post messages in the channel, approve suggested posts, or access channel statistics; for channels only
      */
     @SerializedName("can_post_messages")
-    private Boolean canPostMessages;
+    private boolean canPostMessages;
 
     /**
      * Optional. True, if the administrator can edit messages of other users and can pin messages; for channels only
      */
     @SerializedName("can_edit_messages")
-    private Boolean canEditMessages;
+    private boolean canEditMessages;
 
     /**
      * Optional. True, if the user is allowed to pin messages; for groups and supergroups only
      */
     @SerializedName("can_pin_messages")
-    private Boolean canPinMessages;
+    private boolean canPinMessages;
 
     /**
      * Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; for supergroups only
      */
     @SerializedName("can_manage_topics")
-    private Boolean canManageTopics;
+    private boolean canManageTopics;
 
     /**
      * True, if the user is a member of the chat at the moment of the request
      */
     @SerializedName("is_member")
-    private Boolean isMember;
+    private boolean isMember;
 
     /**
      * True, if the user is allowed to send text messages, contacts, giveaways, giveaway winners, invoices, locations and venues
      */
     @SerializedName("can_send_messages")
-    private Boolean canSendMessages;
+    private boolean canSendMessages;
 
     /**
      * True, if the user is allowed to send audios
      */
     @SerializedName("can_send_audios")
-    private Boolean canSendAudios;
+    private boolean canSendAudios;
 
     /**
      * True, if the user is allowed to send documents
      */
     @SerializedName("can_send_documents")
-    private Boolean canSendDocuments;
+    private boolean canSendDocuments;
 
     /**
      * True, if the user is allowed to send photos
      */
     @SerializedName("can_send_photos")
-    private Boolean canSendPhotos;
+    private boolean canSendPhotos;
 
     /**
      * True, if the user is allowed to send videos
      */
     @SerializedName("can_send_videos")
-    private Boolean canSendVideos;
+    private boolean canSendVideos;
 
     /**
      * True, if the user is allowed to send video notes
      */
     @SerializedName("can_send_video_notes")
-    private Boolean canSendVideoNotes;
+    private boolean canSendVideoNotes;
 
     /**
      * True, if the user is allowed to send voice notes
      */
     @SerializedName("can_send_voice_votes")
-    private Boolean canSendVoiceVotes;
+    private boolean canSendVoiceVotes;
 
     /**
      * True, if the user is allowed to send polls and checklists
      */
     @SerializedName("can_send_polls")
-    private Boolean canSendPolls;
+    private boolean canSendPolls;
 
     /**
      * True, if the user is allowed to send animations, games, stickers and use inline bots
      */
     @SerializedName("can_send_other_messages")
-    private Boolean canSendOtherMessages;
+    private boolean canSendOtherMessages;
 
     /**
      * True, if the user is allowed to add web page previews to their messages
      */
     @SerializedName("can_add_web_page_previews")
-    private Boolean canAddWebPagePreviews;
+    private boolean canAddWebPagePreviews;
 
     /**
      * True, if the administrator can post stories to the chat
      */
     @SerializedName("can_post_stories")
-    private Boolean canPostStories;
+    private boolean canPostStories;
 
     /**
      * True, if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive
      */
     @SerializedName("can_edit_stories")
-    private Boolean canEditStories;
+    private boolean canEditStories;
 
     /**
      * True, if the administrator can delete stories posted by other users
      */
     @SerializedName("can_delete_stories")
-    private Boolean canDeleteStories;
+    private boolean canDeleteStories;
 
     /**
      * Optional. Date when the user's subscription will expire; Unix time
@@ -204,19 +204,24 @@ public class ChatMember {
      * True, if the user is allowed to edit their own tag
      */
     @SerializedName("can_edit_tag")
-    private Boolean canEditTag;
+    private boolean canEditTag;
 
     /**
      * Optional. True, if the administrator can edit the tags of regular members; for groups and supergroups only.
      * If omitted defaults to the value of can_pin_messages.
      */
     @SerializedName("can_manage_tags")
-    private Boolean canManageTags;
+    private boolean canManageTags;
 
     /**
      * True, if the user is allowed to react to messages
      */
     @SerializedName("can_react_to_messages")
-    private Boolean canReactToMessages;
+    private boolean canReactToMessages;
 
+    /**
+     * True, if the administrator can manage chat welcome messages or directly send them in the case of bots
+     */
+    @SerializedName("can_send_welcome_messages")
+    private boolean canSendWelcomeMessages;
 }
