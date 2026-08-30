@@ -59,4 +59,13 @@ public class EditEphemeralMessageCaption extends AbstractBaseRequest<EditEphemer
         return add("reply_markup", replyMarkup);
     }
 
+    /**
+     * Optional
+     * @param showCaptionAboveMedia Pass True if the caption must be shown above the message media.
+     *                              Supported only for animation, photo and video messages.
+     * @return {@link EditEphemeralMessageCaption}
+     */
+    public EditEphemeralMessageCaption showCaptionAboveMedia(boolean showCaptionAboveMedia){
+        return add("show_caption_above_media", showCaptionAboveMedia);
+    }
 }
