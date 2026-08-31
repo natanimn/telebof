@@ -4,6 +4,7 @@ import io.github.natanimn.telebof.BotContext;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
+import io.github.natanimn.telebof.types.input.InputRichMessage;
 import io.github.natanimn.telebof.types.keyboard.InlineKeyboardMarkup;
 import io.github.natanimn.telebof.types.media_and_service.LinkPreviewOptions;
 import io.github.natanimn.telebof.types.media_and_service.MessageEntity;
@@ -18,9 +19,32 @@ import java.util.List;
  */
 public class EditEphemeralMessageText extends AbstractBaseRequest<EditEphemeralMessageText, Boolean> {
 
+    /**
+     * Required
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param text New text of the message, 1-4096 characters after entity parsing;
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @param api Api
+     */
     public EditEphemeralMessageText(Object chatId, long receiverUserId, String text, int ephemeralMessageId, Api api) {
         super(chatId, api, "editEphemeralMessageText");
         add("text", text);
+        add("receiver_user_id", receiverUserId);
+        add("ephemeral_message_id", ephemeralMessageId);
+    }
+
+    /**
+     * Required
+     * @param chatId Unique identifier for the target chat or username of the target supergroup in the format @username
+     * @param receiverUserId Identifier of the user who received the message
+     * @param richMessage  	New rich content of the message;
+     * @param ephemeralMessageId Identifier of the ephemeral message to edit
+     * @param api Api
+     */
+    public EditEphemeralMessageText(Object chatId, long receiverUserId, InputRichMessage richMessage, int ephemeralMessageId, Api api) {
+        super(chatId, api, "editEphemeralMessageText");
+        add("rich_message", richMessage);
         add("receiver_user_id", receiverUserId);
         add("ephemeral_message_id", ephemeralMessageId);
     }
