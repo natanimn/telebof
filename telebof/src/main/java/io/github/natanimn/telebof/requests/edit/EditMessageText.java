@@ -69,7 +69,7 @@ public class EditMessageText extends AbstractBaseRequest<EditMessageText, Object
      * @return {@link EditMessageText}
      */
     public EditMessageText linkPreviewOption(LinkPreviewOptions linkPreviewOption) {
-        return add("disable_web_page_preview", linkPreviewOption);
+        return add("link_preview_options", linkPreviewOption);
     }
 
     /**
