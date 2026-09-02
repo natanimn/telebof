@@ -7,8 +7,7 @@ import io.github.natanimn.telebof.requests.Api;
 /**
  * PromoteChatMember class. Returns True on success.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.5.0
+ * @since 0.1
  * @see BotContext#promoteChatMember
  */
 public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Boolean> {
@@ -178,5 +177,14 @@ public class PromoteChatMember extends AbstractBaseRequest<PromoteChatMember, Bo
      */
     public PromoteChatMember canManageTags(Boolean canManageTags){
         return add("can_manage_tags", canManageTags);
+    }
+
+    /**
+     * Optional
+     * @param canSendWelcomeMessages Pass True if the administrator can manage chat welcome messages or directly send them in the case of bots
+     * @return {@link PromoteChatMember}
+     */
+    public PromoteChatMember canSendWelcomeMessages(Boolean canSendWelcomeMessages){
+        return add("can_send_welcome_messages", canSendWelcomeMessages);
     }
 }
