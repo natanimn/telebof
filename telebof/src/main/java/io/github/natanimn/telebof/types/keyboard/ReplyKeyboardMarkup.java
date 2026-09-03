@@ -15,8 +15,7 @@ import java.util.stream.Collectors;
  * <br>
  * Not supported in channels and for messages sent on behalf of a Telegram Business account.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  * @see <a href="https://core.telegram.org/bots/features#keyboards">Introduction to bots for details and examples</a>
  */
 public class ReplyKeyboardMarkup implements Markup {
@@ -34,6 +33,9 @@ public class ReplyKeyboardMarkup implements Markup {
     @SerializedName("input_field_placeholder")
     private String inputFieldPlaceholder;
 
+    @SerializedName("force_reply")
+    private boolean forceReply;
+
     private final List<List<KeyboardButton>> keyboard;
     transient protected final int MAX_ROW_WIDTH = 12;
     transient private int rowWidth = 3;
@@ -49,6 +51,24 @@ public class ReplyKeyboardMarkup implements Markup {
     public ReplyKeyboardMarkup(KeyboardButton[][] keyboards) {
         this.keyboard = new ArrayList<>();
         List.of(keyboards).forEach(k-> keyboard.add(List.of(k)));
+    }
+
+    /**
+     * Required
+     * @param keyboards Array of button rows, each represented by an Array of {@link KeyboardButton} objects
+     */
+    public ReplyKeyboardMarkup(KeyboardButton[] keyboards) {
+        this.keyboard = new ArrayList<>();
+        List.of(keyboards).forEach(k-> keyboard.add(List.of(k)));
+    }
+
+    /**
+     * Required
+     * @param keyboards Array of button rows, each represented by an Array of String
+     */
+    public ReplyKeyboardMarkup(String[] keyboards) {
+        this.keyboard = new ArrayList<>();
+        add(keyboards);
     }
 
     /**
@@ -120,6 +140,16 @@ public class ReplyKeyboardMarkup implements Markup {
      */
     public ReplyKeyboardMarkup setSelective(boolean selective){
         this.selective = selective;
+        return this;
+    }
+
+    /**
+     * Optional
+     * @param forceReply Pass True if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'.
+     * @return {@link ReplyKeyboardMarkup}
+     */
+    public ReplyKeyboardMarkup setForceReply(boolean forceReply) {
+        this.forceReply = forceReply;
         return this;
     }
 
