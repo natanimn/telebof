@@ -1,7 +1,9 @@
 package io.github.natanimn.telebof.requests.send;
+
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.requests.AbstractBaseRequest;
 import io.github.natanimn.telebof.requests.Api;
+import io.github.natanimn.telebof.types.EphemeralMessageParameters;
 import io.github.natanimn.telebof.types.keyboard.Markup;
 import io.github.natanimn.telebof.types.ReplyParameters;
 import io.github.natanimn.telebof.types.suggested.SuggestedPostParameters;
@@ -133,21 +135,10 @@ abstract public class SendBuilder<T, R> extends AbstractBaseRequest<T, R> {
 
     /**
      * Optional
-     * @param callbackQueryId For outgoing ephemeral messages, identifier of the callback query which triggered the message if any
+     * @param parameters A JSON-serialized object containing the parameters of the ephemeral message to send
      * @return {@link T}
      */
-    public T callbackQueryId(String callbackQueryId){
-        return add("callback_query_id", callbackQueryId);
-    }
-
-    /**
-     * Optional
-     * @param receiverUserId For outgoing ephemeral messages, unique identifier of the user who will receive the message; for group and supergroup chats only.
-     *                      It is not guaranteed that the user will receive the message, especially if they are offline.
-     *                      See <a href='https://core.telegram.org/bots/api#ephemeral-messages-and-commands'>ephemeral message sending</a> for more details.
-     * @return {@link T}
-     */
-    public T receiverUserId(long receiverUserId){
-        return add("receiver_user_id", receiverUserId);
+    public T ephemeralMessageParameters(EphemeralMessageParameters parameters){
+        return add("ephemeral_message_parameters", parameters);
     }
 }
