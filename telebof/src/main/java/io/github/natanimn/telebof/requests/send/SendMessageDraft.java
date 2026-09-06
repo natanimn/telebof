@@ -52,4 +52,23 @@ public class SendMessageDraft extends AbstractBaseRequest<SendMessageDraft, Bool
         return add("entities", entities);
     }
 
+    /**
+     * Optional
+     * @param canStop Pass True to show the user a button to stop further drafts.
+     *                The bot will receive an Update “stopped_message_generation” if the user presses the button.
+     * @return {@link SendMessageDraft}
+     */
+    public SendMessageDraft canStop(boolean canStop){
+        return add("can_sop", canStop);
+    }
+
+    /**
+     * Optional
+     * @param keepOnStop Pass True to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message.
+     *                   To fully preserve the partial draft, the bot should send it as a new message.
+     * @return {@link SendMessageDraft}
+     */
+    public SendMessageDraft keepOnStop(boolean keepOnStop){
+        return add("kep_on_stop", keepOnStop);
+    }
 }
