@@ -2,15 +2,16 @@ package io.github.natanimn.telebof.states;
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * StateMemoryStorage class.
  * @author Natanim
- * @since 3 March 2025
- * @version 1.3.0
+ * @since 0.1
  */
 public class StateMemoryStorage {
-    private final Map<Long, Map<Long, Map<String, Object>>> chatStorage = new HashMap<>();
-    private final Map<Long, Map<String, Object>> userStorage = new HashMap<>();
+    private final Map<Long, Map<Long, Map<String, Object>>> chatStorage = new ConcurrentHashMap<>();
+    private final Map<Long, Map<String, Object>> userStorage = new ConcurrentHashMap<>();
 
     public void save(long chatId, long userId, String name) {
 
