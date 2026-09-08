@@ -27,7 +27,7 @@ public class RichBlock {
     /**
      * Text of the block
      */
-    private RichText text;
+    private Object text; //TODO:
 
     /**
      * Relative size of the text font; 1-6, 1 is the largest, 6 is the smallest. Available for {@link RichBlockType#HEADING}
