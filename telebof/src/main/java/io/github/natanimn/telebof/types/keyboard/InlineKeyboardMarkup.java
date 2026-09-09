@@ -23,6 +23,10 @@ public class InlineKeyboardMarkup implements Markup {
     @Getter
     private List<List<InlineKeyboardButton>> inlineKeyboard;
 
+    @Getter
+    @SerializedName("force_reply")
+    private boolean forceReply;
+
     @Setter
     transient private int rowWidth = 3;
 
@@ -68,4 +72,14 @@ public class InlineKeyboardMarkup implements Markup {
         }
     }
 
+    /**
+     * Optional
+     * @param forceReply Pass True if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'.
+     *                   The value of the field can't be changed when the inline keyboard is edited.
+     * @return {@link InlineKeyboardMarkup}
+     */
+    public InlineKeyboardMarkup setForceReply(boolean forceReply) {
+        this.forceReply = forceReply;
+        return this;
+    }
 }
