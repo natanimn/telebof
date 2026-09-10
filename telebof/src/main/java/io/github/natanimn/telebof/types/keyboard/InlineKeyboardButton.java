@@ -11,7 +11,7 @@ import lombok.Getter;
 import java.io.Serializable;
 
 /**
- * This object represents one button of an inline keyboard.
+ * This String represents one button of an inline keyboard.
  * Exactly one of the optional fields must be used to specify type of the button.
  * @author Natanim 
  * @since 0.1
@@ -49,10 +49,13 @@ public class InlineKeyboardButton implements Serializable {
 
     private ButtonStyle style;
 
+    private DisabledButton disabled;
+
     /**
      * Required
      * @param text Label text on the button
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton(String text) {
         this.text = text;
     }
@@ -62,6 +65,7 @@ public class InlineKeyboardButton implements Serializable {
      * @param text Required. Label text on the button
      * @param callbackData Optional. Data to be sent in a callback query to the bot when the button is pressed, 1-64 bytes
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton(String text, String callbackData) {
         this.text = text;
         this.callbackData = callbackData;
@@ -73,6 +77,7 @@ public class InlineKeyboardButton implements Serializable {
      *            can be used to mention a user by their identifier without using a username, if this is allowed by their privacy settings.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setUrl(String url) {
         this.url = url;
         return this;
@@ -86,6 +91,7 @@ public class InlineKeyboardButton implements Serializable {
      *                Not supported for messages sent on behalf of a Telegram Business account.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setWebApp(WebAppInfo webApp) {
         this.wepApp = webApp;
         return this;
@@ -97,6 +103,7 @@ public class InlineKeyboardButton implements Serializable {
      *                  Can be used as a replacement for the <a href="https://core.telegram.org/widgets/login">Telegram Login Widget.</a>
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setLoginUrl(LoginUrl loginUrl) {
         this.loginUrl = loginUrl;
         return this;
@@ -108,6 +115,7 @@ public class InlineKeyboardButton implements Serializable {
      *                                          May be empty, in which case only the bot's username will be inserted.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setSwitchInlineQueryCurrentChat(String switchInlineQueryCurrentChat) {
         this.switchInlineQueryCurrentChat = switchInlineQueryCurrentChat;
         return this;
@@ -120,6 +128,7 @@ public class InlineKeyboardButton implements Serializable {
      * <b>NOTE:</b> This type of button must always be the first button in the first row.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setCallbackGame(CallbackGame callbackGame) {
         this.callbackGame = callbackGame;
         return this;
@@ -133,6 +142,7 @@ public class InlineKeyboardButton implements Serializable {
      * <b>NOTE:</b> This type of button must always be the first button in the first row and can only be used in invoice messages.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setPay(Boolean pay) {
         this.pay = pay;
         return this;
@@ -155,6 +165,7 @@ public class InlineKeyboardButton implements Serializable {
      * @param copyText Description of the button that copies the specified text to the clipboard.
      * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setCopyText(CopyTextButton copyText){
         this.copyText = copyText;
         return this;
@@ -164,8 +175,9 @@ public class InlineKeyboardButton implements Serializable {
      * Optional
      * @param iconCustomEmojiId Optional. Unique identifier of the custom emoji shown before the text of the button.
      *                          Can only be used by bots that purchased additional usernames on <a href="https://fragment.com">Fragment</a> or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
-     * @return {@link KeyboardButton}
+     * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setIconCustomEmojiId(String iconCustomEmojiId) {
         this.iconCustomEmojiId = iconCustomEmojiId;
         return this;
@@ -174,11 +186,54 @@ public class InlineKeyboardButton implements Serializable {
     /**
      * Optional
      * @param style Style of the button. If omitted, then an app-specific style is used.
-     * @return {@link KeyboardButton}
+     * @return {@link InlineKeyboardButton}
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public InlineKeyboardButton setStyle(ButtonStyle style) {
         this.style = style;
         return this;
     }
 
+    /**
+     * Optional
+     * @param disabled  If set, then the button is disabled and does nothing
+     * @return {@link InlineKeyboardButton}
+     */
+    @Deprecated(since = "2.3", forRemoval = true)
+    public InlineKeyboardButton setDisabled(DisabledButton disabled){
+        this.disabled = disabled;
+        return this;
+    }
+
+    public static InlineKeyboardButton ofUrl(String text, String url){
+        return new InlineKeyboardButton(text).setUrl(url);
+    }
+
+    public static InlineKeyboardButton ofCallbackData(String text, String callbackData){
+        return new InlineKeyboardButton(text, callbackData);
+    }
+
+    public static InlineKeyboardButton ofCallbackGame(String text, CallbackGame callbackGame){
+        return new InlineKeyboardButton(text).setCallbackGame(callbackGame);
+    }
+
+    public static InlineKeyboardButton ofWebApp(String text, WebAppInfo webApp){
+        return new InlineKeyboardButton(text).setWebApp(webApp);
+    }
+
+    public static InlineKeyboardButton ofLoginUrl(String text, LoginUrl loginUrl){
+        return new InlineKeyboardButton(text).setLoginUrl(loginUrl);
+    }
+
+    public static InlineKeyboardButton ofSwitchInlineQueryCurrentChat(String text, String switchInlineQueryCurrentChat){
+        return new InlineKeyboardButton(text).setSwitchInlineQueryCurrentChat(switchInlineQueryCurrentChat);
+    }
+
+    public static InlineKeyboardButton ofSwitchInlineQueryChosenChat(String text, SwitchInlineQueryChosenChat switchInlineQueryChosenChat){
+        return new InlineKeyboardButton(text).setSwitchInlineQueryChosenChat(switchInlineQueryChosenChat);
+    }
+
+    public static InlineKeyboardButton ofDisabled(String text){
+        return new InlineKeyboardButton(text).setDisabled(new DisabledButton());
+    }
 }
