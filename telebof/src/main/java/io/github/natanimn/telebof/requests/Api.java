@@ -32,13 +32,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class Api {
 
-    protected int TIMEOUT = 70;
+    protected int TIMEOUT = 120;
     private final String URL;
     private final String FILE_URL;
     private final OkHttpClient client;
     private final Gson gson = new Gson();
     private final String botToken;
     private final Request.Builder builder;
+    private final int MAX_RETRY = 5;
 
     public Api(String botToken, boolean useTestServer, Proxy proxy, @Nullable String localBotAPiUrl){
         this.botToken = botToken;
@@ -148,24 +149,42 @@ public class Api {
         return String.format(URL, botToken, baseRequest.getMethodName());
     }
 
+    private void sleep(int ms){
+        try{
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public  <T> ApiResponse<T> postRequest(AbstractBaseRequest<?, ?> baseRequest) {
         RequestBody requestBody = prepareRequest(baseRequest);
         Request request = builder.url(getUrl(baseRequest))
                 .post(requestBody).build();
 
-        String jsonString;
-        try (Response response = client.newCall(request).execute()) {
-            ResponseBody responseBody = response.body();
-            jsonString = responseBody.string();
+        String jsonString = null;
+        int retry = MAX_RETRY;
 
-            return Util.parseApiResponse(jsonString, baseRequest.getResponseType());
-        } catch (UnknownHostException e) {
-            throw new ConnectionError(String.format("Unable to send request to %s", request.url().url().getHost()));
-        } catch (SocketTimeoutException e){
-            throw new TimeoutException(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        while (retry > 0) {
+            retry--;
+            try (Response response = client.newCall(request).execute()) {
+                ResponseBody responseBody = response.body();
+                jsonString = responseBody.string();
+                BotLog.info("Response body: {0}", jsonString);
+                break;
+            } catch (UnknownHostException e) {
+                throw new ConnectionError(String.format("Unable to send request to %s", request.url().url().getHost()));
+            } catch (SocketTimeoutException e) {
+                if (retry == 0)
+                    throw new TimeoutException(e.getMessage());
+                sleep(1000);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+
+        return Util.parseApiResponse(jsonString, baseRequest.getResponseType());
+
     }
 
     @SuppressWarnings("unchecked")
