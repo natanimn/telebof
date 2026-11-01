@@ -6,3 +6,4 @@ telebof/target
 /examples/webhook/spring/target
 /examples/long-polling/target
 **/target
+**/Main.java
