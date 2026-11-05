@@ -79,7 +79,10 @@ public enum Updates{
     GUEST_MESSAGE,
 
     @SerializedName("subscription")
-    SUBSCRIPTION;
+    SUBSCRIPTION,
+
+    @SerializedName("stopped_message_generation")
+    STOPPED_MESSAGE_GENERATION;
 
     public static final Updates[] ALL = {
             MESSAGE,
@@ -107,6 +110,7 @@ public enum Updates{
             PURCHASED_PAID_MEDIA,
             MANAGED_BOT,
             GUEST_MESSAGE,
-            SUBSCRIPTION
+            SUBSCRIPTION,
+            STOPPED_MESSAGE_GENERATION
     };
 }
