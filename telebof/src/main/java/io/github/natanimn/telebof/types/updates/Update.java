@@ -185,4 +185,10 @@ public class Update implements TelegramUpdate, JsonFormatter {
      */
     private BotSubscriptionUpdated subscription;
 
+    /**
+     * Optional. A user asked the bot to stop the generation of a message
+     */
+    @SerializedName("stopped_message_generation")
+    private MessageGenerationStopped stoppedMessageGeneration;
+
 }
