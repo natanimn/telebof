@@ -27,6 +27,7 @@ import io.github.natanimn.telebof.annotations.ReactionCountHandler;
 import io.github.natanimn.telebof.annotations.ReactionHandler;
 import io.github.natanimn.telebof.annotations.RemovedChatBoostHandler;
 import io.github.natanimn.telebof.annotations.ShippingHandler;
+import io.github.natanimn.telebof.annotations.StoppedMessageGenerationHandler;
 import io.github.natanimn.telebof.annotations.meta.BotSubscriptionHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.BusinessConnectionHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.BusinessMessageHandlerMeta;
@@ -53,12 +54,12 @@ import io.github.natanimn.telebof.annotations.meta.ReactionCountHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.ReactionHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.RemovedChatBoostHandlerMeta;
 import io.github.natanimn.telebof.annotations.meta.ShippingHandlerMeta;
+import io.github.natanimn.telebof.annotations.meta.StoppedMessageGenerationHandlerMeta;
 import io.github.natanimn.telebof.enums.Updates;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
 import io.github.natanimn.telebof.exceptions.FloodError;
 import io.github.natanimn.telebof.exceptions.TelegramApiException;
 import io.github.natanimn.telebof.exceptions.TelegramError;
-import io.github.natanimn.telebof.exceptions.TimeoutException;
 import io.github.natanimn.telebof.filters.Filter;
 import io.github.natanimn.telebof.filters.FilterExecutor;
 import io.github.natanimn.telebof.log.BotLog;
@@ -78,6 +79,7 @@ import io.github.natanimn.telebof.types.updates.ChosenInlineResult;
 import io.github.natanimn.telebof.types.updates.InlineQuery;
 import io.github.natanimn.telebof.types.updates.ManagedBotUpdated;
 import io.github.natanimn.telebof.types.updates.Message;
+import io.github.natanimn.telebof.types.updates.MessageGenerationStopped;
 import io.github.natanimn.telebof.types.updates.MessageReactionCountUpdated;
 import io.github.natanimn.telebof.types.updates.MessageReactionUpdated;
 import io.github.natanimn.telebof.types.updates.PaidMediaPurchased;
@@ -110,7 +112,6 @@ import java.util.function.Function;
  */
 final public class BotClient {
     record UpdateInfo(TelegramUpdate update, Updates uname){}
-
     private Integer offset;
     private final AtomicBoolean stopPolling = new AtomicBoolean(false);
     private boolean skipOldUpdates;
@@ -122,8 +123,9 @@ final public class BotClient {
     private Boolean isConnected;
     private final ExecutorService pollingExecutor;
     private final GetUpdates getUpdates;
-    private static final ConcurrentMap<Function<Update, TelegramUpdate>, Updates> updateMap = new ConcurrentHashMap<>();
-    static {
+    private final ConcurrentMap<Function<Update, TelegramUpdate>, Updates> updateMap = new ConcurrentHashMap<>();
+
+    private void init() {
         updateMap.put(Update::getMessage, Updates.MESSAGE);
         updateMap.put(Update::getCallbackQuery, Updates.CALLBACK_QUERY);
         updateMap.put(Update::getInlineQuery, Updates.INLINE_QUERY);
@@ -150,6 +152,7 @@ final public class BotClient {
         updateMap.put(Update::getManagedBot, Updates.MANAGED_BOT);
         updateMap.put(Update::getGuestMessage, Updates.GUEST_MESSAGE);
         updateMap.put(Update::getSubscription, Updates.SUBSCRIPTION);
+        updateMap.put(Update::getStoppedMessageGeneration, Updates.STOPPED_MESSAGE_GENERATION);
     }
 
     /**
@@ -178,25 +181,24 @@ final public class BotClient {
             int numThreads,
             boolean useVirtualThread
     ) {
-
+        init();
         this.skipOldUpdates = skipOldUpdates;
         this.offset = offset;
         this.storage = new StateMemoryStorage();
         this.executor  = useVirtualThread? Executors.newVirtualThreadPerTaskExecutor(): Executors.newFixedThreadPool(numThreads);
         this.dispatcher = new Dispatcher<>();
-        var getUpdatesApi = new Api(botToken, useTestServer, proxy, localBotApiUrl);
+        Api api = new Api(botToken, useTestServer, proxy, localBotApiUrl);
 
-        getUpdates = new GetUpdates(getUpdatesApi)
+        getUpdates = new GetUpdates(api)
                 .allowedUpdates(allowedUpdates)
                 .limit(limit)
                 .timeout(timeout);
 
         this.pollingExecutor = Executors.newSingleThreadExecutor();
 
-        Api api = new Api(botToken, useTestServer, proxy, localBotApiUrl);
 
         this.context = new BotContext(api, storage);
-        BotLog.info("BotClient initialized");
+        BotLog.debug("BotClient initialized");
     }
 
     public BotClient(String botToken){
@@ -702,6 +704,19 @@ final public class BotClient {
         this.dispatcher.add(Updates.SUBSCRIPTION, map);
     }
 
+
+    /**
+     * Use this method to register new handler for incoming {@link Update#getStoppedMessageGeneration()} update.
+     * @param executor pre-defined or user-defined filter
+     * @param handler a handler to be executed
+     */
+    @SuppressWarnings("unchecked")
+    public void onStoppedMessageGeneration(FilterExecutor executor, UpdateHandler<MessageGenerationStopped> handler){
+        ConcurrentHashMap<FilterExecutor, UpdateHandler<MessageGenerationStopped>> map = new ConcurrentHashMap<>();
+        map.put(executor, handler);
+        this.dispatcher.add(Updates.STOPPED_MESSAGE_GENERATION, map);
+    }
+
     private void addMessageHandler(MessageHandler handler, MethodHandle method){
         MessageHandlerMeta meta = new MessageHandlerMeta(handler, method);
         onMessage(meta::matches, method::invoke);
@@ -832,6 +847,11 @@ final public class BotClient {
         onBotSubscription(meta::matches, method::invoke);
     }
 
+    private void addStoppedMessageGenerationHandler(StoppedMessageGenerationHandler handler, MethodHandle method){
+        var meta = new StoppedMessageGenerationHandlerMeta(handler, method);
+        onStoppedMessageGeneration(meta::matches, method::invoke);
+    }
+
     private void addToList(MethodHandle handle, Method method, List<AnnotatedHandler> annotatedMethods){
         for (var anno : method.getDeclaredAnnotationsByType(MessageHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
@@ -887,10 +907,12 @@ final public class BotClient {
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
         for (var anno : method.getDeclaredAnnotationsByType(BotSubscriptionHandler.class))
             annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
+        for (var anno : method.getDeclaredAnnotationsByType(StoppedMessageGenerationHandler.class))
+            annotatedMethods.add(new AnnotatedHandler(handle, anno, anno.priority()));
     }
 
     public void addHandlers(List<Handler> handlers){
-        BotLog.info("Adding {0} handlers class", handlers.size());
+        BotLog.debug("Adding {0} handlers class", handlers.size());
         List<Handler> newHandlers = new ArrayList<>(handlers.size());
         newHandlers.addAll(handlers);
         newHandlers.sort(Comparator.comparingInt(Handler::priority));
@@ -966,6 +988,8 @@ final public class BotClient {
                     addGuestHandler(gh, handler.getMethodHandle());
                 else if (handler.getAnnotation() instanceof BotSubscriptionHandler bsh)
                     addBotSubscriptionHandler(bsh, handler.getMethodHandle());
+                else if (handler.getAnnotation() instanceof StoppedMessageGenerationHandler stmh)
+                    addStoppedMessageGenerationHandler(stmh, handler.getMethodHandle());
             }
 
         } catch (IllegalAccessException e) {
@@ -992,7 +1016,7 @@ final public class BotClient {
                             } catch (Throwable e) {
                                 throw new RuntimeException(e);
                             } finally {
-                                BotLog.info("Task executed");
+                                BotLog.debug("Task executed");
                             }
                         };
 
@@ -1032,7 +1056,7 @@ final public class BotClient {
      * @param updates array of {@link Update}
      */
     public void processUpdates(List<Update> updates){
-        BotLog.info("Processing updates");
+        BotLog.debug("Processing updates");
         for (Update update: updates) {
             UpdateInfo info = getInfoFromUpdate(update);;
             var filter      = new Filter(update, storage);
@@ -1056,7 +1080,7 @@ final public class BotClient {
         List<Update> updates = getUpdates.offset(this.offset).exec();
 
         int count = updates.size();
-        BotLog.info("Received {0} updates", count);
+        BotLog.debug("Received {0} updates", count);
         if (!updates.isEmpty()){
            setOffset(updates.get(count - 1).getUpdateId() + 1);
            processUpdates(updates);
@@ -1075,19 +1099,14 @@ final public class BotClient {
                 retrieveUpdates();
             } catch (TelegramError | InterruptedException err) {
                 stop();
-                err.printStackTrace();
                 shutDown();
-                BotLog.info("Polling stopped");
+                BotLog.debug("Polling stopped");
             } catch (FloodError error){
                 int delay = error.getParameters().getRetryAfter();
                 BotLog.error(error.getDescription());
-                error.printStackTrace();
                 sleep(delay);
             } catch (TelegramApiException apiException){
                 BotLog.error(apiException.getDescription());
-                apiException.printStackTrace();
-            } catch (TimeoutException e) {
-                sleep(1);
             } catch (ConnectionError connectionError){
                 BotLog.error(connectionError.getMessage());
                 System.err.println("Connection error. Trying after 5 seconds");
@@ -1105,7 +1124,7 @@ final public class BotClient {
      */
     public void startPolling(){
         this.bot         = this.context.getMe().exec();
-        BotLog.info("@{0} started running via longPolling", bot.getUsername());
+        BotLog.debug("@{0} started running via longPolling", bot.getUsername());
         pollingExecutor.submit(() -> {
             this.isConnected = true;
             runOnNewThread();
