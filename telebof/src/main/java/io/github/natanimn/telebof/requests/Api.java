@@ -2,16 +2,24 @@ package io.github.natanimn.telebof.requests;
 
 import com.google.gson.Gson;
 import io.github.natanimn.telebof.ApiResponse;
-import io.github.natanimn.telebof.async.AsyncCallback;
-import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.Util;
-import io.github.natanimn.telebof.exceptions.TelegramApiException;
+import io.github.natanimn.telebof.async.AsyncCallback;
 import io.github.natanimn.telebof.enums.ParseMode;
 import io.github.natanimn.telebof.exceptions.ConnectionError;
+import io.github.natanimn.telebof.exceptions.TelegramApiException;
 import io.github.natanimn.telebof.exceptions.TelegramError;
 import io.github.natanimn.telebof.exceptions.TimeoutException;
+import io.github.natanimn.telebof.log.BotLog;
 import io.github.natanimn.telebof.types.input.InputMedia;
-import okhttp3.*;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,15 +28,13 @@ import java.io.IOException;
 import java.net.Proxy;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
  * A class to interact with telegram server
  * @author Natanim
- * @since 3 March 2025
- * @version 2.0.0
+ * @since 0.1
  */
 public class Api {
 
@@ -45,13 +51,11 @@ public class Api {
         this.botToken = botToken;
 
         this.client = new OkHttpClient.Builder()
-                .protocols(Collections.singletonList(Protocol.HTTP_1_1))
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .proxy(proxy)
                 .retryOnConnectionFailure(true)
-                .connectionPool(new ConnectionPool(20, 5, TimeUnit.MINUTES))
                 .build();
 
         this.builder = new Request.Builder();
@@ -90,9 +94,9 @@ public class Api {
         Object value = entry.getValue();
 
 
-        if (value instanceof InputMedia ) {
-            if (((InputMedia) value).hasFile()) {
-                for (File file: ((InputMedia) value).getFiles())
+        if (value instanceof InputMedia v) {
+            if (v.hasFile()) {
+                for (File file: v.getFiles())
                     builder.addFormDataPart(
                             file.getName(),
                             file.getName(),
@@ -101,8 +105,8 @@ public class Api {
 
             }
 
-        } else if (value instanceof InputMedia[]) {
-            for (InputMedia media : (InputMedia[]) value) {
+        } else if (value instanceof InputMedia[] v) {
+            for (InputMedia media : v) {
                 if (media.hasFile()) {
                     for (File file : media.getFiles())
                         builder.addFormDataPart(
